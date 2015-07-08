@@ -1,0 +1,434 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		5C5365791B4D640F00A76374 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5365781B4D640F00A76374 /* AppDelegate.swift */; };
+		5C53657B1B4D640F00A76374 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5C53657A1B4D640F00A76374 /* GameScene.sks */; };
+		5C53657D1B4D640F00A76374 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C53657C1B4D640F00A76374 /* GameScene.swift */; };
+		5C53657F1B4D640F00A76374 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C53657E1B4D640F00A76374 /* GameViewController.swift */; };
+		5C5365821B4D640F00A76374 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C5365801B4D640F00A76374 /* Main.storyboard */; };
+		5C5365841B4D640F00A76374 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5C5365831B4D640F00A76374 /* Images.xcassets */; };
+		5C5365871B4D640F00A76374 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5C5365851B4D640F00A76374 /* LaunchScreen.xib */; };
+		5C5365931B4D640F00A76374 /* NextSpaceRevolutionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5365921B4D640F00A76374 /* NextSpaceRevolutionTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		5C53658D1B4D640F00A76374 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5C53656B1B4D640F00A76374 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5C5365721B4D640F00A76374;
+			remoteInfo = NextSpaceRevolution;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		5C5365731B4D640F00A76374 /* NextSpaceRevolution.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NextSpaceRevolution.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5C5365771B4D640F00A76374 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5C5365781B4D640F00A76374 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		5C53657A1B4D640F00A76374 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
+		5C53657C1B4D640F00A76374 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		5C53657E1B4D640F00A76374 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		5C5365811B4D640F00A76374 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		5C5365831B4D640F00A76374 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		5C5365861B4D640F00A76374 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		5C53658C1B4D640F00A76374 /* NextSpaceRevolutionTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NextSpaceRevolutionTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5C5365911B4D640F00A76374 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5C5365921B4D640F00A76374 /* NextSpaceRevolutionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NextSpaceRevolutionTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		5C5365701B4D640F00A76374 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5C5365891B4D640F00A76374 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5C53656A1B4D640F00A76374 = {
+			isa = PBXGroup;
+			children = (
+				5C5365751B4D640F00A76374 /* NextSpaceRevolution */,
+				5C53658F1B4D640F00A76374 /* NextSpaceRevolutionTests */,
+				5C5365741B4D640F00A76374 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		5C5365741B4D640F00A76374 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5C5365731B4D640F00A76374 /* NextSpaceRevolution.app */,
+				5C53658C1B4D640F00A76374 /* NextSpaceRevolutionTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5C5365751B4D640F00A76374 /* NextSpaceRevolution */ = {
+			isa = PBXGroup;
+			children = (
+				5C5365781B4D640F00A76374 /* AppDelegate.swift */,
+				5C53657A1B4D640F00A76374 /* GameScene.sks */,
+				5C53657C1B4D640F00A76374 /* GameScene.swift */,
+				5C53657E1B4D640F00A76374 /* GameViewController.swift */,
+				5C5365801B4D640F00A76374 /* Main.storyboard */,
+				5C5365831B4D640F00A76374 /* Images.xcassets */,
+				5C5365851B4D640F00A76374 /* LaunchScreen.xib */,
+				5C5365761B4D640F00A76374 /* Supporting Files */,
+			);
+			path = NextSpaceRevolution;
+			sourceTree = "<group>";
+		};
+		5C5365761B4D640F00A76374 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				5C5365771B4D640F00A76374 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		5C53658F1B4D640F00A76374 /* NextSpaceRevolutionTests */ = {
+			isa = PBXGroup;
+			children = (
+				5C5365921B4D640F00A76374 /* NextSpaceRevolutionTests.swift */,
+				5C5365901B4D640F00A76374 /* Supporting Files */,
+			);
+			path = NextSpaceRevolutionTests;
+			sourceTree = "<group>";
+		};
+		5C5365901B4D640F00A76374 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				5C5365911B4D640F00A76374 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		5C5365721B4D640F00A76374 /* NextSpaceRevolution */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5C5365961B4D640F00A76374 /* Build configuration list for PBXNativeTarget "NextSpaceRevolution" */;
+			buildPhases = (
+				5C53656F1B4D640F00A76374 /* Sources */,
+				5C5365701B4D640F00A76374 /* Frameworks */,
+				5C5365711B4D640F00A76374 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NextSpaceRevolution;
+			productName = NextSpaceRevolution;
+			productReference = 5C5365731B4D640F00A76374 /* NextSpaceRevolution.app */;
+			productType = "com.apple.product-type.application";
+		};
+		5C53658B1B4D640F00A76374 /* NextSpaceRevolutionTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5C5365991B4D640F00A76374 /* Build configuration list for PBXNativeTarget "NextSpaceRevolutionTests" */;
+			buildPhases = (
+				5C5365881B4D640F00A76374 /* Sources */,
+				5C5365891B4D640F00A76374 /* Frameworks */,
+				5C53658A1B4D640F00A76374 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5C53658E1B4D640F00A76374 /* PBXTargetDependency */,
+			);
+			name = NextSpaceRevolutionTests;
+			productName = NextSpaceRevolutionTests;
+			productReference = 5C53658C1B4D640F00A76374 /* NextSpaceRevolutionTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		5C53656B1B4D640F00A76374 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0640;
+				ORGANIZATIONNAME = OuterSpace;
+				TargetAttributes = {
+					5C5365721B4D640F00A76374 = {
+						CreatedOnToolsVersion = 6.4;
+					};
+					5C53658B1B4D640F00A76374 = {
+						CreatedOnToolsVersion = 6.4;
+						TestTargetID = 5C5365721B4D640F00A76374;
+					};
+				};
+			};
+			buildConfigurationList = 5C53656E1B4D640F00A76374 /* Build configuration list for PBXProject "NextSpaceRevolution" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 5C53656A1B4D640F00A76374;
+			productRefGroup = 5C5365741B4D640F00A76374 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5C5365721B4D640F00A76374 /* NextSpaceRevolution */,
+				5C53658B1B4D640F00A76374 /* NextSpaceRevolutionTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		5C5365711B4D640F00A76374 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5C5365871B4D640F00A76374 /* LaunchScreen.xib in Resources */,
+				5C5365841B4D640F00A76374 /* Images.xcassets in Resources */,
+				5C53657B1B4D640F00A76374 /* GameScene.sks in Resources */,
+				5C5365821B4D640F00A76374 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5C53658A1B4D640F00A76374 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5C53656F1B4D640F00A76374 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5C53657D1B4D640F00A76374 /* GameScene.swift in Sources */,
+				5C53657F1B4D640F00A76374 /* GameViewController.swift in Sources */,
+				5C5365791B4D640F00A76374 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5C5365881B4D640F00A76374 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5C5365931B4D640F00A76374 /* NextSpaceRevolutionTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		5C53658E1B4D640F00A76374 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5C5365721B4D640F00A76374 /* NextSpaceRevolution */;
+			targetProxy = 5C53658D1B4D640F00A76374 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		5C5365801B4D640F00A76374 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5C5365811B4D640F00A76374 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		5C5365851B4D640F00A76374 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5C5365861B4D640F00A76374 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		5C5365941B4D640F00A76374 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		5C5365951B4D640F00A76374 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		5C5365971B4D640F00A76374 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = NextSpaceRevolution/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		5C5365981B4D640F00A76374 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = NextSpaceRevolution/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		5C53659A1B4D640F00A76374 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = NextSpaceRevolutionTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NextSpaceRevolution.app/NextSpaceRevolution";
+			};
+			name = Debug;
+		};
+		5C53659B1B4D640F00A76374 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = NextSpaceRevolutionTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NextSpaceRevolution.app/NextSpaceRevolution";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5C53656E1B4D640F00A76374 /* Build configuration list for PBXProject "NextSpaceRevolution" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5C5365941B4D640F00A76374 /* Debug */,
+				5C5365951B4D640F00A76374 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5C5365961B4D640F00A76374 /* Build configuration list for PBXNativeTarget "NextSpaceRevolution" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5C5365971B4D640F00A76374 /* Debug */,
+				5C5365981B4D640F00A76374 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		5C5365991B4D640F00A76374 /* Build configuration list for PBXNativeTarget "NextSpaceRevolutionTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5C53659A1B4D640F00A76374 /* Debug */,
+				5C53659B1B4D640F00A76374 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 5C53656B1B4D640F00A76374 /* Project object */;
+}
