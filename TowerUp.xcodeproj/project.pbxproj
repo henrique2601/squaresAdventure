@@ -17,6 +17,10 @@
 		1359DD101B7287A7006C12FA /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1359DD0F1B7287A7006C12FA /* Button.swift */; };
 		1359DD161B728C95006C12FA /* Switch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1359DD151B728C95006C12FA /* Switch.swift */; };
 		1359DD181B728D3E006C12FA /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1359DD171B728D3E006C12FA /* Label.swift */; };
+		13CCB6FC1B72AD310060334C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13CCB6FB1B72AD310060334C /* LaunchScreen.xib */; };
+		13CCB6FE1B72B9010060334C /* TowersScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13CCB6FD1B72B9010060334C /* TowersScene.swift */; };
+		13CCB7001B72B9A70060334C /* OptionsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13CCB6FF1B72B9A70060334C /* OptionsScene.swift */; };
+		13CCB7021B72B9D90060334C /* CreditsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13CCB7011B72B9D90060334C /* CreditsScene.swift */; };
 		81BA814B1A49DA1800E65899 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BA814A1A49DA1800E65899 /* AppDelegate.swift */; };
 		81BA814D1A49DA1800E65899 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BA814C1A49DA1800E65899 /* ViewController.swift */; };
 		81BA81501A49DA1800E65899 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81BA814E1A49DA1800E65899 /* Main.storyboard */; };
@@ -43,6 +47,10 @@
 		1359DD0F1B7287A7006C12FA /* Button.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Button.swift; path = src/Button.swift; sourceTree = "<group>"; };
 		1359DD151B728C95006C12FA /* Switch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Switch.swift; path = src/Switch.swift; sourceTree = "<group>"; };
 		1359DD171B728D3E006C12FA /* Label.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Label.swift; path = src/Label.swift; sourceTree = "<group>"; };
+		13CCB6FB1B72AD310060334C /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
+		13CCB6FD1B72B9010060334C /* TowersScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TowersScene.swift; path = Scenes/TowersScene.swift; sourceTree = "<group>"; };
+		13CCB6FF1B72B9A70060334C /* OptionsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OptionsScene.swift; path = Scenes/OptionsScene.swift; sourceTree = "<group>"; };
+		13CCB7011B72B9D90060334C /* CreditsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreditsScene.swift; path = Scenes/CreditsScene.swift; sourceTree = "<group>"; };
 		81BA81451A49DA1800E65899 /* TowerUp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TowerUp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		81BA81491A49DA1800E65899 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		81BA814A1A49DA1800E65899 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -102,6 +110,9 @@
 			isa = PBXGroup;
 			children = (
 				1359DD0B1B7286D3006C12FA /* MainMenuScene.swift */,
+				13CCB6FD1B72B9010060334C /* TowersScene.swift */,
+				13CCB6FF1B72B9A70060334C /* OptionsScene.swift */,
+				13CCB7011B72B9D90060334C /* CreditsScene.swift */,
 			);
 			name = Scenes;
 			sourceTree = "<group>";
@@ -130,6 +141,7 @@
 				1359DCFD1B727FFE006C12FA /* src */,
 				81BA814E1A49DA1800E65899 /* Main.storyboard */,
 				81BA81511A49DA1800E65899 /* Images.xcassets */,
+				13CCB6FB1B72AD310060334C /* LaunchScreen.xib */,
 				1359DC981B727726006C12FA /* TowerUp.xcdatamodeld */,
 				81BA81481A49DA1800E65899 /* Supporting Files */,
 			);
@@ -228,6 +240,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				81BA81501A49DA1800E65899 /* Main.storyboard in Resources */,
+				13CCB6FC1B72AD310060334C /* LaunchScreen.xib in Resources */,
 				81BA81521A49DA1800E65899 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -257,6 +270,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				81BA814D1A49DA1800E65899 /* ViewController.swift in Sources */,
+				13CCB7001B72B9A70060334C /* OptionsScene.swift in Sources */,
 				81BA814B1A49DA1800E65899 /* AppDelegate.swift in Sources */,
 				1359DD081B728611006C12FA /* GameColors.swift in Sources */,
 				1359DD161B728C95006C12FA /* Switch.swift in Sources */,
@@ -266,6 +280,8 @@
 				1359DD0E1B72874C006C12FA /* Control.swift in Sources */,
 				1359DD011B72805F006C12FA /* GameScene.swift in Sources */,
 				1359DD0C1B7286D3006C12FA /* MainMenuScene.swift in Sources */,
+				13CCB7021B72B9D90060334C /* CreditsScene.swift in Sources */,
+				13CCB6FE1B72B9010060334C /* TowersScene.swift in Sources */,
 				1359DD181B728D3E006C12FA /* Label.swift in Sources */,
 				1359DC9A1B727726006C12FA /* TowerUp.xcdatamodeld in Sources */,
 			);
@@ -374,6 +390,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = TowerUp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "TowerUp/TowerUp-Bridging-Header.h";
@@ -390,6 +407,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = TowerUp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "TowerUp/TowerUp-Bridging-Header.h";

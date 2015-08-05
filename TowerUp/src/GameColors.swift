@@ -14,6 +14,7 @@ class GameColors: NSObject {
     static var gray = UIColor(red: 65/255, green: 65/255, blue: 65/255, alpha: 1)
     
     static var white = UIColor(red: 1, green: 1, blue: 1, alpha: 0.75)
+    static var black = UIColor(red: 0, green: 0, blue: 0, alpha: 0.75)
     static var red = UIColor(red: 1, green: 0, blue: 0, alpha: 0.75)
     static var green = UIColor(red: 0, green: 1, blue: 0, alpha: 0.75)
 }

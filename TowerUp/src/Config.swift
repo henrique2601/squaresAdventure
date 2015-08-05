@@ -16,6 +16,8 @@ class Config: NSObject {
     
     static var HUDZPosition:CGFloat = 1000
     
+    static var defaultTransition:SKTransition = SKTransition.crossFadeWithDuration(1)
+    
     static func sceneSize() -> CGSize {
         
         switch(UIDevice.currentDevice().systemVersion[0] as String) {
