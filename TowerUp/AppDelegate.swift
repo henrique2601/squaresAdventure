@@ -1,7 +1,7 @@
 //
 //  AppDelegate.swift
 //
-//  Copyright 2011-present Parse Inc. All rights reserved.
+//  Copyright (c) 2015 WTFGames. All rights reserved.
 //
 
 import UIKit
@@ -67,7 +67,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
             }
         }
-        //TODO registrar no momento adequado o usuario para receber notificações
+        //TODO registrar no momento adequado o usuário para receber notificações
         /*
         if application.respondsToSelector("registerUserNotificationSettings:") {
             let userNotificationTypes = UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound

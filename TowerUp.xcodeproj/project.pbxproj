@@ -8,6 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		1359DC9A1B727726006C12FA /* TowerUp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1359DC981B727726006C12FA /* TowerUp.xcdatamodeld */; };
+		1359DD011B72805F006C12FA /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1359DD001B72805F006C12FA /* GameScene.swift */; };
+		1359DD041B728168006C12FA /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1359DD031B728168006C12FA /* Config.swift */; };
+		1359DD061B728574006C12FA /* GameMath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1359DD051B728574006C12FA /* GameMath.swift */; };
+		1359DD081B728611006C12FA /* GameColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1359DD071B728611006C12FA /* GameColors.swift */; };
+		1359DD0C1B7286D3006C12FA /* MainMenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1359DD0B1B7286D3006C12FA /* MainMenuScene.swift */; };
+		1359DD0E1B72874C006C12FA /* Control.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1359DD0D1B72874C006C12FA /* Control.swift */; };
+		1359DD101B7287A7006C12FA /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1359DD0F1B7287A7006C12FA /* Button.swift */; };
+		1359DD161B728C95006C12FA /* Switch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1359DD151B728C95006C12FA /* Switch.swift */; };
+		1359DD181B728D3E006C12FA /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1359DD171B728D3E006C12FA /* Label.swift */; };
 		81BA814B1A49DA1800E65899 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BA814A1A49DA1800E65899 /* AppDelegate.swift */; };
 		81BA814D1A49DA1800E65899 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BA814C1A49DA1800E65899 /* ViewController.swift */; };
 		81BA81501A49DA1800E65899 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81BA814E1A49DA1800E65899 /* Main.storyboard */; };
@@ -25,6 +34,15 @@
 
 /* Begin PBXFileReference section */
 		1359DC991B727726006C12FA /* TowerUp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TowerUp.xcdatamodel; sourceTree = "<group>"; };
+		1359DD001B72805F006C12FA /* GameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameScene.swift; path = src/GameScene.swift; sourceTree = "<group>"; };
+		1359DD031B728168006C12FA /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Config.swift; path = src/Config.swift; sourceTree = "<group>"; };
+		1359DD051B728574006C12FA /* GameMath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameMath.swift; path = src/GameMath.swift; sourceTree = "<group>"; };
+		1359DD071B728611006C12FA /* GameColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameColors.swift; path = src/GameColors.swift; sourceTree = "<group>"; };
+		1359DD0B1B7286D3006C12FA /* MainMenuScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainMenuScene.swift; path = Scenes/MainMenuScene.swift; sourceTree = "<group>"; };
+		1359DD0D1B72874C006C12FA /* Control.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Control.swift; path = src/Control.swift; sourceTree = "<group>"; };
+		1359DD0F1B7287A7006C12FA /* Button.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Button.swift; path = src/Button.swift; sourceTree = "<group>"; };
+		1359DD151B728C95006C12FA /* Switch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Switch.swift; path = src/Switch.swift; sourceTree = "<group>"; };
+		1359DD171B728D3E006C12FA /* Label.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Label.swift; path = src/Label.swift; sourceTree = "<group>"; };
 		81BA81451A49DA1800E65899 /* TowerUp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TowerUp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		81BA81491A49DA1800E65899 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		81BA814A1A49DA1800E65899 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -63,6 +81,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1359DCFD1B727FFE006C12FA /* src */ = {
+			isa = PBXGroup;
+			children = (
+				81BA814A1A49DA1800E65899 /* AppDelegate.swift */,
+				81BA814C1A49DA1800E65899 /* ViewController.swift */,
+				1359DD001B72805F006C12FA /* GameScene.swift */,
+				1359DD031B728168006C12FA /* Config.swift */,
+				1359DD051B728574006C12FA /* GameMath.swift */,
+				1359DD071B728611006C12FA /* GameColors.swift */,
+				1359DD0D1B72874C006C12FA /* Control.swift */,
+				1359DD0F1B7287A7006C12FA /* Button.swift */,
+				1359DD151B728C95006C12FA /* Switch.swift */,
+				1359DD171B728D3E006C12FA /* Label.swift */,
+			);
+			name = src;
+			sourceTree = "<group>";
+		};
+		1359DD021B728114006C12FA /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				1359DD0B1B7286D3006C12FA /* MainMenuScene.swift */,
+			);
+			name = Scenes;
+			sourceTree = "<group>";
+		};
 		81BA813C1A49DA1800E65899 = {
 			isa = PBXGroup;
 			children = (
@@ -83,8 +126,8 @@
 		81BA81471A49DA1800E65899 /* TowerUp */ = {
 			isa = PBXGroup;
 			children = (
-				81BA814A1A49DA1800E65899 /* AppDelegate.swift */,
-				81BA814C1A49DA1800E65899 /* ViewController.swift */,
+				1359DD021B728114006C12FA /* Scenes */,
+				1359DCFD1B727FFE006C12FA /* src */,
 				81BA814E1A49DA1800E65899 /* Main.storyboard */,
 				81BA81511A49DA1800E65899 /* Images.xcassets */,
 				1359DC981B727726006C12FA /* TowerUp.xcdatamodeld */,
@@ -154,7 +197,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0610;
-				ORGANIZATIONNAME = Parse;
+				ORGANIZATIONNAME = WTFGames;
 				TargetAttributes = {
 					81BA81441A49DA1800E65899 = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -215,6 +258,15 @@
 			files = (
 				81BA814D1A49DA1800E65899 /* ViewController.swift in Sources */,
 				81BA814B1A49DA1800E65899 /* AppDelegate.swift in Sources */,
+				1359DD081B728611006C12FA /* GameColors.swift in Sources */,
+				1359DD161B728C95006C12FA /* Switch.swift in Sources */,
+				1359DD041B728168006C12FA /* Config.swift in Sources */,
+				1359DD061B728574006C12FA /* GameMath.swift in Sources */,
+				1359DD101B7287A7006C12FA /* Button.swift in Sources */,
+				1359DD0E1B72874C006C12FA /* Control.swift in Sources */,
+				1359DD011B72805F006C12FA /* GameScene.swift in Sources */,
+				1359DD0C1B7286D3006C12FA /* MainMenuScene.swift in Sources */,
+				1359DD181B728D3E006C12FA /* Label.swift in Sources */,
 				1359DC9A1B727726006C12FA /* TowerUp.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
