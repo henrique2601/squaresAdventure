@@ -30,7 +30,7 @@ class MainMenuScene: GameScene {
         self.addChild(Button(name: "buttonPlay", textureName: "buttonYellow", text:"PLAY", x: 550, y: 189, align:.center))
         self.addChild(Button(name: "buttonOptions", textureName: "buttonYellow", text:"OPTIONS", x: 550, y: 287, align:.center))
         self.addChild(Button(name: "buttonCredits", textureName: "buttonYellow", text:"CREDITS", x: 550, y: 385, align:.center))
-        self.addChild(Button(name: "buttonD", textureName: "buttonYellow", text:"BUTTON D", x: 550, y: 483, align:.center))
+        self.addChild(Button(name: "buttonYellow", text:"BUTTON D", x: 550, y: 483, align:.center))
     }
     
     override func update(currentTime: NSTimeInterval) {
@@ -75,13 +75,12 @@ class MainMenuScene: GameScene {
                         self.nextState = .towers
                         return
                     }
-                    
                     if (self.childNodeWithName("buttonOptions")!.containsPoint(location)) {
-                        //self.nextState = .options
+                        self.nextState = .options
                         return
                     }
                     if (self.childNodeWithName("buttonCredits")!.containsPoint(location)) {
-                        //self.nextState = .credits
+                        self.nextState = .credits
                         return
                     }
                 }

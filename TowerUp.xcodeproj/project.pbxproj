@@ -21,6 +21,7 @@
 		13CCB6FE1B72B9010060334C /* TowersScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13CCB6FD1B72B9010060334C /* TowersScene.swift */; };
 		13CCB7001B72B9A70060334C /* OptionsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13CCB6FF1B72B9A70060334C /* OptionsScene.swift */; };
 		13CCB7021B72B9D90060334C /* CreditsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13CCB7011B72B9D90060334C /* CreditsScene.swift */; };
+		13CCB7041B7373D00060334C /* FloorsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13CCB7031B7373D00060334C /* FloorsScene.swift */; };
 		81BA814B1A49DA1800E65899 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BA814A1A49DA1800E65899 /* AppDelegate.swift */; };
 		81BA814D1A49DA1800E65899 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BA814C1A49DA1800E65899 /* ViewController.swift */; };
 		81BA81501A49DA1800E65899 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81BA814E1A49DA1800E65899 /* Main.storyboard */; };
@@ -51,6 +52,7 @@
 		13CCB6FD1B72B9010060334C /* TowersScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TowersScene.swift; path = Scenes/TowersScene.swift; sourceTree = "<group>"; };
 		13CCB6FF1B72B9A70060334C /* OptionsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OptionsScene.swift; path = Scenes/OptionsScene.swift; sourceTree = "<group>"; };
 		13CCB7011B72B9D90060334C /* CreditsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreditsScene.swift; path = Scenes/CreditsScene.swift; sourceTree = "<group>"; };
+		13CCB7031B7373D00060334C /* FloorsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FloorsScene.swift; path = Scenes/FloorsScene.swift; sourceTree = "<group>"; };
 		81BA81451A49DA1800E65899 /* TowerUp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TowerUp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		81BA81491A49DA1800E65899 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		81BA814A1A49DA1800E65899 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 				13CCB6FD1B72B9010060334C /* TowersScene.swift */,
 				13CCB6FF1B72B9A70060334C /* OptionsScene.swift */,
 				13CCB7011B72B9D90060334C /* CreditsScene.swift */,
+				13CCB7031B7373D00060334C /* FloorsScene.swift */,
 			);
 			name = Scenes;
 			sourceTree = "<group>";
@@ -284,6 +287,7 @@
 				13CCB6FE1B72B9010060334C /* TowersScene.swift in Sources */,
 				1359DD181B728D3E006C12FA /* Label.swift in Sources */,
 				1359DC9A1B727726006C12FA /* TowerUp.xcdatamodeld in Sources */,
+				13CCB7041B7373D00060334C /* FloorsScene.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -131,7 +131,7 @@ class Button: Control {
         let labelNode = SKLabelNode(fontNamed: "Trebuchet MS")
         labelNode.text = text
         labelNode.fontSize = 32/2
-        labelNode.fontColor = GameColors.white
+        labelNode.fontColor = GameColors.black
         labelNode.verticalAlignmentMode = SKLabelVerticalAlignmentMode.Center
         labelNode.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Center
         labelNode.position = CGPoint(x: texture.size().width/2, y: -texture.size().height/2)
@@ -148,7 +148,7 @@ class Button: Control {
         let labelNodePressed = SKLabelNode(fontNamed: "Trebuchet MS")
         labelNodePressed.text = text
         labelNodePressed.fontSize = 32/2
-        labelNodePressed.fontColor = GameColors.black
+        labelNodePressed.fontColor = GameColors.white
         labelNodePressed.verticalAlignmentMode = SKLabelVerticalAlignmentMode.Center
         labelNodePressed.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Center
         //TODO: deslocamento vindo por parâmetro

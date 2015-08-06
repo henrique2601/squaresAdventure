@@ -25,7 +25,7 @@ class TowersScene: GameScene {
         
         self.addChild(Label(name: "labelTitle", textureName: "TowersScene", x: 667, y: 130, align:.center))
         
-        self.addChild(Button(name: "buttonA", textureName: "buttonYellow", text:"BUTTON A", x: 550, y: 189, align:.center))
+        self.addChild(Button(name: "buttonA", textureName: "buttonYellow", text:"TOWER A", x: 550, y: 189, align:.center))
         self.addChild(Button(name: "buttonB", textureName: "buttonYellow", text:"BUTTON B", x: 550, y: 287, align:.center))
         self.addChild(Button(name: "buttonC", textureName: "buttonYellow", text:"BUTTON C", x: 550, y: 385, align:.center))
         self.addChild(Button(name: "buttonD", textureName: "buttonYellow", text:"BUTTON D", x: 550, y: 483, align:.center))
