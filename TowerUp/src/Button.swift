@@ -130,7 +130,7 @@ class Button: Control {
         
         let labelNode = SKLabelNode(fontNamed: "Trebuchet MS")
         labelNode.text = text
-        labelNode.fontSize = 25/2
+        labelNode.fontSize = 32/2
         labelNode.fontColor = GameColors.white
         labelNode.verticalAlignmentMode = SKLabelVerticalAlignmentMode.Center
         labelNode.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Center
@@ -147,7 +147,7 @@ class Button: Control {
         
         let labelNodePressed = SKLabelNode(fontNamed: "Trebuchet MS")
         labelNodePressed.text = text
-        labelNodePressed.fontSize = 25/2
+        labelNodePressed.fontSize = 32/2
         labelNodePressed.fontColor = GameColors.black
         labelNodePressed.verticalAlignmentMode = SKLabelVerticalAlignmentMode.Center
         labelNodePressed.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Center

@@ -27,10 +27,10 @@ class MainMenuScene: GameScene {
         
         self.addChild(Label(name: "labelTitle", textureName: "MainMenuScene", x: 667, y: 130, align:.center))
         
-        self.addChild(Button(name: "buttonPlay", textureName: "buttonYellow", text:"Play", x: 550, y: 189, align:.center))
-        self.addChild(Button(name: "buttonOptions", textureName: "buttonYellow", text:"Options", x: 550, y: 287, align:.center))
-        self.addChild(Button(name: "buttonCredits", textureName: "buttonYellow", text:"Credits", x: 550, y: 385, align:.center))
-        //self.addChild(Button(name: "buttonBack", textureName: "buttonGrayLeft", x: 20, y: 652, xAlign:.left, yAlign:.down))
+        self.addChild(Button(name: "buttonPlay", textureName: "buttonYellow", text:"PLAY", x: 550, y: 189, align:.center))
+        self.addChild(Button(name: "buttonOptions", textureName: "buttonYellow", text:"OPTIONS", x: 550, y: 287, align:.center))
+        self.addChild(Button(name: "buttonCredits", textureName: "buttonYellow", text:"CREDITS", x: 550, y: 385, align:.center))
+        self.addChild(Button(name: "buttonD", textureName: "buttonYellow", text:"BUTTON D", x: 550, y: 483, align:.center))
     }
     
     override func update(currentTime: NSTimeInterval) {
@@ -77,11 +77,11 @@ class MainMenuScene: GameScene {
                     }
                     
                     if (self.childNodeWithName("buttonOptions")!.containsPoint(location)) {
-                        self.nextState = .options
+                        //self.nextState = .options
                         return
                     }
                     if (self.childNodeWithName("buttonCredits")!.containsPoint(location)) {
-                        self.nextState = .credits
+                        //self.nextState = .credits
                         return
                     }
                 }
