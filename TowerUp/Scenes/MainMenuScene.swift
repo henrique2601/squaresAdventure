@@ -45,15 +45,15 @@ class MainMenuScene: GameScene {
             switch (self.nextState) {
                 
             case states.towers:
-                self.view!.presentScene(TowersScene(), transition: Config.defaultTransition)
+                self.view!.presentScene(TowersScene(), transition: Config.defaultGoTransition)
                 break
                 
             case states.options:
-                self.view!.presentScene(OptionsScene(), transition: Config.defaultTransition)
+                self.view!.presentScene(OptionsScene(), transition: Config.defaultGoTransition)
                 break
                 
             case states.credits:
-                self.view!.presentScene(CreditsScene(), transition: Config.defaultTransition)
+                self.view!.presentScene(CreditsScene(), transition: Config.defaultGoTransition)
                 break
                 
             default:

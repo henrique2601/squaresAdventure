@@ -1,5 +1,5 @@
 //
-//  FloorsScene.swift
+//  AfterMissionScene.swift
 //  TowerUp
 //
 //  Created by Pablo Henrique Bertaco on 8/6/15.
@@ -9,28 +9,25 @@
 import UIKit
 import SpriteKit
 
-class FloorsScene: GameScene {
+class AfterMissionScene: GameScene {
     enum states {
+        case afterMission
         case floors
-        case beforeMission
-        case towers
     }
     
-    var state = states.floors
-    var nextState = states.floors
+    var state = states.afterMission
+    var nextState = states.afterMission
     
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
-        self.addChild(Control(name: "floorsBackground", x:0, y:0, align:.center))
+        self.addChild(Control(name: "afterMissionBackground", x:0, y:0, align:.center))
         
-        self.addChild(Label(name: "labelTitle", textureName: "FloorsScene", x: 667, y: 130, align:.center))
+        self.addChild(Label(name: "labelTitle", textureName: "AfterMissionScene", x: 667, y: 130, align:.center))
         
-        self.addChild(Button(name: "buttonFloor0", textureName: "buttonYellow", text:"FLOOR A", x: 550, y: 189, align:.center))
+        self.addChild(Button(name: "buttonOK", textureName: "buttonYellow", text:"OK", x: 550, y: 189, align:.center))
         self.addChild(Button(name: "buttonB", textureName: "buttonYellow", text:"BUTTON B", x: 550, y: 287, align:.center))
         self.addChild(Button(name: "buttonC", textureName: "buttonYellow", text:"BUTTON C", x: 550, y: 385, align:.center))
         self.addChild(Button(name: "buttonD", textureName: "buttonYellow", text:"BUTTON D", x: 550, y: 483, align:.center))
-        
-        self.addChild(Button(name: "buttonBack", textureName: "buttonGrayLeft", x: 20, y: 652, xAlign:.left, yAlign:.down))
     }
     
     override func update(currentTime: NSTimeInterval) {
@@ -43,13 +40,9 @@ class FloorsScene: GameScene {
             self.state = self.nextState
             
             switch (self.nextState) {
-            
-            case states.beforeMission:
-                self.view!.presentScene(BeforeMissionScene(), transition: Config.defaultGoTransition)
-                break
                 
-            case states.towers:
-                self.view!.presentScene(TowersScene(), transition: Config.defaultBackTransition)
+            case states.floors:
+                self.view!.presentScene(FloorsScene(), transition: Config.defaultGoTransition)
                 break
                 
             default:
@@ -63,17 +56,12 @@ class FloorsScene: GameScene {
         
         if (self.state == self.nextState) {
             switch (self.state) {
-            case states.floors:
+            case states.afterMission:
                 for touch in (touches as! Set<UITouch>) {
                     let location = touch.locationInNode(self)
                     
-                    if (self.childNodeWithName("buttonFloor0")!.containsPoint(location)) {
-                        self.nextState = .beforeMission
-                        return
-                    }
-                    
-                    if (self.childNodeWithName("buttonBack")!.containsPoint(location)) {
-                        self.nextState = .towers
+                    if (self.childNodeWithName("buttonOK")!.containsPoint(location)) {
+                        self.nextState = .floors
                         return
                     }
                 }

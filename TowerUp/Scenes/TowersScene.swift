@@ -13,6 +13,7 @@ class TowersScene: GameScene {
     
     enum states {
         case towers
+        case floors
         case mainMenu
     }
     
@@ -25,7 +26,7 @@ class TowersScene: GameScene {
         
         self.addChild(Label(name: "labelTitle", textureName: "TowersScene", x: 667, y: 130, align:.center))
         
-        self.addChild(Button(name: "buttonA", textureName: "buttonYellow", text:"TOWER A", x: 550, y: 189, align:.center))
+        self.addChild(Button(name: "buttonTower0", textureName: "buttonYellow", text:"TOWER A", x: 550, y: 189, align:.center))
         self.addChild(Button(name: "buttonB", textureName: "buttonYellow", text:"BUTTON B", x: 550, y: 287, align:.center))
         self.addChild(Button(name: "buttonC", textureName: "buttonYellow", text:"BUTTON C", x: 550, y: 385, align:.center))
         self.addChild(Button(name: "buttonD", textureName: "buttonYellow", text:"BUTTON D", x: 550, y: 483, align:.center))
@@ -44,8 +45,12 @@ class TowersScene: GameScene {
             
             switch (self.nextState) {
                 
+            case states.floors:
+                self.view!.presentScene(FloorsScene(), transition: Config.defaultGoTransition)
+                break
+                
             case states.mainMenu:
-                self.view!.presentScene(MainMenuScene(), transition: Config.defaultTransition)
+                self.view!.presentScene(MainMenuScene(), transition: Config.defaultBackTransition)
                 break
                 
             default:
@@ -62,6 +67,11 @@ class TowersScene: GameScene {
             case states.towers:
                 for touch in (touches as! Set<UITouch>) {
                     let location = touch.locationInNode(self)
+                    
+                    if (self.childNodeWithName("buttonTower0")!.containsPoint(location)) {
+                        self.nextState = .floors
+                        return
+                    }
                     
                     if (self.childNodeWithName("buttonBack")!.containsPoint(location)) {
                         self.nextState = .mainMenu

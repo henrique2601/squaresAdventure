@@ -44,7 +44,7 @@ class OptionsScene: GameScene {
             switch (self.nextState) {
                 
             case states.mainMenu:
-                self.view!.presentScene(MainMenuScene(), transition: Config.defaultTransition)
+                self.view!.presentScene(MainMenuScene(), transition: Config.defaultBackTransition)
                 break
                 
             default:

@@ -16,7 +16,8 @@ class Config: NSObject {
     
     static var HUDZPosition:CGFloat = 1000
     
-    static var defaultTransition:SKTransition = SKTransition.crossFadeWithDuration(1)
+    static var defaultGoTransition:SKTransition = SKTransition.pushWithDirection(SKTransitionDirection.Left, duration: 0.5)
+    static var defaultBackTransition:SKTransition = SKTransition.pushWithDirection(SKTransitionDirection.Right, duration: 0.5)
     
     static func sceneSize() -> CGSize {
         
