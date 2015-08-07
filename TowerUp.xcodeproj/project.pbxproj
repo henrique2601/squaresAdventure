@@ -20,6 +20,10 @@
 		139A0E881B73D00200EDE944 /* BeforeMissionScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139A0E871B73D00200EDE944 /* BeforeMissionScene.swift */; };
 		139A0E8A1B73D05900EDE944 /* MissionScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139A0E891B73D05900EDE944 /* MissionScene.swift */; };
 		139A0E8C1B73D08300EDE944 /* AfterMissionScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139A0E8B1B73D08300EDE944 /* AfterMissionScene.swift */; };
+		139A0E8F1B7431CB00EDE944 /* MemoryCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139A0E8E1B7431CB00EDE944 /* MemoryCard.swift */; };
+		139A0E951B743BF200EDE944 /* Floor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139A0E941B743BF200EDE944 /* Floor.swift */; };
+		139A0E971B743BF200EDE944 /* Tower.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139A0E961B743BF200EDE944 /* Tower.swift */; };
+		139A0E991B743C1300EDE944 /* PlayerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139A0E981B743C1300EDE944 /* PlayerData.swift */; };
 		13CCB6FC1B72AD310060334C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13CCB6FB1B72AD310060334C /* LaunchScreen.xib */; };
 		13CCB6FE1B72B9010060334C /* TowersScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13CCB6FD1B72B9010060334C /* TowersScene.swift */; };
 		13CCB7001B72B9A70060334C /* OptionsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13CCB6FF1B72B9A70060334C /* OptionsScene.swift */; };
@@ -54,6 +58,10 @@
 		139A0E871B73D00200EDE944 /* BeforeMissionScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BeforeMissionScene.swift; path = Scenes/BeforeMissionScene.swift; sourceTree = "<group>"; };
 		139A0E891B73D05900EDE944 /* MissionScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MissionScene.swift; path = Scenes/MissionScene.swift; sourceTree = "<group>"; };
 		139A0E8B1B73D08300EDE944 /* AfterMissionScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AfterMissionScene.swift; path = Scenes/AfterMissionScene.swift; sourceTree = "<group>"; };
+		139A0E8E1B7431CB00EDE944 /* MemoryCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MemoryCard.swift; path = CoreData/MemoryCard.swift; sourceTree = "<group>"; };
+		139A0E941B743BF200EDE944 /* Floor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Floor.swift; path = CoreData/Floor.swift; sourceTree = "<group>"; };
+		139A0E961B743BF200EDE944 /* Tower.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Tower.swift; path = CoreData/Tower.swift; sourceTree = "<group>"; };
+		139A0E981B743C1300EDE944 /* PlayerData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayerData.swift; path = CoreData/PlayerData.swift; sourceTree = "<group>"; };
 		13CCB6FB1B72AD310060334C /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		13CCB6FD1B72B9010060334C /* TowersScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TowersScene.swift; path = Scenes/TowersScene.swift; sourceTree = "<group>"; };
 		13CCB6FF1B72B9A70060334C /* OptionsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OptionsScene.swift; path = Scenes/OptionsScene.swift; sourceTree = "<group>"; };
@@ -129,6 +137,18 @@
 			name = Scenes;
 			sourceTree = "<group>";
 		};
+		139A0E8D1B74319000EDE944 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				139A0E8E1B7431CB00EDE944 /* MemoryCard.swift */,
+				1359DC981B727726006C12FA /* TowerUp.xcdatamodeld */,
+				139A0E981B743C1300EDE944 /* PlayerData.swift */,
+				139A0E961B743BF200EDE944 /* Tower.swift */,
+				139A0E941B743BF200EDE944 /* Floor.swift */,
+			);
+			name = CoreData;
+			sourceTree = "<group>";
+		};
 		81BA813C1A49DA1800E65899 = {
 			isa = PBXGroup;
 			children = (
@@ -149,12 +169,12 @@
 		81BA81471A49DA1800E65899 /* TowerUp */ = {
 			isa = PBXGroup;
 			children = (
+				139A0E8D1B74319000EDE944 /* CoreData */,
 				1359DD021B728114006C12FA /* Scenes */,
 				1359DCFD1B727FFE006C12FA /* src */,
 				81BA814E1A49DA1800E65899 /* Main.storyboard */,
 				81BA81511A49DA1800E65899 /* Images.xcassets */,
 				13CCB6FB1B72AD310060334C /* LaunchScreen.xib */,
-				1359DC981B727726006C12FA /* TowerUp.xcdatamodeld */,
 				81BA81481A49DA1800E65899 /* Supporting Files */,
 			);
 			path = TowerUp;
@@ -282,6 +302,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				81BA814D1A49DA1800E65899 /* ViewController.swift in Sources */,
+				139A0E951B743BF200EDE944 /* Floor.swift in Sources */,
 				13CCB7001B72B9A70060334C /* OptionsScene.swift in Sources */,
 				81BA814B1A49DA1800E65899 /* AppDelegate.swift in Sources */,
 				139A0E8A1B73D05900EDE944 /* MissionScene.swift in Sources */,
@@ -293,8 +314,11 @@
 				1359DD101B7287A7006C12FA /* Button.swift in Sources */,
 				1359DD0E1B72874C006C12FA /* Control.swift in Sources */,
 				1359DD011B72805F006C12FA /* GameScene.swift in Sources */,
+				139A0E991B743C1300EDE944 /* PlayerData.swift in Sources */,
 				1359DD0C1B7286D3006C12FA /* MainMenuScene.swift in Sources */,
 				139A0E8C1B73D08300EDE944 /* AfterMissionScene.swift in Sources */,
+				139A0E971B743BF200EDE944 /* Tower.swift in Sources */,
+				139A0E8F1B7431CB00EDE944 /* MemoryCard.swift in Sources */,
 				13CCB7021B72B9D90060334C /* CreditsScene.swift in Sources */,
 				13CCB6FE1B72B9010060334C /* TowersScene.swift in Sources */,
 				1359DD181B728D3E006C12FA /* Label.swift in Sources */,

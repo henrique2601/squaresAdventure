@@ -1,4 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14E46" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
-    <elements/>
+    <entity name="Floor" representedClassName="PRODUCT_MODULE_NAME.Floor" syncable="YES">
+        <attribute name="progress" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="tower" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Tower" inverseName="floors" inverseEntity="Tower" syncable="YES"/>
+    </entity>
+    <entity name="PlayerData" representedClassName="PRODUCT_MODULE_NAME.PlayerData" syncable="YES"/>
+    <entity name="Tower" representedClassName="PRODUCT_MODULE_NAME.Tower" syncable="YES">
+        <relationship name="floors" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Floor" inverseName="tower" inverseEntity="Floor" syncable="YES"/>
+    </entity>
+    <fetchRequest name="FetchRequest" entity="PlayerData"/>
+    <elements>
+        <element name="PlayerData" positionX="-63" positionY="-18" width="128" height="45"/>
+        <element name="Tower" positionX="-54" positionY="-9" width="128" height="60"/>
+        <element name="Floor" positionX="-36" positionY="9" width="128" height="75"/>
+    </elements>
 </model>
