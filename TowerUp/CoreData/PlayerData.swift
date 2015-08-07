@@ -13,5 +13,7 @@ import CoreData
 
 class PlayerData: NSManagedObject {
 
+    @NSManaged var powerUps: NSSet
+    @NSManaged var towers: NSSet
 
 }

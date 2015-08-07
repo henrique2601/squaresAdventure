@@ -14,6 +14,6 @@ import CoreData
 class Floor: NSManagedObject {
 
     @NSManaged var progress: NSNumber
-    @NSManaged var tower: NSManagedObject
+    @NSManaged var tower: Tower
 
 }

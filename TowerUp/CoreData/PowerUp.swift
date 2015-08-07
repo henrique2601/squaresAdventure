@@ -1,5 +1,5 @@
 //
-//  Tower.swift
+//  PowerUp.swift
 //  TowerUp
 //
 //  Created by Pablo Henrique Bertaco on 8/7/15.
@@ -9,11 +9,12 @@
 import Foundation
 import CoreData
 
-@objc(Tower)
+@objc(PowerUp)
 
-class Tower: NSManagedObject {
+class PowerUp: NSManagedObject {
 
-    @NSManaged var floors: NSSet
+    @NSManaged var available: NSNumber
+    @NSManaged var locked: NSNumber
     @NSManaged var playerData: PlayerData
 
 }
