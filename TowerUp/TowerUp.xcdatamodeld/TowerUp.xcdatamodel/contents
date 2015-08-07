@@ -4,14 +4,24 @@
         <attribute name="progress" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <relationship name="tower" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Tower" inverseName="floors" inverseEntity="Tower" syncable="YES"/>
     </entity>
-    <entity name="PlayerData" representedClassName="PRODUCT_MODULE_NAME.PlayerData" syncable="YES"/>
+    <entity name="PlayerData" representedClassName="PRODUCT_MODULE_NAME.PlayerData" syncable="YES">
+        <relationship name="powerUps" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PowerUp" inverseName="playerData" inverseEntity="PowerUp" syncable="YES"/>
+        <relationship name="towers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tower" inverseName="playerData" inverseEntity="Tower" syncable="YES"/>
+    </entity>
+    <entity name="PowerUp" syncable="YES">
+        <attribute name="available" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="locked" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <relationship name="playerData" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PlayerData" inverseName="powerUps" inverseEntity="PlayerData" syncable="YES"/>
+    </entity>
     <entity name="Tower" representedClassName="PRODUCT_MODULE_NAME.Tower" syncable="YES">
-        <relationship name="floors" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Floor" inverseName="tower" inverseEntity="Floor" syncable="YES"/>
+        <relationship name="floors" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Floor" inverseName="tower" inverseEntity="Floor" syncable="YES"/>
+        <relationship name="playerData" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PlayerData" inverseName="towers" inverseEntity="PlayerData" syncable="YES"/>
     </entity>
     <fetchRequest name="FetchRequest" entity="PlayerData"/>
     <elements>
-        <element name="PlayerData" positionX="-63" positionY="-18" width="128" height="45"/>
-        <element name="Tower" positionX="-54" positionY="-9" width="128" height="60"/>
-        <element name="Floor" positionX="-36" positionY="9" width="128" height="75"/>
+        <element name="Floor" positionX="-29" positionY="-147" width="128" height="75"/>
+        <element name="PlayerData" positionX="394" positionY="-486" width="128" height="73"/>
+        <element name="Tower" positionX="198" positionY="-270" width="128" height="73"/>
+        <element name="PowerUp" positionX="603" positionY="-333" width="128" height="90"/>
     </elements>
 </model>
