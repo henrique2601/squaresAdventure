@@ -25,6 +25,9 @@
 		139A0E9D1B74D3B800EDE944 /* Floor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139A0E9C1B74D3B800EDE944 /* Floor.swift */; };
 		139A0E9F1B74D3B800EDE944 /* PowerUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139A0E9E1B74D3B800EDE944 /* PowerUp.swift */; };
 		139A0EA11B74D3B800EDE944 /* PlayerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139A0EA01B74D3B800EDE944 /* PlayerData.swift */; };
+		13B32C041B74E599001A1486 /* Skin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B32C031B74E599001A1486 /* Skin.swift */; };
+		13B32C061B74EE93001A1486 /* LobbyScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B32C051B74EE93001A1486 /* LobbyScene.swift */; };
+		13B32C081B74F823001A1486 /* MultiplayerMissionScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B32C071B74F823001A1486 /* MultiplayerMissionScene.swift */; };
 		13CCB6FC1B72AD310060334C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13CCB6FB1B72AD310060334C /* LaunchScreen.xib */; };
 		13CCB6FE1B72B9010060334C /* TowersScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13CCB6FD1B72B9010060334C /* TowersScene.swift */; };
 		13CCB7001B72B9A70060334C /* OptionsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13CCB6FF1B72B9A70060334C /* OptionsScene.swift */; };
@@ -65,6 +68,9 @@
 		139A0E9C1B74D3B800EDE944 /* Floor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Floor.swift; path = CoreData/Floor.swift; sourceTree = "<group>"; };
 		139A0E9E1B74D3B800EDE944 /* PowerUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PowerUp.swift; path = CoreData/PowerUp.swift; sourceTree = "<group>"; };
 		139A0EA01B74D3B800EDE944 /* PlayerData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayerData.swift; path = CoreData/PlayerData.swift; sourceTree = "<group>"; };
+		13B32C031B74E599001A1486 /* Skin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Skin.swift; path = CoreData/Skin.swift; sourceTree = "<group>"; };
+		13B32C051B74EE93001A1486 /* LobbyScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LobbyScene.swift; path = Scenes/LobbyScene.swift; sourceTree = "<group>"; };
+		13B32C071B74F823001A1486 /* MultiplayerMissionScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MultiplayerMissionScene.swift; path = Scenes/MultiplayerMissionScene.swift; sourceTree = "<group>"; };
 		13CCB6FB1B72AD310060334C /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		13CCB6FD1B72B9010060334C /* TowersScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TowersScene.swift; path = Scenes/TowersScene.swift; sourceTree = "<group>"; };
 		13CCB6FF1B72B9A70060334C /* OptionsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OptionsScene.swift; path = Scenes/OptionsScene.swift; sourceTree = "<group>"; };
@@ -130,6 +136,7 @@
 			isa = PBXGroup;
 			children = (
 				1359DD0B1B7286D3006C12FA /* MainMenuScene.swift */,
+				13B32C051B74EE93001A1486 /* LobbyScene.swift */,
 				13CCB6FD1B72B9010060334C /* TowersScene.swift */,
 				13CCB6FF1B72B9A70060334C /* OptionsScene.swift */,
 				13CCB7011B72B9D90060334C /* CreditsScene.swift */,
@@ -137,6 +144,7 @@
 				139A0E871B73D00200EDE944 /* BeforeMissionScene.swift */,
 				139A0E891B73D05900EDE944 /* MissionScene.swift */,
 				139A0E8B1B73D08300EDE944 /* AfterMissionScene.swift */,
+				13B32C071B74F823001A1486 /* MultiplayerMissionScene.swift */,
 			);
 			name = Scenes;
 			sourceTree = "<group>";
@@ -150,6 +158,7 @@
 				139A0E9E1B74D3B800EDE944 /* PowerUp.swift */,
 				139A0E9C1B74D3B800EDE944 /* Floor.swift */,
 				139A0E9A1B74D3B700EDE944 /* Tower.swift */,
+				13B32C031B74E599001A1486 /* Skin.swift */,
 			);
 			name = CoreData;
 			sourceTree = "<group>";
@@ -324,7 +333,10 @@
 				139A0E9D1B74D3B800EDE944 /* Floor.swift in Sources */,
 				1359DD161B728C95006C12FA /* Switch.swift in Sources */,
 				1359DD041B728168006C12FA /* Config.swift in Sources */,
+				13B32C041B74E599001A1486 /* Skin.swift in Sources */,
 				1359DD061B728574006C12FA /* GameMath.swift in Sources */,
+				13B32C081B74F823001A1486 /* MultiplayerMissionScene.swift in Sources */,
+				13B32C061B74EE93001A1486 /* LobbyScene.swift in Sources */,
 				139A0E881B73D00200EDE944 /* BeforeMissionScene.swift in Sources */,
 				1359DD101B7287A7006C12FA /* Button.swift in Sources */,
 				1359DD0E1B72874C006C12FA /* Control.swift in Sources */,
