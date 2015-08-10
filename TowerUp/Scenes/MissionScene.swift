@@ -28,7 +28,7 @@ class MissionScene: GameScene {
     
         //test
         
-        self.addChild(Control(name: "player", textureName: "buttonYellowPressed", x: 0, y: 0 , align:.center))
+        self.addChild(Control(name: "player", textureName: "buttonYellowPressed", x: 500 , y: 200 , align:.center))
     
         self.addChild(Button(name: "buttonBack", textureName: "buttonGrayLeft" ,x:81, y:633, xAlign:.left, yAlign:.down))
         
