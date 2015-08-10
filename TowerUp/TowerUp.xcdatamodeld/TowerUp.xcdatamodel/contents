@@ -25,7 +25,7 @@
     <fetchRequest name="FetchRequest" entity="PlayerData"/>
     <elements>
         <element name="Floor" positionX="-29" positionY="-147" width="128" height="75"/>
-        <element name="PlayerData" positionX="394" positionY="-486" width="128" height="88"/>
+        <element name="PlayerData" positionX="394" positionY="-486" width="128" height="90"/>
         <element name="PowerUp" positionX="603" positionY="-333" width="128" height="88"/>
         <element name="Skin" positionX="432" positionY="-166" width="128" height="73"/>
         <element name="Tower" positionX="198" positionY="-270" width="128" height="73"/>

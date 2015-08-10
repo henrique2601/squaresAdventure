@@ -14,6 +14,7 @@ class TowersScene: GameScene {
     enum states {
         case towers
         case floors
+        case multiplayer
         case mainMenu
     }
     
@@ -29,7 +30,7 @@ class TowersScene: GameScene {
         self.addChild(Button(name: "buttonTower0", textureName: "buttonYellow", text:"TOWER A", x: 550, y: 189, align:.center))
         self.addChild(Button(name: "buttonB", textureName: "buttonYellow", text:"BUTTON B", x: 550, y: 287, align:.center))
         self.addChild(Button(name: "buttonC", textureName: "buttonYellow", text:"BUTTON C", x: 550, y: 385, align:.center))
-        self.addChild(Button(name: "buttonD", textureName: "buttonYellow", text:"BUTTON D", x: 550, y: 483, align:.center))
+        self.addChild(Button(name: "buttonMultiplayer", textureName: "buttonYellow", text:"BUTTON D", x: 550, y: 483, align:.center))
         
         self.addChild(Button(name: "buttonBack", textureName: "buttonGrayLeft", x: 20, y: 652, xAlign:.left, yAlign:.down))
     }
@@ -47,6 +48,10 @@ class TowersScene: GameScene {
                 
             case states.floors:
                 self.view!.presentScene(FloorsScene(), transition: Config.defaultGoTransition)
+                break
+                
+            case states.multiplayer:
+                self.view!.presentScene(LobbyScene(), transition: Config.defaultGoTransition)
                 break
                 
             case states.mainMenu:
@@ -70,6 +75,11 @@ class TowersScene: GameScene {
                     
                     if (self.childNodeWithName("buttonTower0")!.containsPoint(location)) {
                         self.nextState = .floors
+                        return
+                    }
+                    
+                    if (self.childNodeWithName("buttonMultiplayer")!.containsPoint(location)) {
+                        self.nextState = .multiplayer
                         return
                     }
                     
