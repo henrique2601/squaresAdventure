@@ -11,12 +11,16 @@ import SpriteKit
 
 class Tile: SKSpriteNode {
     
-    static var size:CGFloat = 128
+    static var sizeInPoints:CGFloat = 128/2
+    
+    override init(texture: SKTexture!, color: UIColor!, size: CGSize) {
+        super.init(texture: texture, color: color, size: size)
+    }
     
     init(imageName:String, x:Int, y:Int) {
         let texture = SKTexture(imageNamed: imageName)
         super.init(texture: texture, color: nil, size: texture.size())
-        self.position = CGPoint(x: x * (Int)(Tile.size), y: y * -(Int)(Tile.size) + (Int)(Chunk.size - Tile.size))
+        self.position = CGPoint(x: x * (Int)(Tile.sizeInPoints), y: y * -(Int)(Tile.sizeInPoints) + (Int)(Chunk.sizeInPoints - Tile.sizeInPoints))
     }
 
     required init?(coder aDecoder: NSCoder) {

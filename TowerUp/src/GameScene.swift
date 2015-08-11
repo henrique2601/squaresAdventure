@@ -41,4 +41,14 @@ class GameScene: SKScene {
     override func touchesCancelled(touches: Set<NSObject>!, withEvent event: UIEvent!) {
         Control.touchesEnded(self, touches: touches as! Set<UITouch>)
     }
+    
+    
+}
+
+public extension SKScene {
+    func centerOnNode(node:SKNode)
+    {
+        let cameraPositionInScene:CGPoint = node.scene!.convertPoint(node.position, fromNode: node.parent!)
+        node.parent!.position = CGPoint(x: node.parent!.position.x - cameraPositionInScene.x, y: node.parent!.position.y - cameraPositionInScene.y)
+    }
 }

@@ -51,10 +51,10 @@ class MapManager: SKNode {
         }
     }
     
-    func update(currentTime: NSTimeInterval, player:Player, region:Int) {
+    func update(currentTime: NSTimeInterval, position:CGPoint) {
         if(!MapManager.loading) {
             if(currentTime - self.lastUpdate > 0.1) {
-                self.updatePlayerRegion(player.position)
+                self.updatePlayerRegion(position)
                 if (self.playerRegionX != self.loadedRegionX || self.playerRegionY != self.loadedRegionY) {
                     MapManager.loading = true
                     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
@@ -72,17 +72,17 @@ class MapManager: SKNode {
         var positionX = position.x
         var positionY = position.y
         
-        self.playerRegionX = Int(positionX / Chunk.size)
-        self.playerRegionY = Int(positionY / Chunk.size)
+        self.playerRegionX = Int(positionX / Chunk.sizeInPoints)
+        self.playerRegionY = Int(positionY / Chunk.sizeInPoints)
         
         if (self.playerRegionY <= 0) {
-            if (position.y / CGFloat(Chunk.size) < 0) {
+            if (position.y / CGFloat(Chunk.sizeInPoints) < 0) {
                 self.playerRegionY--;
             }
         }
         
         if (self.playerRegionX <= 0) {
-            if (position.x / CGFloat(Chunk.size) < 0) {
+            if (position.x / CGFloat(Chunk.sizeInPoints) < 0) {
                 self.playerRegionX--;
             }
         }

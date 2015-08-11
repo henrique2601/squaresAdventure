@@ -19,11 +19,29 @@ class MissionScene: GameScene {
     var state = states.mission
     var nextState = states.mission
     
+    var world:World!
+    var camera:Camera!
+    var player:Player!
+    var mapManager:MapManager!
+    
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
         self.backgroundColor = GameColors.cornflowerBlue
         
-        self.addChild(Player(name: "player", x: 96, y: 96))
+        self.world = World()
+        self.addChild(world)
+        
+        self.camera = Camera()
+        world.addChild(camera)
+        
+        self.player = Player(name: "player", x: 0, y: 0)
+        Control.locations.removeObject("player")
+        world.addChild(player)
+        
+        self.mapManager = MapManager()
+        world.addChild(mapManager)
+        mapManager.reloadMap(player.position)
+        
         
         self.addChild(Button(name: "buttonLeft", textureName: "buttonYellowLeft" ,x:20, y:652, xAlign:.left, yAlign:.down))
         self.addChild(Button(name: "buttonRight", textureName: "buttonYellowRight" ,x:118, y:652, xAlign:.left, yAlign:.down))
@@ -35,6 +53,10 @@ class MissionScene: GameScene {
     override func update(currentTime: NSTimeInterval) {
         if(self.state == self.nextState){
             switch (self.state) {
+            case states.mission:
+                self.player.update(currentTime)
+                self.mapManager.update(currentTime, position: self.player.position)
+                break
             default:
                 break
             }
@@ -51,6 +73,11 @@ class MissionScene: GameScene {
                 break
             }
         }
+    }
+    
+    override func didFinishUpdate()
+    {
+        self.camera.update(self.player.position)
     }
     
     //    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
