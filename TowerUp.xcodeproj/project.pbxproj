@@ -17,6 +17,10 @@
 		1359DD101B7287A7006C12FA /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1359DD0F1B7287A7006C12FA /* Button.swift */; };
 		1359DD161B728C95006C12FA /* Switch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1359DD151B728C95006C12FA /* Switch.swift */; };
 		1359DD181B728D3E006C12FA /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1359DD171B728D3E006C12FA /* Label.swift */; };
+		1383FD5E1B7A49730012DA45 /* MapManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1383FD5D1B7A49730012DA45 /* MapManager.swift */; };
+		1383FD601B7A4A920012DA45 /* Chunk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1383FD5F1B7A4A920012DA45 /* Chunk.swift */; };
+		1383FD621B7A4B420012DA45 /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1383FD611B7A4B420012DA45 /* Tile.swift */; };
+		1383FD641B7A50990012DA45 /* Ground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1383FD631B7A50990012DA45 /* Ground.swift */; };
 		139A0E881B73D00200EDE944 /* BeforeMissionScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139A0E871B73D00200EDE944 /* BeforeMissionScene.swift */; };
 		139A0E8A1B73D05900EDE944 /* MissionScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139A0E891B73D05900EDE944 /* MissionScene.swift */; };
 		139A0E8C1B73D08300EDE944 /* AfterMissionScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139A0E8B1B73D08300EDE944 /* AfterMissionScene.swift */; };
@@ -60,6 +64,10 @@
 		1359DD0F1B7287A7006C12FA /* Button.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Button.swift; path = src/Button.swift; sourceTree = "<group>"; };
 		1359DD151B728C95006C12FA /* Switch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Switch.swift; path = src/Switch.swift; sourceTree = "<group>"; };
 		1359DD171B728D3E006C12FA /* Label.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Label.swift; path = src/Label.swift; sourceTree = "<group>"; };
+		1383FD5D1B7A49730012DA45 /* MapManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapManager.swift; path = src/MapManager.swift; sourceTree = "<group>"; };
+		1383FD5F1B7A4A920012DA45 /* Chunk.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Chunk.swift; path = src/Chunk.swift; sourceTree = "<group>"; };
+		1383FD611B7A4B420012DA45 /* Tile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Tile.swift; path = src/Tile.swift; sourceTree = "<group>"; };
+		1383FD631B7A50990012DA45 /* Ground.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ground.swift; sourceTree = "<group>"; };
 		139A0E871B73D00200EDE944 /* BeforeMissionScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BeforeMissionScene.swift; path = Scenes/BeforeMissionScene.swift; sourceTree = "<group>"; };
 		139A0E891B73D05900EDE944 /* MissionScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MissionScene.swift; path = Scenes/MissionScene.swift; sourceTree = "<group>"; };
 		139A0E8B1B73D08300EDE944 /* AfterMissionScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AfterMissionScene.swift; path = Scenes/AfterMissionScene.swift; sourceTree = "<group>"; };
@@ -120,6 +128,10 @@
 			children = (
 				81BA814A1A49DA1800E65899 /* AppDelegate.swift */,
 				81BA814C1A49DA1800E65899 /* ViewController.swift */,
+				1383FD5D1B7A49730012DA45 /* MapManager.swift */,
+				1383FD5F1B7A4A920012DA45 /* Chunk.swift */,
+				1383FD611B7A4B420012DA45 /* Tile.swift */,
+				1383FD631B7A50990012DA45 /* Ground.swift */,
 				1359DD001B72805F006C12FA /* GameScene.swift */,
 				1359DD031B728168006C12FA /* Config.swift */,
 				1359DD051B728574006C12FA /* GameMath.swift */,
@@ -339,16 +351,20 @@
 				13B32C061B74EE93001A1486 /* LobbyScene.swift in Sources */,
 				139A0E881B73D00200EDE944 /* BeforeMissionScene.swift in Sources */,
 				1359DD101B7287A7006C12FA /* Button.swift in Sources */,
+				1383FD621B7A4B420012DA45 /* Tile.swift in Sources */,
 				1359DD0E1B72874C006C12FA /* Control.swift in Sources */,
 				1359DD011B72805F006C12FA /* GameScene.swift in Sources */,
+				1383FD601B7A4A920012DA45 /* Chunk.swift in Sources */,
 				1359DD0C1B7286D3006C12FA /* MainMenuScene.swift in Sources */,
 				139A0E8C1B73D08300EDE944 /* AfterMissionScene.swift in Sources */,
 				139A0E8F1B7431CB00EDE944 /* MemoryCard.swift in Sources */,
+				1383FD641B7A50990012DA45 /* Ground.swift in Sources */,
 				13CCB7021B72B9D90060334C /* CreditsScene.swift in Sources */,
 				5CF945E41B74E049001079C3 /* Player.swift in Sources */,
 				139A0EA11B74D3B800EDE944 /* PlayerData.swift in Sources */,
 				139A0E9F1B74D3B800EDE944 /* PowerUp.swift in Sources */,
 				13CCB6FE1B72B9010060334C /* TowersScene.swift in Sources */,
+				1383FD5E1B7A49730012DA45 /* MapManager.swift in Sources */,
 				1359DD181B728D3E006C12FA /* Label.swift in Sources */,
 				1359DC9A1B727726006C12FA /* TowerUp.xcdatamodeld in Sources */,
 				13CCB7041B7373D00060334C /* FloorsScene.swift in Sources */,

@@ -12,6 +12,7 @@ import SpriteKit
 class MissionScene: GameScene {
     enum states {
         case mission
+        case paused
         case afterMission
     }
     
