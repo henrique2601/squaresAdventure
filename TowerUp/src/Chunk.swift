@@ -20,11 +20,12 @@ class Chunk: SKSpriteNode {
         
         #if DEBUG
             let texture = SKTexture(imageNamed: "chunkBackground")
+            super.init(texture: texture, color: nil, size: CGSize(width: Chunk.size, height: Chunk.size))
         #else
-            let texture = nil
+            super.init(texture: nil, color: nil, size: CGSize(width: Chunk.size, height: Chunk.size))
         #endif
         
-        super.init(texture: texture, color: nil, size: CGSize(width: Chunk.size, height: Chunk.size))
+        
         self.anchorPoint = CGPointZero
         self.load(regionX, regionY: regionY)
     }

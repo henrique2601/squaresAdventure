@@ -21,22 +21,15 @@ class MissionScene: GameScene {
     
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
-        
         self.backgroundColor = GameColors.cornflowerBlue
-        //self.addChild(Control(name: "missionBackground", x:0, y:0, align:.center))
         
-        self.addChild(Label(name: "labelTitle", textureName: "MissionScene", x: 667, y: 130, align:.center))
-    
-        //test
+        self.addChild(Player(name: "player", x: 96, y: 96))
         
-        self.addChild(Control(name: "player", textureName: "buttonYellowPressed", x: 0, y: 0 , align:.center))
-    
-        self.addChild(Button(name: "buttonBack", textureName: "buttonGrayLeft" ,x:81, y:633, xAlign:.left, yAlign:.down))
-        
-        
+        self.addChild(Button(name: "buttonLeft", textureName: "buttonYellowLeft" ,x:20, y:652, xAlign:.left, yAlign:.down))
+        self.addChild(Button(name: "buttonRight", textureName: "buttonYellowRight" ,x:118, y:652, xAlign:.left, yAlign:.down))
         self.addChild(Button(name: "buttonJump" ,x:1236, y:652, xAlign:.right, yAlign:.down))
         
-        
+        self.addChild(Button(name: "buttonBack", textureName: "buttonGrayLeft" ,x:20, y:20, xAlign:.left, yAlign:.down))
     }
     
     override func update(currentTime: NSTimeInterval) {
@@ -60,37 +53,36 @@ class MissionScene: GameScene {
         }
     }
     
-//    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
-//       
-//        super.touchesEnded(touches, withEvent: event)
-//        
-//        if (self.state == self.nextState) {
-//            switch (self.state) {
-//            case states.mission:
-//                for touch in (touches as! Set<UITouch>) {
-//                    let location = touch.locationInNode(self)
-//                    
-//                    //self.nextState = .afterMission
-//                    return
-//                }
-//                break
-//                
-//            default:
-//                break
-//            }
-//        }
-//    }
+    //    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
+    //
+    //        super.touchesEnded(touches, withEvent: event)
+    //
+    //        if (self.state == self.nextState) {
+    //            switch (self.state) {
+    //            case states.mission:
+    //                for touch in (touches as! Set<UITouch>) {
+    //                    let location = touch.locationInNode(self)
+    //
+    //                    //self.nextState = .afterMission
+    //                    return
+    //                }
+    //                break
+    //
+    //            default:
+    //                break
+    //            }
+    //        }
+    //    }
     
     override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
-    Control.touchesEnded(self, touches: touches as! Set<UITouch>)
-    for touch in (touches as! Set<UITouch>) {
-    let location = touch.locationInNode(self)
-    
-    if (self.childNodeWithName("buttonBack")!.containsPoint(location)) {
-    self.view?.presentScene(AfterMissionScene(), transition: SKTransition.crossFadeWithDuration(1))
-    return
-    }
+        Control.touchesEnded(self, touches: touches as! Set<UITouch>)
+        for touch in (touches as! Set<UITouch>) {
+            let location = touch.locationInNode(self)
+            
+            if (self.childNodeWithName("buttonBack")!.containsPoint(location)) {
+                self.view?.presentScene(AfterMissionScene(), transition: SKTransition.crossFadeWithDuration(1))
+                return
+            }
         }
     }
-
 }
