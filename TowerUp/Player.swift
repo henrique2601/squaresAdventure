@@ -80,7 +80,7 @@ func update(currentTime: NSTimeInterval) {
         if(currentTime - self.startMoving > 1){
             self.needToMove = false
         }
-        
+        /*
         if(abs(self.physicsBody!.angularVelocity) < CGFloat(M_PI * 2) && (self.needToMove || self.touchesArrayCount > 0)) {
             self.totalRotation = self.rotation - self.zRotation
             
@@ -89,6 +89,7 @@ func update(currentTime: NSTimeInterval) {
             
             self.physicsBody!.applyAngularImpulse(self.totalRotation *  0.005)
         }
+        */
         
         if (self.needToMove) {
             var dX:CGFloat = destination.x - self.position.x
@@ -102,13 +103,13 @@ func update(currentTime: NSTimeInterval) {
                 switch(self.touchesArrayCount) {
                 case 0:
                     if(abs(self.totalRotation) < 1){
-                        self.physicsBody!.applyForce(CGVector(dx: -sin(self.zRotation) * 1000, dy: cos(self.zRotation) * 1000))
+                        //self.physicsBody!.applyForce(CGVector(dx: -sin(self.zRotation) * 1000, dy: cos(self.zRotation) * 1000))
                     }
                     break
                     
                 default:
                     //aplicar forca em direcao ao destino
-                    self.physicsBody!.applyForce(CGVector(dx: (dX/distanceToDestination) * 1000, dy: (dY/distanceToDestination) * 1000))
+                    //self.physicsBody!.applyForce(CGVector(dx: (dX/distanceToDestination) * 1000, dy: (dY/distanceToDestination) * 1000))
                     break
                 }
             }
