@@ -17,8 +17,17 @@ class ViewController: UIViewController {
         
         // Configure the view.
         let skView = self.view as! SKView
-        skView.showsFPS = true
-        skView.showsNodeCount = true
+        
+        #if DEBUG
+            skView.showsFPS = true
+            skView.showsNodeCount = true
+            skView.showsDrawCount = true
+            skView.showsFields = true
+            skView.showsFPS = true
+            skView.showsNodeCount = true
+            skView.showsPhysics = true
+            skView.showsQuadCount = true
+        #endif
         
         /* Sprite Kit applies additional optimizations to improve rendering performance */
         skView.ignoresSiblingOrder = true

@@ -32,6 +32,10 @@ class MissionScene: GameScene {
     
         self.addChild(Button(name: "buttonBack", textureName: "buttonGrayLeft" ,x:81, y:633, xAlign:.left, yAlign:.down))
         
+        
+        self.addChild(Button(name: "buttonJump" ,x:1236, y:652, xAlign:.right, yAlign:.down))
+        
+        
     }
     
     override func update(currentTime: NSTimeInterval) {
