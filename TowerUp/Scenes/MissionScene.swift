@@ -37,9 +37,9 @@ class MissionScene: GameScene {
     
         self.addChild(Button(name: "buttonBack", textureName: "buttonGrayLeft" ,x:81, y:633, xAlign:.left, yAlign:.down))
         
-        self.addChild(Button(name: "buttonRight", textureName: "buttonGrayLeft" ,x:161, y:633, xAlign:.left, yAlign:.down))
+        self.addChild(Button(name: "buttonLeft", textureName: "buttonGrayLeft" ,x:161, y:633, xAlign:.left, yAlign:.down))
         
-        self.addChild(Button(name: "buttonLeft", textureName: "buttonGrayLeft" ,x:241, y:633, xAlign:.left, yAlign:.down))
+        self.addChild(Button(name: "buttonRight", textureName: "buttonGrayLeft" ,x:241, y:633, xAlign:.left, yAlign:.down))
         
         self.addChild(Button(name: "buttonJump" ,x:1236, y:652, xAlign:.right, yAlign:.down))
         
@@ -77,6 +77,21 @@ class MissionScene: GameScene {
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         Control.touchesBegan(self, touches: touches as! Set<UITouch>)
+        for touch in (touches as! Set<UITouch>) {
+            let location = touch.locationInNode(self)
+            
+            if (self.childNodeWithName("buttonRight")!.containsPoint(location)) {
+                self.childNodeWithName("player")?.physicsBody?.applyForce(CGVector(dx: 100, dy: 0))
+                return
+            }
+            if (self.childNodeWithName("buttonRight")!.containsPoint(location)) {
+                self.childNodeWithName("player")?.physicsBody?.applyForce(CGVector(dx: -100, dy: 0))
+                return
+            }
+
+        }
+
+        
     }
     
     override func touchesMoved(touches: Set<NSObject>, withEvent event: UIEvent) {
