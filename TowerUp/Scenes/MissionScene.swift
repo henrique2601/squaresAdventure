@@ -49,6 +49,9 @@ class MissionScene: GameScene {
         
         self.addChild(Button(name: "buttonBack", textureName: "buttonGrayLeft" ,x:20, y:20, xAlign:.left, yAlign:.down))
     }
+
+ 
+
     
     override func update(currentTime: NSTimeInterval) {
         if(self.state == self.nextState){
@@ -65,6 +68,10 @@ class MissionScene: GameScene {
             
             switch (self.nextState) {
                 
+            case states.mission:
+                let player = self.childNodeWithName("//player")! as! Player
+                player.update(currentTime)
+                break
             case states.afterMission:
                 self.view!.presentScene(AfterMissionScene(), transition: Config.defaultGoTransition)
                 break
