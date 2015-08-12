@@ -18,6 +18,11 @@ class MissionScene: GameScene {
     var state = states.mission
     var nextState = states.mission
     
+    var xPos = 500
+    var yPos = 200
+    
+    let velo:CGFloat = 3
+    
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
         
@@ -28,15 +33,22 @@ class MissionScene: GameScene {
     
         //test
         
-        self.addChild(Control(name: "player", textureName: "buttonYellowPressed", x: 500 , y: 200 , align:.center))
+        self.addChild(Player(name: "player", textureName: "buttonYellowPressed", x: xPos , y: yPos , align:.center))
     
         self.addChild(Button(name: "buttonBack", textureName: "buttonGrayLeft" ,x:81, y:633, xAlign:.left, yAlign:.down))
         
+        self.addChild(Button(name: "buttonRight", textureName: "buttonGrayLeft" ,x:161, y:633, xAlign:.left, yAlign:.down))
+        
+        self.addChild(Button(name: "buttonLeft", textureName: "buttonGrayLeft" ,x:241, y:633, xAlign:.left, yAlign:.down))
         
         self.addChild(Button(name: "buttonJump" ,x:1236, y:652, xAlign:.right, yAlign:.down))
         
+       
         
     }
+
+ 
+
     
     override func update(currentTime: NSTimeInterval) {
         if(self.state == self.nextState){
@@ -49,6 +61,10 @@ class MissionScene: GameScene {
             
             switch (self.nextState) {
                 
+            case states.mission:
+                let player = self.childNodeWithName("//player")! as! Player
+                player.update(currentTime)
+                break
             case states.afterMission:
                 self.view!.presentScene(AfterMissionScene(), transition: Config.defaultGoTransition)
                 break
@@ -59,26 +75,14 @@ class MissionScene: GameScene {
         }
     }
     
-//    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
-//       
-//        super.touchesEnded(touches, withEvent: event)
-//        
-//        if (self.state == self.nextState) {
-//            switch (self.state) {
-//            case states.mission:
-//                for touch in (touches as! Set<UITouch>) {
-//                    let location = touch.locationInNode(self)
-//                    
-//                    //self.nextState = .afterMission
-//                    return
-//                }
-//                break
-//                
-//            default:
-//                break
-//            }
-//        }
-//    }
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+        Control.touchesBegan(self, touches: touches as! Set<UITouch>)
+    }
+    
+    override func touchesMoved(touches: Set<NSObject>, withEvent event: UIEvent) {
+        Control.touchesMoved(self)
+    }
+
     
     override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
     Control.touchesEnded(self, touches: touches as! Set<UITouch>)
@@ -91,5 +95,6 @@ class MissionScene: GameScene {
     }
         }
     }
-
+    
+        
 }
