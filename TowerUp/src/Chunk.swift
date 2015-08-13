@@ -14,7 +14,7 @@ class Chunk: SKSpriteNode {
     static var sizeInTiles:CGFloat = 21
     static var sizeInPoints:CGFloat = Tile.sizeInPoints * sizeInTiles
     
-    var type = "dirt"
+    var type = "dirt" //TODO 
     
     init(regionX:Int, regionY:Int) {
         
@@ -22,7 +22,7 @@ class Chunk: SKSpriteNode {
             let texture = SKTexture(imageNamed: "chunkBackground")
             super.init(texture: texture, color: nil, size: CGSize(width: Chunk.sizeInPoints, height: Chunk.sizeInPoints))
         #else
-            super.init(texture: nil, color: nil, size: CGSize(width: Chunk.size, height: Chunk.size))
+            super.init(texture: nil, color: nil, size: CGSize(width: Chunk.sizeInPoints, height: Chunk.sizeInPoints))
         #endif
         
         
