@@ -9,7 +9,7 @@
 import UIKit
 import SpriteKit
 
-class MissionScene: GameScene {
+class MissionScene: GameScene, SKPhysicsContactDelegate {
     enum states {
         case mission
         case paused
@@ -32,16 +32,14 @@ class MissionScene: GameScene {
         super.didMoveToView(view)
         self.backgroundColor = GameColors.cornflowerBlue
         
-        self.world = World()
+        self.world = World(physicsWorld: self.physicsWorld)
         self.addChild(world)
-        
-        self.physicsWorld.gravity = CGVectorMake(0 ,-2);
-        
+        self.physicsWorld.contactDelegate = self
         
         self.camera = Camera()
         world.addChild(camera)
         
-        self.player = Player(x: 0, y: 100, loadPhysics: true)
+        self.player = Player(x: 200, y: 100, loadPhysics: true)
         
         world.addChild(player)
         
@@ -56,7 +54,15 @@ class MissionScene: GameScene {
         self.addChild(Button(name: "buttonRight", textureName: "buttonYellowRight" ,x:118, y:652, xAlign:.left, yAlign:.down))
         self.addChild(Button(name: "buttonJump" ,x:1236, y:652, xAlign:.right, yAlign:.down))
         
-        self.addChild(Button(name: "buttonBack", textureName: "buttonGrayLeft" ,x:20, y:20, xAlign:.left, yAlign:.down))
+        self.addChild(Button(name: "buttonBack", textureName: "buttonGrayLeft" ,x:20, y:20, xAlign:.left, yAlign:.up))
+    }
+    
+    func didBeginContact(contact: SKPhysicsContact) {
+        world.didBeginContact(contact)
+    }
+    
+    func didEndContact(contact: SKPhysicsContact) {
+        world.didEndContact(contact)
     }
     
     override func update(currentTime: NSTimeInterval) {

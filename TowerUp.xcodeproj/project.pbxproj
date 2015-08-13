@@ -133,23 +133,23 @@
 			isa = PBXGroup;
 			children = (
 				81BA814A1A49DA1800E65899 /* AppDelegate.swift */,
-				81BA814C1A49DA1800E65899 /* ViewController.swift */,
-				13428EBD1B7CB0BC0017D23A /* Square.swift */,
-				13428EBF1B7CB4A90017D23A /* Player.swift */,
-				13EBD7BD1B7A65E5005F1CA4 /* World.swift */,
-				13EBD7BF1B7A6614005F1CA4 /* Camera.swift */,
-				1383FD5D1B7A49730012DA45 /* MapManager.swift */,
-				1383FD5F1B7A4A920012DA45 /* Chunk.swift */,
-				1383FD611B7A4B420012DA45 /* Tile.swift */,
-				1383FD631B7A50990012DA45 /* Ground.swift */,
-				1359DD001B72805F006C12FA /* GameScene.swift */,
-				1359DD031B728168006C12FA /* Config.swift */,
-				1359DD051B728574006C12FA /* GameMath.swift */,
-				1359DD071B728611006C12FA /* GameColors.swift */,
-				1359DD0D1B72874C006C12FA /* Control.swift */,
 				1359DD0F1B7287A7006C12FA /* Button.swift */,
-				1359DD151B728C95006C12FA /* Switch.swift */,
+				13EBD7BF1B7A6614005F1CA4 /* Camera.swift */,
+				1383FD5F1B7A4A920012DA45 /* Chunk.swift */,
+				1359DD031B728168006C12FA /* Config.swift */,
+				1359DD0D1B72874C006C12FA /* Control.swift */,
+				1359DD071B728611006C12FA /* GameColors.swift */,
+				1359DD051B728574006C12FA /* GameMath.swift */,
+				1359DD001B72805F006C12FA /* GameScene.swift */,
+				1383FD631B7A50990012DA45 /* Ground.swift */,
 				1359DD171B728D3E006C12FA /* Label.swift */,
+				1383FD5D1B7A49730012DA45 /* MapManager.swift */,
+				13428EBF1B7CB4A90017D23A /* Player.swift */,
+				13428EBD1B7CB0BC0017D23A /* Square.swift */,
+				1359DD151B728C95006C12FA /* Switch.swift */,
+				1383FD611B7A4B420012DA45 /* Tile.swift */,
+				81BA814C1A49DA1800E65899 /* ViewController.swift */,
+				13EBD7BD1B7A65E5005F1CA4 /* World.swift */,
 			);
 			name = src;
 			sourceTree = "<group>";
@@ -188,9 +188,9 @@
 		81BA813C1A49DA1800E65899 = {
 			isa = PBXGroup;
 			children = (
-				81BA81471A49DA1800E65899 /* TowerUp */,
 				81BA816A1A49DB5600E65899 /* Frameworks */,
 				81BA81461A49DA1800E65899 /* Products */,
+				81BA81471A49DA1800E65899 /* TowerUp */,
 			);
 			sourceTree = "<group>";
 		};
