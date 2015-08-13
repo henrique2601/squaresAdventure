@@ -41,9 +41,7 @@ class MissionScene: GameScene {
         self.camera = Camera()
         world.addChild(camera)
         
-        self.player = Player(name: "player", x: 0, y: -400)
-        self.player.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: 30, height: 30))
-        self.player.rotation = 0
+        self.player = Player(x: 0, y: 100, loadPhysics: true)
         
         world.addChild(player)
         
