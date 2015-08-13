@@ -188,9 +188,9 @@
 		81BA813C1A49DA1800E65899 = {
 			isa = PBXGroup;
 			children = (
-				81BA81471A49DA1800E65899 /* TowerUp */,
 				81BA816A1A49DB5600E65899 /* Frameworks */,
 				81BA81461A49DA1800E65899 /* Products */,
+				81BA81471A49DA1800E65899 /* TowerUp */,
 			);
 			sourceTree = "<group>";
 		};

@@ -41,17 +41,57 @@ class Player: Square {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func update(currentTime:NSTimeInterval) {
-        if((self.childNodeWithName("//buttonJump") as! Button).pressed){
-            self.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 40))
-            (self.childNodeWithName("//buttonJump") as! Button).pressed = false
+    override func loadPhysics(texture: SKTexture) {
+        super.loadPhysics(texture)
+        self.physicsBody!.contactTestBitMask = physicsCategory.player.rawValue
+        self.physicsBody!.usesPreciseCollisionDetection = true
+    }
+    
+    func didBeginContact(physicsBody:SKPhysicsBody) {
+        
+        switch(physicsBody.contactTestBitMask) {
+        case physicsCategory.ground.rawValue:
             
+            break
+        default:
+            println("didBeginContact de player com \(physicsBody.node!.name!) não está sendo processado")
+            break
         }
+    }
+    
+    func didEndContact(physicsBody:SKPhysicsBody) {
+        switch(physicsBody.contactTestBitMask) {
+        case physicsCategory.ground.rawValue:
+            
+            break
+        default:
+            println("didEndContact de player com \(physicsBody.node!.name!) não está sendo processado")
+            break
+        }
+    }
+    
+    func update(currentTime:NSTimeInterval) {
+        if(self.physicsBody!.allContactedBodies().count > 0) {
+            let velocity = self.physicsBody!.velocity
+            if (abs(velocity.dy) < 500) {
+                if((self.childNodeWithName("//buttonJump") as! Button).pressed) {
+                    self.physicsBody?.applyForce(CGVector(dx: 0, dy: 2000))
+                }
+            }
+        }
+        
         if((self.parent?.childNodeWithName("//buttonLeft") as! Button).pressed){
-            self.physicsBody?.applyForce(CGVector(dx: -100, dy: 0))
+            let velocity = self.physicsBody!.velocity
+            if (abs(velocity.dx) < 500) {
+                self.physicsBody?.applyImpulse(CGVector(dx: -10, dy: 0))
+            }
         }
+        
         if((self.parent?.childNodeWithName("//buttonRight") as! Button).pressed){
-            self.physicsBody?.applyForce(CGVector(dx: 100, dy: 0))
+            let velocity = self.physicsBody!.velocity
+            if (abs(velocity.dx) < 500) {
+                self.physicsBody?.applyImpulse(CGVector(dx: 10, dy: 0))
+            }
         }
     }
 }
