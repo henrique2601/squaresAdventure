@@ -42,8 +42,6 @@ class World: SKNode {
             break
         }
     }
-    
-    
 }
 
 public enum physicsCategory : UInt32 {
