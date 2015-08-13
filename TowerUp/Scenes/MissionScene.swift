@@ -46,7 +46,7 @@ class MissionScene: GameScene {
         self.player.rotation = 0
         
         world.addChild(player)
-    
+        
         
         self.mapManager = MapManager()
         world.addChild(mapManager)
@@ -90,9 +90,25 @@ class MissionScene: GameScene {
         }
     }
     
-     override func didFinishUpdate()
+    override func didFinishUpdate()
     {
         self.camera.update(self.player.position)
+        
+    }
     
-}
+    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
+        super.touchesEnded(touches, withEvent: event)
+        
+        if (self.state == self.nextState) {
+            for touch in (touches as! Set<UITouch>) {
+                let location = touch.locationInNode(self)
+                
+                if (self.childNodeWithName("buttonBack")!.containsPoint(location)) {
+                    self.nextState = .afterMission
+                    return
+                }
+            }
+        
+        }
+    }
 }
