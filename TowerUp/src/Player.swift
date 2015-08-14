@@ -79,7 +79,7 @@ class Player: Square {
             let velocity = self.physicsBody!.velocity
             if (abs(velocity.dy) < 500) {
                 if((self.childNodeWithName("//buttonJump") as! Button).pressed) {
-                    self.physicsBody?.applyForce(CGVector(dx: 0, dy: 2000))
+                    self.physicsBody?.applyForce(CGVector(dx: 0, dy: 2100))
                 }
             }
         }
