@@ -19,7 +19,9 @@ class Ground: Tile {
         
         self.physicsBody = SKPhysicsBody(bodies: [MapManager.bodies[id - 1]])
         
-        self.physicsBody!.contactTestBitMask = physicsCategory.ground.rawValue
+        self.physicsBody!.categoryBitMask = physicsCategory.ground.rawValue
+        self.physicsBody!.contactTestBitMask = physicsCategory.none.rawValue
+        self.physicsBody!.collisionBitMask = physicsCategory.none.rawValue
         
         self.physicsBody!.dynamic = false
     }

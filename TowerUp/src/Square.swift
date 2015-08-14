@@ -14,7 +14,10 @@ class Square: Control {
     func loadPhysics(texture:SKTexture) {
         //Physics Config
         self.physicsBody = SKPhysicsBody(rectangleOfSize: texture.size())
-        self.physicsBody!.angularDamping = 1
-        self.physicsBody!.linearDamping = 1
+        
+        self.physicsBody!.angularDamping = 2
+        self.physicsBody!.linearDamping = 2
+        self.physicsBody!.friction = 2
+        //self.physicsBody!.restitution
     }
 }

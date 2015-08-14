@@ -22,7 +22,7 @@ class World: SKNode {
     
     func didBeginContact(contact: SKPhysicsContact) {
         
-        switch(contact.bodyA.contactTestBitMask) {
+        switch(contact.bodyA.categoryBitMask) {
         case physicsCategory.player.rawValue:
             (contact.bodyA.node as! Player).didBeginContact(contact.bodyB)
             break
@@ -33,7 +33,7 @@ class World: SKNode {
     }
     
     func didEndContact(contact: SKPhysicsContact) {
-        switch(contact.bodyA.contactTestBitMask) {
+        switch(contact.bodyA.categoryBitMask) {
         case physicsCategory.player.rawValue:
             (contact.bodyA.node as! Player).didEndContact(contact.bodyB)
             break

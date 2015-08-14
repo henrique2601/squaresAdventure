@@ -43,7 +43,11 @@ class Player: Square {
     
     override func loadPhysics(texture: SKTexture) {
         super.loadPhysics(texture)
-        self.physicsBody!.contactTestBitMask = physicsCategory.player.rawValue
+        
+        self.physicsBody!.categoryBitMask = physicsCategory.player.rawValue
+        self.physicsBody!.contactTestBitMask = physicsCategory.none.rawValue
+        self.physicsBody!.collisionBitMask = physicsCategory.ground.rawValue
+        
         self.physicsBody!.usesPreciseCollisionDetection = true
     }
     
@@ -82,15 +86,15 @@ class Player: Square {
         
         if((self.parent?.childNodeWithName("//buttonLeft") as! Button).pressed){
             let velocity = self.physicsBody!.velocity
-            if (abs(velocity.dx) < 500) {
-                self.physicsBody?.applyImpulse(CGVector(dx: -10, dy: 0))
+            if (abs(velocity.dx) < 400) {
+                self.physicsBody?.applyImpulse(CGVector(dx: -5, dy: 0))
             }
         }
         
         if((self.parent?.childNodeWithName("//buttonRight") as! Button).pressed){
             let velocity = self.physicsBody!.velocity
-            if (abs(velocity.dx) < 500) {
-                self.physicsBody?.applyImpulse(CGVector(dx: 10, dy: 0))
+            if (abs(velocity.dx) < 400) {
+                self.physicsBody?.applyImpulse(CGVector(dx: 5, dy: 0))
             }
         }
     }
