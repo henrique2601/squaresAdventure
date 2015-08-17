@@ -1,17 +1,17 @@
 //
-//  PowerUp.swift
+//  PowerUpData.swift
 //  TowerUp
 //
-//  Created by Pablo Henrique Bertaco on 8/7/15.
+//  Created by Pablo Henrique Bertaco on 8/17/15.
 //  Copyright (c) 2015 WTFGames. All rights reserved.
 //
 
 import Foundation
 import CoreData
 
-@objc(PowerUp)
+@objc(PowerUpData)
 
-class PowerUp: NSManagedObject {
+class PowerUpData: NSManagedObject {
 
     @NSManaged var available: NSNumber
     @NSManaged var locked: NSNumber
