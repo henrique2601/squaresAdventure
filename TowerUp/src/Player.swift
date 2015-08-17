@@ -27,7 +27,7 @@ class Player: Square {
         self.name = name
         self.zPosition = Config.HUDZPosition
         
-        let texture = SKTexture(imageNamed: "player")//TODO SKIN!!!
+        let texture = SKTexture(imageNamed: "rabbit")//TODO SKIN!!!
         let spriteNode = SKSpriteNode(texture: texture, color: nil, size: CGSize(width: 64, height: 64))
         spriteNode.name = name
         
