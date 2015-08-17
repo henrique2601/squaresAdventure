@@ -23,14 +23,13 @@ class MainMenuScene: GameScene {
     
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
+        self.backgroundColor = GameColors.blue
         self.addChild(Control(name: "mainMenuBackground", x:0, y:0, align:.center))
         
-        self.addChild(Label(name: "labelTitle", textureName: "MainMenuScene", x: 667, y: 130, align:.center))
-        
-        self.addChild(Button(name: "buttonPlay", textureName: "buttonYellow", text:"PLAY", x: 550, y: 189, align:.center))
-        self.addChild(Button(name: "buttonOptions", textureName: "buttonYellow", text:"OPTIONS", x: 550, y: 287, align:.center))
-        self.addChild(Button(name: "buttonCredits", textureName: "buttonYellow", text:"CREDITS", x: 550, y: 385, align:.center))
-        self.addChild(Button(name: "buttonYellow", text:"BUTTON D", x: 550, y: 483, align:.center))
+        self.addChild(Button(name: "buttonPlay", textureName: "buttonYellow", text:"SINGLEPLAYER", x: 517, y: 263, align:.center))
+        self.addChild(Button(name: "buttonPlayOnline", textureName: "buttonYellow", text:"MULTIPLAYER", x: 517, y: 387, align:.center))
+        self.addChild(Button(name: "buttonOptions", textureName: "buttonBlueSmall", text:"OPTIONS", x: 550, y: 511, align:.center))
+        self.addChild(Button(name: "buttonCredits", textureName: "buttonBlueSmall", text:"CREDITS", x: 550, y: 613, align:.center))
     }
     
     override func update(currentTime: NSTimeInterval) {
