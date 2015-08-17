@@ -11,9 +11,9 @@ import SpriteKit
 
 class Square: Control {
     
-    func loadPhysics(texture:SKTexture) {
+    func loadPhysics() {
         //Physics Config
-        self.physicsBody = SKPhysicsBody(rectangleOfSize: texture.size())
+        self.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: 32, height: 32))
         
         self.physicsBody!.angularDamping = 2
         self.physicsBody!.linearDamping = 2

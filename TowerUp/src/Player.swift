@@ -11,6 +11,13 @@ import SpriteKit
 
 class Player: Square {
     
+    //Ajuste de angulo
+    var needAngularImpulse = 0
+    var totalRotation:CGFloat = 0
+    
+    //Respawn
+    var startingPosition:CGPoint = CGPoint.zeroPoint
+    
     init(x:Int, y:Int, loadPhysics:Bool) {
         super.init()
         self.loadNewPlayer("player", x: x, y: y, loadPhysics: loadPhysics)
@@ -21,12 +28,13 @@ class Player: Square {
         self.zPosition = Config.HUDZPosition
         
         let texture = SKTexture(imageNamed: "player")//TODO SKIN!!!
-        let spriteNode = SKSpriteNode(texture: texture, color: nil, size: texture.size())
+        let spriteNode = SKSpriteNode(texture: texture, color: nil, size: CGSize(width: 64, height: 64))
         spriteNode.name = name
         
         if(loadPhysics){
             self.position = CGPoint(x: x, y: y)
-            self.loadPhysics(texture)
+            self.startingPosition = self.position
+            self.loadPhysics()
         } else {
             self.sketchPosition = CGPoint(x: x, y: y)
             self.yAlign = .center
@@ -36,13 +44,13 @@ class Player: Square {
         
         self.addChild(spriteNode)
     }
-
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func loadPhysics(texture: SKTexture) {
-        super.loadPhysics(texture)
+    override func loadPhysics() {
+        super.loadPhysics()
         
         self.physicsBody!.categoryBitMask = physicsCategory.player.rawValue
         self.physicsBody!.contactTestBitMask = physicsCategory.none.rawValue
@@ -75,6 +83,11 @@ class Player: Square {
     }
     
     func update(currentTime:NSTimeInterval) {
+        if(self.position.y < 0){
+            self.respawn()
+        }
+        
+        self.needAngularImpulse = 1
         if(self.physicsBody!.allContactedBodies().count > 0) {
             let velocity = self.physicsBody!.velocity
             if (abs(velocity.dy) < 500) {
@@ -82,9 +95,14 @@ class Player: Square {
                     self.physicsBody?.applyForce(CGVector(dx: 0, dy: 2100))
                 }
             }
+        } else {
+            //Player esta no ar
+            self.needAngularImpulse = 3
         }
         
+        
         if((self.parent?.childNodeWithName("//buttonLeft") as! Button).pressed){
+            self.needAngularImpulse--
             let velocity = self.physicsBody!.velocity
             if (abs(velocity.dx) < 400) {
                 self.physicsBody?.applyImpulse(CGVector(dx: -5, dy: 0))
@@ -92,10 +110,30 @@ class Player: Square {
         }
         
         if((self.parent?.childNodeWithName("//buttonRight") as! Button).pressed){
+            self.needAngularImpulse--
             let velocity = self.physicsBody!.velocity
             if (abs(velocity.dx) < 400) {
                 self.physicsBody?.applyImpulse(CGVector(dx: 5, dy: 0))
             }
         }
+        
+        if(self.needAngularImpulse > 0){
+            self.ajustAngle()
+        }
+    }
+    
+    func ajustAngle() {
+        if(abs(self.physicsBody!.angularVelocity) < CGFloat(M_PI)) {
+            self.totalRotation = 0 - self.zRotation
+            
+            while(self.totalRotation < -CGFloat(M_PI)) { self.totalRotation += CGFloat(M_PI * 2) }
+            while(self.totalRotation >  CGFloat(M_PI)) { self.totalRotation -= CGFloat(M_PI * 2) }
+            
+            self.physicsBody!.applyAngularImpulse(self.totalRotation * 0.001)
+        }
+    }
+    
+    func respawn(){
+        self.position = self.startingPosition
     }
 }
