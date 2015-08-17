@@ -33,21 +33,19 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
         self.backgroundColor = GameColors.cornflowerBlue
         
         self.world = World(physicsWorld: self.physicsWorld)
-        self.addChild(world)
+        self.addChild(self.world)
         self.physicsWorld.contactDelegate = self
         
         self.camera = Camera()
-        world.addChild(camera)
+        self.world.addChild(self.camera)
         
         self.player = Player(x: 200, y: 100, loadPhysics: true)
-        
-        world.addChild(player)
-        
+        self.world.addChild(self.player)
         
         self.mapManager = MapManager()
-        world.addChild(mapManager)
+        self.world.addChild(self.mapManager)
         
-        mapManager.reloadMap(player.position)
+        self.mapManager.reloadMap(self.player.position)
         
         self.addChild(Button(name: "buttonLeft", textureName: "buttonYellowSquare", text:"<", x:20, y:630, xAlign:.left, yAlign:.down))
         self.addChild(Button(name: "buttonRight", textureName: "buttonYellowSquare", text:">" ,x:160, y:630, xAlign:.left, yAlign:.down))
@@ -80,8 +78,6 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
             switch (self.nextState) {
                 
             case states.mission:
-                let player = self.childNodeWithName("//player")! as! Player
-                player.update(currentTime)
                 break
             case states.afterMission:
                 self.view!.presentScene(AfterMissionScene(), transition: Config.defaultGoTransition)
@@ -96,7 +92,6 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
     override func didFinishUpdate()
     {
         self.camera.update(self.player.position)
-        
     }
     
     override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
