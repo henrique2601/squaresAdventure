@@ -37,10 +37,10 @@ class Parallax: SKNode {
     func update(position:CGPoint){
         
         self.nodeA.position = CGPoint(x: (-position.x/4 % self.nodeA.size.width),
-                                      y: (-position.y/8 % self.nodeA.size.height) + 128)
-        self.nodeB.position = CGPoint(x: (-position.x/4 % self.nodeA.size.width) + self.nodeA.size.width,
-                                      y: (-position.y/8 % self.nodeA.size.height) + 128)
-        self.nodeC.position = CGPoint(x: (-position.x/4 % self.nodeA.size.width) + self.nodeA.size.width * 2,
-                                      y: (-position.y/8 % self.nodeA.size.height) + 128)
+                                      y: (-position.y/8 % self.nodeA.size.height) + (-self.scene!.size.height + self.nodeA.size.height))
+        self.nodeB.position = CGPoint(x: (-position.x/4 % self.nodeA.size.width)  + self.nodeA.size.width,
+                                      y: (-position.y/8 % self.nodeA.size.height) + (-self.scene!.size.height + self.nodeA.size.height))
+        self.nodeC.position = CGPoint(x: (-position.x/4 % self.nodeA.size.width)  + self.nodeA.size.width * 2,
+                                      y: (-position.y/8 % self.nodeA.size.height) + (-self.scene!.size.height + self.nodeA.size.height))
     }
 }
