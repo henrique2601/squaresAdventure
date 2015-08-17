@@ -49,12 +49,11 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
         
         mapManager.reloadMap(player.position)
         
+        self.addChild(Button(name: "buttonLeft", textureName: "buttonYellowSquare" ,x:20, y:630, xAlign:.left, yAlign:.down))
+        self.addChild(Button(name: "buttonRight", textureName: "buttonYellowSquare" ,x:160, y:630, xAlign:.left, yAlign:.down))
+        self.addChild(Button(name: "buttonJump", textureName: "buttonYellow", x:1014, y:630, xAlign:.right, yAlign:.down))
         
-        self.addChild(Button(name: "buttonLeft", textureName: "buttonYellowLeft" ,x:20, y:652, xAlign:.left, yAlign:.down))
-        self.addChild(Button(name: "buttonRight", textureName: "buttonYellowRight" ,x:118, y:652, xAlign:.left, yAlign:.down))
-        self.addChild(Button(name: "buttonJump" ,x:1236, y:652, xAlign:.right, yAlign:.down))
-        
-        self.addChild(Button(name: "buttonBack", textureName: "buttonGrayLeft" ,x:20, y:20, xAlign:.left, yAlign:.up))
+        self.addChild(Button(name: "buttonBack", textureName: "buttonGraySquareSmall" ,x:20, y:20, xAlign:.left, yAlign:.up))
     }
     
     func didBeginContact(contact: SKPhysicsContact) {
