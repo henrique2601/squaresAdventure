@@ -25,12 +25,16 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
     var camera:Camera!
     var player:Player!
     var mapManager:MapManager!
+    var parallax:Parallax!
     
     let velo:CGFloat = 3
     
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
-        self.backgroundColor = GameColors.cornflowerBlue
+        self.backgroundColor = GameColors.blueSky
+        
+        self.parallax = Parallax(imageNamed: "grassBackground")
+        self.addChild(self.parallax)
         
         self.world = World(physicsWorld: self.physicsWorld)
         self.addChild(self.world)
@@ -92,6 +96,7 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
     override func didFinishUpdate()
     {
         self.camera.update(self.player.position)
+        self.parallax.update(self.camera.position)
     }
     
     override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
