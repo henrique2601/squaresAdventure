@@ -89,12 +89,10 @@ class Player: Square {
             break
             
         case physicsCategory.spike.rawValue:
-            if(self.healthPoints > 1) {
+            if(self.healthPoints > 0) {
                 self.physicsBody!.applyImpulse(CGVector(dx: 0, dy: 25))
-            } else {
-                //TODO: tocar som de morte por espinho
+                self.healthPoints = 0
             }
-            self.healthPoints--
             break
             
         default:
