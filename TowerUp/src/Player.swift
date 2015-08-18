@@ -24,6 +24,7 @@ class Player: Square {
     var healthPoints = 2
     var deathCount = 0
     var lastAlive:NSTimeInterval = 0
+    var lastHeal:NSTimeInterval = 0
     
     var collectedBonus = 0
     
@@ -88,10 +89,12 @@ class Player: Square {
             break
             
         case physicsCategory.spike.rawValue:
-            if(self.healthPoints > 0) {
+            if(self.healthPoints > 1) {
                 self.physicsBody!.applyImpulse(CGVector(dx: 0, dy: 25))
-                self.healthPoints = 0
+            } else {
+                //TODO: tocar som de morte por espinho
             }
+            self.healthPoints--
             break
             
         default:
@@ -122,6 +125,16 @@ class Player: Square {
         
         if(self.healthPoints > 0) {
             self.lastAlive = currentTime
+            
+            //Teste heal. Exportar função
+            if(self.healthPoints >= self.maxHealthPoints) {
+                self.lastHeal = currentTime
+            } else {
+                if(currentTime - self.lastHeal > 3) {
+                    self.healthPoints++
+                }
+            }
+            //
             
             if(self.position.y < 0) {
                 self.healthPoints = 0
@@ -189,6 +202,5 @@ class Player: Square {
         self.zRotation = 0
         self.healthPoints = self.maxHealthPoints
         self.deathCount++
-        println(self.deathCount)
     }
 }
