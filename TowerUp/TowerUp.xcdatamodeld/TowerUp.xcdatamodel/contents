@@ -1,33 +1,33 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14E46" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
-    <entity name="Floor" representedClassName="PRODUCT_MODULE_NAME.Floor" syncable="YES">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14F27" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="FloorData" representedClassName="PRODUCT_MODULE_NAME.FloorData" syncable="YES">
         <attribute name="progress" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
-        <relationship name="tower" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Tower" inverseName="floors" inverseEntity="Tower" syncable="YES"/>
+        <relationship name="tower" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TowerData" inverseName="floors" inverseEntity="TowerData" syncable="YES"/>
     </entity>
     <entity name="PlayerData" representedClassName="PRODUCT_MODULE_NAME.PlayerData" syncable="YES">
-        <relationship name="powerUps" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PowerUp" inverseName="playerData" inverseEntity="PowerUp" syncable="YES"/>
-        <relationship name="skins" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Skin" inverseName="playerData" inverseEntity="Skin" syncable="YES"/>
-        <relationship name="towers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tower" inverseName="playerData" inverseEntity="Tower" syncable="YES"/>
+        <relationship name="powerUps" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PowerUpData" inverseName="playerData" inverseEntity="PowerUpData" syncable="YES"/>
+        <relationship name="skins" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SkinData" inverseName="playerData" inverseEntity="SkinData" syncable="YES"/>
+        <relationship name="towers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TowerData" inverseName="playerData" inverseEntity="TowerData" syncable="YES"/>
     </entity>
-    <entity name="PowerUp" representedClassName="PRODUCT_MODULE_NAME.PowerUp" syncable="YES">
+    <entity name="PowerUpData" representedClassName="PRODUCT_MODULE_NAME.PowerUpData" syncable="YES">
         <attribute name="available" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="locked" optional="YES" attributeType="Boolean" syncable="YES"/>
         <relationship name="playerData" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PlayerData" inverseName="powerUps" inverseEntity="PlayerData" syncable="YES"/>
     </entity>
-    <entity name="Skin" representedClassName="PRODUCT_MODULE_NAME.Skin" syncable="YES">
+    <entity name="SkinData" representedClassName="PRODUCT_MODULE_NAME.SkinData" syncable="YES">
         <attribute name="index" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <relationship name="playerData" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PlayerData" inverseName="skins" inverseEntity="PlayerData" syncable="YES"/>
     </entity>
-    <entity name="Tower" representedClassName="PRODUCT_MODULE_NAME.Tower" syncable="YES">
-        <relationship name="floors" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Floor" inverseName="tower" inverseEntity="Floor" syncable="YES"/>
+    <entity name="TowerData" representedClassName="PRODUCT_MODULE_NAME.TowerData" syncable="YES">
+        <relationship name="floors" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="FloorData" inverseName="tower" inverseEntity="FloorData" syncable="YES"/>
         <relationship name="playerData" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PlayerData" inverseName="towers" inverseEntity="PlayerData" syncable="YES"/>
     </entity>
     <fetchRequest name="FetchRequest" entity="PlayerData"/>
     <elements>
-        <element name="Floor" positionX="-29" positionY="-147" width="128" height="75"/>
+        <element name="FloorData" positionX="-29" positionY="-147" width="128" height="75"/>
         <element name="PlayerData" positionX="394" positionY="-486" width="128" height="90"/>
-        <element name="PowerUp" positionX="603" positionY="-333" width="128" height="88"/>
-        <element name="Skin" positionX="432" positionY="-166" width="128" height="73"/>
-        <element name="Tower" positionX="198" positionY="-270" width="128" height="73"/>
+        <element name="PowerUpData" positionX="603" positionY="-333" width="128" height="90"/>
+        <element name="SkinData" positionX="432" positionY="-166" width="128" height="75"/>
+        <element name="TowerData" positionX="198" positionY="-270" width="128" height="75"/>
     </elements>
 </model>

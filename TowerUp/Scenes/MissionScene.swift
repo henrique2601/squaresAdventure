@@ -9,7 +9,7 @@
 import UIKit
 import SpriteKit
 
-class MissionScene: GameScene {
+class MissionScene: GameScene, SKPhysicsContactDelegate {
     enum states {
         case mission
         case paused
@@ -25,38 +25,45 @@ class MissionScene: GameScene {
     var camera:Camera!
     var player:Player!
     var mapManager:MapManager!
+    var parallax:Parallax!
     
     let velo:CGFloat = 3
     
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
-        self.backgroundColor = GameColors.cornflowerBlue
+        self.backgroundColor = GameColors.blueSky
         
-        self.world = World()
-        self.addChild(world)
+        self.parallax = Parallax(imageNamed: "grassBackground")
+        self.addChild(self.parallax)
         
-        self.physicsWorld.gravity = CGVectorMake(0 ,-2);
-        
+        self.world = World(physicsWorld: self.physicsWorld)
+        self.addChild(self.world)
+        self.physicsWorld.contactDelegate = self
         
         self.camera = Camera()
-        world.addChild(camera)
+        self.world.addChild(self.camera)
         
-        self.player = Player(x: 0, y: 100, loadPhysics: true)
-        
-        world.addChild(player)
-        
+        self.player = Player(x: 200, y: 100, loadPhysics: true)
+        self.world.addChild(self.player)
         
         self.mapManager = MapManager()
-        world.addChild(mapManager)
+        self.world.addChild(self.mapManager)
         
-        mapManager.reloadMap(player.position)
+        self.mapManager.reloadMap(self.player.position)
         
+        self.addChild(Button(name: "buttonLeft", textureName: "buttonYellowSquare", text:"<", x:20, y:630, xAlign:.left, yAlign:.down))
+        self.addChild(Button(name: "buttonRight", textureName: "buttonYellowSquare", text:">" ,x:160, y:630, xAlign:.left, yAlign:.down))
+        self.addChild(Button(name: "buttonJump", textureName: "buttonYellow", text:"Jump", x:1014, y:630, xAlign:.right, yAlign:.down))
         
-        self.addChild(Button(name: "buttonLeft", textureName: "buttonYellowLeft" ,x:20, y:652, xAlign:.left, yAlign:.down))
-        self.addChild(Button(name: "buttonRight", textureName: "buttonYellowRight" ,x:118, y:652, xAlign:.left, yAlign:.down))
-        self.addChild(Button(name: "buttonJump" ,x:1236, y:652, xAlign:.right, yAlign:.down))
-        
-        self.addChild(Button(name: "buttonBack", textureName: "buttonGrayLeft" ,x:20, y:20, xAlign:.left, yAlign:.down))
+        self.addChild(Button(name: "buttonBack", textureName: "buttonGraySquareSmall", text:"||" ,x:20, y:20, xAlign:.left, yAlign:.up))
+    }
+    
+    func didBeginContact(contact: SKPhysicsContact) {
+        world.didBeginContact(contact)
+    }
+    
+    func didEndContact(contact: SKPhysicsContact) {
+        world.didEndContact(contact)
     }
     
     override func update(currentTime: NSTimeInterval) {
@@ -75,8 +82,6 @@ class MissionScene: GameScene {
             switch (self.nextState) {
                 
             case states.mission:
-                let player = self.childNodeWithName("//player")! as! Player
-                player.update(currentTime)
                 break
             case states.afterMission:
                 self.view!.presentScene(AfterMissionScene(), transition: Config.defaultGoTransition)
@@ -91,7 +96,7 @@ class MissionScene: GameScene {
     override func didFinishUpdate()
     {
         self.camera.update(self.player.position)
-        
+        self.parallax.update(self.camera.position)
     }
     
     override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {

@@ -25,7 +25,7 @@ class Camera: SKNode {
         }
         //certo
         
-        if(position.y > self.scene!.size.height + Tile.sizeInPoints + Chunk.sizeInPoints/2){
+        if(position.y > Chunk.sizeInPoints - Tile.sizeInPoints / 2){
             position.y = Chunk.sizeInPoints - Tile.sizeInPoints / 2
         }
         

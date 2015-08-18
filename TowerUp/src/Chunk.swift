@@ -17,14 +17,7 @@ class Chunk: SKSpriteNode {
     var type = "dirt" //TODO 
     
     init(regionX:Int, regionY:Int) {
-        
-        #if DEBUG
-            let texture = SKTexture(imageNamed: "chunkBackground")
-            super.init(texture: texture, color: nil, size: CGSize(width: Chunk.sizeInPoints, height: Chunk.sizeInPoints))
-        #else
-            super.init(texture: nil, color: nil, size: CGSize(width: Chunk.sizeInPoints, height: Chunk.sizeInPoints))
-        #endif
-        
+        super.init(texture: nil, color: nil, size: CGSize(width: Chunk.sizeInPoints, height: Chunk.sizeInPoints))
         
         self.anchorPoint = CGPointZero
         self.load(regionX, regionY: regionY)

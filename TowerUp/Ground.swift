@@ -15,7 +15,14 @@ class Ground: Tile {
     init(type:String, id:Int, x:Int, y:Int) {
         super.init(imageName: type + String(id), x: x, y: y)
         
+        self.name = "ground"
+        
         self.physicsBody = SKPhysicsBody(bodies: [MapManager.bodies[id - 1]])
+        
+        self.physicsBody!.categoryBitMask = physicsCategory.ground.rawValue
+        self.physicsBody!.contactTestBitMask = physicsCategory.none.rawValue
+        self.physicsBody!.collisionBitMask = physicsCategory.none.rawValue
+        
         self.physicsBody!.dynamic = false
     }
 

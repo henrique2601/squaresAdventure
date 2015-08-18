@@ -34,7 +34,7 @@ class ViewController: UIViewController {
         
         Config.skViewBoundsSize = skView.bounds.size
         
-        let scene = MissionScene()
+        let scene = MainMenuScene()
         skView.presentScene(scene)
         
     }
