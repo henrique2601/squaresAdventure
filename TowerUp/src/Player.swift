@@ -18,6 +18,10 @@ class Player: Square {
     //Respawn
     var startingPosition:CGPoint = CGPoint.zeroPoint
     
+    //Vida
+    var healthPoints = 2
+    var deathCount = 0
+    
     var collectedBonus = 0
     
     init(x:Int, y:Int, loadPhysics:Bool) {
@@ -151,5 +155,8 @@ class Player: Square {
     
     func respawn(){
         self.position = self.startingPosition
+        self.physicsBody!.velocity = CGVector.zeroVector
+        self.physicsBody!.angularVelocity = 0
+        self.zRotation = 0
     }
 }
