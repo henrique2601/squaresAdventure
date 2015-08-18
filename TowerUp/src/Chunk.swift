@@ -46,6 +46,9 @@ class Chunk: SKSpriteNode {
                         case specialTiles.winTile.rawValue:
                             tile = WinTile(type: self.type, x: x, y: y)
                             break
+                        case specialTiles.spikeTile.rawValue:
+                            tile = Spike(x: x, y: y)
+                            break
                         default:
                             println("Tile \(id) inesperadamente encontrou nulo. s;")
                             break
@@ -129,7 +132,7 @@ class Chunk: SKSpriteNode {
                 19,0,0,0,0,0,16,17,18,0,0,0,0,0,16,17,18,0,0,0,20,
                 19,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,20,
                 19,0,0,0,0,0,0,0,0,0,16,17,18,0,0,0,0,0,0,0,20,
-                19,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,20,
+                19,0,0,0,0,specialTiles.spikeTile.rawValue,0,0,0,0,0,0,0,0,0,0,0,0,0,0,20,
                 8,17,0,16,17,18,0,16,17,17,18,0,16,18,0,16,17,17,17,17,9
 ])
             break

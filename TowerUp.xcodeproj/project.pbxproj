@@ -28,6 +28,7 @@
 		132FB8661B826E640012A7D3 /* PowerUpData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 132FB8651B826E640012A7D3 /* PowerUpData.swift */; };
 		132FB8681B828FF80012A7D3 /* Parallax.swift in Sources */ = {isa = PBXBuildFile; fileRef = 132FB8671B828FF80012A7D3 /* Parallax.swift */; };
 		133184A01B83679200DF11D5 /* Coin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1331849F1B83679200DF11D5 /* Coin.swift */; };
+		133184A21B83AADB00DF11D5 /* Spike.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133184A11B83AADB00DF11D5 /* Spike.swift */; };
 		13428EBE1B7CB0BC0017D23A /* Square.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13428EBD1B7CB0BC0017D23A /* Square.swift */; };
 		13428EC01B7CB4A90017D23A /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13428EBF1B7CB4A90017D23A /* Player.swift */; };
 		1359DC9A1B727726006C12FA /* TowerUp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1359DC981B727726006C12FA /* TowerUp.xcdatamodeld */; };
@@ -94,6 +95,7 @@
 		132FB8651B826E640012A7D3 /* PowerUpData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PowerUpData.swift; path = CoreData/PowerUpData.swift; sourceTree = "<group>"; };
 		132FB8671B828FF80012A7D3 /* Parallax.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Parallax.swift; path = src/Parallax.swift; sourceTree = "<group>"; };
 		1331849F1B83679200DF11D5 /* Coin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Coin.swift; path = src/Coin.swift; sourceTree = "<group>"; };
+		133184A11B83AADB00DF11D5 /* Spike.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Spike.swift; path = src/Spike.swift; sourceTree = "<group>"; };
 		13428EBD1B7CB0BC0017D23A /* Square.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Square.swift; path = src/Square.swift; sourceTree = "<group>"; };
 		13428EBF1B7CB4A90017D23A /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Player.swift; path = src/Player.swift; sourceTree = "<group>"; };
 		1359DC991B727726006C12FA /* TowerUp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TowerUp.xcdatamodel; sourceTree = "<group>"; };
@@ -199,6 +201,7 @@
 				1383FD5D1B7A49730012DA45 /* MapManager.swift */,
 				132FB8671B828FF80012A7D3 /* Parallax.swift */,
 				13428EBF1B7CB4A90017D23A /* Player.swift */,
+				133184A11B83AADB00DF11D5 /* Spike.swift */,
 				13428EBD1B7CB0BC0017D23A /* Square.swift */,
 				1359DD151B728C95006C12FA /* Switch.swift */,
 				1383FD611B7A4B420012DA45 /* Tile.swift */,
@@ -439,6 +442,7 @@
 				13CCB7021B72B9D90060334C /* CreditsScene.swift in Sources */,
 				13CCB6FE1B72B9010060334C /* TowersScene.swift in Sources */,
 				13169CEE1B810A9100516CF6 /* SocketPacket.swift in Sources */,
+				133184A21B83AADB00DF11D5 /* Spike.swift in Sources */,
 				1383FD5E1B7A49730012DA45 /* MapManager.swift in Sources */,
 				1359DD181B728D3E006C12FA /* Label.swift in Sources */,
 				13169CEC1B810A9100516CF6 /* SocketIOClient.swift in Sources */,
