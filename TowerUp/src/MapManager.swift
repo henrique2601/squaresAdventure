@@ -51,19 +51,39 @@ class MapManager: SKNode {
         }
     }
     
-    func update(currentTime: NSTimeInterval, position:CGPoint) {
+//    func update(currentTime: NSTimeInterval, position:CGPoint) {
+//        if(!MapManager.loading) {
+//            if(currentTime - self.lastUpdate > 0.1) {
+//                self.updatePlayerRegion(position)
+//                if (self.playerRegionX != self.loadedRegionX || self.playerRegionY != self.loadedRegionY) {
+//                    MapManager.loading = true
+//                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+//                        self.loadMap()
+//                        MapManager.loading = false
+//                        self.lastUpdate = currentTime
+//                    }
+//                }
+//            }
+//        }
+//    }
+    
+    func update(currentTime: NSTimeInterval) {
         if(!MapManager.loading) {
-            if(currentTime - self.lastUpdate > 0.1) {
-                self.updatePlayerRegion(position)
-                if (self.playerRegionX != self.loadedRegionX || self.playerRegionY != self.loadedRegionY) {
-                    MapManager.loading = true
-                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
-                        self.loadMap()
-                        MapManager.loading = false
-                        self.lastUpdate = currentTime
-                    }
+            if(currentTime - self.lastUpdate > 0.5) {
+                MapManager.loading = true
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+                    self.cleanChunks()
+                    MapManager.loading = false
+                    self.lastUpdate = currentTime
                 }
             }
+        }
+    }
+    
+    func cleanChunks(){
+        for(var i = 0; i < 9; i++) {
+            let chunk = self.childNodeWithName("chunk\(i)")! as! Chunk
+            chunk.clean()
         }
     }
     

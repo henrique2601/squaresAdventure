@@ -51,5 +51,6 @@ public enum physicsCategory : UInt32 {
     case bullet  = 4
     case ground  = 8
     case winTile = 16
+    case coin    = 32
     case all     = 4294967295
 }

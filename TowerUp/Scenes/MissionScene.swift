@@ -49,7 +49,7 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
         self.mapManager = MapManager()
         self.world.addChild(self.mapManager)
         
-        self.mapManager.reloadMap(self.player.position)
+        self.mapManager.reloadMap(CGPoint(x: 10, y: Chunk.sizeInPoints + 10))
         
         self.addChild(Button(name: "buttonLeft", textureName: "buttonYellowSquare", text:"<", x:20, y:630, xAlign:.left, yAlign:.down))
         self.addChild(Button(name: "buttonRight", textureName: "buttonYellowSquare", text:">" ,x:160, y:630, xAlign:.left, yAlign:.down))
@@ -71,7 +71,7 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
             switch (self.state) {
             case states.mission:
                 self.player.update(currentTime)
-                self.mapManager.update(currentTime, position: self.player.position)
+                self.mapManager.update(currentTime)
                 break
             default:
                 break

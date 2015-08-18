@@ -18,6 +18,8 @@ class Player: Square {
     //Respawn
     var startingPosition:CGPoint = CGPoint.zeroPoint
     
+    var collectedBonus = 0
+    
     init(x:Int, y:Int, loadPhysics:Bool) {
         super.init()
         self.loadNewPlayer("player", x: x, y: y, loadPhysics: loadPhysics)
@@ -53,17 +55,22 @@ class Player: Square {
         super.loadPhysics()
         
         self.physicsBody!.categoryBitMask = physicsCategory.player.rawValue
-        self.physicsBody!.contactTestBitMask = physicsCategory.winTile.rawValue
+        self.physicsBody!.contactTestBitMask = physicsCategory.winTile.rawValue | physicsCategory.coin.rawValue
         self.physicsBody!.collisionBitMask = physicsCategory.ground.rawValue
-        
-        self.physicsBody!.usesPreciseCollisionDetection = true
     }
     
     func didBeginContact(physicsBody:SKPhysicsBody) {
         
-        switch(physicsBody.contactTestBitMask) {
+        switch(physicsBody.categoryBitMask) {
         case physicsCategory.ground.rawValue:
             
+            break
+        case physicsCategory.coin.rawValue:
+            let coin = (physicsBody.node! as! Coin)
+            self.collectedBonus += coin.bonus
+            coin.bonus = 0
+            Coin.list.removeObject(coin)
+            coin.removeFromParent()
             break
         default:
             println("didBeginContact de player com \(physicsBody.node!.name!) não está sendo processado")
@@ -72,12 +79,16 @@ class Player: Square {
     }
     
     func didEndContact(physicsBody:SKPhysicsBody) {
-        switch(physicsBody.contactTestBitMask) {
+        //physicsBody.node pode ter sido removido(nulo) em didBeginContact. Use ? no lugar de !
+        switch(physicsBody.categoryBitMask) {
         case physicsCategory.ground.rawValue:
             
             break
+        case physicsCategory.coin.rawValue:
+            
+            break
         default:
-            println("didEndContact de player com \(physicsBody.node!.name!) não está sendo processado")
+            println("didEndContact de player com \(physicsBody.node?.name!) não está sendo processado")
             break
         }
     }
@@ -89,12 +100,17 @@ class Player: Square {
         
         self.needAngularImpulse = 1
         if(self.physicsBody!.allContactedBodies().count > 0) {
-            let velocity = self.physicsBody!.velocity
-            if (abs(velocity.dy) < 500) {
-                if((self.childNodeWithName("//buttonJump") as! Button).pressed) {
-                    self.physicsBody?.applyForce(CGVector(dx: 0, dy: 2100))
+            for body in self.physicsBody!.allContactedBodies(){
+                if(body.categoryBitMask == physicsCategory.ground.rawValue) {
+                    if (abs(self.physicsBody!.velocity.dy) < 500) {
+                        if((self.childNodeWithName("//buttonJump") as! Button).pressed) {
+                            self.physicsBody?.applyForce(CGVector(dx: 0, dy: 2100))
+                        }
+                    }
+                    break
                 }
             }
+            
         } else {
             //Player esta no ar
             self.needAngularImpulse = 3

@@ -33,7 +33,7 @@ class Chunk: SKSpriteNode {
         }
     }
     
-    func loadData(data: NSArray){
+    func loadData(data: NSArray) {
         var i = 0
         var tiles:NSMutableArray = NSMutableArray()
         for (var y = 0; y < Int(Chunk.sizeInTiles); y++) {
@@ -54,12 +54,27 @@ class Chunk: SKSpriteNode {
                         tile = Ground(type: self.type, id: id, x: x, y: y)
                     }
                     
+                    //TODO: exportar função?
                     //MapManager.loading é setado para true durante o update do MapManager. No carregamento inicial seu valor é false
                     if(MapManager.loading) {
                         tiles.addObject(tile)
                     } else {
                         self.addChild(tile)
                     }
+                } else {
+                    #if DEBUG //DEBUG com itens colocados aleatoriamente em espaços vazios.
+                    if(Int.random(100) < 20) {
+                        var tile:Coin = Coin(type: "Gold", x: x, y: y)
+                        
+                        //TODO: exportar função?
+                        //MapManager.loading é setado para true durante o update do MapManager. No carregamento inicial seu valor é false
+                        if(MapManager.loading) {
+                            tiles.addObject(tile)
+                        } else {
+                            self.addChild(tile)
+                        }
+                    }
+                    #endif
                 }
                 i++
             }
@@ -69,6 +84,20 @@ class Chunk: SKSpriteNode {
             dispatch_async(dispatch_get_main_queue()) {
                 for tile in tiles {
                     self.addChild(tile as! SKNode)
+                }
+            }
+        }
+    }
+    
+    func clean() {
+        //Remove obejetos que cairem para fora do cenario
+        let coins = Coin.list
+        if(coins.count > 0){
+            for(var i = coins.count - 1; i >= 0; i--) {
+                let node = coins.objectAtIndex(i) as! Coin
+                if(node.position.y < -128) {
+                    coins.removeObjectAtIndex(i)
+                    node.removeFromParent()
                 }
             }
         }
