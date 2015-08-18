@@ -27,3 +27,7 @@ class Tile: SKSpriteNode {
         fatalError("init(coder:) has not been implemented")
     }
 }
+
+public enum specialTiles:Int {
+    case winTile = 1001
+}

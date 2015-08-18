@@ -12,8 +12,8 @@ import SpriteKit
 class Camera: SKNode {
     func update(newPosition:CGPoint) {
         
+        self.position = CGPoint(x: Int(newPosition.x - self.scene!.size.width/2), y: Int(newPosition.y + self.scene!.size.height/2))
         
-        self.position = CGPoint(x: newPosition.x - self.scene!.size.width/2 , y: newPosition.y + self.scene!.size.height/2)
         //certo
         if(position.x < -Tile.sizeInPoints/2){
             position.x = -Tile.sizeInPoints/2
@@ -35,9 +35,5 @@ class Camera: SKNode {
         }
         
         self.scene!.centerOnNode(self)
-    
-    
-    
-    
     }
 }

@@ -14,7 +14,7 @@ class Chunk: SKSpriteNode {
     static var sizeInTiles:CGFloat = 21
     static var sizeInPoints:CGFloat = Tile.sizeInPoints * sizeInTiles
     
-    var type = "dirt" //TODO 
+    var type = "dirt" //TODO: skins dos chunks
     
     init(regionX:Int, regionY:Int) {
         super.init(texture: nil, color: nil, size: CGSize(width: Chunk.sizeInPoints, height: Chunk.sizeInPoints))
@@ -38,8 +38,21 @@ class Chunk: SKSpriteNode {
         var tiles:NSMutableArray = NSMutableArray()
         for (var y = 0; y < Int(Chunk.sizeInTiles); y++) {
             for (var x = 0; x <  Int(Chunk.sizeInTiles); x++) {
-                if(data[i].integerValue != 0) {
-                    var tile = Ground(type: self.type, id: data[i].integerValue, x: x, y: y)
+                var id = data[i].integerValue
+                if(id != 0) {
+                    var tile:Tile!
+                    if(id > 1000) {
+                        switch(id) {
+                        case specialTiles.winTile.rawValue:
+                            tile = WinTile(type: self.type, x: x, y: y)
+                            break
+                        default:
+                            println("Tile \(id) inesperadamente encontrou nulo. s;")
+                            break
+                        }
+                    } else {
+                        tile = Ground(type: self.type, id: id, x: x, y: y)
+                    }
                     
                     //MapManager.loading é setado para true durante o update do MapManager. No carregamento inicial seu valor é false
                     if(MapManager.loading) {
@@ -68,7 +81,7 @@ class Chunk: SKSpriteNode {
             
         case "0 0":
             self.loadData([
-                19,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,20,
+                19,0,0,0,0,0,0,0,0,0,0,0,0,0,0,specialTiles.winTile.rawValue,0,0,0,0,20,
                 19,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,20,
                 19,0,6,17,17,7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,20,
                 19,0,0,0,0,0,0,0,0,0,0,0,16,17,18,0,0,0,0,0,20,

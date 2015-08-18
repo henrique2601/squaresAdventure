@@ -27,7 +27,7 @@ class Player: Square {
         self.name = name
         self.zPosition = Config.HUDZPosition
         
-        let texture = SKTexture(imageNamed: "rabbit")//TODO SKIN!!!
+        let texture = SKTexture(imageNamed: "rabbit")//TODO: SKIN!!!
         let spriteNode = SKSpriteNode(texture: texture, color: nil, size: CGSize(width: 64, height: 64))
         spriteNode.name = name
         
@@ -53,7 +53,7 @@ class Player: Square {
         super.loadPhysics()
         
         self.physicsBody!.categoryBitMask = physicsCategory.player.rawValue
-        self.physicsBody!.contactTestBitMask = physicsCategory.none.rawValue
+        self.physicsBody!.contactTestBitMask = physicsCategory.winTile.rawValue
         self.physicsBody!.collisionBitMask = physicsCategory.ground.rawValue
         
         self.physicsBody!.usesPreciseCollisionDetection = true
