@@ -1,5 +1,5 @@
 //
-//  Chunk.swift
+//  ChunkWorld.swift
 //  TowerUp
 //
 //  Created by Pablo Henrique Bertaco on 8/11/15.
@@ -9,17 +9,17 @@
 import UIKit
 import SpriteKit
 
-class Chunk: SKSpriteNode {
+class ChunkWorld: SKSpriteNode {
     
     static var sizeInTiles:CGFloat = 21
     static var sizeInPoints:CGFloat = Tile.sizeInPoints * sizeInTiles
     
-    var type = "dirt" //TODO 
+    var type = "dirt" //TODO
     
     
     
     init(regionX:Int, regionY:Int) {
-        super.init(texture: nil, color: nil, size: CGSize(width: Chunk.sizeInPoints, height: Chunk.sizeInPoints))
+        super.init(texture: nil, color: nil, size: CGSize(width: ChunkWorld.sizeInPoints, height: ChunkWorld.sizeInPoints))
         
         self.anchorPoint = CGPointZero
         self.load(regionX, regionY: regionY)
@@ -38,13 +38,13 @@ class Chunk: SKSpriteNode {
     func loadData(data: NSArray){
         var i = 0
         var tiles:NSMutableArray = NSMutableArray()
-        for (var y = 0; y < Int(Chunk.sizeInTiles); y++) {
-            for (var x = 0; x <  Int(Chunk.sizeInTiles); x++) {
+        for (var y = 0; y < Int(ChunkWorld.sizeInTiles); y++) {
+            for (var x = 0; x <  Int(ChunkWorld.sizeInTiles); x++) {
                 if(data[i].integerValue != 0) {
                     var tile = Ground(type: self.type, id: data[i].integerValue, x: x, y: y)
                     
-                    //MapManager.loading é setado para true durante o update do MapManager. No carregamento inicial seu valor é false
-                    if(MapManager.loading) {
+                    //MapManagerWorld.loading é setado para true durante o update do MapManagerWorld. No carregamento inicial seu valor é false
+                    if(MapManagerWorld.loading) {
                         tiles.addObject(tile)
                     } else {
                         self.addChild(tile)
@@ -54,7 +54,7 @@ class Chunk: SKSpriteNode {
             }
         }
         
-        if(MapManager.loading){
+        if(MapManagerWorld.loading){
             dispatch_async(dispatch_get_main_queue()) {
                 for tile in tiles {
                     self.addChild(tile as! SKNode)
@@ -96,7 +96,7 @@ class Chunk: SKSpriteNode {
                 
                 ])
             break
-        
+            
         case "1 0":
             self.loadData([
                 

@@ -9,33 +9,71 @@
 import UIKit
 import SpriteKit
 
-class FloorsScene: GameScene {
+class FloorsScene: GameScene , SKPhysicsContactDelegate {
     enum states {
         case floors
         case beforeMission
         case towers
+        case mission
     }
     
     var state = states.floors
     var nextState = states.floors
     
+    var xPos = 500
+    var yPos = 200
+    var world:World!
+    var cameraWorld:CameraWorld!
+    var player:Player!
+    var mapManager:MapManager!
+    var parallax:Parallax!
+    
+    let velo:CGFloat = 3
+    
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
-        self.addChild(Control(name: "floorsBackground", x:0, y:0, align:.center))
+        self.backgroundColor = GameColors.blueSky
         
-        self.addChild(Label(name: "labelTitle", textureName: "FloorsScene", x: 667, y: 130, align:.center))
+        self.parallax = Parallax(imageNamed: "grassBackground")
+        self.addChild(self.parallax)
         
-        self.addChild(Button(name: "buttonFloor0", textureName: "buttonYellow", text:"FLOOR A", x: 550, y: 189, align:.center))
-        self.addChild(Button(name: "buttonB", textureName: "buttonYellow", text:"BUTTON B", x: 550, y: 287, align:.center))
-        self.addChild(Button(name: "buttonC", textureName: "buttonYellow", text:"BUTTON C", x: 550, y: 385, align:.center))
-        self.addChild(Button(name: "buttonD", textureName: "buttonYellow", text:"BUTTON D", x: 550, y: 483, align:.center))
+        self.world = World(physicsWorld: self.physicsWorld)
+        self.addChild(self.world)
+        self.physicsWorld.contactDelegate = self
         
-        self.addChild(Button(name: "buttonBack", textureName: "buttonGrayLeft", x: 20, y: 652, xAlign:.left, yAlign:.down))
+        self.cameraWorld = CameraWorld()
+        self.world.addChild(self.cameraWorld)
+        
+        self.player = Player(x: 200, y: 100, loadPhysics: true)
+        self.world.addChild(self.player)
+        
+        self.mapManager = MapManager()
+        self.world.addChild(self.mapManager)
+        
+        self.mapManager.reloadMap(self.player.position)
+        
+        self.addChild(Button(name: "buttonLeft", textureName: "buttonYellowSquare", text:"<", x:20, y:630, xAlign:.left, yAlign:.down))
+        self.addChild(Button(name: "buttonRight", textureName: "buttonYellowSquare", text:">" ,x:160, y:630, xAlign:.left, yAlign:.down))
+        self.addChild(Button(name: "buttonJump", textureName: "buttonYellow", text:"Jump", x:1014, y:630, xAlign:.right, yAlign:.down))
+        
+        self.addChild(Button(name: "buttonBack", textureName: "buttonGraySquareSmall", text:"||" ,x:20, y:20, xAlign:.left, yAlign:.up))
+    }
+    
+    func didBeginContact(contact: SKPhysicsContact) {
+        world.didBeginContact(contact)
+    }
+    
+    func didEndContact(contact: SKPhysicsContact) {
+        world.didEndContact(contact)
     }
     
     override func update(currentTime: NSTimeInterval) {
         if(self.state == self.nextState){
             switch (self.state) {
+            case states.floors:
+                self.player.update(currentTime)
+                self.mapManager.update(currentTime, position: self.player.position)
+                break
             default:
                 break
             }
@@ -43,13 +81,11 @@ class FloorsScene: GameScene {
             self.state = self.nextState
             
             switch (self.nextState) {
-            
-            case states.beforeMission:
-                self.view!.presentScene(BeforeMissionScene(), transition: Config.defaultGoTransition)
-                break
                 
-            case states.towers:
-                self.view!.presentScene(TowersScene(), transition: Config.defaultBackTransition)
+            case states.floors:
+                break
+            case states.mission:
+                self.view!.presentScene(MissionScene(), transition: Config.defaultGoTransition)
                 break
                 
             default:
@@ -58,30 +94,25 @@ class FloorsScene: GameScene {
         }
     }
     
+    override func didFinishUpdate()
+    {
+        self.cameraWorld.update(self.player.position)
+        self.parallax.update(self.cameraWorld.position)
+    }
+    
     override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
         super.touchesEnded(touches, withEvent: event)
         
         if (self.state == self.nextState) {
-            switch (self.state) {
-            case states.floors:
-                for touch in (touches as! Set<UITouch>) {
-                    let location = touch.locationInNode(self)
-                    
-                    if (self.childNodeWithName("buttonFloor0")!.containsPoint(location)) {
-                        self.nextState = .beforeMission
-                        return
-                    }
-                    
-                    if (self.childNodeWithName("buttonBack")!.containsPoint(location)) {
-                        self.nextState = .towers
-                        return
-                    }
-                }
-                break
+            for touch in (touches as! Set<UITouch>) {
+                let location = touch.locationInNode(self)
                 
-            default:
-                break
+                if (self.childNodeWithName("buttonBack")!.containsPoint(location)) {
+                    self.nextState = .mission
+                    return
+                }
             }
+            
         }
     }
 }

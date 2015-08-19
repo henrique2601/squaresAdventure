@@ -1,5 +1,5 @@
 //
-//  MapManager.swift
+//  MapManagerWorld.swift
 //  TowerUp
 //
 //  Created by Pablo Henrique Bertaco on 8/11/15.
@@ -9,7 +9,7 @@
 import UIKit
 import SpriteKit
 
-class MapManager: SKNode {
+class MapManagerWorld: SKNode {
     
     var playerRegionX = 0
     var playerRegionY = 0
@@ -42,24 +42,24 @@ class MapManager: SKNode {
     }
     
     func loadPhysics() {
-        MapManager.bodies = []
+        MapManagerWorld.bodies = []
         
         //Preload de fisica dos cenário.
         for (var i = 0; i < Ground.typeCount; i++) {
             var texture = SKTexture(imageNamed: "dirt\(i + 1)")//TODO tema do tile
-            MapManager.bodies.append(SKPhysicsBody(texture: texture, alphaThreshold: 0.7,  size: texture.size()))
+            MapManagerWorld.bodies.append(SKPhysicsBody(texture: texture, alphaThreshold: 0.7,  size: texture.size()))
         }
     }
     
     func update(currentTime: NSTimeInterval, position:CGPoint) {
-        if(!MapManager.loading) {
+        if(!MapManagerWorld.loading) {
             if(currentTime - self.lastUpdate > 0.1) {
                 self.updatePlayerRegion(position)
                 if (self.playerRegionX != self.loadedRegionX || self.playerRegionY != self.loadedRegionY) {
-                    MapManager.loading = true
+                    MapManagerWorld.loading = true
                     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
                         self.loadMap()
-                        MapManager.loading = false
+                        MapManagerWorld.loading = false
                         self.lastUpdate = currentTime
                     }
                 }
