@@ -16,6 +16,7 @@ class Camera: SKNode {
     
     func update(newPosition:CGPoint) {
         
+        self.position = CGPoint(x: Int(newPosition.x - self.scene!.size.width/2), y: Int(newPosition.y + self.scene!.size.height/2))
         
          self.maxX = Chunk.sizeInPoints * CGFloat(Chunk.maxChunkX)
          self.maxY = Chunk.sizeInPoints * CGFloat(Chunk.maxChunkY)
@@ -43,9 +44,5 @@ class Camera: SKNode {
         }
         
         self.scene!.centerOnNode(self)
-    
-    
-    
-    
     }
 }

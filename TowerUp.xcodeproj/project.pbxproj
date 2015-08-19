@@ -20,12 +20,15 @@
 		13169CF01B810A9100516CF6 /* SocketTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13169CE31B810A9100516CF6 /* SocketTypes.swift */; };
 		13169CF11B810A9100516CF6 /* SwiftRegex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13169CE41B810A9100516CF6 /* SwiftRegex.swift */; };
 		13169CF21B810A9100516CF6 /* WebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13169CE51B810A9100516CF6 /* WebSocket.swift */; };
+		1323B1521B83554A00174777 /* WinTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1323B1511B83554A00174777 /* WinTile.swift */; };
 		132FB85E1B826E630012A7D3 /* SkinData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 132FB85D1B826E630012A7D3 /* SkinData.swift */; };
 		132FB8601B826E640012A7D3 /* TowerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 132FB85F1B826E640012A7D3 /* TowerData.swift */; };
 		132FB8621B826E640012A7D3 /* PlayerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 132FB8611B826E640012A7D3 /* PlayerData.swift */; };
 		132FB8641B826E640012A7D3 /* FloorData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 132FB8631B826E640012A7D3 /* FloorData.swift */; };
 		132FB8661B826E640012A7D3 /* PowerUpData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 132FB8651B826E640012A7D3 /* PowerUpData.swift */; };
 		132FB8681B828FF80012A7D3 /* Parallax.swift in Sources */ = {isa = PBXBuildFile; fileRef = 132FB8671B828FF80012A7D3 /* Parallax.swift */; };
+		133184A01B83679200DF11D5 /* Coin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1331849F1B83679200DF11D5 /* Coin.swift */; };
+		133184A21B83AADB00DF11D5 /* Spike.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133184A11B83AADB00DF11D5 /* Spike.swift */; };
 		13428EBE1B7CB0BC0017D23A /* Square.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13428EBD1B7CB0BC0017D23A /* Square.swift */; };
 		13428EC01B7CB4A90017D23A /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13428EBF1B7CB4A90017D23A /* Player.swift */; };
 		1359DC9A1B727726006C12FA /* TowerUp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1359DC981B727726006C12FA /* TowerUp.xcdatamodeld */; };
@@ -84,12 +87,15 @@
 		13169CE31B810A9100516CF6 /* SocketTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketTypes.swift; sourceTree = "<group>"; };
 		13169CE41B810A9100516CF6 /* SwiftRegex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftRegex.swift; sourceTree = "<group>"; };
 		13169CE51B810A9100516CF6 /* WebSocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebSocket.swift; sourceTree = "<group>"; };
+		1323B1511B83554A00174777 /* WinTile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WinTile.swift; path = src/WinTile.swift; sourceTree = "<group>"; };
 		132FB85D1B826E630012A7D3 /* SkinData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SkinData.swift; path = CoreData/SkinData.swift; sourceTree = "<group>"; };
 		132FB85F1B826E640012A7D3 /* TowerData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TowerData.swift; path = CoreData/TowerData.swift; sourceTree = "<group>"; };
 		132FB8611B826E640012A7D3 /* PlayerData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayerData.swift; path = CoreData/PlayerData.swift; sourceTree = "<group>"; };
 		132FB8631B826E640012A7D3 /* FloorData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FloorData.swift; path = CoreData/FloorData.swift; sourceTree = "<group>"; };
 		132FB8651B826E640012A7D3 /* PowerUpData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PowerUpData.swift; path = CoreData/PowerUpData.swift; sourceTree = "<group>"; };
 		132FB8671B828FF80012A7D3 /* Parallax.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Parallax.swift; path = src/Parallax.swift; sourceTree = "<group>"; };
+		1331849F1B83679200DF11D5 /* Coin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Coin.swift; path = src/Coin.swift; sourceTree = "<group>"; };
+		133184A11B83AADB00DF11D5 /* Spike.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Spike.swift; path = src/Spike.swift; sourceTree = "<group>"; };
 		13428EBD1B7CB0BC0017D23A /* Square.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Square.swift; path = src/Square.swift; sourceTree = "<group>"; };
 		13428EBF1B7CB4A90017D23A /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Player.swift; path = src/Player.swift; sourceTree = "<group>"; };
 		1359DC991B727726006C12FA /* TowerUp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TowerUp.xcdatamodel; sourceTree = "<group>"; };
@@ -184,6 +190,7 @@
 				1359DD0F1B7287A7006C12FA /* Button.swift */,
 				13EBD7BF1B7A6614005F1CA4 /* Camera.swift */,
 				1383FD5F1B7A4A920012DA45 /* Chunk.swift */,
+				1331849F1B83679200DF11D5 /* Coin.swift */,
 				1359DD031B728168006C12FA /* Config.swift */,
 				1359DD0D1B72874C006C12FA /* Control.swift */,
 				1359DD071B728611006C12FA /* GameColors.swift */,
@@ -194,10 +201,12 @@
 				1383FD5D1B7A49730012DA45 /* MapManager.swift */,
 				132FB8671B828FF80012A7D3 /* Parallax.swift */,
 				13428EBF1B7CB4A90017D23A /* Player.swift */,
+				133184A11B83AADB00DF11D5 /* Spike.swift */,
 				13428EBD1B7CB0BC0017D23A /* Square.swift */,
 				1359DD151B728C95006C12FA /* Switch.swift */,
 				1383FD611B7A4B420012DA45 /* Tile.swift */,
 				81BA814C1A49DA1800E65899 /* ViewController.swift */,
+				1323B1511B83554A00174777 /* WinTile.swift */,
 				13EBD7BD1B7A65E5005F1CA4 /* World.swift */,
 			);
 			name = src;
@@ -389,6 +398,7 @@
 			files = (
 				81BA814D1A49DA1800E65899 /* ViewController.swift in Sources */,
 				13169CF21B810A9100516CF6 /* WebSocket.swift in Sources */,
+				1323B1521B83554A00174777 /* WinTile.swift in Sources */,
 				132FB8601B826E640012A7D3 /* TowerData.swift in Sources */,
 				13CCB7001B72B9A70060334C /* OptionsScene.swift in Sources */,
 				13169CE81B810A9100516CF6 /* SocketEngine.swift in Sources */,
@@ -419,6 +429,7 @@
 				13428EC01B7CB4A90017D23A /* Player.swift in Sources */,
 				1359DD011B72805F006C12FA /* GameScene.swift in Sources */,
 				13EBD7BE1B7A65E5005F1CA4 /* World.swift in Sources */,
+				133184A01B83679200DF11D5 /* Coin.swift in Sources */,
 				13169CE71B810A9100516CF6 /* SocketAnyEvent.swift in Sources */,
 				1383FD601B7A4A920012DA45 /* Chunk.swift in Sources */,
 				1359DD0C1B7286D3006C12FA /* MainMenuScene.swift in Sources */,
@@ -431,6 +442,7 @@
 				13CCB7021B72B9D90060334C /* CreditsScene.swift in Sources */,
 				13CCB6FE1B72B9010060334C /* TowersScene.swift in Sources */,
 				13169CEE1B810A9100516CF6 /* SocketPacket.swift in Sources */,
+				133184A21B83AADB00DF11D5 /* Spike.swift in Sources */,
 				1383FD5E1B7A49730012DA45 /* MapManager.swift in Sources */,
 				1359DD181B728D3E006C12FA /* Label.swift in Sources */,
 				13169CEC1B810A9100516CF6 /* SocketIOClient.swift in Sources */,
