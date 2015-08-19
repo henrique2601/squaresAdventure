@@ -55,9 +55,6 @@
 		13CCB7041B7373D00060334C /* FloorsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13CCB7031B7373D00060334C /* FloorsScene.swift */; };
 		13EBD7BE1B7A65E5005F1CA4 /* World.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EBD7BD1B7A65E5005F1CA4 /* World.swift */; };
 		13EBD7C01B7A6614005F1CA4 /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EBD7BF1B7A6614005F1CA4 /* Camera.swift */; };
-		5C4805561B8368BB0066E151 /* CameraWorld.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4805551B8368BB0066E151 /* CameraWorld.swift */; };
-		5C4805581B84A6CE0066E151 /* MapManagerWorld.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4805571B84A6CE0066E151 /* MapManagerWorld.swift */; };
-		5C48055A1B84A7430066E151 /* ChunckWorld.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C4805591B84A7430066E151 /* ChunckWorld.swift */; };
 		81BA814B1A49DA1800E65899 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BA814A1A49DA1800E65899 /* AppDelegate.swift */; };
 		81BA814D1A49DA1800E65899 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BA814C1A49DA1800E65899 /* ViewController.swift */; };
 		81BA81501A49DA1800E65899 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81BA814E1A49DA1800E65899 /* Main.storyboard */; };
@@ -122,9 +119,6 @@
 		13CCB7031B7373D00060334C /* FloorsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FloorsScene.swift; path = Scenes/FloorsScene.swift; sourceTree = "<group>"; };
 		13EBD7BD1B7A65E5005F1CA4 /* World.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = World.swift; path = src/World.swift; sourceTree = "<group>"; };
 		13EBD7BF1B7A6614005F1CA4 /* Camera.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Camera.swift; path = src/Camera.swift; sourceTree = "<group>"; };
-		5C4805551B8368BB0066E151 /* CameraWorld.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraWorld.swift; sourceTree = "<group>"; };
-		5C4805571B84A6CE0066E151 /* MapManagerWorld.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapManagerWorld.swift; sourceTree = "<group>"; };
-		5C4805591B84A7430066E151 /* ChunckWorld.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChunckWorld.swift; sourceTree = "<group>"; };
 		81BA81451A49DA1800E65899 /* TowerUp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TowerUp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		81BA81491A49DA1800E65899 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		81BA814A1A49DA1800E65899 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -189,8 +183,6 @@
 				81BA814A1A49DA1800E65899 /* AppDelegate.swift */,
 				1359DD0F1B7287A7006C12FA /* Button.swift */,
 				13EBD7BF1B7A6614005F1CA4 /* Camera.swift */,
-				5C4805551B8368BB0066E151 /* CameraWorld.swift */,
-				5C4805591B84A7430066E151 /* ChunckWorld.swift */,
 				1383FD5F1B7A4A920012DA45 /* Chunk.swift */,
 				1359DD031B728168006C12FA /* Config.swift */,
 				1359DD0D1B72874C006C12FA /* Control.swift */,
@@ -200,7 +192,6 @@
 				1383FD631B7A50990012DA45 /* Ground.swift */,
 				1359DD171B728D3E006C12FA /* Label.swift */,
 				1383FD5D1B7A49730012DA45 /* MapManager.swift */,
-				5C4805571B84A6CE0066E151 /* MapManagerWorld.swift */,
 				132FB8671B828FF80012A7D3 /* Parallax.swift */,
 				13428EBF1B7CB4A90017D23A /* Player.swift */,
 				13428EBD1B7CB0BC0017D23A /* Square.swift */,
@@ -396,14 +387,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5C48055A1B84A7430066E151 /* ChunckWorld.swift in Sources */,
 				81BA814D1A49DA1800E65899 /* ViewController.swift in Sources */,
 				13169CF21B810A9100516CF6 /* WebSocket.swift in Sources */,
 				132FB8601B826E640012A7D3 /* TowerData.swift in Sources */,
 				13CCB7001B72B9A70060334C /* OptionsScene.swift in Sources */,
 				13169CE81B810A9100516CF6 /* SocketEngine.swift in Sources */,
 				13EBD7C01B7A6614005F1CA4 /* Camera.swift in Sources */,
-				5C4805581B84A6CE0066E151 /* MapManagerWorld.swift in Sources */,
 				81BA814B1A49DA1800E65899 /* AppDelegate.swift in Sources */,
 				13169CED1B810A9100516CF6 /* SocketLogger.swift in Sources */,
 				132FB8661B826E640012A7D3 /* PowerUpData.swift in Sources */,
@@ -413,7 +402,6 @@
 				1359DD081B728611006C12FA /* GameColors.swift in Sources */,
 				1359DD161B728C95006C12FA /* Switch.swift in Sources */,
 				13169CEF1B810A9100516CF6 /* SocketParser.swift in Sources */,
-				5C4805561B8368BB0066E151 /* CameraWorld.swift in Sources */,
 				1359DD041B728168006C12FA /* Config.swift in Sources */,
 				13169CEA1B810A9100516CF6 /* SocketEventHandler.swift in Sources */,
 				1359DD061B728574006C12FA /* GameMath.swift in Sources */,

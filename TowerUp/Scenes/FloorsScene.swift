@@ -23,7 +23,7 @@ class FloorsScene: GameScene , SKPhysicsContactDelegate {
     var xPos = 500
     var yPos = 200
     var world:World!
-    var cameraWorld:CameraWorld!
+    var camera:Camera!
     var player:Player!
     var mapManager:MapManager!
     var parallax:Parallax!
@@ -41,8 +41,8 @@ class FloorsScene: GameScene , SKPhysicsContactDelegate {
         self.addChild(self.world)
         self.physicsWorld.contactDelegate = self
         
-        self.cameraWorld = CameraWorld()
-        self.world.addChild(self.cameraWorld)
+        self.camera = Camera()
+        self.world.addChild(self.camera)
         
         self.player = Player(x: 200, y: 100, loadPhysics: true)
         self.world.addChild(self.player)
@@ -96,8 +96,8 @@ class FloorsScene: GameScene , SKPhysicsContactDelegate {
     
     override func didFinishUpdate()
     {
-        self.cameraWorld.update(self.player.position)
-        self.parallax.update(self.cameraWorld.position)
+        self.camera.update(self.player.position)
+        self.parallax.update(self.camera.position)
     }
     
     override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
