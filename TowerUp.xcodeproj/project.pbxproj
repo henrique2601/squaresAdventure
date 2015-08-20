@@ -21,6 +21,9 @@
 		13169CF11B810A9100516CF6 /* SwiftRegex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13169CE41B810A9100516CF6 /* SwiftRegex.swift */; };
 		13169CF21B810A9100516CF6 /* WebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13169CE51B810A9100516CF6 /* WebSocket.swift */; };
 		1323B1521B83554A00174777 /* WinTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1323B1511B83554A00174777 /* WinTile.swift */; };
+		1326AE881B85FCA300D4563B /* Box.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1326AE871B85FCA300D4563B /* Box.swift */; };
+		1326AE8A1B85FD8800D4563B /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1326AE891B85FD8800D4563B /* Event.swift */; };
+		1326AE8D1B86283F00D4563B /* AfterMissionBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1326AE8C1B86283F00D4563B /* AfterMissionBox.swift */; };
 		132FB85E1B826E630012A7D3 /* SkinData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 132FB85D1B826E630012A7D3 /* SkinData.swift */; };
 		132FB8601B826E640012A7D3 /* TowerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 132FB85F1B826E640012A7D3 /* TowerData.swift */; };
 		132FB8621B826E640012A7D3 /* PlayerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 132FB8611B826E640012A7D3 /* PlayerData.swift */; };
@@ -90,6 +93,9 @@
 		13169CE41B810A9100516CF6 /* SwiftRegex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftRegex.swift; sourceTree = "<group>"; };
 		13169CE51B810A9100516CF6 /* WebSocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebSocket.swift; sourceTree = "<group>"; };
 		1323B1511B83554A00174777 /* WinTile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WinTile.swift; path = src/WinTile.swift; sourceTree = "<group>"; };
+		1326AE871B85FCA300D4563B /* Box.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Box.swift; path = src/Box.swift; sourceTree = "<group>"; };
+		1326AE891B85FD8800D4563B /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Event.swift; path = src/Event.swift; sourceTree = "<group>"; };
+		1326AE8C1B86283F00D4563B /* AfterMissionBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AfterMissionBox.swift; path = Boxes/AfterMissionBox.swift; sourceTree = "<group>"; };
 		132FB85D1B826E630012A7D3 /* SkinData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SkinData.swift; path = CoreData/SkinData.swift; sourceTree = "<group>"; };
 		132FB85F1B826E640012A7D3 /* TowerData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TowerData.swift; path = CoreData/TowerData.swift; sourceTree = "<group>"; };
 		132FB8611B826E640012A7D3 /* PlayerData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayerData.swift; path = CoreData/PlayerData.swift; sourceTree = "<group>"; };
@@ -187,10 +193,26 @@
 			name = SocketIOClient;
 			sourceTree = "<group>";
 		};
+		1326AE861B85FC1200D4563B /* DialogBoxes */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = DialogBoxes;
+			sourceTree = "<group>";
+		};
+		1326AE8B1B86278C00D4563B /* Boxes */ = {
+			isa = PBXGroup;
+			children = (
+				1326AE8C1B86283F00D4563B /* AfterMissionBox.swift */,
+			);
+			name = Boxes;
+			sourceTree = "<group>";
+		};
 		1359DCFD1B727FFE006C12FA /* src */ = {
 			isa = PBXGroup;
 			children = (
 				81BA814A1A49DA1800E65899 /* AppDelegate.swift */,
+				1326AE871B85FCA300D4563B /* Box.swift */,
 				1359DD0F1B7287A7006C12FA /* Button.swift */,
 				13EBD7BF1B7A6614005F1CA4 /* Camera.swift */,
 				1383FD5F1B7A4A920012DA45 /* Chunk.swift */,
@@ -273,6 +295,7 @@
 				13CCB6FB1B72AD310060334C /* LaunchScreen.xib */,
 				81BA814E1A49DA1800E65899 /* Main.storyboard */,
 				139A0E8D1B74319000EDE944 /* CoreData */,
+				1326AE861B85FC1200D4563B /* DialogBoxes */,
 				1359DD021B728114006C12FA /* Scenes */,
 				13169CD81B810A8800516CF6 /* SocketIOClient */,
 				1359DCFD1B727FFE006C12FA /* src */,
@@ -409,6 +432,7 @@
 				13CCB7001B72B9A70060334C /* OptionsScene.swift in Sources */,
 				13169CE81B810A9100516CF6 /* SocketEngine.swift in Sources */,
 				13EBD7C01B7A6614005F1CA4 /* Camera.swift in Sources */,
+				1326AE8D1B86283F00D4563B /* AfterMissionBox.swift in Sources */,
 				81BA814B1A49DA1800E65899 /* AppDelegate.swift in Sources */,
 				13169CED1B810A9100516CF6 /* SocketLogger.swift in Sources */,
 				132FB8661B826E640012A7D3 /* PowerUpData.swift in Sources */,
@@ -428,6 +452,7 @@
 				13B32C061B74EE93001A1486 /* LobbyScene.swift in Sources */,
 				139A0E881B73D00200EDE944 /* BeforeMissionScene.swift in Sources */,
 				13169CEB1B810A9100516CF6 /* SocketFixUTF8.swift in Sources */,
+				1326AE881B85FCA300D4563B /* Box.swift in Sources */,
 				1359DD101B7287A7006C12FA /* Button.swift in Sources */,
 				13FC800A1B8640B800865C72 /* PlayerOnline.swift in Sources */,
 				132FB8681B828FF80012A7D3 /* Parallax.swift in Sources */,

@@ -31,6 +31,8 @@ class Control: SKNode {
         }
     }
     
+    var size:CGSize!
+    
     var sketchPosition:CGPoint = CGPointZero
     
     static var locations:NSMutableArray = NSMutableArray()
@@ -65,6 +67,11 @@ class Control: SKNode {
         self.load(name, textureName: textureName, x: x, y: y, xAlign: align, yAlign: .center)
     }
     
+    init(name:String, texture:SKTexture, x:Int, y:Int, align:Control.xAlignments) {
+        super.init()
+        self.load(name, texture: texture, x: x, y: y, xAlign: align, yAlign: .center)
+    }
+    
     init(name:String, textureName:String, x:Int, y:Int, xAlign:Control.xAlignments, yAlign:Control.yAlignments) {
         super.init()
         self.load(name, textureName: textureName, x: x, y: y, xAlign: xAlign, yAlign: yAlign)
@@ -89,6 +96,21 @@ class Control: SKNode {
         spriteNode.name = name
         self.addChild(spriteNode)
     }
+    
+    func load(name:String, texture:SKTexture, x:Int, y:Int, xAlign:Control.xAlignments, yAlign:Control.yAlignments) {
+        self.name = name
+        Control.locations.addObject(name)
+        self.sketchPosition = CGPoint(x: x, y: y)
+        self.yAlign = yAlign
+        self.xAlign = xAlign
+        self.zPosition = Config.HUDZPosition/2
+        
+        let spriteNode = SKSpriteNode(texture: texture, color: nil, size: texture.size())
+        spriteNode.anchorPoint = CGPoint(x: 0, y: 1)
+        spriteNode.name = name
+        self.addChild(spriteNode)
+    }
+    //
     
     class func resetControls(scene: SKScene) {
         for name in Control.locations {

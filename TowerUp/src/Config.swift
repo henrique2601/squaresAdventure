@@ -16,6 +16,8 @@ class Config: NSObject {
     
     static var HUDZPosition:CGFloat = 1000
     
+    static var currentSceneSize:CGSize!
+    
     static var defaultGoTransition:SKTransition = SKTransition.pushWithDirection(SKTransitionDirection.Left, duration: 0.5)
     static var defaultBackTransition:SKTransition = SKTransition.pushWithDirection(SKTransitionDirection.Right, duration: 0.5)
     
@@ -32,12 +34,14 @@ class Config: NSObject {
             Config.translate = CGPoint(x: ((skViewBoundsSize.width - (sceneSize.width * scale))/2)/scale,
                 y: ((skViewBoundsSize.height - (sceneSize.height * scale))/2)/scale)
             
-            return CGSize(width: skViewBoundsSize.width / scale, height: skViewBoundsSize.height / scale)
+            Config.currentSceneSize = CGSize(width: skViewBoundsSize.width / scale, height: skViewBoundsSize.height / scale)
+            return Config.currentSceneSize
             
         default:
             var scale = 1
             Config.translate = CGPoint.zeroPoint
-            return CGSize(width: 1334/2, height: 750/2)
+            Config.currentSceneSize = CGSize(width: 1334/2, height: 750/2)
+            return Config.currentSceneSize
         }
     }
 }
