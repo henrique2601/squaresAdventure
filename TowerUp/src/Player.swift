@@ -66,7 +66,8 @@ class Player: Square {
         self.physicsBody!.contactTestBitMask =
             physicsCategory.winTile.rawValue |
             physicsCategory.coin.rawValue |
-            physicsCategory.spike.rawValue
+            physicsCategory.spike.rawValue |
+            physicsCategory.doorTile.rawValue
         
         self.physicsBody!.collisionBitMask =
             physicsCategory.ground.rawValue |
@@ -94,6 +95,14 @@ class Player: Square {
                 self.healthPoints = 0
             }
             break
+        
+        case physicsCategory.doorTile.rawValue:
+            
+           println("Toc toc , tem alguem na \(physicsBody.node!.name!)")
+            
+            
+            break
+
             
         default:
             println("didBeginContact de player com \(physicsBody.node!.name!) não está sendo processado")
@@ -113,6 +122,11 @@ class Player: Square {
         case physicsCategory.spike.rawValue:
             
             break
+        
+        case physicsCategory.doorTile.rawValue:
+            
+            break
+        
         default:
             println("didEndContact de player com \(physicsBody.node?.name!) não está sendo processado")
             break

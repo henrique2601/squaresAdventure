@@ -54,6 +54,10 @@ class Chunk: SKSpriteNode {
                         case specialTiles.spikeTile.rawValue:
                             tile = Spike(x: x, y: y)
                             break
+                        case specialTiles.doorTile.rawValue:
+                            tile = DoorTile(type: self.type, x: x, y: y)
+                            break
+
                         default:
                             println("Tile \(id) inesperadamente encontrou nulo. s;")
                             break
@@ -132,7 +136,7 @@ class Chunk: SKSpriteNode {
                 17,0,0,0,0,0,17,0,0,0,0,0,0,17,0,0,0,0,0,0,0,
                 17,0,0,0,0,0,17,0,0,0,0,0,0,17,0,0,0,0,0,0,0,
                 17,0,0,0,0,0,17,0,0,0,0,0,0,17,0,0,0,0,0,0,0,
-                17,0,0,0,0,0,17,0,0,0,0,0,0,17,0,0,0,0,0,0,0,
+                17,0,specialTiles.doorTile.rawValue,0,0,0,17,0,0,0,0,0,0,17,0,0,0,0,0,0,0,
                 17,17,17,17,0,0,17,0,0,0,0,0,0,17,0,0,0,0,0,0,0,
                 17,0,0,0,0,0,17,0,0,0,0,0,0,17,0,0,0,0,0,0,0,
                 17,0,0,0,0,0,17,0,0,0,0,0,0,17,0,0,0,0,0,0,0,
