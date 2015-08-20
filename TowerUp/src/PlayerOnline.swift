@@ -26,5 +26,5 @@ class PlayerOnline: Player {
         self.physicsBody!.angularVelocity = vrotation
         //println( self.name! + " Updated")
     }
-   
+    
 }

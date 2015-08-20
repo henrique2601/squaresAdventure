@@ -28,12 +28,12 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
     var parallax:Parallax!
     var room:Int = 0
     let velo:CGFloat = 3
-
+    
     
     //Multiplayer
     var localName:String!
     let socket = SocketIOClient(socketURL: "179.232.86.110:3001", opts: nil)
-
+    
     
     
     
@@ -80,56 +80,56 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
         
         self.socket.on("addPlayers") {[weak self] data, ack in
             
+            
+            var xPos = 144
+            
+            
+            self!.player = PlayerOnline(x: xPos, y: 48, loadPhysics: true)
+            self!.player!.name = self?.localName
+            
+            //self?.localName = name
+            
+            self!.world.addChild(self!.player!)
+            
+            self!.mapManager = MapManager()
+            self!.mapManager.name = "mapManager"
+            self!.world.addChild(self!.mapManager);
+            self!.mapManager.reloadMap(self!.player!.position)
+            
+            if let playersArray = data?[0] as? NSArray {
                 
-                var xPos = 144
+                //println(playersArray)
                 
-                
-                self!.player = PlayerOnline(x: xPos, y: 48, loadPhysics: true)
-                self!.player!.name = self?.localName
-                
-                //self?.localName = name
-                
-                self!.world.addChild(self!.player!)
-                
-                self!.mapManager = MapManager()
-                self!.mapManager.name = "mapManager"
-                self!.world.addChild(self!.mapManager);
-                self!.mapManager.reloadMap(self!.player!.position)
-                
-                if let playersArray = data?[0] as? NSArray {
+                for onlinePlayer in playersArray{
                     
-                    //println(playersArray)
+                    let nameTest = onlinePlayer as? String
                     
-                    for onlinePlayer in playersArray{
+                    switch nameTest! {
+                    case "0":
+                        xPos = 80
+                    case "1":
+                        xPos = 120
+                    case "2":
+                        xPos = 160
+                    case "3":
+                        xPos = 200
+                    default:
+                        xPos = 80
                         
-                        let nameTest = onlinePlayer as? String
-                        
-                        switch nameTest! {
-                        case "0":
-                            xPos = 80
-                        case "1":
-                            xPos = 120
-                        case "2":
-                            xPos = 160
-                        case "3":
-                            xPos = 200
-                        default:
-                            xPos = 80
-                            
-                        }
-                        
-                        xPos = 144
-                        var player2 = PlayerOnline(x: xPos, y: 48, loadPhysics: true)
-                        
-                        player2.name = nameTest
-                        
-                        player2.position = CGPoint(x: xPos, y: 48)
-                        self!.world.addChild(player2)
                     }
                     
+                    xPos = 144
+                    var player2 = PlayerOnline(x: xPos, y: 48, loadPhysics: true)
+                    
+                    player2.name = nameTest
+                    
+                    player2.position = CGPoint(x: xPos, y: 48)
+                    self!.world.addChild(player2)
                 }
                 
-                
+            }
+            
+            
             
             
             println("Added Players")
@@ -139,7 +139,7 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
         
         
         self.socket.on("didJoin") {[weak self] data, ack in
-                self!.socket.emit("joinRoom", self!.localName! , self!.room)
+            self!.socket.emit("joinRoom", self!.localName! , self!.room)
         }
         
         
@@ -174,7 +174,7 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
             }
         }
     }
-
+    
     
     
     
