@@ -54,7 +54,7 @@ class Player: Square {
         
         self.physicsBody!.categoryBitMask = physicsCategory.player.rawValue
         self.physicsBody!.contactTestBitMask = physicsCategory.none.rawValue
-        self.physicsBody!.collisionBitMask = physicsCategory.ground.rawValue
+        self.physicsBody!.collisionBitMask = physicsCategory.ground.rawValue | physicsCategory.player.rawValue
         
         self.physicsBody!.usesPreciseCollisionDetection = true
     }

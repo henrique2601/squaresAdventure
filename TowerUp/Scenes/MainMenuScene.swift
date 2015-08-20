@@ -14,6 +14,7 @@ class MainMenuScene: GameScene {
     enum states {
         case mainMenu
         case towers
+        case multiplayer
         case options
         case credits
     }
@@ -47,6 +48,10 @@ class MainMenuScene: GameScene {
                 self.view!.presentScene(TowersScene(), transition: Config.defaultGoTransition)
                 break
                 
+            case states.multiplayer:
+                self.view!.presentScene(LobbyScene(), transition: Config.defaultGoTransition)
+                break
+                
             case states.options:
                 self.view!.presentScene(OptionsScene(), transition: Config.defaultGoTransition)
                 break
@@ -72,6 +77,10 @@ class MainMenuScene: GameScene {
                     
                     if (self.childNodeWithName("buttonPlay")!.containsPoint(location)) {
                         self.nextState = .towers
+                        return
+                    }
+                    if (self.childNodeWithName("buttonPlayOnline")!.containsPoint(location)) {
+                        self.nextState = .multiplayer
                         return
                     }
                     if (self.childNodeWithName("buttonOptions")!.containsPoint(location)) {
