@@ -63,12 +63,16 @@ class Player: Square {
         super.loadPhysics()
         
         self.physicsBody!.categoryBitMask = physicsCategory.player.rawValue
-        self.physicsBody!.contactTestBitMask = physicsCategory.none.rawValue
-        self.physicsBody!.collisionBitMask = physicsCategory.ground.rawValue | physicsCategory.player.rawValue
+        self.physicsBody!.contactTestBitMask =
+            physicsCategory.winTile.rawValue |
+            physicsCategory.coin.rawValue |
+            physicsCategory.spike.rawValue
+        
         
         self.physicsBody!.collisionBitMask =
             physicsCategory.ground.rawValue |
-            physicsCategory.spike.rawValue
+            physicsCategory.spike.rawValue |
+            physicsCategory.player.rawValue
     }
     
     func didBeginContact(physicsBody:SKPhysicsBody) {

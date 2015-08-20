@@ -192,7 +192,7 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
             case states.mission:
                 if let player = self.player {
                     player.update(currentTime, room: self.room)
-                    self.mapManager.update(currentTime, position: player.position)
+                    self.mapManager.update(currentTime)
                 }
                 break
             default:
