@@ -69,9 +69,11 @@ class Player: Square {
             physicsCategory.spike.rawValue |
             physicsCategory.doorTile.rawValue
         
+        
         self.physicsBody!.collisionBitMask =
             physicsCategory.ground.rawValue |
-            physicsCategory.spike.rawValue
+            physicsCategory.spike.rawValue |
+            physicsCategory.player.rawValue
     }
     
     func didBeginContact(physicsBody:SKPhysicsBody) {
