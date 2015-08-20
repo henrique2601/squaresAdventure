@@ -14,7 +14,7 @@ class Chunk: SKSpriteNode {
     static var sizeInTiles:CGFloat = 21
     static var sizeInPoints:CGFloat = Tile.sizeInPoints * sizeInTiles
     
-    var type = "dirt" //TODO 
+    var type = "dirt" //TODO: skins dos chunks
     
     init(regionX:Int, regionY:Int) {
         super.init(texture: nil, color: nil, size: CGSize(width: Chunk.sizeInPoints, height: Chunk.sizeInPoints))
@@ -33,20 +33,51 @@ class Chunk: SKSpriteNode {
         }
     }
     
-    func loadData(data: NSArray){
+    func loadData(data: NSArray) {
         var i = 0
         var tiles:NSMutableArray = NSMutableArray()
         for (var y = 0; y < Int(Chunk.sizeInTiles); y++) {
             for (var x = 0; x <  Int(Chunk.sizeInTiles); x++) {
-                if(data[i].integerValue != 0) {
-                    var tile = Ground(type: self.type, id: data[i].integerValue, x: x, y: y)
+                var id = data[i].integerValue
+                if(id != 0) {
+                    var tile:Tile!
+                    if(id > 1000) {
+                        switch(id) {
+                        case specialTiles.winTile.rawValue:
+                            tile = WinTile(type: self.type, x: x, y: y)
+                            break
+                        case specialTiles.spikeTile.rawValue:
+                            tile = Spike(x: x, y: y)
+                            break
+                        default:
+                            println("Tile \(id) inesperadamente encontrou nulo. s;")
+                            break
+                        }
+                    } else {
+                        tile = Ground(type: self.type, id: id, x: x, y: y)
+                    }
                     
+                    //TODO: exportar função?
                     //MapManager.loading é setado para true durante o update do MapManager. No carregamento inicial seu valor é false
                     if(MapManager.loading) {
                         tiles.addObject(tile)
                     } else {
                         self.addChild(tile)
                     }
+                } else {
+                    #if DEBUG //DEBUG com itens colocados aleatoriamente em espaços vazios.
+                    if(Int.random(100) < 20) {
+                        var tile:Coin = Coin(type: "Gold", x: x, y: y)
+                        
+                        //TODO: exportar função?
+                        //MapManager.loading é setado para true durante o update do MapManager. No carregamento inicial seu valor é false
+                        if(MapManager.loading) {
+                            tiles.addObject(tile)
+                        } else {
+                            self.addChild(tile)
+                        }
+                    }
+                    #endif
                 }
                 i++
             }
@@ -61,6 +92,20 @@ class Chunk: SKSpriteNode {
         }
     }
     
+    func clean() {
+        //Remove obejetos que cairem para fora do cenario
+        let coins = Coin.list
+        if(coins.count > 0){
+            for(var i = coins.count - 1; i >= 0; i--) {
+                let node = coins.objectAtIndex(i) as! Coin
+                if(node.position.y < -128) {
+                    coins.removeObjectAtIndex(i)
+                    node.removeFromParent()
+                }
+            }
+        }
+    }
+    
     func load(regionX:Int, regionY:Int) {
         self.position = CGPoint(x: self.size.width * (CGFloat)(regionX), y: self.size.height * (CGFloat)(regionY))
         
@@ -68,28 +113,27 @@ class Chunk: SKSpriteNode {
             
         case "0 0":
             self.loadData([
-                19,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,15,17,17,14,20,
-                19,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,0,0,8,20,
-                19,0,0,0,0,0,0,15,17,17,17,14,0,0,0,0,3,0,0,3,20,
-                19,0,0,0,0,0,0,9,0,0,0,8,0,0,0,0,3,0,17,3,20,
-                19,0,0,0,0,0,0,3,0,0,0,3,0,0,0,0,3,0,0,0,20,
-                19,0,0,0,0,0,0,3,17,0,17,3,0,0,0,0,3,17,14,0,20,
-                19,0,0,0,0,0,0,0,3,0,3,0,0,0,0,0,3,3,8,0,20,
-                19,0,0,0,0,0,0,0,3,0,3,0,0,0,0,0,3,0,0,0,20,
-                19,0,17,0,17,0,17,0,3,0,3,0,17,0,17,0,3,0,15,17,20,
-                19,0,3,17,3,17,3,17,3,0,3,17,3,17,3,17,3,0,3,3,20,
-                19,0,3,3,3,3,3,3,3,0,0,0,0,0,0,0,0,0,0,0,20,
-                19,17,3,3,3,3,3,3,3,17,17,17,17,17,14,0,0,17,0,0,20,
-                19,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,20,
-                19,17,17,17,14,0,17,0,17,0,17,0,17,0,0,0,0,3,17,17,20,
-                19,3,3,3,8,17,3,17,3,17,3,17,3,17,14,0,0,0,3,0,20,
-                19,3,3,3,3,0,0,0,0,0,0,0,0,0,8,0,0,0,3,0,20,
-                19,3,0,0,0,0,0,0,0,0,17,0,0,0,3,0,14,0,0,0,20,
-                19,3,0,4,17,0,4,17,0,0,3,17,14,0,3,0,8,17,14,0,20,
-                19,3,0,0,3,0,0,3,17,0,0,0,8,0,3,17,3,3,8,0,20,
-                19,3,0,0,3,0,0,0,3,0,0,0,0,0,0,0,0,0,0,0,20,
-                8,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,17,9
-
+                19,0,0,0,0,0,0,0,0,0,0,0,0,0,0,specialTiles.winTile.rawValue,0,0,0,0,20,
+                19,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,20,
+                19,0,6,17,17,7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,20,
+                19,0,0,0,0,0,0,0,0,0,0,0,16,17,18,0,0,0,0,0,20,
+                19,0,0,0,0,0,0,0,16,17,18,0,0,0,0,0,1,0,0,0,20,
+                19,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,20,
+                19,0,0,0,16,17,18,0,0,0,0,0,0,0,0,0,0,1,0,0,20,
+                19,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,20,
+                19,0,0,0,0,0,0,16,17,18,0,0,0,0,0,0,16,17,18,0,20,
+                19,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,15,20,
+                19,0,0,0,0,0,0,0,0,0,16,17,18,0,0,0,0,16,17,9,20,
+                19,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,20,
+                19,0,0,0,0,0,16,17,18,0,0,0,0,0,0,0,16,17,18,0,20,
+                19,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,20,
+                19,0,16,17,18,0,0,0,0,0,0,6,7,0,0,16,17,18,0,0,20,
+                19,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,20,
+                19,0,0,0,0,0,16,17,18,0,0,0,0,0,16,17,18,0,0,0,20,
+                19,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,20,
+                19,0,0,0,0,0,0,0,0,0,16,17,18,0,0,0,0,0,0,0,20,
+                19,0,0,0,0,specialTiles.spikeTile.rawValue,0,0,0,0,0,0,0,0,0,0,0,0,0,0,20,
+                8,17,0,16,17,18,0,16,17,17,18,0,16,18,0,16,17,17,17,17,9
 ])
             break
             
