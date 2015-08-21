@@ -254,7 +254,9 @@
 				1359DD0B1B7286D3006C12FA /* MainMenuScene.swift */,
 				139A0E891B73D05900EDE944 /* MissionScene.swift */,
 				13FC80071B86404500865C72 /* MultiplayerGameScene.swift */,
+				13B32C071B74F823001A1486 /* MultiplayerMissionScene.swift */,
 				13CCB6FF1B72B9A70060334C /* OptionsScene.swift */,
+				5C653FC11B86B6EE00FABE23 /* PowerUpScene.swift */,
 				13CCB6FD1B72B9010060334C /* TowersScene.swift */,
 			);
 			name = Scenes;
