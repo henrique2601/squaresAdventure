@@ -59,6 +59,7 @@
 		13EBD7BE1B7A65E5005F1CA4 /* World.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EBD7BD1B7A65E5005F1CA4 /* World.swift */; };
 		13EBD7C01B7A6614005F1CA4 /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EBD7BF1B7A6614005F1CA4 /* Camera.swift */; };
 		5C48055E1B84CFF60066E151 /* DoorTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C48055D1B84CFF60066E151 /* DoorTile.swift */; };
+		5C653FC21B86B6EE00FABE23 /* PowerUpScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C653FC11B86B6EE00FABE23 /* PowerUpScene.swift */; };
 		81BA814B1A49DA1800E65899 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BA814A1A49DA1800E65899 /* AppDelegate.swift */; };
 		81BA814D1A49DA1800E65899 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BA814C1A49DA1800E65899 /* ViewController.swift */; };
 		81BA81501A49DA1800E65899 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81BA814E1A49DA1800E65899 /* Main.storyboard */; };
@@ -127,6 +128,7 @@
 		13EBD7BD1B7A65E5005F1CA4 /* World.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = World.swift; path = src/World.swift; sourceTree = "<group>"; };
 		13EBD7BF1B7A6614005F1CA4 /* Camera.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Camera.swift; path = src/Camera.swift; sourceTree = "<group>"; };
 		5C48055D1B84CFF60066E151 /* DoorTile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoorTile.swift; sourceTree = "<group>"; };
+		5C653FC11B86B6EE00FABE23 /* PowerUpScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PowerUpScene.swift; sourceTree = "<group>"; };
 		81BA81451A49DA1800E65899 /* TowerUp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TowerUp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		81BA81491A49DA1800E65899 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		81BA814A1A49DA1800E65899 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -217,17 +219,18 @@
 		1359DD021B728114006C12FA /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				1359DD0B1B7286D3006C12FA /* MainMenuScene.swift */,
-				13B32C051B74EE93001A1486 /* LobbyScene.swift */,
-				13CCB6FD1B72B9010060334C /* TowersScene.swift */,
-				13CCB6FF1B72B9A70060334C /* OptionsScene.swift */,
+				139A0E8B1B73D08300EDE944 /* AfterMissionScene.swift */,
+				139A0E871B73D00200EDE944 /* BeforeMissionScene.swift */,
 				13CCB7011B72B9D90060334C /* CreditsScene.swift */,
 				13CCB7031B7373D00060334C /* FloorsScene.swift */,
 				1359DD001B72805F006C12FA /* GameScene.swift */,
-				139A0E871B73D00200EDE944 /* BeforeMissionScene.swift */,
+				13B32C051B74EE93001A1486 /* LobbyScene.swift */,
+				1359DD0B1B7286D3006C12FA /* MainMenuScene.swift */,
 				139A0E891B73D05900EDE944 /* MissionScene.swift */,
-				139A0E8B1B73D08300EDE944 /* AfterMissionScene.swift */,
 				13B32C071B74F823001A1486 /* MultiplayerMissionScene.swift */,
+				13CCB6FF1B72B9A70060334C /* OptionsScene.swift */,
+				5C653FC11B86B6EE00FABE23 /* PowerUpScene.swift */,
+				13CCB6FD1B72B9010060334C /* TowersScene.swift */,
 			);
 			name = Scenes;
 			sourceTree = "<group>";
@@ -235,13 +238,13 @@
 		139A0E8D1B74319000EDE944 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				139A0E8E1B7431CB00EDE944 /* MemoryCard.swift */,
-				1359DC981B727726006C12FA /* TowerUp.xcdatamodeld */,
-				132FB8651B826E640012A7D3 /* PowerUpData.swift */,
 				132FB8631B826E640012A7D3 /* FloorData.swift */,
+				139A0E8E1B7431CB00EDE944 /* MemoryCard.swift */,
 				132FB8611B826E640012A7D3 /* PlayerData.swift */,
-				132FB85F1B826E640012A7D3 /* TowerData.swift */,
+				132FB8651B826E640012A7D3 /* PowerUpData.swift */,
 				132FB85D1B826E630012A7D3 /* SkinData.swift */,
+				132FB85F1B826E640012A7D3 /* TowerData.swift */,
+				1359DC981B727726006C12FA /* TowerUp.xcdatamodeld */,
 			);
 			name = CoreData;
 			sourceTree = "<group>";
@@ -415,6 +418,7 @@
 				139A0E8A1B73D05900EDE944 /* MissionScene.swift in Sources */,
 				1359DD081B728611006C12FA /* GameColors.swift in Sources */,
 				1359DD161B728C95006C12FA /* Switch.swift in Sources */,
+				5C653FC21B86B6EE00FABE23 /* PowerUpScene.swift in Sources */,
 				13169CEF1B810A9100516CF6 /* SocketParser.swift in Sources */,
 				1359DD041B728168006C12FA /* Config.swift in Sources */,
 				13169CEA1B810A9100516CF6 /* SocketEventHandler.swift in Sources */,
