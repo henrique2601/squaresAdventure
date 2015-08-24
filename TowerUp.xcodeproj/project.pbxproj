@@ -50,7 +50,6 @@
 		1383FD641B7A50990012DA45 /* Ground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1383FD631B7A50990012DA45 /* Ground.swift */; };
 		139A0E881B73D00200EDE944 /* BeforeMissionScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139A0E871B73D00200EDE944 /* BeforeMissionScene.swift */; };
 		139A0E8A1B73D05900EDE944 /* MissionScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139A0E891B73D05900EDE944 /* MissionScene.swift */; };
-		139A0E8C1B73D08300EDE944 /* AfterMissionScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139A0E8B1B73D08300EDE944 /* AfterMissionScene.swift */; };
 		139A0E8F1B7431CB00EDE944 /* MemoryCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139A0E8E1B7431CB00EDE944 /* MemoryCard.swift */; };
 		13B32C061B74EE93001A1486 /* LobbyScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B32C051B74EE93001A1486 /* LobbyScene.swift */; };
 		13CCB6FC1B72AD310060334C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13CCB6FB1B72AD310060334C /* LaunchScreen.xib */; };
@@ -123,7 +122,6 @@
 		1383FD631B7A50990012DA45 /* Ground.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ground.swift; sourceTree = "<group>"; };
 		139A0E871B73D00200EDE944 /* BeforeMissionScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BeforeMissionScene.swift; path = Scenes/BeforeMissionScene.swift; sourceTree = "<group>"; };
 		139A0E891B73D05900EDE944 /* MissionScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MissionScene.swift; path = Scenes/MissionScene.swift; sourceTree = "<group>"; };
-		139A0E8B1B73D08300EDE944 /* AfterMissionScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AfterMissionScene.swift; path = Scenes/AfterMissionScene.swift; sourceTree = "<group>"; };
 		139A0E8E1B7431CB00EDE944 /* MemoryCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MemoryCard.swift; path = CoreData/MemoryCard.swift; sourceTree = "<group>"; };
 		13B32C051B74EE93001A1486 /* LobbyScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LobbyScene.swift; path = Scenes/LobbyScene.swift; sourceTree = "<group>"; };
 		13CCB6FB1B72AD310060334C /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
@@ -195,13 +193,6 @@
 			name = SocketIOClient;
 			sourceTree = "<group>";
 		};
-		1326AE861B85FC1200D4563B /* DialogBoxes */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = DialogBoxes;
-			sourceTree = "<group>";
-		};
 		1326AE8B1B86278C00D4563B /* Boxes */ = {
 			isa = PBXGroup;
 			children = (
@@ -245,7 +236,6 @@
 		1359DD021B728114006C12FA /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				139A0E8B1B73D08300EDE944 /* AfterMissionScene.swift */,
 				139A0E871B73D00200EDE944 /* BeforeMissionScene.swift */,
 				13CCB7011B72B9D90060334C /* CreditsScene.swift */,
 				13CCB7031B7373D00060334C /* FloorsScene.swift */,
@@ -254,7 +244,6 @@
 				1359DD0B1B7286D3006C12FA /* MainMenuScene.swift */,
 				139A0E891B73D05900EDE944 /* MissionScene.swift */,
 				13FC80071B86404500865C72 /* MultiplayerGameScene.swift */,
-				13B32C071B74F823001A1486 /* MultiplayerMissionScene.swift */,
 				13CCB6FF1B72B9A70060334C /* OptionsScene.swift */,
 				5C653FC11B86B6EE00FABE23 /* PowerUpScene.swift */,
 				13CCB6FD1B72B9010060334C /* TowersScene.swift */,
@@ -301,7 +290,6 @@
 				81BA814E1A49DA1800E65899 /* Main.storyboard */,
 				1326AE8B1B86278C00D4563B /* Boxes */,
 				139A0E8D1B74319000EDE944 /* CoreData */,
-				1326AE861B85FC1200D4563B /* DialogBoxes */,
 				1359DD021B728114006C12FA /* Scenes */,
 				13169CD81B810A8800516CF6 /* SocketIOClient */,
 				1359DCFD1B727FFE006C12FA /* src */,
@@ -476,7 +464,6 @@
 				1359DD0C1B7286D3006C12FA /* MainMenuScene.swift in Sources */,
 				132FB8641B826E640012A7D3 /* FloorData.swift in Sources */,
 				13428EBE1B7CB0BC0017D23A /* Square.swift in Sources */,
-				139A0E8C1B73D08300EDE944 /* AfterMissionScene.swift in Sources */,
 				139A0E8F1B7431CB00EDE944 /* MemoryCard.swift in Sources */,
 				132FB8621B826E640012A7D3 /* PlayerData.swift in Sources */,
 				1383FD641B7A50990012DA45 /* Ground.swift in Sources */,
