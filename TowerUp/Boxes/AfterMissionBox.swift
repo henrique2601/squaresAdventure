@@ -10,7 +10,12 @@ import UIKit
 import SpriteKit
 
 class AfterMissionBox: Box {
-    override init(background: String) {
+    
+    var labelTime:Label!
+    var labelDeaths:Label!
+    var labelBonus:Label!
+    
+    init(background: String, time:String, deaths:String, bonus:String) {
         super.init(background: background)
         
         self.addChild(Button(name: "buttonExit", textureName: "buttonGraySquare", text:"X", x: 98, y: 590))
@@ -36,6 +41,15 @@ class AfterMissionBox: Box {
                 break
             }
         }
+        
+        self.labelTime = Label(name: "labelTime", color:GameColors.black, textureName: "Time \(time)s", x: 288, y: 226)
+        self.addChild(self.labelTime)
+        
+        self.labelDeaths = Label(name: "labelDeaths", color:GameColors.black, textureName: "Deaths \(deaths)", x: 288, y: 366)
+        self.addChild(self.labelDeaths)
+        
+        self.labelBonus = Label(name: "labelBonus", color:GameColors.black, textureName: "Coins \(bonus)", x: 288, y: 506)
+        self.addChild(self.labelBonus)
     }
 
     required init?(coder aDecoder: NSCoder) {

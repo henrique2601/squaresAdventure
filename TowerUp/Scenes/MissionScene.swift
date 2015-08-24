@@ -11,13 +11,14 @@ import SpriteKit
 
 class MissionScene: GameScene, SKPhysicsContactDelegate {
     enum states {
+        case loading
         case mission
         case paused
         case afterMission
         case floors
     }
     
-    var state = states.mission
+    var state = states.loading
     var nextState = states.mission
     
     var xPos = 500
@@ -32,6 +33,9 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
     
     //Effect
     var blackSpriteNode:SKSpriteNode!
+    
+    //Gameplay
+    var lastReset:NSTimeInterval!
     
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
@@ -87,15 +91,15 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
                 
             case states.mission:
                 self.mapManager.reloadMap(CGPoint(x: 10, y: Chunk.sizeInPoints + 10))
-                self.player.reset()//TODO:
+                self.player.reset()
+                self.lastReset = currentTime
                 break
             case states.afterMission:
                 
                 self.blackSpriteNode = SKSpriteNode(color: GameColors.black, size: self.size)
                 self.blackSpriteNode.anchorPoint = CGPoint(x: 0, y: 1)
                 self.addChild(self.blackSpriteNode)
-                
-                let box = AfterMissionBox(background: "boxWhite")
+                let box = AfterMissionBox(background: "boxWhite", time: Int(currentTime - self.lastReset).description, deaths: self.player.deathCount.description, bonus: self.player.collectedBonus.description)
                 self.addChild(box)
                 
                 self.blackSpriteNode.zPosition = box.zPosition - 1
