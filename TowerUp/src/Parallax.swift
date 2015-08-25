@@ -18,15 +18,15 @@ class Parallax: SKNode {
     init(imageNamed:String) {
         super.init()
         self.nodeA = SKSpriteNode(imageNamed: imageNamed)
-        self.nodeA.anchorPoint = CGPoint(x: 0, y: 1)
+        self.nodeA.anchorPoint = CGPoint(x: 0.5, y: 1)
         self.addChild(self.nodeA)
         
         self.nodeB = SKSpriteNode(imageNamed: imageNamed)
-        self.nodeB.anchorPoint = CGPoint(x: 0, y: 1)
+        self.nodeB.anchorPoint = CGPoint(x: 0.5, y: 1)
         self.addChild(self.nodeB)
         
         self.nodeC = SKSpriteNode(imageNamed: imageNamed)
-        self.nodeC.anchorPoint = CGPoint(x: 0, y: 1)
+        self.nodeC.anchorPoint = CGPoint(x: 0.5, y: 1)
         self.addChild(self.nodeC)
     }
 
