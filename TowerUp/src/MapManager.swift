@@ -16,8 +16,8 @@ class MapManager: SKNode {
     var loadedRegionX = 0
     var loadedRegionY = 0
     
-    var tower = 0//TODO: setar ao inicializar
-    var floor = 0//TODO: setar ao inicializar
+    static var tower = 0//TODO: setar ao inicializar
+    static var floor = 0//TODO: setar ao inicializar
     
     static var bodies = [SKPhysicsBody]()
     
@@ -25,6 +25,7 @@ class MapManager: SKNode {
     var lastUpdate:NSTimeInterval = 0
     
     func reloadMap(position:CGPoint) {
+        self.removeAllChildren()
         
         self.updatePlayerRegion(position)
         
@@ -33,7 +34,7 @@ class MapManager: SKNode {
         var i = 0;
         for (var y = self.playerRegionY - 1; y <= self.playerRegionY + 1 ; y++) {
             for (var x = self.playerRegionX - 1; x <= self.playerRegionX + 1 ; x++) {
-                let chunk = Chunk(tower: self.tower, floor:self.floor, regionX: x, regionY: y)//TODO: receber mundo e andar por parametro ?
+                let chunk = Chunk(tower: MapManager.tower, floor:MapManager.floor, regionX: x, regionY: y)//TODO: receber mundo e andar por parametro ?
                 chunk.name = "chunk\(i)"
                 self.addChild(chunk);
                 i++
@@ -147,15 +148,15 @@ class MapManager: SKNode {
         */
         let chunk8 = self.childNodeWithName("chunk8")! as! Chunk
         chunk8.removeAllChildren()
-        chunk8.load(self.tower, floor: self.floor, regionX: self.loadedRegionX - 1, regionY: self.loadedRegionY + 1)
+        chunk8.load(MapManager.tower, floor: MapManager.floor, regionX: self.loadedRegionX - 1, regionY: self.loadedRegionY + 1)
         
         let chunk5 = self.childNodeWithName("chunk5")! as! Chunk
         chunk5.removeAllChildren()
-        chunk5.load(self.tower, floor: self.floor, regionX: self.loadedRegionX - 1, regionY: self.loadedRegionY + 0)
+        chunk5.load(MapManager.tower, floor: MapManager.floor, regionX: self.loadedRegionX - 1, regionY: self.loadedRegionY + 0)
         
         let chunk2 = self.childNodeWithName("chunk2")! as! Chunk
         chunk2.removeAllChildren()
-        chunk2.load(self.tower, floor: self.floor, regionX: self.loadedRegionX - 1, regionY: self.loadedRegionY - 1)
+        chunk2.load(MapManager.tower, floor: MapManager.floor, regionX: self.loadedRegionX - 1, regionY: self.loadedRegionY - 1)
         
         let chunk7 = self.childNodeWithName("chunk7")! as! Chunk
         let chunk4 = self.childNodeWithName("chunk4")! as! Chunk
@@ -186,15 +187,15 @@ class MapManager: SKNode {
         */
         let chunk6 = self.childNodeWithName("chunk6")! as! Chunk
         chunk6.removeAllChildren()
-        chunk6.load(self.tower, floor: self.floor, regionX: self.loadedRegionX - 1, regionY: self.loadedRegionY - 1)
+        chunk6.load(MapManager.tower, floor: MapManager.floor, regionX: self.loadedRegionX - 1, regionY: self.loadedRegionY - 1)
         
         let chunk7 = self.childNodeWithName("chunk7")! as! Chunk
         chunk7.removeAllChildren()
-        chunk7.load(self.tower, floor: self.floor, regionX: self.loadedRegionX + 0, regionY: self.loadedRegionY - 1)
+        chunk7.load(MapManager.tower, floor: MapManager.floor, regionX: self.loadedRegionX + 0, regionY: self.loadedRegionY - 1)
         
         let chunk8 = self.childNodeWithName("chunk8")! as! Chunk
         chunk8.removeAllChildren()
-        chunk8.load(self.tower, floor: self.floor, regionX: self.loadedRegionX + 1, regionY: self.loadedRegionY - 1)
+        chunk8.load(MapManager.tower, floor: MapManager.floor, regionX: self.loadedRegionX + 1, regionY: self.loadedRegionY - 1)
         
         let chunk0 = self.childNodeWithName("chunk0")! as! Chunk
         let chunk1 = self.childNodeWithName("chunk1")! as! Chunk
@@ -225,15 +226,15 @@ class MapManager: SKNode {
         */
         let chunk6 = self.childNodeWithName("chunk6")! as! Chunk
         chunk6.removeAllChildren()
-        chunk6.load(self.tower, floor: self.floor, regionX: self.loadedRegionX + 1, regionY: self.loadedRegionY + 1)
+        chunk6.load(MapManager.tower, floor: MapManager.floor, regionX: self.loadedRegionX + 1, regionY: self.loadedRegionY + 1)
         
         let chunk3 = self.childNodeWithName("chunk3")! as! Chunk
         chunk3.removeAllChildren()
-        chunk3.load(self.tower, floor: self.floor, regionX: self.loadedRegionX + 1, regionY: self.loadedRegionY + 0)
+        chunk3.load(MapManager.tower, floor: MapManager.floor, regionX: self.loadedRegionX + 1, regionY: self.loadedRegionY + 0)
         
         let chunk0 = self.childNodeWithName("chunk0")! as! Chunk
         chunk0.removeAllChildren()
-        chunk0.load(self.tower, floor: self.floor, regionX: self.loadedRegionX + 1, regionY: self.loadedRegionY - 1)
+        chunk0.load(MapManager.tower, floor: MapManager.floor, regionX: self.loadedRegionX + 1, regionY: self.loadedRegionY - 1)
         
         let chunk7 = self.childNodeWithName("chunk7")! as! Chunk
         let chunk4 = self.childNodeWithName("chunk4")! as! Chunk
@@ -264,15 +265,15 @@ class MapManager: SKNode {
         */
         let chunk0 = self.childNodeWithName("chunk0")! as! Chunk
         chunk0.removeAllChildren()
-        chunk0.load(self.tower, floor: self.floor, regionX: self.loadedRegionX - 1, regionY: self.loadedRegionY + 1)
+        chunk0.load(MapManager.tower, floor: MapManager.floor, regionX: self.loadedRegionX - 1, regionY: self.loadedRegionY + 1)
         
         let chunk1 = self.childNodeWithName("chunk1")! as! Chunk
         chunk1.removeAllChildren()
-        chunk1.load(self.tower, floor: self.floor, regionX: self.loadedRegionX + 0, regionY: self.loadedRegionY + 1)
+        chunk1.load(MapManager.tower, floor: MapManager.floor, regionX: self.loadedRegionX + 0, regionY: self.loadedRegionY + 1)
         
         let chunk2 = self.childNodeWithName("chunk2")! as! Chunk
         chunk2.removeAllChildren()
-        chunk2.load(self.tower, floor: self.floor, regionX: self.loadedRegionX + 1, regionY: self.loadedRegionY + 1)
+        chunk2.load(MapManager.tower, floor: MapManager.floor, regionX: self.loadedRegionX + 1, regionY: self.loadedRegionY + 1)
         
         let chunk3 = self.childNodeWithName("chunk3")! as! Chunk
         let chunk4 = self.childNodeWithName("chunk4")! as! Chunk
