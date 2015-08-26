@@ -9,7 +9,7 @@
 import UIKit
 import SpriteKit
 
-class LobbyScene: GameScene {
+class LobbyScene: GameScene, UITextFieldDelegate {
     enum states {
         case lobby
         case multiplayerMission
@@ -20,8 +20,10 @@ class LobbyScene: GameScene {
     var state = states.lobby
     var nextState = states.lobby
     let socket = SocketIOClient(socketURL: "179.232.86.110:3001", options: nil)
-    var localName: String? = ""
+
+    var myTextField: UITextField!
     
+    var labelName:Label!
     
     func randomStringWithLength (len : Int) -> NSString {
         
@@ -42,20 +44,41 @@ class LobbyScene: GameScene {
     
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
-        self.addChild(Control(name: "beforeMissionBackground", x:0, y:0, align:.center))
-        
-        self.addChild(Label(name: "labelTitle", textureName: "BeforeMissionScene", x: 667, y: 130, align:.center))
-        
-        self.addChild(Button(name: "buttonRoom0", textureName: "buttonYellow", text:"room0", x: 550, y: 189, align:.center))
+        self.addChild(Control(name: "mainMenuBackground", x:0, y:0, align:.center))
         
         
-        self.addChild(Button(name: "buttonRoom1", textureName: "buttonYellow", text:"room1", x: 550, y: 287, align:.center)) // y = 98
-        self.addChild(Button(name: "buttonRoom2", textureName: "buttonYellow", text:"room2", x: 550, y: 385, align:.center))
-        self.addChild(Button(name: "buttonRoom3", textureName: "buttonYellow", text:"room3", x: 550, y: 483, align:.center))
         
-        self.addChild(Button(name: "buttonBack", textureName: "buttonGrayLeft", x: 20, y: 652, xAlign:.left, yAlign:.down))
-        self.localName = self.randomStringWithLength(8) as String
+        
+        self.addChild(Button(name: "buttonRoom0", textureName: "buttonYellow", text:"room0", x: 550, y: 289, align:.center))
+        
+        
+        self.addChild(Button(name: "buttonRoom1", textureName: "buttonYellow", text:"room1", x: 550, y: 387, align:.center)) // y = 98
+        self.addChild(Button(name: "buttonRoom2", textureName: "buttonYellow", text:"room2", x: 550, y: 485, align:.center))
+        self.addChild(Button(name: "buttonRoom3", textureName: "buttonYellow", text:"room3", x: 550, y: 583, align:.center))
+        
+        self.addChild(Button(name: "buttonBack", textureName: "buttonGraySquareSmall", x: 20, y: 652, xAlign:.left, yAlign:.down))
+        
+        
+        myTextField = UITextField(frame: CGRect(x: 290, y: 100, width: 130, height: 40.00))
+        self.view?.addSubview(myTextField)
+        myTextField.delegate = self
+        myTextField.backgroundColor = GameColors.white
+        myTextField.text = self.randomStringWithLength(8) as String
+        myTextField.borderStyle = UITextBorderStyle.RoundedRect
+
+        
     }
+    
+    // Called by tapping return on the keyboard.
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    
+
+    
     
     override func update(currentTime: NSTimeInterval) {
         if(self.state == self.nextState){
@@ -71,7 +94,7 @@ class LobbyScene: GameScene {
             case states.multiplayerMission:
                 var nextScene  = MultiplayerGameScene()
                 nextScene.room = self.room
-                nextScene.localName = self.localName
+                nextScene.localName = self.myTextField.text
                 self.view!.presentScene(nextScene, transition: Config.defaultGoTransition)
                 break
                 
@@ -96,32 +119,39 @@ class LobbyScene: GameScene {
                     
                     if (self.childNodeWithName("buttonRoom0")!.containsPoint(location)) {
                         room = 0
+                        myTextField.removeFromSuperview()
                         self.nextState = .multiplayerMission
                         return
                     }
                     
                     if (self.childNodeWithName("buttonRoom1")!.containsPoint(location)) {
                         room = 1
+                        myTextField.removeFromSuperview()
                         self.nextState = .multiplayerMission
                         return
                     }
                     
                     if (self.childNodeWithName("buttonRoom2")!.containsPoint(location)) {
                         room = 2
+                        myTextField.removeFromSuperview()
                         self.nextState = .multiplayerMission
                         return
                     }
                     
                     if (self.childNodeWithName("buttonRoom3")!.containsPoint(location)) {
                         room = 3
+                        myTextField.removeFromSuperview()
                         self.nextState = .multiplayerMission
                         return
                     }
                     
                     if (self.childNodeWithName("buttonBack")!.containsPoint(location)) {
+                        myTextField.removeFromSuperview()
                         self.nextState = .mainMenu
                         return
                     }
+                    
+                    
                 }
                 break
                 

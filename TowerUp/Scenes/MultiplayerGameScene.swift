@@ -16,6 +16,11 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
         case afterMission
     }
     
+    enum messages : String {
+        case addPlayers = "addPlayers"
+    }
+    
+    var message = messages.addPlayers
     var state = states.mission
     var nextState = states.mission
     
@@ -28,10 +33,12 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
     var parallax:Parallax!
     var room:Int = 0
     let velo:CGFloat = 3
+    var currentTime: NSTimeInterval = 0
     
     
     //Multiplayer
     var localName:String!
+    var labelName: Label!
     let socket = SocketIOClient(socketURL: "179.232.86.110:3001", opts: nil)
     
     
@@ -66,11 +73,14 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
         self.addChild(Button(name: "buttonBack", textureName: "buttonGraySquareSmall", text:"||" ,x:20, y:20, xAlign:.left, yAlign:.up))
         
         
+        
         //Multiplayer
         self.socket.connect()
         
         self.addHandlers()
-        //println( "Room " + self.room.description)
+        
+        message = .addPlayers
+        println(message)
         
         
     }
@@ -78,7 +88,8 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
     
     func addHandlers(){
         
-        self.socket.on("addPlayers") {[weak self] data, ack in
+        message = .addPlayers
+        self.socket.on(messages.addPlayers.rawValue) {[weak self] data, ack in
             
             
             var xPos = 144
@@ -86,10 +97,19 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
             
             self!.player = PlayerOnline(x: xPos, y: 48, loadPhysics: true)
             self!.player!.name = self?.localName
-            
-            //self?.localName = name
-            
             self!.world.addChild(self!.player!)
+            
+            
+            self!.labelName = Label(name: "labelName", textureName: "", x: 0, y: 0)
+            Control.locations.removeObject("labelName")
+            self!.labelName.position = CGPoint(x: self!.player!.position.x, y: self!.player!.position.y + 32)
+            self!.world.addChild(self!.labelName)
+            self!.labelName.zPosition = self!.player!.zPosition + 1
+            self!.labelName.setText(self!.localName!, color: GameColors.black)
+            self!.player?.labelName = self!.labelName
+            
+            
+            
             
             self!.mapManager = MapManager()
             self!.mapManager.name = "mapManager"
@@ -104,27 +124,22 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
                     
                     let nameTest = onlinePlayer as? String
                     
-                    switch nameTest! {
-                    case "0":
-                        xPos = 80
-                    case "1":
-                        xPos = 120
-                    case "2":
-                        xPos = 160
-                    case "3":
-                        xPos = 200
-                    default:
-                        xPos = 80
-                        
-                    }
                     
                     xPos = 144
                     var player2 = PlayerOnline(x: xPos, y: 48, loadPhysics: true)
-                    
                     player2.name = nameTest
-                    
                     player2.position = CGPoint(x: xPos, y: 48)
                     self!.world.addChild(player2)
+                    
+                    var labelName2: Label!
+                    labelName2 = Label(name: "label"+player2.name! , textureName: "", x: 0, y: 0)
+                    Control.locations.removeObject("label" + player2.name!)
+                    labelName2.position = CGPoint(x: player2.position.x, y: player2.position.y + 32)
+                    self!.world.addChild(labelName2)
+                    labelName2.zPosition = player2.zPosition + 1
+                    labelName2.setText(player2.name!, color: GameColors.black)
+                    player2.labelName = labelName2
+                    
                 }
                 
             }
@@ -146,15 +161,24 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
         self.socket.on("join") {[weak self] data, ack in
             if let name = data?[0] as? String {
                 
-                println(name + "Join")
+                
                 
                 var xPos = 144
                 var player = PlayerOnline(x: xPos, y: 48, loadPhysics: true)
                 player.name = name
-                
                 player.position = CGPoint(x: xPos, y: 48)
-                
                 self!.world.addChild(player)
+                
+                var labelName2: Label!
+                labelName2 = Label(name: "label"+player.name! , textureName: "", x: 0, y: 0)
+                Control.locations.removeObject("label" + player.name!)
+                labelName2.position = CGPoint(x: player.position.x, y: player.position.y + 32)
+                self!.world.addChild(labelName2)
+                labelName2.zPosition = player.zPosition + 1
+                labelName2.setText(player.name!, color: GameColors.black)
+                
+                player.labelName = labelName2
+                
             }
             
             println("teste")
@@ -167,10 +191,19 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
                 
                 
                 if let player = self?.childNodeWithName("//\(name)") as? PlayerOnline {
-                    //println("teste2")
-                    player.updateOnline(data?[1] as! CGFloat, y: data?[2] as! CGFloat, vx: data?[3] as! CGFloat, vy: data?[4] as! CGFloat, rotation: data?[5] as! CGFloat, vrotation: data?[6] as! CGFloat)
+                    //println(data)
+                    player.updateOnline(data?[1] as! CGFloat, y: data?[2] as! CGFloat, vx: data?[3] as! CGFloat, vy: data?[4] as! CGFloat, rotation: data?[5] as! CGFloat, vrotation: data?[6] as! CGFloat , currentTime: data?[7] as! NSTimeInterval )
+                    
+                    
+                    player.labelName.position = CGPoint(x: player.position.x, y: player.position.y + 32)
+                        
+                    
+                    
                     
                 }
+                
+                
+                
             }
         }
     }
@@ -187,11 +220,12 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
     }
     
     override func update(currentTime: NSTimeInterval) {
+        self.currentTime = currentTime
         if(self.state == self.nextState){
             switch (self.state) {
             case states.mission:
                 if let player = self.player {
-                    player.update(currentTime, room: self.room)
+                    player.update(currentTime)
                     self.mapManager.update(currentTime)
                 }
                 break
@@ -219,6 +253,8 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
     {
         if let player = self.player {
             self.camera.update(self.player!.position)
+            player.updateEmiter(self.currentTime, room: self.room)
+            self.player!.labelName.position = CGPoint(x: self.player!.position.x, y: self.player!.position.y + 32)
             self.parallax.update(self.camera.position)
         }
     }
