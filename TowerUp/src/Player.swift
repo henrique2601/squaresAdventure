@@ -26,6 +26,10 @@ class Player: Square {
     var lastAlive:NSTimeInterval = 0
     var lastHeal:NSTimeInterval = 0
     
+    //Gameplay
+    var win:Bool = false
+    var lastNoWin:NSTimeInterval = 0
+    
     var collectedBonus = 0
     
     init(x:Int, y:Int, loadPhysics:Bool) {
@@ -97,14 +101,14 @@ class Player: Square {
                 self.healthPoints = 0
             }
             break
-        
+            
         case physicsCategory.doorTile.rawValue:
-            
-           println("Toc toc , tem alguem na \(physicsBody.node!.name!)")
-            
-            
+            println("Toc toc , tem alguem na \(physicsBody.node!.name!)")
             break
-
+            
+        case physicsCategory.winTile.rawValue:
+            self.win = true
+            break
             
         default:
             println("didBeginContact de player com \(physicsBody.node!.name!) não está sendo processado")
@@ -124,11 +128,15 @@ class Player: Square {
         case physicsCategory.spike.rawValue:
             
             break
-        
+            
         case physicsCategory.doorTile.rawValue:
             
             break
-        
+            
+        case physicsCategory.winTile.rawValue:
+            self.win = false
+            break
+            
         default:
             println("didEndContact de player com \(physicsBody.node?.name!) não está sendo processado")
             break
@@ -146,6 +154,18 @@ class Player: Square {
             } else {
                 if(currentTime - self.lastHeal > 3) {
                     self.healthPoints++
+                }
+            }
+            //
+            
+            //Win exprotar função?
+            if(!self.win){
+                self.lastNoWin = currentTime
+            } else {
+                if(currentTime - self.lastNoWin > 1) {
+                    if let scene = self.scene as? MissionScene {
+                        scene.nextState = MissionScene.states.afterMission
+                    }
                 }
             }
             //
@@ -216,5 +236,21 @@ class Player: Square {
         self.zRotation = 0
         self.healthPoints = self.maxHealthPoints
         self.deathCount++
+    }
+    
+    func reset() {
+        self.respawn()
+        
+        //Vida
+        self.healthPoints = self.maxHealthPoints
+        self.deathCount = 0
+        self.lastAlive = 0
+        self.lastHeal = 0
+        
+        //Gameplay
+        self.win = false
+        self.lastNoWin = 0
+        
+        self.collectedBonus = 0
     }
 }
