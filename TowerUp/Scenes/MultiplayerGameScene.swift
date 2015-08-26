@@ -17,7 +17,11 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
     }
     
     enum messages : String {
-        case addPlayers = "addPlayers"
+        case addPlayers = "a"
+        case didJoin = "d"
+        case join = "j"
+        case joinRoom = "r"
+        case update = "u"
     }
     
     var message = messages.addPlayers
@@ -153,12 +157,12 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
         
         
         
-        self.socket.on("didJoin") {[weak self] data, ack in
-            self!.socket.emit("joinRoom", self!.localName! , self!.room)
+        self.socket.on(messages.didJoin.rawValue) {[weak self] data, ack in
+            self!.socket.emit(messages.joinRoom.rawValue, self!.localName! , self!.room)
         }
         
         
-        self.socket.on("join") {[weak self] data, ack in
+        self.socket.on(messages.join.rawValue) {[weak self] data, ack in
             if let name = data?[0] as? String {
                 
                 
@@ -185,14 +189,14 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
             
         }
         
-        self.socket.on("update") {[weak self] data, ack in
+        self.socket.on(messages.update.rawValue) {[weak self] data, ack in
             //println("teste")
             if let name = data?[0] as? String{
                 
                 
                 if let player = self?.childNodeWithName("//\(name)") as? PlayerOnline {
-                    //println(data)
-                    player.updateOnline(data?[1] as! CGFloat, y: data?[2] as! CGFloat, vx: data?[3] as! CGFloat, vy: data?[4] as! CGFloat, rotation: data?[5] as! CGFloat, vrotation: data?[6] as! CGFloat , currentTime: data?[7] as! NSTimeInterval )
+                    println(data)
+                    player.updateOnline(data?[1] as! CGFloat, y: data?[2] as! CGFloat, vx: data?[3] as! CGFloat, vy: data?[4] as! CGFloat, rotation: data?[5] as! CGFloat, vrotation: data?[6] as! CGFloat )
                     
                     
                     player.labelName.position = CGPoint(x: player.position.x, y: player.position.y + 32)
@@ -254,7 +258,8 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
         if let player = self.player {
             self.camera.update(self.player!.position)
             player.updateEmiter(self.currentTime, room: self.room)
-            self.player!.labelName.position = CGPoint(x: self.player!.position.x, y: self.player!.position.y + 32)
+            //self.player!.labelName.position = CGPoint(x: self.player!.position.x, y: self.player!.position.y + 32)
+            self.player!.didFinishUpdate()
             self.parallax.update(self.camera.position)
         }
     }
