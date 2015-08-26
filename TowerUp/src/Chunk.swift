@@ -46,8 +46,11 @@ class Chunk: SKSpriteNode {
                 var id = data[i].integerValue
                 if(id != 0) {
                     var tile:Tile!
-                    if(id > 1000) {
+                    if(id > 25) {
                         switch(id) {
+                        case specialTiles.coinTile.rawValue:
+                            tile = Coin(type: "Gold", x: x, y: y)
+                            break
                         case specialTiles.winTile.rawValue:
                             tile = WinTile(type: self.type, x: x, y: y)
                             break
@@ -117,7 +120,7 @@ class Chunk: SKSpriteNode {
     
     func load(tower:Int, floor:Int, regionX:Int, regionY:Int) {
         self.position = CGPoint(x: self.size.width * (CGFloat)(regionX), y: self.size.height * (CGFloat)(regionY))
-        
+
         if let path = NSBundle.mainBundle().pathForResource("\(tower) \(floor) \(regionX) \(regionY)", ofType: "") {
             let data = NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding, error: NSErrorPointer())!.componentsSeparatedByString(",")
             self.loadData(data)

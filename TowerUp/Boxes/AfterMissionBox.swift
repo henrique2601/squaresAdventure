@@ -82,6 +82,7 @@ class AfterMissionBox: Box {
                     scene.nextState = MissionScene.states.mission
                     scene.blackSpriteNode.removeFromParent()
                     self.removeFromParent()
+                    MapManager.floor++ //TODO: altas gambs
                 }
                 return
             }
