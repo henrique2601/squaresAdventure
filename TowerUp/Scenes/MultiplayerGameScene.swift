@@ -165,13 +165,18 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
         
         
         self.socket.on(messages.join.rawValue) {[weak self] data, ack in
-            if let name = data?[0] as? String {
+            
+            if let name = data?[0] as? NSDictionary {
+        
                 
                 
                 
                 var xPos = 144
                 var player = PlayerOnline(x: xPos, y: 48, loadPhysics: true)
-                player.name = name
+                player.name = name.objectForKey("name") as? String
+                println(player.name)
+                player.id = name.objectForKey("id") as? Int
+                println(player.id.description)
                 player.position = CGPoint(x: xPos, y: 48)
                 self!.world.addChild(player)
                 
