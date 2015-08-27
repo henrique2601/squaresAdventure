@@ -14,7 +14,7 @@ class MemoryCard: NSObject {
     
     var playerData:PlayerData!
     
-    func newGame(shipIndex:Int) {
+    func newGame() {
         println("Creating new game...")
         
         self.playerData = NSEntityDescription.insertNewObjectForEntityForName("PlayerData", inManagedObjectContext: self.managedObjectContext!) as! PlayerData
