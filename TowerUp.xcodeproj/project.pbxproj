@@ -48,6 +48,7 @@
 		139A0E8F1B7431CB00EDE944 /* MemoryCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139A0E8E1B7431CB00EDE944 /* MemoryCard.swift */; };
 		13B32C061B74EE93001A1486 /* LobbyScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B32C051B74EE93001A1486 /* LobbyScene.swift */; };
 		13B6E6031B8F30EF00624263 /* -1 0 0 0 in Resources */ = {isa = PBXBuildFile; fileRef = 13B6E6021B8F30EF00624263 /* -1 0 0 0 */; };
+		13B6E6081B8F3FA600624263 /* PlayerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B6E6071B8F3FA600624263 /* PlayerData.swift */; };
 		13CCB6FC1B72AD310060334C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13CCB6FB1B72AD310060334C /* LaunchScreen.xib */; };
 		13CCB6FE1B72B9010060334C /* TowersScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13CCB6FD1B72B9010060334C /* TowersScene.swift */; };
 		13CCB7001B72B9A70060334C /* OptionsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13CCB6FF1B72B9A70060334C /* OptionsScene.swift */; };
@@ -61,7 +62,6 @@
 		13FC800A1B8640B800865C72 /* PlayerOnline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FC80091B8640B800865C72 /* PlayerOnline.swift */; };
 		5C48055E1B84CFF60066E151 /* DoorTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C48055D1B84CFF60066E151 /* DoorTile.swift */; };
 		5C653FC21B86B6EE00FABE23 /* PowerUpScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C653FC11B86B6EE00FABE23 /* PowerUpScene.swift */; };
-		5CF8A3A41B8F399F00C16CA9 /* PlayerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF8A3A31B8F399F00C16CA9 /* PlayerData.swift */; };
 		5CF8A3A61B8F39A000C16CA9 /* PowerUpData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF8A3A51B8F39A000C16CA9 /* PowerUpData.swift */; };
 		5CF8A3A81B8F39A000C16CA9 /* FloorData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF8A3A71B8F39A000C16CA9 /* FloorData.swift */; };
 		5CF8A3AA1B8F39A000C16CA9 /* SkinData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF8A3A91B8F39A000C16CA9 /* SkinData.swift */; };
@@ -123,6 +123,7 @@
 		139A0E8E1B7431CB00EDE944 /* MemoryCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MemoryCard.swift; path = CoreData/MemoryCard.swift; sourceTree = "<group>"; };
 		13B32C051B74EE93001A1486 /* LobbyScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LobbyScene.swift; path = Scenes/LobbyScene.swift; sourceTree = "<group>"; };
 		13B6E6021B8F30EF00624263 /* -1 0 0 0 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "-1 0 0 0"; path = "Multiplayer/-1 0 0 0"; sourceTree = "<group>"; };
+		13B6E6071B8F3FA600624263 /* PlayerData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayerData.swift; path = CoreData/PlayerData.swift; sourceTree = "<group>"; };
 		13CCB6FB1B72AD310060334C /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		13CCB6FD1B72B9010060334C /* TowersScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TowersScene.swift; path = Scenes/TowersScene.swift; sourceTree = "<group>"; };
 		13CCB6FF1B72B9A70060334C /* OptionsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OptionsScene.swift; path = Scenes/OptionsScene.swift; sourceTree = "<group>"; };
@@ -136,7 +137,6 @@
 		13FC80091B8640B800865C72 /* PlayerOnline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayerOnline.swift; path = src/PlayerOnline.swift; sourceTree = "<group>"; };
 		5C48055D1B84CFF60066E151 /* DoorTile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoorTile.swift; sourceTree = "<group>"; };
 		5C653FC11B86B6EE00FABE23 /* PowerUpScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PowerUpScene.swift; sourceTree = "<group>"; };
-		5CF8A3A31B8F399F00C16CA9 /* PlayerData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayerData.swift; path = CoreData/PlayerData.swift; sourceTree = "<group>"; };
 		5CF8A3A51B8F39A000C16CA9 /* PowerUpData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PowerUpData.swift; path = CoreData/PowerUpData.swift; sourceTree = "<group>"; };
 		5CF8A3A71B8F39A000C16CA9 /* FloorData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FloorData.swift; path = CoreData/FloorData.swift; sourceTree = "<group>"; };
 		5CF8A3A91B8F39A000C16CA9 /* SkinData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SkinData.swift; path = CoreData/SkinData.swift; sourceTree = "<group>"; };
@@ -260,12 +260,12 @@
 		139A0E8D1B74319000EDE944 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				5CF8A3AB1B8F39A000C16CA9 /* TowerData.swift */,
-				5CF8A3A91B8F39A000C16CA9 /* SkinData.swift */,
 				5CF8A3A71B8F39A000C16CA9 /* FloorData.swift */,
-				5CF8A3A51B8F39A000C16CA9 /* PowerUpData.swift */,
-				5CF8A3A31B8F399F00C16CA9 /* PlayerData.swift */,
 				139A0E8E1B7431CB00EDE944 /* MemoryCard.swift */,
+				13B6E6071B8F3FA600624263 /* PlayerData.swift */,
+				5CF8A3A51B8F39A000C16CA9 /* PowerUpData.swift */,
+				5CF8A3A91B8F39A000C16CA9 /* SkinData.swift */,
+				5CF8A3AB1B8F39A000C16CA9 /* TowerData.swift */,
 				1359DC981B727726006C12FA /* TowerUp.xcdatamodeld */,
 			);
 			name = CoreData;
@@ -1354,10 +1354,10 @@
 				13169CE61B810A9100516CF6 /* SocketAckManager.swift in Sources */,
 				13B32C061B74EE93001A1486 /* LobbyScene.swift in Sources */,
 				139A0E881B73D00200EDE944 /* BeforeMissionScene.swift in Sources */,
-				5CF8A3A41B8F399F00C16CA9 /* PlayerData.swift in Sources */,
 				13169CEB1B810A9100516CF6 /* SocketFixUTF8.swift in Sources */,
 				1326AE881B85FCA300D4563B /* Box.swift in Sources */,
 				1359DD101B7287A7006C12FA /* Button.swift in Sources */,
+				13B6E6081B8F3FA600624263 /* PlayerData.swift in Sources */,
 				13FC800A1B8640B800865C72 /* PlayerOnline.swift in Sources */,
 				132FB8681B828FF80012A7D3 /* Parallax.swift in Sources */,
 				1383FD621B7A4B420012DA45 /* Tile.swift in Sources */,
