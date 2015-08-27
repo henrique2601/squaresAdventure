@@ -15,7 +15,7 @@ class PlayerOnline: Player {
     var labelName: Label!
     static var list:NSMutableArray = NSMutableArray()
     
-    override init(x: Int, y: Int, loadPhysics: Bool) {
+    init(x: Int, y: Int, loadPhysics: Bool) {
         super.init(x: x, y: y, loadPhysics: loadPhysics)
         PlayerOnline.list.addObject(self)
     }

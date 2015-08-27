@@ -16,6 +16,7 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
         case paused
         case afterMission
         case floors
+        case powerUp
     }
     
     var state = states.loading
@@ -108,6 +109,11 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
             case states.floors:
                 self.view!.presentScene(FloorsScene(), transition: Config.defaultGoTransition)
                 break
+            case states.powerUp:
+                self.view!.presentScene(PowerUpScene(), transition: Config.defaultGoTransition)
+                break
+
+                
                 
             default:
                 break

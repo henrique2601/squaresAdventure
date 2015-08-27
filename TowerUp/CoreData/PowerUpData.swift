@@ -2,7 +2,7 @@
 //  PowerUpData.swift
 //  TowerUp
 //
-//  Created by Pablo Henrique Bertaco on 8/17/15.
+//  Created by Gabriel Prado Marcolino on 27/08/15.
 //  Copyright (c) 2015 WTFGames. All rights reserved.
 //
 
@@ -15,6 +15,7 @@ class PowerUpData: NSManagedObject {
 
     @NSManaged var available: NSNumber
     @NSManaged var locked: NSNumber
+    @NSManaged var index: NSNumber
     @NSManaged var playerData: PlayerData
 
 }
