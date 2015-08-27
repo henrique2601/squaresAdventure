@@ -79,7 +79,7 @@ class AfterMissionBox: Box {
             }
             if (self.childNodeWithName("buttonNext")!.containsPoint(location)) {
                 if let scene = self.scene as? MissionScene {
-                    scene.nextState = MissionScene.states.mission
+                    scene.nextState = MissionScene.states.powerUp
                     scene.blackSpriteNode.removeFromParent()
                     self.removeFromParent()
                     MapManager.floor++ //TODO: altas gambs

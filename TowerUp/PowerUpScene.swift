@@ -21,12 +21,14 @@ class PowerUpScene: GameScene {
     
     var state = states.powerUp
     var nextState = states.powerUp
+    
     var powerUpPageNumber = -1
     var skinPageNumber = -1
     var moveTheSkin = false
     var movethePowerUp = false
     
     override func didMoveToView(view: SKView) {
+        
         super.didMoveToView(view)
         
         self.backgroundColor = GameColors.blue
@@ -130,9 +132,7 @@ class PowerUpScene: GameScene {
             switch (self.state) {
                 
             case .powerUp:
-                
                 break
-                
                 
             default:
                 break
@@ -293,11 +293,11 @@ class PowerUpScene: GameScene {
         
         println(nPowerUps)
         
-        var buttonSkin1  = PowerUps.types.objectAtIndex(j+1).description
+        var buttonSkin1  = PowerUps.types.objectAtIndex(j+1).image
         
-        var buttonSkin2  = PowerUps.types.objectAtIndex(j+2).description
+        var buttonSkin2  = PowerUps.types.objectAtIndex(j+2).image
         
-        var buttonSkin3  = PowerUps.types.objectAtIndex(j+3).description
+        var buttonSkin3  = PowerUps.types.objectAtIndex(j+3).image
         
         
         self.addChild(Control(name: "power1", textureName: buttonSkin1 , x: 450, y: 230, xAlign:.left, yAlign:.center))
@@ -315,35 +315,30 @@ class PowerUpScene: GameScene {
 // Power Ups e Skins Organizacao de dados// **************************************
 
 class PowerUpType: NSObject {
-    var speed:Int
-    var acceleration:Int
-    var armor:Int
-    var price:Int
     
-    init(speed:Int, acceleration:Int, armor:Int, price:Int) {
-        self.speed = speed
-        self.acceleration = acceleration
-        self.armor = armor
-        self.price = price
+    var image:String
+    
+    init(image:String) {
+        self.image = image
     }
 }
 
 class PowerUps :NSObject {
     
     static var types:NSArray = NSArray(array: [
-        PowerUpType(speed: 70, acceleration: 10, armor: 10, price:1000), //0
-        PowerUpType(speed: 40, acceleration: 10, armor: 10, price:2000), //1
-        PowerUpType(speed: 10, acceleration: 70, armor: 10, price:3000), //2
-        PowerUpType(speed: 10, acceleration: 10, armor: 10, price:4000), //3
-        PowerUpType(speed: 10, acceleration: 10, armor: 10, price:5000), //4
-        PowerUpType(speed: 10, acceleration: 10, armor: 40, price:6000), //5
-        PowerUpType(speed: 10, acceleration: 10, armor: 70, price:7000), //6
-        PowerUpType(speed: 10, acceleration: 10, armor: 40, price:8000), //7
-        PowerUpType(speed: 10, acceleration: 10, armor: 10, price:9000), //8
-        PowerUpType(speed: 10, acceleration: 40, armor: 10, price:10000), //9
-        PowerUpType(speed: 10, acceleration: 10, armor: 10, price:11000), //10
-        PowerUpType(speed: 40, acceleration: 40, armor: 10, price:12000), //11
-        PowerUpType(speed: 20, acceleration: 20, armor: 20, price:13000)  //12
+        PowerUpType(image:"bubble"), //0
+        PowerUpType(image:"bubbleUp"), //1
+        PowerUpType(image:"bunny"), //2
+        PowerUpType(image:"carrotGold"), //3
+        PowerUpType(image:"carrotNormal"), //4
+        PowerUpType(image:"doubleLife"), //5
+        PowerUpType(image:"empty"), //6
+        PowerUpType(image:"gold"), //7
+        PowerUpType(image:"jetPack"), //8
+        PowerUpType(image:"player"), //9
+        PowerUpType(image:"portalOranje"), //10
+        PowerUpType(image:"wings"), //11
+        PowerUpType(image:"bubbleUp")  //12
         ])
     
     

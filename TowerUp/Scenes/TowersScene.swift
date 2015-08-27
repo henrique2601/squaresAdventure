@@ -16,6 +16,7 @@ class TowersScene: GameScene {
         case floors
         case multiplayer
         case mainMenu
+        case powerUp
     }
     
     var state = states.towers
@@ -58,6 +59,11 @@ class TowersScene: GameScene {
                 self.view!.presentScene(MainMenuScene(), transition: Config.defaultBackTransition)
                 break
                 
+            case states.powerUp:
+                self.view!.presentScene(PowerUpScene(), transition: Config.defaultBackTransition)
+                break
+
+                
             default:
                 break
             }
@@ -74,7 +80,7 @@ class TowersScene: GameScene {
                     let location = touch.locationInNode(self)
                     
                     if (self.childNodeWithName("buttonTower0")!.containsPoint(location)) {
-                        self.nextState = .floors
+                        self.nextState = .powerUp
                         return
                     }
                     

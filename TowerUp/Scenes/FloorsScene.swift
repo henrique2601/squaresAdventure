@@ -12,7 +12,7 @@ import SpriteKit
 class FloorsScene: GameScene , SKPhysicsContactDelegate {
     enum states {
         case floors
-        case beforeMission
+        case powerUp
         case towers
         case mission
     }
