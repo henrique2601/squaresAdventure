@@ -43,6 +43,7 @@
 		1383FD601B7A4A920012DA45 /* Chunk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1383FD5F1B7A4A920012DA45 /* Chunk.swift */; };
 		1383FD621B7A4B420012DA45 /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1383FD611B7A4B420012DA45 /* Tile.swift */; };
 		1383FD641B7A50990012DA45 /* Ground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1383FD631B7A50990012DA45 /* Ground.swift */; };
+		138F29031B8F8E28000DC7E7 /* -1 1 0 0 in Resources */ = {isa = PBXBuildFile; fileRef = 138F29021B8F8E28000DC7E7 /* -1 1 0 0 */; };
 		139A0E881B73D00200EDE944 /* BeforeMissionScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139A0E871B73D00200EDE944 /* BeforeMissionScene.swift */; };
 		139A0E8A1B73D05900EDE944 /* MissionScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139A0E891B73D05900EDE944 /* MissionScene.swift */; };
 		139A0E8F1B7431CB00EDE944 /* MemoryCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139A0E8E1B7431CB00EDE944 /* MemoryCard.swift */; };
@@ -123,6 +124,7 @@
 		1383FD5F1B7A4A920012DA45 /* Chunk.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Chunk.swift; path = src/Chunk.swift; sourceTree = "<group>"; };
 		1383FD611B7A4B420012DA45 /* Tile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Tile.swift; path = src/Tile.swift; sourceTree = "<group>"; };
 		1383FD631B7A50990012DA45 /* Ground.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ground.swift; sourceTree = "<group>"; };
+		138F29021B8F8E28000DC7E7 /* -1 1 0 0 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "-1 1 0 0"; sourceTree = "<group>"; };
 		139A0E871B73D00200EDE944 /* BeforeMissionScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BeforeMissionScene.swift; path = Scenes/BeforeMissionScene.swift; sourceTree = "<group>"; };
 		139A0E891B73D05900EDE944 /* MissionScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MissionScene.swift; path = Scenes/MissionScene.swift; sourceTree = "<group>"; };
 		139A0E8E1B7431CB00EDE944 /* MemoryCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MemoryCard.swift; path = CoreData/MemoryCard.swift; sourceTree = "<group>"; };
@@ -267,6 +269,22 @@
 			name = Scenes;
 			sourceTree = "<group>";
 		};
+		138F29041B8F8E2F000DC7E7 /* Floor0 */ = {
+			isa = PBXGroup;
+			children = (
+				13B6E6021B8F30EF00624263 /* -1 0 0 0 */,
+			);
+			name = Floor0;
+			sourceTree = "<group>";
+		};
+		138F29051B8F8E3D000DC7E7 /* Floor1 */ = {
+			isa = PBXGroup;
+			children = (
+				138F29021B8F8E28000DC7E7 /* -1 1 0 0 */,
+			);
+			name = Floor1;
+			sourceTree = "<group>";
+		};
 		139A0E8D1B74319000EDE944 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
@@ -284,7 +302,8 @@
 		13B6E6011B8F309F00624263 /* Multiplayer */ = {
 			isa = PBXGroup;
 			children = (
-				13B6E6021B8F30EF00624263 /* -1 0 0 0 */,
+				138F29041B8F8E2F000DC7E7 /* Floor0 */,
+				138F29051B8F8E3D000DC7E7 /* Floor1 */,
 			);
 			name = Multiplayer;
 			sourceTree = "<group>";
@@ -1312,6 +1331,7 @@
 				13B6E6031B8F30EF00624263 /* -1 0 0 0 in Resources */,
 				81BA81501A49DA1800E65899 /* Main.storyboard in Resources */,
 				13B6E60C1B8F4F6000624263 /* 0 3 0 0 in Resources */,
+				138F29031B8F8E28000DC7E7 /* -1 1 0 0 in Resources */,
 				13B6E60E1B8F50F000624263 /* 0 4 0 0 in Resources */,
 				13B6E60A1B8F48E200624263 /* 0 2 0 0 in Resources */,
 				13CCB6FC1B72AD310060334C /* LaunchScreen.xib in Resources */,

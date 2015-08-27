@@ -19,7 +19,7 @@ class PlayerOnline: Player {
         super.init(x: x, y: y, loadPhysics: loadPhysics)
         PlayerOnline.list.addObject(self)
     }
-
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -30,13 +30,11 @@ class PlayerOnline: Player {
             (self.scene as! MultiplayerGameScene).socket.emit("u", room , Int(self.position.x) , Int(self.position.y) , Int(self.physicsBody!.velocity.dx) , Int(self.physicsBody!.velocity.dy) , Int(self.zRotation * 1000000) , Int(self.physicsBody!.angularVelocity))
             lastCurrentTime = currentTime
         }
-       
+        
     }
     
     func updateOnline(x: CGFloat, y: CGFloat , vx: CGFloat , vy: CGFloat , rotation:CGFloat , vrotation:CGFloat)
     {
-        
-
         self.position.x = (x + self.position.x)/2
         self.position.y = (y + self.position.y)/2
         self.physicsBody!.velocity.dx = vx
@@ -51,7 +49,4 @@ class PlayerOnline: Player {
             player.labelName!.position = CGPoint(x: player.position.x, y: player.position.y + 48)
         }
     }
-    
-    
-    
 }
