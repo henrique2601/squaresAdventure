@@ -10,6 +10,7 @@ import UIKit
 
 class PlayerOnline: Player {
     
+    var id : Int!
     var lastCurrentTime: NSTimeInterval = 0
     var labelName: Label!
     static var list:NSMutableArray = NSMutableArray()

@@ -65,7 +65,6 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
         self.camera = Camera()
         self.world.addChild(self.camera)
         
-        
         self.mapManager = MapManager()
         self.world.addChild(self.mapManager)
         
@@ -92,12 +91,11 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
     
     func addHandlers(){
         
-        message = .addPlayers
+        
         self.socket.on(messages.addPlayers.rawValue) {[weak self] data, ack in
             
             
             var xPos = 144
-            
             
             self!.player = PlayerOnline(x: xPos, y: 48, loadPhysics: true)
             self!.player!.name = self?.localName
@@ -120,18 +118,22 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
             self!.world.addChild(self!.mapManager);
             self!.mapManager.reloadMap(self!.player!.position)
             
+            //println(data?[0])
+            
             if let playersArray = data?[0] as? NSArray {
                 
-                //println(playersArray)
+               
+
+               for onlinePlayer in playersArray{
                 
-                for onlinePlayer in playersArray{
-                    
-                    let nameTest = onlinePlayer as? String
+                    let nameTest = onlinePlayer as? NSDictionary
+                    //println (nameTest?.objectForKey("name"))
                     
                     
                     xPos = 144
                     var player2 = PlayerOnline(x: xPos, y: 48, loadPhysics: true)
-                    player2.name = nameTest
+                    player2.name = nameTest!.objectForKey("name") as? String
+                    player2.id = nameTest!.objectForKey("id") as? Int
                     player2.position = CGPoint(x: xPos, y: 48)
                     self!.world.addChild(player2)
                     
@@ -190,21 +192,26 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
         }
         
         self.socket.on(messages.update.rawValue) {[weak self] data, ack in
-            //println("teste")
-            if let name = data?[0] as? String{
+            
+            if let name = data?[0] as? Int {
                 
                 
-                if let player = self?.childNodeWithName("//\(name)") as? PlayerOnline {
-                    println(data)
-                    player.updateOnline(data?[1] as! CGFloat, y: data?[2] as! CGFloat, vx: data?[3] as! CGFloat, vy: data?[4] as! CGFloat, rotation: data?[5] as! CGFloat, vrotation: data?[6] as! CGFloat )
+                for player in PlayerOnline.list {
                     
-                    
-                    player.labelName.position = CGPoint(x: player.position.x, y: player.position.y + 32)
-                        
-                    
+                    if let aux = player as? PlayerOnline {
+                        if let id = aux.id
+                        {
+                            if id == name{
+                                aux.updateOnline(data?[1] as! CGFloat, y: data?[2] as! CGFloat, vx: data?[3] as! CGFloat, vy: data?[4] as! CGFloat, rotation: data?[5] as! CGFloat, vrotation: data?[6] as! CGFloat )
+                                aux.labelName.position = CGPoint(x: player.position.x, y: player.position.y + 32)
+                            }
+                        }
+                    }
                     
                     
                 }
+                
+                
                 
                 
                 
