@@ -31,6 +31,6 @@ class Tile: SKSpriteNode {
 public enum specialTiles:Int {
     case coinTile  = 26
     case winTile   = 27
-    case spikeTile = 1003
+    case spikeTile = 28
     case doorTile = 1004
 }
