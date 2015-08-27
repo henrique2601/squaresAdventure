@@ -39,17 +39,10 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
     let velo:CGFloat = 3
     var currentTime: NSTimeInterval = 0
     
-    
     //Multiplayer
     var localName:String!
     var labelName: Label!
     let socket = SocketIOClient(socketURL: "179.232.86.110:3001", opts: nil)
-    
-    
-    
-    
-    
-    
     
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
@@ -66,16 +59,17 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
         self.world.addChild(self.camera)
         
         self.mapManager = MapManager()
+        MapManager.tower = -1//TODO: altas gambs
+        MapManager.floor = 1//TODO: altas gambs
         self.world.addChild(self.mapManager)
         
+        self.mapManager.reloadMap(CGPoint(x: 10, y: Chunk.sizeInPoints + 10))
         
         self.addChild(Button(name: "buttonLeft", textureName: "buttonYellowSquare", text:"<", x:20, y:630, xAlign:.left, yAlign:.down))
         self.addChild(Button(name: "buttonRight", textureName: "buttonYellowSquare", text:">" ,x:160, y:630, xAlign:.left, yAlign:.down))
         self.addChild(Button(name: "buttonJump", textureName: "buttonYellow", text:"Jump", x:1014, y:630, xAlign:.right, yAlign:.down))
         
         self.addChild(Button(name: "buttonBack", textureName: "buttonGraySquareSmall", text:"||" ,x:20, y:20, xAlign:.left, yAlign:.up))
-        
-        
         
         //Multiplayer
         self.socket.connect()
@@ -84,23 +78,17 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
         
         message = .addPlayers
         println(message)
-        
-        
     }
-    
     
     func addHandlers(){
         
-        
         self.socket.on(messages.addPlayers.rawValue) {[weak self] data, ack in
-            
             
             var xPos = 144
             
             self!.player = PlayerOnline(x: xPos, y: 48, loadPhysics: true)
             self!.player!.name = self?.localName
             self!.world.addChild(self!.player!)
-            
             
             self!.labelName = Label(name: "labelName", textureName: "", x: 0, y: 0)
             Control.locations.removeObject("labelName")
@@ -110,25 +98,12 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
             self!.labelName.setText(self!.localName!, color: GameColors.black)
             self!.player?.labelName = self!.labelName
             
-            
-            
-            
-            self!.mapManager = MapManager()
-            self!.mapManager.name = "mapManager"
-            self!.world.addChild(self!.mapManager);
-            self!.mapManager.reloadMap(self!.player!.position)
-            
             //println(data?[0])
             
             if let playersArray = data?[0] as? NSArray {
-                
-               
-
-               for onlinePlayer in playersArray{
-                
+                for onlinePlayer in playersArray{
                     let nameTest = onlinePlayer as? NSDictionary
                     //println (nameTest?.objectForKey("name"))
-                    
                     
                     xPos = 144
                     var player2 = PlayerOnline(x: xPos, y: 48, loadPhysics: true)
@@ -145,31 +120,20 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
                     labelName2.zPosition = player2.zPosition + 1
                     labelName2.setText(player2.name!, color: GameColors.black)
                     player2.labelName = labelName2
-                    
                 }
-                
             }
             
-            
-            
-            
             println("Added Players")
-            
         }
-        
-        
         
         self.socket.on(messages.didJoin.rawValue) {[weak self] data, ack in
             self!.socket.emit(messages.joinRoom.rawValue, self!.localName! , self!.room)
         }
         
-        
         self.socket.on(messages.join.rawValue) {[weak self] data, ack in
             
             if let name = data?[0] as? NSDictionary {
         
-                
-                
                 
                 var xPos = 144
                 var player = PlayerOnline(x: xPos, y: 48, loadPhysics: true)
@@ -189,20 +153,13 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
                 labelName2.setText(player.name!, color: GameColors.black)
                 
                 player.labelName = labelName2
-                
             }
-            
-            println("teste")
-            
         }
         
         self.socket.on(messages.update.rawValue) {[weak self] data, ack in
             
             if let name = data?[0] as? Int {
-                
-                
                 for player in PlayerOnline.list {
-                    
                     if let aux = player as? PlayerOnline {
                         if let id = aux.id
                         {
@@ -212,20 +169,10 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
                             }
                         }
                     }
-                    
-                    
                 }
-                
-                
-                
-                
-                
             }
         }
     }
-    
-    
-    
     
     func didBeginContact(contact: SKPhysicsContact) {
         world.didBeginContact(contact)
@@ -265,8 +212,7 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
         }
     }
     
-    override func didFinishUpdate()
-    {
+    override func didFinishUpdate() {
         if let player = self.player {
             self.camera.update(self.player!.position)
             player.updateEmiter(self.currentTime, room: self.room)
@@ -288,7 +234,6 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
                     return
                 }
             }
-            
         }
     }
 }
