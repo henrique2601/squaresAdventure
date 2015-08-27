@@ -32,16 +32,24 @@ class Player: Square {
     
     var collectedBonus = 0
     
-    init(x:Int, y:Int, loadPhysics:Bool) {
+    init(texture:String = "rabbit", x:Int, y:Int, loadPhysics:Bool) {
         super.init()
-        self.loadNewPlayer("player", x: x, y: y, loadPhysics: loadPhysics)
+        self.loadNewPlayer("player", texture:texture, x: x, y: y, loadPhysics: loadPhysics)
     }
     
-    func loadNewPlayer(name:String, x:Int, y:Int, loadPhysics:Bool) {
+    init(playerData:PlayerData, x:Int, y:Int, loadPhysics:Bool) {
+        super.init()
+        
+        let skinType = Skins.types.objectAtIndex(playerData.currentSkin.index.integerValue) as! SkinsType
+        
+        self.loadNewPlayer("player", texture:skinType.image, x: x, y: y, loadPhysics: loadPhysics)
+    }
+    
+    func loadNewPlayer(name:String, texture:String, x:Int, y:Int, loadPhysics:Bool) {
         self.name = name
         self.zPosition = Config.HUDZPosition
         
-        let texture = SKTexture(imageNamed: "rabbit")//TODO: SKIN!!!
+        let texture = SKTexture(imageNamed: texture)
         let spriteNode = SKSpriteNode(texture: texture, color: nil, size: CGSize(width: 64, height: 64))
         spriteNode.name = name
         

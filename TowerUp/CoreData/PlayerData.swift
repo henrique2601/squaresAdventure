@@ -16,6 +16,7 @@ class PlayerData: NSManagedObject {
     @NSManaged var powerUps: NSSet
     @NSManaged var skins: NSSet
     @NSManaged var towers: NSSet
+    @NSManaged var currentSkin: SkinData
 
 }
 
