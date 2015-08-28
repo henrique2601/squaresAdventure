@@ -107,10 +107,10 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
                 
                 break
             case states.floors:
-                self.view!.presentScene(FloorsScene(), transition: Config.defaultGoTransition)
+                self.view!.presentScene(MainMenuScene(), transition: Config.defaultGoTransition)
                 break
             case states.powerUp:
-                self.view!.presentScene(PowerUpScene(), transition: Config.defaultGoTransition)
+                self.view!.presentScene(MissionScene(), transition: Config.defaultGoTransition)
                 break
 
                 
@@ -135,7 +135,7 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
                 let location = touch.locationInNode(self)
                 
                 if (self.childNodeWithName("buttonBack")!.containsPoint(location)) {
-                    self.nextState = .afterMission
+                    self.nextState = .floors
                     return
                 }
             }

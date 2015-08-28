@@ -153,12 +153,17 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
         self.socket.on(messages.update.rawValue) {[weak self] data, ack in
             
             if let name = data?[0] as? Int {
-                for playerOnline in PlayerOnline.list {
-                    if playerOnline.id == name {
-                        playerOnline.updateOnline(data?[1] as! CGFloat, y: data?[2] as! CGFloat, vx: data?[3] as! CGFloat, vy: data?[4] as! CGFloat, rotation: data?[5] as! CGFloat, vrotation: data?[6] as! CGFloat )
-                        playerOnline.labelName.position = CGPoint(x: playerOnline.position.x, y: playerOnline.position.y + 32)
-                    }
-                }
+                for player in PlayerOnline.list {
+                    if let aux = player as PlayerOnline? {
+                        if let id = aux.id
+                        {
+                            if id == name{
+                                aux.updateOnline(data?[1] as! CGFloat, y: data?[2] as! CGFloat, vx: data?[3] as! CGFloat, vy: data?[4] as! CGFloat, rotation: data?[5] as! CGFloat, vrotation: data?[6] as! CGFloat )
+                                aux.labelName.position = CGPoint(x: player.position.x, y: player.position.y + 32)
+                            }
+                        }
+                     }
+                 }
             }
         }
     }
