@@ -14,9 +14,7 @@ class TowersScene: GameScene {
     enum states {
         case towers
         case floors
-        case multiplayer
         case mainMenu
-        case powerUp
     }
     
     var state = states.towers
@@ -24,16 +22,13 @@ class TowersScene: GameScene {
     
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
+        self.backgroundColor = GameColors.blue
+        
         self.addChild(Control(name: "towersBackground", x:0, y:0, align:.center))
         
-        self.addChild(Label(name: "labelTitle", textureName: "TowersScene", x: 667, y: 130, align:.center))
+        self.addChild(Button(name: "buttonTower0", textureName: "buttonYellow", text:"TOWER 0", x: 550, y: 189, align:.center))
         
-        self.addChild(Button(name: "buttonTower0", textureName: "buttonYellow", text:"TOWER A", x: 550, y: 189, align:.center))
-        self.addChild(Button(name: "buttonB", textureName: "buttonYellow", text:"BUTTON B", x: 550, y: 287, align:.center))
-        self.addChild(Button(name: "buttonC", textureName: "buttonYellow", text:"BUTTON C", x: 550, y: 385, align:.center))
-        self.addChild(Button(name: "buttonMultiplayer", textureName: "buttonYellow", text:"BUTTON D", x: 550, y: 483, align:.center))
-        
-        self.addChild(Button(name: "buttonBack", textureName: "buttonGrayLeft", x: 20, y: 652, xAlign:.left, yAlign:.down))
+        self.addChild(Button(name: "buttonBack", textureName: "buttonGraySquareSmall", text:"<", x: 20, y: 652, xAlign:.left, yAlign:.down))
     }
     
     override func update(currentTime: NSTimeInterval) {
@@ -51,18 +46,9 @@ class TowersScene: GameScene {
                 self.view!.presentScene(FloorsScene(), transition: Config.defaultGoTransition)
                 break
                 
-            case states.multiplayer:
-                self.view!.presentScene(LobbyScene(), transition: Config.defaultGoTransition)
-                break
-                
             case states.mainMenu:
                 self.view!.presentScene(MainMenuScene(), transition: Config.defaultBackTransition)
                 break
-                
-            case states.powerUp:
-                self.view!.presentScene(PowerUpScene(), transition: Config.defaultBackTransition)
-                break
-
                 
             default:
                 break
@@ -80,12 +66,7 @@ class TowersScene: GameScene {
                     let location = touch.locationInNode(self)
                     
                     if (self.childNodeWithName("buttonTower0")!.containsPoint(location)) {
-                        self.nextState = .powerUp
-                        return
-                    }
-                    
-                    if (self.childNodeWithName("buttonMultiplayer")!.containsPoint(location)) {
-                        self.nextState = .multiplayer
+                        self.nextState = .floors
                         return
                     }
                     

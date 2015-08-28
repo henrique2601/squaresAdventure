@@ -9,71 +9,32 @@
 import UIKit
 import SpriteKit
 
-class FloorsScene: GameScene , SKPhysicsContactDelegate {
+class FloorsScene: GameScene {
     enum states {
         case floors
-        case powerUp
+        case beforeMission
         case towers
-        case mission
     }
     
     var state = states.floors
     var nextState = states.floors
     
-    var xPos = 500
-    var yPos = 200
-    var world:World!
-    var camera:Camera!
-    var player:Player!
-    var mapManager:MapManager!
-    var parallax:Parallax!
-    
-    let velo:CGFloat = 3
-    
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
-        self.backgroundColor = GameColors.blueSky
+        self.backgroundColor = GameColors.blue
         
-        self.parallax = Parallax(imageNamed: "grassBackground")
-        self.addChild(self.parallax)
+        self.addChild(Control(name: "floorsBackground", x:0, y:0, align:.center))
         
-        self.world = World(physicsWorld: self.physicsWorld)
-        self.addChild(self.world)
-        self.physicsWorld.contactDelegate = self
+        self.addChild(Label(name: "labelTitle", textureName: "FloorsScene", x: 667, y: 130, align:.center))
         
-        self.camera = Camera()
-        self.world.addChild(self.camera)
+        self.addChild(Button(name: "buttonA", textureName: "buttonYellow", text:"FLOOR 0", x: 550, y: 189, align:.center))
         
-        self.player = Player(x: 200, y: 100, loadPhysics: true)
-        self.world.addChild(self.player)
-        
-        self.mapManager = MapManager()
-        self.world.addChild(self.mapManager)
-        
-        self.mapManager.reloadMap(self.player.position)
-        
-        self.addChild(Button(name: "buttonLeft", textureName: "buttonYellowSquare", text:"<", x:20, y:630, xAlign:.left, yAlign:.down))
-        self.addChild(Button(name: "buttonRight", textureName: "buttonYellowSquare", text:">" ,x:160, y:630, xAlign:.left, yAlign:.down))
-        self.addChild(Button(name: "buttonJump", textureName: "buttonYellow", text:"Jump", x:1014, y:630, xAlign:.right, yAlign:.down))
-        
-        self.addChild(Button(name: "buttonBack", textureName: "buttonGraySquareSmall", text:"||" ,x:20, y:20, xAlign:.left, yAlign:.up))
-    }
-    
-    func didBeginContact(contact: SKPhysicsContact) {
-        world.didBeginContact(contact)
-    }
-    
-    func didEndContact(contact: SKPhysicsContact) {
-        world.didEndContact(contact)
+        self.addChild(Button(name: "buttonBack", textureName: "buttonGraySquareSmall", text:"<", x: 20, y: 652, xAlign:.left, yAlign:.down))
     }
     
     override func update(currentTime: NSTimeInterval) {
         if(self.state == self.nextState){
             switch (self.state) {
-            case states.floors:
-                self.player.update(currentTime)
-                self.mapManager.update(currentTime, position: self.player.position)
-                break
             default:
                 break
             }
@@ -82,10 +43,12 @@ class FloorsScene: GameScene , SKPhysicsContactDelegate {
             
             switch (self.nextState) {
                 
-            case states.floors:
+            case states.beforeMission:
+                self.view!.presentScene(BeforeMissionScene(), transition: Config.defaultGoTransition)
                 break
-            case states.mission:
-                self.view!.presentScene(MissionScene(), transition: Config.defaultGoTransition)
+                
+            case states.towers:
+                self.view!.presentScene(TowersScene(), transition: Config.defaultBackTransition)
                 break
                 
             default:
@@ -94,25 +57,30 @@ class FloorsScene: GameScene , SKPhysicsContactDelegate {
         }
     }
     
-    override func didFinishUpdate()
-    {
-        self.camera.update(self.player.position)
-        self.parallax.update(self.camera.position)
-    }
-    
     override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
         super.touchesEnded(touches, withEvent: event)
         
         if (self.state == self.nextState) {
-            for touch in (touches as! Set<UITouch>) {
-                let location = touch.locationInNode(self)
-                
-                if (self.childNodeWithName("buttonBack")!.containsPoint(location)) {
-                    self.nextState = .mission
-                    return
+            switch (self.state) {
+            case states.floors:
+                for touch in (touches as! Set<UITouch>) {
+                    let location = touch.locationInNode(self)
+                    
+                    if (self.childNodeWithName("buttonA")!.containsPoint(location)) {
+                        self.nextState = .beforeMission
+                        return
+                    }
+                    
+                    if (self.childNodeWithName("buttonBack")!.containsPoint(location)) {
+                        self.nextState = .towers
+                        return
+                    }
                 }
+                break
+                
+            default:
+                break
             }
-            
         }
     }
 }

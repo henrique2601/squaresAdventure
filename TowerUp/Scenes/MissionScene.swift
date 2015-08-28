@@ -112,8 +112,6 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
             case states.powerUp:
                 self.view!.presentScene(MissionScene(), transition: Config.defaultGoTransition)
                 break
-
-                
                 
             default:
                 break

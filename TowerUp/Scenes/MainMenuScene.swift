@@ -45,7 +45,7 @@ class MainMenuScene: GameScene {
             switch (self.nextState) {
                 
             case states.towers:
-                self.view!.presentScene(MissionScene(), transition: Config.defaultGoTransition)
+                self.view!.presentScene(TowersScene(), transition: Config.defaultGoTransition)
                 break
                 
             case states.multiplayer:

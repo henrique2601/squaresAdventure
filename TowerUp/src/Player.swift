@@ -40,7 +40,7 @@ class Player: Square {
     init(playerData:PlayerData, x:Int, y:Int, loadPhysics:Bool) {
         super.init()
         
-        let skinType = Skins.types.objectAtIndex(playerData.currentSkin.index.integerValue) as! SkinsType
+        let skinType = Skins.types[playerData.currentSkin.index.integerValue]
         
         self.loadNewPlayer("player", texture:skinType.image, x: x, y: y, loadPhysics: loadPhysics)
     }
