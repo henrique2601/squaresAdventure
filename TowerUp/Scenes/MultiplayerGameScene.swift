@@ -120,6 +120,33 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
             println("Added Players")
         }
         
+        
+        self.socket.on("win") {[weak self] data, ack in
+            
+            if let name = data?[0] as? Int {
+                for player in PlayerOnline.list {
+                    if let aux = player as PlayerOnline? {
+                        if let id = aux.id
+                        {
+                            if id == name{
+                                println(aux.name! + " win")
+                                self.blackSpriteNode = SKSpriteNode(color: GameColors.black, size: self.size)
+                                self.blackSpriteNode.anchorPoint = CGPoint(x: 0, y: 1)
+                                self.addChild(self.blackSpriteNode)
+                                let box = MultiplayerWinBox(background: "boxWhite", name:"You Win!!")
+                                self.addChild(box)
+                                
+                                self.blackSpriteNode.zPosition = box.zPosition - 1
+                                
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
+
+        
         self.socket.on(messages.didJoin.rawValue) {[weak self] data, ack in
             self!.socket.emit(messages.joinRoom.rawValue, self!.localName! , self!.room)
         }
