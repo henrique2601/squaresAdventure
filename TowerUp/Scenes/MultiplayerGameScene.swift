@@ -16,6 +16,9 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
         case afterMission
     }
     
+    //Effect
+    var blackSpriteNode:SKSpriteNode!
+    
     enum messages : String {
         case addPlayers = "a"
         case didJoin = "d"
@@ -222,7 +225,13 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
             case states.mission:
                 break
             case states.afterMission:
-                self.view!.presentScene(MainMenuScene(), transition: Config.defaultGoTransition)
+                self.blackSpriteNode = SKSpriteNode(color: GameColors.black, size: self.size)
+                self.blackSpriteNode.anchorPoint = CGPoint(x: 0, y: 1)
+                self.addChild(self.blackSpriteNode)
+                let box = MultiplayerWinBox(background: "boxWhite", name:"You Win!!")
+                self.addChild(box)
+                
+                self.blackSpriteNode.zPosition = box.zPosition - 1
                 break
                 
             default:
