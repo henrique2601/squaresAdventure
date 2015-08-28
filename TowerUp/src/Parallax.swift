@@ -17,6 +17,7 @@ class Parallax: SKNode {
     
     init(imageNamed:String) {
         super.init()
+        self.zPosition = -10000
         self.nodeA = SKSpriteNode(imageNamed: imageNamed)
         self.nodeA.anchorPoint = CGPoint(x: 0.5, y: 1)
         self.addChild(self.nodeA)
