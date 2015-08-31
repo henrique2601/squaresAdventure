@@ -12,7 +12,7 @@ import SpriteKit
 class GameScene: SKScene {
     
     override init() {
-        Control.locations = NSMutableArray()
+        Control.controlList = Set<Control>()
         super.init(size: Config.sceneSize())
     }
     
@@ -24,6 +24,11 @@ class GameScene: SKScene {
         self.scaleMode = SKSceneScaleMode.AspectFit
         self.backgroundColor = GameColors.gray
         self.anchorPoint = CGPoint(x: 0, y: 1)
+    }
+    
+    override func didFinishUpdate() {
+        super.didFinishUpdate()
+        Control.touchesMoved = false
     }
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
@@ -41,8 +46,6 @@ class GameScene: SKScene {
     override func touchesCancelled(touches: Set<NSObject>!, withEvent event: UIEvent!) {
         Control.touchesEnded(self, touches: touches as! Set<UITouch>)
     }
-    
-    
 }
 
 public extension SKScene {

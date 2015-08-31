@@ -11,7 +11,7 @@ import SpriteKit
 
 class Coin: Tile {
     
-    static var list:NSMutableArray = NSMutableArray()
+    static var coinList:NSMutableArray = NSMutableArray()
     
     var bonus = 1//Valor da moeda
     
@@ -28,19 +28,15 @@ class Coin: Tile {
         
         self.physicsBody!.dynamic = false
         
-        Coin.list.addObject(self)
+        Coin.coinList.addObject(self)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    #if DEBUG
     override func removeFromParent() {
+        Coin.coinList.removeObject(self)
         super.removeFromParent()
-        if(Coin.list.containsObject(self)) {
-            NSException.raise("Use Coin.list.remove... antes de removeFromParent para evitar vazamento de memória.", format: "", arguments: CVaListPointer(_fromUnsafeMutablePointer: UnsafeMutablePointer<Void>()))
-        }
     }
-    #endif
 }

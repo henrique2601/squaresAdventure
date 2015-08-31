@@ -10,7 +10,10 @@ import UIKit
 import SpriteKit
 
 class Control: SKNode {
-    static var touchesArray:NSMutableArray = NSMutableArray()
+    static var touchesArray = Set<UITouch>()
+    static var dx:Int = 0
+    static var dy:Int = 0
+    static var touchesMoved:Bool = false
     
     enum xAlignments: Int {
         case left = 0
@@ -35,7 +38,7 @@ class Control: SKNode {
     
     var sketchPosition:CGPoint = CGPointZero
     
-    static var locations:NSMutableArray = NSMutableArray()
+    static var controlList:Set<Control> = Set<Control>()
     
     override init() {
         super.init()
@@ -84,7 +87,7 @@ class Control: SKNode {
     //Esta função deve ser sobreescrita nas subclasses
     func load(name:String, textureName:String, x:Int, y:Int, xAlign:Control.xAlignments, yAlign:Control.yAlignments) {
         self.name = name
-        Control.locations.addObject(name)
+        Control.controlList.insert(self)
         self.sketchPosition = CGPoint(x: x, y: y)
         self.yAlign = yAlign
         self.xAlign = xAlign
@@ -99,7 +102,7 @@ class Control: SKNode {
     
     func load(name:String, texture:SKTexture, x:Int, y:Int, xAlign:Control.xAlignments, yAlign:Control.yAlignments) {
         self.name = name
-        Control.locations.addObject(name)
+        Control.controlList.insert(self)
         self.sketchPosition = CGPoint(x: x, y: y)
         self.yAlign = yAlign
         self.xAlign = xAlign
@@ -113,12 +116,13 @@ class Control: SKNode {
     //
     
     class func resetControls(scene: SKScene) {
-        for name in Control.locations {
-            ((scene.childNodeWithName("//" + (name as! String))) as! Control).resetPosition()
+        for control in Control.controlList {
+            control.resetPosition()
         }
         Button.resetButtons(scene)
         Switch.resetSwitches(scene)
         Label.resetLabels(scene)
+        ScrollNode.resetScrollNodes(scene)
     }
     
     func resetPosition() {
@@ -128,18 +132,26 @@ class Control: SKNode {
     
     class func touchesBegan(scene: SKNode, touches: Set<UITouch>) {
         for touch in touches {
-            Control.touchesArray.addObject(touch)
+            Control.touchesArray.insert(touch)
         }
         Button.update(scene)
     }
     
     class func touchesMoved(scene: SKNode) {
+        Control.dx = 0
+        Control.dy = 0
+        Control.touchesMoved = true
+        for touch in Control.touchesArray {
+            Control.dx += Int(touch.locationInNode(scene).x - touch.previousLocationInNode(scene).x)
+            Control.dy += Int(touch.locationInNode(scene).y - touch.previousLocationInNode(scene).y)
+        }
         Button.update(scene)
+        ScrollNode.update(scene)
     }
     
     class func touchesEnded(scene: SKNode, touches: Set<UITouch>) {
         for touch in touches {
-            Control.touchesArray.removeObject(touch)
+            Control.touchesArray.remove(touch)
         }
         Button.update(scene)
         Switch.update(scene, touches: touches)
