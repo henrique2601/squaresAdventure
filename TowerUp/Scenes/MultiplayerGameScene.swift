@@ -16,6 +16,9 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
         case afterMission
     }
     
+    //Effect
+    var blackSpriteNode:SKSpriteNode!
+    
     enum messages : String {
         case addPlayers = "a"
         case didJoin = "d"
@@ -120,6 +123,35 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
             println("Added Players")
         }
         
+        
+    
+    
+        self.socket.on("win") {[weak self] data, ack in
+            println("recebeu")
+            if let name = data?[0] as? Int {
+                for player in PlayerOnline.list {
+                    if let aux = player as PlayerOnline? {
+                        if let id = aux.id
+                        {
+                            if id == name{
+                                println(aux.name! + " win")
+                                self!.blackSpriteNode = SKSpriteNode(color: GameColors.black, size: self!.size)
+                                self!.blackSpriteNode.anchorPoint = CGPoint(x: 0, y: 1)
+                                self!.addChild(self!.blackSpriteNode)
+                                let box = MultiplayerWinBox(background: "boxWhite", name:aux.name!)
+                                self!.addChild(box)
+                                
+                                self!.blackSpriteNode.zPosition = box.zPosition - 1
+                                
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
+
+        
         self.socket.on(messages.didJoin.rawValue) {[weak self] data, ack in
             self!.socket.emit(messages.joinRoom.rawValue, self!.localName! , self!.room)
         }
@@ -195,7 +227,13 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
             case states.mission:
                 break
             case states.afterMission:
-                self.view!.presentScene(MainMenuScene(), transition: Config.defaultGoTransition)
+                self.blackSpriteNode = SKSpriteNode(color: GameColors.black, size: self.size)
+                self.blackSpriteNode.anchorPoint = CGPoint(x: 0, y: 1)
+                self.addChild(self.blackSpriteNode)
+                let box = MultiplayerWinBox(background: "boxWhite", name:"You Win!!")
+                self.addChild(box)
+                
+                self.blackSpriteNode.zPosition = box.zPosition - 1
                 break
                 
             default:
@@ -209,6 +247,7 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
         self.player.updateEmiter(self.currentTime, room: self.room)
         self.player.didFinishUpdate()
         self.parallax.update(self.camera.position)
+        self.socket.emit("win", self.room)
     }
     
     override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {

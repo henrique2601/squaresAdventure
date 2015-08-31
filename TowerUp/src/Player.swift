@@ -174,6 +174,9 @@ class Player: Square {
                     if let scene = self.scene as? MissionScene {
                         scene.nextState = MissionScene.states.afterMission
                     }
+                    if let scene = self.scene as? MultiplayerGameScene {
+                        scene.nextState = MultiplayerGameScene.states.afterMission
+                    }
                 }
             }
             //

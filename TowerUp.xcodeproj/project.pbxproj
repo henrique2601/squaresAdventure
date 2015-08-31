@@ -217,6 +217,7 @@
 			isa = PBXGroup;
 			children = (
 				1326AE8C1B86283F00D4563B /* AfterMissionBox.swift */,
+				1323FF5C1B90817F00EF4C2E /* MultiplayerWinBox.swift */,
 			);
 			name = Boxes;
 			sourceTree = "<group>";
@@ -1415,6 +1416,7 @@
 				1359DD0C1B7286D3006C12FA /* MainMenuScene.swift in Sources */,
 				13428EBE1B7CB0BC0017D23A /* Square.swift in Sources */,
 				139A0E8F1B7431CB00EDE944 /* MemoryCard.swift in Sources */,
+				1323FF5D1B90817F00EF4C2E /* MultiplayerWinBox.swift in Sources */,
 				1383FD641B7A50990012DA45 /* Ground.swift in Sources */,
 				13CCB7021B72B9D90060334C /* CreditsScene.swift in Sources */,
 				13CCB6FE1B72B9010060334C /* TowersScene.swift in Sources */,
