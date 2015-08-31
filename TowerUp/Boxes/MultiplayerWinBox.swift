@@ -11,16 +11,22 @@ import SpriteKit
 
 class MultiplayerWinBox: Box {
     
-    var labelTime:Label!
-    var labelDeaths:Label!
-    var labelBonus:Label!
+    var labelName:Label!
+    
     
     init(background: String, name:String) {
         super.init(background: background)
         
         self.addChild(Button(name: "buttonExit", textureName: "buttonGraySquare", text:"X", x: 98, y: 590))
         
-        self.labelTime = Label(name: "labelName", color:GameColors.black, textureName: name, x: 288, y: 226)
+        println(name)
+        
+        self.labelName = Label(name: "labelName", color:GameColors.black, textureName: name, x: 288, y: 226)
+        self.addChild(self.labelName)
+        
+        if let scene = self.scene as? MultiplayerGameScene {
+            scene.socket.emit("win", scene.room)
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {

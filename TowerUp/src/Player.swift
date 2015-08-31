@@ -175,7 +175,6 @@ class Player: Square {
                         scene.nextState = MissionScene.states.afterMission
                     }
                     if let scene = self.scene as? MultiplayerGameScene {
-                        scene.socket.emit("win", scene.room)
                         scene.nextState = MultiplayerGameScene.states.afterMission
                     }
                 }
