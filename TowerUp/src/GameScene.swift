@@ -13,6 +13,7 @@ class GameScene: SKScene {
     
     override init() {
         Control.controlList = Set<Control>()
+        ScrollNode.scrollNodeList = Set<ScrollNode>()
         super.init(size: Config.sceneSize())
     }
     

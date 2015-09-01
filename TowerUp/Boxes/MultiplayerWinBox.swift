@@ -25,7 +25,7 @@ class MultiplayerWinBox: Box {
         self.addChild(self.labelName)
         
         if let scene = self.scene as? MultiplayerGameScene {
-            scene.socket.emit("win", scene.room)
+            //scene.socket.emit("win", scene.room)
         }
     }
     

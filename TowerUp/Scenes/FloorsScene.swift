@@ -44,7 +44,7 @@ class FloorsScene: GameScene {
             switch (self.nextState) {
                 
             case states.beforeMission:
-                self.view!.presentScene(BeforeMissionScene(), transition: Config.defaultGoTransition)
+                self.view!.presentScene(MissionScene(), transition: Config.defaultGoTransition)
                 break
                 
             case states.towers:
