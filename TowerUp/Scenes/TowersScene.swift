@@ -20,12 +20,34 @@ class TowersScene: GameScene {
     var state = states.towers
     var nextState = states.towers
     
+    var playerData = AppDelegate.memoryCard.playerData
+    
+    var towersScrollNode:ScrollNode!
+    
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
         self.backgroundColor = GameColors.blue
         
-        var scrollNode = ScrollNode(name: "scrollNode", textureName: "towerBox", x: 445, y: 153, align: Control.xAlignments.center, count: 10, spacing:111)
-        self.addChild(scrollNode)
+        var towersArray = Array<SKSpriteNode>()
+        var i = 0
+        for tower in playerData.towers {
+            let cell = SKSpriteNode(imageNamed: "towerBox")
+            if((Int(self.playerData.lastFloorUnlocked) - 1) / 10 >= i) {
+                //Teste com label
+                var label = Label(name: "labelTowerName", color: GameColors.black, textureName: "Tower " + i.description, x: 222, y: 222)
+                cell.addChild(label)
+            } else {
+                var spriteNode = SKSpriteNode(imageNamed: "towerBoxLocked")
+                spriteNode.anchorPoint = CGPoint(x: 0, y: 1)
+                cell.addChild(spriteNode)
+            }
+            towersArray.append(cell)
+            i++
+        }
+        
+        self.towersScrollNode = ScrollNode(name: "scrollNode", x: 445, y: 153, align: Control.xAlignments.center, cells:towersArray, spacing:111)
+        
+        self.addChild(self.towersScrollNode)
         
         self.addChild(Button(name: "buttonTower0", textureName: "buttonYellow", text:"TOWER 0", x: 550, y: 189, align:.center))
         

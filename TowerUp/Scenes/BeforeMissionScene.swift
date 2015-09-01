@@ -44,7 +44,7 @@ class BeforeMissionScene: GameScene {
         swipeLeft.direction = .Left
         view.addGestureRecognizer(swipeLeft)
         
-        AppDelegate.memoryCard.newGame()
+        //AppDelegate.memoryCard.newGame()
         
         self.skinPaged(self.skinPageNumber)
         self.powerUpPaged(self.powerUpPageNumber)

@@ -81,9 +81,6 @@ override
     }
     
     override func load(name:String, textureName:String, x:Int, y:Int, xAlign:Control.xAlignments, yAlign:Control.yAlignments) {
-        if(!name.hasPrefix("label")) {
-            fatalError("Error loading Label: \(name). Did you mean label\(name)?")
-        }
         self.name = name
         self.sketchPosition = CGPoint(x: x, y: y)
         self.yAlign = yAlign
@@ -99,12 +96,11 @@ override
         
         labelNode.name = name
         self.addChild(labelNode)
+        
+        Control.controlList.insert(self)
     }
     
     func load(name:String, color:UIColor, textureName:String, x:Int, y:Int, xAlign:Control.xAlignments, yAlign:Control.yAlignments) {
-        if(!name.hasPrefix("label")) {
-            fatalError("Error loading Label: \(name). Did you mean label\(name)?")
-        }
         self.name = name
         self.sketchPosition = CGPoint(x: x, y: y)
         self.yAlign = yAlign
@@ -120,12 +116,8 @@ override
         
         labelNode.name = name
         self.addChild(labelNode)
-    }
-    
-    class func resetLabels(scene: SKScene) {
-        scene.enumerateChildNodesWithName("label*", usingBlock: { (node:SKNode!, stop:UnsafeMutablePointer<ObjCBool>) -> Void in
-            (node as! Label).resetPosition()
-        })
+        
+        Control.controlList.insert(self)
     }
     
     func getText()->NSString{

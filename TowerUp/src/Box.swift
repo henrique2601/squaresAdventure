@@ -27,29 +27,24 @@ class Box: Control {
     }
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
-        Control.touchesBegan(self, touches: touches as! Set<UITouch>)
+        Control.touchesBegan(touches as! Set<UITouch>)
     }
     
     override func touchesMoved(touches: Set<NSObject>, withEvent event: UIEvent) {
-        Control.touchesMoved(self)
+        Control.touchesMoved()
     }
     
     override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
-        Control.touchesEnded(self, touches: touches as! Set<UITouch>)
+        Control.touchesEnded(touches as! Set<UITouch>)
     }
     
     override func touchesCancelled(touches: Set<NSObject>!, withEvent event: UIEvent!) {
-        Control.touchesEnded(self, touches: touches as! Set<UITouch>)
+        Control.touchesEnded(touches as! Set<UITouch>)
     }
     
     override var hidden: Bool {
         didSet {
             self.userInteractionEnabled = !hidden
         }
-    }
-    
-    override func removeFromParent() {
-        Control.controlList.remove(self)
-        super.removeFromParent()
     }
 }

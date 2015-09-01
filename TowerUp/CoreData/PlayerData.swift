@@ -13,10 +13,11 @@ import CoreData
 
 class PlayerData: NSManagedObject {
 
+    @NSManaged var lastFloorUnlocked: NSNumber
+    @NSManaged var currentSkin: SkinData
     @NSManaged var powerUps: NSSet
     @NSManaged var skins: NSSet
     @NSManaged var towers: NSSet
-    @NSManaged var currentSkin: SkinData
 
 }
 
@@ -32,4 +33,8 @@ extension PlayerData{
         items.addObject(value)
     }
     
+    func addTower(value: TowerData) {
+        var items = self.mutableSetValueForKey("towers");
+        items.addObject(value)
+    }
 }

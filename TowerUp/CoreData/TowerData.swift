@@ -17,3 +17,10 @@ class TowerData: NSManagedObject {
     @NSManaged var playerData: PlayerData
 
 }
+
+extension TowerData {
+    func addFloor(value: FloorData) {
+        var items = self.mutableSetValueForKey("floors");
+        items.addObject(value)
+    }
+}

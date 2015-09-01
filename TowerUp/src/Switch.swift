@@ -11,11 +11,9 @@ import SpriteKit
 
 class Switch: Control {
     
+    static var switchList = Set<Switch>()
+    
     override func load(name: String, textureName: String, x: Int, y: Int, xAlign: Control.xAlignments, yAlign:Control.yAlignments) {
-        
-        if(!name.hasPrefix("switch")) {
-            fatalError("Error loading Switch: \(name). Did you mean switch\(name)?")
-        }
         self.name = name
         self.position = CGPoint(x: x/2 + Int(Config.translate.x), y: -y/2 - Int(Config.translate.y))
         self.zPosition = Config.HUDZPosition
@@ -32,23 +30,25 @@ class Switch: Control {
         switch1.name = "\(name)1"
         switch1.hidden = true
         self.addChild(switch1)
+        
+        Switch.switchList.insert(self)
     }
     
-    class func resetSwitches(scene: SKScene) {
-        scene.enumerateChildNodesWithName("switch*", usingBlock: { (node:SKNode!, stop:UnsafeMutablePointer<ObjCBool>) -> Void in
-            (node as! Switch).resetPosition()
-        })
+    class func resetSwitches() {
+        for switchNode in Switch.switchList {
+            switchNode.resetPosition()
+        }
     }
     
-    class func update(scene: SKNode, touches: Set<UITouch>) {
-        scene.enumerateChildNodesWithName("switch*", usingBlock: { (node:SKNode!, stop:UnsafeMutablePointer<ObjCBool>) -> Void in
+    class func update(touches: Set<UITouch>) {
+        for switchNode in Switch.switchList {
             for touch in touches {
-                let location = touch.locationInNode(node.parent)
-                if node.containsPoint(location) {
-                    (node as! Switch).switchPressed()
+                let location = touch.locationInNode(switchNode.parent)
+                if switchNode.containsPoint(location) {
+                    switchNode.switchPressed()
                 }
             }
-        })
+        }
     }
     
     func switchPressed() {
@@ -56,5 +56,10 @@ class Switch: Control {
         switch0.hidden = !switch0.hidden
         var switch1:SKNode = self.childNodeWithName("\(self.name!)1")!
         switch1.hidden = !switch1.hidden
+    }
+    
+    override func removeFromParent() {
+        Switch.switchList.remove(self)
+        super.removeFromParent()
     }
 }

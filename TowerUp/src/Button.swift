@@ -10,6 +10,9 @@ import UIKit
 import SpriteKit
 
 class Button: Control {
+    
+    static var buttonList = Set<Button>()
+    
     var pressed:Bool = false
     
     override init(name:String, x:Int, y:Int) {
@@ -77,9 +80,6 @@ class Button: Control {
     }
     
     override func load(name:String, textureName:String, x:Int, y:Int, xAlign:Control.xAlignments, yAlign:Control.yAlignments) {
-        if(!name.hasPrefix("button")) {
-            fatalError("Error loading Button: \(name). Did you mean button\(name)?")
-        }
         self.name = name
         self.sketchPosition = CGPoint(x: x, y: y)
         self.yAlign = yAlign
@@ -98,24 +98,11 @@ class Button: Control {
         buttonPressed.anchorPoint = CGPoint(x: 0, y: 1)
         buttonPressed.hidden = true
         self.addChild(buttonPressed)
-    }
-    
-    class func resetButtons(scene: SKScene) {
-        NSArray(array: scene.children).enumerateObjectsUsingBlock({ object, index, stop in
-            var node = object as! SKNode
-            if let name = node.name
-            {
-                if(name.hasPrefix("button")) {
-                    (node as! Button).resetPosition()
-                }
-            }
-        })
+        
+        Button.buttonList.insert(self)
     }
     
     func load(name:String, textureName:String, text:String, x:Int, y:Int, xAlign:Control.xAlignments, yAlign:Control.yAlignments) {
-        if(!name.hasPrefix("button")) {
-            fatalError("Error loading Button: \(name). Did you mean button\(name)?")
-        }
         self.name = name
         self.sketchPosition = CGPoint(x: x, y: y)
         self.yAlign = yAlign
@@ -155,32 +142,31 @@ class Button: Control {
         labelNodePressed.position = CGPoint(x: texturePressed.size().width/2, y: -texturePressed.size().height/2 - 2)
         buttonPressed.addChild(labelNodePressed)
         labelNodePressed.zPosition = labelNodePressed.zPosition + 1
+        
+        Button.buttonList.insert(self)
     }
     
-    class func update(scene: SKNode) {
-        NSArray(array: scene.children).enumerateObjectsUsingBlock({ object, index, stop in
-            var node = object as! SKNode
-            
-            if let name = node.name
-            {
-                if(name.hasPrefix("button")) {
-                    
-                    var i = 0
-                    for touch in Control.touchesArray {
-                        let location = touch.locationInNode(node.parent)
-                        if node.containsPoint(location) {
-                            i++
-                        }
-                    }
-                    if(i > 0){
-                        (node as! Button).buttonPressed()
-                    } else {
-                        (node as! Button).buttonReleased()
-                    }
+    class func resetButtons() {
+        for button in Button.buttonList {
+            button.resetPosition()
+        }
+    }
+    
+    class func update() {
+        for button in Button.buttonList {
+            var i = 0
+            for touch in Control.touchesArray {
+                let location = touch.locationInNode(button.parent)
+                if button.containsPoint(location) {
+                    i++
                 }
-                
             }
-        })
+            if(i > 0){
+                button.buttonPressed()
+            } else {
+                button.buttonReleased()
+            }
+        }
     }
     
     private func buttonPressed() {
@@ -193,5 +179,10 @@ class Button: Control {
         self.pressed = false
         self.childNodeWithName(self.name!)!.hidden = false
         self.childNodeWithName("\(self.name!)Pressed")!.hidden = true
+    }
+    
+    override func removeFromParent() {
+        Button.buttonList.remove(self)
+        super.removeFromParent()
     }
 }

@@ -48,7 +48,7 @@ class ViewController: UIViewController {
         Config.skViewBoundsSize = skView.bounds.size
         
         skView.scene?.size = Config.sceneSize()
-        Control.resetControls(skView.scene!)
+        Control.resetControls()
     }
     
     override func shouldAutorotate() -> Bool {

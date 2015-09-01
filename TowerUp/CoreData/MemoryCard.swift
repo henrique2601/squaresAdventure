@@ -10,24 +10,38 @@ import UIKit
 import CoreData
 
 class MemoryCard: NSObject {
-    var autoSave:Bool = false
+    
+    private var autoSave:Bool = false
     
     var playerData:PlayerData!
     
     func newGame() {
         println("Creating new game...")
         
-        self.playerData = NSEntityDescription.insertNewObjectForEntityForName("PlayerData", inManagedObjectContext: self.managedObjectContext!) as! PlayerData
+        self.playerData = self.newPlayerData()
+        
+        //Towers e Floors
+        self.playerData.lastFloorUnlocked = NSNumber(int: 0)//Somente primeiro andar da primeira torre vai estar desbloqueada
+        
+        for(var i = 0; i < 10; i++) { //Definindo 10 torres
+            var tower = self.newTowerData()
+            self.playerData.addTower(tower)
+            for(var j = 0; j < 10; j++) {// 10 andares por torre
+                var floor = self.newFloorData()
+                floor.progress = NSNumber(int: 0)
+                tower.addFloor(floor)
+            }
+        }
         
         //PowerUps
-        var power1 = NSEntityDescription.insertNewObjectForEntityForName("PowerUpData", inManagedObjectContext: self.managedObjectContext!) as! PowerUpData
+        var power1 = self.newPowerUpData()
         power1.locked = NSNumber(bool: false)
         power1.index = 0
         power1.available = NSNumber(bool: false)
         self.playerData.addPowerUp(power1)
         
         //Skins
-        var skin1 = NSEntityDescription.insertNewObjectForEntityForName("SkinData", inManagedObjectContext: self.managedObjectContext!) as! SkinData
+        var skin1 = self.newSkinData()
         
         skin1.locked = NSNumber(bool: false)
         skin1.index = 0
@@ -46,11 +60,10 @@ class MemoryCard: NSObject {
         }
     }
     
-    func loadGame() -> Bool {
+    func loadGame() {
         
         if let playerData = self.playerData {
             println("Game already loaded.")
-            return true
         } else {
             let fetchRequestData:NSArray = fetchRequest()
             
@@ -58,9 +71,8 @@ class MemoryCard: NSObject {
                 println("Loading game...")
                 self.playerData = (fetchRequestData.lastObject as! PlayerData)
                 self.autoSave = true
-                return true
             } else {
-                return false
+                self.newGame()
             }
         }
     }
@@ -146,5 +158,25 @@ class MemoryCard: NSObject {
                 abort()
             }
         }
+    }
+    
+    func newPlayerData() -> PlayerData {
+        return NSEntityDescription.insertNewObjectForEntityForName("PlayerData", inManagedObjectContext: self.managedObjectContext!) as! PlayerData
+    }
+    
+    func newTowerData() -> TowerData {
+        return NSEntityDescription.insertNewObjectForEntityForName("TowerData", inManagedObjectContext: self.managedObjectContext!) as! TowerData
+    }
+    
+    func newFloorData() -> FloorData {
+        return NSEntityDescription.insertNewObjectForEntityForName("FloorData", inManagedObjectContext: self.managedObjectContext!) as! FloorData
+    }
+    
+    func newPowerUpData() -> PowerUpData {
+        return NSEntityDescription.insertNewObjectForEntityForName("PowerUpData", inManagedObjectContext: self.managedObjectContext!) as! PowerUpData
+    }
+    
+    func newSkinData() -> SkinData {
+        return NSEntityDescription.insertNewObjectForEntityForName("SkinData", inManagedObjectContext: self.managedObjectContext!) as! SkinData
     }
 }

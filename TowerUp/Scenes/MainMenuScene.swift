@@ -76,6 +76,7 @@ class MainMenuScene: GameScene {
                     let location = touch.locationInNode(self)
                     
                     if (self.childNodeWithName("buttonPlay")!.containsPoint(location)) {
+                        AppDelegate.memoryCard.loadGame()
                         self.nextState = .towers
                         return
                     }

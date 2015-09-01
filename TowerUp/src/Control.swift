@@ -10,7 +10,10 @@ import UIKit
 import SpriteKit
 
 class Control: SKNode {
+    
     static var touchesArray = Set<UITouch>()
+    
+    static var controlList = Set<Control>()
     
     enum xAlignments: Int {
         case left = 0
@@ -34,8 +37,6 @@ class Control: SKNode {
     var size:CGSize!
     
     var sketchPosition:CGPoint = CGPointZero
-    
-    static var controlList:Set<Control> = Set<Control>()
     
     override init() {
         super.init()
@@ -84,7 +85,6 @@ class Control: SKNode {
     //Esta função deve ser sobreescrita nas subclasses
     func load(name:String, textureName:String, x:Int, y:Int, xAlign:Control.xAlignments, yAlign:Control.yAlignments) {
         self.name = name
-        Control.controlList.insert(self)
         self.sketchPosition = CGPoint(x: x, y: y)
         self.yAlign = yAlign
         self.xAlign = xAlign
@@ -95,11 +95,12 @@ class Control: SKNode {
         spriteNode.anchorPoint = CGPoint(x: 0, y: 1)
         spriteNode.name = name
         self.addChild(spriteNode)
+        
+        Control.controlList.insert(self)
     }
     
     func load(name:String, texture:SKTexture, x:Int, y:Int, xAlign:Control.xAlignments, yAlign:Control.yAlignments) {
         self.name = name
-        Control.controlList.insert(self)
         self.sketchPosition = CGPoint(x: x, y: y)
         self.yAlign = yAlign
         self.xAlign = xAlign
@@ -109,17 +110,18 @@ class Control: SKNode {
         spriteNode.anchorPoint = CGPoint(x: 0, y: 1)
         spriteNode.name = name
         self.addChild(spriteNode)
+        
+        Control.controlList.insert(self)
     }
     //
     
-    class func resetControls(scene: SKScene) {
+    class func resetControls() {
         for control in Control.controlList {
             control.resetPosition()
         }
-        Button.resetButtons(scene)
-        Switch.resetSwitches(scene)
-        Label.resetLabels(scene)
-        ScrollNode.resetScrollNodes(scene)
+        Button.resetButtons()
+        Switch.resetSwitches()
+        ScrollNode.resetScrollNodes()
     }
     
     func resetPosition() {
@@ -127,23 +129,28 @@ class Control: SKNode {
             y: -Int(sketchPosition.y)/2 - Int(Config.translate.y * CGFloat(yAlign.rawValue)))
     }
     
-    class func touchesBegan(scene: SKNode, touches: Set<UITouch>) {
+    class func touchesBegan(touches: Set<UITouch>) {
         for touch in touches {
             Control.touchesArray.insert(touch)
         }
-        Button.update(scene)
+        Button.update()
     }
     
-    class func touchesMoved(scene: SKNode) {
-        Button.update(scene)
-        ScrollNode.update(scene)
+    class func touchesMoved() {
+        Button.update()
+        ScrollNode.update()
     }
     
-    class func touchesEnded(scene: SKNode, touches: Set<UITouch>) {
+    class func touchesEnded(touches: Set<UITouch>) {
         for touch in touches {
             Control.touchesArray.remove(touch)
         }
-        Button.update(scene)
-        Switch.update(scene, touches: touches)
+        Button.update()
+        Switch.update(touches)
+    }
+    
+    override func removeFromParent() {
+        Control.controlList.remove(self)
+        super.removeFromParent()
     }
 }

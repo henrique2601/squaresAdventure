@@ -13,7 +13,7 @@ class PlayerOnline: Player {
     var id : Int!
     var lastCurrentTime: NSTimeInterval = 0
     var labelName: Label!
-    static var playerOnlineList:Set<PlayerOnline> = Set<PlayerOnline>()
+    static var playerOnlineList = Set<PlayerOnline>()
     
     init(x: Int, y: Int, loadPhysics: Bool) {
         super.init(x: x, y: y, loadPhysics: loadPhysics)

@@ -16,7 +16,7 @@ class ScrollNode: Control {
         case vertical
     }
     
-    static var scrollNodeList:Set<ScrollNode> = Set<ScrollNode>()
+    static var scrollNodeList = Set<ScrollNode>()
     
     var cells = Array<SKSpriteNode>()
     
@@ -52,6 +52,36 @@ class ScrollNode: Control {
         self.load(name, textureName: textureName, x: x, y: y, xAlign: xAlign, yAlign: yAlign, count:count, spacing:spacing, scrollDirection:scrollDirection)
     }
     
+    init(name:String, x:Int, y:Int, cells:Array<SKSpriteNode>, spacing:Int = 10, scrollDirection:scrollTypes = scrollTypes.horizontal) {
+        super.init()
+        self.load(name, x: x, y: y, xAlign: .left, yAlign: .up, cells:cells, spacing:spacing, scrollDirection:scrollDirection)
+    }
+    
+    init(name:String, textureName:String, x:Int, y:Int, cells:Array<SKSpriteNode>, spacing:Int = 10, scrollDirection:scrollTypes = scrollTypes.horizontal) {
+        super.init()
+        self.load(name, x: x, y: y, xAlign: .left, yAlign: .up, cells:cells, spacing:spacing, scrollDirection:scrollDirection)
+    }
+    
+    init(name:String, x:Int, y:Int, align:Control.xAlignments, cells:Array<SKSpriteNode>, spacing:Int = 10, scrollDirection:scrollTypes = scrollTypes.horizontal) {
+        super.init()
+        self.load(name, x: x, y: y, xAlign: align, yAlign: .center, cells:cells, spacing:spacing, scrollDirection:scrollDirection)
+    }
+    
+    init(name:String, x:Int, y:Int, xAlign:Control.xAlignments, yAlign:Control.yAlignments, cells:Array<SKSpriteNode>, spacing:Int = 10, scrollDirection:scrollTypes = scrollTypes.horizontal) {
+        super.init()
+        self.load(name, x: x, y: y, xAlign: xAlign, yAlign: yAlign, cells:cells, spacing:spacing, scrollDirection:scrollDirection)
+    }
+    
+    init(name:String, textureName:String, x:Int, y:Int, align:Control.xAlignments, cells:Array<SKSpriteNode>, spacing:Int = 10, scrollDirection:scrollTypes = scrollTypes.horizontal) {
+        super.init()
+        self.load(name, x: x, y: y, xAlign: align, yAlign: .center, cells:cells, spacing:spacing, scrollDirection:scrollDirection)
+    }
+    
+    init(name:String, textureName:String, x:Int, y:Int, xAlign:Control.xAlignments, yAlign:Control.yAlignments, cells:Array<SKSpriteNode>, spacing:Int = 10, scrollDirection:scrollTypes = scrollTypes.horizontal) {
+        super.init()
+        self.load(name, x: x, y: y, xAlign: xAlign, yAlign: yAlign, cells:cells, spacing:spacing, scrollDirection:scrollDirection)
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -75,7 +105,6 @@ class ScrollNode: Control {
         for (var i = 0; i < count; i++) {
             let spriteNode = SKSpriteNode(texture: texture, color: nil, size: texture.size())
             spriteNode.anchorPoint = CGPoint(x: 0, y: 1)
-            spriteNode.name = name + i.description
             spriteNode.position = CGPoint(x: (Int(spriteNode.size.width) + spacing) * i, y: 0)
             self.cells.append(spriteNode)
             self.addChild(spriteNode)
@@ -83,14 +112,36 @@ class ScrollNode: Control {
         ScrollNode.scrollNodeList.insert(self)
     }
     
-    class func update(scene: SKNode) {
+    func load(name:String, x:Int, y:Int, xAlign:Control.xAlignments, yAlign:Control.yAlignments, cells:Array<SKSpriteNode>, spacing:Int, scrollDirection:scrollTypes) {
+        if(cells.count <= 1) {
+            fatalError("cells.count deve ser maior que um ou use a classe Control.")
+        }
+        self.name = name
+        self.sketchPosition = CGPoint(x: x, y: y)
+        self.yAlign = yAlign
+        self.xAlign = xAlign
+        self.zPosition = Config.HUDZPosition/2
+        
+        self.cells = cells
+        var i = 0
+        for spriteNode in self.cells {
+            spriteNode.anchorPoint = CGPoint(x: 0, y: 1)
+            spriteNode.position = CGPoint(x: (Int(spriteNode.size.width) + spacing) * i, y: 0)
+            self.addChild(spriteNode)
+            i++
+        }
+        
+        ScrollNode.scrollNodeList.insert(self)
+    }
+    
+    class func update() {
         for scrollNode in ScrollNode.scrollNodeList {
             switch(scrollNode.scrollType) {
             case scrollTypes.horizontal:
                 for touch in Control.touchesArray {
-                    let location = touch.locationInNode(scene)
+                    let location = touch.locationInNode(scrollNode.parent)
                     if scrollNode.containsPoint(location) {
-                        var dx:Int = Int(location.x - touch.previousLocationInNode(scene).x)
+                        var dx:Int = Int(location.x - touch.previousLocationInNode(scrollNode.parent).x)
                         if(dx < 0) {
                             //Moveu o toque para a esquerda
                             if(scrollNode.cells[scrollNode.cells.count - 1].position.x + CGFloat(dx) >= 0) {
@@ -139,7 +190,7 @@ class ScrollNode: Control {
         }
     }
     
-    class func resetScrollNodes(scene: SKScene) {
+    class func resetScrollNodes() {
         for scrollNode in ScrollNode.scrollNodeList {
             scrollNode.resetPosition()
         }

@@ -13,6 +13,7 @@ class GameScene: SKScene {
     
     override init() {
         Control.controlList = Set<Control>()
+        Button.buttonList = Set<Button>()
         ScrollNode.scrollNodeList = Set<ScrollNode>()
         super.init(size: Config.sceneSize())
     }
@@ -28,19 +29,19 @@ class GameScene: SKScene {
     }
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
-        Control.touchesBegan(self, touches: touches as! Set<UITouch>)
+        Control.touchesBegan(touches as! Set<UITouch>)
     }
     
     override func touchesMoved(touches: Set<NSObject>, withEvent event: UIEvent) {
-        Control.touchesMoved(self)
+        Control.touchesMoved()
     }
     
     override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
-        Control.touchesEnded(self, touches: touches as! Set<UITouch>)
+        Control.touchesEnded(touches as! Set<UITouch>)
     }
     
     override func touchesCancelled(touches: Set<NSObject>!, withEvent event: UIEvent!) {
-        Control.touchesEnded(self, touches: touches as! Set<UITouch>)
+        Control.touchesEnded(touches as! Set<UITouch>)
     }
 }
 

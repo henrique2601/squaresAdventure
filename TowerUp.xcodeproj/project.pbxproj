@@ -52,7 +52,6 @@
 		139A0E8F1B7431CB00EDE944 /* MemoryCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139A0E8E1B7431CB00EDE944 /* MemoryCard.swift */; };
 		13B32C061B74EE93001A1486 /* LobbyScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B32C051B74EE93001A1486 /* LobbyScene.swift */; };
 		13B6E6031B8F30EF00624263 /* -1 0 0 0 in Resources */ = {isa = PBXBuildFile; fileRef = 13B6E6021B8F30EF00624263 /* -1 0 0 0 */; };
-		13B6E6081B8F3FA600624263 /* PlayerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B6E6071B8F3FA600624263 /* PlayerData.swift */; };
 		13B6E60A1B8F48E200624263 /* 0 2 0 0 in Resources */ = {isa = PBXBuildFile; fileRef = 13B6E6091B8F48E200624263 /* 0 2 0 0 */; };
 		13B6E60C1B8F4F6000624263 /* 0 3 0 0 in Resources */ = {isa = PBXBuildFile; fileRef = 13B6E60B1B8F4F6000624263 /* 0 3 0 0 */; };
 		13B6E60E1B8F50F000624263 /* 0 4 0 0 in Resources */ = {isa = PBXBuildFile; fileRef = 13B6E60D1B8F50F000624263 /* 0 4 0 0 */; };
@@ -63,6 +62,7 @@
 		13CCB7001B72B9A70060334C /* OptionsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13CCB6FF1B72B9A70060334C /* OptionsScene.swift */; };
 		13CCB7021B72B9D90060334C /* CreditsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13CCB7011B72B9D90060334C /* CreditsScene.swift */; };
 		13CCB7041B7373D00060334C /* FloorsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13CCB7031B7373D00060334C /* FloorsScene.swift */; };
+		13CD1FDD1B96101100EFEFBA /* PlayerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13CD1FDC1B96101100EFEFBA /* PlayerData.swift */; };
 		13DE13051B94C38E0092D50B /* ScrollNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13DE13041B94C38E0092D50B /* ScrollNode.swift */; };
 		13E7D1091B8CE98D000F67D6 /* 0 0 0 0 in Resources */ = {isa = PBXBuildFile; fileRef = 13E7D1081B8CE98D000F67D6 /* 0 0 0 0 */; };
 		13E7D10B1B8CE9D2000F67D6 /* 0 1 0 0 in Resources */ = {isa = PBXBuildFile; fileRef = 13E7D10A1B8CE9D2000F67D6 /* 0 1 0 0 */; };
@@ -136,7 +136,6 @@
 		139A0E8E1B7431CB00EDE944 /* MemoryCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MemoryCard.swift; path = CoreData/MemoryCard.swift; sourceTree = "<group>"; };
 		13B32C051B74EE93001A1486 /* LobbyScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LobbyScene.swift; path = Scenes/LobbyScene.swift; sourceTree = "<group>"; };
 		13B6E6021B8F30EF00624263 /* -1 0 0 0 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "-1 0 0 0"; path = "Multiplayer/-1 0 0 0"; sourceTree = "<group>"; };
-		13B6E6071B8F3FA600624263 /* PlayerData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayerData.swift; path = CoreData/PlayerData.swift; sourceTree = "<group>"; };
 		13B6E6091B8F48E200624263 /* 0 2 0 0 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "0 2 0 0"; sourceTree = "<group>"; };
 		13B6E60B1B8F4F6000624263 /* 0 3 0 0 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "0 3 0 0"; sourceTree = "<group>"; };
 		13B6E60D1B8F50F000624263 /* 0 4 0 0 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "0 4 0 0"; sourceTree = "<group>"; };
@@ -147,6 +146,7 @@
 		13CCB6FF1B72B9A70060334C /* OptionsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OptionsScene.swift; path = Scenes/OptionsScene.swift; sourceTree = "<group>"; };
 		13CCB7011B72B9D90060334C /* CreditsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreditsScene.swift; path = Scenes/CreditsScene.swift; sourceTree = "<group>"; };
 		13CCB7031B7373D00060334C /* FloorsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FloorsScene.swift; path = Scenes/FloorsScene.swift; sourceTree = "<group>"; };
+		13CD1FDC1B96101100EFEFBA /* PlayerData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayerData.swift; path = CoreData/PlayerData.swift; sourceTree = "<group>"; };
 		13DE13041B94C38E0092D50B /* ScrollNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ScrollNode.swift; path = src/ScrollNode.swift; sourceTree = "<group>"; };
 		13E7D1081B8CE98D000F67D6 /* 0 0 0 0 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "0 0 0 0"; sourceTree = "<group>"; };
 		13E7D10A1B8CE9D2000F67D6 /* 0 1 0 0 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "0 1 0 0"; sourceTree = "<group>"; };
@@ -299,7 +299,7 @@
 			children = (
 				5CF8A3A71B8F39A000C16CA9 /* FloorData.swift */,
 				139A0E8E1B7431CB00EDE944 /* MemoryCard.swift */,
-				13B6E6071B8F3FA600624263 /* PlayerData.swift */,
+				13CD1FDC1B96101100EFEFBA /* PlayerData.swift */,
 				5CF8A3A51B8F39A000C16CA9 /* PowerUpData.swift */,
 				5CF8A3A91B8F39A000C16CA9 /* SkinData.swift */,
 				5CF8A3AB1B8F39A000C16CA9 /* TowerData.swift */,
@@ -1382,6 +1382,7 @@
 				13CCB7001B72B9A70060334C /* OptionsScene.swift in Sources */,
 				13169CE81B810A9100516CF6 /* SocketEngine.swift in Sources */,
 				13EBD7C01B7A6614005F1CA4 /* Camera.swift in Sources */,
+				13CD1FDD1B96101100EFEFBA /* PlayerData.swift in Sources */,
 				1326AE8D1B86283F00D4563B /* AfterMissionBox.swift in Sources */,
 				81BA814B1A49DA1800E65899 /* AppDelegate.swift in Sources */,
 				13169CED1B810A9100516CF6 /* SocketLogger.swift in Sources */,
@@ -1405,7 +1406,6 @@
 				13169CEB1B810A9100516CF6 /* SocketFixUTF8.swift in Sources */,
 				1326AE881B85FCA300D4563B /* Box.swift in Sources */,
 				1359DD101B7287A7006C12FA /* Button.swift in Sources */,
-				13B6E6081B8F3FA600624263 /* PlayerData.swift in Sources */,
 				13FC800A1B8640B800865C72 /* PlayerOnline.swift in Sources */,
 				132FB8681B828FF80012A7D3 /* Parallax.swift in Sources */,
 				1383FD621B7A4B420012DA45 /* Tile.swift in Sources */,
