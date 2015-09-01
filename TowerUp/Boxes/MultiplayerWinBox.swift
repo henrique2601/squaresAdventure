@@ -19,8 +19,6 @@ class MultiplayerWinBox: Box {
         
         self.addChild(Button(name: "buttonExit", textureName: "buttonGraySquare", text:"X", x: 98, y: 590))
         
-        println(name)
-        
         self.labelName = Label(name: "labelName", color:GameColors.black, textureName: name, x: 288, y: 226)
         self.addChild(self.labelName)
         

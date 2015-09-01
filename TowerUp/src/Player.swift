@@ -188,9 +188,10 @@ class Player: Square {
             if(self.physicsBody!.allContactedBodies().count > 0) {
                 for body in self.physicsBody!.allContactedBodies() {
                     if(body.categoryBitMask == physicsCategory.ground.rawValue) {
-                        if (abs(self.physicsBody!.velocity.dy) < 500) {
+                        if (abs(self.physicsBody!.velocity.dy) < 200) {
                             if((self.childNodeWithName("//buttonJump") as! Button).pressed) {
-                                self.physicsBody?.applyForce(CGVector(dx: 0, dy: 2100))
+                                self.physicsBody?.velocity.dy = 900
+                                //self.physicsBody?.applyForce(CGVector(dx: 0, dy: 2100))
                             }
                         }
                         break
