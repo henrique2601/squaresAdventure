@@ -13,11 +13,11 @@ class PlayerOnline: Player {
     var id : Int!
     var lastCurrentTime: NSTimeInterval = 0
     var labelName: Label!
-    static var list:Set<PlayerOnline> = Set<PlayerOnline>()
+    static var playerOnlineList:Set<PlayerOnline> = Set<PlayerOnline>()
     
     init(x: Int, y: Int, loadPhysics: Bool) {
         super.init(x: x, y: y, loadPhysics: loadPhysics)
-        PlayerOnline.list.insert(self)
+        PlayerOnline.playerOnlineList.insert(self)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -44,7 +44,7 @@ class PlayerOnline: Player {
     }
     
     func didFinishUpdate(){
-        for player in PlayerOnline.list {
+        for player in PlayerOnline.playerOnlineList {
             player.labelName.position = CGPoint(x: player.position.x, y: player.position.y + 48)
         }
     }

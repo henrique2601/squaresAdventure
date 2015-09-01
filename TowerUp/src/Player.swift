@@ -61,7 +61,7 @@ class Player: Square {
             self.sketchPosition = CGPoint(x: x, y: y)
             self.yAlign = .center
             self.xAlign = .center
-            Control.locations.addObject(name)
+            Control.controlList.insert(self)
         }
         
         self.addChild(spriteNode)
@@ -99,7 +99,6 @@ class Player: Square {
             let coin = (physicsBody.node! as! Coin)
             self.collectedBonus += coin.bonus
             coin.bonus = 0
-            Coin.list.removeObject(coin)
             coin.removeFromParent()
             break
             

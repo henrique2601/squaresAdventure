@@ -49,7 +49,7 @@ class Box: Control {
     }
     
     override func removeFromParent() {
-        Control.locations.removeObject(self.name!)
+        Control.controlList.remove(self)
         super.removeFromParent()
     }
 }

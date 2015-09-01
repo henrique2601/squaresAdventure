@@ -106,13 +106,12 @@ class Chunk: SKSpriteNode {
     
     func clean() {
         //Remove obejetos que cairem para fora do cenario
-        let coins = Coin.list
+        let coins = Coin.coinList
         if(coins.count > 0) {
             for(var i = coins.count - 1; i >= 0; i--) {
-                let node = coins.objectAtIndex(i) as! Coin
-                if(node.position.y < -128) {
-                    coins.removeObjectAtIndex(i)
-                    node.removeFromParent()
+                let coin = coins.objectAtIndex(i) as! Coin
+                if(coin.position.y < -128) {
+                    coin.removeFromParent()
                 }
             }
         }

@@ -111,7 +111,7 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
                     
                     var labelName2: Label!
                     labelName2 = Label(name: "label"+player2.name! , textureName: "", x: 0, y: 0)
-                    Control.locations.removeObject("label" + player2.name!)
+                    Control.controlList.remove(labelName2)
                     labelName2.position = CGPoint(x: player2.position.x, y: player2.position.y + 32)
                     self!.world.addChild(labelName2)
                     labelName2.zPosition = player2.zPosition + 1
@@ -172,7 +172,7 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
                 
                 var labelName2: Label!
                 labelName2 = Label(name: "label"+player.name! , textureName: "", x: 0, y: 0)
-                Control.locations.removeObject("label" + player.name!)
+                Control.controlList.remove(labelName2)
                 labelName2.position = CGPoint(x: player.position.x, y: player.position.y + 32)
                 self!.world.addChild(labelName2)
                 labelName2.zPosition = player.zPosition + 1
@@ -185,7 +185,7 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
         self.socket.on(messages.update.rawValue) {[weak self] data, ack in
             
             if let name = data?[0] as? Int {
-                for player in PlayerOnline.list {
+                for player in PlayerOnline.playerOnlineList {
                     if let aux = player as PlayerOnline? {
                         if let id = aux.id
                         {

@@ -24,7 +24,8 @@ class TowersScene: GameScene {
         super.didMoveToView(view)
         self.backgroundColor = GameColors.blue
         
-        self.addChild(Control(name: "towersBackground", x:0, y:0, align:.center))
+        var scrollNode = ScrollNode(name: "scrollNode", textureName: "boxWhite", x: 0, y: 0, align: Control.xAlignments.center, count: 3)
+        self.addChild(scrollNode)
         
         self.addChild(Button(name: "buttonTower0", textureName: "buttonYellow", text:"TOWER 0", x: 550, y: 189, align:.center))
         
