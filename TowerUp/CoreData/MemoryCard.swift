@@ -19,21 +19,19 @@ class MemoryCard: NSObject {
         
         self.playerData = NSEntityDescription.insertNewObjectForEntityForName("PlayerData", inManagedObjectContext: self.managedObjectContext!) as! PlayerData
         
+        //PowerUps
         var power1 = NSEntityDescription.insertNewObjectForEntityForName("PowerUpData", inManagedObjectContext: self.managedObjectContext!) as! PowerUpData
         power1.locked = NSNumber(bool: false)
         power1.index = 0
         power1.available = NSNumber(bool: false)
-        
         self.playerData.addPowerUp(power1)
         
-        
-        
+        //Skins
         var skin1 = NSEntityDescription.insertNewObjectForEntityForName("SkinData", inManagedObjectContext: self.managedObjectContext!) as! SkinData
         
         skin1.locked = NSNumber(bool: false)
         skin1.index = 0
         skin1.available = NSNumber(bool: true)
-        
         self.playerData.addSkin(skin1)
         
         self.autoSave = true

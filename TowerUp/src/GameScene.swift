@@ -27,11 +27,6 @@ class GameScene: SKScene {
         self.anchorPoint = CGPoint(x: 0, y: 1)
     }
     
-    override func didFinishUpdate() {
-        super.didFinishUpdate()
-        Control.touchesMoved = false
-    }
-    
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
         Control.touchesBegan(self, touches: touches as! Set<UITouch>)
     }

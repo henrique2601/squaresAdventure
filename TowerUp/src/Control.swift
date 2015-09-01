@@ -11,9 +11,6 @@ import SpriteKit
 
 class Control: SKNode {
     static var touchesArray = Set<UITouch>()
-    static var dx:Int = 0
-    static var dy:Int = 0
-    static var touchesMoved:Bool = false
     
     enum xAlignments: Int {
         case left = 0
@@ -138,13 +135,6 @@ class Control: SKNode {
     }
     
     class func touchesMoved(scene: SKNode) {
-        Control.dx = 0
-        Control.dy = 0
-        Control.touchesMoved = true
-        for touch in Control.touchesArray {
-            Control.dx += Int(touch.locationInNode(scene).x - touch.previousLocationInNode(scene).x)
-            Control.dy += Int(touch.locationInNode(scene).y - touch.previousLocationInNode(scene).y)
-        }
         Button.update(scene)
         ScrollNode.update(scene)
     }

@@ -18,7 +18,7 @@ class ScrollNode: Control {
     
     static var scrollNodeList:Set<ScrollNode> = Set<ScrollNode>()
     
-    var cells:Set<SKSpriteNode> = Set<SKSpriteNode>()
+    var cells = Array<SKSpriteNode>()
     
     var scrollType = scrollTypes.horizontal
     
@@ -57,12 +57,12 @@ class ScrollNode: Control {
     }
     
     override func load(name:String, textureName:String, x:Int, y:Int, xAlign:Control.xAlignments, yAlign:Control.yAlignments) {
-        NSException.raise("Parâmetro count:Int deve ser maior que um ou use a classe Control.", format: "", arguments: CVaListPointer(_fromUnsafeMutablePointer: UnsafeMutablePointer<Void>()))
+        fatalError("Parâmetro count:Int deve ser maior que um ou use a classe Control.")
     }
     
     func load(name:String, textureName:String, x:Int, y:Int, xAlign:Control.xAlignments, yAlign:Control.yAlignments, count:Int, spacing:Int, scrollDirection:scrollTypes) {
-        if(count <= 1){
-            NSException.raise("Parâmetro count:Int deve ser maior que um ou use a classe Control.", format: "", arguments: CVaListPointer(_fromUnsafeMutablePointer: UnsafeMutablePointer<Void>()))
+        if(count <= 1) {
+            fatalError("Parâmetro count:Int deve ser maior que um ou use a classe Control.")
         }
         self.name = name
         self.sketchPosition = CGPoint(x: x, y: y)
@@ -77,7 +77,7 @@ class ScrollNode: Control {
             spriteNode.anchorPoint = CGPoint(x: 0, y: 1)
             spriteNode.name = name + i.description
             spriteNode.position = CGPoint(x: (Int(spriteNode.size.width) + spacing) * i, y: 0)
-            self.cells.insert(spriteNode)
+            self.cells.append(spriteNode)
             self.addChild(spriteNode)
         }
         ScrollNode.scrollNodeList.insert(self)
@@ -87,20 +87,52 @@ class ScrollNode: Control {
         for scrollNode in ScrollNode.scrollNodeList {
             switch(scrollNode.scrollType) {
             case scrollTypes.horizontal:
-                for cell in scrollNode.cells {
-                    var position = cell.position
-                    cell.position = CGPoint(x: Int(position.x) + Control.dx, y: Int(position.y))
+                for touch in Control.touchesArray {
+                    let location = touch.locationInNode(scene)
+                    if scrollNode.containsPoint(location) {
+                        var dx:Int = Int(location.x - touch.previousLocationInNode(scene).x)
+                        if(dx < 0) {
+                            //Moveu o toque para a esquerda
+                            if(scrollNode.cells[scrollNode.cells.count - 1].position.x + CGFloat(dx) >= 0) {
+                                for cell in scrollNode.cells {
+                                    var position = cell.position
+                                    cell.position = CGPoint(x: Int(position.x) + dx, y: Int(position.y))
+                                }
+                            } else {
+                                var auxMove:Int = Int(scrollNode.cells[scrollNode.cells.count - 1].position.x)
+                                for cell in scrollNode.cells {
+                                    var position = cell.position
+                                    cell.position = CGPoint(x: Int(position.x) - auxMove, y: Int(position.y))
+                                }
+                            }
+                        } else {
+                            //Moveu o toque para a direita
+                            if(scrollNode.cells[0].position.x + CGFloat(dx) <= 0) {
+                                for cell in scrollNode.cells {
+                                    var position = cell.position
+                                    cell.position = CGPoint(x: Int(position.x) + dx, y: Int(position.y))
+                                }
+                            } else {
+                                var auxMove:Int = Int(scrollNode.cells[0].position.x)
+                                for cell in scrollNode.cells {
+                                    var position = cell.position
+                                    cell.position = CGPoint(x: Int(position.x) - auxMove, y: Int(position.y))
+                                }
+                            }
+                        }
+                    }
                 }
                 break
             case scrollTypes.vertical:
-                for cell in scrollNode.cells {
-                    var position = cell.position
-                    cell.position = CGPoint(x: Int(position.x), y: Int(position.y) + Control.dy)
-                }
+                //TODO: scrollTypes.vertical
+//                for cell in scrollNode.cells {
+//                    var position = cell.position
+//                    cell.position = CGPoint(x: Int(position.x), y: Int(position.y) + dy)
+//                }
                 break
             default:
-                #if !DEBUG
-                    NSException.raise("Algo saiu muito errado no update de ScrollNode", format: "", arguments: CVaListPointer(_fromUnsafeMutablePointer: UnsafeMutablePointer<Void>()))
+                #if DEBUG
+                    fatalError("Algo saiu muito errado no update de ScrollNode")
                 #endif
                 break
             }
