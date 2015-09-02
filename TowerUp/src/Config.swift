@@ -136,3 +136,9 @@ public extension CGFloat {
         return CGFloat.random() * (max - min) + min
     }
 }
+
+extension NSSet: ArrayLiteralConvertible {
+    public class func convertFromArrayLiteral(elements: AnyObject...) -> Self {
+        return self(array: elements)
+    }
+}

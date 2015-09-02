@@ -31,18 +31,18 @@ class MapManager: SKNode {
         
         self.loadPhysics()
         
-        var i = 0;
+        var i = 0
         for (var y = self.playerRegionY - 1; y <= self.playerRegionY + 1 ; y++) {
             for (var x = self.playerRegionX - 1; x <= self.playerRegionX + 1 ; x++) {
                 let chunk = Chunk(tower: MapManager.tower, floor:MapManager.floor, regionX: x, regionY: y)//TODO: receber mundo e andar por parametro ?
                 chunk.name = "chunk\(i)"
-                self.addChild(chunk);
+                self.addChild(chunk)
                 i++
             }
         }
         
-        self.loadedRegionX = self.playerRegionX;
-        self.loadedRegionY = self.playerRegionY;
+        self.loadedRegionX = self.playerRegionX
+        self.loadedRegionY = self.playerRegionY
     }
     
     func loadPhysics() {
@@ -101,13 +101,13 @@ class MapManager: SKNode {
         
         if (self.playerRegionY <= 0) {
             if (position.y / CGFloat(Chunk.sizeInPoints) < 0) {
-                self.playerRegionY--;
+                self.playerRegionY--
             }
         }
         
         if (self.playerRegionX <= 0) {
             if (position.x / CGFloat(Chunk.sizeInPoints) < 0) {
-                self.playerRegionX--;
+                self.playerRegionX--
             }
         }
     }
@@ -116,27 +116,27 @@ class MapManager: SKNode {
         
         if (self.playerRegionX < self.loadedRegionX)
         {
-            self.loadedRegionX--;
-            self.loadA();
-            return;
+            self.loadedRegionX--
+            self.loadA()
+            return
         }
         if (self.playerRegionY < self.loadedRegionY)
         {
-            self.loadedRegionY--;
-            self.loadS();
-            return;
+            self.loadedRegionY--
+            self.loadS()
+            return
         }
         if (self.playerRegionX > self.loadedRegionX)
         {
-            self.loadedRegionX++;
-            self.loadD();
-            return;
+            self.loadedRegionX++
+            self.loadD()
+            return
         }
         if (self.playerRegionY > self.loadedRegionY)
         {
-            self.loadedRegionY++;
-            self.loadW();
-            return;
+            self.loadedRegionY++
+            self.loadW()
+            return
         }
     }
     

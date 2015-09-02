@@ -112,7 +112,7 @@ class ScrollNode: Control {
             let spriteNode = SKSpriteNode(texture: texture, color: nil, size: texture.size())
             spriteNode.position = CGPoint(x: (Int(spriteNode.size.width) + spacing) * i, y: 0)
             if(self.scaleNodes) {
-                spriteNode.setScale(1 - abs(spriteNode.position.x/self.scaleDistance))
+                self.setCellScale(spriteNode)
             }
             self.cells.append(spriteNode)
             self.addChild(spriteNode)
@@ -138,7 +138,7 @@ class ScrollNode: Control {
         for spriteNode in self.cells {
             spriteNode.position = CGPoint(x: (Int(spriteNode.size.width) + spacing) * i, y: 0)
             if(self.scaleNodes) {
-                spriteNode.setScale(1 - abs(spriteNode.position.x/self.scaleDistance))
+                self.setCellScale(spriteNode)
             }
             self.addChild(spriteNode)
             i++
@@ -162,7 +162,7 @@ class ScrollNode: Control {
                                     var position = cell.position
                                     cell.position = CGPoint(x: Int(position.x) + dx, y: Int(position.y))
                                     if(scrollNode.scaleNodes) {
-                                        cell.setScale(1 - abs(cell.position.x/scrollNode.scaleDistance))
+                                        scrollNode.setCellScale(cell)
                                     }
                                 }
                             } else {
@@ -171,7 +171,7 @@ class ScrollNode: Control {
                                     var position = cell.position
                                     cell.position = CGPoint(x: Int(position.x) - auxMove, y: Int(position.y))
                                     if(scrollNode.scaleNodes) {
-                                        cell.setScale(1 - abs(cell.position.x/scrollNode.scaleDistance))
+                                        scrollNode.setCellScale(cell)
                                     }
                                 }
                             }
@@ -182,7 +182,7 @@ class ScrollNode: Control {
                                     var position = cell.position
                                     cell.position = CGPoint(x: Int(position.x) + dx, y: Int(position.y))
                                     if(scrollNode.scaleNodes) {
-                                        cell.setScale(1 - abs(cell.position.x/scrollNode.scaleDistance))
+                                        scrollNode.setCellScale(cell)
                                     }
                                 }
                             } else {
@@ -191,7 +191,7 @@ class ScrollNode: Control {
                                     var position = cell.position
                                     cell.position = CGPoint(x: Int(position.x) - auxMove, y: Int(position.y))
                                     if(scrollNode.scaleNodes) {
-                                        cell.setScale(1 - abs(cell.position.x/scrollNode.scaleDistance))
+                                        scrollNode.setCellScale(cell)
                                     }
                                 }
                             }
@@ -213,6 +213,10 @@ class ScrollNode: Control {
                 break
             }
         }
+    }
+    
+    private func setCellScale(spriteNode:SKSpriteNode) {
+        spriteNode.setScale(max(0, 1 - abs(spriteNode.position.x/self.scaleDistance)))
     }
     
     class func resetScrollNodes() {

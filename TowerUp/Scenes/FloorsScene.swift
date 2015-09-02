@@ -19,21 +19,55 @@ class FloorsScene: GameScene {
     var state = states.floors
     var nextState = states.floors
     
+    var playerData = AppDelegate.memoryCard.playerData
+    
+    var floorsScrollNone:ScrollNode!
+    
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
         self.backgroundColor = GameColors.blue
+        self.addChild(Control(name: "mainMenuBackground", x:0, y:0, align:.center))
         
-        self.addChild(Control(name: "floorsBackground", x:0, y:0, align:.center))
+        var floorsArray = Array<SKSpriteNode>()
+        var towerIndex = 0
+        for tower in self.playerData.towers {
+            if(MapManager.tower == towerIndex) {
+                if let tower = tower as? TowerData {
+                    var floorIndex = 0
+                    for floor in tower.floors {
+                        var progress = min(Int(self.playerData.lastFloorUnlocked) - (towerIndex * 10) - 1, 10)
+
+                        let cell = SKSpriteNode(imageNamed: "boxSmall")//TODO: imagem do andar
+                        if(progress >= floorIndex) {
+                            
+                            var labelName = Label(name: "labelFloorName", color: GameColors.black, textureName: "Floor " + floorIndex.description, x: 0, y: 0)
+                            cell.addChild(labelName)
+                            
+                        } else {
+                            
+                            var spriteNode = SKSpriteNode(imageNamed: "boxSmallLocked")
+                            cell.addChild(spriteNode)
+                            
+                            var labelName = Label(name: "labelFloorName", color: GameColors.black, textureName: "Locked", x: 0, y: 0)
+                            cell.addChild(labelName)
+                            
+                        }
+                        floorsArray.append(cell)
+                        floorIndex++
+                    }
+                }
+            }
+            towerIndex++
+        }
         
-        self.addChild(Label(name: "labelTitle", textureName: "FloorsScene", x: 667, y: 130, align:.center))
-        
-        self.addChild(Button(name: "buttonA", textureName: "buttonYellow", text:"FLOOR 0", x: 550, y: 189, align:.center))
+        self.floorsScrollNone = ScrollNode(name: "scrollNode", textureName: "boxSmall", x: 667, y: 466, align: .center, cells:floorsArray, spacing: 1, scrollDirection: ScrollNode.scrollTypes.horizontal, scaleNodes:true, scaleDistance:1334/4 + 100)
+        self.addChild(self.floorsScrollNone)
         
         self.addChild(Button(name: "buttonBack", textureName: "buttonGraySquareSmall", text:"<", x: 20, y: 652, xAlign:.left, yAlign:.down))
     }
     
     override func update(currentTime: NSTimeInterval) {
-        if(self.state == self.nextState){
+        if(self.state == self.nextState) {
             switch (self.state) {
             default:
                 break
@@ -66,10 +100,7 @@ class FloorsScene: GameScene {
                 for touch in (touches as! Set<UITouch>) {
                     let location = touch.locationInNode(self)
                     
-                    if (self.childNodeWithName("buttonA")!.containsPoint(location)) {
-                        self.nextState = .beforeMission
-                        return
-                    }
+                    
                     
                     if (self.childNodeWithName("buttonBack")!.containsPoint(location)) {
                         self.nextState = .towers

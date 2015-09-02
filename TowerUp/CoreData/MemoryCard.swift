@@ -21,7 +21,7 @@ class MemoryCard: NSObject {
         self.playerData = self.newPlayerData()
         
         //Towers e Floors
-        self.playerData.lastFloorUnlocked = NSNumber(int: 0)//Somente primeiro andar da primeira torre vai estar desbloqueada
+        self.playerData.lastFloorUnlocked = NSNumber(int: 1)//Somente primeiro andar da primeira torre vai estar desbloqueada
         
         for(var i = 0; i < 10; i++) { //Definindo 10 torres
             var tower = self.newTowerData()

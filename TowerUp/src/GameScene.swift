@@ -24,7 +24,6 @@ class GameScene: SKScene {
     
     override func didMoveToView(view: SKView) {
         self.scaleMode = SKSceneScaleMode.AspectFit
-        self.backgroundColor = GameColors.gray
         self.anchorPoint = CGPoint(x: 0, y: 1)
     }
     

@@ -31,7 +31,7 @@ class TowersScene: GameScene {
         
         var towersArray = Array<SKSpriteNode>()
         var i = 0
-        for tower in playerData.towers {
+        for tower in self.playerData.towers {
             let cell = SKSpriteNode(imageNamed: "towerBox")//TODO: imagem da torre
             if(GameMath.isTowerUnlocked(Int(self.playerData.lastFloorUnlocked), towerIndex: i)) {
                 var progress = min(Int(self.playerData.lastFloorUnlocked) - (i * 10) - 1, 10)
@@ -50,7 +50,7 @@ class TowersScene: GameScene {
             i++
         }
         
-        self.towersScrollNode = ScrollNode(name: "scrollNode", x: 667, y: 466, align: Control.xAlignments.center, cells:towersArray, spacing:20, scaleNodes:true, scaleDistance:1000)
+        self.towersScrollNode = ScrollNode(name: "scrollNode", x: 667, y: 466, align: .center, cells:towersArray, spacing:1, scaleNodes:true, scaleDistance:1334/4 + 100)
         
         self.addChild(self.towersScrollNode)
         
