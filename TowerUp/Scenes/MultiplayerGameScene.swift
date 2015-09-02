@@ -153,7 +153,7 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
         self.socket.on(messages.disconnect.rawValue) {[weak self] data, ack in
             if let name = data?[0] as? Int {
                 
-                for player in PlayerOnline.list {
+                for player in PlayerOnline.playerOnlineList {
                     if let aux = player as PlayerOnline? {
                         if let id = aux.id
                         {

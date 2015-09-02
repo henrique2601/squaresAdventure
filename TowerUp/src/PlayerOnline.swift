@@ -52,7 +52,7 @@ class PlayerOnline: Player {
     override func removeFromParent() {
         
         self.labelName.removeFromParent()
-        PlayerOnline.list.remove(self)
+        PlayerOnline.playerOnlineList.remove(self)
         super.removeFromParent()
         
     }
