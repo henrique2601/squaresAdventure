@@ -34,18 +34,17 @@ class TowersScene: GameScene {
             let cell = SKSpriteNode(imageNamed: "towerBox")
             if((Int(self.playerData.lastFloorUnlocked) - 1) / 10 >= i) {
                 //Teste com label
-                var label = Label(name: "labelTowerName", color: GameColors.black, textureName: "Tower " + i.description, x: 222, y: 222)
+                var label = Label(name: "labelTowerName", color: GameColors.black, textureName: "Tower " + i.description, x: 0, y: 0)
                 cell.addChild(label)
             } else {
                 var spriteNode = SKSpriteNode(imageNamed: "towerBoxLocked")
-                spriteNode.anchorPoint = CGPoint(x: 0, y: 1)
                 cell.addChild(spriteNode)
             }
             towersArray.append(cell)
             i++
         }
         
-        self.towersScrollNode = ScrollNode(name: "scrollNode", x: 445, y: 153, align: Control.xAlignments.center, cells:towersArray, spacing:111)
+        self.towersScrollNode = ScrollNode(name: "scrollNode", x: 667, y: 375, align: Control.xAlignments.center, cells:towersArray, spacing:50, scaleNodes:true, scaleDistance:1000)
         
         self.addChild(self.towersScrollNode)
         
