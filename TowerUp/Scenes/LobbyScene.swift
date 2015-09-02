@@ -44,6 +44,8 @@ class LobbyScene: GameScene, UITextFieldDelegate {
     
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
+        self.backgroundColor = GameColors.blue
+        
         self.addChild(Control(name: "mainMenuBackground", x:0, y:0, align:.center))
         
         

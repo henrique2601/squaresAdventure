@@ -27,28 +27,32 @@ class TowersScene: GameScene {
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
         self.backgroundColor = GameColors.blue
+        self.addChild(Control(name: "mainMenuBackground", x:0, y:0, align:.center))
         
         var towersArray = Array<SKSpriteNode>()
         var i = 0
         for tower in playerData.towers {
-            let cell = SKSpriteNode(imageNamed: "towerBox")
-            if((Int(self.playerData.lastFloorUnlocked) - 1) / 10 >= i) {
-                //Teste com label
-                var label = Label(name: "labelTowerName", color: GameColors.black, textureName: "Tower " + i.description, x: 0, y: 0)
-                cell.addChild(label)
+            let cell = SKSpriteNode(imageNamed: "towerBox")//TODO: imagem da torre
+            if(GameMath.isTowerUnlocked(Int(self.playerData.lastFloorUnlocked), towerIndex: i)) {
+                var progress = min(Int(self.playerData.lastFloorUnlocked) - (i * 10) - 1, 10)
+                var labelName = Label(name: "labelTowerName", color: GameColors.black, textureName: "Tower " + i.description, x: 0, y: 0)
+                var labelProgress = Label(name: "labelTowerProgress", color: GameColors.black, textureName: progress.description + "/10", x: 0, y: 64)
+                cell.addChild(labelName)
+                cell.addChild(labelProgress)
             } else {
                 var spriteNode = SKSpriteNode(imageNamed: "towerBoxLocked")
                 cell.addChild(spriteNode)
+                
+                var labelName = Label(name: "labelTowerName", color: GameColors.black, textureName: "Locked", x: 0, y: 0)
+                cell.addChild(labelName)
             }
             towersArray.append(cell)
             i++
         }
         
-        self.towersScrollNode = ScrollNode(name: "scrollNode", x: 667, y: 375, align: Control.xAlignments.center, cells:towersArray, spacing:50, scaleNodes:true, scaleDistance:1000)
+        self.towersScrollNode = ScrollNode(name: "scrollNode", x: 667, y: 466, align: Control.xAlignments.center, cells:towersArray, spacing:20, scaleNodes:true, scaleDistance:1000)
         
         self.addChild(self.towersScrollNode)
-        
-        self.addChild(Button(name: "buttonTower0", textureName: "buttonYellow", text:"TOWER 0", x: 550, y: 189, align:.center))
         
         self.addChild(Button(name: "buttonBack", textureName: "buttonGraySquareSmall", text:"<", x: 20, y: 652, xAlign:.left, yAlign:.down))
     }
@@ -87,14 +91,30 @@ class TowersScene: GameScene {
                 for touch in (touches as! Set<UITouch>) {
                     let location = touch.locationInNode(self)
                     
-                    if (self.childNodeWithName("buttonTower0")!.containsPoint(location)) {
-                        self.nextState = .floors
-                        return
-                    }
-                    
                     if (self.childNodeWithName("buttonBack")!.containsPoint(location)) {
                         self.nextState = .mainMenu
                         return
+                    }
+                    
+                    if (self.towersScrollNode.containsPoint(location)) {
+                        if(touch.tapCount > 0) {
+                            
+                            var i = 0
+                            let locationInScrollNode = touch.locationInNode(self.towersScrollNode)
+                            
+                            for cell in self.towersScrollNode.cells {
+                                if(cell.containsPoint(locationInScrollNode)) {
+                                    if(GameMath.isTowerUnlocked(Int(self.playerData.lastFloorUnlocked), towerIndex: i)) {
+                                        MapManager.tower = i
+                                        self.nextState = .floors
+                                    } else {
+                                        println("Torre \(i) ainda não foi desbloqueada")
+                                    }
+                                    return
+                                }
+                                i++
+                            }
+                        }
                     }
                 }
                 break

@@ -10,6 +10,7 @@ import UIKit
 
 class GameMath: NSObject {
     
-    
-   
+    class func isTowerUnlocked(lastFloorUnlocked:Int, towerIndex:Int) -> Bool {
+        return (lastFloorUnlocked - 1) / 10 >= towerIndex
+    }
 }
