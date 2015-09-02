@@ -26,7 +26,7 @@ class PlayerOnline: Player {
     
     func updateEmiter(currentTime:NSTimeInterval , room:Int) {
         
-        if ((currentTime - lastCurrentTime) > 0.035) {
+        if ((currentTime - lastCurrentTime) > 0.047) {
             (self.scene as! MultiplayerGameScene).socket.emit("u", room , Int(self.position.x) , Int(self.position.y) , Int(self.physicsBody!.velocity.dx) , Int(self.physicsBody!.velocity.dy) , Int(self.zRotation * 1000000) , Int(self.physicsBody!.angularVelocity))
             lastCurrentTime = currentTime
         }
@@ -47,5 +47,13 @@ class PlayerOnline: Player {
         for player in PlayerOnline.list {
             player.labelName.position = CGPoint(x: player.position.x, y: player.position.y + 48)
         }
+    }
+    
+    override func removeFromParent() {
+        
+        self.labelName.removeFromParent()
+        PlayerOnline.list.remove(self)
+        super.removeFromParent()
+        
     }
 }

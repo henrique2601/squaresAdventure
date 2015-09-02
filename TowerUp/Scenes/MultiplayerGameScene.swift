@@ -20,6 +20,7 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
     var blackSpriteNode:SKSpriteNode!
     
     enum messages : String {
+        case disconnect = "q"
         case addPlayers = "a"
         case didJoin = "d"
         case join = "j"
@@ -44,6 +45,7 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
     
     //Multiplayer
     var localName:String!
+    //let socket = SocketIOClient(socketURL: "https://squaregame.mybluemix.net", opts: nil)
     let socket = SocketIOClient(socketURL: "179.232.86.110:3001", opts: nil)
     
     override func didMoveToView(view: SKView) {
@@ -127,7 +129,6 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
     
     
         self.socket.on("win") {[weak self] data, ack in
-            println("recebeu")
             if let name = data?[0] as? Int {
                 for player in PlayerOnline.list {
                     if let aux = player as PlayerOnline? {
@@ -149,6 +150,26 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
                 }
             }
 
+        }
+        
+        
+        self.socket.on(messages.disconnect.rawValue) {[weak self] data, ack in
+            if let name = data?[0] as? Int {
+                
+                for player in PlayerOnline.list {
+                    if let aux = player as PlayerOnline? {
+                        if let id = aux.id
+                        {
+                            if id == name{
+                                aux.removeFromParent()
+                            }
+                        }
+                    }
+                }
+
+            
+            }
+            
         }
 
         
@@ -247,7 +268,6 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
         self.player.updateEmiter(self.currentTime, room: self.room)
         self.player.didFinishUpdate()
         self.parallax.update(self.camera.position)
-        self.socket.emit("win", self.room)
     }
     
     override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
@@ -258,6 +278,9 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
                 let location = touch.locationInNode(self)
                 
                 if (self.childNodeWithName("buttonBack")!.containsPoint(location)) {
+                    
+                        self.socket.emit("win", self.room)
+                   
                     self.nextState = .afterMission
                     return
                 }

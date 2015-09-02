@@ -24,9 +24,6 @@ class MultiplayerWinBox: Box {
         self.labelName = Label(name: "labelName", color:GameColors.black, textureName: name, x: 288, y: 226)
         self.addChild(self.labelName)
         
-        if let scene = self.scene as? MultiplayerGameScene {
-            scene.socket.emit("win", scene.room)
-        }
     }
     
     required init?(coder aDecoder: NSCoder) {

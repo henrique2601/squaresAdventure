@@ -14,9 +14,10 @@ function Player(socket) {
         self.game.update( self.socket ,self.id , room , x, y , vx , vy , rotation , vrotation)
     })
 
-    this.socket.on("win", function(room) {
-        self.game.win( self.socket ,self.id , room )
-    })
+     this.socket.on("win", function(room) {
+         console.log(self.name + "win")
+         self.game.win( self.socket ,self.id , room )
+     })
 
     this.socket.on("r", function(name,room) {
         self.joinRoom(name,room)
@@ -25,8 +26,13 @@ function Player(socket) {
 
     this.socket.on('disconnect', function(){
             console.log( self.name + " disconnect" )
+            
+            self.socket.broadcast.to(self.room).emit("q", self.id )
             var idx = self.game.rooms[self.room].indexOf(self.name)
             self.game.rooms[self.room].splice(idx, 1)
+
+
+            
     });
     
 }
