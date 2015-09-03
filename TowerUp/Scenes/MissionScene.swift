@@ -121,7 +121,9 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
     
     override func didFinishUpdate()
     {
-        self.camera.update(self.player.position)
+        if(self.player.healthPoints > 0){
+            self.camera.update(self.player.position)
+        }
         self.parallax.update(self.camera.position)
     }
     

@@ -155,6 +155,13 @@ class ScrollNode: Control {
                     let location = touch.locationInNode(scrollNode.parent)
                     if scrollNode.containsPoint(location) {
                         var dx:Int = Int(location.x - touch.previousLocationInNode(scrollNode.parent).x)
+                        if(dx == 0){
+                            if(location.x - touch.previousLocationInNode(scrollNode.parent).x > 0){
+                                dx++
+                            } else {
+                                dx--
+                            }
+                        }
                         if(dx < 0) {
                             //Moveu o toque para a esquerda
                             if(scrollNode.cells[scrollNode.cells.count - 1].position.x + CGFloat(dx) >= 0) {
