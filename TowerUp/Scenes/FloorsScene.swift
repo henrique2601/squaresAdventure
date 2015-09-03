@@ -100,12 +100,12 @@ class FloorsScene: GameScene {
                 for touch in (touches as! Set<UITouch>) {
                     let location = touch.locationInNode(self)
                     
-                    
-                    
                     if (self.childNodeWithName("buttonBack")!.containsPoint(location)) {
                         self.nextState = .towers
                         return
                     }
+                    
+                    self.nextState = states.beforeMission
                 }
                 break
                 
