@@ -35,12 +35,12 @@ class FloorsScene: GameScene {
                 if let tower = tower as? TowerData {
                     var floorIndex = 0
                     for floor in tower.floors {
-                        var progress = min(Int(self.playerData.lastFloorUnlocked) - (towerIndex * 10) - 1, 10)
+                        var progress = min(Int(self.playerData.lastFloorUnlocked) - (towerIndex * Config.towerCount) - 1, Config.floorsPerTower)
 
                         let cell = SKSpriteNode(imageNamed: "boxSmall")//TODO: imagem do andar
                         if(progress >= floorIndex) {
                             
-                            var labelName = Label(name: "labelFloorName", color: GameColors.black, textureName: "Floor " + floorIndex.description, x: 0, y: 0)
+                            var labelName = Label(name: "labelFloorName", color: GameColors.black, textureName: "Floor " + (floorIndex + 1).description, x: 0, y: 0)
                             cell.addChild(labelName)
                             
                         } else {

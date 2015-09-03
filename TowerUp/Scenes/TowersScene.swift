@@ -35,7 +35,7 @@ class TowersScene: GameScene {
             let cell = SKSpriteNode(imageNamed: "towerBox")//TODO: imagem da torre
             if(GameMath.isTowerUnlocked(Int(self.playerData.lastFloorUnlocked), towerIndex: i)) {
                 var progress = min(Int(self.playerData.lastFloorUnlocked) - (i * 10) - 1, 10)
-                var labelName = Label(name: "labelTowerName", color: GameColors.black, textureName: "Tower " + i.description, x: 0, y: 0)
+                var labelName = Label(name: "labelTowerName", color: GameColors.black, textureName: "Tower " + (i + 1).description, x: 0, y: 0)
                 var labelProgress = Label(name: "labelTowerProgress", color: GameColors.black, textureName: progress.description + "/10", x: 0, y: 64)
                 cell.addChild(labelName)
                 cell.addChild(labelProgress)
