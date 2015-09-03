@@ -21,9 +21,6 @@ class Config: NSObject {
     static var defaultGoTransition:SKTransition = SKTransition.pushWithDirection(SKTransitionDirection.Left, duration: 0)
     static var defaultBackTransition:SKTransition = SKTransition.pushWithDirection(SKTransitionDirection.Right, duration: 0)
     
-    static var towerCount = 10
-    static var floorsPerTower = 10
-    
     static func sceneSize() -> CGSize {
         
         switch(UIDevice.currentDevice().systemVersion[0] as String) {

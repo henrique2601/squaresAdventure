@@ -101,7 +101,7 @@ class ScrollNode: Control {
         self.sketchPosition = CGPoint(x: x, y: y)
         self.yAlign = yAlign
         self.xAlign = xAlign
-        self.zPosition = Config.HUDZPosition/2
+        self.zPosition = Config.HUDZPosition
         
         let texture = SKTexture(imageNamed: textureName)
         
@@ -128,7 +128,7 @@ class ScrollNode: Control {
         self.sketchPosition = CGPoint(x: x, y: y)
         self.yAlign = yAlign
         self.xAlign = xAlign
-        self.zPosition = Config.HUDZPosition/2
+        self.zPosition = Config.HUDZPosition
         
         self.scaleDistance = CGFloat(scaleDistance)
         self.scaleNodes = scaleNodes

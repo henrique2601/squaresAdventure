@@ -23,6 +23,8 @@ class FloorsScene: GameScene {
     
     var floorsScrollNone:ScrollNode!
     
+    var selectedTower:TowerData!
+    
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
         self.backgroundColor = GameColors.blue
@@ -30,34 +32,39 @@ class FloorsScene: GameScene {
         
         var floorsArray = Array<SKSpriteNode>()
         var towerIndex = 0
+        
         for tower in self.playerData.towers {
             if(MapManager.tower == towerIndex) {
-                if let tower = tower as? TowerData {
-                    var floorIndex = 0
-                    for floor in tower.floors {
-                        var progress = min(Int(self.playerData.lastFloorUnlocked) - (towerIndex * Config.towerCount) - 1, Config.floorsPerTower)
-
-                        let cell = SKSpriteNode(imageNamed: "boxSmall")//TODO: imagem do andar
-                        if(progress >= floorIndex) {
-                            
-                            var labelName = Label(name: "labelFloorName", color: GameColors.black, textureName: "Floor " + (floorIndex + 1).description, x: 0, y: 0)
-                            cell.addChild(labelName)
-                            
-                        } else {
-                            
-                            var spriteNode = SKSpriteNode(imageNamed: "boxSmallLocked")
-                            cell.addChild(spriteNode)
-                            
-                            var labelName = Label(name: "labelFloorName", color: GameColors.black, textureName: "Locked", x: 0, y: 0)
-                            cell.addChild(labelName)
-                            
-                        }
-                        floorsArray.append(cell)
-                        floorIndex++
-                    }
-                }
+                self.selectedTower = tower as! TowerData//Encontrou torre selecionada
+                break
             }
             towerIndex++
+        }
+        
+        //Andares da torre selecionada desbloqueados que foram salvos no CoreData
+        var floorIndex = 0
+        for floor in self.selectedTower.floors {
+            
+            let cell = SKSpriteNode(imageNamed: "boxSmall")//TODO: imagem do andar
+            
+            var labelName = Label(name: "labelFloorName", color: GameColors.black, textureName: "Floor " + (floorIndex + 1).description, x: 0, y: 0)
+            cell.addChild(labelName)
+            
+            floorsArray.append(cell)
+            floorIndex++
+        }
+        
+        //Andares bloqueados, mostrar cadeado
+        for (0; floorIndex < Towers.types[towerIndex].floorCount; floorIndex++) {
+            let cell = SKSpriteNode(imageNamed: "boxSmall")//TODO: imagem do andar
+            
+            var spriteNode = SKSpriteNode(imageNamed: "boxSmallLocked")
+            cell.addChild(spriteNode)
+            
+            var labelName = Label(name: "labelFloorName", color: GameColors.black, textureName: "Locked", x: 0, y: 0)
+            cell.addChild(labelName)
+            
+            floorsArray.append(cell)
         }
         
         self.floorsScrollNone = ScrollNode(name: "scrollNode", textureName: "boxSmall", x: 667, y: 466, align: .center, cells:floorsArray, spacing: 1, scrollDirection: ScrollNode.scrollTypes.horizontal, scaleNodes:true, scaleDistance:1334/4 + 100)
@@ -105,7 +112,26 @@ class FloorsScene: GameScene {
                         return
                     }
                     
-                    self.nextState = states.beforeMission
+                    if (self.floorsScrollNone.containsPoint(location)) {
+                        if(touch.tapCount > 0) {
+                            
+                            var i = 0
+                            let locationInScrollNode = touch.locationInNode(self.floorsScrollNone)
+                            
+                            for cell in self.floorsScrollNone.cells {
+                                if(cell.containsPoint(locationInScrollNode)) {
+                                    if(i < self.selectedTower.floors.count) {
+                                        MapManager.floor = i
+                                        self.nextState = states.beforeMission
+                                    } else {
+                                        println("Andar \(i) ainda não foi desbloqueada")
+                                    }
+                                    return
+                                }
+                                i++
+                            }
+                        }
+                    }
                 }
                 break
                 

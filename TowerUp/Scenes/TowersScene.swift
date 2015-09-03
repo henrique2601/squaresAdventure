@@ -30,25 +30,34 @@ class TowersScene: GameScene {
         self.addChild(Control(name: "mainMenuBackground", x:0, y:0, align:.center))
         
         var towersArray = Array<SKSpriteNode>()
-        var i = 0
-        for tower in self.playerData.towers {
-            let cell = SKSpriteNode(imageNamed: "towerBox")//TODO: imagem da torre
-            if(GameMath.isTowerUnlocked(Int(self.playerData.lastFloorUnlocked), towerIndex: i)) {
-                var progress = min(Int(self.playerData.lastFloorUnlocked) - (i * 10) - 1, 10)
-                var labelName = Label(name: "labelTowerName", color: GameColors.black, textureName: "Tower " + (i + 1).description, x: 0, y: 0)
-                var labelProgress = Label(name: "labelTowerProgress", color: GameColors.black, textureName: progress.description + "/10", x: 0, y: 64)
+        var towerIndex = 0
+        
+        //Torres desbloqueadas que foram salvas no CoreData
+        for tower in self.playerData.towers as! Set<TowerData> {
+            let towerType = Towers.types[towerIndex]
+            let cell = SKSpriteNode(imageNamed: "towerBox")
+                var labelName = Label(name: "labelTowerName", color: GameColors.black, textureName: "Tower " + (towerIndex + 1).description, x: 0, y: 0)
+                var labelProgress = Label(name: "labelTowerProgress", color: GameColors.black, textureName: (tower.floors.count - 1).description + "/" + towerType.floorCount.description, x: 0, y: 64)
                 cell.addChild(labelName)
                 cell.addChild(labelProgress)
-            } else {
-                var spriteNode = SKSpriteNode(imageNamed: "towerBoxLocked")
-                cell.addChild(spriteNode)
-                
-                var labelName = Label(name: "labelTowerName", color: GameColors.black, textureName: "Locked", x: 0, y: 0)
-                cell.addChild(labelName)
-            }
+            
             towersArray.append(cell)
-            i++
+            towerIndex++
         }
+        
+        //Torres bloqueadas, mostrar cadeado
+        for (0; towerIndex < Towers.types.count; towerIndex++) {
+            let cell = SKSpriteNode(imageNamed: "towerBox")
+            var spriteNode = SKSpriteNode(imageNamed: "towerBoxLocked")
+            cell.addChild(spriteNode)
+            
+            var labelName = Label(name: "labelTowerName", color: GameColors.black, textureName: "Locked", x: 0, y: 0)
+            cell.addChild(labelName)
+            
+            towersArray.append(cell)
+        }
+        
+        //TODO: torre "?"
         
         self.towersScrollNode = ScrollNode(name: "scrollNode", x: 667, y: 466, align: .center, cells:towersArray, spacing:1, scaleNodes:true, scaleDistance:1334/4 + 100)
         
@@ -104,7 +113,7 @@ class TowersScene: GameScene {
                             
                             for cell in self.towersScrollNode.cells {
                                 if(cell.containsPoint(locationInScrollNode)) {
-                                    if(GameMath.isTowerUnlocked(Int(self.playerData.lastFloorUnlocked), towerIndex: i)) {
+                                    if(i < self.playerData.towers.count) {
                                         MapManager.tower = i
                                         self.nextState = .floors
                                     } else {

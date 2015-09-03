@@ -18,35 +18,29 @@ class MemoryCard: NSObject {
     func newGame() {
         println("Creating new game...")
         
+        //Player
         self.playerData = self.newPlayerData()
         
         //Towers e Floors
-        self.playerData.lastFloorUnlocked = NSNumber(int: 1)//Somente primeiro andar da primeira torre vai estar desbloqueada
+        var tower = self.newTowerData()
+        var floor = self.newFloorData()
+        tower.addFloor(floor)
         
-        for(var i = 0; i < Config.towerCount; i++) { //Definindo 10 torres
-            var tower = self.newTowerData()
-            self.playerData.addTower(tower)
-            for(var j = 0; j < 10; j++) {// 10 andares por torre
-                var floor = self.newFloorData()
-                floor.progress = NSNumber(int: 0)
-                tower.addFloor(floor)
-            }
-        }
+        self.playerData.addTower(tower)
         
         //PowerUps
-        var power1 = self.newPowerUpData()
-        power1.locked = NSNumber(bool: false)
-        power1.index = 0
-        power1.available = NSNumber(bool: false)
-        self.playerData.addPowerUp(power1)
+        var powerUp = self.newPowerUpData()
+        powerUp.locked = NSNumber(bool: false)
+        powerUp.index = 0
+        powerUp.available = NSNumber(bool: false)
+        self.playerData.addPowerUp(powerUp)
         
         //Skins
-        var skin1 = self.newSkinData()
-        
-        skin1.locked = NSNumber(bool: false)
-        skin1.index = 0
-        skin1.available = NSNumber(bool: true)
-        self.playerData.addSkin(skin1)
+        var skin = self.newSkinData()
+        skin.locked = NSNumber(bool: false)
+        skin.index = 0
+        skin.available = NSNumber(bool: true)
+        self.playerData.addSkin(skin)
         
         self.autoSave = true
         

@@ -2,7 +2,7 @@
 //  PlayerData.swift
 //  TowerUp
 //
-//  Created by Gabriel Prado Marcolino on 27/08/15.
+//  Created by Pablo Henrique on 03/09/15.
 //  Copyright (c) 2015 WTFGames. All rights reserved.
 //
 
@@ -13,7 +13,6 @@ import CoreData
 
 class PlayerData: NSManagedObject {
 
-    @NSManaged var lastFloorUnlocked: NSNumber
     @NSManaged var currentSkin: SkinData
     @NSManaged var powerUps: NSSet
     @NSManaged var skins: NSSet
