@@ -37,7 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // ParseCrashReporting.enable()
         //
         // Uncomment and fill in with your Parse credentials:
-        Parse.setApplicationId("IvYhNIyO7wyJsDF4181S9iddoTg1QmrjUGcoPPnD", clientKey: "L3muupUM7rmO6BLmfNVZ6kymNYdYY3JCJmGVsmti")
+        Parse.setApplicationId("gFonAGpYOf1TgUX1SW1L5rlKJvkLNwnoVWtgawmm", clientKey: "VD7qPEFUTtQY25bUWdxW2a6l5TZGd0uev0mEtaZ1")
         //
         // If you are using Facebook, uncomment and add your FacebookAppID to your bundle's plist as
         // described here: https://developers.facebook.com/docs/getting-started/facebook-sdk-for-ios/
@@ -47,7 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         PFUser.enableAutomaticUser()
 
-        let defaultACL = PFACL();
+        let defaultACL = PFACL()
 
         // If you would like all objects to be private by default, remove this line.
         defaultACL.setPublicReadAccess(true)
@@ -61,15 +61,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
             let preBackgroundPush = !application.respondsToSelector("backgroundRefreshStatus")
             let oldPushHandlerOnly = !self.respondsToSelector("application:didReceiveRemoteNotification:fetchCompletionHandler:")
-            var noPushPayload = false;
+            var noPushPayload = false
             if let options = launchOptions {
-                noPushPayload = options[UIApplicationLaunchOptionsRemoteNotificationKey] != nil;
+                noPushPayload = options[UIApplicationLaunchOptionsRemoteNotificationKey] != nil
             }
             if (preBackgroundPush || oldPushHandlerOnly || noPushPayload) {
                 PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
             }
         }
-        //TODO registrar no momento adequado o usuário para receber notificações
+        //TODO: registrar no momento adequado o usuário para receber notificações
         /*
         if application.respondsToSelector("registerUserNotificationSettings:") {
             let userNotificationTypes = UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound
@@ -120,7 +120,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         PFPush.subscribeToChannelInBackground("") { (succeeded: Bool, error: NSError?) in
             if succeeded {
-                println("TowerUp successfully subscribed to push notifications on the broadcast channel.");
+                println("TowerUp successfully subscribed to push notifications on the broadcast channel.")
             } else {
                 println("TowerUp failed to subscribe to push notifications on the broadcast channel with error = %@.", error)
             }
