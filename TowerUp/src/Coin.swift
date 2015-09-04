@@ -20,7 +20,7 @@ class Coin: Tile {
         
         self.name = "coin"
         
-        self.physicsBody = SKPhysicsBody(circleOfRadius: 16)
+        self.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: 32, height: 32))
         
         self.physicsBody!.categoryBitMask = physicsCategory.coin.rawValue
         self.physicsBody!.contactTestBitMask = physicsCategory.none.rawValue

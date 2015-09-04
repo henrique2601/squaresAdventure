@@ -261,7 +261,9 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
     }
     
     override func didFinishUpdate() {
-        self.camera.update(self.player!.position)
+        if(self.player.healthPoints > 0){
+            self.camera.update(self.player.position)
+        }
         self.player.updateEmiter(self.currentTime, room: self.room)
         self.player.didFinishUpdate()
         self.parallax.update(self.camera.position)

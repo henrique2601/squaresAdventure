@@ -78,7 +78,7 @@ class Chunk: SKSpriteNode {
                     }
                 } else {
                     #if DEBUG //DEBUG com itens colocados aleatoriamente em espaços vazios.
-                    if(Int.random(100) < 20) {
+                    if(Int.random(100) < 99) {
                         var tile:Coin = Coin(type: "Gold", x: x, y: y)
                         
                         //TODO: exportar função?
