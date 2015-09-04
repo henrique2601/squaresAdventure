@@ -122,6 +122,7 @@ class Control: SKNode {
         Button.resetButtons()
         Switch.resetSwitches()
         ScrollNode.resetScrollNodes()
+        Textfield.resetTextfields()
     }
     
     func resetPosition() {

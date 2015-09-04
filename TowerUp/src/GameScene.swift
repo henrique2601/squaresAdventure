@@ -15,6 +15,10 @@ class GameScene: SKScene {
         Control.controlList = Set<Control>()
         Button.buttonList = Set<Button>()
         ScrollNode.scrollNodeList = Set<ScrollNode>()
+        for textfield in Textfield.textfieldList {
+            textfield.myTextField.removeFromSuperview()
+        }
+        Textfield.textfieldList = Set<Textfield>()
         super.init(size: Config.sceneSize())
     }
     

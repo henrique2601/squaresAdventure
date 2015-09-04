@@ -13,6 +13,7 @@ class Config: NSObject {
     
     static var skViewBoundsSize:CGSize = CGSizeZero
     static var translate:CGPoint = CGPointZero
+    static var translateInView:CGPoint = CGPointZero
     
     static var HUDZPosition:CGFloat = 1000
     
@@ -32,7 +33,10 @@ class Config: NSObject {
             var scale = min(xScale, yScale)
             
             Config.translate = CGPoint(x: ((skViewBoundsSize.width - (sceneSize.width * scale))/2)/scale,
-                y: ((skViewBoundsSize.height - (sceneSize.height * scale))/2)/scale)
+                                       y: ((skViewBoundsSize.height - (sceneSize.height * scale))/2)/scale)
+            
+            Config.translateInView = CGPoint(x: ((skViewBoundsSize.width - (sceneSize.width * scale))/2)/scale,
+                                        y: ((skViewBoundsSize.height - (sceneSize.height * scale))/2))
             
             Config.currentSceneSize = CGSize(width: skViewBoundsSize.width / scale, height: skViewBoundsSize.height / scale)
             return Config.currentSceneSize
