@@ -11,6 +11,8 @@ import CoreData
 
 class MemoryCard: NSObject {
     
+    static let sharedInstance = MemoryCard()
+    
     private var autoSave:Bool = false
     
     var playerData:PlayerData!
@@ -38,9 +40,11 @@ class MemoryCard: NSObject {
         //Skins
         var skin = self.newSkinData()
         skin.locked = NSNumber(bool: false)
-        skin.index = 0
+        skin.index = Int.random(10)
         skin.available = NSNumber(bool: true)
         self.playerData.addSkin(skin)
+        
+        self.playerData.currentSkin = skin
         
         self.autoSave = true
         

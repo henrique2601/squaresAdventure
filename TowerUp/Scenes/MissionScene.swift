@@ -38,6 +38,8 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
     //Gameplay
     var lastReset:NSTimeInterval!
     
+    var playerData = MemoryCard.sharedInstance.playerData
+    
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
         self.backgroundColor = GameColors.blueSky
@@ -52,7 +54,8 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
         self.camera = Camera()
         self.world.addChild(self.camera)
         
-        self.player = Player(x: 200, y: 100, loadPhysics: true)
+        //self.player = Player(x: 200, y: 100, loadPhysics: true)
+        self.player = Player(playerData: self.playerData, x: 200, y: 100, loadPhysics: true)
         self.world.addChild(self.player)
         
         self.mapManager = MapManager()
@@ -63,6 +66,10 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
         self.addChild(Button(name: "buttonLeft", textureName: "buttonYellowSquare", text:"<", x:20, y:630, xAlign:.left, yAlign:.down))
         self.addChild(Button(name: "buttonRight", textureName: "buttonYellowSquare", text:">" ,x:160, y:630, xAlign:.left, yAlign:.down))
         self.addChild(Button(name: "buttonJump", textureName: "buttonYellow", text:"Jump", x:1014, y:630, xAlign:.right, yAlign:.down))
+        
+        self.addChild(Button(name: "buttonPowerUp0", textureName: "buttonBlueSquare", text:"1", x: 497, y: 630, xAlign:.center, yAlign:.down))
+        self.addChild(Button(name: "buttonPowerUp1", textureName: "buttonOrangeSquare", text:"2", x: 617, y: 630, xAlign:.center, yAlign:.down))
+        self.addChild(Button(name: "buttonPowerUp2", textureName: "buttonYellowSquare", text:"3", x: 737, y: 630, xAlign:.center, yAlign:.down))
         
         self.addChild(Button(name: "buttonBack", textureName: "buttonGraySquareSmall", text:"||" ,x:20, y:20, xAlign:.left, yAlign:.up))
     }

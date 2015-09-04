@@ -19,7 +19,7 @@ class FloorsScene: GameScene {
     var state = states.floors
     var nextState = states.floors
     
-    var playerData = AppDelegate.memoryCard.playerData
+    var playerData = MemoryCard.sharedInstance.playerData
     
     var floorsScrollNone:ScrollNode!
     
