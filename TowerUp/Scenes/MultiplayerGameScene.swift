@@ -45,8 +45,10 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
     
     //Multiplayer
     var localName:String!
-    let socket = SocketIOClient(socketURL: "https://squaregame.mybluemix.net", opts: nil)
+    //let socket = SocketIOClient(socketURL: "https://squaregame.mybluemix.net", opts: nil)
     //let socket = SocketIOClient(socketURL: "179.232.86.110:3001", opts: nil)
+    let socket = SocketIOClient(socketURL: "181.41.197.181:3001", opts: nil)
+    
     
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)

@@ -43,9 +43,10 @@ class LobbyScene: GameScene {
     
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
+        self.addChild(Control(name: "lobby1Background", x:0, y:0, align:.center))
         self.backgroundColor = GameColors.blue
         
-        self.addChild(Control(name: "mainMenuBackground", x:0, y:0, align:.center))
+        
         
         
         
