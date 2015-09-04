@@ -42,7 +42,7 @@ class Player: Square {
         
         let skinType = Skins.types[playerData.currentSkin.index.integerValue]
         
-        self.loadNewPlayer("player", texture:skinType.image, x: x, y: y, loadPhysics: loadPhysics)
+        self.loadNewPlayer("player", texture:skinType.imageName, x: x, y: y, loadPhysics: loadPhysics)
     }
     
     func loadNewPlayer(name:String, texture:String, x:Int, y:Int, loadPhysics:Bool) {
@@ -50,14 +50,23 @@ class Player: Square {
         self.zPosition = Config.HUDZPosition
         
         let texture = SKTexture(imageNamed: texture)
-        let spriteNode = SKSpriteNode(texture: texture, color: nil, size: CGSize(width: 64, height: 64))
-        spriteNode.name = name
+        var spriteNode:SKSpriteNode!
         
         if(loadPhysics) {
+            spriteNode = SKSpriteNode(texture: texture, color: nil, size: texture.size())
+            //Teste
+            //spriteNode.color = UIColor.blackColor()
+            //spriteNode.colorBlendFactor = 1
+            spriteNode.name = name
+            
             self.position = CGPoint(x: x, y: y)
             self.startingPosition = self.position
             self.loadPhysics()
         } else {
+            spriteNode = SKSpriteNode(texture: texture, color: nil, size: CGSize(width: texture.size().width, height: texture.size().height))
+            spriteNode.name = name
+            
+            spriteNode.anchorPoint = CGPoint(x: 0, y: 1)
             self.sketchPosition = CGPoint(x: x, y: y)
             self.yAlign = .center
             self.xAlign = .center
@@ -192,6 +201,11 @@ class Player: Square {
                         if (abs(self.physicsBody!.velocity.dy) < 200) {
                             if((self.childNodeWithName("//buttonJump") as! Button).pressed) {
                                 self.physicsBody?.velocity.dy = 900
+                                //self.physicsBody?.applyForce(CGVector(dx: 0, dy: 2100))
+                            }
+                            //TODO: teste gambs
+                            if((self.childNodeWithName("//buttonPowerUp0") as! Button).pressed) {
+                                self.physicsBody?.velocity.dy = 900 * 2
                                 //self.physicsBody?.applyForce(CGVector(dx: 0, dy: 2100))
                             }
                         }

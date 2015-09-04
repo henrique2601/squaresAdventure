@@ -20,7 +20,7 @@ class TowersScene: GameScene {
     var state = states.towers
     var nextState = states.towers
     
-    var playerData = AppDelegate.memoryCard.playerData
+    var playerData = MemoryCard.sharedInstance.playerData
     
     var towersScrollNode:ScrollNode!
     

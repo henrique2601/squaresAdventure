@@ -155,7 +155,7 @@ class ScrollNode: Control {
                     let location = touch.locationInNode(scrollNode.parent)
                     if scrollNode.containsPoint(location) {
                         var dx:Int = Int(location.x - touch.previousLocationInNode(scrollNode.parent).x)
-                        if(dx == 0){
+                        if(dx == 0) {
                             if(location.x - touch.previousLocationInNode(scrollNode.parent).x > 0){
                                 dx++
                             } else {

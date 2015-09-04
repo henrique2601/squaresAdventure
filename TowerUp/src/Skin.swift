@@ -13,25 +13,27 @@ class Skin: NSObject {
 }
 
 class SkinType: NSObject {
-    var image:String
+    var imageName:String
+    var price:Int
     
-    init(image:String) {
-        self.image = image
+    init(imageName:String, price:Int) {
+        self.imageName = imageName
+        self.price = price
     }
 }
 
 class Skins : NSObject {
     
     static var types = Array<SkinType>([
-        SkinType(image:"elephant"), //0
-        SkinType(image:"giraffe"), //1
-        SkinType(image:"hippo"), //2
-        SkinType(image:"monkey"), //3
-        SkinType(image:"panda"), //4
-        SkinType(image:"parrot"), //5
-        SkinType(image:"penguin"), //6
-        SkinType(image:"pig"), //7
-        SkinType(image:"rabbit"), //8
-        SkinType(image:"snake"), //9
+        SkinType(imageName:"elephant", price:0), //0
+        SkinType(imageName:"giraffe", price:0), //1
+        SkinType(imageName:"hippo", price:0), //2
+        SkinType(imageName:"monkey", price:0), //3
+        SkinType(imageName:"panda", price:0), //4
+        SkinType(imageName:"parrot", price:0), //5
+        SkinType(imageName:"penguin", price:0), //6
+        SkinType(imageName:"pig", price:0), //7
+        SkinType(imageName:"rabbit", price:10), //8
+        SkinType(imageName:"snake", price:0), //9
         ])
 }
