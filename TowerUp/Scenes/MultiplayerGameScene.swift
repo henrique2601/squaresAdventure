@@ -94,39 +94,57 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
         self.socket.on(messages.addPlayers.rawValue) {[weak self] data, ack in
             
             self!.player.name = self!.localName
-
+            
             self!.player.labelName.position = CGPoint(x: self!.player!.position.x, y: self!.player!.position.y + 32)
             self!.player.labelName.zPosition = self!.player!.zPosition + 1
             self!.player.labelName.setText(self!.localName!, color: GameColors.black)
             
-            //println(data?[0])
+            
+            
             
             if let playersArray = data?[0] as? NSArray {
                 for onlinePlayer in playersArray {
                     let nameTest = onlinePlayer as? NSDictionary
                     
-                    var player2 = PlayerOnline(x: 200, y: 48, loadPhysics: true)
-                    player2.name = nameTest!.objectForKey("name") as? String
-                    player2.id = nameTest!.objectForKey("id") as? Int
-                    player2.position = CGPoint(x: 200, y: 48)
-                    self!.world.addChild(player2)
+                    var test = 0
                     
-                    var labelName2: Label!
-                    labelName2 = Label(name: "label"+player2.name! , textureName: "", x: 0, y: 0)
-                    Control.controlList.remove(labelName2)
-                    labelName2.position = CGPoint(x: player2.position.x, y: player2.position.y + 32)
-                    self!.world.addChild(labelName2)
-                    labelName2.zPosition = player2.zPosition + 1
-                    labelName2.setText(player2.name!, color: GameColors.black)
-                    player2.labelName = labelName2
+                    for player in PlayerOnline.playerOnlineList {
+                        if let aux = player as PlayerOnline? {
+                            if let id = aux.id
+                            {
+                                if id == nameTest!.objectForKey("id") as? Int{
+                                    test++
+                                }
+                            }
+                        }
+                    }
+                    
+                    
+                    if (test == 0) {
+                        
+                        var player2 = PlayerOnline(x: 200, y: 48, loadPhysics: true)
+                        player2.name = nameTest!.objectForKey("name") as? String
+                        player2.id = nameTest!.objectForKey("id") as? Int
+                        player2.position = CGPoint(x: 200, y: 48)
+                        self!.world.addChild(player2)
+                        
+                        var labelName2: Label!
+                        labelName2 = Label(name: "label"+player2.name! , textureName: "", x: 0, y: 0)
+                        Control.controlList.remove(labelName2)
+                        labelName2.position = CGPoint(x: player2.position.x, y: player2.position.y + 32)
+                        self!.world.addChild(labelName2)
+                        labelName2.zPosition = player2.zPosition + 1
+                        labelName2.setText(player2.name!, color: GameColors.black)
+                        player2.labelName = labelName2
+                    }
                 }
             }
             println("Added Players")
         }
         
         
-    
-    
+        
+        
         self.socket.on("win") {[weak self] data, ack in
             if let name = data?[0] as? Int {
                 for player in PlayerOnline.playerOnlineList {
@@ -137,7 +155,7 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
                             self!.blackSpriteNode = SKSpriteNode(color: GameColors.black, size: self!.size)
                             self!.blackSpriteNode.anchorPoint = CGPoint(x: 0, y: 1)
                             self!.addChild(self!.blackSpriteNode)
-                            let box = MultiplayerWinBox(background: "boxWhite", name:player.name!)
+                            let box = MultiplayerWinBox(background: "boxWhite", name:player.name! + " win!!!")
                             self!.addChild(box)
                             
                             self!.blackSpriteNode.zPosition = box.zPosition - 1
@@ -146,7 +164,7 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
                     }
                 }
             }
-
+            
         }
         
         
@@ -163,12 +181,12 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
                         }
                     }
                 }
-
-            
+                
+                
             }
             
         }
-
+        
         
         self.socket.on(messages.didJoin.rawValue) {[weak self] data, ack in
             self!.socket.emit(messages.joinRoom.rawValue, self!.localName! , self!.room)
@@ -177,7 +195,7 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
         self.socket.on(messages.join.rawValue) {[weak self] data, ack in
             
             if let name = data?[0] as? NSDictionary {
-        
+                
                 
                 var xPos = 144
                 var player = PlayerOnline(x: xPos, y: 48, loadPhysics: true)
@@ -212,8 +230,8 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
                                 aux.labelName.position = CGPoint(x: player.position.x, y: player.position.y + 32)
                             }
                         }
-                     }
-                 }
+                    }
+                }
             }
         }
     }
@@ -245,6 +263,7 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
             case states.mission:
                 break
             case states.afterMission:
+                self.socket.emit("win", self.room)
                 self.blackSpriteNode = SKSpriteNode(color: GameColors.black, size: self.size)
                 self.blackSpriteNode.anchorPoint = CGPoint(x: 0, y: 1)
                 self.addChild(self.blackSpriteNode)
@@ -278,8 +297,8 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
                 
                 if (self.childNodeWithName("buttonBack")!.containsPoint(location)) {
                     
-                        self.socket.emit("win", self.room)
-                   
+                    
+                    
                     self.nextState = .afterMission
                     return
                 }
