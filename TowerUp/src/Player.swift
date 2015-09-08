@@ -30,7 +30,13 @@ class Player: Square {
     var win:Bool = false
     var lastNoWin:NSTimeInterval = 0
     
-    var collectedBonus = 0
+    var collectedBonus = 0 {
+        didSet {
+            if let scene = self.scene as? MissionScene {
+                (scene.boxCoins.childNodeWithName("lebelCoins") as! Label).setText(self.collectedBonus.description)
+            }
+        }
+    }
     
     init(texture:String = "rabbit", x:Int, y:Int, loadPhysics:Bool) {
         super.init()
@@ -106,7 +112,7 @@ class Player: Square {
             
         case physicsCategory.coin.rawValue:
             let coin = (physicsBody.node! as! Coin)
-            self.collectedBonus += coin.bonus
+            self.collectedBonus = self.collectedBonus + coin.bonus
             coin.bonus = 0
             coin.removeFromParent()
             break
@@ -234,7 +240,7 @@ class Player: Square {
                 }
             }
             
-            if(self.needAngularImpulse > 0){
+            if(self.needAngularImpulse > 0) {
                 self.ajustAngle()
             }
         }

@@ -24,10 +24,16 @@ class TowersScene: GameScene {
     
     var towersScrollNode:ScrollNode!
     
+    var boxCoins:Control!
+    
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
         self.backgroundColor = GameColors.blue
         self.addChild(Control(name: "mainMenuBackground", x:0, y:0, align:.center))
+        
+        self.boxCoins = Control(name: "boxCoins", textureName: "boxCoins", x: 1058, y: 20, xAlign: .right, yAlign: .up)
+        self.boxCoins.addChild(Label(name: "lebelCoins", color: GameColors.black, textureName: self.playerData.coins.description, x: 160, y: 39))
+        self.addChild(self.boxCoins)
         
         var towersArray = Array<SKSpriteNode>()
         var towerIndex = 0
