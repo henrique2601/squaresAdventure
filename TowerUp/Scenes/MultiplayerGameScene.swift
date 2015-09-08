@@ -51,6 +51,7 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
     //let socket = SocketIOClient(socketURL: "179.232.86.110:3001", opts: nil)
     let socket = SocketIOClient(socketURL: "181.41.197.181:3001", opts: nil)
     
+    var boxCoins:Control!
     
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
@@ -86,6 +87,10 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
         self.addChild(Button(name: "buttonPowerUp0", textureName: "buttonBlueSquare", text:"1", x: 497, y: 630, xAlign:.center, yAlign:.down))
         self.addChild(Button(name: "buttonPowerUp1", textureName: "buttonOrangeSquare", text:"2", x: 617, y: 630, xAlign:.center, yAlign:.down))
         self.addChild(Button(name: "buttonPowerUp2", textureName: "buttonYellowSquare", text:"3", x: 737, y: 630, xAlign:.center, yAlign:.down))
+        
+        self.boxCoins = Control(name: "boxCoins", textureName: "boxCoins", x: 1058, y: 20, xAlign: .right, yAlign: .up)
+        self.boxCoins.addChild(Label(name: "lebelCoins", color: GameColors.black, textureName: "0", x: 160, y: 39))
+        self.addChild(self.boxCoins)
         
         self.addChild(Button(name: "buttonBack", textureName: "buttonGraySquareSmall", text:"||" ,x:20, y:20, xAlign:.left, yAlign:.up))
         

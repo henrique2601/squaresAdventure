@@ -35,6 +35,9 @@ class Player: Square {
             if let scene = self.scene as? MissionScene {
                 (scene.boxCoins.childNodeWithName("lebelCoins") as! Label).setText(self.collectedBonus.description)
             }
+            if let scene = self.scene as? MultiplayerGameScene {
+                (scene.boxCoins.childNodeWithName("lebelCoins") as! Label).setText(self.collectedBonus.description)
+            }
         }
     }
     
