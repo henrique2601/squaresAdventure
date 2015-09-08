@@ -13,6 +13,7 @@ import CoreData
 
 class PlayerData: NSManagedObject {
 
+    @NSManaged var coins:NSNumber
     @NSManaged var currentSkin: SkinData
     @NSManaged var powerUps: NSSet
     @NSManaged var skins: NSSet

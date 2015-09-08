@@ -22,6 +22,8 @@ class MemoryCard: NSObject {
         
         //Player
         self.playerData = self.newPlayerData()
+        self.playerData.coins = NSNumber(int: 100)
+
         
         //Towers e Floors
         var tower = self.newTowerData()
