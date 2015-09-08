@@ -110,6 +110,38 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
                 break
             case states.afterMission:
                 
+                //Desbloquear nova fase?
+                var towerIndex:Int = 0
+                for item in self.playerData.towers as NSOrderedSet {
+                    let tower = item as! TowerData
+                    
+                    let towerType = Towers.types[towerIndex]
+                    
+                    if(MapManager.tower == towerIndex) {
+                        if(MapManager.floor == tower.floors.count - 1) {
+                            if(tower.floors.count < towerType.floorCount) {
+                                var floor = MemoryCard.sharedInstance.newFloorData()
+                                tower.addFloor(floor)
+                            } else {
+                                if (tower.floors.count == towerType.floorCount) {
+                                    //Libera fase para futuros updates
+                                    var floor = MemoryCard.sharedInstance.newFloorData()
+                                    tower.addFloor(floor)
+                                    
+                                    //Cria próxima torre
+                                    var newTower = MemoryCard.sharedInstance.newTowerData()
+                                    floor = MemoryCard.sharedInstance.newFloorData()
+                                    self.playerData.addTower(newTower)
+                                    newTower.addFloor(floor)
+                                    break
+                                }
+                            }
+                        }
+                        break
+                    }
+                    towerIndex++
+                }
+                
                 self.blackSpriteNode = SKSpriteNode(color: GameColors.black, size: self.size)
                 self.blackSpriteNode.anchorPoint = CGPoint(x: 0, y: 1)
                 self.addChild(self.blackSpriteNode)

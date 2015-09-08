@@ -82,7 +82,24 @@ class AfterMissionBox: Box {
                     scene.nextState = MissionScene.states.powerUp
                     scene.blackSpriteNode.removeFromParent()
                     self.removeFromParent()
-                    MapManager.floor++ //TODO: altas gambs
+                    MapManager.floor++ //TODO: ???
+                    
+                    var towerIndex = 0
+                    for tower in MemoryCard.sharedInstance.playerData.towers {
+                        if(MapManager.tower == towerIndex) {
+                            //Encontrou torre selecionada
+                            let towerType = Towers.types[towerIndex]
+                            if(MapManager.floor >= towerType.floorCount) {
+                                MapManager.floor = 0
+                                MapManager.tower++
+                                if(MapManager.tower >= Towers.types.count) {
+                                    MapManager.tower = 0
+                                }
+                            }
+                            break
+                        }
+                        towerIndex++
+                    }
                 }
                 return
             }

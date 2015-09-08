@@ -49,19 +49,22 @@ class FloorsScene: GameScene {
         
         //Andares da torre selecionada desbloqueados que foram salvos no CoreData
         var floorIndex = 0
+        let towerType = Towers.types[towerIndex]
+        
         for floor in self.selectedTower.floors {
-            
-            let cell = SKSpriteNode(imageNamed: "boxSmall")//TODO: imagem do andar
-            
-            var labelName = Label(name: "labelFloorName", color: GameColors.black, textureName: "Floor " + (floorIndex + 1).description, x: 0, y: 0)
-            cell.addChild(labelName)
-            
-            floorsArray.append(cell)
-            floorIndex++
+            if(floorIndex < towerType.floorCount){
+                let cell = SKSpriteNode(imageNamed: "boxSmall")//TODO: imagem do andar
+                
+                var labelName = Label(name: "labelFloorName", color: GameColors.black, textureName: "Floor " + (floorIndex + 1).description, x: 0, y: 0)
+                cell.addChild(labelName)
+                
+                floorsArray.append(cell)
+                floorIndex++
+            }
         }
         
         //Andares bloqueados, mostrar cadeado
-        for (0; floorIndex < Towers.types[towerIndex].floorCount; floorIndex++) {
+        for (0; floorIndex < towerType.floorCount; floorIndex++) {
             let cell = SKSpriteNode(imageNamed: "boxSmall")//TODO: imagem do andar
             
             var spriteNode = SKSpriteNode(imageNamed: "boxSmallLocked")

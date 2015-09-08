@@ -9,7 +9,7 @@
         <relationship name="currentSkin" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SkinData" syncable="YES"/>
         <relationship name="powerUps" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PowerUpData" inverseName="playerData" inverseEntity="PowerUpData" syncable="YES"/>
         <relationship name="skins" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SkinData" inverseName="playerData" inverseEntity="SkinData" syncable="YES"/>
-        <relationship name="towers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TowerData" inverseName="playerData" inverseEntity="TowerData" syncable="YES"/>
+        <relationship name="towers" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="TowerData" inverseName="playerData" inverseEntity="TowerData" syncable="YES"/>
     </entity>
     <entity name="PowerUpData" representedClassName="PowerUpData" syncable="YES">
         <attribute name="available" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>

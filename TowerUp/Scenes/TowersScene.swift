@@ -39,7 +39,8 @@ class TowersScene: GameScene {
         var towerIndex = 0
         
         //Torres desbloqueadas que foram salvas no CoreData
-        for tower in self.playerData.towers as! Set<TowerData> {
+        for item in self.playerData.towers as NSOrderedSet {
+            let tower = item as! TowerData
             let towerType = Towers.types[towerIndex]
             let cell = SKSpriteNode(imageNamed: "towerBox")
                 var labelName = Label(name: "labelTowerName", color: GameColors.black, textureName: "Tower " + (towerIndex + 1).description, x: 0, y: 0)
