@@ -15,8 +15,14 @@ class PlayerOnline: Player {
     var labelName: Label!
     static var playerOnlineList = Set<PlayerOnline>()
     
+    
     init(x: Int, y: Int, loadPhysics: Bool) {
         super.init(x: x, y: y, loadPhysics: loadPhysics)
+        PlayerOnline.playerOnlineList.insert(self)
+    }
+    
+    override init(skinId:Int, x:Int, y:Int, loadPhysics:Bool) {
+        super.init(skinId: skinId, x: x, y: y, loadPhysics: loadPhysics)
         PlayerOnline.playerOnlineList.insert(self)
     }
     

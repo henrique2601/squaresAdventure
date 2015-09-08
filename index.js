@@ -19,8 +19,8 @@ function Player(socket) {
          self.game.win( self.socket ,self.id , room )
      })
 
-    this.socket.on("r", function(name,room) {
-        self.joinRoom(name,room)
+    this.socket.on("r", function(name,room,skin) {
+        self.joinRoom(name,room,skin)
     })
 
 
@@ -48,17 +48,19 @@ function Player(socket) {
 
 
 
-Player.prototype.joinRoom = function(name,room) {
+Player.prototype.joinRoom = function(name,room,skin) {
     this.name = name
     this.room = room
+    this.skin = skin
     this.socket.join(this.room)
 
     if (this.game.rooms[this.room] === undefined) {
         this.game.rooms[this.room] = new Array()
         this.id = 0
     } 
-    
+
     else if (this.game.rooms[this.room].length == 0) {
+        console.log("sala vazia")
         this.id = 0
     } 
 
@@ -68,13 +70,13 @@ Player.prototype.joinRoom = function(name,room) {
         this.id = last.id + 1
     }
     
-    var teste = {name : this.name , id : this.id}
+    var teste = {name : this.name , id : this.id, skin: this.skin}
     this.socket.emit("a", this.game.rooms[this.room])
     this.socket.broadcast.to(this.room).emit("j" , teste)
 
     this.game.rooms[this.room].push(teste)
 
-    //console.log(this.game.rooms[this.room])
+    console.log(this.game.rooms[this.room])
 
     
  

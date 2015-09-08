@@ -81,6 +81,7 @@ class MainMenuScene: GameScene {
                         return
                     }
                     if (self.childNodeWithName("buttonPlayOnline")!.containsPoint(location)) {
+                        MemoryCard.sharedInstance.loadGame()
                         self.nextState = .multiplayer
                         return
                     }

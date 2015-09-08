@@ -45,6 +45,15 @@ class Player: Square {
         self.loadNewPlayer("player", texture:skinType.imageName, x: x, y: y, loadPhysics: loadPhysics)
     }
     
+    init(skinId:Int, x:Int, y:Int, loadPhysics:Bool) {
+        super.init()
+        
+        let skinType = Skins.types[skinId]
+        
+        self.loadNewPlayer("player", texture:skinType.imageName, x: x, y: y, loadPhysics: loadPhysics)
+    }
+    
+    
     func loadNewPlayer(name:String, texture:String, x:Int, y:Int, loadPhysics:Bool) {
         self.name = name
         self.zPosition = Config.HUDZPosition

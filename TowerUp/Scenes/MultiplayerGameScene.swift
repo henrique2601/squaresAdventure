@@ -43,6 +43,8 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
     let velo:CGFloat = 3
     var currentTime: NSTimeInterval = 0
     
+    var playerData = MemoryCard.sharedInstance.playerData
+    
     //Multiplayer
     var localName:String!
     //let socket = SocketIOClient(socketURL: "https://squaregame.mybluemix.net", opts: nil)
@@ -64,7 +66,7 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
         self.camera = Camera()
         self.world.addChild(self.camera)
         
-        self.player = PlayerOnline(x: 200, y: 100, loadPhysics: true)
+        self.player = PlayerOnline(skinId: self.playerData.currentSkin.index.integerValue, x: 200, y: 100, loadPhysics: true)
         self.world.addChild(self.player)
         
         self.player.labelName = Label(name: "labelName", textureName: "", x: 0, y: 0)
@@ -128,7 +130,10 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
                     
                     if (test == 0) {
                         
-                        var player2 = PlayerOnline(x: 200, y: 48, loadPhysics: true)
+                        println(nameTest)
+                        
+                        var skin = nameTest!.objectForKey("skin") as? Int
+                        var player2 = PlayerOnline(skinId: skin! ,x: 200, y: 48, loadPhysics: true)
                         player2.name = nameTest!.objectForKey("name") as? String
                         player2.id = nameTest!.objectForKey("id") as? Int
                         player2.position = CGPoint(x: 200, y: 48)
@@ -195,7 +200,7 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
         
         
         self.socket.on(messages.didJoin.rawValue) {[weak self] data, ack in
-            self!.socket.emit(messages.joinRoom.rawValue, self!.localName! , self!.room)
+            self!.socket.emit(messages.joinRoom.rawValue, self!.localName! , self!.room, self!.playerData.currentSkin.index.integerValue)
         }
         
         self.socket.on(messages.join.rawValue) {[weak self] data, ack in
@@ -204,7 +209,8 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
                 
                 
                 var xPos = 144
-                var player = PlayerOnline(x: xPos, y: 48, loadPhysics: true)
+                var skin = name.objectForKey("skin") as? Int
+                var player = PlayerOnline(skinId: skin!, x: xPos, y: 48, loadPhysics: true)
                 player.name = name.objectForKey("name") as? String
                 println(player.name)
                 player.id = name.objectForKey("id") as? Int
