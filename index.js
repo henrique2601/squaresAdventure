@@ -28,11 +28,20 @@ function Player(socket) {
             console.log( self.name + " disconnect" )
             
             self.socket.broadcast.to(self.room).emit("q", self.id )
-            var idx = self.game.rooms[self.room].indexOf(self.name)
-            self.game.rooms[self.room].splice(idx, 1)
+            var aux = self.game.rooms[self.room]
 
+            console.log(self.game.rooms[self.room])
 
-            
+            for(var i = aux.length - 1; i >= 0; i--) {
+                if(aux[i].id === self.id) {
+                    aux.splice(i, 1)
+                    console.log(i)
+                }
+            }
+
+            self.game.rooms[self.room] = aux
+            console.log(self.game.rooms[self.room])
+
     });
     
 }
@@ -47,18 +56,25 @@ Player.prototype.joinRoom = function(name,room) {
     if (this.game.rooms[this.room] === undefined) {
         this.game.rooms[this.room] = new Array()
         this.id = 0
-    } else {
-        this.id = this.game.rooms[this.room].length
+    } 
+    
+    else if (this.game.rooms[this.room].length == 0) {
+        this.id = 0
+    } 
+
+    else {
+        var aux = this.game.rooms[this.room]
+        var last = aux[this.game.rooms[this.room].length - 1]
+        this.id = last.id + 1
     }
     
     var teste = {name : this.name , id : this.id}
-
-    console.log(this.game.rooms[this.room])
-    
     this.socket.emit("a", this.game.rooms[this.room])
     this.socket.broadcast.to(this.room).emit("j" , teste)
 
     this.game.rooms[this.room].push(teste)
+
+    //console.log(this.game.rooms[this.room])
 
     
  
