@@ -169,13 +169,13 @@ class Button: Control {
         }
     }
     
-    private func buttonPressed() {
+    func buttonPressed() {
         self.pressed = true
         self.childNodeWithName(self.name!)!.hidden = true
         self.childNodeWithName("\(self.name!)Pressed")!.hidden = false
     }
     
-    private func buttonReleased() {
+    func buttonReleased() {
         self.pressed = false
         self.childNodeWithName(self.name!)!.hidden = false
         self.childNodeWithName("\(self.name!)Pressed")!.hidden = true

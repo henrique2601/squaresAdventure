@@ -25,6 +25,8 @@ class Spike: Tile {
         self.physicsBody!.collisionBitMask = physicsCategory.none.rawValue
         
         self.physicsBody!.dynamic = false
+        
+        self.physicsBody!.restitution = 2
     }
     
     required init?(coder aDecoder: NSCoder) {

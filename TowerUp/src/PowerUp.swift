@@ -7,33 +7,87 @@
 //
 
 import UIKit
+import SpriteKit
 
-class PowerUp: NSObject {
+class PowerUp: Button {
     
+    static var powerUpList = Set<PowerUp>()
+    
+    override func load(name:String, textureName:String, x:Int, y:Int, xAlign:Control.xAlignments, yAlign:Control.yAlignments) {
+        self.name = name
+        self.position = CGPoint(x: x/2 + Int(Config.translate.x), y: -y/2 - Int(Config.translate.y))
+        self.zPosition = Config.HUDZPosition
+        
+        let texture0 = SKTexture(imageNamed: "\(textureName)0")
+        let switch0 = SKSpriteNode(texture: texture0, color: nil, size: texture0.size())
+        switch0.anchorPoint = CGPoint(x: 0, y: 1)
+        switch0.name = "\(name)0"
+        self.addChild(switch0)
+        
+        let texture1 = SKTexture(imageNamed: "\(textureName)1")
+        let switch1 = SKSpriteNode(texture: texture1, color: nil, size: texture1.size())
+        switch1.anchorPoint = CGPoint(x: 0, y: 1)
+        switch1.name = "\(name)1"
+        switch1.hidden = true
+        self.addChild(switch1)
+        
+        PowerUp.powerUpList.insert(self)
+    }
+    
+    class func update(currentTime: NSTimeInterval) {
+        for powerUp in PowerUp.powerUpList {
+            //powerUp.update(currentTime:currentTime)
+            
+        }
+    }
+    
+    //    private func update(currentTime: NSTimeInterval) {
+    //
+    //    }
+    
+    override class func update() {
+        for powerUp in PowerUp.powerUpList {
+            var i = 0
+            for touch in Control.touchesArray {
+                let location = touch.locationInNode(powerUp.parent)
+                if powerUp.containsPoint(location) {
+                    i++
+                }
+            }
+            if(i > 0) {
+                powerUp.buttonPressed()
+            } else {
+                powerUp.buttonReleased()
+            }
+        }
+    }
 }
 
 class PowerUpType: NSObject {
-    var image:String
+    var buttonImage:String
+    var coolDown:NSTimeInterval
+    var price:Int
     
-    init(image:String) {
-        self.image = image
+    init(buttonImage:String, price:Int, coolDown:NSTimeInterval) {
+        self.buttonImage = buttonImage
+        self.coolDown = coolDown
+        self.price = price
     }
 }
 
 class PowerUps :NSObject {
     static var types = Array<PowerUpType>([
-        PowerUpType(image:"bubble"), //0
-        PowerUpType(image:"bubbleUp"), //1
-        PowerUpType(image:"bunny"), //2
-        PowerUpType(image:"carrotGold"), //3
-        PowerUpType(image:"carrotNormal"), //4
-        PowerUpType(image:"doubleLife"), //5
-        PowerUpType(image:"empty"), //6
-        PowerUpType(image:"gold"), //7
-        PowerUpType(image:"jetPack"), //8
-        PowerUpType(image:"player"), //9
-        PowerUpType(image:"portalOranje"), //10
-        PowerUpType(image:"wings"), //11
-        PowerUpType(image:"bubbleUp")  //12
+        PowerUpType(buttonImage:"powerUp A", price:120, coolDown:1),
+        PowerUpType(buttonImage:"powerUp B", price:110, coolDown:2),
+        PowerUpType(buttonImage:"powerUp C", price:100, coolDown:3),
+        PowerUpType(buttonImage:"powerUp D", price:90, coolDown:4),
+        PowerUpType(buttonImage:"powerUp E", price:80, coolDown:5),
+        PowerUpType(buttonImage:"powerUp F", price:70, coolDown:6),
+        PowerUpType(buttonImage:"powerUp G", price:60, coolDown:7),
+        PowerUpType(buttonImage:"powerUp H", price:50, coolDown:8),
+        PowerUpType(buttonImage:"powerUp I", price:40, coolDown:9),
+        PowerUpType(buttonImage:"powerUp J", price:30, coolDown:10),
+        PowerUpType(buttonImage:"powerUp K", price:20, coolDown:11),
+        PowerUpType(buttonImage:"powerUp L", price:10, coolDown:12)
         ])
 }

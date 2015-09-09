@@ -17,7 +17,7 @@ class Chunk: SKSpriteNode {
     static var maxChunkX = 0
     static var maxChunkY = 0
     
-    var type = "dirt" //TODO 
+    var type = "dirt" //TODO:
     
     
     

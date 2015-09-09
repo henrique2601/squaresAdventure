@@ -37,19 +37,12 @@ class FloorsScene: GameScene {
         self.addChild(self.boxCoins)
         
         var floorsArray = Array<SKSpriteNode>()
-        var towerIndex = 0
         
-        for tower in self.playerData.towers {
-            if(MapManager.tower == towerIndex) {
-                self.selectedTower = tower as! TowerData//Encontrou torre selecionada
-                break
-            }
-            towerIndex++
-        }
+        self.selectedTower = self.playerData.towers.objectAtIndex(MapManager.tower) as! TowerData
         
         //Andares da torre selecionada desbloqueados que foram salvos no CoreData
         var floorIndex = 0
-        let towerType = Towers.types[towerIndex]
+        let towerType = Towers.types[MapManager.tower]
         
         for floor in self.selectedTower.floors {
             if(floorIndex < towerType.floorCount){

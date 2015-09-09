@@ -84,7 +84,7 @@ class Player: Square {
             spriteNode = SKSpriteNode(texture: texture, color: nil, size: CGSize(width: texture.size().width, height: texture.size().height))
             spriteNode.name = name
             
-            spriteNode.anchorPoint = CGPoint(x: 0, y: 1)
+            //spriteNode.anchorPoint = CGPoint(x: 0, y: 1)
             self.sketchPosition = CGPoint(x: x, y: y)
             self.yAlign = .center
             self.xAlign = .center

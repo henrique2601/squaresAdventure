@@ -25,10 +25,12 @@ class BeforeMissionScene: GameScene {
     var playerData = MemoryCard.sharedInstance.playerData
     
     var player:Player!
+    var powerUpSlotsScrollNode:ScrollNode!
     
     var skinsScrollNode:ScrollNode!
+    var powerUpsScrollNode:ScrollNode!
     
-    var mySkins = NSMutableArray()//SkinsDesbloqueadas/Conpradas
+    var mySkins = NSMutableArray()//SkinsDesbloqueadas/Compradas
     
     var boxCoins:Control!
     
@@ -37,9 +39,15 @@ class BeforeMissionScene: GameScene {
         self.backgroundColor = GameColors.blue
         self.addChild(Control(name: "mainMenuBackground", x:0, y:0, align:.center))
         
-        self.addChild(Button(name: "buttonPowerUp0", textureName: "buttonBlueSquare", text:"1", x: 497, y: 630, xAlign:.center, yAlign:.down))
-        self.addChild(Button(name: "buttonPowerUp1", textureName: "buttonOrangeSquare", text:"2", x: 617, y: 630, xAlign:.center, yAlign:.down))
-        self.addChild(Button(name: "buttonPowerUp2", textureName: "buttonYellowSquare", text:"3", x: 737, y: 630, xAlign:.center, yAlign:.down))
+        var powerUpSlotsArray = Array<SKSpriteNode>()
+        
+        powerUpSlotsArray.append(SKSpriteNode(imageNamed: "powerUpSlot"))
+        powerUpSlotsArray.append(SKSpriteNode(imageNamed: "powerUpSlot"))
+        powerUpSlotsArray.append(SKSpriteNode(imageNamed: "powerUpSlot"))
+        
+        self.powerUpSlotsScrollNode = ScrollNode(name: "powerUpSlotsScrollNode", textureName: "", x: 676, y: 680, xAlign: .center, yAlign: .down, cells: powerUpSlotsArray, scrollDirection: ScrollNode.scrollTypes.horizontal, scaleNodes: false)
+        //ScrollNode.scrollNodeList.remove(self.powerUpSlotsScrollNode)
+        self.addChild(self.powerUpSlotsScrollNode)
         
         self.addChild(Button(name: "buttonPlay", textureName: "buttonYellow", text:"GO!", x: 1014, y: 630, xAlign:.right, yAlign:.down))
         self.addChild(Button(name: "buttonBack", textureName: "buttonGraySquareSmall", text:"<", x: 20, y: 652, xAlign:.left, yAlign:.down))
@@ -130,12 +138,33 @@ class BeforeMissionScene: GameScene {
                 
                 break
                 
+            case states.choosePowerUps:
+                self.player.removeFromParent()
+                
+                var powerUpsArray = Array<SKSpriteNode>()
+                
+                var powerUpIndex = 0
+                for powerUp in PowerUps.types {
+                    var cell = SKSpriteNode(imageNamed: powerUp.buttonImage)
+                    cell.name = powerUpIndex.description
+                    powerUpsArray.append(cell)
+                    powerUpIndex++
+                }
+                
+                self.powerUpsScrollNode = ScrollNode(name: "powerUpsScrollNode", x: 667, y: 466, align: .center, cells: powerUpsArray, scrollDirection: .horizontal, scaleNodes: false, scaleDistance: 100)
+                self.addChild(self.powerUpsScrollNode)
+                
+                break
+                
             case states.beforeMission:
-                self.player = Player(playerData: self.playerData, x: 603, y: 342, loadPhysics: false)
+                self.player = Player(playerData: self.playerData, x: 667, y: 466, loadPhysics: false)
                 self.addChild(self.player)
                 
                 if let teste = self.skinsScrollNode {
                     teste.removeFromParent()
+                }
+                if let teste = self.powerUpsScrollNode {
+                    powerUpsScrollNode.removeFromParent()
                 }
                 break
                 
@@ -171,6 +200,11 @@ class BeforeMissionScene: GameScene {
                         self.nextState = .chooseSkin
                         return
                     }
+                    
+                    if(self.powerUpSlotsScrollNode.containsPoint(location)) {
+                        self.nextState = .choosePowerUps
+                        return
+                    }
                 }
                 break
             case states.chooseSkin:
@@ -182,7 +216,7 @@ class BeforeMissionScene: GameScene {
                         return
                     }
                     if (self.childNodeWithName("buttonBack")!.containsPoint(location)) {
-                        self.nextState = .floors
+                        self.nextState = .beforeMission
                         return
                     }
                     
@@ -223,6 +257,39 @@ class BeforeMissionScene: GameScene {
                             }
                         } else {
                             self.nextState = states.beforeMission
+                        }
+                    }
+                }
+                break
+                
+            case states.choosePowerUps:
+                for touch in (touches as! Set<UITouch>) {
+                    let location = touch.locationInNode(self)
+                    
+                    if (self.childNodeWithName("buttonPlay")!.containsPoint(location)) {
+                        self.nextState = .mission
+                        return
+                    }
+                    
+                    if (self.childNodeWithName("buttonBack")!.containsPoint(location)) {
+                        self.nextState = .beforeMission
+                        return
+                    }
+                    
+                    if(touch.tapCount > 0) {
+                        if (self.powerUpsScrollNode.containsPoint(location)) {
+                            let locationInScrollNode = touch.locationInNode(self.powerUpsScrollNode)
+                            
+                            for cell in self.powerUpsScrollNode.cells {
+                                if(cell.containsPoint(locationInScrollNode)) {
+                                    println("Tocou no PowerUp " + cell.name!)
+                                    
+                                    return
+                                }
+                            }
+                        } else {
+                            self.nextState = states.beforeMission
+                            return
                         }
                     }
                 }
