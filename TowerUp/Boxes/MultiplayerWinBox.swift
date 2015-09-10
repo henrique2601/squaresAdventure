@@ -40,6 +40,11 @@ class MultiplayerWinBox: Box {
                 if let scene = self.scene as? MultiplayerGameScene {
                     scene.view!.presentScene(MainMenuScene(), transition: Config.defaultGoTransition)
                 }
+                
+                if let scene = self.scene as? LocalGameScene {
+                    scene.view!.presentScene(MainMenuScene(), transition: Config.defaultGoTransition)
+                }
+                
                 return
             }
         }
