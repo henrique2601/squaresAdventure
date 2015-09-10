@@ -98,8 +98,7 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
         self.socket.connect()
         
         self.addHandlers()
-        
-        message = .addPlayers
+       
     }
     
     func addHandlers(){

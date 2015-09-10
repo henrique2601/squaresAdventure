@@ -13,6 +13,7 @@ class LobbyScene: GameScene {
     enum states {
         case lobby
         case multiplayerMission
+        case localLobby
         case mainMenu
     }
     
@@ -103,6 +104,10 @@ class LobbyScene: GameScene {
                 self.view!.presentScene(MainMenuScene(), transition: Config.defaultBackTransition)
                 break
                 
+            case states.localLobby:
+                self.view!.presentScene(LocalLobbyScene(), transition: Config.defaultBackTransition)
+                break
+                
             default:
                 break
             }
@@ -132,7 +137,7 @@ class LobbyScene: GameScene {
                     
                     if (self.childNodeWithName("buttonLocal")!.containsPoint(location)) {
                         room = 2
-                        self.nextState = .multiplayerMission
+                        self.nextState = .localLobby
                         return
                     }
                     

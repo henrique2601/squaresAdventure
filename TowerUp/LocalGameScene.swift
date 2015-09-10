@@ -1,24 +1,40 @@
 //
-//  MissionScene.swift
+//  LocalGameScene.swift
 //  TowerUp
 //
-//  Created by Pablo Henrique Bertaco on 8/6/15.
+//  Created by Paulo Henrique dos Santos on 09/09/15.
 //  Copyright (c) 2015 WTFGames. All rights reserved.
 //
 
 import UIKit
 import SpriteKit
+import MultipeerConnectivity
 
-class MissionScene: GameScene, SKPhysicsContactDelegate {
+class LocalGameScene: GameScene, SKPhysicsContactDelegate {
+    
+    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    
+    
     enum states {
         case loading
         case mission
         case paused
         case afterMission
-        case floors
-        case powerUp
     }
     
+    //Effect
+    var blackSpriteNode:SKSpriteNode!
+    
+    enum messages : String {
+        case disconnect = "q"
+        case addPlayers = "a"
+        case didJoin = "d"
+        case join = "j"
+        case joinRoom = "r"
+        case update = "u"
+    }
+    
+    var message = messages.addPlayers
     var state = states.loading
     var nextState = states.mission
     
@@ -26,20 +42,19 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
     var yPos = 200
     var world:World!
     var camera:Camera!
-    var player:Player!
+    var player:PlayerOnline!
     var mapManager:MapManager!
     var parallax:Parallax!
-    
+    var room:Int = 0
     let velo:CGFloat = 3
-    
-    //Effect
-    var blackSpriteNode:SKSpriteNode!
-    
-    //Gameplay
-    var lastReset:NSTimeInterval!
+    var currentTime: NSTimeInterval = 0
+    var zeroTime: NSTimeInterval = 0
     
     var playerData = MemoryCard.sharedInstance.playerData
     
+    //Multiplayer
+    var localName:String!
+    var numUpdates = 0
     var boxCoins:Control!
     
     override func didMoveToView(view: SKView) {
@@ -53,15 +68,18 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
         self.addChild(self.world)
         self.physicsWorld.contactDelegate = self
         
-        
         self.camera = Camera()
         self.world.addChild(self.camera)
         
-        //self.player = Player(x: 200, y: 100, loadPhysics: true)
-        self.player = Player(playerData: self.playerData, x: 200, y: 100, loadPhysics: true)
+        self.player = PlayerOnline(skinId: self.playerData.currentSkin.index.integerValue, x: 200, y: 100, loadPhysics: true)
         self.world.addChild(self.player)
         
+        self.player.labelName = Label(name: "labelName", textureName: "", x: 0, y: 0)
+        self.world.addChild(self.player.labelName)
+        
         self.mapManager = MapManager()
+        MapManager.tower = -1//TODO: altas gambs
+        MapManager.floor = 1//TODO: altas gambs
         self.world.addChild(self.mapManager)
         
         self.mapManager.reloadMap(CGPoint(x: 10, y: Chunk.sizeInPoints + 10))
@@ -75,10 +93,24 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
         self.addChild(Button(name: "buttonPowerUp2", textureName: "buttonYellowSquare", text:"3", x: 737, y: 630, xAlign:.center, yAlign:.down))
         
         self.boxCoins = Control(name: "boxCoins", textureName: "boxCoins", x: 1058, y: 20, xAlign: .right, yAlign: .up)
-        self.boxCoins.addChild(Label(name: "lebelCoins", color: GameColors.black, textureName: self.playerData.coins.description, x: 160, y: 39))
+        self.boxCoins.addChild(Label(name: "lebelCoins", color: GameColors.black, textureName: "0", x: 160, y: 39))
         self.addChild(self.boxCoins)
         
         self.addChild(Button(name: "buttonBack", textureName: "buttonGraySquareSmall", text:"||" ,x:20, y:20, xAlign:.left, yAlign:.up))
+        
+        appDelegate.mpcManager.browser.startBrowsingForPeers()
+        appDelegate.mpcManager.advertiser.startAdvertisingPeer()
+        
+        let UTCDate = NSDate()
+        println(UTCDate)
+        
+        self.addHandlers()
+        
+    }
+    
+    func addHandlers(){
+        
+
     }
     
     func didBeginContact(contact: SKPhysicsContact) {
@@ -90,11 +122,14 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
     }
     
     override func update(currentTime: NSTimeInterval) {
+        self.currentTime = currentTime
         if(self.state == self.nextState){
             switch (self.state) {
             case states.mission:
                 self.player.update(currentTime)
                 self.mapManager.update(currentTime)
+                //println(currentTime - self.zeroTIme)
+                
                 break
             default:
                 break
@@ -105,60 +140,16 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
             switch (self.nextState) {
                 
             case states.mission:
-                self.mapManager.reloadMap(CGPoint(x: 10, y: Chunk.sizeInPoints + 10))
-                self.player.reset()
-                self.lastReset = currentTime
+                self.zeroTime = currentTime
                 break
             case states.afterMission:
-                
-                //Desbloquear nova fase?
-                var towerIndex:Int = 0
-                for item in self.playerData.towers as NSOrderedSet {
-                    let tower = item as! TowerData
-                    
-                    let towerType = Towers.types[towerIndex]
-                    
-                    if(MapManager.tower == towerIndex) {
-                        if(MapManager.floor == tower.floors.count - 1) {
-                            if(tower.floors.count < towerType.floorCount) {
-                                var floor = MemoryCard.sharedInstance.newFloorData()
-                                tower.addFloor(floor)
-                            } else {
-                                if (tower.floors.count == towerType.floorCount) {
-                                    //Libera fase para futuros updates
-                                    var floor = MemoryCard.sharedInstance.newFloorData()
-                                    tower.addFloor(floor)
-                                    
-                                    //Cria próxima torre
-                                    var newTower = MemoryCard.sharedInstance.newTowerData()
-                                    floor = MemoryCard.sharedInstance.newFloorData()
-                                    self.playerData.addTower(newTower)
-                                    newTower.addFloor(floor)
-                                    break
-                                }
-                            }
-                        }
-                        break
-                    }
-                    towerIndex++
-                }
-                
                 self.blackSpriteNode = SKSpriteNode(color: GameColors.black, size: self.size)
                 self.blackSpriteNode.anchorPoint = CGPoint(x: 0, y: 1)
                 self.addChild(self.blackSpriteNode)
-                let box = AfterMissionBox(background: "boxWhite", time: Int(currentTime - self.lastReset).description, deaths: self.player.deathCount.description, bonus: self.player.collectedBonus.description)
-                
-                self.playerData.coins = NSNumber(integer: Int(self.playerData.coins) + self.player.collectedBonus)
+                let box = MultiplayerWinBox(background: "boxWhite", name:"You Win!!")
                 self.addChild(box)
                 
                 self.blackSpriteNode.zPosition = box.zPosition - 1
-                
-                break
-            case states.floors:
-                self.view!.presentScene(MainMenuScene(), transition: Config.defaultGoTransition)
-                break
-            case states.powerUp:
-                self.view!.presentScene(MissionScene(), transition: Config.defaultGoTransition)
                 break
                 
             default:
@@ -167,11 +158,12 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
         }
     }
     
-    override func didFinishUpdate()
-    {
+    override func didFinishUpdate() {
         if(self.player.healthPoints > 0){
             self.camera.update(self.player.position)
         }
+        self.player.updateEmiter(self.currentTime, room: self.room)
+        self.player.didFinishUpdate()
         self.parallax.update(self.camera.position)
     }
     
@@ -183,11 +175,13 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
                 let location = touch.locationInNode(self)
                 
                 if (self.childNodeWithName("buttonBack")!.containsPoint(location)) {
-                    self.nextState = .floors
+                    
+                    
+                    
+                    self.nextState = .afterMission
                     return
                 }
             }
-        
         }
     }
 }
