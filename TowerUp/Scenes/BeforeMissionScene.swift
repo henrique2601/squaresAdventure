@@ -39,15 +39,17 @@ class BeforeMissionScene: GameScene {
         self.backgroundColor = GameColors.blue
         self.addChild(Control(name: "mainMenuBackground", x:0, y:0, align:.center))
         
-        var powerUpSlotsArray = Array<SKSpriteNode>()
-        
-        powerUpSlotsArray.append(SKSpriteNode(imageNamed: "powerUpSlot"))
-        powerUpSlotsArray.append(SKSpriteNode(imageNamed: "powerUpSlot"))
-        powerUpSlotsArray.append(SKSpriteNode(imageNamed: "powerUpSlot"))
-        
-        self.powerUpSlotsScrollNode = ScrollNode(name: "powerUpSlotsScrollNode", textureName: "", x: 676, y: 680, xAlign: .center, yAlign: .down, cells: powerUpSlotsArray, scrollDirection: ScrollNode.scrollTypes.horizontal, scaleNodes: false)
-        //ScrollNode.scrollNodeList.remove(self.powerUpSlotsScrollNode)
-        self.addChild(self.powerUpSlotsScrollNode)
+        if(self.playerData.powerUps.count > 0) {
+            var powerUpSlotsArray = Array<SKSpriteNode>()
+            
+            powerUpSlotsArray.append(PowerUpSlot())
+            powerUpSlotsArray.append(PowerUpSlot())
+            powerUpSlotsArray.append(PowerUpSlot())
+            
+            self.powerUpSlotsScrollNode = ScrollNode(name: "powerUpSlotsScrollNode", textureName: "", x: 667, y: 680, xAlign: .center, yAlign: .down, cells: powerUpSlotsArray, scrollDirection: ScrollNode.scrollTypes.horizontal, scaleNodes: false)
+            //ScrollNode.scrollNodeList.remove(self.powerUpSlotsScrollNode)
+            self.addChild(self.powerUpSlotsScrollNode)
+        }
         
         self.addChild(Button(name: "buttonPlay", textureName: "buttonYellow", text:"GO!", x: 1014, y: 630, xAlign:.right, yAlign:.down))
         self.addChild(Button(name: "buttonBack", textureName: "buttonGraySquareSmall", text:"<", x: 20, y: 652, xAlign:.left, yAlign:.down))
@@ -143,6 +145,10 @@ class BeforeMissionScene: GameScene {
                 
                 var powerUpsArray = Array<SKSpriteNode>()
                 
+                for powerUp in self.playerData.powerUps as! Set<PowerUpData> {
+                    println("Achei um powerUp")
+                }
+                
                 var powerUpIndex = 0
                 for powerUp in PowerUps.types {
                     var cell = SKSpriteNode(imageNamed: powerUp.buttonImage)
@@ -178,6 +184,33 @@ class BeforeMissionScene: GameScene {
         }
     }
     
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+        super.touchesBegan(touches, withEvent: event)
+        if (self.state == self.nextState) {
+            switch (self.state) {
+//            case states.choosePowerUps:
+//                for touch in (touches as! Set<UITouch>) {
+//                    let location = touch.locationInNode(self)
+//                    if (self.powerUpsScrollNode.containsPoint(location)) {
+//                        let locationInScrollNode = touch.locationInNode(self.powerUpsScrollNode)
+//                        
+//                        for cell in self.powerUpsScrollNode.cells {
+//                            if(cell.containsPoint(locationInScrollNode)) {
+//                                println("Iniciou toque em PowerUp " + cell.name!)
+//                                
+//                                return
+//                            }
+//                        }
+//                    }
+//                }
+//                break
+                
+            default:
+                break
+            }
+        }
+    }
+    
     override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
         super.touchesEnded(touches, withEvent: event)
         
@@ -201,9 +234,11 @@ class BeforeMissionScene: GameScene {
                         return
                     }
                     
-                    if(self.powerUpSlotsScrollNode.containsPoint(location)) {
-                        self.nextState = .choosePowerUps
-                        return
+                    if(self.playerData.powerUps.count > 0) {
+                        if(self.powerUpSlotsScrollNode.containsPoint(location)) {
+                            self.nextState = .choosePowerUps
+                            return
+                        }
                     }
                 }
                 break
@@ -277,13 +312,29 @@ class BeforeMissionScene: GameScene {
                     }
                     
                     if(touch.tapCount > 0) {
+                        if (self.powerUpSlotsScrollNode.containsPoint(location)) {
+                            let locationInScrollNode = touch.locationInNode(self.powerUpSlotsScrollNode)
+                            
+                            for cell in self.powerUpSlotsScrollNode.cells as! Array<PowerUpSlot> {
+                                if(cell.containsPoint(locationInScrollNode)) {
+                                    cell.reset()
+                                }
+                            }
+                            return
+                        }
+                        
                         if (self.powerUpsScrollNode.containsPoint(location)) {
                             let locationInScrollNode = touch.locationInNode(self.powerUpsScrollNode)
                             
                             for cell in self.powerUpsScrollNode.cells {
                                 if(cell.containsPoint(locationInScrollNode)) {
-                                    println("Tocou no PowerUp " + cell.name!)
                                     
+                                    for powerUpSlotCell in self.powerUpSlotsScrollNode.cells as! Array<PowerUpSlot> {
+                                        if(powerUpSlotCell.empty) {
+                                            powerUpSlotCell.setPowerUp(cell.name!.toInt()!)
+                                            break
+                                        }
+                                    }
                                     return
                                 }
                             }

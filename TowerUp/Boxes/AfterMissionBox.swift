@@ -82,7 +82,7 @@ class AfterMissionBox: Box {
                     scene.nextState = MissionScene.states.powerUp
                     scene.blackSpriteNode.removeFromParent()
                     self.removeFromParent()
-                    MapManager.floor++ //TODO: ???
+                    MapManager.floor++
                     
                     var towerIndex = 0
                     for tower in MemoryCard.sharedInstance.playerData.towers {

@@ -16,8 +16,8 @@ class MapManager: SKNode {
     var loadedRegionX = 0
     var loadedRegionY = 0
     
-    static var tower = 0//TODO: setar ao inicializar
-    static var floor = 0//TODO: setar ao inicializar
+    static var tower = 0
+    static var floor = 0
     
     static var bodies = [SKPhysicsBody]()
     
@@ -34,7 +34,7 @@ class MapManager: SKNode {
         var i = 0
         for (var y = self.playerRegionY - 1; y <= self.playerRegionY + 1 ; y++) {
             for (var x = self.playerRegionX - 1; x <= self.playerRegionX + 1 ; x++) {
-                let chunk = Chunk(tower: MapManager.tower, floor:MapManager.floor, regionX: x, regionY: y)//TODO: receber mundo e andar por parametro ?
+                let chunk = Chunk(tower: MapManager.tower, floor:MapManager.floor, regionX: x, regionY: y)
                 chunk.name = "chunk\(i)"
                 self.addChild(chunk)
                 i++

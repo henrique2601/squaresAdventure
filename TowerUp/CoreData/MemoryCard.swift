@@ -22,7 +22,7 @@ class MemoryCard: NSObject {
         
         //Player
         self.playerData = self.newPlayerData()
-        self.playerData.coins = NSNumber(int: 100)
+        self.playerData.coins = NSNumber(int: 1000)
 
         
         //Towers e Floors
@@ -34,9 +34,8 @@ class MemoryCard: NSObject {
         
         //PowerUps
         var powerUp = self.newPowerUpData()
-        powerUp.locked = NSNumber(bool: false)
         powerUp.index = 0
-        powerUp.available = NSNumber(bool: false)
+        powerUp.available = NSNumber(integer: 10)
         self.playerData.addPowerUp(powerUp)
         
         //Skins

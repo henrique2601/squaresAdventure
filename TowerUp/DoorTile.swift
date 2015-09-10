@@ -11,7 +11,7 @@ import SpriteKit
 
 class DoorTile: Tile {
     init(type:String, x:Int, y:Int) {
-        super.init(imageName: "winTile", x: x, y: y)//TODO: door vai mudar de acordo com o tipo de torre
+        super.init(imageName: "winTile", x: x, y: y)//TODO: door vai mudar de acordo com o tipo de torre?
         
         self.name = "doorTile"
         
