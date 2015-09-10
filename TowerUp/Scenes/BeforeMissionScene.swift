@@ -151,7 +151,7 @@ class BeforeMissionScene: GameScene {
                     powerUpIndex++
                 }
                 
-                self.powerUpsScrollNode = ScrollNode(name: "powerUpsScrollNode", x: 667, y: 466, align: .center, cells: powerUpsArray, scrollDirection: .horizontal, scaleNodes: false, scaleDistance: 100)
+                self.powerUpsScrollNode = ScrollNode(name: "powerUpsScrollNode", x: 667, y: 466, align: .center, cells: powerUpsArray, scrollDirection: .horizontal, scaleNodes: true, scaleDistance:1334 + 100)
                 self.addChild(self.powerUpsScrollNode)
                 
                 break

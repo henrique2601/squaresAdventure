@@ -36,5 +36,17 @@ class Skins : NSObject {
         SkinType(imageName:"pig", price:100), //7
         SkinType(imageName:"rabbit", price:200), //8
         SkinType(imageName:"snake", price:100), //9
+        
+        SkinType(imageName:"skin1", price:200),
+        SkinType(imageName:"skin2", price:200),
+        SkinType(imageName:"skin3", price:300),
+        SkinType(imageName:"skin4", price:200),
+        SkinType(imageName:"skin5", price:500),
+        SkinType(imageName:"skin6", price:200),
+        SkinType(imageName:"skin7", price:200),
+        SkinType(imageName:"skin8", price:200),
+        SkinType(imageName:"skin9", price:400),
+        SkinType(imageName:"skin10", price:300)
+        
         ])
 }
