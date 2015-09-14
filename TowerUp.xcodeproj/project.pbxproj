@@ -157,7 +157,6 @@
 		13CCB6FF1B72B9A70060334C /* OptionsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OptionsScene.swift; path = Scenes/OptionsScene.swift; sourceTree = "<group>"; };
 		13CCB7011B72B9D90060334C /* CreditsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreditsScene.swift; path = Scenes/CreditsScene.swift; sourceTree = "<group>"; };
 		13CCB7031B7373D00060334C /* FloorsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FloorsScene.swift; path = Scenes/FloorsScene.swift; sourceTree = "<group>"; };
-		13D831691BA7329900A95FEB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		13D8316B1BA732A800A95FEB /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/Localizable.strings; sourceTree = "<group>"; };
 		13DE13041B94C38E0092D50B /* ScrollNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ScrollNode.swift; path = src/ScrollNode.swift; sourceTree = "<group>"; };
 		13E7D1081B8CE98D000F67D6 /* 0 0 0 0 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "0 0 0 0"; sourceTree = "<group>"; };
@@ -1475,7 +1474,6 @@
 		13D8316A1BA7329900A95FEB /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				13D831691BA7329900A95FEB /* en */,
 				13D8316B1BA732A800A95FEB /* pt */,
 			);
 			name = Localizable.strings;

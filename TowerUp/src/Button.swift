@@ -116,7 +116,7 @@ class Button: Control {
         self.addChild(button)
         
         let labelNode = SKLabelNode(fontNamed: "Trebuchet MS")
-        labelNode.text = text
+        labelNode.text = NSLocalizedString(text, tableName: nil, comment:"")
         labelNode.fontSize = 32/2
         labelNode.fontColor = GameColors.black
         labelNode.verticalAlignmentMode = SKLabelVerticalAlignmentMode.Center
@@ -133,7 +133,7 @@ class Button: Control {
         self.addChild(buttonPressed)
         
         let labelNodePressed = SKLabelNode(fontNamed: "Trebuchet MS")
-        labelNodePressed.text = text
+        labelNodePressed.text = NSLocalizedString(text, tableName: nil, comment:"")
         labelNodePressed.fontSize = 32/2
         labelNodePressed.fontColor = GameColors.white
         labelNodePressed.verticalAlignmentMode = SKLabelVerticalAlignmentMode.Center

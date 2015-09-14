@@ -88,7 +88,7 @@ override
         self.zPosition = Config.HUDZPosition/2
         
         let labelNode = SKLabelNode(fontNamed: "Trebuchet MS")
-        labelNode.text = textureName
+        labelNode.text = NSLocalizedString(textureName, tableName: nil, comment:"")
         labelNode.fontSize = 25/2
         labelNode.fontColor = GameColors.white
         labelNode.verticalAlignmentMode = SKLabelVerticalAlignmentMode.Center
@@ -108,7 +108,7 @@ override
         self.zPosition = Config.HUDZPosition/2
         
         let labelNode = SKLabelNode(fontNamed: "Trebuchet MS")
-        labelNode.text = textureName
+        labelNode.text = NSLocalizedString(textureName, tableName: nil, comment:"")
         labelNode.fontSize = 25/2
         labelNode.fontColor = color
         labelNode.verticalAlignmentMode = SKLabelVerticalAlignmentMode.Center
@@ -127,14 +127,14 @@ override
     
     func setText(text:String){
         let label = self.childNodeWithName(self.name!) as! SKLabelNode
-        label.text = text
+        label.text = NSLocalizedString(text, tableName: nil, comment:"")
         label.zPosition = Config.HUDZPosition/2
     }
     
     func setText(text:String, color:UIColor){
         let label = self.childNodeWithName(self.name!) as! SKLabelNode
         label.fontColor = color
-        label.text = text
+        label.text = NSLocalizedString(text, tableName: nil, comment:"")
         label.zPosition = Config.HUDZPosition/2
     }
 }

@@ -29,6 +29,7 @@ class MainMenuScene: GameScene {
         
         self.addChild(Button(name: "buttonPlay", textureName: "buttonYellow", text:"SINGLEPLAYER", x: 517, y: 263, align:.center))
         self.addChild(Button(name: "buttonPlayOnline", textureName: "buttonYellow", text:"MULTIPLAYER", x: 517, y: 387, align:.center))
+        
         self.addChild(Button(name: "buttonOptions", textureName: "buttonBlueSmall", text:"OPTIONS", x: 550, y: 511, align:.center))
         self.addChild(Button(name: "buttonCredits", textureName: "buttonBlueSmall", text:"CREDITS", x: 550, y: 613, align:.center))
     }
