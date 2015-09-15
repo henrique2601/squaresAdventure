@@ -15,6 +15,8 @@ class Button: Control {
     
     var pressed:Bool = false
     
+    var event:Event<Void>?// = Event()
+    
     override init(name:String, x:Int, y:Int) {
         super.init()
         self.load(name, textureName: name, x: x, y: y, xAlign: .left, yAlign: .up)
@@ -77,6 +79,15 @@ class Button: Control {
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func addHandler(handler: Void -> ()) {
+        if let event = self.event {
+            
+        } else {
+            self.event = Event()
+        }
+        self.event!.addHandler(handler)
     }
     
     override func load(name:String, textureName:String, x:Int, y:Int, xAlign:Control.xAlignments, yAlign:Control.yAlignments) {
@@ -149,6 +160,33 @@ class Button: Control {
     class func resetButtons() {
         for button in Button.buttonList {
             button.resetPosition()
+        }
+    }
+    
+    class func update(touches: Set<UITouch>) {
+        for button in Button.buttonList {
+            
+            if let event = button.event {
+                for touch in touches {
+                    let location = touch.locationInNode(button.parent)
+                    if button.containsPoint(location) {
+                        event.raise()
+                    }
+                }
+            }
+            
+            var i = 0
+            for touch in Control.touchesArray {
+                let location = touch.locationInNode(button.parent)
+                if button.containsPoint(location) {
+                    i++
+                }
+            }
+            if(i > 0){
+                button.buttonPressed()
+            } else {
+                button.buttonReleased()
+            }
         }
     }
     

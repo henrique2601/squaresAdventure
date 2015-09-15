@@ -35,7 +35,7 @@ class MainMenuScene: GameScene {
     }
     
     override func update(currentTime: NSTimeInterval) {
-        if(self.state == self.nextState){
+        if(self.state == self.nextState) {
             switch (self.state) {
             default:
                 break

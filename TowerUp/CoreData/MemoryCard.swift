@@ -42,7 +42,7 @@ class MemoryCard: NSObject {
         var skin = self.newSkinData()
         skin.locked = NSNumber(bool: false)
         skin.index = Int.random(10)
-        skin.available = NSNumber(bool: true)
+        skin.available = NSNumber(integer: 10)
         self.playerData.addSkin(skin)
         
         self.playerData.currentSkin = skin

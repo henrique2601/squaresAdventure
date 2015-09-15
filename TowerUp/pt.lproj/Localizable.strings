@@ -6,13 +6,18 @@
   Copyright (c) 2015 WTFGames. All rights reserved.
 */
 
+//Portuguese
+
 //MainMenu
 "OPTIONS" = "OPÇÕES";
 "CREDITS" = "CRÉDITOS";
+
+
+//MessegeBox
+"Cancel" = "Cancelar";
 
 
 
 
 
 //"" = ""
-

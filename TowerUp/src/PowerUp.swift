@@ -34,12 +34,12 @@ class PowerUp: Button {
         PowerUp.powerUpList.insert(self)
     }
     
-    class func update(currentTime: NSTimeInterval) {
-        for powerUp in PowerUp.powerUpList {
-            //powerUp.update(currentTime:currentTime)
-            
-        }
-    }
+//    class func update(currentTime: NSTimeInterval) {
+//        for powerUp in PowerUp.powerUpList {
+//            //powerUp.update(currentTime:currentTime)
+//            
+//        }
+//    }
     
     //    private func update(currentTime: NSTimeInterval) {
     //

@@ -30,7 +30,8 @@ class BeforeMissionScene: GameScene {
     var skinsScrollNode:ScrollNode!
     var powerUpsScrollNode:ScrollNode!
     
-    var mySkins = NSMutableArray()//SkinsDesbloqueadas/Compradas
+    var mySkins = NSMutableArray()//Skins Desbloqueadas/Compradas
+    var myPowerUps = NSMutableArray()//PowerUps Desbloqueados/Comprados
     
     var boxCoins:Control!
     
@@ -78,6 +79,7 @@ class BeforeMissionScene: GameScene {
                 self.player.removeFromParent()
                 
                 var skinsArray = Array<SKSpriteNode>()
+                self.mySkins = NSMutableArray()
                 
                 //Skins desbloqueadas
                 for skin in self.playerData.skins as! Set<SkinData> {
@@ -86,7 +88,7 @@ class BeforeMissionScene: GameScene {
                     let cell = SKSpriteNode(imageNamed: "boxSmall")
                     cell.name = String(skin.index.description)
                     
-                    let skinType = Skins.types[Int(skin.index)]
+                    let skinType = Skins.types[skin.index.integerValue]
                     
                     cell.addChild(SKSpriteNode(imageNamed: skinType.imageName))
                     
@@ -144,18 +146,28 @@ class BeforeMissionScene: GameScene {
                 self.player.removeFromParent()
                 
                 var powerUpsArray = Array<SKSpriteNode>()
-                
-                for powerUp in self.playerData.powerUps as! Set<PowerUpData> {
-                    println("Achei um powerUp")
-                }
-                
-                var powerUpIndex = 0
-                for powerUp in PowerUps.types {
-                    var cell = SKSpriteNode(imageNamed: powerUp.buttonImage)
-                    cell.name = powerUpIndex.description
+                self.myPowerUps = NSMutableArray()
+                    
+                //PowerUps desbloqueados
+                for powerUpData in self.playerData.powerUps as! Set<PowerUpData> {
+                    self.myPowerUps.addObject(powerUpData.index.description)
+                    let powerUpType = PowerUps.types[powerUpData.index.integerValue]
+                    var cell = SKSpriteNode(imageNamed: powerUpType.buttonImage)
+                    cell.name = powerUpData.index.description
                     powerUpsArray.append(cell)
-                    powerUpIndex++
                 }
+                
+                var cell = SKSpriteNode(imageNamed: "powerUpSlot")
+                cell.name = "-1"
+                
+                var spriteNode = SKSpriteNode(imageNamed: "powerUpSlot")
+                spriteNode.color = GameColors.black
+                spriteNode.colorBlendFactor = 1
+                cell.addChild(spriteNode)
+                
+                cell.addChild(Label(name: "lebelName", color:GameColors.white, textureName: "?", x: 0, y: 0))
+                
+                powerUpsArray.append(cell)
                 
                 self.powerUpsScrollNode = ScrollNode(name: "powerUpsScrollNode", x: 667, y: 466, align: .center, cells: powerUpsArray, scrollDirection: .horizontal, scaleNodes: true, scaleDistance:1334 + 100)
                 self.addChild(self.powerUpsScrollNode)
@@ -331,7 +343,9 @@ class BeforeMissionScene: GameScene {
                                     
                                     for powerUpSlotCell in self.powerUpSlotsScrollNode.cells as! Array<PowerUpSlot> {
                                         if(powerUpSlotCell.empty) {
-                                            powerUpSlotCell.setPowerUp(cell.name!.toInt()!)
+                                            if(cell.name!.toInt()! >= 0){
+                                                powerUpSlotCell.setPowerUp(cell.name!.toInt()!)
+                                            }
                                             break
                                         }
                                     }

@@ -146,7 +146,7 @@ class Control: SKNode {
         for touch in touches {
             Control.touchesArray.remove(touch)
         }
-        Button.update()
+        Button.update(touches)
         Switch.update(touches)
     }
     
