@@ -51,9 +51,10 @@ class LocalLobbyScene: GameScene, MPCManagerDelegate {
         
         self.mpcManager = MPCManager()
         self.mpcManager.delegate = self
-        self.mpcManager.peer = MCPeerID(displayName: self.playerData.name)
+        self.mpcManager.peer = MCPeerID(displayName: self.playerData.currentSkin.index.description + " " + self.playerData.name)
         println(self.mpcManager.peer)
         self.mpcManager.advertiser.startAdvertisingPeer()
+        self.mpcManager.browser.startBrowsingForPeers()
         
         
         
@@ -69,8 +70,8 @@ class LocalLobbyScene: GameScene, MPCManagerDelegate {
             case states.searching:
                 if ((currentTime - self.zeroTime) > 20) {
                     println("Nao achei, vou hostear")
-                    self.mpcManager.advertiser.stopAdvertisingPeer()
-                    self.mpcManager.browser.startBrowsingForPeers()
+                    //self.mpcManager.advertiser.stopAdvertisingPeer()
+                    //self.mpcManager.browser.startBrowsingForPeers()
                     self.nextState = states.hosting
                 }
                 break
@@ -158,9 +159,12 @@ class LocalLobbyScene: GameScene, MPCManagerDelegate {
             println("Conectado a " + peerID.displayName)
             //self.appDelegate.mpcManager.join(dictionaryWithData: [self.playerData.currentSkin.index.integerValue: self.appDelegate.mpcManager.peer.displayName])
             println(self.mpcManager.session.connectedPeers)
-            self.nextState = .waitingHostStart
+            self.nextState = .hosting
+            
         }
     }
+    
+    
 
     
 }

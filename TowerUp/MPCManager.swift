@@ -41,6 +41,8 @@ class MPCManager: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate, M
     
     var lastTime = NSDate().timeIntervalSince1970
     
+    let timeStarted = NSDate()
+    
     var playerData = MemoryCard.sharedInstance.playerData
     
     
@@ -48,8 +50,8 @@ class MPCManager: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate, M
         super.init()
         
         //peer = MCPeerID(displayName: UIDevice.currentDevice().name)
-        
-        peer = MCPeerID(displayName: self.playerData.name)
+        //println(self.playerData.currentSkin.index)
+        peer = MCPeerID(displayName: self.playerData.currentSkin.index.description + " " + self.playerData.name)
         
         session = MCSession(peer: peer)
         session.delegate = self
@@ -63,11 +65,17 @@ class MPCManager: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate, M
     
     
     // MARK: MCNearbyServiceBrowserDelegate method implementation
+//    
+//    func browser(browser: MCNearbyServiceBrowser!, foundPeer peerID: MCPeerID!, withDiscoveryInfo info: [NSObject : AnyObject]!) {
+//        foundPeers.append(peerID)
+//        browser.invitePeer(peerID, toSession: self.session, withContext: nil, timeout: 10)
+//        //delegate?.foundPeer()
+//    }
     
     func browser(browser: MCNearbyServiceBrowser!, foundPeer peerID: MCPeerID!, withDiscoveryInfo info: [NSObject : AnyObject]!) {
-        foundPeers.append(peerID)
-        browser.invitePeer(peerID, toSession: self.session, withContext: nil, timeout: 10)
-        //delegate?.foundPeer()
+        var runningTime = -timeStarted.timeIntervalSinceNow
+        let context = NSData(bytes: &runningTime, length: sizeof(NSTimeInterval))
+        browser.invitePeer(peerID, toSession: self.session, withContext: context, timeout: 30)
     }
     
     
@@ -90,10 +98,21 @@ class MPCManager: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate, M
     
     // MARK: MCNearbyServiceAdvertiserDelegate method implementation
     
+//    func advertiser(advertiser: MCNearbyServiceAdvertiser!, didReceiveInvitationFromPeer peerID: MCPeerID!, withContext context: NSData!, invitationHandler: ((Bool, MCSession!) -> Void)!) {
+//        self.invitationHandler = invitationHandler
+//        self.invitationHandler(true, self.session)
+//        //delegate?.invitationWasReceived(peerID.displayName)
+//    }
+    
     func advertiser(advertiser: MCNearbyServiceAdvertiser!, didReceiveInvitationFromPeer peerID: MCPeerID!, withContext context: NSData!, invitationHandler: ((Bool, MCSession!) -> Void)!) {
-        self.invitationHandler = invitationHandler
-        self.invitationHandler(true, self.session)
-        //delegate?.invitationWasReceived(peerID.displayName)
+        var runningTime = -timeStarted.timeIntervalSinceNow
+        var peerRunningTime = NSTimeInterval()
+        context.getBytes(&peerRunningTime)
+        let isPeerOlder = (peerRunningTime > runningTime)
+        invitationHandler(isPeerOlder, self.session)
+        if isPeerOlder {
+            advertiser.stopAdvertisingPeer()
+        } 
     }
     
     
