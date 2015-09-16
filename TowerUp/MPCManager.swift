@@ -35,13 +35,21 @@ class MPCManager: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate, M
     
     var foundPeers = [MCPeerID]()
     
+    var connectedPeers = [MCPeerID]()
+    
     var invitationHandler: ((Bool, MCSession!)->Void)!
+    
+    var lastTime = NSDate().timeIntervalSince1970
+    
+    var playerData = MemoryCard.sharedInstance.playerData
     
     
     override init() {
         super.init()
         
-        peer = MCPeerID(displayName: UIDevice.currentDevice().name)
+        //peer = MCPeerID(displayName: UIDevice.currentDevice().name)
+        
+        peer = MCPeerID(displayName: self.playerData.name)
         
         session = MCSession(peer: peer)
         session.delegate = self
@@ -100,7 +108,7 @@ class MPCManager: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate, M
         switch state{
         case MCSessionState.Connected:
             println("Connected" )
-            delegate?.connectedWithPeer(peerID)
+            self.delegate?.connectedWithPeer(peerID)
             
         case MCSessionState.Connecting:
             println("Connecting")
@@ -112,8 +120,13 @@ class MPCManager: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate, M
     
     
     func session(session: MCSession!, didReceiveData data: NSData!, fromPeer peerID: MCPeerID!) {
-        let dictionary: [String: AnyObject] = ["data": data, "fromPeer": peerID]
-        NSNotificationCenter.defaultCenter().postNotificationName("receivedMPCDataNotification", object: dictionary)
+        //let dictionary: [String: AnyObject] = ["data": data, "fromPeer": peerID]
+        let dataDictionary = NSKeyedUnarchiver.unarchiveObjectWithData(data!) as! Dictionary<Int, String>
+        println(dataDictionary)
+        println((NSDate().timeIntervalSince1970 - self.lastTime) * 1000)
+        self.lastTime = NSDate().timeIntervalSince1970
+        
+        //NSNotificationCenter.defaultCenter().postNotificationName("receivedMPCDataNotification", object: dictionary)
     }
     
     
@@ -138,6 +151,18 @@ class MPCManager: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate, M
         }
         
         return true
+    }
+    
+    func join(dictionaryWithData dictionary: Dictionary<Int, String>) {
+        let dataToSend = NSKeyedArchiver.archivedDataWithRootObject(dictionary)
+        
+        if session.connectedPeers.count > 0 {
+            var error : NSError?
+            if !session.sendData(dataToSend, toPeers: session.connectedPeers , withMode: MCSessionSendDataMode.Reliable, error: &error) {
+                println(error?.localizedDescription)
+            }
+        }
+        
     }
     
 }

@@ -9,7 +9,7 @@
 import UIKit
 import SpriteKit
 
-class LobbyScene: GameScene {
+class LobbyScene: GameScene, UITextFieldDelegate {
     enum states {
         case lobby
         case multiplayerMission
@@ -23,22 +23,10 @@ class LobbyScene: GameScene {
     let socket = SocketIOClient(socketURL: "179.232.86.110:3001", options: nil)
 
     var myTextField: Textfield!
+    var playerData = MemoryCard.sharedInstance.playerData
     
     
-    func randomStringWithLength (len : Int) -> NSString {
-        
-        let letters : NSString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-        
-        var randomString : NSMutableString = NSMutableString(capacity: len)
-        
-        for (var i=0; i < len; i++){
-            var length = UInt32 (letters.length)
-            var rand = arc4random_uniform(length)
-            randomString.appendFormat("%C", letters.characterAtIndex(Int(rand)))
-        }
-        
-        return randomString
-    }
+    
     
     
     
@@ -56,9 +44,10 @@ class LobbyScene: GameScene {
         self.addChild(Button(name: "buttonQuick", textureName: "buttonYellow", text:"QUICKPLAY", x: 229, y: 393, align:.center))
         self.addChild(Button(name: "buttonLocal", textureName: "buttonYellow", text:"LOCAL GAME", x: 229, y: 517, align:.center))
         
-        self.myTextField = Textfield(name: self.randomStringWithLength(8) as String, x: 741, y: 240, align:.center, view:self.view!)
-        
+        self.myTextField = Textfield(name: self.playerData.name , x: 741, y: 240, align:.center, view:self.view!)
+        self.myTextField.myTextField.delegate = self
         self.addChild(self.myTextField)
+        
         
         
 
@@ -75,6 +64,14 @@ class LobbyScene: GameScene {
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         
         textField.resignFirstResponder()
+        return true
+    }
+    
+    
+    //do anything befor keyboard go away
+    func textFieldShouldEndEditing(textField: UITextField) -> Bool
+    {
+        self.playerData.name = textField.text
         return true
     }
     

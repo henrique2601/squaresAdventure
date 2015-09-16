@@ -141,6 +141,27 @@ public extension CGFloat {
     }
 }
 
+public extension String {
+    /**
+    Returns a random floating point number between 0.0 and 1.0, inclusive.
+    */
+    public static  func randomStringWithLength (len : Int) -> String {
+        
+        
+        let letters : NSString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        
+        var randomString : NSMutableString = NSMutableString(capacity: len)
+        
+        for (var i=0; i < len; i++){
+            var length = UInt32 (letters.length)
+            var rand = arc4random_uniform(length)
+            randomString.appendFormat("%C", letters.characterAtIndex(Int(rand)))
+        }
+        
+        return randomString as String
+    }
+}
+
 extension NSSet: ArrayLiteralConvertible {
     public class func convertFromArrayLiteral(elements: AnyObject...) -> Self {
         return self(array: elements)

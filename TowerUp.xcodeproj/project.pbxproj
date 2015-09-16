@@ -44,7 +44,6 @@
 		1359DD101B7287A7006C12FA /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1359DD0F1B7287A7006C12FA /* Button.swift */; };
 		1359DD161B728C95006C12FA /* Switch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1359DD151B728C95006C12FA /* Switch.swift */; };
 		1359DD181B728D3E006C12FA /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1359DD171B728D3E006C12FA /* Label.swift */; };
-		13634B341B9F57060040379C /* PlayerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13634B331B9F57060040379C /* PlayerData.swift */; };
 		137DC5151BA1C3E300D58DED /* PowerUpSlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137DC5141BA1C3E300D58DED /* PowerUpSlot.swift */; };
 		1383FD5E1B7A49730012DA45 /* MapManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1383FD5D1B7A49730012DA45 /* MapManager.swift */; };
 		1383FD601B7A4A920012DA45 /* Chunk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1383FD5F1B7A4A920012DA45 /* Chunk.swift */; };
@@ -77,6 +76,7 @@
 		3A979C641BA0773C00A8E09F /* MPCManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A979C631BA0773C00A8E09F /* MPCManager.swift */; };
 		3A979C661BA0780100A8E09F /* LocalGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A979C651BA0780100A8E09F /* LocalGameScene.swift */; };
 		3A979C681BA1BB9500A8E09F /* LocalLobbyScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A979C671BA1BB9500A8E09F /* LocalLobbyScene.swift */; };
+		3AF8813A1BA8690D006AEB70 /* PlayerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF881391BA8690D006AEB70 /* PlayerData.swift */; };
 		5C48055E1B84CFF60066E151 /* DoorTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C48055D1B84CFF60066E151 /* DoorTile.swift */; };
 		5CF8A3A61B8F39A000C16CA9 /* PowerUpData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF8A3A51B8F39A000C16CA9 /* PowerUpData.swift */; };
 		5CF8A3A81B8F39A000C16CA9 /* FloorData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF8A3A71B8F39A000C16CA9 /* FloorData.swift */; };
@@ -134,7 +134,6 @@
 		1359DD0F1B7287A7006C12FA /* Button.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Button.swift; path = src/Button.swift; sourceTree = "<group>"; };
 		1359DD151B728C95006C12FA /* Switch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Switch.swift; path = src/Switch.swift; sourceTree = "<group>"; };
 		1359DD171B728D3E006C12FA /* Label.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Label.swift; path = src/Label.swift; sourceTree = "<group>"; };
-		13634B331B9F57060040379C /* PlayerData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayerData.swift; path = CoreData/PlayerData.swift; sourceTree = "<group>"; };
 		137DC5141BA1C3E300D58DED /* PowerUpSlot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PowerUpSlot.swift; path = src/PowerUpSlot.swift; sourceTree = "<group>"; };
 		1383FD5D1B7A49730012DA45 /* MapManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapManager.swift; path = src/MapManager.swift; sourceTree = "<group>"; };
 		1383FD5F1B7A4A920012DA45 /* Chunk.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Chunk.swift; path = src/Chunk.swift; sourceTree = "<group>"; };
@@ -167,6 +166,7 @@
 		3A979C631BA0773C00A8E09F /* MPCManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPCManager.swift; sourceTree = "<group>"; };
 		3A979C651BA0780100A8E09F /* LocalGameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalGameScene.swift; sourceTree = "<group>"; };
 		3A979C671BA1BB9500A8E09F /* LocalLobbyScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocalLobbyScene.swift; path = Scenes/LocalLobbyScene.swift; sourceTree = "<group>"; };
+		3AF881391BA8690D006AEB70 /* PlayerData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayerData.swift; path = CoreData/PlayerData.swift; sourceTree = "<group>"; };
 		5C48055D1B84CFF60066E151 /* DoorTile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoorTile.swift; sourceTree = "<group>"; };
 		5CF8A3A51B8F39A000C16CA9 /* PowerUpData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PowerUpData.swift; path = CoreData/PowerUpData.swift; sourceTree = "<group>"; };
 		5CF8A3A71B8F39A000C16CA9 /* FloorData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FloorData.swift; path = CoreData/FloorData.swift; sourceTree = "<group>"; };
@@ -317,7 +317,7 @@
 			children = (
 				5CF8A3A71B8F39A000C16CA9 /* FloorData.swift */,
 				139A0E8E1B7431CB00EDE944 /* MemoryCard.swift */,
-				13634B331B9F57060040379C /* PlayerData.swift */,
+				3AF881391BA8690D006AEB70 /* PlayerData.swift */,
 				5CF8A3A51B8F39A000C16CA9 /* PowerUpData.swift */,
 				5CF8A3A91B8F39A000C16CA9 /* SkinData.swift */,
 				132D229E1B9875230094CF53 /* TowerData.swift */,
@@ -1412,6 +1412,7 @@
 				13169CF11B810A9100516CF6 /* SwiftRegex.swift in Sources */,
 				13FC80081B86404500865C72 /* MultiplayerGameScene.swift in Sources */,
 				139A0E8A1B73D05900EDE944 /* MissionScene.swift in Sources */,
+				3AF8813A1BA8690D006AEB70 /* PlayerData.swift in Sources */,
 				1359DD081B728611006C12FA /* GameColors.swift in Sources */,
 				1359DD161B728C95006C12FA /* Switch.swift in Sources */,
 				13169CEF1B810A9100516CF6 /* SocketParser.swift in Sources */,
@@ -1454,7 +1455,6 @@
 				1323FF611B90C83300EF4C2E /* Skin.swift in Sources */,
 				1383FD5E1B7A49730012DA45 /* MapManager.swift in Sources */,
 				1359DD181B728D3E006C12FA /* Label.swift in Sources */,
-				13634B341B9F57060040379C /* PlayerData.swift in Sources */,
 				5CF8A3A81B8F39A000C16CA9 /* FloorData.swift in Sources */,
 				5CF8A3A61B8F39A000C16CA9 /* PowerUpData.swift in Sources */,
 				13169CEC1B810A9100516CF6 /* SocketIOClient.swift in Sources */,

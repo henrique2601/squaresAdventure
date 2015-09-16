@@ -215,7 +215,7 @@ class Player: Square {
             self.needAngularImpulse = 1
             if(self.physicsBody!.allContactedBodies().count > 0) {
                 for body in self.physicsBody!.allContactedBodies() {
-                    if(body.categoryBitMask == physicsCategory.ground.rawValue) {
+                    if(body.categoryBitMask == physicsCategory.ground.rawValue || body.categoryBitMask == physicsCategory.player.rawValue) {
                         if (abs(self.physicsBody!.velocity.dy) < 200) {
                             if((self.childNodeWithName("//buttonJump") as! Button).pressed) {
                                 self.physicsBody?.velocity.dy = 900
