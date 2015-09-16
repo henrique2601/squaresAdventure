@@ -29,6 +29,7 @@ class GameScene: SKScene {
     override func didMoveToView(view: SKView) {
         self.scaleMode = SKSceneScaleMode.AspectFit
         self.anchorPoint = CGPoint(x: 0, y: 1)
+        MemoryCard.sharedInstance.saveGame()
     }
     
     override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {

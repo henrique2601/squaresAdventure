@@ -78,6 +78,7 @@ class AfterMissionBox: Box {
                 return
             }
             if (self.childNodeWithName("buttonNext")!.containsPoint(location)) {
+                //
                 if let scene = self.scene as? MissionScene {
                     scene.nextState = MissionScene.states.powerUp
                     scene.blackSpriteNode.removeFromParent()

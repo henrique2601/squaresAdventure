@@ -31,7 +31,7 @@ class BeforeMissionScene: GameScene {
     var powerUpsScrollNode:ScrollNode!
     
     var mySkins = NSMutableArray()//Skins Desbloqueadas/Compradas
-    var myPowerUps = NSMutableArray()//PowerUps Desbloqueados/Comprados
+    //var myPowerUps = NSMutableArray()//PowerUps Desbloqueados/Comprados
     
     var boxCoins:Control!
     
@@ -43,9 +43,9 @@ class BeforeMissionScene: GameScene {
         if(self.playerData.powerUps.count > 0) {
             var powerUpSlotsArray = Array<SKSpriteNode>()
             
-            powerUpSlotsArray.append(PowerUpSlot())
-            powerUpSlotsArray.append(PowerUpSlot())
-            powerUpSlotsArray.append(PowerUpSlot())
+            for item in self.playerData.powerUpSlots {
+                powerUpSlotsArray.append(PowerUpSlot(powerUpSlotData: item as! PowerUpSlotData))
+            }
             
             self.powerUpSlotsScrollNode = ScrollNode(name: "powerUpSlotsScrollNode", textureName: "", x: 667, y: 680, xAlign: .center, yAlign: .down, cells: powerUpSlotsArray, scrollDirection: ScrollNode.scrollTypes.horizontal, scaleNodes: false)
             //ScrollNode.scrollNodeList.remove(self.powerUpSlotsScrollNode)
@@ -61,7 +61,7 @@ class BeforeMissionScene: GameScene {
     }
     
     override func update(currentTime: NSTimeInterval) {
-        if(self.state == self.nextState){
+        if(self.state == self.nextState) {
             switch (self.state) {
             default:
                 break
@@ -108,7 +108,7 @@ class BeforeMissionScene: GameScene {
                         
                         var spriteNodeSkin = SKSpriteNode(imageNamed: skinType.imageName)
                         spriteNodeSkin.color = GameColors.black
-                        spriteNodeSkin.colorBlendFactor = 0.8
+                        spriteNodeSkin.colorBlendFactor = 1
                         cell.addChild(spriteNodeSkin)
                         spriteNodeSkin.zPosition = 1
                         
@@ -141,22 +141,28 @@ class BeforeMissionScene: GameScene {
                 self.addChild(skinsScrollNode)
                 
                 break
+
                 
             case states.choosePowerUps:
                 self.player.removeFromParent()
                 
                 var powerUpsArray = Array<SKSpriteNode>()
-                self.myPowerUps = NSMutableArray()
                     
                 //PowerUps desbloqueados
-                for powerUpData in self.playerData.powerUps as! Set<PowerUpData> {
-                    self.myPowerUps.addObject(powerUpData.index.description)
-                    let powerUpType = PowerUps.types[powerUpData.index.integerValue]
-                    var cell = SKSpriteNode(imageNamed: powerUpType.buttonImage)
-                    cell.name = powerUpData.index.description
-                    powerUpsArray.append(cell)
+                for item in self.playerData.powerUps {
+                    let powerUp = PowerUp(powerUpData: item as! PowerUpData)
+                    for item in self.powerUpSlotsScrollNode.cells {
+                        if let powerUpSlot = item as? PowerUpSlot {
+                            if powerUpSlot.powerUpSlotData.powerUp?.index == powerUp.powerUpData.index {
+                                powerUp.inUse = true
+                                break
+                            }
+                        }
+                    }
+                    powerUpsArray.append(powerUp)
                 }
                 
+                // PowerUp "?"
                 var cell = SKSpriteNode(imageNamed: "powerUpSlot")
                 cell.name = "-1"
                 
@@ -166,6 +172,7 @@ class BeforeMissionScene: GameScene {
                 cell.addChild(spriteNode)
                 
                 cell.addChild(Label(name: "lebelName", color:GameColors.white, textureName: "?", x: 0, y: 0))
+                //
                 
                 powerUpsArray.append(cell)
                 
@@ -283,7 +290,7 @@ class BeforeMissionScene: GameScene {
                                             let skinData = MemoryCard.sharedInstance.newSkinData()
                                             skinData.index = NSNumber(integer: cell.name!.toInt()!)
                                             self.playerData.addSkin(skinData)
-                                            self.playerData.currentSkin = skinData
+                                            self.playerData.skinSlot.skin = skinData
                                             self.playerData.coins = NSNumber(integer: Int(self.playerData.coins) - skinType.price)
                                             (self.boxCoins.childNodeWithName("lebelCoins") as! Label).setText(self.playerData.coins.description)
                                             self.nextState = states.beforeMission
@@ -294,7 +301,7 @@ class BeforeMissionScene: GameScene {
                                     } else {
                                         for skin in self.playerData.skins as! Set<SkinData> {
                                             if (skin.index.description == cell.name!) {
-                                                self.playerData.currentSkin = skin
+                                                self.playerData.skinSlot.skin = skin
                                                 self.nextState = states.beforeMission
                                                 return
                                             }
@@ -327,9 +334,19 @@ class BeforeMissionScene: GameScene {
                         if (self.powerUpSlotsScrollNode.containsPoint(location)) {
                             let locationInScrollNode = touch.locationInNode(self.powerUpSlotsScrollNode)
                             
-                            for cell in self.powerUpSlotsScrollNode.cells as! Array<PowerUpSlot> {
+                            for cell in self.powerUpSlotsScrollNode.cells {
                                 if(cell.containsPoint(locationInScrollNode)) {
-                                    cell.reset()
+                                    if let powerUpSlot = cell as? PowerUpSlot {
+                                        for item in self.powerUpsScrollNode.cells {
+                                            if let powerUp = item as? PowerUp {
+                                                if (powerUp.powerUpData.index == powerUpSlot.powerUpSlotData.powerUp?.index) {
+                                                    powerUp.inUse = false
+                                                    break
+                                                }
+                                            }
+                                        }
+                                        powerUpSlot.reset()
+                                    }
                                 }
                             }
                             return
@@ -341,10 +358,13 @@ class BeforeMissionScene: GameScene {
                             for cell in self.powerUpsScrollNode.cells {
                                 if(cell.containsPoint(locationInScrollNode)) {
                                     
-                                    for powerUpSlotCell in self.powerUpSlotsScrollNode.cells as! Array<PowerUpSlot> {
-                                        if(powerUpSlotCell.empty) {
-                                            if(cell.name!.toInt()! >= 0){
-                                                powerUpSlotCell.setPowerUp(cell.name!.toInt()!)
+                                    for powerUpSlot in self.powerUpSlotsScrollNode.cells as! Array<PowerUpSlot> {
+                                        if(powerUpSlot.empty) {
+                                            if let powerUp = cell as? PowerUp {
+                                                if(!powerUp.inUse) {
+                                                    powerUp.inUse = true
+                                                    powerUpSlot.setPowerUp(powerUp.powerUpData)
+                                                }
                                             }
                                             break
                                         }

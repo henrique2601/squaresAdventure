@@ -67,7 +67,7 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
         self.camera = Camera()
         self.world.addChild(self.camera)
         
-        self.player = PlayerOnline(skinId: self.playerData.currentSkin.index.integerValue, x: 200, y: 100, loadPhysics: true)
+        self.player = PlayerOnline(skinId: self.playerData.skinSlot.skin.index.integerValue, x: 200, y: 100, loadPhysics: true)
         self.world.addChild(self.player)
         
         self.player.labelName = Label(name: "labelName", textureName: "", x: 0, y: 0)
@@ -204,7 +204,7 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
         
         
         self.socket.on(messages.didJoin.rawValue) {[weak self] data, ack in
-            self!.socket.emit(messages.joinRoom.rawValue, self!.localName! , self!.room, self!.playerData.currentSkin.index.integerValue)
+            self!.socket.emit(messages.joinRoom.rawValue, self!.localName! , self!.room, self!.playerData.skinSlot.skin.index.integerValue)
         }
         
         self.socket.on(messages.join.rawValue) {[weak self] data, ack in

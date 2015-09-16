@@ -44,7 +44,9 @@
 		1359DD101B7287A7006C12FA /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1359DD0F1B7287A7006C12FA /* Button.swift */; };
 		1359DD161B728C95006C12FA /* Switch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1359DD151B728C95006C12FA /* Switch.swift */; };
 		1359DD181B728D3E006C12FA /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1359DD171B728D3E006C12FA /* Label.swift */; };
-		13634B341B9F57060040379C /* PlayerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13634B331B9F57060040379C /* PlayerData.swift */; };
+		135C5CA21BA8310A006643BB /* PlayerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135C5CA11BA8310A006643BB /* PlayerData.swift */; };
+		135C5CA41BA8364B006643BB /* PowerUpSlotData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135C5CA31BA8364B006643BB /* PowerUpSlotData.swift */; };
+		135C5CA61BA8364C006643BB /* SkinSlotData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135C5CA51BA8364C006643BB /* SkinSlotData.swift */; };
 		137DC5151BA1C3E300D58DED /* PowerUpSlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137DC5141BA1C3E300D58DED /* PowerUpSlot.swift */; };
 		1383FD5E1B7A49730012DA45 /* MapManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1383FD5D1B7A49730012DA45 /* MapManager.swift */; };
 		1383FD601B7A4A920012DA45 /* Chunk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1383FD5F1B7A4A920012DA45 /* Chunk.swift */; };
@@ -136,7 +138,9 @@
 		1359DD0F1B7287A7006C12FA /* Button.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Button.swift; path = src/Button.swift; sourceTree = "<group>"; };
 		1359DD151B728C95006C12FA /* Switch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Switch.swift; path = src/Switch.swift; sourceTree = "<group>"; };
 		1359DD171B728D3E006C12FA /* Label.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Label.swift; path = src/Label.swift; sourceTree = "<group>"; };
-		13634B331B9F57060040379C /* PlayerData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayerData.swift; path = CoreData/PlayerData.swift; sourceTree = "<group>"; };
+		135C5CA11BA8310A006643BB /* PlayerData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayerData.swift; path = CoreData/PlayerData.swift; sourceTree = "<group>"; };
+		135C5CA31BA8364B006643BB /* PowerUpSlotData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PowerUpSlotData.swift; path = CoreData/PowerUpSlotData.swift; sourceTree = "<group>"; };
+		135C5CA51BA8364C006643BB /* SkinSlotData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SkinSlotData.swift; path = CoreData/SkinSlotData.swift; sourceTree = "<group>"; };
 		137DC5141BA1C3E300D58DED /* PowerUpSlot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PowerUpSlot.swift; path = src/PowerUpSlot.swift; sourceTree = "<group>"; };
 		1383FD5D1B7A49730012DA45 /* MapManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapManager.swift; path = src/MapManager.swift; sourceTree = "<group>"; };
 		1383FD5F1B7A4A920012DA45 /* Chunk.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Chunk.swift; path = src/Chunk.swift; sourceTree = "<group>"; };
@@ -322,9 +326,11 @@
 			children = (
 				5CF8A3A71B8F39A000C16CA9 /* FloorData.swift */,
 				139A0E8E1B7431CB00EDE944 /* MemoryCard.swift */,
-				13634B331B9F57060040379C /* PlayerData.swift */,
+				135C5CA11BA8310A006643BB /* PlayerData.swift */,
 				5CF8A3A51B8F39A000C16CA9 /* PowerUpData.swift */,
+				135C5CA31BA8364B006643BB /* PowerUpSlotData.swift */,
 				5CF8A3A91B8F39A000C16CA9 /* SkinData.swift */,
+				135C5CA51BA8364C006643BB /* SkinSlotData.swift */,
 				132D229E1B9875230094CF53 /* TowerData.swift */,
 				1359DC981B727726006C12FA /* TowerUp.xcdatamodeld */,
 			);
@@ -1460,12 +1466,14 @@
 				13CCB6FE1B72B9010060334C /* TowersScene.swift in Sources */,
 				13169CEE1B810A9100516CF6 /* SocketPacket.swift in Sources */,
 				133184A21B83AADB00DF11D5 /* Spike.swift in Sources */,
+				135C5CA61BA8364C006643BB /* SkinSlotData.swift in Sources */,
 				1323FF611B90C83300EF4C2E /* Skin.swift in Sources */,
 				1383FD5E1B7A49730012DA45 /* MapManager.swift in Sources */,
 				1359DD181B728D3E006C12FA /* Label.swift in Sources */,
-				13634B341B9F57060040379C /* PlayerData.swift in Sources */,
 				5CF8A3A81B8F39A000C16CA9 /* FloorData.swift in Sources */,
+				135C5CA21BA8310A006643BB /* PlayerData.swift in Sources */,
 				5CF8A3A61B8F39A000C16CA9 /* PowerUpData.swift in Sources */,
+				135C5CA41BA8364B006643BB /* PowerUpSlotData.swift in Sources */,
 				13169CEC1B810A9100516CF6 /* SocketIOClient.swift in Sources */,
 				1359DC9A1B727726006C12FA /* TowerUp.xcdatamodeld in Sources */,
 				13CCB7041B7373D00060334C /* FloorsScene.swift in Sources */,

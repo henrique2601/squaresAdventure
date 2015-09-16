@@ -9,30 +9,61 @@
 import UIKit
 import SpriteKit
 
-class PowerUp: Button {
+class PowerUp: SKSpriteNode {
     
     static var powerUpList = Set<PowerUp>()
     
-    override func load(name:String, textureName:String, x:Int, y:Int, xAlign:Control.xAlignments, yAlign:Control.yAlignments) {
-        self.name = name
-        self.position = CGPoint(x: x/2 + Int(Config.translate.x), y: -y/2 - Int(Config.translate.y))
-        self.zPosition = Config.HUDZPosition
-        
-        let texture0 = SKTexture(imageNamed: "\(textureName)0")
-        let switch0 = SKSpriteNode(texture: texture0, color: nil, size: texture0.size())
-        switch0.anchorPoint = CGPoint(x: 0, y: 1)
-        switch0.name = "\(name)0"
-        self.addChild(switch0)
-        
-        let texture1 = SKTexture(imageNamed: "\(textureName)1")
-        let switch1 = SKSpriteNode(texture: texture1, color: nil, size: texture1.size())
-        switch1.anchorPoint = CGPoint(x: 0, y: 1)
-        switch1.name = "\(name)1"
-        switch1.hidden = true
-        self.addChild(switch1)
-        
-        PowerUp.powerUpList.insert(self)
+    var powerUpData:PowerUpData
+    
+    var inUse:Bool = false {
+        didSet {
+            if(self.inUse) {
+                var spriteNode = SKSpriteNode(imageNamed: PowerUps.types.last!.buttonImage)
+                spriteNode.color = GameColors.black
+                spriteNode.colorBlendFactor = 1
+                spriteNode.zPosition = self.zPosition + CGFloat(1)
+                self.addChild(spriteNode)
+            } else {
+                self.removeAllChildren()
+            }
+        }
     }
+    
+    init(powerUpData:PowerUpData) {
+        self.powerUpData = powerUpData
+        
+        let powerUpType = PowerUps.types[powerUpData.index.integerValue]
+        
+        let texture = SKTexture(imageNamed: powerUpType.buttonImage)
+        super.init(texture: texture, color: nil, size: texture.size())
+        
+        self.name = powerUpData.index.description
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+//    override func load(name:String, textureName:String, x:Int, y:Int, xAlign:Control.xAlignments, yAlign:Control.yAlignments) {
+//        self.name = name
+//        self.position = CGPoint(x: x/2 + Int(Config.translate.x), y: -y/2 - Int(Config.translate.y))
+//        self.zPosition = Config.HUDZPosition
+//        
+//        let texture0 = SKTexture(imageNamed: "\(textureName)0")
+//        let switch0 = SKSpriteNode(texture: texture0, color: nil, size: texture0.size())
+//        switch0.anchorPoint = CGPoint(x: 0, y: 1)
+//        switch0.name = "\(name)0"
+//        self.addChild(switch0)
+//        
+//        let texture1 = SKTexture(imageNamed: "\(textureName)1")
+//        let switch1 = SKSpriteNode(texture: texture1, color: nil, size: texture1.size())
+//        switch1.anchorPoint = CGPoint(x: 0, y: 1)
+//        switch1.name = "\(name)1"
+//        switch1.hidden = true
+//        self.addChild(switch1)
+//        
+//        PowerUp.powerUpList.insert(self)
+//    }
     
 //    class func update(currentTime: NSTimeInterval) {
 //        for powerUp in PowerUp.powerUpList {
@@ -45,22 +76,22 @@ class PowerUp: Button {
     //
     //    }
     
-    override class func update() {
-        for powerUp in PowerUp.powerUpList {
-            var i = 0
-            for touch in Control.touchesArray {
-                let location = touch.locationInNode(powerUp.parent)
-                if powerUp.containsPoint(location) {
-                    i++
-                }
-            }
-            if(i > 0) {
-                powerUp.buttonPressed()
-            } else {
-                powerUp.buttonReleased()
-            }
-        }
-    }
+//    override class func update() {
+//        for powerUp in PowerUp.powerUpList {
+//            var i = 0
+//            for touch in Control.touchesArray {
+//                let location = touch.locationInNode(powerUp.parent)
+//                if powerUp.containsPoint(location) {
+//                    i++
+//                }
+//            }
+//            if(i > 0) {
+//                powerUp.buttonPressed()
+//            } else {
+//                powerUp.buttonReleased()
+//            }
+//        }
+//    }
 }
 
 class PowerUpType: NSObject {

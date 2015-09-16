@@ -33,6 +33,12 @@ class MemoryCard: NSObject {
         self.playerData.addTower(tower)
         
         //PowerUps
+        self.playerData.powerUpSlots = NSOrderedSet(array: [
+            self.newPowerUpSlotData(),
+            self.newPowerUpSlotData(),
+            self.newPowerUpSlotData()
+            ])// Fixado 3 slots
+        
         var powerUp = self.newPowerUpData()
         powerUp.index = 0
         powerUp.available = NSNumber(integer: 10)
@@ -45,7 +51,8 @@ class MemoryCard: NSObject {
         skin.available = NSNumber(integer: 10)
         self.playerData.addSkin(skin)
         
-        self.playerData.currentSkin = skin
+        self.playerData.skinSlot = self.newSkinSlotData()
+        self.playerData.skinSlot.skin = skin
         
         self.autoSave = true
         
@@ -53,9 +60,11 @@ class MemoryCard: NSObject {
     }
     
     func saveGame() {
-        if(self.autoSave){
+        if(self.autoSave) {
+            self.autoSave = false
             println("Saving game...")
             self.saveContext()
+            self.autoSave = true
         }
     }
     
@@ -177,5 +186,13 @@ class MemoryCard: NSObject {
     
     func newSkinData() -> SkinData {
         return NSEntityDescription.insertNewObjectForEntityForName("SkinData", inManagedObjectContext: self.managedObjectContext!) as! SkinData
+    }
+    
+    func newSkinSlotData() -> SkinSlotData {
+        return NSEntityDescription.insertNewObjectForEntityForName("SkinSlotData", inManagedObjectContext: self.managedObjectContext!) as! SkinSlotData
+    }
+    
+    func newPowerUpSlotData() -> PowerUpSlotData {
+        return NSEntityDescription.insertNewObjectForEntityForName("PowerUpSlotData", inManagedObjectContext: self.managedObjectContext!) as! PowerUpSlotData
     }
 }
