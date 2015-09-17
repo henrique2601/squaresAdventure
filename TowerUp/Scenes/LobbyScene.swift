@@ -26,7 +26,6 @@ class LobbyScene: GameScene, UITextFieldDelegate {
     var playerData = MemoryCard.sharedInstance.playerData
     
     
-    
     func randomStringWithLength (len : Int) -> NSString {
         
         let letters : NSString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
@@ -41,6 +40,7 @@ class LobbyScene: GameScene, UITextFieldDelegate {
         
         return randomString
     }
+    
     
     
     
@@ -85,7 +85,7 @@ class LobbyScene: GameScene, UITextFieldDelegate {
     //do anything befor keyboard go away
     func textFieldShouldEndEditing(textField: UITextField) -> Bool
     {
-        self.playerData.name = textField.text
+        self.playerData.name = textField.text!
         return true
     }
     

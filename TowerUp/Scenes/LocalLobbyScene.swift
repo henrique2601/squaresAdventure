@@ -10,7 +10,7 @@ import UIKit
 import SpriteKit
 import MultipeerConnectivity
 
-class LocalLobbyScene: GameScene, MPCManagerDelegate {
+class LocalLobbyScene: GameScene {
     enum states {
         case loading
         case searching
@@ -31,7 +31,7 @@ class LocalLobbyScene: GameScene, MPCManagerDelegate {
     var labelStatus: Label!
     
     var playerData = MemoryCard.sharedInstance.playerData
-    var mpcManager: MPCManager!
+    //var mpcManager: MPCManager!
 
     
     
@@ -49,12 +49,12 @@ class LocalLobbyScene: GameScene, MPCManagerDelegate {
         self.addChild(Button(name: "buttonBack", textureName: "buttonGraySquareSmall", text:"<", x: 20, y: 652, xAlign:.left, yAlign:.down))
         
         
-        self.mpcManager = MPCManager()
-        self.mpcManager.delegate = self
-        self.mpcManager.peer = MCPeerID(displayName: self.playerData.currentSkin.index.description + " " + self.playerData.name)
-        println(self.mpcManager.peer)
-        self.mpcManager.advertiser.startAdvertisingPeer()
-        self.mpcManager.browser.startBrowsingForPeers()
+//        self.mpcManager = MPCManager()
+//        self.mpcManager.delegate = self
+//        self.mpcManager.peer = MCPeerID(displayName: self.playerData.currentSkin.index.description + " " + self.playerData.name)
+//        println(self.mpcManager.peer)
+//        self.mpcManager.advertiser.startAdvertisingPeer()
+//        self.mpcManager.browser.startBrowsingForPeers()
         
         
         
@@ -71,8 +71,8 @@ class LocalLobbyScene: GameScene, MPCManagerDelegate {
                 
                 if ((currentTime - self.zeroTime) > 10) {
                     print("Nao achei, vou hostear")
-                    appDelegate.mpcManager.advertiser.stopAdvertisingPeer()
-                    appDelegate.mpcManager.browser.startBrowsingForPeers()
+//                    appDelegate.mpcManager.advertiser.stopAdvertisingPeer()
+//                    appDelegate.mpcManager.browser.startBrowsingForPeers()
                     self.nextState = states.hosting
                 }
                 break
@@ -120,10 +120,8 @@ class LocalLobbyScene: GameScene, MPCManagerDelegate {
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         super.touchesEnded(touches, withEvent: event)
         
-        if (self.state == self.nextState) {
-            switch (self.state) {
-            case states.lobby:
-                for touch in (touches ) {
+        
+                for touch in (touches as! Set<UITouch>) {
                     let location = touch.locationInNode(self)
                     
                     
@@ -156,13 +154,7 @@ class LocalLobbyScene: GameScene, MPCManagerDelegate {
         }
     }
     
-    
-    func connectedWithPeer(peerID: MCPeerID) {
-        NSOperationQueue.mainQueue().addOperationWithBlock { () -> Void in
-            print("Conectado a " + peerID.displayName)
-            self.nextState = .waitingHostStart
-        }
-    }
+
     
     
 
