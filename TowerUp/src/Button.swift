@@ -17,6 +17,11 @@ class Button: Control {
     
     var event:Event<Void>?// = Event()
     
+    override init() {
+        super.init()
+        //Este inicializador deve ser sobreescrito nas subclasses
+    }
+    
     override init(name:String, x:Int, y:Int) {
         super.init()
         self.load(name, textureName: name, x: x, y: y, xAlign: .left, yAlign: .up)
@@ -98,13 +103,13 @@ class Button: Control {
         self.zPosition = Config.HUDZPosition
         
         let texture = SKTexture(imageNamed: textureName)
-        let button = SKSpriteNode(texture: texture, color: nil, size: texture.size())
+        let button = SKSpriteNode(texture: texture, color: UIColor.whiteColor(), size: texture.size())
         button.anchorPoint = CGPoint(x: 0, y: 1)
         button.name = name
         self.addChild(button)
         
         let texturePressed = SKTexture(imageNamed: "\(textureName)Pressed")
-        let buttonPressed = SKSpriteNode(texture: texturePressed, color: nil, size: texturePressed.size())
+        let buttonPressed = SKSpriteNode(texture: texturePressed, color: UIColor.whiteColor(), size: texturePressed.size())
         buttonPressed.name = "\(name)Pressed"
         buttonPressed.anchorPoint = CGPoint(x: 0, y: 1)
         buttonPressed.hidden = true
@@ -121,7 +126,7 @@ class Button: Control {
         self.zPosition = Config.HUDZPosition
         
         let texture = SKTexture(imageNamed: textureName)
-        let button = SKSpriteNode(texture: texture, color: nil, size: texture.size())
+        let button = SKSpriteNode(texture: texture, color: UIColor.whiteColor(), size: texture.size())
         button.anchorPoint = CGPoint(x: 0, y: 1)
         button.name = name
         self.addChild(button)
@@ -137,7 +142,7 @@ class Button: Control {
         labelNode.zPosition = labelNode.zPosition + 1
         
         let texturePressed = SKTexture(imageNamed: "\(textureName)Pressed")
-        let buttonPressed = SKSpriteNode(texture: texturePressed, color: nil, size: texturePressed.size())
+        let buttonPressed = SKSpriteNode(texture: texturePressed, color: UIColor.whiteColor(), size: texturePressed.size())
         buttonPressed.name = "\(name)Pressed"
         buttonPressed.anchorPoint = CGPoint(x: 0, y: 1)
         buttonPressed.hidden = true
@@ -168,42 +173,38 @@ class Button: Control {
             
             if let event = button.event {
                 for touch in touches {
-                    let location = touch.locationInNode(button.parent)
-                    if button.containsPoint(location) {
-                        event.raise()
+                    if let parent = button.parent {
+                        let location = touch.locationInNode(parent)
+                        if button.containsPoint(location) {
+                            event.raise()
+                        }
                     }
                 }
             }
-            
-            var i = 0
-            for touch in Control.touchesArray {
-                let location = touch.locationInNode(button.parent)
-                if button.containsPoint(location) {
-                    i++
-                }
-            }
-            if(i > 0){
-                button.buttonPressed()
-            } else {
-                button.buttonReleased()
-            }
+            button.update()
         }
     }
     
     class func update() {
         for button in Button.buttonList {
-            var i = 0
-            for touch in Control.touchesArray {
-                let location = touch.locationInNode(button.parent)
-                if button.containsPoint(location) {
+            button.update()
+        }
+    }
+    
+    func update(){
+        var i = 0
+        for touch in Control.touchesArray {
+            if let parent = self.parent {
+                let location = touch.locationInNode(parent)
+                if self.containsPoint(location) {
                     i++
                 }
             }
-            if(i > 0){
-                button.buttonPressed()
-            } else {
-                button.buttonReleased()
-            }
+        }
+        if(i > 0){
+            self.buttonPressed()
+        } else {
+            self.buttonReleased()
         }
     }
     

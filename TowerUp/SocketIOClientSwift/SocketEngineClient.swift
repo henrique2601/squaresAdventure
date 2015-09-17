@@ -1,8 +1,8 @@
 //
-//  SocketAnyEvent.swift
-//  Socket.IO-Swift
+//  SocketEngineClient.swift
+//  Socket.IO-Client-Swift
 //
-//  Created by Erik Little on 3/28/15.
+//  Created by Erik Little on 3/19/15.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -21,15 +21,16 @@
 //  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
+//
 
 import Foundation
 
-@objc public final class SocketAnyEvent {
-    public let event:String!
-    public let items:NSArray?
+@objc public protocol SocketEngineClient {
+    var socketURL: String {get}
+    var secure: Bool {get}
     
-    init(event:String, items:NSArray?) {
-        self.event = event
-        self.items = items
-    }
+    func didError(reason: AnyObject)
+    func engineDidClose(reason: String)
+    func parseSocketMessage(msg: String)
+    func parseBinaryData(data: NSData)
 }

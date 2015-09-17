@@ -1,8 +1,8 @@
 //
-//  SocketTypes.swift
-//  SocketIO-Swift
+//  SocketIOClientStatus.swift
+//  Socket.IO-Client-Swift
 //
-//  Created by Erik Little on 4/8/15.
+//  Created by Erik Little on 8/14/15.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -24,11 +24,21 @@
 
 import Foundation
 
-// @objc_block is undocumented, but is used because Swift assumes that all
-// Objective-C blocks are copied, but Objective-C assumes that Swift will copy it.
-// And the way things are done here, the bridging fails to copy the block in
-// SocketAckMap#addAck
-public typealias AckCallback = @objc_block (NSArray?) -> Void
-public typealias AckEmitter = (AnyObject...) -> Void
-public typealias NormalCallback = (NSArray?, AckEmitter?) -> Void
-public typealias OnAckCallback = (timeoutAfter:UInt64, callback:AckCallback) -> Void
+@objc public enum SocketIOClientStatus: Int, CustomStringConvertible {
+    public var description: String {
+        switch self {
+        case NotConnected:
+            return "Not Connected"
+        case Closed:
+            return "Closed"
+        case Connecting:
+            return "Connecting"
+        case Connected:
+            return "Connected"
+        case Reconnecting:
+            return "Reconnecting"
+        }
+    }
+    
+    case NotConnected, Closed, Connecting, Connected, Reconnecting
+}

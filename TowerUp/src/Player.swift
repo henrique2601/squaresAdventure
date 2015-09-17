@@ -16,7 +16,7 @@ class Player: Square {
     var totalRotation:CGFloat = 0
     
     //Respawn
-    var startingPosition:CGPoint = CGPoint.zeroPoint
+    var startingPosition:CGPoint = CGPoint.zero
     
     //Vida
     var maxDeathCount = 10
@@ -33,10 +33,11 @@ class Player: Square {
     var collectedBonus = 0 {
         didSet {
             if let scene = self.scene as? MissionScene {
-                (scene.boxCoins.childNodeWithName("lebelCoins") as! Label).setText(self.collectedBonus.description)
+                scene.labelCoins.setText(self.collectedBonus.description)
+                return
             }
             if let scene = self.scene as? MultiplayerGameScene {
-                (scene.boxCoins.childNodeWithName("lebelCoins") as! Label).setText(self.collectedBonus.description)
+                scene.labelCoins.setText(self.collectedBonus.description)
             }
         }
     }
@@ -62,16 +63,16 @@ class Player: Square {
         self.loadNewPlayer("player", texture:skinType.imageName, x: x, y: y, loadPhysics: loadPhysics)
     }
     
-    
     func loadNewPlayer(name:String, texture:String, x:Int, y:Int, loadPhysics:Bool) {
         self.name = name
-        self.zPosition = Config.HUDZPosition
+        
         
         let texture = SKTexture(imageNamed: texture)
         var spriteNode:SKSpriteNode!
         
         if(loadPhysics) {
-            spriteNode = SKSpriteNode(texture: texture, color: nil, size: texture.size())
+            self.zPosition = Config.HUDZPosition/2
+            spriteNode = SKSpriteNode(texture: texture, color: UIColor.whiteColor(), size: texture.size())
             //Teste
             //spriteNode.color = UIColor.blackColor()
             //spriteNode.colorBlendFactor = 1
@@ -81,7 +82,8 @@ class Player: Square {
             self.startingPosition = self.position
             self.loadPhysics()
         } else {
-            spriteNode = SKSpriteNode(texture: texture, color: nil, size: CGSize(width: texture.size().width, height: texture.size().height))
+            self.zPosition = Config.HUDZPosition
+            spriteNode = SKSpriteNode(texture: texture, color: UIColor.whiteColor(), size: CGSize(width: texture.size().width, height: texture.size().height))
             spriteNode.name = name
             
             //spriteNode.anchorPoint = CGPoint(x: 0, y: 1)
@@ -137,7 +139,7 @@ class Player: Square {
             break
             
         case physicsCategory.doorTile.rawValue:
-            println("Toc toc , tem alguem na \(physicsBody.node!.name!)")
+            print("Toc toc , tem alguem na \(physicsBody.node!.name!)")
             break
             
         case physicsCategory.winTile.rawValue:
@@ -145,7 +147,7 @@ class Player: Square {
             break
             
         default:
-            println("didBeginContact de player com \(physicsBody.node!.name!) não está sendo processado")
+            print("didBeginContact de player com \(physicsBody.node!.name!) não está sendo processado")
             break
         }
     }
@@ -172,7 +174,7 @@ class Player: Square {
             break
             
         default:
-            println("didEndContact de player com \(physicsBody.node?.name!) não está sendo processado")
+            print("didEndContact de player com \(physicsBody.node?.name!) não está sendo processado")
             break
         }
     }
@@ -213,21 +215,18 @@ class Player: Square {
             }
             
             self.needAngularImpulse = 1
-            if(self.physicsBody!.allContactedBodies().count > 0) {
-                for body in self.physicsBody!.allContactedBodies() {
-                    if(body.categoryBitMask == physicsCategory.ground.rawValue) {
-                        if (abs(self.physicsBody!.velocity.dy) < 200) {
-                            if((self.childNodeWithName("//buttonJump") as! Button).pressed) {
-                                self.physicsBody?.velocity.dy = 900
-                                //self.physicsBody?.applyForce(CGVector(dx: 0, dy: 2100))
+            if let physicsBody = self.physicsBody {
+                if(physicsBody.allContactedBodies().count > 0) {
+                    for body in physicsBody.allContactedBodies() as NSArray {
+                        if(body.categoryBitMask == physicsCategory.ground.rawValue) {
+                            if (abs(self.physicsBody!.velocity.dy) < 200) {
+                                if((self.childNodeWithName("//buttonJump") as! Button).pressed) {
+                                    self.physicsBody?.velocity.dy = 900
+                                    //self.physicsBody?.applyForce(CGVector(dx: 0, dy: 2100))
+                                }
                             }
-                            //TODO: teste gambs
-                            if((self.childNodeWithName("//buttonPowerUp0") as! Button).pressed) {
-                                self.physicsBody?.velocity.dy = 900 * 2
-                                //self.physicsBody?.applyForce(CGVector(dx: 0, dy: 2100))
-                            }
+                            break
                         }
-                        break
                     }
                 }
                 

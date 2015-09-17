@@ -25,17 +25,17 @@ class PlayerData: NSManagedObject {
 extension PlayerData{
     //Adiciona HardPointData no NSSet hardPoints
     func addPowerUp(value: PowerUpData) {
-        var items = self.mutableSetValueForKey("powerUps");
+        let items = self.mutableSetValueForKey("powerUps");
         items.addObject(value)
     }
     
     func addSkin(value: SkinData) {
-        var items = self.mutableSetValueForKey("skins");
+        let items = self.mutableSetValueForKey("skins");
         items.addObject(value)
     }
     
     func addTower(value: TowerData) {
-        var items = self.mutableOrderedSetValueForKey("towers");
+        let items = self.mutableOrderedSetValueForKey("towers");
         items.addObject(value)
     }
 }

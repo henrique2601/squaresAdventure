@@ -25,7 +25,7 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
     var xPos = 500
     var yPos = 200
     var world:World!
-    var camera:Camera!
+    var myCamera:GameCamera!
     var player:Player!
     var mapManager:MapManager!
     var parallax:Parallax!
@@ -40,7 +40,9 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
     
     var playerData = MemoryCard.sharedInstance.playerData
     
-    var boxCoins:Control!
+    var labelCoins:Label!
+    
+    var powerUpsScrollNode:ScrollNode!
     
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
@@ -54,8 +56,8 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
         self.physicsWorld.contactDelegate = self
         
         
-        self.camera = Camera()
-        self.world.addChild(self.camera)
+        self.myCamera = GameCamera()
+        self.world.addChild(self.myCamera)
         
         //self.player = Player(x: 200, y: 100, loadPhysics: true)
         self.player = Player(playerData: self.playerData, x: 200, y: 100, loadPhysics: true)
@@ -70,13 +72,27 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
         self.addChild(Button(name: "buttonRight", textureName: "buttonYellowSquare", text:">" ,x:160, y:630, xAlign:.left, yAlign:.down))
         self.addChild(Button(name: "buttonJump", textureName: "buttonYellow", text:"Jump", x:1014, y:630, xAlign:.right, yAlign:.down))
         
-        self.addChild(Button(name: "buttonPowerUp0", textureName: "buttonBlueSquare", text:"1", x: 497, y: 630, xAlign:.center, yAlign:.down))
-        self.addChild(Button(name: "buttonPowerUp1", textureName: "buttonOrangeSquare", text:"2", x: 617, y: 630, xAlign:.center, yAlign:.down))
-        self.addChild(Button(name: "buttonPowerUp2", textureName: "buttonYellowSquare", text:"3", x: 737, y: 630, xAlign:.center, yAlign:.down))
+        if(self.playerData.powerUps.count > 0) {
+            var powerUpsArray = Array<SKNode>()
+            
+            for item in self.playerData.powerUpSlots {
+                if let powerUpSlotData = item as? PowerUpSlotData {
+                    if let powerUpData = powerUpSlotData.powerUp {
+                        let powerUp = PowerUp(powerUpData: powerUpData)
+                        powerUpsArray.append(powerUp)
+                    }
+                }
+            }
+            
+            self.powerUpsScrollNode = ScrollNode(name: "powerUpSlotsScrollNode", textureName: "", x: 667, y: 680, xAlign: .center, yAlign: .down, cells: powerUpsArray, scrollDirection: ScrollNode.scrollTypes.horizontal, scaleNodes: false)
+            self.powerUpsScrollNode.canScroll = false
+            self.addChild(self.powerUpsScrollNode)
+        }
         
-        self.boxCoins = Control(name: "boxCoins", textureName: "boxCoins", x: 1058, y: 20, xAlign: .right, yAlign: .up)
-        self.boxCoins.addChild(Label(name: "lebelCoins", color: GameColors.black, textureName: self.playerData.coins.description, x: 160, y: 39))
-        self.addChild(self.boxCoins)
+        let boxCoins = Control(name: "boxCoins", textureName: "boxCoins", x: 1058, y: 20, xAlign: .right, yAlign: .up)
+        self.labelCoins = Label(name: "lebelCoins", color: GameColors.black, textureName: self.playerData.coins.description, x: 160, y: 39)
+        boxCoins.addChild(self.labelCoins)
+        self.addChild(boxCoins)
         
         self.addChild(Button(name: "buttonBack", textureName: "buttonGraySquareSmall", text:"||" ,x:20, y:20, xAlign:.left, yAlign:.up))
     }
@@ -121,7 +137,7 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
                     if(MapManager.tower == towerIndex) {
                         if(MapManager.floor == tower.floors.count - 1) {
                             if(tower.floors.count < towerType.floorCount) {
-                                var floor = MemoryCard.sharedInstance.newFloorData()
+                                let floor = MemoryCard.sharedInstance.newFloorData()
                                 tower.addFloor(floor)
                             } else {
                                 if (tower.floors.count == towerType.floorCount) {
@@ -130,7 +146,7 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
                                     tower.addFloor(floor)
                                     
                                     //Cria próxima torre
-                                    var newTower = MemoryCard.sharedInstance.newTowerData()
+                                    let newTower = MemoryCard.sharedInstance.newTowerData()
                                     floor = MemoryCard.sharedInstance.newFloorData()
                                     self.playerData.addTower(newTower)
                                     newTower.addFloor(floor)
@@ -170,16 +186,16 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
     override func didFinishUpdate()
     {
         if(self.player.healthPoints > 0){
-            self.camera.update(self.player.position)
+            self.myCamera.update(self.player.position)
         }
-        self.parallax.update(self.camera.position)
+        self.parallax.update(self.myCamera.position)
     }
     
-    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         super.touchesEnded(touches, withEvent: event)
         
         if (self.state == self.nextState) {
-            for touch in (touches as! Set<UITouch>) {
+            for touch in (touches ) {
                 let location = touch.locationInNode(self)
                 
                 if (self.childNodeWithName("buttonBack")!.containsPoint(location)) {

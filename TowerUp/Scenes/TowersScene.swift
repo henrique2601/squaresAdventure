@@ -43,8 +43,8 @@ class TowersScene: GameScene {
             let tower = item as! TowerData
             let towerType = Towers.types[towerIndex]
             let cell = SKSpriteNode(imageNamed: "towerBox")
-                var labelName = Label(name: "labelTowerName", color: GameColors.black, textureName: "Tower " + (towerIndex + 1).description, x: 0, y: 0)
-                var labelProgress = Label(name: "labelTowerProgress", color: GameColors.black, textureName: (tower.floors.count - 1).description + "/" + towerType.floorCount.description, x: 0, y: 64)
+                let labelName = Label(name: "labelTowerName", color: GameColors.black, textureName: "Tower " + (towerIndex + 1).description, x: 0, y: 0)
+                let labelProgress = Label(name: "labelTowerProgress", color: GameColors.black, textureName: (tower.floors.count - 1).description + "/" + towerType.floorCount.description, x: 0, y: 64)
                 cell.addChild(labelName)
                 cell.addChild(labelProgress)
             
@@ -55,10 +55,10 @@ class TowersScene: GameScene {
         //Torres bloqueadas, mostrar cadeado
         for (0; towerIndex < Towers.types.count; towerIndex++) {
             let cell = SKSpriteNode(imageNamed: "towerBox")
-            var spriteNode = SKSpriteNode(imageNamed: "towerBoxLocked")
+            let spriteNode = SKSpriteNode(imageNamed: "towerBoxLocked")
             cell.addChild(spriteNode)
             
-            var labelName = Label(name: "labelTowerName", color: GameColors.black, textureName: "Locked", x: 0, y: 0)
+            let labelName = Label(name: "labelTowerName", color: GameColors.black, textureName: "Locked", x: 0, y: 0)
             cell.addChild(labelName)
             
             towersArray.append(cell)
@@ -98,13 +98,13 @@ class TowersScene: GameScene {
         }
     }
     
-    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         super.touchesEnded(touches, withEvent: event)
         
         if (self.state == self.nextState) {
             switch (self.state) {
             case states.towers:
-                for touch in (touches as! Set<UITouch>) {
+                for touch in (touches ) {
                     let location = touch.locationInNode(self)
                     
                     if (self.childNodeWithName("buttonBack")!.containsPoint(location)) {
@@ -124,7 +124,7 @@ class TowersScene: GameScene {
                                         MapManager.tower = i
                                         self.nextState = .floors
                                     } else {
-                                        println("Torre \(i) ainda não foi desbloqueada")
+                                        print("Torre \(i) ainda não foi desbloqueada")
                                     }
                                     return
                                 }

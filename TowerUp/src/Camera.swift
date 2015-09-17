@@ -9,7 +9,7 @@
 import UIKit
 import SpriteKit
 
-class Camera: SKNode {
+class GameCamera: SKNode {
     
     var maxX:CGFloat = 0
     var maxY:CGFloat = 0

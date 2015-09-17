@@ -26,20 +26,20 @@ class Box: Control {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
-        Control.touchesBegan(touches as! Set<UITouch>)
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        Control.touchesBegan(touches )
     }
     
-    override func touchesMoved(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
         Control.touchesMoved()
     }
     
-    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
-        Control.touchesEnded(touches as! Set<UITouch>)
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        Control.touchesEnded(touches )
     }
     
-    override func touchesCancelled(touches: Set<NSObject>!, withEvent event: UIEvent!) {
-        Control.touchesEnded(touches as! Set<UITouch>)
+    override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
+        Control.touchesEnded(touches! as Set<UITouch>)
     }
     
     override var hidden: Bool {

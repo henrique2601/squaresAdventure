@@ -12,9 +12,18 @@
 "OPTIONS" = "OPÇÕES";
 "CREDITS" = "CRÉDITOS";
 
+//OptionsScene
+
+
+//BeforeMissionScene
+"GO!" = "VAI!";
+
+//MissionScene
+"Jump" = "Pulo";
 
 //MessegeBox
 "Cancel" = "Cancelar";
+
 
 
 

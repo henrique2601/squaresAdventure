@@ -50,7 +50,7 @@ class MapManager: SKNode {
         
         //Preload de fisica dos cenário.
         for (var i = 0; i < Ground.typeCount; i++) {
-            var texture = SKTexture(imageNamed: "dirt\(i + 1)")//TODO: tema do tile
+            let texture = SKTexture(imageNamed: "dirt\(i + 1)")//TODO: tema do tile
             MapManager.bodies.append(SKPhysicsBody(texture: texture, alphaThreshold: 0.7,  size: texture.size()))
         }
     }
@@ -93,8 +93,8 @@ class MapManager: SKNode {
     
     func updatePlayerRegion(position:CGPoint) {
         
-        var positionX = position.x
-        var positionY = position.y
+        let positionX = position.x
+        let positionY = position.y
         
         self.playerRegionX = Int(positionX / Chunk.sizeInPoints)
         self.playerRegionY = Int(positionY / Chunk.sizeInPoints)

@@ -24,13 +24,30 @@ class Config: NSObject {
     
     static func sceneSize() -> CGSize {
         
-        switch(UIDevice.currentDevice().systemVersion[0] as String) {
-        case "8":
+        switch(Int(UIDevice.currentDevice().systemVersion[0] as String)!) {
+            
+        case 9:
             let sceneSize:CGSize = CGSize(width: 1334/2, height: 750/2)
             
             let xScale = skViewBoundsSize.width / sceneSize.width
             let yScale = skViewBoundsSize.height / sceneSize.height
-            var scale = min(xScale, yScale)
+            let scale = min(xScale, yScale)
+            
+            Config.translate = CGPoint(x: ((skViewBoundsSize.width - (sceneSize.width * scale))/2)/scale,
+                y: ((skViewBoundsSize.height - (sceneSize.height * scale))/2)/scale)
+            
+            Config.translateInView = CGPoint(x: ((skViewBoundsSize.width - (sceneSize.width * scale))/2)/scale,
+                y: ((skViewBoundsSize.height - (sceneSize.height * scale))/2))
+            
+            Config.currentSceneSize = CGSize(width: skViewBoundsSize.width / scale, height: skViewBoundsSize.height / scale)
+            return Config.currentSceneSize
+            
+        case 8:
+            let sceneSize:CGSize = CGSize(width: 1334/2, height: 750/2)
+            
+            let xScale = skViewBoundsSize.width / sceneSize.width
+            let yScale = skViewBoundsSize.height / sceneSize.height
+            let scale = min(xScale, yScale)
             
             Config.translate = CGPoint(x: ((skViewBoundsSize.width - (sceneSize.width * scale))/2)/scale,
                                        y: ((skViewBoundsSize.height - (sceneSize.height * scale))/2)/scale)
@@ -42,8 +59,8 @@ class Config: NSObject {
             return Config.currentSceneSize
             
         default:
-            var scale = 1
-            Config.translate = CGPoint.zeroPoint
+            let scale = 1
+            Config.translate = CGPoint.zero
             Config.currentSceneSize = CGSize(width: 1334/2, height: 750/2)
             return Config.currentSceneSize
         }
@@ -52,7 +69,7 @@ class Config: NSObject {
 
 public extension String {
     subscript (i: Int) -> Character {
-        return self[advance(self.startIndex, i)]
+        return self[self.startIndex.advancedBy(i)]
     }
     
     subscript (i: Int) -> String {
@@ -60,7 +77,7 @@ public extension String {
     }
     
     subscript (r: Range<Int>) -> String {
-        return substringWithRange(Range(start: advance(startIndex, r.startIndex), end: advance(startIndex, r.endIndex)))
+        return substringWithRange(Range(start: startIndex.advancedBy(r.startIndex), end: startIndex.advancedBy(r.endIndex)))
     }
 }
 
@@ -73,21 +90,21 @@ public extension Int {
     }
     /**
     Create a random num Int
-    :param: lower number Int
-    :param: upper number Int
+    - parameter lower: number Int
+    - parameter upper: number Int
     :return: random number Int
     */
-    public static func random(#min: Int, max: Int) -> Int {
+    public static func random(min min: Int, max: Int) -> Int {
         return Int(arc4random_uniform(UInt32(max - min + 1))) + min
     }
     
     /**
     Create a random num Int
-    :param: lower number CGFloat
-    :param: upper number CGFloat
+    - parameter lower: number CGFloat
+    - parameter upper: number CGFloat
     :return: random number Int
     */
-    public static func random(#min: CGFloat, max: CGFloat) -> Int {
+    public static func random(min min: CGFloat, max: CGFloat) -> Int {
         return Int(arc4random_uniform(UInt32(max - min + 1))) + Int(min)
     }
 }
@@ -102,11 +119,11 @@ public extension Double {
     
     /**
     Create a random num Double
-    :param: lower number Double
-    :param: upper number Double
+    - parameter lower: number Double
+    - parameter upper: number Double
     :return: random number Double
     */
-    public static func random(#min: Double, max: Double) -> Double {
+    public static func random(min min: Double, max: Double) -> Double {
         return Double.random() * (max - min) + min
     }
 }
@@ -120,11 +137,11 @@ public extension Float {
     }
     /**
     Create a random num Float
-    :param: lower number Float
-    :param: upper number Float
+    - parameter lower: number Float
+    - parameter upper: number Float
     :return: random number Float
     */
-    public static func random(#min: Float, max: Float) -> Float {
+    public static func random(min min: Float, max: Float) -> Float {
         return Float.random() * (max - min) + min
     }
 }
@@ -136,13 +153,13 @@ public extension CGFloat {
     public static func random() -> CGFloat {
         return CGFloat(Float(arc4random()) / 0xFFFFFFFF)
     }
-    public static func random(#min: CGFloat, max: CGFloat) -> CGFloat {
+    public static func random(min min: CGFloat, max: CGFloat) -> CGFloat {
         return CGFloat.random() * (max - min) + min
     }
 }
 
-extension NSSet: ArrayLiteralConvertible {
-    public class func convertFromArrayLiteral(elements: AnyObject...) -> Self {
-        return self(array: elements)
-    }
-}
+//extension NSSet: ArrayLiteralConvertible {
+//    public class func convertFromArrayLiteral(elements: AnyObject...) -> Self {
+//        return self.init(array: elements)
+//    }
+//}

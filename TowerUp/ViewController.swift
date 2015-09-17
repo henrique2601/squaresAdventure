@@ -17,6 +17,7 @@ class ViewController: UIViewController {
         
         // Configure the view.
         let skView = self.view as! SKView
+        skView.multipleTouchEnabled = true
         
         #if DEBUG
             skView.showsFPS = true
@@ -55,11 +56,11 @@ class ViewController: UIViewController {
         return true
     }
     
-    override func supportedInterfaceOrientations() -> Int {
+    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
         if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
-            return Int(UIInterfaceOrientationMask.Landscape.rawValue)
+            return UIInterfaceOrientationMask.Landscape
         } else {
-            return Int(UIInterfaceOrientationMask.All.rawValue)
+            return UIInterfaceOrientationMask.All
         }
     }
 

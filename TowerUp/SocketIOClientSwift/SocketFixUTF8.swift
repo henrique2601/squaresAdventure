@@ -1,8 +1,8 @@
 //
-//  SocketEngineClient.swift
-//  Socket.IO-Swift
+//  SocketFixUTF8.swift
+//  Socket.IO-Client-Swift
 //
-//  Created by Erik Little on 3/19/15.
+//  Created by Erik Little on 3/16/15.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -25,13 +25,14 @@
 
 import Foundation
 
-@objc public protocol SocketEngineClient {
-    var handleQueue:dispatch_queue_attr_t! {get}
-    var socketURL:String {get}
-    var secure:Bool {get}
-    
-    func didError(reason:AnyObject)
-    func engineDidClose(reason:String)
-    func parseSocketMessage(msg:String)
-    func parseBinaryData(data:NSData)
+func fixDoubleUTF8(inout name: String) {
+    let utf8 = name.dataUsingEncoding(NSISOLatin1StringEncoding)!
+    let latin1 = NSString(data: utf8, encoding: NSUTF8StringEncoding)!
+    name = latin1 as String
+}
+
+func doubleEncodeUTF8(inout str: String) {
+    let latin1 = str.dataUsingEncoding(NSUTF8StringEncoding)!
+    let utf8 = NSString(data: latin1, encoding: NSISOLatin1StringEncoding)!
+    str = utf8 as String
 }

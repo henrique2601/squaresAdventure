@@ -11,6 +11,8 @@ import SpriteKit
 
 class Label: Control {
     
+    var labelNode:SKLabelNode!
+    
     override init(name:String, x:Int, y:Int) {
         super.init()
         self.load(name, textureName: name, x: x, y: y, xAlign: .left, yAlign: .up)
@@ -87,15 +89,15 @@ override
         self.xAlign = xAlign
         self.zPosition = Config.HUDZPosition/2
         
-        let labelNode = SKLabelNode(fontNamed: "Trebuchet MS")
-        labelNode.text = NSLocalizedString(textureName, tableName: nil, comment:"")
-        labelNode.fontSize = 25/2
-        labelNode.fontColor = GameColors.white
-        labelNode.verticalAlignmentMode = SKLabelVerticalAlignmentMode.Center
-        labelNode.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Center
+        self.labelNode = SKLabelNode(fontNamed: "Trebuchet MS")
+        self.labelNode.text = NSLocalizedString(textureName, tableName: nil, comment:"")
+        self.labelNode.fontSize = 25/2
+        self.labelNode.fontColor = GameColors.white
+        self.labelNode.verticalAlignmentMode = SKLabelVerticalAlignmentMode.Center
+        self.labelNode.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Center
         
         labelNode.name = name
-        self.addChild(labelNode)
+        self.addChild(self.labelNode)
         
         Control.controlList.insert(self)
     }
@@ -107,34 +109,31 @@ override
         self.xAlign = xAlign
         self.zPosition = Config.HUDZPosition/2
         
-        let labelNode = SKLabelNode(fontNamed: "Trebuchet MS")
-        labelNode.text = NSLocalizedString(textureName, tableName: nil, comment:"")
-        labelNode.fontSize = 25/2
-        labelNode.fontColor = color
-        labelNode.verticalAlignmentMode = SKLabelVerticalAlignmentMode.Center
-        labelNode.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Center
+        self.labelNode = SKLabelNode(fontNamed: "Trebuchet MS")
+        self.labelNode.text = NSLocalizedString(textureName, tableName: nil, comment:"")
+        self.labelNode.fontSize = 25/2
+        self.labelNode.fontColor = color
+        self.labelNode.verticalAlignmentMode = SKLabelVerticalAlignmentMode.Center
+        self.labelNode.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Center
         
-        labelNode.name = name
-        self.addChild(labelNode)
+        self.labelNode.name = name
+        self.addChild(self.labelNode)
         
         Control.controlList.insert(self)
     }
     
     func getText()->NSString{
-        let label = self.childNodeWithName(self.name!) as! SKLabelNode
-        return label.text
+        return self.labelNode.text!
     }
     
     func setText(text:String){
-        let label = self.childNodeWithName(self.name!) as! SKLabelNode
-        label.text = NSLocalizedString(text, tableName: nil, comment:"")
-        label.zPosition = Config.HUDZPosition/2
+        self.labelNode.text = NSLocalizedString(text, tableName: nil, comment:"")
+        self.labelNode.zPosition = Config.HUDZPosition/2
     }
     
-    func setText(text:String, color:UIColor){
-        let label = self.childNodeWithName(self.name!) as! SKLabelNode
-        label.fontColor = color
-        label.text = NSLocalizedString(text, tableName: nil, comment:"")
-        label.zPosition = Config.HUDZPosition/2
+    func setText(text:String, color:UIColor) {
+        self.labelNode.fontColor = color
+        self.labelNode.text = NSLocalizedString(text, tableName: nil, comment:"")
+        self.labelNode.zPosition = Config.HUDZPosition/2
     }
 }

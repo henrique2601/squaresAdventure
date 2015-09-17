@@ -91,7 +91,7 @@ class Control: SKNode {
         self.zPosition = Config.HUDZPosition/2
         
         let texture = SKTexture(imageNamed: textureName)
-        let spriteNode = SKSpriteNode(texture: texture, color: nil, size: texture.size())
+        let spriteNode = SKSpriteNode(texture: texture, color: UIColor.whiteColor(), size: texture.size())
         spriteNode.anchorPoint = CGPoint(x: 0, y: 1)
         spriteNode.name = name
         self.addChild(spriteNode)
@@ -106,7 +106,7 @@ class Control: SKNode {
         self.xAlign = xAlign
         self.zPosition = Config.HUDZPosition/2
         
-        let spriteNode = SKSpriteNode(texture: texture, color: nil, size: texture.size())
+        let spriteNode = SKSpriteNode(texture: texture, color: UIColor.whiteColor(), size: texture.size())
         spriteNode.anchorPoint = CGPoint(x: 0, y: 1)
         spriteNode.name = name
         self.addChild(spriteNode)
@@ -135,10 +135,12 @@ class Control: SKNode {
             Control.touchesArray.insert(touch)
         }
         Button.update()
+        PowerUp.update()
     }
     
     class func touchesMoved() {
         Button.update()
+        PowerUp.update()
         ScrollNode.update()
     }
     
@@ -147,6 +149,7 @@ class Control: SKNode {
             Control.touchesArray.remove(touch)
         }
         Button.update(touches)
+        PowerUp.update(touches)
         Switch.update(touches)
     }
     

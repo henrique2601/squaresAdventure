@@ -19,13 +19,13 @@ class Switch: Control {
         self.zPosition = Config.HUDZPosition
         
         let texture0 = SKTexture(imageNamed: "\(textureName)0")
-        let switch0 = SKSpriteNode(texture: texture0, color: nil, size: texture0.size())
+        let switch0 = SKSpriteNode(texture: texture0, color: UIColor.whiteColor(), size: texture0.size())
         switch0.anchorPoint = CGPoint(x: 0, y: 1)
         switch0.name = "\(name)0"
         self.addChild(switch0)
         
         let texture1 = SKTexture(imageNamed: "\(textureName)1")
-        let switch1 = SKSpriteNode(texture: texture1, color: nil, size: texture1.size())
+        let switch1 = SKSpriteNode(texture: texture1, color: UIColor.whiteColor(), size: texture1.size())
         switch1.anchorPoint = CGPoint(x: 0, y: 1)
         switch1.name = "\(name)1"
         switch1.hidden = true
@@ -43,18 +43,20 @@ class Switch: Control {
     class func update(touches: Set<UITouch>) {
         for switchNode in Switch.switchList {
             for touch in touches {
-                let location = touch.locationInNode(switchNode.parent)
-                if switchNode.containsPoint(location) {
-                    switchNode.switchPressed()
+                if let parent = switchNode.parent {
+                    let location = touch.locationInNode(parent)
+                    if switchNode.containsPoint(location) {
+                        switchNode.switchPressed()
+                    }
                 }
             }
         }
     }
     
     func switchPressed() {
-        var switch0:SKNode = self.childNodeWithName("\(self.name!)0")!
+        let switch0:SKNode = self.childNodeWithName("\(self.name!)0")!
         switch0.hidden = !switch0.hidden
-        var switch1:SKNode = self.childNodeWithName("\(self.name!)1")!
+        let switch1:SKNode = self.childNodeWithName("\(self.name!)1")!
         switch1.hidden = !switch1.hidden
     }
     

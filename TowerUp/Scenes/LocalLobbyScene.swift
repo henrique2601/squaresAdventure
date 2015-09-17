@@ -61,7 +61,7 @@ class LocalLobbyScene: GameScene, MPCManagerDelegate {
             case states.searching:
                 
                 if ((currentTime - self.zeroTime) > 10) {
-                    println("Nao achei, vou hostear")
+                    print("Nao achei, vou hostear")
                     appDelegate.mpcManager.advertiser.stopAdvertisingPeer()
                     appDelegate.mpcManager.browser.startBrowsingForPeers()
                     self.nextState = states.hosting
@@ -108,13 +108,13 @@ class LocalLobbyScene: GameScene, MPCManagerDelegate {
         }
     }
     
-    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         super.touchesEnded(touches, withEvent: event)
         
         if (self.state == self.nextState) {
             switch (self.state) {
             case states.lobby:
-                for touch in (touches as! Set<UITouch>) {
+                for touch in (touches ) {
                     let location = touch.locationInNode(self)
                     
                     
@@ -142,7 +142,7 @@ class LocalLobbyScene: GameScene, MPCManagerDelegate {
     
     func connectedWithPeer(peerID: MCPeerID) {
         NSOperationQueue.mainQueue().addOperationWithBlock { () -> Void in
-            println("Conectado a " + peerID.displayName)
+            print("Conectado a " + peerID.displayName)
             self.nextState = .waitingHostStart
         }
     }

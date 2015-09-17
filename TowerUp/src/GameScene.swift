@@ -12,6 +12,8 @@ import SpriteKit
 class GameScene: SKScene {
     
     override init() {
+        Control.touchesArray = Set<UITouch>()
+        
         Control.controlList = Set<Control>()
         Button.buttonList = Set<Button>()
         ScrollNode.scrollNodeList = Set<ScrollNode>()
@@ -19,6 +21,7 @@ class GameScene: SKScene {
             textfield.myTextField.removeFromSuperview()
         }
         Textfield.textfieldList = Set<Textfield>()
+        PowerUp.powerUpList = Set<PowerUp>()
         super.init(size: Config.sceneSize())
     }
     
@@ -32,27 +35,30 @@ class GameScene: SKScene {
         MemoryCard.sharedInstance.saveGame()
     }
     
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
-        Control.touchesBegan(touches as! Set<UITouch>)
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        Control.touchesBegan(touches )
     }
     
-    override func touchesMoved(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        print(touches.count)
         Control.touchesMoved()
     }
     
-    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
-        Control.touchesEnded(touches as! Set<UITouch>)
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        Control.touchesEnded(touches )
     }
     
-    override func touchesCancelled(touches: Set<NSObject>!, withEvent event: UIEvent!) {
-        Control.touchesEnded(touches as! Set<UITouch>)
+    override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
+        Control.touchesEnded(touches! as Set<UITouch>)
     }
 }
 
 public extension SKScene {
     func centerOnNode(node:SKNode)
     {
-        let cameraPositionInScene:CGPoint = node.scene!.convertPoint(node.position, fromNode: node.parent!)
-        node.parent!.position = CGPoint(x: node.parent!.position.x - cameraPositionInScene.x, y: node.parent!.position.y - cameraPositionInScene.y)
+        if let parent = node.parent {
+            let cameraPositionInScene:CGPoint = node.scene!.convertPoint(node.position, fromNode: parent)
+            parent.position = CGPoint(x: parent.position.x - cameraPositionInScene.x, y: parent.position.y - cameraPositionInScene.y)
+        }
     }
 }

@@ -18,7 +18,7 @@ class MemoryCard: NSObject {
     var playerData:PlayerData!
     
     func newGame() {
-        println("Creating new game...")
+        print("Creating new game...")
         
         //Player
         self.playerData = self.newPlayerData()
@@ -26,8 +26,8 @@ class MemoryCard: NSObject {
 
         
         //Towers e Floors
-        var tower = self.newTowerData()
-        var floor = self.newFloorData()
+        let tower = self.newTowerData()
+        let floor = self.newFloorData()
         tower.addFloor(floor)
         
         self.playerData.addTower(tower)
@@ -39,13 +39,16 @@ class MemoryCard: NSObject {
             self.newPowerUpSlotData()
             ])// Fixado 3 slots
         
-        var powerUp = self.newPowerUpData()
-        powerUp.index = 0
-        powerUp.available = NSNumber(integer: 10)
-        self.playerData.addPowerUp(powerUp)
+        for (var i = 0; i < PowerUps.types.count; i++) {//Teste com todos os PowerUps desbloqueados no inicio do jogo
+            let powerUp = self.newPowerUpData()
+            powerUp.index = NSNumber(integer: i)
+            powerUp.available = NSNumber(integer: 10)
+            self.playerData.addPowerUp(powerUp)
+        }
+        
         
         //Skins
-        var skin = self.newSkinData()
+        let skin = self.newSkinData()
         skin.locked = NSNumber(bool: false)
         skin.index = Int.random(10)
         skin.available = NSNumber(integer: 10)
@@ -62,7 +65,7 @@ class MemoryCard: NSObject {
     func saveGame() {
         if(self.autoSave) {
             self.autoSave = false
-            println("Saving game...")
+            print("Saving game...")
             self.saveContext()
             self.autoSave = true
         }
@@ -71,12 +74,12 @@ class MemoryCard: NSObject {
     func loadGame() {
         
         if let playerData = self.playerData {
-            println("Game already loaded.")
+            print("Game already loaded.")
         } else {
             let fetchRequestData:NSArray = fetchRequest()
             
             if(fetchRequestData.count > 0){
-                println("Loading game...")
+                print("Loading game...")
                 self.playerData = (fetchRequestData.lastObject as! PlayerData)
                 self.autoSave = true
             } else {
@@ -86,7 +89,7 @@ class MemoryCard: NSObject {
     }
     
     func reset(){
-        println("MemoryCard.reset()")
+        print("MemoryCard.reset()")
         
         let fetchRequestData:NSArray = fetchRequest()
         
@@ -101,7 +104,7 @@ class MemoryCard: NSObject {
     
     func fetchRequest() -> NSArray{
         let fetchRequest = self.managedObjectModel.fetchRequestTemplateForName("FetchRequest")!
-        let fetchRequestData: NSArray! = self.managedObjectContext!.executeFetchRequest(fetchRequest, error: nil)
+        let fetchRequestData: NSArray! = try? self.managedObjectContext!.executeFetchRequest(fetchRequest)
         return fetchRequestData
     }
     
@@ -110,7 +113,7 @@ class MemoryCard: NSObject {
     lazy var applicationDocumentsDirectory: NSURL = {
         // The directory the application uses to store the Core Data store file. This code uses a directory named "PabloHenri91.TowerUp" in the application's documents Application Support directory.
         let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
-        return urls[urls.count-1] as! NSURL
+        return urls[urls.count-1] 
         }()
     
     lazy var managedObjectModel: NSManagedObjectModel = {
@@ -126,7 +129,10 @@ class MemoryCard: NSObject {
         let url = self.applicationDocumentsDirectory.URLByAppendingPathComponent("TowerUp.sqlite")
         var error: NSError? = nil
         var failureReason = "There was an error creating or loading the application's saved data."
-        if coordinator!.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: nil, error: &error) == nil {
+        do {
+            try coordinator!.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: nil)
+        } catch var error1 as NSError {
+            error = error1
             coordinator = nil
             // Report any error we got.
             var dict = [String: AnyObject]()
@@ -138,6 +144,8 @@ class MemoryCard: NSObject {
             // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
             NSLog("Unresolved error \(error), \(error!.userInfo)")
             abort()
+        } catch {
+            fatalError()
         }
         
         return coordinator
@@ -159,11 +167,16 @@ class MemoryCard: NSObject {
     func saveContext () {
         if let moc = self.managedObjectContext {
             var error: NSError? = nil
-            if moc.hasChanges && !moc.save(&error) {
-                // Replace this implementation with code to handle the error appropriately.
-                // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                NSLog("Unresolved error \(error), \(error!.userInfo)")
-                abort()
+            if moc.hasChanges {
+                do {
+                    try moc.save()
+                } catch let error1 as NSError {
+                    error = error1
+                    // Replace this implementation with code to handle the error appropriately.
+                    // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                    NSLog("Unresolved error \(error), \(error!.userInfo)")
+                    abort()
+                }
             }
         }
     }

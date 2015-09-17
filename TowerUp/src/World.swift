@@ -39,7 +39,7 @@ class World: SKNode {
             (self.bodyA.node as! Player).didBeginContact(self.bodyB)
             break
         default:
-            println("didBeginContact de \(self.bodyA.node?.name) não está sendo processado")
+            print("didBeginContact de \(self.bodyA.node?.name) não está sendo processado")
             break
         }
     }
@@ -60,23 +60,23 @@ class World: SKNode {
             (self.bodyA.node as! Player).didEndContact(self.bodyB)
             break
         default:
-            println("didEndContact de \(self.bodyA.node?.name) não está sendo processado")
+            print("didEndContact de \(self.bodyA.node?.name) não está sendo processado")
             break
         }
     }
 }
 
-struct physicsCategory : RawOptionSetType {
+struct physicsCategory : OptionSetType {
     typealias RawValue = UInt32
     private var value: UInt32 = 0
     init(_ value: UInt32) { self.value = value }
     init(rawValue value: UInt32) { self.value = value }
     init(nilLiteral: ()) { self.value = 0 }
-    static var allZeros: physicsCategory { return self(0) }
-    static func fromMask(raw: UInt32) -> physicsCategory { return self(raw) }
+    static var allZeros: physicsCategory { return self.init(0) }
+    static func fromMask(raw: UInt32) -> physicsCategory { return self.init(raw) }
     var rawValue: UInt32 { return self.value }
     
-    static var none: physicsCategory { return self(0) }
+    static var none: physicsCategory { return self.init(0) }
     static var player: physicsCategory { return physicsCategory(1 << 0) }
     static var enemy: physicsCategory { return physicsCategory(1 << 1) }
     static var bullet: physicsCategory { return physicsCategory(1 << 2) }

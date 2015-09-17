@@ -23,7 +23,7 @@ class PowerUpSlot: SKSpriteNode {
         self.powerUpSlotData = powerUpSlotData
         
         let texture = SKTexture(imageNamed: "powerUpSlot")
-        super.init(texture: texture, color: nil, size: texture.size())
+        super.init(texture: texture, color: UIColor.whiteColor(), size: texture.size())
         if let powerUpData = powerUpSlotData.powerUp {
             self.setPowerUp(powerUpData)
         }
@@ -46,8 +46,9 @@ class PowerUpSlot: SKSpriteNode {
     
     func setPowerUp(powerUpData:PowerUpData) {
         self.powerUpSlotData.powerUp = powerUpData
-        var powerUpType = PowerUps.types[powerUpData.index.integerValue]
-        self.addChild(SKSpriteNode(imageNamed: powerUpType.buttonImage))
+        let powerUpType = PowerUps.types[powerUpData.index.integerValue]
+        self.addChild(SKSpriteNode(imageNamed: powerUpType.powerUpImage))
+        self.addChild(Label(name: "labelPrice", color: GameColors.black, textureName: powerUpType.price.description, x: 0, y: 31))
         self.empty = false
     }
     

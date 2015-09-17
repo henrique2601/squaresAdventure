@@ -41,7 +41,7 @@ class LocalGameScene: GameScene, SKPhysicsContactDelegate {
     var xPos = 500
     var yPos = 200
     var world:World!
-    var camera:Camera!
+    var myCamera:GameCamera!
     var player:PlayerOnline!
     var mapManager:MapManager!
     var parallax:Parallax!
@@ -68,8 +68,8 @@ class LocalGameScene: GameScene, SKPhysicsContactDelegate {
         self.addChild(self.world)
         self.physicsWorld.contactDelegate = self
         
-        self.camera = Camera()
-        self.world.addChild(self.camera)
+        self.myCamera = GameCamera()
+        self.world.addChild(self.myCamera)
         
         self.player = PlayerOnline(skinId: self.playerData.skinSlot.skin.index.integerValue, x: 200, y: 100, loadPhysics: true)
         self.world.addChild(self.player)
@@ -102,7 +102,7 @@ class LocalGameScene: GameScene, SKPhysicsContactDelegate {
         appDelegate.mpcManager.advertiser.startAdvertisingPeer()
         
         let UTCDate = NSDate()
-        println(UTCDate)
+        print(UTCDate)
         
         self.addHandlers()
         
@@ -160,18 +160,18 @@ class LocalGameScene: GameScene, SKPhysicsContactDelegate {
     
     override func didFinishUpdate() {
         if(self.player.healthPoints > 0){
-            self.camera.update(self.player.position)
+            self.myCamera.update(self.player.position)
         }
         self.player.updateEmiter(self.currentTime, room: self.room)
         self.player.didFinishUpdate()
-        self.parallax.update(self.camera.position)
+        self.parallax.update(self.myCamera.position)
     }
     
-    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         super.touchesEnded(touches, withEvent: event)
         
         if (self.state == self.nextState) {
-            for touch in (touches as! Set<UITouch>) {
+            for touch in (touches ) {
                 let location = touch.locationInNode(self)
                 
                 if (self.childNodeWithName("buttonBack")!.containsPoint(location)) {

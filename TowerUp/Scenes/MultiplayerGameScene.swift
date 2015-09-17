@@ -35,7 +35,7 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
     var xPos = 500
     var yPos = 200
     var world:World!
-    var camera:Camera!
+    var myCamera:GameCamera!
     var player:PlayerOnline!
     var mapManager:MapManager!
     var parallax:Parallax!
@@ -51,7 +51,7 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
     //let socket = SocketIOClient(socketURL: "179.232.86.110:3001", opts: nil)
     let socket = SocketIOClient(socketURL: "181.41.197.181:3001", opts: nil)
     
-    var boxCoins:Control!
+    var labelCoins:Label!
     
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
@@ -64,13 +64,13 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
         self.addChild(self.world)
         self.physicsWorld.contactDelegate = self
         
-        self.camera = Camera()
-        self.world.addChild(self.camera)
+        self.myCamera = GameCamera()
+        self.world.addChild(self.myCamera)
         
         self.player = PlayerOnline(skinId: self.playerData.skinSlot.skin.index.integerValue, x: 200, y: 100, loadPhysics: true)
         self.world.addChild(self.player)
         
-        self.player.labelName = Label(name: "labelName", textureName: "", x: 0, y: 0)
+        self.player.labelName = Label(name: "labelName", textureName: "???", x: 0, y: 0)
         self.world.addChild(self.player.labelName)
         
         self.mapManager = MapManager()
@@ -88,9 +88,10 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
         self.addChild(Button(name: "buttonPowerUp1", textureName: "buttonOrangeSquare", text:"2", x: 617, y: 630, xAlign:.center, yAlign:.down))
         self.addChild(Button(name: "buttonPowerUp2", textureName: "buttonYellowSquare", text:"3", x: 737, y: 630, xAlign:.center, yAlign:.down))
         
-        self.boxCoins = Control(name: "boxCoins", textureName: "boxCoins", x: 1058, y: 20, xAlign: .right, yAlign: .up)
-        self.boxCoins.addChild(Label(name: "lebelCoins", color: GameColors.black, textureName: "0", x: 160, y: 39))
-        self.addChild(self.boxCoins)
+        let boxCoins = Control(name: "boxCoins", textureName: "boxCoins", x: 1058, y: 20, xAlign: .right, yAlign: .up)
+        self.labelCoins = Label(name: "lebelCoins", color: GameColors.black, textureName: "0", x: 160, y: 39)
+        boxCoins.addChild(self.labelCoins)
+        self.addChild(boxCoins)
         
         self.addChild(Button(name: "buttonBack", textureName: "buttonGraySquareSmall", text:"||" ,x:20, y:20, xAlign:.left, yAlign:.up))
         
@@ -134,10 +135,10 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
                     
                     if (test == 0) {
                         
-                        println(nameTest)
+                        print(nameTest)
                         
-                        var skin = nameTest!.objectForKey("skin") as? Int
-                        var player2 = PlayerOnline(skinId: skin! ,x: 200, y: 48, loadPhysics: true)
+                        let skin = nameTest!.objectForKey("skin") as? Int
+                        let player2 = PlayerOnline(skinId: skin! ,x: 200, y: 48, loadPhysics: true)
                         player2.name = nameTest!.objectForKey("name") as? String
                         player2.id = nameTest!.objectForKey("id") as? Int
                         player2.position = CGPoint(x: 200, y: 48)
@@ -154,7 +155,7 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
                     }
                 }
             }
-            println("Added Players")
+            print("Added Players")
         }
         
         
@@ -166,7 +167,7 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
                     if let id = player.id
                     {
                         if id == name{
-                            println(player.name! + " win")
+                            print(player.name! + " win")
                             self!.blackSpriteNode = SKSpriteNode(color: GameColors.black, size: self!.size)
                             self!.blackSpriteNode.anchorPoint = CGPoint(x: 0, y: 1)
                             self!.addChild(self!.blackSpriteNode)
@@ -212,13 +213,13 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
             if let name = data?[0] as? NSDictionary {
                 
                 
-                var xPos = 144
-                var skin = name.objectForKey("skin") as? Int
-                var player = PlayerOnline(skinId: skin!, x: xPos, y: 48, loadPhysics: true)
+                let xPos = 144
+                let skin = name.objectForKey("skin") as? Int
+                let player = PlayerOnline(skinId: skin!, x: xPos, y: 48, loadPhysics: true)
                 player.name = name.objectForKey("name") as? String
-                println(player.name)
+                print(player.name)
                 player.id = name.objectForKey("id") as? Int
-                println(player.id.description)
+                print(player.id.description)
                 player.position = CGPoint(x: xPos, y: 48)
                 self!.world.addChild(player)
                 
@@ -297,18 +298,18 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
     
     override func didFinishUpdate() {
         if(self.player.healthPoints > 0){
-            self.camera.update(self.player.position)
+            self.myCamera.update(self.player.position)
         }
         self.player.updateEmiter(self.currentTime, room: self.room)
         self.player.didFinishUpdate()
-        self.parallax.update(self.camera.position)
+        self.parallax.update(self.myCamera.position)
     }
     
-    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         super.touchesEnded(touches, withEvent: event)
         
         if (self.state == self.nextState) {
-            for touch in (touches as! Set<UITouch>) {
+            for touch in (touches ) {
                 let location = touch.locationInNode(self)
                 
                 if (self.childNodeWithName("buttonBack")!.containsPoint(location)) {

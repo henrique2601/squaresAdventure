@@ -48,7 +48,7 @@ class FloorsScene: GameScene {
             if(floorIndex < towerType.floorCount){
                 let cell = SKSpriteNode(imageNamed: "boxSmall")//TODO: imagem do andar
                 
-                var labelName = Label(name: "labelFloorName", color: GameColors.black, textureName: "Floor " + (floorIndex + 1).description, x: 0, y: 0)
+                let labelName = Label(name: "labelFloorName", color: GameColors.black, textureName: "Floor " + (floorIndex + 1).description, x: 0, y: 0)
                 cell.addChild(labelName)
                 
                 floorsArray.append(cell)
@@ -60,10 +60,10 @@ class FloorsScene: GameScene {
         for (0; floorIndex < towerType.floorCount; floorIndex++) {
             let cell = SKSpriteNode(imageNamed: "boxSmall")//TODO: imagem do andar
             
-            var spriteNode = SKSpriteNode(imageNamed: "boxSmallLocked")
+            let spriteNode = SKSpriteNode(imageNamed: "boxSmallLocked")
             cell.addChild(spriteNode)
             
-            var labelName = Label(name: "labelFloorName", color: GameColors.black, textureName: "Locked", x: 0, y: 0)
+            let labelName = Label(name: "labelFloorName", color: GameColors.black, textureName: "Locked", x: 0, y: 0)
             cell.addChild(labelName)
             
             floorsArray.append(cell)
@@ -100,13 +100,13 @@ class FloorsScene: GameScene {
         }
     }
     
-    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         super.touchesEnded(touches, withEvent: event)
         
         if (self.state == self.nextState) {
             switch (self.state) {
             case states.floors:
-                for touch in (touches as! Set<UITouch>) {
+                for touch in (touches ) {
                     let location = touch.locationInNode(self)
                     
                     if (self.childNodeWithName("buttonBack")!.containsPoint(location)) {
@@ -126,7 +126,7 @@ class FloorsScene: GameScene {
                                         MapManager.floor = i
                                         self.nextState = states.beforeMission
                                     } else {
-                                        println("Andar \(i) ainda não foi desbloqueada")
+                                        print("Andar \(i) ainda não foi desbloqueada")
                                     }
                                     return
                                 }

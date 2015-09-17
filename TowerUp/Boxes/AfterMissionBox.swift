@@ -56,9 +56,9 @@ class AfterMissionBox: Box {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         super.touchesEnded(touches, withEvent: event)
-        for touch in (touches as! Set<UITouch>) {
+        for touch in (touches ) {
             let location = touch.locationInNode(self)
             
             if (self.childNodeWithName("buttonExit")!.containsPoint(location)) {
@@ -86,7 +86,7 @@ class AfterMissionBox: Box {
                     MapManager.floor++
                     
                     var towerIndex = 0
-                    for tower in MemoryCard.sharedInstance.playerData.towers {
+                    for _ in MemoryCard.sharedInstance.playerData.towers {
                         if(MapManager.tower == towerIndex) {
                             //Encontrou torre selecionada
                             let towerType = Towers.types[towerIndex]

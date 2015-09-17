@@ -67,13 +67,13 @@ class MainMenuScene: GameScene {
         }
     }
     
-    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         super.touchesEnded(touches, withEvent: event)
         
         if (self.state == self.nextState) {
             switch (self.state) {
             case states.mainMenu:
-                for touch in (touches as! Set<UITouch>) {
+                for touch in (touches ) {
                     let location = touch.locationInNode(self)
                     
                     if (self.childNodeWithName("buttonPlay")!.containsPoint(location)) {

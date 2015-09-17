@@ -123,20 +123,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         PFPush.subscribeToChannelInBackground("") { (succeeded: Bool, error: NSError?) in
             if succeeded {
-                println("TowerUp successfully subscribed to push notifications on the broadcast channel.")
+                print("TowerUp successfully subscribed to push notifications on the broadcast channel.")
             } else {
-                println("TowerUp failed to subscribe to push notifications on the broadcast channel with error = %@.", error)
+                print("TowerUp failed to subscribe to push notifications on the broadcast channel with error = %@.", error)
             }
         }
     }
 
     func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
         if error.code == 3010 {
-            println("Push notifications are not supported in the iOS Simulator.")
+            print("Push notifications are not supported in the iOS Simulator.")
         } else if error.code == 3000 {
             //TODO criar código de autorização válido de 'aps-environment' para o aplicativo
         } else {
-            println("application:didFailToRegisterForRemoteNotificationsWithError: %@", error)
+            print("application:didFailToRegisterForRemoteNotificationsWithError: %@", error)
         }
     }
 

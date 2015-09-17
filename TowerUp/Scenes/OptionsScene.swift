@@ -46,13 +46,17 @@ class OptionsScene: GameScene {
                 buttonOk.addHandler({
                     MemoryCard.sharedInstance.reset()
                     self.nextState = .options
-                    buttonOk.parent!.removeFromParent()
+                    if let parent = buttonOk.parent {
+                        parent.removeFromParent()
+                    }
                 })
                 
                 let buttonCancel = Button(name: "buttonGraySmall", text: "Cancel", x: 12, y: 162)
                 buttonCancel.addHandler({
                     self.nextState = .options
-                    buttonCancel.parent!.removeFromParent()
+                    if let parent = buttonCancel.parent {
+                        parent.removeFromParent()
+                    }
                 })
                 
                 self.addChild(box)
@@ -71,13 +75,13 @@ class OptionsScene: GameScene {
         }
     }
     
-    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         super.touchesEnded(touches, withEvent: event)
         
         if (self.state == self.nextState) {
             switch (self.state) {
             case states.options:
-                for touch in (touches as! Set<UITouch>) {
+                for touch in (touches ) {
                     let location = touch.locationInNode(self)
                     
                     if (self.childNodeWithName("buttonDeleteSavedGame")!.containsPoint(location)) {

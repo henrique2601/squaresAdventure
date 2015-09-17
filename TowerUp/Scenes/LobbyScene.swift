@@ -20,7 +20,7 @@ class LobbyScene: GameScene {
     var room: Int = 0
     var state = states.lobby
     var nextState = states.lobby
-    let socket = SocketIOClient(socketURL: "179.232.86.110:3001", options: nil)
+    let socket = SocketIOClient(socketURL: "179.232.86.110:3001", opts: nil)
 
     var myTextField: Textfield!
     
@@ -29,11 +29,11 @@ class LobbyScene: GameScene {
         
         let letters : NSString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
         
-        var randomString : NSMutableString = NSMutableString(capacity: len)
+        let randomString : NSMutableString = NSMutableString(capacity: len)
         
         for (var i=0; i < len; i++){
-            var length = UInt32 (letters.length)
-            var rand = arc4random_uniform(length)
+            let length = UInt32 (letters.length)
+            let rand = arc4random_uniform(length)
             randomString.appendFormat("%C", letters.characterAtIndex(Int(rand)))
         }
         
@@ -94,7 +94,7 @@ class LobbyScene: GameScene {
             switch (self.nextState) {
                 
             case states.multiplayerMission:
-                var nextScene  = MultiplayerGameScene()
+                let nextScene  = MultiplayerGameScene()
                 nextScene.room = self.room
                 nextScene.localName = self.myTextField.myTextField.text
                 self.view!.presentScene(nextScene, transition: Config.defaultGoTransition)
@@ -114,13 +114,13 @@ class LobbyScene: GameScene {
         }
     }
     
-    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         super.touchesEnded(touches, withEvent: event)
         
         if (self.state == self.nextState) {
             switch (self.state) {
             case states.lobby:
-                for touch in (touches as! Set<UITouch>) {
+                for touch in (touches ) {
                     let location = touch.locationInNode(self)
                     
                     if (self.childNodeWithName("buttonOnline")!.containsPoint(location)) {

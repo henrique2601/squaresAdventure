@@ -30,9 +30,9 @@ class MessageBox: Control {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
-        Button.touchesEnded(touches as! Set<UITouch>)
-        for touch in (touches as! Set<UITouch>) {
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        Button.touchesEnded(touches )
+        for touch in (touches ) {
             let location = touch.locationInNode(self)
             
             if (self.childNodeWithName("buttonCancel")!.containsPoint(location) == true) {
