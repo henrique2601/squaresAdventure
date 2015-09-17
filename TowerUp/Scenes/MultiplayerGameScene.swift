@@ -14,6 +14,7 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
         case mission
         case paused
         case afterMission
+        case loose
     }
     
     //Effect
@@ -175,6 +176,7 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
                             self!.addChild(box)
                             
                             self!.blackSpriteNode.zPosition = box.zPosition - 1
+                            self!.nextState = states.loose
                             
                         }
                     }
@@ -322,4 +324,5 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
             }
         }
     }
+    
 }

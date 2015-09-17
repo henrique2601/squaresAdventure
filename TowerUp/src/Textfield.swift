@@ -9,10 +9,11 @@
 import UIKit
 import SpriteKit
 
-class Textfield: Control, UITextFieldDelegate {
+class Textfield: Control {
     
 static var textfieldList = Set<Textfield>()
     var myTextField: UITextField!
+    
     
     init(name:String, x:Int, y:Int, view:UIView) {
         super.init()
@@ -91,7 +92,6 @@ static var textfieldList = Set<Textfield>()
         
         self.myTextField = UITextField(frame: CGRect(x: 0, y: 0 , width: 150, height: 50))
         view.addSubview(myTextField)
-        self.myTextField.delegate = self
         self.myTextField.backgroundColor = GameColors.white
         self.myTextField.text = name
         self.myTextField.borderStyle = UITextBorderStyle.RoundedRect

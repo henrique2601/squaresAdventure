@@ -98,8 +98,8 @@ class LocalGameScene: GameScene, SKPhysicsContactDelegate {
         
         self.addChild(Button(name: "buttonBack", textureName: "buttonGraySquareSmall", text:"||" ,x:20, y:20, xAlign:.left, yAlign:.up))
         
-        appDelegate.mpcManager.browser.startBrowsingForPeers()
-        appDelegate.mpcManager.advertiser.startAdvertisingPeer()
+        //self.mpcManager.browser.startBrowsingForPeers()
+        //self.mpcManager.advertiser.startAdvertisingPeer()
         
         let UTCDate = NSDate()
         print(UTCDate)

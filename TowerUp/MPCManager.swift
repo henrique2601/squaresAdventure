@@ -35,13 +35,23 @@ class MPCManager: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate, M
     
     var foundPeers = [MCPeerID]()
     
+    var connectedPeers = [MCPeerID]()
+    
     var invitationHandler: ((Bool, MCSession!)->Void)!
+    
+    var lastTime = NSDate().timeIntervalSince1970
+    
+    let timeStarted = NSDate()
+    
+    var playerData = MemoryCard.sharedInstance.playerData
     
     
     override init() {
         super.init()
         
-        peer = MCPeerID(displayName: UIDevice.currentDevice().name)
+        //peer = MCPeerID(displayName: UIDevice.currentDevice().name)
+        //println(self.playerData.currentSkin.index)
+        peer = MCPeerID(displayName: self.playerData.currentSkin.index.description + " " + self.playerData.name)
         
         session = MCSession(peer: peer)
         session.delegate = self
@@ -55,6 +65,12 @@ class MPCManager: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate, M
     
     
     // MARK: MCNearbyServiceBrowserDelegate method implementation
+//    
+//    func browser(browser: MCNearbyServiceBrowser!, foundPeer peerID: MCPeerID!, withDiscoveryInfo info: [NSObject : AnyObject]!) {
+//        foundPeers.append(peerID)
+//        browser.invitePeer(peerID, toSession: self.session, withContext: nil, timeout: 10)
+//        //delegate?.foundPeer()
+//    }
     
     func browser(browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID, withDiscoveryInfo info: [String : String]?) {
         foundPeers.append(peerID)
@@ -141,6 +157,18 @@ class MPCManager: NSObject, MCSessionDelegate, MCNearbyServiceBrowserDelegate, M
 //        }
         
         return true
+    }
+    
+    func join(dictionaryWithData dictionary: Dictionary<Int, String>) {
+        let dataToSend = NSKeyedArchiver.archivedDataWithRootObject(dictionary)
+        
+        if session.connectedPeers.count > 0 {
+            var error : NSError?
+            if !session.sendData(dataToSend, toPeers: session.connectedPeers , withMode: MCSessionSendDataMode.Reliable, error: &error) {
+                println(error?.localizedDescription)
+            }
+        }
+        
     }
     
 }

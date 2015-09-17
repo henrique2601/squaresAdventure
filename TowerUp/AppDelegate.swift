@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
-    var mpcManager: MPCManager!
+    
 
     //--------------------------------------
     // MARK: - UIApplicationDelegate
@@ -31,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Enable storing and querying data from Local Datastore. 
         // Remove this line if you don't want to use Local Datastore features or want to use cachePolicy.
         
-        mpcManager = MPCManager()
+        
         
         Parse.enableLocalDatastore()
 
