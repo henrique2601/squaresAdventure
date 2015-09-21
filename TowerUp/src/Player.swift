@@ -125,10 +125,12 @@ class Player: Square {
             break
             
         case physicsCategory.coin.rawValue:
-            let coin = (physicsBody.node! as! Coin)
-            self.collectedBonus = self.collectedBonus + coin.bonus
-            coin.bonus = 0
-            coin.removeFromParent()
+            if let node = physicsBody.node {
+                let coin = (node as! Coin)
+                self.collectedBonus = self.collectedBonus + coin.bonus
+                coin.bonus = 0
+                coin.removeFromParent()
+            }
             break
             
         case physicsCategory.spike.rawValue:
@@ -198,7 +200,7 @@ class Player: Square {
             if(!self.win){
                 self.lastNoWin = currentTime
             } else {
-                if(currentTime - self.lastNoWin > 1) {
+                if(currentTime - self.lastNoWin > 0.1) {
                     if let scene = self.scene as? MissionScene {
                         scene.nextState = MissionScene.states.afterMission
                     }

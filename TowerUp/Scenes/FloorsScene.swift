@@ -44,7 +44,7 @@ class FloorsScene: GameScene {
         var floorIndex = 0
         let towerType = Towers.types[MapManager.tower]
         
-        for floor in self.selectedTower.floors {
+        for _ in self.selectedTower.floors {
             if(floorIndex < towerType.floorCount){
                 let cell = SKSpriteNode(imageNamed: "boxSmall")//TODO: imagem do andar
                 
@@ -61,6 +61,7 @@ class FloorsScene: GameScene {
             let cell = SKSpriteNode(imageNamed: "boxSmall")//TODO: imagem do andar
             
             let spriteNode = SKSpriteNode(imageNamed: "boxSmallLocked")
+            spriteNode.zPosition = cell.zPosition + 1
             cell.addChild(spriteNode)
             
             let labelName = Label(name: "labelFloorName", color: GameColors.black, textureName: "Locked", x: 0, y: 0)

@@ -135,7 +135,7 @@ static var textfieldList = Set<Textfield>()
         let sceneSize:CGSize = CGSize(width: 1334/2, height: 750/2)
         
         let xScale = Config.skViewBoundsSize.width / sceneSize.width
-        let yScale = Config.skViewBoundsSize.height / sceneSize.height
+        //let yScale = Config.skViewBoundsSize.height / sceneSize.height
         
         let y0 = (self.sketchPosition.y / 2 ) * xScale
         

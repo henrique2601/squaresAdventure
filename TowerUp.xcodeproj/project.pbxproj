@@ -1344,7 +1344,7 @@
 			attributes = {
 				LastSwiftMigration = 0700;
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0610;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = WTFGames;
 				TargetAttributes = {
 					81BA81441A49DA1800E65899 = {

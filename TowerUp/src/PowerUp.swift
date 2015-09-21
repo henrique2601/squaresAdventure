@@ -21,6 +21,8 @@ class PowerUp: Button {
     var powerUpShadow:SKSpriteNode!
     var powerUpPressedShadow:SKSpriteNode!
     
+    var lastUse:NSTimeInterval = 0
+    
     var inUse:Bool = false {
         didSet {
             if(self.inUse) {
@@ -77,7 +79,21 @@ class PowerUp: Button {
         PowerUp.powerUpList.insert(self)
     }
     
-    override class func update(touches: Set<UITouch>) {
+    func loadEvent() {
+        self.event = Event<Void>()
+        switch(self.powerUpData.index.integerValue) {
+        case 0:
+            self.event?.addHandler({
+                print("Executando Handler de PowerUp 0")
+            })
+            break
+        default:
+            self.event = nil
+            break
+        }
+    }
+    
+    override class func touchesEnded(touches: Set<UITouch>) {
         for powerUp in PowerUp.powerUpList {
             if let event = powerUp.event {
                 for touch in touches {
@@ -90,6 +106,18 @@ class PowerUp: Button {
                 }
             }
             powerUp.update()
+        }
+    }
+    
+    class func doLogic(currentTime: NSTimeInterval) {
+        for powerUp in PowerUp.powerUpList {
+            if powerUp.pressed == true {
+                let powerUpType = PowerUps.types[powerUp.powerUpData.index.integerValue]
+                if currentTime - powerUp.lastUse > powerUpType.coolDown {
+                    powerUp.event?.raise()
+                    powerUp.lastUse = currentTime
+                }
+            }
         }
     }
     

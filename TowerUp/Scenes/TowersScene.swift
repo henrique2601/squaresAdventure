@@ -56,6 +56,7 @@ class TowersScene: GameScene {
         for (0; towerIndex < Towers.types.count; towerIndex++) {
             let cell = SKSpriteNode(imageNamed: "towerBox")
             let spriteNode = SKSpriteNode(imageNamed: "towerBoxLocked")
+            spriteNode.zPosition = cell.zPosition + 1
             cell.addChild(spriteNode)
             
             let labelName = Label(name: "labelTowerName", color: GameColors.black, textureName: "Locked", x: 0, y: 0)
