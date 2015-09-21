@@ -173,6 +173,7 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
                 self.blackSpriteNode.anchorPoint = CGPoint(x: 0, y: 1)
                 self.addChild(self.blackSpriteNode)
                 let box = AfterMissionBox(background: "boxWhite", time: Int(currentTime - self.lastReset).description, deaths: self.player.deathCount.description, bonus: self.collectedBonus.description)
+                self.collectedBonus = 0
                 
                 self.addChild(box)
                 

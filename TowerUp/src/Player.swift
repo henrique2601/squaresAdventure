@@ -120,16 +120,16 @@ class Player: Square {
             if let node = physicsBody.node {
                 let coin = (node as! Coin)
                 if let scene = self.scene as? MissionScene {
-                    scene.collectedBonus = scene.collectedBonus + coin.bonus
-                    
                     let playerData = MemoryCard.sharedInstance.playerData
                     playerData.coins = NSNumber(integer: Int(playerData.coins) + coin.bonus)
+                    
+                    scene.collectedBonus = scene.collectedBonus + coin.bonus
                 } else {
                     if let scene = self.scene as? MultiplayerMissionScene {
-                        scene.collectedBonus = scene.collectedBonus + coin.bonus
-                        
                         let playerData = MemoryCard.sharedInstance.playerData
                         playerData.coins = NSNumber(integer: Int(playerData.coins) + coin.bonus)
+                        
+                        scene.collectedBonus = scene.collectedBonus + coin.bonus
                     }
                 }
                 coin.bonus = 0
@@ -208,8 +208,12 @@ class Player: Square {
             } else {
                 if(currentTime - self.lastNoWin > 0.1) {
                     if let scene = self.scene as? MissionScene {
+                        
                         let playerData = MemoryCard.sharedInstance.playerData
                         playerData.coins = NSNumber(integer: Int(playerData.coins) + 100)
+                        
+                        scene.collectedBonus = scene.collectedBonus + 100
+                        
                         scene.nextState = MissionScene.states.win
                     }
                     if let scene = self.scene as? MultiplayerMissionScene {
