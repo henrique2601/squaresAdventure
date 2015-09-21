@@ -17,7 +17,7 @@ class Chunk: SKSpriteNode {
     static var maxChunkX = 0
     static var maxChunkY = 0
     
-    var type = "dirt" //TODO:
+    var type = "grass" //TODO:
     
     
     
@@ -78,7 +78,7 @@ class Chunk: SKSpriteNode {
                     }
                 } else {
                     #if DEBUG //DEBUG com itens colocados aleatoriamente em espaços vazios.
-                    if(Int.random(100) < 99) {
+                    if(Int.random(101) <= 10) {
                         let tile:Coin = Coin(type: "Gold", x: x, y: y)
                         
                         //TODO: exportar função?

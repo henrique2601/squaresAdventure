@@ -200,6 +200,8 @@ class Player: Square {
             } else {
                 if(currentTime - self.lastNoWin > 0.1) {
                     if let scene = self.scene as? MissionScene {
+                        let playerData = MemoryCard.sharedInstance.playerData
+                        playerData.coins = NSNumber(integer: Int(playerData.coins) + 100)
                         scene.nextState = MissionScene.states.afterMission
                     }
                     if let scene = self.scene as? MultiplayerGameScene {
@@ -256,7 +258,7 @@ class Player: Square {
             }
         }
         
-        if(currentTime - self.lastAlive > 1) {//Intervalo de spawn apos zerar healthPoints
+        if(currentTime - self.lastAlive > 3) {//Intervalo de spawn apos zerar healthPoints
             self.respawn()
         }
     }

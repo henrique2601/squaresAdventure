@@ -113,8 +113,26 @@ class PowerUp: Button {
             self.eventEnd?.addHandler({
                 player.resetCategoryBitMasks()
             })
-            
             break
+            
+        case 2://Fenix Caida :D
+            self.eventBegin?.addHandler({
+                if(player.healthPoints <= 0) {
+                    player.healthPoints = player.maxHealthPoints
+                } else {
+                    let playerData = MemoryCard.sharedInstance.playerData
+                    playerData.coins = NSNumber(integer: Int(playerData.coins) + self.powerUpType.price)
+                    if let scene = self.scene as? MissionScene {
+                        scene.labelCoins.setText(String(Int(MemoryCard.sharedInstance.playerData.coins) + scene.collectedBonus))
+                    }
+                    if let scene = self.scene as? MultiplayerGameScene {
+                        scene.labelCoins.setText(String(Int(MemoryCard.sharedInstance.playerData.coins) + scene.collectedBonus))
+                    }
+                    self.lastUse = 0
+                }
+            })
+            break
+            
         default:
             self.eventBegin = nil
             self.eventUpdate = nil
@@ -137,8 +155,8 @@ class PowerUp: Button {
                         if let scene = powerUp.scene as? MultiplayerGameScene {
                             scene.labelCoins.setText(String(Int(MemoryCard.sharedInstance.playerData.coins) + scene.collectedBonus))
                         }
-                        powerUp.eventBegin?.raise()
                         powerUp.lastUse = currentTime
+                        powerUp.eventBegin?.raise()
                         powerUp.inUse = true
                         powerUp.needUpdate = true
                     }
@@ -218,7 +236,8 @@ class PowerUpType: NSObject {
 
 class PowerUps :NSObject {
     static var types = Array<PowerUpType>([
-        PowerUpType(powerUpImage:"powerUp A", price:100, coolDown:10, duration:5),
-        PowerUpType(powerUpImage:"powerUp B", price:200, coolDown:10, duration:10)
+        PowerUpType(powerUpImage:"powerUp A", price:100, coolDown:10, duration:3),
+        PowerUpType(powerUpImage:"powerUp B", price:200, coolDown:10, duration:10),
+        PowerUpType(powerUpImage:"powerUp C", price:500, coolDown:10, duration:5)
         ])
 }
