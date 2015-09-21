@@ -9,11 +9,11 @@
 import UIKit
 import SpriteKit
 
-class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
+class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
     enum states {
         case mission
         case paused
-        case afterMission
+        case win
         case loose
     }
     
@@ -118,7 +118,7 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
             PowerUp.updatePowerUpLabels()
         }
         
-        self.addChild(Button(name: "buttonBack", textureName: "buttonGraySquareSmall", text:"||" ,x:20, y:20, xAlign:.left, yAlign:.up))
+        self.addChild(Button(name: "buttonBack", textureName: "buttonGraySquareSmall", text:"X" ,x:20, y:20, xAlign:.left, yAlign:.up))
         
         //Multiplayer
         self.socket.connect()
@@ -157,7 +157,6 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
                         }
                     }
                     
-                    
                     if (test == 0) {
                         
                         print(nameTest)
@@ -183,9 +182,6 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
             print("Added Players")
         }
         
-        
-        
-        
         self.socket.on("win") {[weak self] data, ack in
             if let name = data?[0] as? Int {
                 for player in PlayerOnline.playerOnlineList {
@@ -209,7 +205,6 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
             
         }
         
-        
         self.socket.on(messages.disconnect.rawValue) {[weak self] data, ack in
             if let name = data?[0] as? Int {
                 
@@ -223,12 +218,8 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
                         }
                     }
                 }
-                
-                
             }
-            
         }
-        
         
         self.socket.on(messages.didJoin.rawValue) {[weak self] data, ack in
             self!.socket.emit(messages.joinRoom.rawValue, self!.localName! , self!.room, self!.playerData.skinSlot.skin.index.integerValue)
@@ -237,7 +228,6 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
         self.socket.on(messages.join.rawValue) {[weak self] data, ack in
             
             if let name = data?[0] as? NSDictionary {
-                
                 
                 let xPos = 144
                 let skin = name.objectForKey("skin") as? Int
@@ -306,7 +296,7 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
                 
             case states.mission:
                 break
-            case states.afterMission:
+            case states.win:
                 self.socket.emit("win", self.room)
                 self.blackSpriteNode = SKSpriteNode(color: GameColors.black, size: self.size)
                 self.blackSpriteNode.anchorPoint = CGPoint(x: 0, y: 1)
@@ -315,6 +305,10 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
                 self.addChild(box)
                 
                 self.blackSpriteNode.zPosition = box.zPosition - 1
+                break
+                
+            case states.loose:
+                self.view!.presentScene(LobbyScene(), transition: Config.defaultGoTransition)
                 break
                 
             default:
@@ -340,8 +334,7 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
                 let location = touch.locationInNode(self)
                 
                 if (self.childNodeWithName("buttonBack")!.containsPoint(location)) {
-                    
-                    self.nextState = .afterMission
+                    self.nextState = .loose
                     return
                 }
             }

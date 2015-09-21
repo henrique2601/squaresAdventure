@@ -21,10 +21,6 @@ class MultiplayerWinBox: Box {
         
         self.labelName = Label(name: "labelName", color:GameColors.black, textureName: name, x: 288, y: 226)
         self.addChild(self.labelName)
-        
-        if let _ = self.scene as? MultiplayerGameScene {
-            //scene.socket.emit("win", scene.room)
-        }
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -37,8 +33,8 @@ class MultiplayerWinBox: Box {
             let location = touch.locationInNode(self)
             
             if (self.childNodeWithName("buttonExit")!.containsPoint(location)) {
-                if let scene = self.scene as? MultiplayerGameScene {
-                    scene.view!.presentScene(MainMenuScene(), transition: Config.defaultGoTransition)
+                if let scene = self.scene as? MultiplayerMissionScene {
+                    scene.view!.presentScene(LobbyScene(), transition: Config.defaultGoTransition)
                 }
                 
                 if let scene = self.scene as? LocalGameScene {

@@ -14,7 +14,7 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
         case loading
         case mission
         case paused
-        case afterMission
+        case win
         case floors
         case powerUp
     }
@@ -103,7 +103,7 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
             PowerUp.updatePowerUpLabels()
         }
         
-        self.addChild(Button(name: "buttonBack", textureName: "buttonGraySquareSmall", text:"||" ,x:20, y:20, xAlign:.left, yAlign:.up))
+        self.addChild(Button(name: "buttonBack", textureName: "buttonGraySquareSmall", text:"X" ,x:20, y:20, xAlign:.left, yAlign:.up))
     }
     
     func didBeginContact(contact: SKPhysicsContact) {
@@ -135,7 +135,7 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
                 self.player.reset()
                 self.lastReset = currentTime
                 break
-            case states.afterMission:
+            case states.win:
                 
                 //Desbloquear nova fase?
                 var towerIndex:Int = 0
@@ -180,7 +180,7 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
                 
                 break
             case states.floors:
-                self.view!.presentScene(MainMenuScene(), transition: Config.defaultGoTransition)
+                self.view!.presentScene(FloorsScene(), transition: Config.defaultGoTransition)
                 break
             case states.powerUp:
                 self.view!.presentScene(MissionScene(), transition: Config.defaultGoTransition)

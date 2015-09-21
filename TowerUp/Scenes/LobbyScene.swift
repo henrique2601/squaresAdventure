@@ -105,7 +105,7 @@ class LobbyScene: GameScene, UITextFieldDelegate {
             switch (self.nextState) {
                 
             case states.multiplayerMission:
-                let nextScene  = MultiplayerGameScene()
+                let nextScene = MultiplayerMissionScene()
                 nextScene.room = self.room
                 nextScene.localName = self.myTextField.myTextField.text
                 self.view!.presentScene(nextScene, transition: Config.defaultGoTransition)

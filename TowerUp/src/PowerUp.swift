@@ -160,7 +160,7 @@ class PowerUp: Button {
                             if let scene = powerUp.scene as? MissionScene {
                                 scene.labelCoins.setText(MemoryCard.sharedInstance.playerData.coins.description)
                             }
-                            if let scene = powerUp.scene as? MultiplayerGameScene {
+                            if let scene = powerUp.scene as? MultiplayerMissionScene {
                                 scene.labelCoins.setText(MemoryCard.sharedInstance.playerData.coins.description)
                             }
                             PowerUp.updatePowerUpLabels()

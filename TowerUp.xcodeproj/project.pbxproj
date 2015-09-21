@@ -77,7 +77,7 @@
 		13E7D10B1B8CE9D2000F67D6 /* 0 1 0 0 in Resources */ = {isa = PBXBuildFile; fileRef = 13E7D10A1B8CE9D2000F67D6 /* 0 1 0 0 */; };
 		13EBD7BE1B7A65E5005F1CA4 /* World.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EBD7BD1B7A65E5005F1CA4 /* World.swift */; };
 		13EBD7C01B7A6614005F1CA4 /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13EBD7BF1B7A6614005F1CA4 /* Camera.swift */; };
-		13FC80081B86404500865C72 /* MultiplayerGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FC80071B86404500865C72 /* MultiplayerGameScene.swift */; };
+		13FC80081B86404500865C72 /* MultiplayerMissionScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FC80071B86404500865C72 /* MultiplayerMissionScene.swift */; };
 		13FC800A1B8640B800865C72 /* PlayerOnline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FC80091B8640B800865C72 /* PlayerOnline.swift */; };
 		3A979BF31B987B3300A8E09F /* Textfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A979BF21B987B3300A8E09F /* Textfield.swift */; };
 		3A979C641BA0773C00A8E09F /* MPCManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A979C631BA0773C00A8E09F /* MPCManager.swift */; };
@@ -173,7 +173,7 @@
 		13E7D10A1B8CE9D2000F67D6 /* 0 1 0 0 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "0 1 0 0"; sourceTree = "<group>"; };
 		13EBD7BD1B7A65E5005F1CA4 /* World.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = World.swift; path = src/World.swift; sourceTree = "<group>"; };
 		13EBD7BF1B7A6614005F1CA4 /* Camera.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Camera.swift; path = src/Camera.swift; sourceTree = "<group>"; };
-		13FC80071B86404500865C72 /* MultiplayerGameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MultiplayerGameScene.swift; path = Scenes/MultiplayerGameScene.swift; sourceTree = "<group>"; };
+		13FC80071B86404500865C72 /* MultiplayerMissionScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MultiplayerMissionScene.swift; path = Scenes/MultiplayerMissionScene.swift; sourceTree = "<group>"; };
 		13FC80091B8640B800865C72 /* PlayerOnline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayerOnline.swift; path = src/PlayerOnline.swift; sourceTree = "<group>"; };
 		3A979BF21B987B3300A8E09F /* Textfield.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Textfield.swift; path = src/Textfield.swift; sourceTree = "<group>"; };
 		3A979C631BA0773C00A8E09F /* MPCManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPCManager.swift; sourceTree = "<group>"; };
@@ -282,7 +282,7 @@
 				3A979C671BA1BB9500A8E09F /* LocalLobbyScene.swift */,
 				1359DD0B1B7286D3006C12FA /* MainMenuScene.swift */,
 				139A0E891B73D05900EDE944 /* MissionScene.swift */,
-				13FC80071B86404500865C72 /* MultiplayerGameScene.swift */,
+				13FC80071B86404500865C72 /* MultiplayerMissionScene.swift */,
 				13CCB6FF1B72B9A70060334C /* OptionsScene.swift */,
 				13CCB6FD1B72B9010060334C /* TowersScene.swift */,
 			);
@@ -1430,7 +1430,7 @@
 				3A979C641BA0773C00A8E09F /* MPCManager.swift in Sources */,
 				1326AE8A1B85FD8800D4563B /* Event.swift in Sources */,
 				13D8316D1BA7415D00A95FEB /* MessageBox.swift in Sources */,
-				13FC80081B86404500865C72 /* MultiplayerGameScene.swift in Sources */,
+				13FC80081B86404500865C72 /* MultiplayerMissionScene.swift in Sources */,
 				13BC7ED61BAAE883003D6CCD /* SocketEngineClient.swift in Sources */,
 				139A0E8A1B73D05900EDE944 /* MissionScene.swift in Sources */,
 				13BC7EE01BAAE883003D6CCD /* SwiftRegex.swift in Sources */,
