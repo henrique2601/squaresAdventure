@@ -16,7 +16,7 @@ class Tower: Control {
 class Towers: NSObject {
     static var types = Array<TowerType>([
         TowerType(floorCount: 7, tileset:"grass"),
-        TowerType(floorCount: 2, tileset:"dirt")
+        TowerType(floorCount: 2, tileset:"sand")
         ])
 }
 
