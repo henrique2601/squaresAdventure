@@ -41,7 +41,6 @@ class GameScene: SKScene {
     }
     
     override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        print(touches.count)
         Control.touchesMoved()
     }
     

@@ -218,11 +218,11 @@ class ScrollNode: Control {
                     //                    cell.position = CGPoint(x: Int(position.x), y: Int(position.y) + dy)
                     //                }
                     break
-                default:
-                    #if DEBUG
-                        fatalError("Algo saiu muito errado no update de ScrollNode")
-                    #endif
-                    break
+//                default:
+//                    #if DEBUG
+//                        fatalError("Algo saiu muito errado no update de ScrollNode")
+//                    #endif
+//                    break
                 }
             }
         }

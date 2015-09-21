@@ -74,7 +74,7 @@ class MemoryCard: NSObject {
     
     func loadGame() {
         
-        if let playerData = self.playerData {
+        if let _ = self.playerData {
             print("Game already loaded.")
         } else {
             let fetchRequestData:NSArray = fetchRequest()
@@ -144,7 +144,8 @@ class MemoryCard: NSObject {
             // Replace this with code to handle the error appropriately.
             // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
             NSLog("Unresolved error \(error), \(error!.userInfo)")
-            abort()
+            print("Deleta o App e teste de novo. =}")
+            //abort()
         } catch {
             fatalError()
         }

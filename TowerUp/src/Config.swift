@@ -59,7 +59,6 @@ class Config: NSObject {
             return Config.currentSceneSize
             
         default:
-            let scale = 1
             Config.translate = CGPoint.zero
             Config.currentSceneSize = CGSize(width: 1334/2, height: 750/2)
             return Config.currentSceneSize

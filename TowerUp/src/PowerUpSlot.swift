@@ -47,7 +47,9 @@ class PowerUpSlot: SKSpriteNode {
     func setPowerUp(powerUpData:PowerUpData) {
         self.powerUpSlotData.powerUp = powerUpData
         let powerUpType = PowerUps.types[powerUpData.index.integerValue]
-        self.addChild(SKSpriteNode(imageNamed: powerUpType.powerUpImage))
+        let spriteNode = SKSpriteNode(imageNamed: powerUpType.powerUpImage)
+        spriteNode.zPosition = self.zPosition + 1
+        self.addChild(spriteNode)
         self.addChild(Label(name: "labelPrice", color: GameColors.black, textureName: powerUpType.price.description, x: 0, y: 31))
         self.empty = false
     }

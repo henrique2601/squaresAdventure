@@ -87,7 +87,7 @@ class Button: Control {
     }
     
     func addHandler(handler: Void -> ()) {
-        if let event = self.event {
+        if let _ = self.event {
             
         } else {
             self.event = Event()
