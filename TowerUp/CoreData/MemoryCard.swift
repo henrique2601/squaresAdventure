@@ -22,8 +22,8 @@ class MemoryCard: NSObject {
         
         //Player
         self.playerData = self.newPlayerData()
-        self.playerData.coins = NSNumber(int: 1000)
         self.playerData.name = String.randomStringWithLength(8)
+        self.playerData.coins = NSNumber(int: 100000)
 
         
         //Towers e Floors

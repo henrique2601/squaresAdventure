@@ -53,6 +53,11 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
     let socket = SocketIOClient(socketURL: "181.41.197.181:3001", opts: nil)
     
     var labelCoins:Label!
+    var collectedBonus = 0 {
+        didSet {
+            self.labelCoins.setText(String(Int(MemoryCard.sharedInstance.playerData.coins) + self.collectedBonus))
+        }
+    }
     
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)

@@ -13,6 +13,8 @@ class PowerUp: Button {
     
     static var powerUpList = Set<PowerUp>()
     
+    var powerUpType:PowerUpType!
+    
     var powerUpData:PowerUpData
     
     var powerUp:SKSpriteNode!
@@ -49,28 +51,28 @@ class PowerUp: Button {
         let name:String = powerUpData.index.description
         self.name = name
         
-        let powerUpType = PowerUps.types[powerUpData.index.integerValue]
+        self.powerUpType = PowerUps.types[powerUpData.index.integerValue]
         
-        let texture = SKTexture(imageNamed: powerUpType.powerUpImage)
+        let texture = SKTexture(imageNamed: self.powerUpType.powerUpImage)
         self.powerUp = SKSpriteNode(texture: texture, color: UIColor.whiteColor(), size: texture.size())
         self.powerUpShadow = SKSpriteNode(texture: texture, color: UIColor.whiteColor(), size: texture.size())
         self.powerUpShadow.color = GameColors.black
         self.powerUpShadow.colorBlendFactor = 1
         self.powerUpShadow.hidden = true
         
-        self.powerUp.addChild(Label(name: "labelPrice", color: GameColors.black, textureName: powerUpType.price.description, x: 0, y: 31))
+        self.powerUp.addChild(Label(name: "labelPrice", color: GameColors.black, textureName: self.powerUpType.price.description, x: 0, y: 31))
         self.powerUp.name = name
         self.addChild(self.powerUp)
         self.powerUp.addChild(self.powerUpShadow)
         
-        let texturePressed = SKTexture(imageNamed: "\(powerUpType.powerUpImage)Pressed")
+        let texturePressed = SKTexture(imageNamed: "\(self.powerUpType.powerUpImage)Pressed")
         self.powerUpPressed = SKSpriteNode(texture: texturePressed, color: UIColor.whiteColor(), size: texturePressed.size())
         self.powerUpPressedShadow = SKSpriteNode(texture: texturePressed, color: UIColor.whiteColor(), size: texturePressed.size())
         self.powerUpPressedShadow.color = GameColors.black
         self.powerUpPressedShadow.colorBlendFactor = 1
         self.powerUpPressedShadow.hidden = true
         
-        self.powerUpPressed.addChild(Label(name: "labelPrice", color: GameColors.black, textureName: powerUpType.price.description, x: 0, y: 31 + 2))
+        self.powerUpPressed.addChild(Label(name: "labelPrice", color: GameColors.black, textureName: self.powerUpType.price.description, x: 0, y: 31 + 2))
         self.powerUpPressed.name = "\(name)Pressed"
         self.powerUpPressed.hidden = true
         self.addChild(self.powerUpPressed)
@@ -93,29 +95,30 @@ class PowerUp: Button {
         }
     }
     
-    override class func touchesEnded(touches: Set<UITouch>) {
-        for powerUp in PowerUp.powerUpList {
-            if let event = powerUp.event {
-                for touch in touches {
-                    if let parent = powerUp.parent {
-                        let location = touch.locationInNode(parent)
-                        if powerUp.containsPoint(location) {
-                            event.raise()
-                        }
-                    }
-                }
-            }
-            powerUp.update()
-        }
-    }
-    
     class func doLogic(currentTime: NSTimeInterval) {
         for powerUp in PowerUp.powerUpList {
             if powerUp.pressed == true {
-                let powerUpType = PowerUps.types[powerUp.powerUpData.index.integerValue]
-                if currentTime - powerUp.lastUse > powerUpType.coolDown {
-                    powerUp.event?.raise()
-                    powerUp.lastUse = currentTime
+                if currentTime - powerUp.lastUse > powerUp.powerUpType.coolDown {
+                    
+                    let playerData = MemoryCard.sharedInstance.playerData
+                    if(powerUp.powerUpType.price <= Int(playerData.coins)) {
+                        playerData.coins = NSNumber(integer: Int(playerData.coins) - powerUp.powerUpType.price)
+                        if let scene = powerUp.scene as? MissionScene {
+                            scene.labelCoins.setText(String(Int(MemoryCard.sharedInstance.playerData.coins) + scene.collectedBonus))
+                        }
+                        if let scene = powerUp.scene as? MultiplayerGameScene {
+                            scene.labelCoins.setText(String(Int(MemoryCard.sharedInstance.playerData.coins) + scene.collectedBonus))
+                        }
+                        powerUp.event?.raise()
+                        powerUp.lastUse = currentTime
+                        powerUp.inUse = true
+                    }
+                }
+            }
+            
+            if (powerUp.inUse == true) {
+                if currentTime - powerUp.lastUse > powerUp.powerUpType.coolDown {
+                    powerUp.inUse = false
                 }
             }
         }

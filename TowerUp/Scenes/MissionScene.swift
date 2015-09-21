@@ -41,6 +41,11 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
     var playerData = MemoryCard.sharedInstance.playerData
     
     var labelCoins:Label!
+    var collectedBonus = 0 {
+        didSet {
+            self.labelCoins.setText(String(Int(MemoryCard.sharedInstance.playerData.coins) + self.collectedBonus))
+        }
+    }
     
     var powerUpsScrollNode:ScrollNode!
     
@@ -79,6 +84,7 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
                 if let powerUpSlotData = item as? PowerUpSlotData {
                     if let powerUpData = powerUpSlotData.powerUp {
                         let powerUp = PowerUp(powerUpData: powerUpData)
+                        powerUp.loadEvent()
                         powerUpsArray.append(powerUp)
                     }
                 }
@@ -109,6 +115,7 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
         if(self.state == self.nextState){
             switch (self.state) {
             case states.mission:
+                PowerUp.doLogic(currentTime)
                 self.player.update(currentTime)
                 self.mapManager.update(currentTime)
                 break
@@ -162,9 +169,9 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
                 self.blackSpriteNode = SKSpriteNode(color: GameColors.black, size: self.size)
                 self.blackSpriteNode.anchorPoint = CGPoint(x: 0, y: 1)
                 self.addChild(self.blackSpriteNode)
-                let box = AfterMissionBox(background: "boxWhite", time: Int(currentTime - self.lastReset).description, deaths: self.player.deathCount.description, bonus: self.player.collectedBonus.description)
+                let box = AfterMissionBox(background: "boxWhite", time: Int(currentTime - self.lastReset).description, deaths: self.player.deathCount.description, bonus: self.collectedBonus.description)
                 
-                self.playerData.coins = NSNumber(integer: Int(self.playerData.coins) + self.player.collectedBonus)
+                self.playerData.coins = NSNumber(integer: Int(self.playerData.coins) + self.collectedBonus)
                 self.addChild(box)
                 
                 self.blackSpriteNode.zPosition = box.zPosition - 1

@@ -30,18 +30,6 @@ class Player: Square {
     var win:Bool = false
     var lastNoWin:NSTimeInterval = 0
     
-    var collectedBonus = 0 {
-        didSet {
-            if let scene = self.scene as? MissionScene {
-                scene.labelCoins.setText(self.collectedBonus.description)
-                return
-            }
-            if let scene = self.scene as? MultiplayerGameScene {
-                scene.labelCoins.setText(self.collectedBonus.description)
-            }
-        }
-    }
-    
     init(texture:String = "rabbit", x:Int, y:Int, loadPhysics:Bool) {
         super.init()
         self.loadNewPlayer("player", texture:texture, x: x, y: y, loadPhysics: loadPhysics)
@@ -127,7 +115,13 @@ class Player: Square {
         case physicsCategory.coin.rawValue:
             if let node = physicsBody.node {
                 let coin = (node as! Coin)
-                self.collectedBonus = self.collectedBonus + coin.bonus
+                if let scene = self.scene as? MissionScene {
+                    scene.collectedBonus = scene.collectedBonus + coin.bonus
+                } else {
+                    if let scene = self.scene as? MultiplayerGameScene {
+                        scene.collectedBonus = scene.collectedBonus + coin.bonus
+                    }
+                }
                 coin.bonus = 0
                 coin.removeFromParent()
             }
@@ -264,13 +258,15 @@ class Player: Square {
     }
     
     func ajustAngle() {
-        if(abs(self.physicsBody!.angularVelocity) < CGFloat(M_PI)) {
-            self.totalRotation = 0 - self.zRotation
-            
-            while(self.totalRotation < -CGFloat(M_PI)) { self.totalRotation += CGFloat(M_PI * 2) }
-            while(self.totalRotation >  CGFloat(M_PI)) { self.totalRotation -= CGFloat(M_PI * 2) }
-            
-            self.physicsBody!.applyAngularImpulse(self.totalRotation * 0.001)
+        if let physicsBody = self.physicsBody {
+            if(abs(physicsBody.angularVelocity) < CGFloat(M_PI)) {
+                self.totalRotation = 0 - self.zRotation
+                
+                while(self.totalRotation < -CGFloat(M_PI)) { self.totalRotation += CGFloat(M_PI * 2) }
+                while(self.totalRotation >  CGFloat(M_PI)) { self.totalRotation -= CGFloat(M_PI * 2) }
+                
+                physicsBody.applyAngularImpulse(self.totalRotation * 0.001)
+            }
         }
     }
     
@@ -295,7 +291,5 @@ class Player: Square {
         //Gameplay
         self.win = false
         self.lastNoWin = 0
-        
-        self.collectedBonus = 0
     }
 }

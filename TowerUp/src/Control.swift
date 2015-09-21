@@ -149,7 +149,7 @@ class Control: SKNode {
             Control.touchesArray.remove(touch)
         }
         Button.update(touches)
-        PowerUp.touchesEnded(touches)
+        PowerUp.update()
         Switch.update(touches)
     }
     
