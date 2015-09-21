@@ -43,7 +43,7 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
     var labelCoins:Label!
     var collectedBonus = 0 {
         didSet {
-            self.labelCoins.setText(String(Int(MemoryCard.sharedInstance.playerData.coins) + self.collectedBonus))
+            self.labelCoins.setText(MemoryCard.sharedInstance.playerData.coins.description)
         }
     }
     
@@ -171,7 +171,6 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
                 self.addChild(self.blackSpriteNode)
                 let box = AfterMissionBox(background: "boxWhite", time: Int(currentTime - self.lastReset).description, deaths: self.player.deathCount.description, bonus: self.collectedBonus.description)
                 
-                self.playerData.coins = NSNumber(integer: Int(self.playerData.coins) + self.collectedBonus)
                 self.addChild(box)
                 
                 self.blackSpriteNode.zPosition = box.zPosition - 1

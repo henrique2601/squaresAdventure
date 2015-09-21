@@ -121,9 +121,15 @@ class Player: Square {
                 let coin = (node as! Coin)
                 if let scene = self.scene as? MissionScene {
                     scene.collectedBonus = scene.collectedBonus + coin.bonus
+                    
+                    let playerData = MemoryCard.sharedInstance.playerData
+                    playerData.coins = NSNumber(integer: Int(playerData.coins) + coin.bonus)
                 } else {
                     if let scene = self.scene as? MultiplayerGameScene {
                         scene.collectedBonus = scene.collectedBonus + coin.bonus
+                        
+                        let playerData = MemoryCard.sharedInstance.playerData
+                        playerData.coins = NSNumber(integer: Int(playerData.coins) + coin.bonus)
                     }
                 }
                 coin.bonus = 0

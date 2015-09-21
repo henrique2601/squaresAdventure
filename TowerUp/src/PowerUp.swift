@@ -123,10 +123,10 @@ class PowerUp: Button {
                     let playerData = MemoryCard.sharedInstance.playerData
                     playerData.coins = NSNumber(integer: Int(playerData.coins) + self.powerUpType.price)
                     if let scene = self.scene as? MissionScene {
-                        scene.labelCoins.setText(String(Int(MemoryCard.sharedInstance.playerData.coins) + scene.collectedBonus))
+                        scene.labelCoins.setText(MemoryCard.sharedInstance.playerData.coins.description)
                     }
                     if let scene = self.scene as? MultiplayerGameScene {
-                        scene.labelCoins.setText(String(Int(MemoryCard.sharedInstance.playerData.coins) + scene.collectedBonus))
+                        scene.labelCoins.setText(MemoryCard.sharedInstance.playerData.coins.description)
                     }
                     self.lastUse = 0
                 }
@@ -150,10 +150,10 @@ class PowerUp: Button {
                     if(powerUp.powerUpType.price <= Int(playerData.coins)) {
                         playerData.coins = NSNumber(integer: Int(playerData.coins) - powerUp.powerUpType.price)
                         if let scene = powerUp.scene as? MissionScene {
-                            scene.labelCoins.setText(String(Int(MemoryCard.sharedInstance.playerData.coins) + scene.collectedBonus))
+                            scene.labelCoins.setText(MemoryCard.sharedInstance.playerData.coins.description)
                         }
                         if let scene = powerUp.scene as? MultiplayerGameScene {
-                            scene.labelCoins.setText(String(Int(MemoryCard.sharedInstance.playerData.coins) + scene.collectedBonus))
+                            scene.labelCoins.setText(MemoryCard.sharedInstance.playerData.coins.description)
                         }
                         powerUp.lastUse = currentTime
                         powerUp.eventBegin?.raise()

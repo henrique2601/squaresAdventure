@@ -55,7 +55,7 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
     var labelCoins:Label!
     var collectedBonus = 0 {
         didSet {
-            self.labelCoins.setText(String(Int(MemoryCard.sharedInstance.playerData.coins) + self.collectedBonus))
+            self.labelCoins.setText(MemoryCard.sharedInstance.playerData.coins.description)
         }
     }
     
@@ -111,7 +111,7 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
         }
         
         let boxCoins = Control(name: "boxCoins", textureName: "boxCoins", x: 1058, y: 20, xAlign: .right, yAlign: .up)
-        self.labelCoins = Label(name: "lebelCoins", color: GameColors.black, textureName: "0", x: 160, y: 39)
+        self.labelCoins = Label(name: "lebelCoins", color: GameColors.black, textureName: self.playerData.coins.description, x: 160, y: 39)
         boxCoins.addChild(self.labelCoins)
         self.addChild(boxCoins)
         
