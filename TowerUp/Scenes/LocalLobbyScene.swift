@@ -121,7 +121,7 @@ class LocalLobbyScene: GameScene {
         super.touchesEnded(touches, withEvent: event)
         
         
-                for touch in (touches as! Set<UITouch>) {
+                for touch in touches {
                     let location = touch.locationInNode(self)
                     
                     

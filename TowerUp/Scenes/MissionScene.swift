@@ -44,6 +44,7 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
     var collectedBonus = 0 {
         didSet {
             self.labelCoins.setText(MemoryCard.sharedInstance.playerData.coins.description)
+            PowerUp.updatePowerUpLabels()
         }
     }
     
@@ -77,6 +78,11 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
         self.addChild(Button(name: "buttonRight", textureName: "buttonYellowSquare", text:">" ,x:160, y:630, xAlign:.left, yAlign:.down))
         self.addChild(Button(name: "buttonJump", textureName: "buttonYellow", text:"Jump", x:1014, y:630, xAlign:.right, yAlign:.down))
         
+        let boxCoins = Control(name: "boxCoins", textureName: "boxCoins", x: 1058, y: 20, xAlign: .right, yAlign: .up)
+        self.labelCoins = Label(name: "lebelCoins", color: GameColors.black, textureName: self.playerData.coins.description, x: 160, y: 39)
+        boxCoins.addChild(self.labelCoins)
+        self.addChild(boxCoins)
+        
         if(self.playerData.powerUps.count > 0) {
             var powerUpsArray = Array<SKNode>()
             
@@ -93,12 +99,9 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
             self.powerUpsScrollNode = ScrollNode(name: "powerUpSlotsScrollNode", textureName: "", x: 667, y: 680, xAlign: .center, yAlign: .down, cells: powerUpsArray, scrollDirection: ScrollNode.scrollTypes.horizontal, scaleNodes: false)
             self.powerUpsScrollNode.canScroll = false
             self.addChild(self.powerUpsScrollNode)
+            
+            PowerUp.updatePowerUpLabels()
         }
-        
-        let boxCoins = Control(name: "boxCoins", textureName: "boxCoins", x: 1058, y: 20, xAlign: .right, yAlign: .up)
-        self.labelCoins = Label(name: "lebelCoins", color: GameColors.black, textureName: self.playerData.coins.description, x: 160, y: 39)
-        boxCoins.addChild(self.labelCoins)
-        self.addChild(boxCoins)
         
         self.addChild(Button(name: "buttonBack", textureName: "buttonGraySquareSmall", text:"||" ,x:20, y:20, xAlign:.left, yAlign:.up))
     }

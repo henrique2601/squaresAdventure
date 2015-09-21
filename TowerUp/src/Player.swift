@@ -149,6 +149,7 @@ class Player: Square {
             break
             
         case physicsCategory.winTile.rawValue:
+            self.physicsBody?.dynamic = false
             self.win = true
             break
             
@@ -176,6 +177,7 @@ class Player: Square {
             break
             
         case physicsCategory.winTile.rawValue:
+            self.physicsBody?.dynamic = true
             self.win = false
             break
             
@@ -262,6 +264,12 @@ class Player: Square {
             if(self.needAngularImpulse > 0) {
                 self.ajustAngle()
             }
+        } else {
+            for touch in Control.touchesArray {
+                if(touch.tapCount >= 2) {
+                    self.respawn()
+                }
+            }
         }
         
         if(currentTime - self.lastAlive > 3) {//Intervalo de spawn apos zerar healthPoints
@@ -303,5 +311,7 @@ class Player: Square {
         //Gameplay
         self.win = false
         self.lastNoWin = 0
+        
+        self.physicsBody?.dynamic = true
     }
 }

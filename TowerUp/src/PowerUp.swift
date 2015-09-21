@@ -31,6 +31,9 @@ class PowerUp: Button {
     
     var needUpdate = false
     
+    var labelPrice:Label!
+    var labelPricePressed:Label!
+    
     var inUse:Bool = false {
         didSet {
             if(self.inUse) {
@@ -66,7 +69,8 @@ class PowerUp: Button {
         self.powerUpShadow.colorBlendFactor = 1
         self.powerUpShadow.hidden = true
         
-        self.powerUp.addChild(Label(name: "labelPrice", color: GameColors.black, textureName: self.powerUpType.price.description, x: 0, y: 31))
+        self.labelPrice = Label(name: "labelPrice", color: GameColors.black, textureName: self.powerUpType.price.description, x: 0, y: 31)
+        self.powerUp.addChild(self.labelPrice)
         self.powerUp.name = name
         self.addChild(self.powerUp)
         self.powerUp.addChild(self.powerUpShadow)
@@ -78,7 +82,8 @@ class PowerUp: Button {
         self.powerUpPressedShadow.colorBlendFactor = 1
         self.powerUpPressedShadow.hidden = true
         
-        self.powerUpPressed.addChild(Label(name: "labelPrice", color: GameColors.black, textureName: self.powerUpType.price.description, x: 0, y: 31 + 2))
+        self.labelPricePressed = Label(name: "labelPrice", color: GameColors.black, textureName: self.powerUpType.price.description, x: 0, y: 31 + 2)
+        self.powerUpPressed.addChild(self.labelPricePressed)
         self.powerUpPressed.name = "\(name)Pressed"
         self.powerUpPressed.hidden = true
         self.addChild(self.powerUpPressed)
@@ -96,7 +101,11 @@ class PowerUp: Button {
             
         case 0://Antigravidade
             self.eventBegin?.addHandler({
-                player.physicsBody!.affectedByGravity = false
+                if(player.healthPoints > 0) {
+                    player.physicsBody!.affectedByGravity = false
+                } else {
+                    self.lastUse = -1
+                }
             })
             self.eventEnd?.addHandler({
                 player.physicsBody!.affectedByGravity = true
@@ -105,10 +114,14 @@ class PowerUp: Button {
             
         case 1://Invencibilidade
             self.eventBegin?.addHandler({
-                player.physicsBody!.contactTestBitMask =
-                    physicsCategory.winTile.rawValue |
-                    physicsCategory.coin.rawValue |
-                    physicsCategory.doorTile.rawValue
+                if(player.healthPoints > 0) {
+                    player.physicsBody!.contactTestBitMask =
+                        physicsCategory.winTile.rawValue |
+                        physicsCategory.coin.rawValue |
+                        physicsCategory.doorTile.rawValue
+                } else {
+                    self.lastUse = -1
+                }
             })
             self.eventEnd?.addHandler({
                 player.resetCategoryBitMasks()
@@ -120,15 +133,7 @@ class PowerUp: Button {
                 if(player.healthPoints <= 0) {
                     player.healthPoints = player.maxHealthPoints
                 } else {
-                    let playerData = MemoryCard.sharedInstance.playerData
-                    playerData.coins = NSNumber(integer: Int(playerData.coins) + self.powerUpType.price)
-                    if let scene = self.scene as? MissionScene {
-                        scene.labelCoins.setText(MemoryCard.sharedInstance.playerData.coins.description)
-                    }
-                    if let scene = self.scene as? MultiplayerGameScene {
-                        scene.labelCoins.setText(MemoryCard.sharedInstance.playerData.coins.description)
-                    }
-                    self.lastUse = 0
+                    self.lastUse = -1
                 }
             })
             break
@@ -148,17 +153,20 @@ class PowerUp: Button {
                     
                     let playerData = MemoryCard.sharedInstance.playerData
                     if(powerUp.powerUpType.price <= Int(playerData.coins)) {
-                        playerData.coins = NSNumber(integer: Int(playerData.coins) - powerUp.powerUpType.price)
-                        if let scene = powerUp.scene as? MissionScene {
-                            scene.labelCoins.setText(MemoryCard.sharedInstance.playerData.coins.description)
-                        }
-                        if let scene = powerUp.scene as? MultiplayerGameScene {
-                            scene.labelCoins.setText(MemoryCard.sharedInstance.playerData.coins.description)
-                        }
                         powerUp.lastUse = currentTime
                         powerUp.eventBegin?.raise()
-                        powerUp.inUse = true
-                        powerUp.needUpdate = true
+                        if(powerUp.lastUse != -1) {// -1 significa que o PowerUp não pode ser ativado.
+                            playerData.coins = NSNumber(integer: Int(playerData.coins) - powerUp.powerUpType.price)
+                            if let scene = powerUp.scene as? MissionScene {
+                                scene.labelCoins.setText(MemoryCard.sharedInstance.playerData.coins.description)
+                            }
+                            if let scene = powerUp.scene as? MultiplayerGameScene {
+                                scene.labelCoins.setText(MemoryCard.sharedInstance.playerData.coins.description)
+                            }
+                            PowerUp.updatePowerUpLabels()
+                            powerUp.inUse = true
+                            powerUp.needUpdate = true
+                        }
                     }
                 }
             }
@@ -175,6 +183,19 @@ class PowerUp: Button {
                 if currentTime - powerUp.lastUse > powerUp.powerUpType.coolDown {
                     powerUp.inUse = false
                 }
+            }
+        }
+    }
+    
+    class func updatePowerUpLabels() {
+        let playerData = MemoryCard.sharedInstance.playerData
+        for powerUp in PowerUp.powerUpList {
+            if(powerUp.powerUpType.price <= Int(playerData.coins)) {
+                powerUp.labelPrice.setText(powerUp.powerUpType.price.description, color: GameColors.black)
+                powerUp.labelPricePressed.setText(powerUp.powerUpType.price.description, color: GameColors.black)
+            } else {
+                powerUp.labelPrice.setText(powerUp.powerUpType.price.description, color: GameColors.red)
+                powerUp.labelPricePressed.setText(powerUp.powerUpType.price.description, color: GameColors.red)
             }
         }
     }
@@ -236,8 +257,8 @@ class PowerUpType: NSObject {
 
 class PowerUps :NSObject {
     static var types = Array<PowerUpType>([
-        PowerUpType(powerUpImage:"powerUp A", price:100, coolDown:10, duration:3),
-        PowerUpType(powerUpImage:"powerUp B", price:200, coolDown:10, duration:10),
-        PowerUpType(powerUpImage:"powerUp C", price:500, coolDown:10, duration:5)
+        PowerUpType(powerUpImage:"powerUp A", price:50, coolDown:5, duration:3),
+        PowerUpType(powerUpImage:"powerUp B", price:75, coolDown:10, duration:5),
+        PowerUpType(powerUpImage:"powerUp C", price:150, coolDown:10, duration:0)
         ])
 }

@@ -15,18 +15,20 @@ class Tower: Control {
 
 class Towers: NSObject {
     static var types = Array<TowerType>([
-        TowerType(floorCount: 7),
-        TowerType(floorCount: 2)
+        TowerType(floorCount: 7, tileset:"grass"),
+        TowerType(floorCount: 2, tileset:"dirt")
         ])
 }
 
 class TowerType: NSObject {
     
     var floorCount:Int!
+    var tileset:String!
     
-    init(floorCount:Int) {
+    init(floorCount:Int, tileset:String) {
         super.init()
         self.floorCount = floorCount
+        self.tileset = tileset
     }
 }
 

@@ -96,7 +96,7 @@ override
         self.labelNode.verticalAlignmentMode = SKLabelVerticalAlignmentMode.Center
         self.labelNode.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Center
         
-        labelNode.name = name
+        self.labelNode.name = name
         self.addChild(self.labelNode)
         
         Control.controlList.insert(self)
