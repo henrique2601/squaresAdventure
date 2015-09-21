@@ -59,6 +59,8 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
         }
     }
     
+     var powerUpsScrollNode:ScrollNode!
+    
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
         self.backgroundColor = GameColors.blueSky
@@ -90,9 +92,23 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
         self.addChild(Button(name: "buttonRight", textureName: "buttonYellowSquare", text:">" ,x:160, y:630, xAlign:.left, yAlign:.down))
         self.addChild(Button(name: "buttonJump", textureName: "buttonYellow", text:"Jump", x:1014, y:630, xAlign:.right, yAlign:.down))
         
-        self.addChild(Button(name: "buttonPowerUp0", textureName: "buttonBlueSquare", text:"1", x: 497, y: 630, xAlign:.center, yAlign:.down))
-        self.addChild(Button(name: "buttonPowerUp1", textureName: "buttonOrangeSquare", text:"2", x: 617, y: 630, xAlign:.center, yAlign:.down))
-        self.addChild(Button(name: "buttonPowerUp2", textureName: "buttonYellowSquare", text:"3", x: 737, y: 630, xAlign:.center, yAlign:.down))
+        if(self.playerData.powerUps.count > 0) {
+            var powerUpsArray = Array<SKNode>()
+            
+            for item in self.playerData.powerUpSlots {
+                if let powerUpSlotData = item as? PowerUpSlotData {
+                    if let powerUpData = powerUpSlotData.powerUp {
+                        let powerUp = PowerUp(powerUpData: powerUpData)
+                        powerUp.loadEvent(self.player)
+                        powerUpsArray.append(powerUp)
+                    }
+                }
+            }
+            
+            self.powerUpsScrollNode = ScrollNode(name: "powerUpSlotsScrollNode", textureName: "", x: 667, y: 680, xAlign: .center, yAlign: .down, cells: powerUpsArray, scrollDirection: ScrollNode.scrollTypes.horizontal, scaleNodes: false)
+            self.powerUpsScrollNode.canScroll = false
+            self.addChild(self.powerUpsScrollNode)
+        }
         
         let boxCoins = Control(name: "boxCoins", textureName: "boxCoins", x: 1058, y: 20, xAlign: .right, yAlign: .up)
         self.labelCoins = Label(name: "lebelCoins", color: GameColors.black, textureName: "0", x: 160, y: 39)
@@ -273,6 +289,7 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
         if(self.state == self.nextState){
             switch (self.state) {
             case states.mission:
+                PowerUp.doLogic(currentTime)
                 self.player.update(currentTime)
                 self.mapManager.update(currentTime)
                 break
@@ -320,8 +337,6 @@ class MultiplayerGameScene: GameScene, SKPhysicsContactDelegate {
                 let location = touch.locationInNode(self)
                 
                 if (self.childNodeWithName("buttonBack")!.containsPoint(location)) {
-                    
-                    
                     
                     self.nextState = .afterMission
                     return

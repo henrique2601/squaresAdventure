@@ -14,6 +14,7 @@ class Player: Square {
     //Ajuste de angulo
     var needAngularImpulse = 0
     var totalRotation:CGFloat = 0
+    var auxRotation:CGFloat = 0
     
     //Respawn
     var startingPosition:CGPoint = CGPoint.zero
@@ -90,7 +91,10 @@ class Player: Square {
     
     override func loadPhysics() {
         super.loadPhysics()
-        
+        self.resetCategoryBitMasks()
+    }
+    
+    func resetCategoryBitMasks() {
         self.physicsBody!.categoryBitMask = physicsCategory.player.rawValue
         self.physicsBody!.contactTestBitMask =
             physicsCategory.winTile.rawValue |
@@ -260,7 +264,7 @@ class Player: Square {
     func ajustAngle() {
         if let physicsBody = self.physicsBody {
             if(abs(physicsBody.angularVelocity) < CGFloat(M_PI)) {
-                self.totalRotation = 0 - self.zRotation
+                self.totalRotation = self.auxRotation - self.zRotation
                 
                 while(self.totalRotation < -CGFloat(M_PI)) { self.totalRotation += CGFloat(M_PI * 2) }
                 while(self.totalRotation >  CGFloat(M_PI)) { self.totalRotation -= CGFloat(M_PI * 2) }

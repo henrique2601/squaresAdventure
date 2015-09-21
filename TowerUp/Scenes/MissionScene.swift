@@ -84,7 +84,7 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
                 if let powerUpSlotData = item as? PowerUpSlotData {
                     if let powerUpData = powerUpSlotData.powerUp {
                         let powerUp = PowerUp(powerUpData: powerUpData)
-                        powerUp.loadEvent()
+                        powerUp.loadEvent(self.player)
                         powerUpsArray.append(powerUp)
                     }
                 }

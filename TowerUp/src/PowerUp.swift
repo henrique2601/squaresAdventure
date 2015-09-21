@@ -13,6 +13,10 @@ class PowerUp: Button {
     
     static var powerUpList = Set<PowerUp>()
     
+    var eventBegin:Event<Void>?// = Event()
+    var eventUpdate:Event<Void>?// = Event()
+    var eventEnd:Event<Void>?// = Event()
+    
     var powerUpType:PowerUpType!
     
     var powerUpData:PowerUpData
@@ -24,6 +28,8 @@ class PowerUp: Button {
     var powerUpPressedShadow:SKSpriteNode!
     
     var lastUse:NSTimeInterval = 0
+    
+    var needUpdate = false
     
     var inUse:Bool = false {
         didSet {
@@ -81,16 +87,38 @@ class PowerUp: Button {
         PowerUp.powerUpList.insert(self)
     }
     
-    func loadEvent() {
-        self.event = Event<Void>()
+    func loadEvent(player:Player) {
+        
+        self.eventBegin = Event<Void>()
+        self.eventUpdate = Event<Void>()
+        self.eventEnd = Event<Void>()
         switch(self.powerUpData.index.integerValue) {
-        case 0:
-            self.event?.addHandler({
-                print("Executando Handler de PowerUp 0")
+            
+        case 0://Antigravidade
+            self.eventBegin?.addHandler({
+                player.physicsBody!.affectedByGravity = false
+            })
+            self.eventEnd?.addHandler({
+                player.physicsBody!.affectedByGravity = true
             })
             break
+            
+        case 1://Invencibilidade
+            self.eventBegin?.addHandler({
+                player.physicsBody!.contactTestBitMask =
+                    physicsCategory.winTile.rawValue |
+                    physicsCategory.coin.rawValue |
+                    physicsCategory.doorTile.rawValue
+            })
+            self.eventEnd?.addHandler({
+                player.resetCategoryBitMasks()
+            })
+            
+            break
         default:
-            self.event = nil
+            self.eventBegin = nil
+            self.eventUpdate = nil
+            self.eventEnd = nil
             break
         }
     }
@@ -109,14 +137,23 @@ class PowerUp: Button {
                         if let scene = powerUp.scene as? MultiplayerGameScene {
                             scene.labelCoins.setText(String(Int(MemoryCard.sharedInstance.playerData.coins) + scene.collectedBonus))
                         }
-                        powerUp.event?.raise()
+                        powerUp.eventBegin?.raise()
                         powerUp.lastUse = currentTime
                         powerUp.inUse = true
+                        powerUp.needUpdate = true
                     }
                 }
             }
             
             if (powerUp.inUse == true) {
+                if(powerUp.needUpdate == true) {
+                    powerUp.eventUpdate?.raise()
+                    if currentTime - powerUp.lastUse > powerUp.powerUpType.duration {
+                        powerUp.eventEnd?.raise()
+                        powerUp.needUpdate = false
+                    }
+                }
+                
                 if currentTime - powerUp.lastUse > powerUp.powerUpType.coolDown {
                     powerUp.inUse = false
                 }
@@ -168,28 +205,20 @@ class PowerUp: Button {
 class PowerUpType: NSObject {
     var powerUpImage:String
     var coolDown:NSTimeInterval
+    var duration:NSTimeInterval
     var price:Int
     
-    init(powerUpImage:String, price:Int, coolDown:NSTimeInterval) {
+    init(powerUpImage:String, price:Int, coolDown:NSTimeInterval, duration:NSTimeInterval) {
         self.powerUpImage = powerUpImage
         self.coolDown = coolDown
+        self.duration = duration
         self.price = price
     }
 }
 
 class PowerUps :NSObject {
     static var types = Array<PowerUpType>([
-        PowerUpType(powerUpImage:"powerUp A", price:120, coolDown:1),
-        PowerUpType(powerUpImage:"powerUp B", price:110, coolDown:2),
-        PowerUpType(powerUpImage:"powerUp C", price:100, coolDown:3),
-        PowerUpType(powerUpImage:"powerUp D", price:90, coolDown:4),
-        PowerUpType(powerUpImage:"powerUp E", price:80, coolDown:5),
-        PowerUpType(powerUpImage:"powerUp F", price:70, coolDown:6),
-        PowerUpType(powerUpImage:"powerUp G", price:60, coolDown:7),
-        PowerUpType(powerUpImage:"powerUp H", price:50, coolDown:8),
-        PowerUpType(powerUpImage:"powerUp I", price:40, coolDown:9),
-        PowerUpType(powerUpImage:"powerUp J", price:30, coolDown:10),
-        PowerUpType(powerUpImage:"powerUp K", price:20, coolDown:11),
-        PowerUpType(powerUpImage:"powerUp L", price:10, coolDown:12)
+        PowerUpType(powerUpImage:"powerUp A", price:100, coolDown:10, duration:5),
+        PowerUpType(powerUpImage:"powerUp B", price:200, coolDown:10, duration:10)
         ])
 }
