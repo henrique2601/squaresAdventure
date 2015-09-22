@@ -17,6 +17,13 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
         case loose
     }
     
+    //Controls
+    var buttonLeft:Button!
+    var buttonRight:Button!
+    var buttonJump:Button!
+    
+    var slider:Slider!
+    
     //Effect
     var blackSpriteNode:SKSpriteNode!
     
@@ -89,9 +96,22 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
         
         self.mapManager.reloadMap(CGPoint(x: 10, y: Chunk.sizeInPoints + 10))
         
-        self.addChild(Button(name: "buttonLeft", textureName: "buttonYellowSquare", text:"<", x:20, y:630, xAlign:.left, yAlign:.down))
-        self.addChild(Button(name: "buttonRight", textureName: "buttonYellowSquare", text:">" ,x:160, y:630, xAlign:.left, yAlign:.down))
-        self.addChild(Button(name: "buttonJump", textureName: "buttonYellow", text:"Jump", x:1014, y:630, xAlign:.right, yAlign:.down))
+        switch(self.playerData.configControls.integerValue) {
+            
+        case 1: //controlsConfig.useButtons.rawValue:
+            self.buttonLeft = Button(name: "buttonLeft", textureName: "buttonYellowSquare", text:"<", x:20, y:630, xAlign:.left, yAlign:.down)
+            self.addChild(self.buttonLeft)
+            
+            self.buttonRight = Button(name: "buttonRight", textureName: "buttonYellowSquare", text:">" ,x:160, y:630, xAlign:.left, yAlign:.down)
+            self.addChild(self.buttonRight)
+            
+            self.buttonJump = Button(name: "buttonJump", textureName: "buttonYellow", text:"Jump", x:1014, y:630, xAlign:.right, yAlign:.down)
+            self.addChild(self.buttonJump)
+            break
+            
+        default:
+            break
+        }
         
         let boxCoins = Control(name: "boxCoins", textureName: "boxCoins", x: 1058, y: 20, xAlign: .right, yAlign: .up)
         self.labelCoins = Label(name: "lebelCoins", color: GameColors.black, textureName: self.playerData.coins.description, x: 160, y: 39)
@@ -283,6 +303,49 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
             switch (self.state) {
             case states.mission:
                 PowerUp.doLogic(currentTime)
+                switch(self.playerData.configControls.integerValue) {
+                case 1: //controlsConfig.useButtons.rawValue:
+                    self.player.jump = self.buttonJump.pressed
+                    
+                    self.player.move = 0
+                    if(self.buttonLeft.pressed) {
+                        self.player.move += -100
+                    }
+                    if(self.buttonRight.pressed) {
+                        self.player.move += 100
+                    }
+                    break
+                case 2: //controlsConfig.useLeftSliderAndScreenRight:
+                    
+                    var jump = 0
+                    for touch in Control.touchesArray {
+                        let location = touch.locationInNode(self)
+                        
+                        if(location.x > (self.scene?.size.width)!/2) {
+                            jump++
+                        }
+                    }
+                    
+                    if(self.slider != nil) {
+                        var x = Int(self.slider.touch.locationInNode(self).x) - Int(self.slider.position.x)
+                        if(x > self.slider.limit) {
+                            x = self.slider.limit
+                        }
+                        if(x < -self.slider.limit) {
+                            x = -self.slider.limit
+                        }
+                        let y = Int(self.slider.thumbSpriteNode.position.y)
+                        self.slider.thumbSpriteNode.position = CGPoint(x: x, y: y)
+                        self.player.move = Int(100.0 * (Float(x) / Float(self.slider.limit)))
+                    } else {
+                        self.player.move = 0
+                    }
+                    self.player.jump = jump > 0
+                    
+                    break
+                default:
+                    break
+                }
                 self.player.update(currentTime)
                 self.mapManager.update(currentTime)
                 break
@@ -326,8 +389,56 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
         self.parallax.update(self.myCamera.position)
     }
     
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        super.touchesBegan(touches, withEvent: event)
+        
+        switch(self.playerData.configControls.integerValue) {
+        case 2: //controlsConfig.useLeftSliderAndScreenRight.rawValue:
+            if (self.state == self.nextState) {
+                for touch in touches {
+                    
+                    let location = touch.locationInNode(self)
+                    
+                    if(self.slider == nil) {
+                        if(location.x < (self.scene?.size.width)!/2) {
+                            self.slider = Slider(name: "slider", x: 0, y: 0, align:.center)
+                            self.slider.touch = touch
+                            self.addChild(self.slider)
+                            self.slider.position = location
+                        }
+                    }
+                }
+            }
+            break
+        default:
+            break
+        }
+    }
+    
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         super.touchesEnded(touches, withEvent: event)
+        
+        switch(self.playerData.configControls.integerValue) {
+        case 2: //controlsConfig.useLeftSliderAndScreenRight.rawValue:
+            if Control.touchesArray.count <= 0 {
+                if let slider = self.slider {
+                    slider.removeFromParent()
+                    self.slider = nil
+                }
+            } else {
+                if let slider = self.slider {
+                    for touch in touches {
+                        if (slider.touch == touch) {
+                            slider.removeFromParent()
+                            self.slider = nil
+                        }
+                    }
+                }
+            }
+            break
+        default:
+            break
+        }
         
         if (self.state == self.nextState) {
             for touch in (touches ) {

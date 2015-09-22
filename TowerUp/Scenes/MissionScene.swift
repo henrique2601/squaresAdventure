@@ -98,8 +98,6 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
             break
         }
         
-        
-        
         let boxCoins = Control(name: "boxCoins", textureName: "boxCoins", x: 1058, y: 20, xAlign: .right, yAlign: .up)
         self.labelCoins = Label(name: "lebelCoins", color: GameColors.black, textureName: self.playerData.coins.description, x: 160, y: 39)
         boxCoins.addChild(self.labelCoins)
@@ -179,8 +177,6 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
                     } else {
                         self.player.move = 0
                     }
-                    
-                    
                     self.player.jump = jump > 0
                     
                     break
