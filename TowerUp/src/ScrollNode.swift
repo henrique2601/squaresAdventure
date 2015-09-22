@@ -96,6 +96,8 @@ class ScrollNode: Control {
     
     func load(name:String, textureName:String, x:Int, y:Int, xAlign:Control.xAlignments, yAlign:Control.yAlignments, count:Int, spacing:Int, scrollDirection:scrollTypes, scaleNodes:Bool, scaleDistance:Int) {
         
+        self.scrollType = scrollDirection
+        
         self.name = name
         self.sketchPosition = CGPoint(x: x, y: y)
         self.yAlign = yAlign
@@ -110,7 +112,15 @@ class ScrollNode: Control {
         for (var i = 0; i < count; i++) {
             //let spriteNode = SKSpriteNode(texture: texture, color: nil, size: texture.size())
             let spriteNode = SKSpriteNode(texture: texture, color: UIColor.whiteColor(), size: texture.size())
-            spriteNode.position = CGPoint(x: (Int(spriteNode.size.width) + spacing) * i, y: 0)
+            switch(scrollDirection) {
+            case scrollTypes.horizontal:
+                spriteNode.position = CGPoint(x: (Int(spriteNode.size.width) + spacing) * i, y: 0)
+                break
+            case scrollTypes.vertical:
+                spriteNode.position = CGPoint(x: 0, y: (Int(spriteNode.size.height) + spacing) * i)
+                break
+            }
+            
             if(self.scaleNodes) {
                 self.setCellScale(spriteNode)
             }
@@ -124,6 +134,8 @@ class ScrollNode: Control {
     
     func load(name:String, x:Int, y:Int, xAlign:Control.xAlignments, yAlign:Control.yAlignments, cells:Array<SKNode>, spacing:Int, scrollDirection:scrollTypes, scaleNodes:Bool, scaleDistance:Int) {
         
+        self.scrollType = scrollDirection
+        
         self.name = name
         self.sketchPosition = CGPoint(x: x, y: y)
         self.yAlign = yAlign
@@ -136,7 +148,14 @@ class ScrollNode: Control {
         self.cells = cells
         var i = 0
         for spriteNode in self.cells {
-            spriteNode.position = CGPoint(x: (Int(spriteNode.calculateAccumulatedFrame().width) + spacing) * i, y: 0)
+            switch(scrollDirection) {
+            case scrollTypes.horizontal:
+                spriteNode.position = CGPoint(x: (Int(spriteNode.calculateAccumulatedFrame().width) + spacing) * i, y: 0)
+                break
+            case scrollTypes.vertical:
+                spriteNode.position = CGPoint(x: 0, y: (Int(spriteNode.calculateAccumulatedFrame().height) + spacing) * i)
+                break
+            }
             if(self.scaleNodes) {
                 self.setCellScale(spriteNode)
             }
@@ -212,24 +231,79 @@ class ScrollNode: Control {
                     }
                     break
                 case scrollTypes.vertical:
-                    //TODO: scrollTypes.vertical
-                    //                for cell in scrollNode.cells {
-                    //                    var position = cell.position
-                    //                    cell.position = CGPoint(x: Int(position.x), y: Int(position.y) + dy)
-                    //                }
+                    for touch in Control.touchesArray {
+                        if let parent = scrollNode.parent {
+                            let location = touch.locationInNode(parent)
+                            
+                            if scrollNode.containsPoint(location) {
+                                var dy:Int = Int(location.y - touch.previousLocationInNode(parent).y)
+                                if(dy == 0) {
+                                    if(location.y - touch.previousLocationInNode(parent).y > 0) {
+                                        dy++
+                                    } else {
+                                        dy--
+                                    }
+                                }
+                                if(dy < 0) {
+                                    //Moveu o toque para baixo???
+                                    if(scrollNode.cells[scrollNode.cells.count - 1].position.y + CGFloat(dy) >= 0) {
+                                        for cell in scrollNode.cells {
+                                            let position = cell.position
+                                            cell.position = CGPoint(x: Int(position.x), y: Int(position.y) + dy)
+                                            if(scrollNode.scaleNodes) {
+                                                scrollNode.setCellScale(cell)
+                                            }
+                                        }
+                                    } else {
+                                        let auxMove:Int = Int(scrollNode.cells[scrollNode.cells.count - 1].position.y)
+                                        for cell in scrollNode.cells {
+                                            let position = cell.position
+                                            cell.position = CGPoint(x: Int(position.x), y: Int(position.y) - auxMove)
+                                            if(scrollNode.scaleNodes) {
+                                                scrollNode.setCellScale(cell)
+                                            }
+                                        }
+                                    }
+                                } else {
+                                    //Moveu o toque para cima???
+                                    if(scrollNode.cells[0].position.y + CGFloat(dy) <= 0) {
+                                        for cell in scrollNode.cells {
+                                            let position = cell.position
+                                            cell.position = CGPoint(x: Int(position.x), y: Int(position.y) + dy)
+                                            if(scrollNode.scaleNodes) {
+                                                scrollNode.setCellScale(cell)
+                                            }
+                                        }
+                                    } else {
+                                        let auxMove:Int = Int(scrollNode.cells[0].position.y)
+                                        for cell in scrollNode.cells {
+                                            let position = cell.position
+                                            cell.position = CGPoint(x: Int(position.x), y: Int(position.y) - auxMove)
+                                            if(scrollNode.scaleNodes) {
+                                                scrollNode.setCellScale(cell)
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                     break
-//                default:
-//                    #if DEBUG
-//                        fatalError("Algo saiu muito errado no update de ScrollNode")
-//                    #endif
-//                    break
                 }
             }
         }
     }
     
     private func setCellScale(spriteNode:SKNode) {
-        spriteNode.setScale(max(0, 1 - abs(spriteNode.position.x/self.scaleDistance)))
+        switch(self.scrollType) {
+        case scrollTypes.horizontal:
+            spriteNode.setScale(max(0, 1 - abs(spriteNode.position.x/self.scaleDistance)))
+            break
+        case scrollTypes.vertical:
+            spriteNode.setScale(max(0, 1 - abs(spriteNode.position.y/self.scaleDistance)))
+            break
+        }
+        
     }
     
     class func resetScrollNodes() {

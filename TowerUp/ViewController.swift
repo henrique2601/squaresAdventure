@@ -38,6 +38,8 @@ class ViewController: UIViewController {
         let scene = MainMenuScene()
         skView.presentScene(scene)
         
+        //TODO: musica
+        //Music.sharedInstance.play(musicNamed: "A New Camp")
     }
     
     override func viewWillLayoutSubviews() {

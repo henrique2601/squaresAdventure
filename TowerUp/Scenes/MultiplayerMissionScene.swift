@@ -451,5 +451,4 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
             }
         }
     }
-    
 }
