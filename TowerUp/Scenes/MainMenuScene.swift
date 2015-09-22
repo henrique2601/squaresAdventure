@@ -77,12 +77,10 @@ class MainMenuScene: GameScene {
                     let location = touch.locationInNode(self)
                     
                     if (self.childNodeWithName("buttonPlay")!.containsPoint(location)) {
-                        MemoryCard.sharedInstance.loadGame()
                         self.nextState = .towers
                         return
                     }
                     if (self.childNodeWithName("buttonPlayOnline")!.containsPoint(location)) {
-                        MemoryCard.sharedInstance.loadGame()
                         self.nextState = .multiplayer
                         return
                     }

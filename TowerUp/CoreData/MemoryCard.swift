@@ -17,6 +17,11 @@ class MemoryCard: NSObject {
     
     var playerData:PlayerData!
     
+    override init() {
+        super.init()
+        self.loadGame()
+    }
+    
     func newGame() {
         print("Creating new game...")
         
@@ -24,6 +29,7 @@ class MemoryCard: NSObject {
         self.playerData = self.newPlayerData()
         self.playerData.name = String.randomStringWithLength(8)
         self.playerData.coins = NSNumber(int: 1000)
+        self.playerData.configControls = NSNumber(integer: controlsConfig.useButtons.rawValue)
 
         
         //Towers e Floors
@@ -210,4 +216,10 @@ class MemoryCard: NSObject {
     func newPowerUpSlotData() -> PowerUpSlotData {
         return NSEntityDescription.insertNewObjectForEntityForName("PowerUpSlotData", inManagedObjectContext: self.managedObjectContext!) as! PowerUpSlotData
     }
+}
+
+public enum controlsConfig:Int {
+    case none  = 0
+    case useButtons = 1
+    case useLeftSliderAndScreenRight = 2
 }

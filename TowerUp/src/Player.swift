@@ -31,6 +31,12 @@ class Player: Square {
     var win:Bool = false
     var lastNoWin:NSTimeInterval = 0
     
+    //Controls
+    var jump:Bool = false
+    var move:Int = 0
+    
+    var playerData = MemoryCard.sharedInstance.playerData
+    
     init(texture:String = "rabbit", x:Int, y:Int, loadPhysics:Bool) {
         super.init()
         self.loadNewPlayer("player", texture:texture, x: x, y: y, loadPhysics: loadPhysics)
@@ -233,34 +239,26 @@ class Player: Square {
                     for body in physicsBody.allContactedBodies() as NSArray {
                         if(body.categoryBitMask == physicsCategory.ground.rawValue) {
                             if (abs(self.physicsBody!.velocity.dy) < 200) {
-                                if((self.childNodeWithName("//buttonJump") as! Button).pressed) {
+                                if(self.jump) {
                                     self.physicsBody?.velocity.dy = 900
                                     //self.physicsBody?.applyForce(CGVector(dx: 0, dy: 2100))
+                                    self.jump = false
                                 }
                             }
                             break
                         }
                     }
                 }
-                
             } else {
                 //Player esta no ar
                 self.needAngularImpulse = 3
             }
             
-            if((self.parent?.childNodeWithName("//buttonLeft") as! Button).pressed){
+            if self.move != 0 {
                 self.needAngularImpulse--
                 let velocity = self.physicsBody!.velocity
                 if (abs(velocity.dx) < 400) {
-                    self.physicsBody?.applyImpulse(CGVector(dx: -5, dy: 0))
-                }
-            }
-            
-            if((self.parent?.childNodeWithName("//buttonRight") as! Button).pressed){
-                self.needAngularImpulse--
-                let velocity = self.physicsBody!.velocity
-                if (abs(velocity.dx) < 400) {
-                    self.physicsBody?.applyImpulse(CGVector(dx: 5, dy: 0))
+                    self.physicsBody?.applyImpulse(CGVector(dx: self.move/20, dy: 0))
                 }
             }
             

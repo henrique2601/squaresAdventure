@@ -46,3 +46,13 @@ class GameCamera: SKNode {
         self.scene!.centerOnNode(self)
     }
 }
+
+public extension SKScene {
+    func centerOnNode(node:SKNode)
+    {
+        if let parent = node.parent {
+            let cameraPositionInScene:CGPoint = node.scene!.convertPoint(node.position, fromNode: parent)
+            parent.position = CGPoint(x: parent.position.x - cameraPositionInScene.x, y: parent.position.y - cameraPositionInScene.y)
+        }
+    }
+}

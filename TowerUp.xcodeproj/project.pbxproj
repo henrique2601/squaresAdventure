@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1305E4ED1BB18B1B009F9B0A /* Slider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1305E4EC1BB18B1B009F9B0A /* Slider.swift */; settings = {ASSET_TAGS = (); }; };
 		1323B1521B83554A00174777 /* WinTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1323B1511B83554A00174777 /* WinTile.swift */; };
 		1323FF5D1B90817F00EF4C2E /* MultiplayerWinBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1323FF5C1B90817F00EF4C2E /* MultiplayerWinBox.swift */; };
 		1323FF5F1B90C7AF00EF4C2E /* PowerUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1323FF5E1B90C7AF00EF4C2E /* PowerUp.swift */; };
@@ -104,6 +105,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1305E4EC1BB18B1B009F9B0A /* Slider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Slider.swift; path = src/Slider.swift; sourceTree = "<group>"; };
 		1323B1511B83554A00174777 /* WinTile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WinTile.swift; path = src/WinTile.swift; sourceTree = "<group>"; };
 		1323FF5C1B90817F00EF4C2E /* MultiplayerWinBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MultiplayerWinBox.swift; path = Boxes/MultiplayerWinBox.swift; sourceTree = "<group>"; };
 		1323FF5E1B90C7AF00EF4C2E /* PowerUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PowerUp.swift; path = src/PowerUp.swift; sourceTree = "<group>"; };
@@ -259,6 +261,7 @@
 				137DC5141BA1C3E300D58DED /* PowerUpSlot.swift */,
 				13DE13041B94C38E0092D50B /* ScrollNode.swift */,
 				1323FF601B90C83300EF4C2E /* Skin.swift */,
+				1305E4EC1BB18B1B009F9B0A /* Slider.swift */,
 				133184A11B83AADB00DF11D5 /* Spike.swift */,
 				13428EBD1B7CB0BC0017D23A /* Square.swift */,
 				1359DD151B728C95006C12FA /* Switch.swift */,
@@ -1478,6 +1481,7 @@
 				3A979BF31B987B3300A8E09F /* Textfield.swift in Sources */,
 				13CCB6FE1B72B9010060334C /* TowersScene.swift in Sources */,
 				133184A21B83AADB00DF11D5 /* Spike.swift in Sources */,
+				1305E4ED1BB18B1B009F9B0A /* Slider.swift in Sources */,
 				135C5CA61BA8364C006643BB /* SkinSlotData.swift in Sources */,
 				1323FF611B90C83300EF4C2E /* Skin.swift in Sources */,
 				1383FD5E1B7A49730012DA45 /* MapManager.swift in Sources */,

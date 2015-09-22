@@ -13,19 +13,27 @@ class OptionsScene: GameScene {
     enum states {
         case options
         case deleteSavedGame
+        case chooseControls
         case mainMenu
     }
     
     var state = states.options
     var nextState = states.options
     
+    var blackSpriteNode:SKSpriteNode!
+    
+    var chooseControlsScrollNode:ScrollNode!
+    
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
         self.backgroundColor = GameColors.blue
         
         self.addChild(Button(name: "buttonDeleteSavedGame", textureName: "buttonBlueSmall", text:"DELETE", x: 20, y: 202, align:.center))
+        self.addChild(Button(name: "buttonChooseControls", textureName: "buttonBlueSmall", text:"CONTROLS", x: 20, y: 304, align:.center))
         
-        self.addChild(Button(name: "buttonBack", textureName: "buttonGraySquareSmall", text:"<", x: 20, y: 652, xAlign:.left, yAlign:.down))
+        let buttonBack = Button(name: "buttonBack", textureName: "buttonGraySquareSmall", text:"<", x: 20, y: 652, xAlign:.left, yAlign:.down)
+        buttonBack.zPosition = Config.HUDZPosition * 2 + 1
+        self.addChild(buttonBack)
     }
     
     override func update(currentTime: NSTimeInterval) {
@@ -38,6 +46,38 @@ class OptionsScene: GameScene {
             self.state = self.nextState
             
             switch (self.nextState) {
+                
+            case states.options:
+                if let teste = self.chooseControlsScrollNode {
+                    teste.removeFromParent()
+                }
+                if let teste = self.blackSpriteNode {
+                    teste.removeFromParent()
+                }
+                break
+                
+            case states.chooseControls:
+                
+                var controlsArray = Array<SKSpriteNode>()
+                
+                var spriteNode = SKSpriteNode(imageNamed: "useButtons")
+                controlsArray.append(spriteNode)
+                
+                spriteNode = SKSpriteNode(imageNamed: "useLeftSliderAndScreenRight")
+                controlsArray.append(spriteNode)
+                
+                self.chooseControlsScrollNode = ScrollNode(name: "scrollNode", x: 667, y: 466, align: .center, cells:controlsArray, spacing:1, scaleNodes:true, scaleDistance:1334/4 + 100)
+                self.addChild(self.chooseControlsScrollNode)
+                
+                let size = self.size.width > self.size.height ? self.size.width : self.size.height
+                self.blackSpriteNode = SKSpriteNode(color: GameColors.black, size: CGSize(width: size * 2, height: size * 2))
+                self.blackSpriteNode.anchorPoint = CGPoint(x: 0, y: 1)
+                self.addChild(self.blackSpriteNode)
+                
+                self.blackSpriteNode.zPosition = Config.HUDZPosition * 2
+                self.chooseControlsScrollNode.zPosition = self.blackSpriteNode.zPosition + 1
+                
+                break
                 
             case states.deleteSavedGame:
                 let box = Box(background: "messegeBox")
@@ -68,9 +108,6 @@ class OptionsScene: GameScene {
             case states.mainMenu:
                 self.view!.presentScene(MainMenuScene(), transition: Config.defaultBackTransition)
                 break
-                
-            default:
-                break
             }
         }
     }
@@ -80,12 +117,49 @@ class OptionsScene: GameScene {
         
         if (self.state == self.nextState) {
             switch (self.state) {
+            case states.chooseControls:
+                
+                for touch in (touches ) {
+                    let location = touch.locationInNode(self)
+                    
+                    if (self.childNodeWithName("buttonBack")!.containsPoint(location)) {
+                        self.nextState = .options
+                        return
+                    }
+                    
+                    if(touch.tapCount > 0) {
+                        if (self.chooseControlsScrollNode.containsPoint(location)) {
+                            
+                            var i = 1
+                            let locationInScrollNode = touch.locationInNode(self.chooseControlsScrollNode)
+                            
+                            for cell in self.chooseControlsScrollNode.cells {
+                                if(cell.containsPoint(locationInScrollNode)) {
+                                    let playerData = MemoryCard.sharedInstance.playerData
+                                    playerData.configControls = NSNumber(integer: i)
+                                    self.nextState = .options
+                                    return
+                                }
+                                i++
+                            }
+                        } else {
+                            self.nextState = .options
+                        }
+                    }
+                }
+                
+                break
             case states.options:
                 for touch in (touches ) {
                     let location = touch.locationInNode(self)
                     
                     if (self.childNodeWithName("buttonDeleteSavedGame")!.containsPoint(location)) {
                         self.nextState = .deleteSavedGame
+                        return
+                    }
+                    
+                    if (self.childNodeWithName("buttonChooseControls")!.containsPoint(location)) {
+                        self.nextState = .chooseControls
                         return
                     }
                     
