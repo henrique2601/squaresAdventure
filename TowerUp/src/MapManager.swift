@@ -84,7 +84,7 @@ class MapManager: SKNode {
         }
     }
     
-    func cleanChunks(){
+    func cleanChunks() {
         for(var i = 0; i < 9; i++) {
             let chunk = self.childNodeWithName("chunk\(i)")! as! Chunk
             chunk.clean()

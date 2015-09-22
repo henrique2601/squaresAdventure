@@ -17,7 +17,7 @@ class Chunk: SKSpriteNode {
     static var maxChunkX = 0
     static var maxChunkY = 0
     
-    var type = Towers.types[MapManager.tower].tileset
+    var type:String = MapManager.tower == -1 ? Towers.types[Int.random(Towers.types.count)].tileset : Towers.types[MapManager.tower].tileset
     
     init(tower:Int, floor:Int, regionX:Int, regionY:Int) {
         super.init(texture: nil, color: UIColor.clearColor(), size: CGSize(width: Chunk.sizeInPoints, height: Chunk.sizeInPoints))
@@ -109,9 +109,10 @@ class Chunk: SKSpriteNode {
         let coins = Coin.coinList
         if(coins.count > 0) {
             for(var i = coins.count - 1; i >= 0; i--) {
-                let coin = coins.objectAtIndex(i) as! Coin
-                if(coin.position.y < -128) {
-                    coin.removeFromParent()
+                if let coin = coins.objectAtIndex(i) as? Coin {
+                    if(coin.position.y < -128) {
+                        coin.removeFromParent()
+                    }
                 }
             }
         }
