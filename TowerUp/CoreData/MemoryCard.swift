@@ -107,6 +107,7 @@ class MemoryCard: NSObject {
         self.playerData = nil
         
         self.autoSave = false
+        self.newGame()
     }
     
     func fetchRequest() -> NSArray{

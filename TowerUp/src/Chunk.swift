@@ -44,7 +44,7 @@ class Chunk: SKSpriteNode {
                 let id = data[i].integerValue
                 if(id != 0) {
                     var tile:Tile!
-                    if(id > 25) {
+                    if(id > 64) {
                         switch(id) {
                         case specialTiles.coinTile.rawValue:
                             tile = Coin(type: "Gold", x: x, y: y)
@@ -55,11 +55,25 @@ class Chunk: SKSpriteNode {
                         case specialTiles.spikeTile.rawValue:
                             tile = Spike(x: x, y: y)
                             break
-                        case specialTiles.doorTile.rawValue:
-                            tile = DoorTile(type: self.type, x: x, y: y)
+                            
+                        case specialTiles.bomb.rawValue:
+                            tile = Bomb(x: x, y: y)
+                            break
+                            
+                        case specialTiles.boxCreate.rawValue:
+                            tile = BoxCrate(x: x, y: y)
+                            break
+                            
+                        case specialTiles.gem.rawValue:
+                            tile = Gem(type: "Blue", x: x, y: y)
+                            break
+                            
+                        case specialTiles.spring.rawValue:
+                            tile = Spring(x: x, y: y)
                             break
 
                         default:
+                            tile = Bug(x: x, y: y)
                             print("Tile \(id) inesperadamente encontrou nulo. s;")
                             break
                         }
@@ -76,17 +90,17 @@ class Chunk: SKSpriteNode {
                     }
                 } else {
                     #if DEBUG //DEBUG com itens colocados aleatoriamente em espaços vazios.
-                    if(Int.random(101) <= 10) {
-                        let tile:Coin = Coin(type: "Gold", x: x, y: y)
-                        
-                        //TODO: exportar função?
-                        //MapManager.loading é setado para true durante o update do MapManager. No carregamento inicial seu valor é false
-                        if(MapManager.loading) {
-                            tiles.addObject(tile)
-                        } else {
-                            self.addChild(tile)
-                        }
-                    }
+//                    if(Int.random(101) <= 10) {
+//                        let tile:Coin = Coin(type: "Gold", x: x, y: y)
+//                        
+//                        //TODO: exportar função?
+//                        //MapManager.loading é setado para true durante o update do MapManager. No carregamento inicial seu valor é false
+//                        if(MapManager.loading) {
+//                            tiles.addObject(tile)
+//                        } else {
+//                            self.addChild(tile)
+//                        }
+//                    }
                     #endif
                 }
                 i++

@@ -106,13 +106,19 @@ class Player: Square {
             physicsCategory.winTile.rawValue |
             physicsCategory.coin.rawValue |
             physicsCategory.spike.rawValue |
+            physicsCategory.bomb.rawValue |
+            physicsCategory.spring.rawValue |
             physicsCategory.doorTile.rawValue
         
         
         self.physicsBody!.collisionBitMask =
             physicsCategory.ground.rawValue |
             physicsCategory.spike.rawValue |
+            physicsCategory.bomb.rawValue |
+            physicsCategory.spring.rawValue |
+            physicsCategory.boxCrate.rawValue |
             physicsCategory.player.rawValue
+        
     }
     
     func didBeginContact(physicsBody:SKPhysicsBody) {
@@ -150,6 +156,20 @@ class Player: Square {
             }
             break
             
+        case physicsCategory.spring.rawValue:
+            self.physicsBody!.applyImpulse(CGVector(dx: 0, dy: 25))
+            break
+            
+        case physicsCategory.bomb.rawValue:
+            self.healthPoints = 0
+            
+            if let node = physicsBody.node {
+                let bomb = (node as! Bomb)
+                bomb.removeFromParent()
+            }
+            
+            break
+            
         case physicsCategory.doorTile.rawValue:
             print("Toc toc , tem alguem na \(physicsBody.node!.name!)")
             break
@@ -175,6 +195,14 @@ class Player: Square {
             
             break
         case physicsCategory.spike.rawValue:
+            
+            break
+            
+        case physicsCategory.bomb.rawValue:
+            
+            break
+            
+        case physicsCategory.spring.rawValue:
             
             break
             
@@ -237,7 +265,8 @@ class Player: Square {
             if let physicsBody = self.physicsBody {
                 if(physicsBody.allContactedBodies().count > 0) {
                     for body in physicsBody.allContactedBodies() as NSArray {
-                        if(body.categoryBitMask == physicsCategory.ground.rawValue) {
+                        if(body.categoryBitMask == physicsCategory.ground.rawValue ||
+                            body.categoryBitMask == physicsCategory.boxCrate.rawValue) {
                             if (abs(self.physicsBody!.velocity.dy) < 200) {
                                 if(self.jump) {
                                     self.physicsBody?.velocity.dy = 900

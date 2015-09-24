@@ -149,6 +149,7 @@ class PowerUp: Button {
     class func doLogic(currentTime: NSTimeInterval) {
         for powerUp in PowerUp.powerUpList {
             if powerUp.pressed == true {
+                
                 if currentTime - powerUp.lastUse > powerUp.powerUpType.coolDown {
                     
                     let playerData = MemoryCard.sharedInstance.playerData

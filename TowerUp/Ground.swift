@@ -10,7 +10,7 @@ import UIKit
 import SpriteKit
 
 class Ground: Tile {
-   static var typeCount = 20
+   static var typeCount = 64
     
     init(type:String, id:Int, x:Int, y:Int) {
         super.init(imageName: type + String(id), x: x, y: y)

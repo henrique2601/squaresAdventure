@@ -302,7 +302,7 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
         if(self.state == self.nextState){
             switch (self.state) {
             case states.mission:
-                PowerUp.doLogic(currentTime)
+                
                 switch(self.playerData.configControls.integerValue) {
                 case 1: //controlsConfig.useButtons.rawValue:
                     self.player.jump = self.buttonJump.pressed
@@ -321,8 +321,10 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
                     for touch in Control.touchesArray {
                         let location = touch.locationInNode(self)
                         
-                        if(location.x > (self.scene?.size.width)!/2) {
-                            jump++
+                        if (!self.powerUpsScrollNode.containsPoint(location)) {
+                            if(location.x > (self.scene?.size.width)!/2) {
+                                jump++
+                            }
                         }
                     }
                     
@@ -340,12 +342,16 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
                     } else {
                         self.player.move = 0
                     }
+                    
                     self.player.jump = jump > 0
                     
                     break
                 default:
                     break
                 }
+                
+                PowerUp.doLogic(currentTime)
+                
                 self.player.update(currentTime)
                 self.mapManager.update(currentTime)
                 break

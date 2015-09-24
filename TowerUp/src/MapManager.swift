@@ -50,7 +50,7 @@ class MapManager: SKNode {
         
         //Preload de fisica dos cenário.
         for (var i = 0; i < Ground.typeCount; i++) {
-            let texture = SKTexture(imageNamed: "dirt\(i + 1)")//TODO: tema do tile
+            let texture = SKTexture(imageNamed: "grass\(i + 1)")//TODO: tema do tile
             MapManager.bodies.append(SKPhysicsBody(texture: texture, alphaThreshold: 0.7,  size: texture.size()))
         }
     }

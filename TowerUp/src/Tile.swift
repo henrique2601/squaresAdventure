@@ -29,8 +29,14 @@ class Tile: SKSpriteNode {
 }
 
 public enum specialTiles:Int {
-    case coinTile  = 26
-    case winTile   = 27
-    case spikeTile = 28
-    case doorTile = 1004
+    case coinTile  = 65
+    case winTile   = 66
+    case spikeTile = 67
+    case bomb = 68
+    case boxCreate = 69
+    case gem = 70
+    //case ? = 71
+    //case ? = 72
+    case spring = 73
+    //case ? = 74
 }

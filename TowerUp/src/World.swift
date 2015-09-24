@@ -85,4 +85,8 @@ struct physicsCategory : OptionSetType {
     static var coin: physicsCategory { return physicsCategory(1 << 5) }
     static var spike: physicsCategory { return physicsCategory(1 << 6) }
     static var doorTile: physicsCategory { return physicsCategory(1 << 7) }
+    static var bomb: physicsCategory { return physicsCategory(1 << 8) }
+    static var spring: physicsCategory { return physicsCategory(1 << 9) }
+    static var boxCrate: physicsCategory { return physicsCategory(1 << 10) }
+    
 }

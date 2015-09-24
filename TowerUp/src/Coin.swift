@@ -15,6 +15,10 @@ class Coin: Tile {
     
     var bonus = 1//Valor da moeda
     
+    override init(imageName:String, x:Int, y:Int) {
+        super.init(imageName: imageName, x: x, y: y)
+    }
+    
     init(type:String, x:Int, y:Int) {
         super.init(imageName: "coin\(type)", x: x, y: y)
         
