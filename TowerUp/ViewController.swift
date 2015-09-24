@@ -26,7 +26,7 @@ class ViewController: UIViewController {
             skView.showsFields = true
             skView.showsFPS = true
             skView.showsNodeCount = true
-            //skView.showsPhysics = true
+            skView.showsPhysics = true
             skView.showsQuadCount = true
         #endif
         

@@ -36,7 +36,39 @@ class Chunk: SKSpriteNode {
         }
     }
     
-    func loadData(data: [AnyObject]) {
+    func loadVisual(data: [AnyObject]) {
+        var i = 0
+        let tiles:NSMutableArray = NSMutableArray()
+        for (var y = 0; y < Int(Chunk.sizeInTiles); y++) {
+            for (var x = 0; x <  Int(Chunk.sizeInTiles); x++) {
+                let id = data[i].integerValue
+                if(id != 0) {
+                    var tile:Tile!
+                    
+                    tile = VisualTile(id: id, x: x, y: y)
+                    
+                    //TODO: exportar função?
+                    //MapManager.loading é setado para true durante o update do MapManager. No carregamento inicial seu valor é false
+                    if(MapManager.loading) {
+                        tiles.addObject(tile)
+                    } else {
+                        self.addChild(tile)
+                    }
+                }
+                i++
+            }
+        }
+        
+        if(MapManager.loading){
+            dispatch_async(dispatch_get_main_queue()) {
+                for tile in tiles {
+                    self.addChild(tile as! SKNode)
+                }
+            }
+        }
+    }
+    
+    func loadGround(data: [AnyObject]) {
         var i = 0
         let tiles:NSMutableArray = NSMutableArray()
         for (var y = 0; y < Int(Chunk.sizeInTiles); y++) {
@@ -135,9 +167,14 @@ class Chunk: SKSpriteNode {
     func load(tower:Int, floor:Int, regionX:Int, regionY:Int) {
         self.position = CGPoint(x: self.size.width * (CGFloat)(regionX), y: self.size.height * (CGFloat)(regionY))
 
-        if let path = NSBundle.mainBundle().pathForResource("\(tower) \(floor) \(regionX) \(regionY)", ofType: "") {
+        if let path = NSBundle.mainBundle().pathForResource("ground \(tower) \(floor) \(regionX) \(regionY)", ofType: "") {
             let data = (try! NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding)).componentsSeparatedByString(",")
-            self.loadData(data)
+            self.loadGround(data)
+        }
+        
+        if let path = NSBundle.mainBundle().pathForResource("visual \(tower) \(floor) \(regionX) \(regionY)", ofType: "") {
+            let data = (try! NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding)).componentsSeparatedByString(",")
+            self.loadVisual(data)
         }
     }
 }

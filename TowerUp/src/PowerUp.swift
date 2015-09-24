@@ -115,16 +115,13 @@ class PowerUp: Button {
         case 1://Invencibilidade
             self.eventBegin?.addHandler({
                 if(player.healthPoints > 0) {
-                    player.physicsBody!.contactTestBitMask =
-                        physicsCategory.winTile.rawValue |
-                        physicsCategory.coin.rawValue |
-                        physicsCategory.doorTile.rawValue
+                    
                 } else {
                     self.lastUse = -1
                 }
             })
-            self.eventEnd?.addHandler({
-                player.resetCategoryBitMasks()
+            self.eventUpdate?.addHandler({
+                player.healthPoints = player.maxHealthPoints
             })
             break
             
