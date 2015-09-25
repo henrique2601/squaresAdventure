@@ -41,17 +41,20 @@ class TowersScene: GameScene {
         //Torres desbloqueadas que foram salvas no CoreData
         for item in self.playerData.towers as NSOrderedSet {
             let tower = item as! TowerData
-            let towerType = Towers.types[towerIndex]
-            let cell = SKSpriteNode(imageNamed: "towerBox")
+            if towerIndex < Towers.types.count {
+                let towerType = Towers.types[towerIndex]
+                let cell = SKSpriteNode(imageNamed: "towerBox")
                 let labelName = Label(name: "labelTowerName", color: GameColors.black, textureName: "Tower " + (towerIndex + 1).description, x: 0, y: 0)
                 let labelProgress = Label(name: "labelTowerProgress", color: GameColors.black, textureName: (tower.floors.count - 1).description + "/" + towerType.floorCount.description, x: 0, y: 64)
                 cell.addChild(labelName)
                 cell.addChild(labelProgress)
-            
-            towersArray.append(cell)
+                
+                towersArray.append(cell)
+            }
             towerIndex++
         }
-        
+
+    
         //Torres bloqueadas, mostrar cadeado
         for (0; towerIndex < Towers.types.count; towerIndex++) {
             let cell = SKSpriteNode(imageNamed: "towerBox")
