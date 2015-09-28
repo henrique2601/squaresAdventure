@@ -28,14 +28,20 @@ class OptionsScene: GameScene {
     var buttonDeleteSavedGame:Button!
     var buttonChooseControls:Button!
     var buttonBack:Button!
+    var buttonFacebook:Button!
     
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
         self.backgroundColor = GameColors.blue
         
-        self.addChild(Button(name: "buttonDeleteSavedGame", textureName: "buttonBlueSmall", text:"DELETE", x: 20, y: 202, align:.center))
-        self.addChild(Button(name: "buttonChooseControls", textureName: "buttonBlueSmall", text:"CONTROLS", x: 20, y: 304, align:.center))
-        self.addChild(Button(name: "buttonFacebook", textureName: "buttonBlueSmall", text:"FACEBOOK", x: 20, y: 406, align:.center))
+        self.buttonFacebook = Button(textureName: "buttonBlueSmall", text:"FACEBOOK", x: 20, y: 406, xAlign:.center, yAlign:.center)
+        self.addChild(self.buttonFacebook)
+        
+        self.buttonDeleteSavedGame = Button(textureName: "buttonBlueSmall", text:"DELETE", x: 20, y: 202)
+        self.addChild(self.buttonDeleteSavedGame)
+        
+        self.buttonChooseControls = Button(textureName: "buttonBlueSmall", text:"CONTROLS", x: 20, y: 304)
+        self.addChild(self.buttonChooseControls)
         
         self.buttonBack = Button(textureName: "buttonGraySquareSmall", text:"<", x: 20, y: 652, xAlign:.left, yAlign:.down)
         self.buttonBack.zPosition = Config.HUDZPosition * 2 + 1
@@ -169,7 +175,7 @@ class OptionsScene: GameScene {
                         return
                     }
                     
-                    if (self.childNodeWithName("buttonFacebook")!.containsPoint(location)) {
+                    if (self.buttonFacebook.containsPoint(location)) {
                         var permissions = [ "public_profile", "email", "user_friends" ]
                         
                         PFFacebookUtils.logInInBackgroundWithReadPermissions(permissions,  block: {  (user: PFUser?, error: NSError?) -> Void in
@@ -186,7 +192,7 @@ class OptionsScene: GameScene {
                         return
                     }
                     
-                    if (self.childNodeWithName("buttonBack")!.containsPoint(location)) {
+                    if (self.buttonBack.containsPoint(location)) {
                         self.nextState = .mainMenu
                         return
                     }
