@@ -15,7 +15,7 @@ class Box: Control {
         let texture = SKTexture(imageNamed: background)
         let position = CGPoint(x: 1334/2 - texture.size().width,
                                y: 750/2  - texture.size().height)
-        super.init(name: "box", texture: texture, x: Int(position.x), y: Int(position.y), align:.center)
+        super.init(texture: texture, x: Int(position.x), y: Int(position.y), xAlign:.center, yAlign:.center)
         
         self.zPosition = Config.HUDZPosition * CGFloat(2)
         

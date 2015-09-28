@@ -14,22 +14,47 @@ class Tower: Control {
 }
 
 class Towers: NSObject {
+    
     static var types = Array<TowerType>([
-        TowerType(floorCount: 7, tileset:"grass"),
-        TowerType(floorCount: 2, tileset:"grass")
+        TowerType(tileset:"grass", floorTypes: Array<FloorType>([
+            FloorType(maxDeathCount: 1, maxTime: 10, minCoins: 10),
+            FloorType(maxDeathCount: 2, maxTime: 15, minCoins: 20),
+            FloorType(maxDeathCount: 3, maxTime: 20, minCoins: 30),
+            FloorType(maxDeathCount: 4, maxTime: 25, minCoins: 40),
+            FloorType(maxDeathCount: 5, maxTime: 30, minCoins: 50),
+            FloorType(maxDeathCount: 6, maxTime: 35, minCoins: 60),
+            FloorType(maxDeathCount: 7, maxTime: 40, minCoins: 70)
+            ])),
+        
+        TowerType(tileset:"grass", floorTypes: Array<FloorType>([
+            FloorType(maxDeathCount: 8, maxTime: 45, minCoins: 80),
+            FloorType(maxDeathCount: 9, maxTime: 50, minCoins: 90)
+            ]))
         ])
 }
 
 class TowerType: NSObject {
     
-    var floorCount:Int!
     var tileset:String!
     
-    init(floorCount:Int, tileset:String) {
+    var floorTypes:Array<FloorType>!
+    
+    init(tileset:String, floorTypes:Array<FloorType>) {
         super.init()
-        self.floorCount = floorCount
         self.tileset = tileset
+        self.floorTypes = floorTypes
     }
 }
 
-
+class FloorType: NSObject {
+    var maxDeathCount:Int!
+    var maxTime:Int!
+    var minCoins:Int!
+    
+    init(maxDeathCount:Int, maxTime:Int, minCoins:Int) {
+        super.init()
+        self.maxDeathCount = maxDeathCount
+        self.maxTime = maxTime
+        self.minCoins = minCoins
+    }
+}

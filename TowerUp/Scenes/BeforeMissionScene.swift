@@ -33,12 +33,15 @@ class BeforeMissionScene: GameScene {
     var mySkins = NSMutableArray()//Skins Desbloqueadas/Compradas
     //var myPowerUps = NSMutableArray()//PowerUps Desbloqueados/Comprados
     
-    var boxCoins:Control!
+    var labelCoins:Label!
+    
+    var buttonPlay:Button!
+    var buttonBack:Button!
     
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
         self.backgroundColor = GameColors.blue
-        self.addChild(Control(name: "mainMenuBackground", x:0, y:0, align:.center))
+        self.addChild(Control(textureName: "mainMenuBackground", xAlign: .center, yAlign: .center))
         
         //PowerUps
         if(self.playerData.powerUps.count > 0) {
@@ -48,18 +51,21 @@ class BeforeMissionScene: GameScene {
                 powerUpSlotsArray.append(PowerUpSlot(powerUpSlotData: item as! PowerUpSlotData))
             }
             
-            self.powerUpSlotsScrollNode = ScrollNode(name: "powerUpSlotsScrollNode", textureName: "", x: 667, y: 680, xAlign: .center, yAlign: .down, cells: powerUpSlotsArray, scrollDirection: ScrollNode.scrollTypes.horizontal, scaleNodes: false)
+            self.powerUpSlotsScrollNode = ScrollNode(x: 547, y: 680, xAlign: .center, yAlign: .down, cells: powerUpSlotsArray, scrollDirection: ScrollNode.scrollTypes.horizontal, scaleNodes: false)
             self.powerUpSlotsScrollNode.canScroll = false
             self.addChild(self.powerUpSlotsScrollNode)
         }
         //
         
-        self.addChild(Button(name: "buttonPlay", textureName: "buttonYellow", text:"GO!", x: 1014, y: 630, xAlign:.right, yAlign:.down))
-        self.addChild(Button(name: "buttonBack", textureName: "buttonGraySquareSmall", text:"<", x: 20, y: 652, xAlign:.left, yAlign:.down))
+        self.buttonPlay = Button(textureName: "buttonYellow", text:"GO!", x: 1014, y: 630, xAlign:.right, yAlign:.down)
+        self.addChild(self.buttonPlay)
+        self.buttonBack = Button(textureName: "buttonGraySquareSmall", text:"<", x: 20, y: 652, xAlign:.left, yAlign:.down)
+        self.addChild(self.buttonBack)
         
-        self.boxCoins = Control(name: "boxCoins", textureName: "boxCoins", x: 1058, y: 20, xAlign: .right, yAlign: .up)
-        self.boxCoins.addChild(Label(name: "lebelCoins", color: GameColors.black, textureName: self.playerData.coins.description, x: 160, y: 39))
-        self.addChild(self.boxCoins)
+        let boxCoins = Control(textureName: "boxCoins", x: 1058, y: 20, xAlign: .right, yAlign: .up)
+        self.labelCoins = Label(color: GameColors.black, text: self.playerData.coins.description, x: 160, y: 39)
+        boxCoins.addChild(self.labelCoins)
+        self.addChild(boxCoins)
     }
     
     override func update(currentTime: NSTimeInterval) {
@@ -120,9 +126,9 @@ class BeforeMissionScene: GameScene {
                         cell.addChild(spriteNodeBox)
                         spriteNodeBox.zPosition = 2
                         
-                        cell.addChild(Label(name: "lebelName", color:GameColors.white, textureName: "?", x: 0, y: 0))
+                        cell.addChild(Label(color:GameColors.white, text: "?", x: 0, y: 0))
                         
-                        cell.addChild(Label(name: "lebelPrice", color:GameColors.white, textureName: skinType.price.description, x: 0, y: 100))
+                        cell.addChild(Label(color:GameColors.white, text: skinType.price.description, x: 0, y: 100))
                         
                         skinsArray.append(cell)
                     }
@@ -136,12 +142,12 @@ class BeforeMissionScene: GameScene {
                 let spriteNodeBox = SKSpriteNode(imageNamed: "boxSmallLocked")
                 cell.addChild(spriteNodeBox)
                 
-                cell.addChild(Label(name: "lebel", color:GameColors.white, textureName: "?", x: 0, y: 0))
+                cell.addChild(Label(color:GameColors.white, text: "?"))
                 
                 skinsArray.append(cell)
                 //
                 
-                self.skinsScrollNode = ScrollNode(name: "skins", x: 667, y: 466, align: .center, cells: skinsArray, spacing: 0, scrollDirection: ScrollNode.scrollTypes.horizontal, scaleNodes: true, scaleDistance:1334/4 + 100)
+                self.skinsScrollNode = ScrollNode(x: 667, y: 466, cells: skinsArray, spacing: 0, scrollDirection: ScrollNode.scrollTypes.horizontal, scaleNodes: true, scaleDistance:1334/4 + 100)
                 self.addChild(skinsScrollNode)
                 
                 break
@@ -180,7 +186,7 @@ class BeforeMissionScene: GameScene {
 //                
 //                powerUpsArray.append(cell)
                 
-                self.powerUpsScrollNode = ScrollNode(name: "powerUpsScrollNode", x: 667, y: 466, align: .center, cells: powerUpsArray, scrollDirection: .horizontal, scaleNodes: true, scaleDistance:1334 + 100)
+                self.powerUpsScrollNode = ScrollNode(x: 667, y: 466, cells: powerUpsArray, scrollDirection: .horizontal, scaleNodes: true, scaleDistance:1334 + 100)
                 self.addChild(self.powerUpsScrollNode)
                 
                 break
@@ -216,11 +222,11 @@ class BeforeMissionScene: GameScene {
                 for touch in (touches ) {
                     let location = touch.locationInNode(self)
                     
-                    if (self.childNodeWithName("buttonPlay")!.containsPoint(location)) {
+                    if (self.buttonPlay.containsPoint(location)) {
                         self.nextState = .mission
                         return
                     }
-                    if (self.childNodeWithName("buttonBack")!.containsPoint(location)) {
+                    if (self.buttonBack.containsPoint(location)) {
                         self.nextState = .floors
                         return
                     }
@@ -242,11 +248,11 @@ class BeforeMissionScene: GameScene {
                 for touch in (touches ) {
                     let location = touch.locationInNode(self)
                     
-                    if (self.childNodeWithName("buttonPlay")!.containsPoint(location)) {
+                    if (self.buttonPlay.containsPoint(location)) {
                         self.nextState = .mission
                         return
                     }
-                    if (self.childNodeWithName("buttonBack")!.containsPoint(location)) {
+                    if (self.buttonBack.containsPoint(location)) {
                         self.nextState = .beforeMission
                         return
                     }
@@ -269,7 +275,7 @@ class BeforeMissionScene: GameScene {
                                             self.playerData.addSkin(skinData)
                                             self.playerData.skinSlot.skin = skinData
                                             self.playerData.coins = NSNumber(integer: Int(self.playerData.coins) - skinType.price)
-                                            (self.boxCoins.childNodeWithName("lebelCoins") as! Label).setText(self.playerData.coins.description)
+                                            self.labelCoins.setText(self.playerData.coins.description)
                                             self.nextState = states.beforeMission
                                         } else {
                                             //TODO: assistir video para ganhar mais moedas???
@@ -297,12 +303,12 @@ class BeforeMissionScene: GameScene {
                 for touch in (touches ) {
                     let location = touch.locationInNode(self)
                     
-                    if (self.childNodeWithName("buttonPlay")!.containsPoint(location)) {
+                    if (self.buttonPlay.containsPoint(location)) {
                         self.nextState = .mission
                         return
                     }
                     
-                    if (self.childNodeWithName("buttonBack")!.containsPoint(location)) {
+                    if (self.buttonBack.containsPoint(location)) {
                         self.nextState = .beforeMission
                         return
                     }

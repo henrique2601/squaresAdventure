@@ -22,16 +22,29 @@ class MainMenuScene: GameScene {
     var state = states.mainMenu
     var nextState = states.mainMenu
     
+    //Buttons
+    var buttonPlay:Button!
+    var buttonPlayOnline:Button!
+    var buttonOptions:Button!
+    var buttonCredits:Button!
+    
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
         self.backgroundColor = GameColors.blue
-        self.addChild(Control(name: "mainMenuBackground", x:0, y:0, align:.center))
         
-        self.addChild(Button(name: "buttonPlay", textureName: "buttonYellow", text:"SINGLEPLAYER", x: 517, y: 263, align:.center))
-        self.addChild(Button(name: "buttonPlayOnline", textureName: "buttonYellow", text:"MULTIPLAYER", x: 517, y: 387, align:.center))
+        self.addChild(Control(textureName: "mainMenuBackground", xAlign: .center, yAlign: .center))
         
-        self.addChild(Button(name: "buttonOptions", textureName: "buttonBlueSmall", text:"OPTIONS", x: 550, y: 511, align:.center))
-        self.addChild(Button(name: "buttonCredits", textureName: "buttonBlueSmall", text:"CREDITS", x: 550, y: 613, align:.center))
+        self.buttonPlay = Button(textureName: "buttonYellow", text:"SINGLEPLAYER", x: 517, y: 263, xAlign: .center, yAlign: .center)
+        self.addChild(self.buttonPlay)
+        
+        self.buttonPlayOnline = Button(textureName: "buttonYellow", text:"MULTIPLAYER", x: 517, y: 387, xAlign: .center, yAlign: .center)
+        self.addChild(self.buttonPlayOnline)
+        
+        self.buttonOptions = Button(textureName: "buttonBlueSmall", text:"OPTIONS", x: 550, y: 511, xAlign: .center, yAlign: .center)
+        self.addChild(self.buttonOptions)
+        
+        self.buttonCredits = Button(textureName: "buttonBlueSmall", text:"CREDITS", x: 550, y: 613, xAlign: .center, yAlign: .center)
+        self.addChild(self.buttonCredits)
     }
     
     override func update(currentTime: NSTimeInterval) {
@@ -76,19 +89,19 @@ class MainMenuScene: GameScene {
                 for touch in (touches ) {
                     let location = touch.locationInNode(self)
                     
-                    if (self.childNodeWithName("buttonPlay")!.containsPoint(location)) {
+                    if (self.buttonPlay.containsPoint(location)) {
                         self.nextState = .towers
                         return
                     }
-                    if (self.childNodeWithName("buttonPlayOnline")!.containsPoint(location)) {
+                    if (self.buttonPlayOnline.containsPoint(location)) {
                         self.nextState = .multiplayer
                         return
                     }
-                    if (self.childNodeWithName("buttonOptions")!.containsPoint(location)) {
+                    if (self.buttonOptions.containsPoint(location)) {
                         self.nextState = .options
                         return
                     }
-                    if (self.childNodeWithName("buttonCredits")!.containsPoint(location)) {
+                    if (self.buttonCredits.containsPoint(location)) {
                         self.nextState = .credits
                         return
                     }

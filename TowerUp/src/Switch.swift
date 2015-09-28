@@ -13,23 +13,23 @@ class Switch: Control {
     
     static var switchList = Set<Switch>()
     
-    override func load(name: String, textureName: String, x: Int, y: Int, xAlign: Control.xAlignments, yAlign:Control.yAlignments) {
-        self.name = name
+    var switch0:SKSpriteNode!
+    var switch1:SKSpriteNode!
+    
+    func load(textureName: String, x: Int, y: Int, xAlign: Control.xAlignments, yAlign:Control.yAlignments) {
         self.position = CGPoint(x: x/2 + Int(Config.translate.x), y: -y/2 - Int(Config.translate.y))
         self.zPosition = Config.HUDZPosition
         
         let texture0 = SKTexture(imageNamed: "\(textureName)0")
-        let switch0 = SKSpriteNode(texture: texture0, color: UIColor.whiteColor(), size: texture0.size())
-        switch0.anchorPoint = CGPoint(x: 0, y: 1)
-        switch0.name = "\(name)0"
-        self.addChild(switch0)
+        self.switch0 = SKSpriteNode(texture: texture0, color: UIColor.whiteColor(), size: texture0.size())
+        self.switch0.anchorPoint = CGPoint(x: 0, y: 1)
+        self.addChild(self.switch0)
         
         let texture1 = SKTexture(imageNamed: "\(textureName)1")
-        let switch1 = SKSpriteNode(texture: texture1, color: UIColor.whiteColor(), size: texture1.size())
-        switch1.anchorPoint = CGPoint(x: 0, y: 1)
-        switch1.name = "\(name)1"
-        switch1.hidden = true
-        self.addChild(switch1)
+        self.switch1 = SKSpriteNode(texture: texture1, color: UIColor.whiteColor(), size: texture1.size())
+        self.switch1.anchorPoint = CGPoint(x: 0, y: 1)
+        self.switch1.hidden = true
+        self.addChild(self.switch1)
         
         Switch.switchList.insert(self)
     }
@@ -54,10 +54,8 @@ class Switch: Control {
     }
     
     func switchPressed() {
-        let switch0:SKNode = self.childNodeWithName("\(self.name!)0")!
-        switch0.hidden = !switch0.hidden
-        let switch1:SKNode = self.childNodeWithName("\(self.name!)1")!
-        switch1.hidden = !switch1.hidden
+        self.switch0.hidden = self.switch0.hidden
+        self.switch1.hidden = self.switch1.hidden
     }
     
     override func removeFromParent() {

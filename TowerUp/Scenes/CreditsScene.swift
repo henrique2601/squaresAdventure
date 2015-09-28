@@ -18,18 +18,14 @@ class CreditsScene: GameScene {
     var state = states.credits
     var nextState = states.credits
     
+    var buttonBack:Button!
+    
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
-        self.addChild(Control(name: "creditsBackground", x:0, y:0, align:.center))
+        self.addChild(Control(textureName: "creditsBackground", xAlign: .center, yAlign: .center))
         
-        self.addChild(Label(name: "labelTitle", textureName: "CreditsScene", x: 667, y: 130, align:.center))
-        
-        self.addChild(Button(name: "buttonA", textureName: "buttonYellow", text:"BUTTON A", x: 550, y: 189, align:.center))
-        self.addChild(Button(name: "buttonB", textureName: "buttonYellow", text:"BUTTON B", x: 550, y: 287, align:.center))
-        self.addChild(Button(name: "buttonC", textureName: "buttonYellow", text:"BUTTON C", x: 550, y: 385, align:.center))
-        self.addChild(Button(name: "buttonD", textureName: "buttonYellow", text:"BUTTON D", x: 550, y: 483, align:.center))
-        
-        self.addChild(Button(name: "buttonBack", textureName: "buttonGraySquareSmall", text:"<", x: 20, y: 652, xAlign:.left, yAlign:.down))
+        self.buttonBack = Button(textureName: "buttonGraySquareSmall", text:"<", x: 20, y: 652, xAlign:.left, yAlign:.down)
+        self.addChild(self.buttonBack)
     }
     
     override func update(currentTime: NSTimeInterval) {
@@ -62,7 +58,7 @@ class CreditsScene: GameScene {
                 for touch in (touches ) {
                     let location = touch.locationInNode(self)
                     
-                    if (self.childNodeWithName("buttonBack")!.containsPoint(location)) {
+                    if (self.buttonBack.containsPoint(location)) {
                         self.nextState = .mainMenu
                         return
                     }
