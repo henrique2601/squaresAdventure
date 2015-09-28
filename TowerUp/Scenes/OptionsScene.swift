@@ -8,6 +8,7 @@
 
 import UIKit
 import SpriteKit
+import ParseFacebookUtilsV4
 
 class OptionsScene: GameScene {
     enum states {
@@ -30,6 +31,7 @@ class OptionsScene: GameScene {
         
         self.addChild(Button(name: "buttonDeleteSavedGame", textureName: "buttonBlueSmall", text:"DELETE", x: 20, y: 202, align:.center))
         self.addChild(Button(name: "buttonChooseControls", textureName: "buttonBlueSmall", text:"CONTROLS", x: 20, y: 304, align:.center))
+        self.addChild(Button(name: "buttonFacebook", textureName: "buttonBlueSmall", text:"FACEBOOK", x: 20, y: 406, align:.center))
         
         let buttonBack = Button(name: "buttonBack", textureName: "buttonGraySquareSmall", text:"<", x: 20, y: 652, xAlign:.left, yAlign:.down)
         buttonBack.zPosition = Config.HUDZPosition * 2 + 1
@@ -160,6 +162,23 @@ class OptionsScene: GameScene {
                     
                     if (self.childNodeWithName("buttonChooseControls")!.containsPoint(location)) {
                         self.nextState = .chooseControls
+                        return
+                    }
+                    
+                    if (self.childNodeWithName("buttonFacebook")!.containsPoint(location)) {
+                        var permissions = [ "public_profile", "email", "user_friends" ]
+                        
+                        PFFacebookUtils.logInInBackgroundWithReadPermissions(permissions,  block: {  (user: PFUser?, error: NSError?) -> Void in
+                            if let user = user {
+                                if user.isNew {
+                                    print("User signed up and logged in through Facebook!")
+                                } else {
+                                    print("User logged in through Facebook!")
+                                }
+                            } else {
+                                print("Uh oh. The user cancelled the Facebook login.")
+                            }
+                        })
                         return
                     }
                     

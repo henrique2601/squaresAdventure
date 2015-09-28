@@ -5,10 +5,10 @@
 //
 
 import UIKit
-
 import Bolts
 import Parse
 import CoreData
+import ParseFacebookUtilsV4
 
 // If you want to use any of the UI components, uncomment this line
 // import ParseUI
@@ -40,12 +40,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // ParseCrashReporting.enable()
         //
         // Uncomment and fill in with your Parse credentials:
-        Parse.setApplicationId("gFonAGpYOf1TgUX1SW1L5rlKJvkLNwnoVWtgawmm", clientKey: "VD7qPEFUTtQY25bUWdxW2a6l5TZGd0uev0mEtaZ1")
+        Parse.setApplicationId("IvYhNIyO7wyJsDF4181S9iddoTg1QmrjUGcoPPnD", clientKey: "L3muupUM7rmO6BLmfNVZ6kymNYdYY3JCJmGVsmti")
         //
         // If you are using Facebook, uncomment and add your FacebookAppID to your bundle's plist as
         // described here: https://developers.facebook.com/docs/getting-started/facebook-sdk-for-ios/
         // Uncomment the line inside TowerUp-Bridging-Header and the following line here:
-        // PFFacebookUtils.initializeFacebook()
+        PFFacebookUtils.initializeFacebookWithApplicationLaunchOptions(launchOptions)
         // ****************************************************************************
 
         PFUser.enableAutomaticUser()
@@ -163,7 +163,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     ///////////////////////////////////////////////////////////
     // Uncomment this method if you are using Facebook
     ///////////////////////////////////////////////////////////
-    // func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
-    //     return FBAppCall.handleOpenURL(url, sourceApplication:sourceApplication, session:PFFacebookUtils.session())
-    // }
+    func application(application: UIApplication,
+        openURL url: NSURL,
+        sourceApplication: String?,
+        annotation: AnyObject) -> Bool {
+            return FBSDKApplicationDelegate.sharedInstance().application(application,
+                openURL: url,
+                sourceApplication: sourceApplication,
+                annotation: annotation)
+    }
 }
