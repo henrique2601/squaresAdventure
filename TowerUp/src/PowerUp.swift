@@ -69,9 +69,8 @@ class PowerUp: Button {
         self.powerUpShadow.colorBlendFactor = 1
         self.powerUpShadow.hidden = true
         
-        self.labelPrice = Label(name: "labelPrice", color: GameColors.black, textureName: self.powerUpType.price.description, x: 0, y: 31)
+        self.labelPrice = Label(text: self.powerUpType.price.description, x: 0, y: 31)
         self.powerUp.addChild(self.labelPrice)
-        self.powerUp.name = name
         self.addChild(self.powerUp)
         self.powerUp.addChild(self.powerUpShadow)
         
@@ -82,9 +81,8 @@ class PowerUp: Button {
         self.powerUpPressedShadow.colorBlendFactor = 1
         self.powerUpPressedShadow.hidden = true
         
-        self.labelPricePressed = Label(name: "labelPrice", color: GameColors.black, textureName: self.powerUpType.price.description, x: 0, y: 31 + 2)
+        self.labelPricePressed = Label(text: self.powerUpType.price.description, x: 0, y: 31 + 2)
         self.powerUpPressed.addChild(self.labelPricePressed)
-        self.powerUpPressed.name = "\(name)Pressed"
         self.powerUpPressed.hidden = true
         self.addChild(self.powerUpPressed)
         self.powerUpPressed.addChild(self.powerUpPressedShadow)

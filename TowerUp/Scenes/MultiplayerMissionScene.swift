@@ -69,6 +69,8 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
     
      var powerUpsScrollNode:ScrollNode!
     
+    var buttonBack:Button!
+    
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
         self.backgroundColor = GameColors.blueSky
@@ -86,7 +88,7 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
         self.player = PlayerOnline(skinId: self.playerData.skinSlot.skin.index.integerValue, x: 200, y: 100, loadPhysics: true)
         self.world.addChild(self.player)
         
-        self.player.labelName = Label(name: "labelName", textureName: "???", x: 0, y: 0)
+        self.player.labelName = Label(text: "???")
         self.world.addChild(self.player.labelName)
         
         self.mapManager = MapManager()
@@ -99,13 +101,13 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
         switch(self.playerData.configControls.integerValue) {
             
         case 1: //controlsConfig.useButtons.rawValue:
-            self.buttonLeft = Button(name: "buttonLeft", textureName: "buttonYellowSquare", text:"<", x:20, y:630, xAlign:.left, yAlign:.down)
+            self.buttonLeft = Button(textureName: "buttonYellowSquare", text:"<", x:20, y:630, xAlign:.left, yAlign:.down)
             self.addChild(self.buttonLeft)
             
-            self.buttonRight = Button(name: "buttonRight", textureName: "buttonYellowSquare", text:">" ,x:160, y:630, xAlign:.left, yAlign:.down)
+            self.buttonRight = Button(textureName: "buttonYellowSquare", text:">" ,x:160, y:630, xAlign:.left, yAlign:.down)
             self.addChild(self.buttonRight)
             
-            self.buttonJump = Button(name: "buttonJump", textureName: "buttonYellow", text:"Jump", x:1014, y:630, xAlign:.right, yAlign:.down)
+            self.buttonJump = Button(textureName: "buttonYellow", text:"Jump", x:1014, y:630, xAlign:.right, yAlign:.down)
             self.addChild(self.buttonJump)
             break
             
@@ -113,8 +115,8 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
             break
         }
         
-        let boxCoins = Control(name: "boxCoins", textureName: "boxCoins", x: 1058, y: 20, xAlign: .right, yAlign: .up)
-        self.labelCoins = Label(name: "lebelCoins", color: GameColors.black, textureName: self.playerData.coins.description, x: 160, y: 39)
+        let boxCoins = Control(textureName: "boxCoins", x: 1058, y: 20, xAlign: .right, yAlign: .up)
+        self.labelCoins = Label(text: self.playerData.coins.description, x: 160, y: 39)
         boxCoins.addChild(self.labelCoins)
         self.addChild(boxCoins)
         
@@ -131,14 +133,15 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
                 }
             }
             
-            self.powerUpsScrollNode = ScrollNode(name: "powerUpSlotsScrollNode", textureName: "", x: 667, y: 680, xAlign: .center, yAlign: .down, cells: powerUpsArray, scrollDirection: ScrollNode.scrollTypes.horizontal, scaleNodes: false)
+            self.powerUpsScrollNode = ScrollNode(x: 547, y: 680, xAlign: .center, yAlign: .down, cells: powerUpsArray, scrollDirection: ScrollNode.scrollTypes.horizontal, scaleNodes: false)
             self.powerUpsScrollNode.canScroll = false
             self.addChild(self.powerUpsScrollNode)
             
             PowerUp.updatePowerUpLabels()
         }
         
-        self.addChild(Button(name: "buttonBack", textureName: "buttonGraySquareSmall", text:"X" ,x:20, y:20, xAlign:.left, yAlign:.up))
+        self.buttonBack = Button(textureName: "buttonGraySquareSmall", text:"X" ,x:20, y:20, xAlign:.left, yAlign:.up)
+        self.addChild(self.buttonBack)
         
         //Multiplayer
         self.socket.connect()
@@ -189,7 +192,7 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
                         self!.world.addChild(player2)
                         
                         var labelName2: Label!
-                        labelName2 = Label(name: "label"+player2.name! , textureName: "", x: 0, y: 0)
+                        labelName2 = Label(text: "")
                         Control.controlList.remove(labelName2)
                         labelName2.position = CGPoint(x: player2.position.x, y: player2.position.y + 32)
                         self!.world.addChild(labelName2)
@@ -260,7 +263,7 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
                 self!.world.addChild(player)
                 
                 var labelName2: Label!
-                labelName2 = Label(name: "label"+player.name! , textureName: "", x: 0, y: 0)
+                labelName2 = Label(text: "")
                 Control.controlList.remove(labelName2)
                 labelName2.position = CGPoint(x: player.position.x, y: player.position.y + 32)
                 self!.world.addChild(labelName2)
@@ -407,7 +410,7 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
                     
                     if(self.slider == nil) {
                         if(location.x < (self.scene?.size.width)!/2) {
-                            self.slider = Slider(name: "slider", x: 0, y: 0, align:.center)
+                            self.slider = Slider()
                             self.slider.touch = touch
                             self.addChild(self.slider)
                             self.slider.position = location
@@ -450,7 +453,7 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
             for touch in (touches ) {
                 let location = touch.locationInNode(self)
                 
-                if (self.childNodeWithName("buttonBack")!.containsPoint(location)) {
+                if (self.buttonBack.containsPoint(location)) {
                     self.nextState = .loose
                     return
                 }

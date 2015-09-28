@@ -26,79 +26,24 @@ class ScrollNode: Control {
     
     var scrollType = scrollTypes.horizontal
     
-    init(name:String, x:Int, y:Int, count:Int, spacing:Int = 10, scrollDirection:scrollTypes = scrollTypes.horizontal, scaleNodes:Bool = false, scaleDistance:Int = 1000) {
+    init(textureName:String, x:Int = 0, y:Int = 0, xAlign:Control.xAlignments = .center, yAlign:Control.yAlignments = .center, count:Int = 1, spacing:Int =  10, scrollDirection:scrollTypes = scrollTypes.horizontal, scaleNodes:Bool = false, scaleDistance:Int = 1000) {
         super.init()
-        self.load(name, textureName: name, x: x, y: y, xAlign: .left, yAlign: .up, count:count, spacing:spacing, scrollDirection:scrollDirection, scaleNodes:scaleNodes, scaleDistance:scaleDistance)
+        self.load(textureName, x:x, y:y, xAlign:xAlign, yAlign:yAlign, count:count, spacing:spacing, scrollDirection:scrollDirection, scaleNodes:scaleNodes, scaleDistance:scaleDistance)
     }
     
-    init(name:String, textureName:String, x:Int, y:Int, count:Int, spacing:Int = 10, scrollDirection:scrollTypes = scrollTypes.horizontal, scaleNodes:Bool = false, scaleDistance:Int = 1000) {
+    init(x:Int = 0, y:Int = 0, xAlign:Control.xAlignments = .center, yAlign:Control.yAlignments = .center, cells:Array<SKNode>, spacing:Int = 10, scrollDirection:scrollTypes = scrollTypes.horizontal, scaleNodes:Bool = false, scaleDistance:Int = 1000) {
         super.init()
-        self.load(name, textureName: textureName, x: x, y: y, xAlign: .left, yAlign: .up, count:count, spacing:spacing, scrollDirection:scrollDirection, scaleNodes:scaleNodes, scaleDistance:scaleDistance)
-    }
-    
-    init(name:String, x:Int, y:Int, align:Control.xAlignments, count:Int, spacing:Int = 10, scrollDirection:scrollTypes = scrollTypes.horizontal, scaleNodes:Bool = false, scaleDistance:Int = 1000) {
-        super.init()
-        self.load(name, textureName: name, x: x, y: y, xAlign: align, yAlign: .center, count:count, spacing:spacing, scrollDirection:scrollDirection, scaleNodes:scaleNodes, scaleDistance:scaleDistance)
-    }
-    
-    init(name:String, x:Int, y:Int, xAlign:Control.xAlignments, yAlign:Control.yAlignments, count:Int, spacing:Int = 10, scrollDirection:scrollTypes = scrollTypes.horizontal, scaleNodes:Bool = false, scaleDistance:Int = 1000) {
-        super.init()
-        self.load(name, textureName: name, x: x, y: y, xAlign: xAlign, yAlign: yAlign, count:count, spacing:spacing, scrollDirection:scrollDirection, scaleNodes:scaleNodes, scaleDistance:scaleDistance)
-    }
-    
-    init(name:String, textureName:String, x:Int, y:Int, align:Control.xAlignments, count:Int, spacing:Int = 10, scrollDirection:scrollTypes = scrollTypes.horizontal, scaleNodes:Bool = false, scaleDistance:Int = 1000) {
-        super.init()
-        self.load(name, textureName: textureName, x: x, y: y, xAlign: align, yAlign: .center, count:count, spacing:spacing, scrollDirection:scrollDirection, scaleNodes:scaleNodes, scaleDistance:scaleDistance)
-    }
-    
-    init(name:String, textureName:String, x:Int, y:Int, xAlign:Control.xAlignments, yAlign:Control.yAlignments, count:Int, spacing:Int = 10, scrollDirection:scrollTypes = scrollTypes.horizontal, scaleNodes:Bool = false, scaleDistance:Int = 100) {
-        super.init()
-        self.load(name, textureName: textureName, x: x, y: y, xAlign: xAlign, yAlign: yAlign, count:count, spacing:spacing, scrollDirection:scrollDirection, scaleNodes:scaleNodes, scaleDistance:scaleDistance)
-    }
-    
-    init(name:String, x:Int, y:Int, cells:Array<SKNode>, spacing:Int = 10, scrollDirection:scrollTypes = scrollTypes.horizontal, scaleNodes:Bool = false, scaleDistance:Int = 1000) {
-        super.init()
-        self.load(name, x: x, y: y, xAlign: .left, yAlign: .up, cells:cells, spacing:spacing, scrollDirection:scrollDirection, scaleNodes:scaleNodes, scaleDistance:scaleDistance)
-    }
-    
-    init(name:String, textureName:String, x:Int, y:Int, cells:Array<SKNode>, spacing:Int = 10, scrollDirection:scrollTypes = scrollTypes.horizontal, scaleNodes:Bool = false, scaleDistance:Int = 1000) {
-        super.init()
-        self.load(name, x: x, y: y, xAlign: .left, yAlign: .up, cells:cells, spacing:spacing, scrollDirection:scrollDirection, scaleNodes:scaleNodes, scaleDistance:scaleDistance)
-    }
-    
-    init(name:String, x:Int, y:Int, align:Control.xAlignments, cells:Array<SKNode>, spacing:Int = 10, scrollDirection:scrollTypes = scrollTypes.horizontal, scaleNodes:Bool = false, scaleDistance:Int = 1000) {
-        super.init()
-        self.load(name, x: x, y: y, xAlign: align, yAlign: .center, cells:cells, spacing:spacing, scrollDirection:scrollDirection, scaleNodes:scaleNodes, scaleDistance:scaleDistance)
-    }
-    
-    init(name:String, x:Int, y:Int, xAlign:Control.xAlignments, yAlign:Control.yAlignments, cells:Array<SKNode>, spacing:Int = 10, scrollDirection:scrollTypes = scrollTypes.horizontal, scaleNodes:Bool = false, scaleDistance:Int = 1000) {
-        super.init()
-        self.load(name, x: x, y: y, xAlign: xAlign, yAlign: yAlign, cells:cells, spacing:spacing, scrollDirection:scrollDirection, scaleNodes:scaleNodes, scaleDistance:scaleDistance)
-    }
-    
-    init(name:String, textureName:String, x:Int, y:Int, align:Control.xAlignments, cells:Array<SKNode>, spacing:Int = 10, scrollDirection:scrollTypes = scrollTypes.horizontal, scaleNodes:Bool = false, scaleDistance:Int = 1000) {
-        super.init()
-        self.load(name, x: x, y: y, xAlign: align, yAlign: .center, cells:cells, spacing:spacing, scrollDirection:scrollDirection, scaleNodes:scaleNodes, scaleDistance:scaleDistance)
-    }
-    
-    init(name:String, textureName:String, x:Int, y:Int, xAlign:Control.xAlignments, yAlign:Control.yAlignments, cells:Array<SKNode>, spacing:Int = 10, scrollDirection:scrollTypes = scrollTypes.horizontal, scaleNodes:Bool = false, scaleDistance:Int = 1000) {
-        super.init()
-        self.load(name, x: x, y: y, xAlign: xAlign, yAlign: yAlign, cells:cells, spacing:spacing, scrollDirection:scrollDirection, scaleNodes:scaleNodes, scaleDistance:scaleDistance)
+        self.load(x, y:y, xAlign:xAlign, yAlign:yAlign, cells:cells, spacing:spacing, scrollDirection:scrollDirection, scaleNodes:scaleNodes, scaleDistance:scaleDistance)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func load(name:String, textureName:String, x:Int, y:Int, xAlign:Control.xAlignments, yAlign:Control.yAlignments) {
-        fatalError("Parâmetro count:Int deve ser maior que um ou use a classe Control.")
-    }
-    
-    func load(name:String, textureName:String, x:Int, y:Int, xAlign:Control.xAlignments, yAlign:Control.yAlignments, count:Int, spacing:Int, scrollDirection:scrollTypes, scaleNodes:Bool, scaleDistance:Int) {
+    func load(textureName:String, x:Int, y:Int, xAlign:Control.xAlignments, yAlign:Control.yAlignments, count:Int, spacing:Int, scrollDirection:scrollTypes, scaleNodes:Bool, scaleDistance:Int) {
         
         self.scrollType = scrollDirection
         
-        self.name = name
         self.sketchPosition = CGPoint(x: x, y: y)
         self.yAlign = yAlign
         self.xAlign = xAlign
@@ -132,11 +77,10 @@ class ScrollNode: Control {
         self.canScroll = (self.cells.count > 1)
     }
     
-    func load(name:String, x:Int, y:Int, xAlign:Control.xAlignments, yAlign:Control.yAlignments, cells:Array<SKNode>, spacing:Int, scrollDirection:scrollTypes, scaleNodes:Bool, scaleDistance:Int) {
+    func load(x:Int, y:Int, xAlign:Control.xAlignments, yAlign:Control.yAlignments, cells:Array<SKNode>, spacing:Int, scrollDirection:scrollTypes, scaleNodes:Bool, scaleDistance:Int) {
         
         self.scrollType = scrollDirection
         
-        self.name = name
         self.sketchPosition = CGPoint(x: x, y: y)
         self.yAlign = yAlign
         self.xAlign = xAlign

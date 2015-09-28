@@ -54,6 +54,7 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
     var buttonLeft:Button!
     var buttonRight:Button!
     var buttonJump:Button!
+    var buttonBack:Button!
     
     var slider:Slider!
     
@@ -84,13 +85,13 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
         switch(self.playerData.configControls.integerValue) {
             
         case 1: //controlsConfig.useButtons.rawValue:
-            self.buttonLeft = Button(name: "buttonLeft", textureName: "buttonYellowSquare", text:"<", x:20, y:630, xAlign:.left, yAlign:.down)
+            self.buttonLeft = Button(textureName: "buttonYellowSquare", text:"<", x:20, y:630, xAlign:.left, yAlign:.down)
             self.addChild(self.buttonLeft)
             
-            self.buttonRight = Button(name: "buttonRight", textureName: "buttonYellowSquare", text:">" ,x:160, y:630, xAlign:.left, yAlign:.down)
+            self.buttonRight = Button(textureName: "buttonYellowSquare", text:">" ,x:160, y:630, xAlign:.left, yAlign:.down)
             self.addChild(self.buttonRight)
             
-            self.buttonJump = Button(name: "buttonJump", textureName: "buttonYellow", text:"Jump", x:1014, y:630, xAlign:.right, yAlign:.down)
+            self.buttonJump = Button(textureName: "buttonYellow", text:"Jump", x:1014, y:630, xAlign:.right, yAlign:.down)
             self.addChild(self.buttonJump)
             break
             
@@ -99,7 +100,7 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
         }
         
         let boxCoins = Control(name: "boxCoins", textureName: "boxCoins", x: 1058, y: 20, xAlign: .right, yAlign: .up)
-        self.labelCoins = Label(name: "lebelCoins", color: GameColors.black, textureName: self.playerData.coins.description, x: 160, y: 39)
+        self.labelCoins = Label(text: self.playerData.coins.description, x: 160, y: 39)
         boxCoins.addChild(self.labelCoins)
         self.addChild(boxCoins)
         
@@ -116,14 +117,15 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
                 }
             }
             
-            self.powerUpsScrollNode = ScrollNode(name: "powerUpSlotsScrollNode", textureName: "", x: 667, y: 680, xAlign: .center, yAlign: .down, cells: powerUpsArray, scrollDirection: ScrollNode.scrollTypes.horizontal, scaleNodes: false)
+            self.powerUpsScrollNode = ScrollNode(x: 547, y: 680, xAlign: .center, yAlign: .down, cells: powerUpsArray, scrollDirection: ScrollNode.scrollTypes.horizontal, scaleNodes: false)
             self.powerUpsScrollNode.canScroll = false
             self.addChild(self.powerUpsScrollNode)
             
             PowerUp.updatePowerUpLabels()
         }
         
-        self.addChild(Button(name: "buttonBack", textureName: "buttonGraySquareSmall", text:"X" ,x:20, y:20, xAlign:.left, yAlign:.up))
+        self.buttonBack = Button(textureName: "buttonGraySquareSmall", text:"X" ,x:20, y:20, xAlign:.left, yAlign:.up)
+        self.addChild(self.buttonBack)
     }
     
     func didBeginContact(contact: SKPhysicsContact) {
@@ -214,11 +216,11 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
                     
                     if(MapManager.tower == towerIndex) {
                         if(MapManager.floor == tower.floors.count - 1) {
-                            if(tower.floors.count < towerType.floorCount) {
+                            if(tower.floors.count < towerType.floorTypes.count) {
                                 let floor = MemoryCard.sharedInstance.newFloorData()
                                 tower.addFloor(floor)
                             } else {
-                                if (tower.floors.count == towerType.floorCount) {
+                                if (tower.floors.count == towerType.floorTypes.count) {
                                     //Libera fase para futuros updates
                                     var floor = MemoryCard.sharedInstance.newFloorData()
                                     tower.addFloor(floor)
@@ -281,7 +283,7 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
                     
                     if(self.slider == nil) {
                         if(location.x < (self.scene?.size.width)!/2) {
-                            self.slider = Slider(name: "slider", x: 0, y: 0, align:.center)
+                            self.slider = Slider()
                             self.slider.touch = touch
                             self.addChild(self.slider)
                             self.slider.position = CGPoint(x: Int(location.x), y: Int(location.y) + 32)
@@ -294,7 +296,7 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
             break
         }
     }
-
+    
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         super.touchesEnded(touches, withEvent: event)
         
@@ -324,7 +326,7 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
             for touch in touches {
                 let location = touch.locationInNode(self)
                 
-                if (self.childNodeWithName("buttonBack")!.containsPoint(location)) {
+                if (self.buttonBack.containsPoint(location)) {
                     self.nextState = .floors
                     return
                 }

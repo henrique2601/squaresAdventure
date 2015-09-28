@@ -13,13 +13,15 @@ class MultiplayerWinBox: Box {
     
     var labelName:Label!
     
+    var buttonExit:Button!
     
     init(background: String, name:String) {
         super.init(background: background)
         
-        self.addChild(Button(name: "buttonExit", textureName: "buttonGraySquare", text:"X", x: 98, y: 590))
+        self.buttonExit = Button(textureName: "buttonGraySquare", text:"X", x: 98, y: 590)
+        self.addChild(self.buttonExit)
         
-        self.labelName = Label(name: "labelName", color:GameColors.black, textureName: name, x: 288, y: 226)
+        self.labelName = Label(text: name, x: 288, y: 226)
         self.addChild(self.labelName)
     }
     
@@ -32,7 +34,7 @@ class MultiplayerWinBox: Box {
         for touch in (touches ) {
             let location = touch.locationInNode(self)
             
-            if (self.childNodeWithName("buttonExit")!.containsPoint(location)) {
+            if (self.buttonExit.containsPoint(location)) {
                 if let scene = self.scene as? MultiplayerMissionScene {
                     scene.view!.presentScene(LobbyScene(), transition: Config.defaultGoTransition)
                 }

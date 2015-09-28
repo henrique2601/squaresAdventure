@@ -14,14 +14,19 @@ class MessageBox: Control {
     var touchesEndedAtButtonCancel:Event<Void> = Event()
     var touchesEndedAtButtonOK:Event<Void> = Event()
     
+    var buttonCancel:Button!
+    var buttonOK:Button!
+    
     init(text:String, textureName:String) {
-        super.init(name: "messegeBox", textureName:textureName, x: 412, y: 283, align:.center)
+        super.init(name: "messegeBox", textureName:textureName, x: 412, y: 283)
         
         self.zPosition = Config.HUDZPosition * CGFloat(2)
         
-        self.addChild(Label(name:"label0", textureName:text, x:255, y:46))
-        self.addChild(Button(name: "buttonOK", x:262, y:93))
-        self.addChild(Button(name: "buttonCancel", x:14, y:93))
+        self.addChild(Label(text:text, x:255, y:46))
+        self.buttonOK = Button(textureName: "buttonOK", x:262, y:93)
+        self.addChild(self.buttonOK)
+        self.buttonCancel = Button(textureName: "buttonCancel", x:14, y:93)
+        self.addChild(self.buttonCancel)
         
         self.hidden = false
     }
@@ -35,14 +40,14 @@ class MessageBox: Control {
         for touch in (touches ) {
             let location = touch.locationInNode(self)
             
-            if (self.childNodeWithName("buttonCancel")!.containsPoint(location) == true) {
+            if (self.buttonCancel.containsPoint(location) == true) {
                 self.hidden = true
                 self.touchesEndedAtButtonCancel.raise()
                 self.removeFromParent()
                 return
             }
             
-            if (self.childNodeWithName("buttonOK")!.containsPoint(location) == true) {
+            if (self.buttonOK.containsPoint(location) == true) {
                 self.hidden = true
                 self.touchesEndedAtButtonOK.raise()
                 self.removeFromParent()
