@@ -23,9 +23,12 @@
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
+			<key>CFBundleURLName</key>
+			<string>com.WTFGames.TowerUp</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>fb597864050351396</string>
+				<string>towerup</string>
 			</array>
 		</dict>
 	</array>
