@@ -13,16 +13,16 @@ class Label: Control {
     
     var labelNode:SKLabelNode!
     
-    init(color:UIColor = GameColors.black, text:String, x:Int = 0, y:Int = 0, xAlign:Control.xAlignments = .left, yAlign:Control.yAlignments = .up) {
+    init(color:UIColor = GameColors.black, text:String, fontSize:GameFonts.fontSize = .medium, x:Int = 0, y:Int = 0, xAlign:Control.xAlignments = .left, yAlign:Control.yAlignments = .up) {
         super.init()
-        self.load(color, text:text, x:x, y:y, xAlign:xAlign, yAlign:yAlign)
+        self.load(color, text:text, fontSize:fontSize.rawValue, x:x, y:y, xAlign:xAlign, yAlign:yAlign)
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func load(color:UIColor, text:String, x:Int, y:Int, xAlign:Control.xAlignments, yAlign:Control.yAlignments) {
+    func load(color:UIColor, text:String, fontSize:CGFloat, x:Int, y:Int, xAlign:Control.xAlignments, yAlign:Control.yAlignments) {
         self.sketchPosition = CGPoint(x: x, y: y)
         self.yAlign = yAlign
         self.xAlign = xAlign
@@ -30,7 +30,7 @@ class Label: Control {
         
         self.labelNode = SKLabelNode(fontNamed: "Trebuchet MS")
         self.labelNode.text = NSLocalizedString(text, tableName: nil, comment:"")
-        self.labelNode.fontSize = 25/2
+        self.labelNode.fontSize = fontSize
         self.labelNode.fontColor = color
         self.labelNode.verticalAlignmentMode = SKLabelVerticalAlignmentMode.Center
         self.labelNode.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Center

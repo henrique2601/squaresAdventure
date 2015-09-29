@@ -42,13 +42,39 @@ class FloorsScene: GameScene {
         
         self.selectedTower = self.playerData.towers.objectAtIndex(MapManager.tower) as! TowerData
         
+        
         //Andares da torre selecionada desbloqueados que foram salvos no CoreData
         var floorIndex = 0
         let towerType = Towers.types[MapManager.tower]
         
-        for _ in self.selectedTower.floors {
+        for item in self.selectedTower.floors as NSOrderedSet {
+            
+            let floorData = item as! FloorData
+            
             if(floorIndex < towerType.floorTypes.count){
                 let cell = SKSpriteNode(imageNamed: "boxSmall")//TODO: imagem do andar
+                
+                for(var i = 0; i <= floorData.stars.integerValue; i++) {
+                    switch(i){
+                    case 0:
+                        break
+                    case 1:
+                        let star1 = Control(textureName: "starSmall", x: -106, y:32)
+                        cell.addChild(star1)
+                        break
+                    case 2:
+                        let star2 = Control(textureName: "starSmall", x: -32, y:32)
+                        cell.addChild(star2)
+                        break
+                    case 3:
+                        let star3 = Control(textureName: "starSmall", x: 42, y:32)
+                        cell.addChild(star3)
+                        break
+                        
+                    default:
+                        break
+                    }
+                }
                 
                 let labelName = Label(text: "Floor " + (floorIndex + 1).description, x: 0, y: 0)
                 cell.addChild(labelName)

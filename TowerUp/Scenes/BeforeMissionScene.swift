@@ -63,7 +63,7 @@ class BeforeMissionScene: GameScene {
         self.addChild(self.buttonBack)
         
         let boxCoins = Control(textureName: "boxCoins", x: 1058, y: 20, xAlign: .right, yAlign: .up)
-        self.labelCoins = Label(color: GameColors.black, text: self.playerData.coins.description, x: 160, y: 39)
+        self.labelCoins = Label(text: self.playerData.coins.description, x: 160, y: 39)
         boxCoins.addChild(self.labelCoins)
         self.addChild(boxCoins)
     }

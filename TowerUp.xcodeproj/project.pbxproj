@@ -38,6 +38,7 @@
 		135C5CA21BA8310A006643BB /* PlayerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135C5CA11BA8310A006643BB /* PlayerData.swift */; };
 		135C5CA41BA8364B006643BB /* PowerUpSlotData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135C5CA31BA8364B006643BB /* PowerUpSlotData.swift */; };
 		135C5CA61BA8364C006643BB /* SkinSlotData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135C5CA51BA8364C006643BB /* SkinSlotData.swift */; };
+		135EA4911BBAE375006C765F /* GameFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135EA4901BBAE375006C765F /* GameFonts.swift */; settings = {ASSET_TAGS = (); }; };
 		137D3D9D1BB42DDF003202D9 /* Bug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137D3D9C1BB42DDF003202D9 /* Bug.swift */; settings = {ASSET_TAGS = (); }; };
 		137D3D9F1BB43097003202D9 /* Bomb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137D3D9E1BB43097003202D9 /* Bomb.swift */; settings = {ASSET_TAGS = (); }; };
 		137D3DA11BB435DE003202D9 /* BoxCrate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137D3DA01BB435DE003202D9 /* BoxCrate.swift */; settings = {ASSET_TAGS = (); }; };
@@ -159,6 +160,7 @@
 		135C5CA11BA8310A006643BB /* PlayerData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayerData.swift; path = CoreData/PlayerData.swift; sourceTree = "<group>"; };
 		135C5CA31BA8364B006643BB /* PowerUpSlotData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PowerUpSlotData.swift; path = CoreData/PowerUpSlotData.swift; sourceTree = "<group>"; };
 		135C5CA51BA8364C006643BB /* SkinSlotData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SkinSlotData.swift; path = CoreData/SkinSlotData.swift; sourceTree = "<group>"; };
+		135EA4901BBAE375006C765F /* GameFonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameFonts.swift; path = src/GameFonts.swift; sourceTree = "<group>"; };
 		137D3D9C1BB42DDF003202D9 /* Bug.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Bug.swift; path = src/Bug.swift; sourceTree = "<group>"; };
 		137D3D9E1BB43097003202D9 /* Bomb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Bomb.swift; path = src/Bomb.swift; sourceTree = "<group>"; };
 		137D3DA01BB435DE003202D9 /* BoxCrate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BoxCrate.swift; path = src/BoxCrate.swift; sourceTree = "<group>"; };
@@ -310,6 +312,7 @@
 				5C48055D1B84CFF60066E151 /* DoorTile.swift */,
 				1326AE891B85FD8800D4563B /* Event.swift */,
 				1359DD071B728611006C12FA /* GameColors.swift */,
+				135EA4901BBAE375006C765F /* GameFonts.swift */,
 				1359DD051B728574006C12FA /* GameMath.swift */,
 				137D3DA21BB438D5003202D9 /* Gem.swift */,
 				1383FD631B7A50990012DA45 /* Ground.swift */,
@@ -1578,6 +1581,7 @@
 				3A979BF31B987B3300A8E09F /* Textfield.swift in Sources */,
 				13CCB6FE1B72B9010060334C /* TowersScene.swift in Sources */,
 				137D3D9D1BB42DDF003202D9 /* Bug.swift in Sources */,
+				135EA4911BBAE375006C765F /* GameFonts.swift in Sources */,
 				133184A21B83AADB00DF11D5 /* Spike.swift in Sources */,
 				1305E4ED1BB18B1B009F9B0A /* Slider.swift in Sources */,
 				135C5CA61BA8364C006643BB /* SkinSlotData.swift in Sources */,

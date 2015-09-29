@@ -67,10 +67,7 @@ class Player: Square {
         
         if(loadPhysics) {
             self.zPosition = Config.HUDZPosition/2
-            spriteNode = SKSpriteNode(texture: texture, color: UIColor.whiteColor(), size: texture.size())
-            //Teste
-            //spriteNode.color = UIColor.blackColor()
-            //spriteNode.colorBlendFactor = 1
+            spriteNode = SKSpriteNode(texture: texture, size: texture.size())
             spriteNode.name = name
             
             self.position = CGPoint(x: x, y: y)
@@ -78,7 +75,7 @@ class Player: Square {
             self.loadPhysics()
         } else {
             self.zPosition = Config.HUDZPosition
-            spriteNode = SKSpriteNode(texture: texture, color: UIColor.whiteColor(), size: CGSize(width: texture.size().width, height: texture.size().height))
+            spriteNode = SKSpriteNode(texture: texture, size: CGSize(width: texture.size().width, height: texture.size().height))
             spriteNode.name = name
             
             //spriteNode.anchorPoint = CGPoint(x: 0, y: 1)
@@ -242,12 +239,6 @@ class Player: Square {
             } else {
                 if(currentTime - self.lastNoWin > 0.1) {
                     if let scene = self.scene as? MissionScene {
-                        
-                        let playerData = MemoryCard.sharedInstance.playerData
-                        playerData.coins = NSNumber(integer: Int(playerData.coins) + 100)
-                        
-                        scene.collectedBonus = scene.collectedBonus + 100
-                        
                         scene.nextState = MissionScene.states.win
                     }
                     if let scene = self.scene as? MultiplayerMissionScene {

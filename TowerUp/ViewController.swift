@@ -20,14 +20,14 @@ class ViewController: UIViewController {
         skView.multipleTouchEnabled = true
         
         #if DEBUG
-            skView.showsFPS = true
-            skView.showsNodeCount = true
-            skView.showsDrawCount = true
-            skView.showsFields = true
-            skView.showsFPS = true
-            skView.showsNodeCount = true
-            skView.showsPhysics = true
-            skView.showsQuadCount = true
+//            skView.showsFPS = true
+//            skView.showsNodeCount = true
+//            skView.showsDrawCount = true
+//            skView.showsFields = true
+//            skView.showsFPS = true
+//            skView.showsNodeCount = true
+//            skView.showsPhysics = true
+//            skView.showsQuadCount = true
         #endif
         
         /* Sprite Kit applies additional optimizations to improve rendering performance */

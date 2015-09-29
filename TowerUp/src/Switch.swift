@@ -21,12 +21,12 @@ class Switch: Control {
         self.zPosition = Config.HUDZPosition
         
         let texture0 = SKTexture(imageNamed: "\(textureName)0")
-        self.switch0 = SKSpriteNode(texture: texture0, color: UIColor.whiteColor(), size: texture0.size())
+        self.switch0 = SKSpriteNode(texture: texture0, size: texture0.size())
         self.switch0.anchorPoint = CGPoint(x: 0, y: 1)
         self.addChild(self.switch0)
         
         let texture1 = SKTexture(imageNamed: "\(textureName)1")
-        self.switch1 = SKSpriteNode(texture: texture1, color: UIColor.whiteColor(), size: texture1.size())
+        self.switch1 = SKSpriteNode(texture: texture1, size: texture1.size())
         self.switch1.anchorPoint = CGPoint(x: 0, y: 1)
         self.switch1.hidden = true
         self.addChild(self.switch1)

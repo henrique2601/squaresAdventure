@@ -13,14 +13,14 @@ import CoreData
 
 class TowerData: NSManagedObject {
 
-    @NSManaged var floors: NSSet
+    @NSManaged var floors: NSOrderedSet
     @NSManaged var playerData: PlayerData
 
 }
 
 extension TowerData {
     func addFloor(value: FloorData) {
-        let items = self.mutableSetValueForKey("floors");
+        let items = self.mutableOrderedSetValueForKey("floors");
         items.addObject(value)
     }
 }

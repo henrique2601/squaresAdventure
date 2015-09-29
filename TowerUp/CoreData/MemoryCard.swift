@@ -17,6 +17,12 @@ class MemoryCard: NSObject {
     
     var playerData:PlayerData!
     
+    internal enum controlsConfig:Int {
+        case none  = 0
+        case useButtons = 1
+        case useLeftSliderAndScreenRight = 2
+    }
+    
     override init() {
         super.init()
         self.loadGame()
@@ -199,7 +205,11 @@ class MemoryCard: NSObject {
     }
     
     func newFloorData() -> FloorData {
-        return NSEntityDescription.insertNewObjectForEntityForName("FloorData", inManagedObjectContext: self.managedObjectContext!) as! FloorData
+        let floorData = NSEntityDescription.insertNewObjectForEntityForName("FloorData", inManagedObjectContext: self.managedObjectContext!) as! FloorData
+        floorData.bonus = NSNumber(bool: false)
+        floorData.deaths = NSNumber(bool: false)
+        floorData.time = NSNumber(bool: false)
+        return floorData
     }
     
     func newPowerUpData() -> PowerUpData {
@@ -219,8 +229,4 @@ class MemoryCard: NSObject {
     }
 }
 
-public enum controlsConfig:Int {
-    case none  = 0
-    case useButtons = 1
-    case useLeftSliderAndScreenRight = 2
-}
+

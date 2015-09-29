@@ -56,7 +56,7 @@ class ScrollNode: Control {
         
         for (var i = 0; i < count; i++) {
             //let spriteNode = SKSpriteNode(texture: texture, color: nil, size: texture.size())
-            let spriteNode = SKSpriteNode(texture: texture, color: UIColor.whiteColor(), size: texture.size())
+            let spriteNode = SKSpriteNode(texture: texture, size: texture.size())
             switch(scrollDirection) {
             case scrollTypes.horizontal:
                 spriteNode.position = CGPoint(x: (Int(spriteNode.size.width) + spacing) * i, y: 0)

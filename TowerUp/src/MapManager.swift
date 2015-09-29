@@ -76,7 +76,7 @@ class MapManager: SKNode {
             if(currentTime - self.lastUpdate > 0.5) {
                 MapManager.loading = true
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
-                    self.cleanChunks()
+                    //self.cleanChunks()
                     MapManager.loading = false
                     self.lastUpdate = currentTime
                 }
@@ -84,12 +84,12 @@ class MapManager: SKNode {
         }
     }
     
-    func cleanChunks() {
-        for(var i = 0; i < 9; i++) {
-            let chunk = self.childNodeWithName("chunk\(i)")! as! Chunk
-            //chunk.clean()
-        }
-    }
+//    func cleanChunks() {
+//        for(var i = 0; i < 9; i++) {
+//            let chunk = self.childNodeWithName("chunk\(i)")! as! Chunk
+//            //chunk.clean()
+//        }
+//    }
     
     func updatePlayerRegion(position:CGPoint) {
         
