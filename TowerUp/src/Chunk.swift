@@ -78,29 +78,29 @@ class Chunk: SKSpriteNode {
                     var tile:Tile!
                     if(id > 64) {
                         switch(id) {
-                        case specialTiles.coinTile.rawValue:
+                        case Tile.specialTiles.coinTile.rawValue:
                             tile = Coin(type: "Gold", x: x, y: y)
                             break
-                        case specialTiles.winTile.rawValue:
+                        case Tile.specialTiles.winTile.rawValue:
                             tile = WinTile(type: self.type, x: x, y: y)
                             break
-                        case specialTiles.spikeTile.rawValue:
+                        case Tile.specialTiles.spikeTile.rawValue:
                             tile = Spike(x: x, y: y)
                             break
                             
-                        case specialTiles.bomb.rawValue:
+                        case Tile.specialTiles.bomb.rawValue:
                             tile = Bomb(x: x, y: y)
                             break
                             
-                        case specialTiles.boxCreate.rawValue:
+                        case Tile.specialTiles.boxCreate.rawValue:
                             tile = BoxCrate(x: x, y: y)
                             break
                             
-                        case specialTiles.gem.rawValue:
+                        case Tile.specialTiles.gem.rawValue:
                             tile = Gem(type: "Blue", x: x, y: y)
                             break
                             
-                        case specialTiles.spring.rawValue:
+                        case Tile.specialTiles.spring.rawValue:
                             tile = Spring(x: x, y: y)
                             break
 

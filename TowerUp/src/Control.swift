@@ -64,7 +64,7 @@ class Control: SKNode {
         self.xAlign = xAlign
         self.zPosition = Config.HUDZPosition/2
         
-        let spriteNode = SKSpriteNode(texture: texture, color: UIColor.whiteColor(), size: texture.size())
+        let spriteNode = SKSpriteNode(texture: texture, size: texture.size())
         spriteNode.anchorPoint = CGPoint(x: 0, y: 1)
         spriteNode.name = name
         self.addChild(spriteNode)

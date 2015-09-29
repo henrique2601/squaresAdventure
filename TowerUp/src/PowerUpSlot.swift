@@ -23,7 +23,7 @@ class PowerUpSlot: SKSpriteNode {
         self.powerUpSlotData = powerUpSlotData
         
         let texture = SKTexture(imageNamed: "powerUpSlot")
-        super.init(texture: texture, color: UIColor.whiteColor(), size: texture.size())
+        super.init(texture: texture, color: UIColor.clearColor(), size: texture.size())
         if let powerUpData = powerUpSlotData.powerUp {
             self.setPowerUp(powerUpData)
         }

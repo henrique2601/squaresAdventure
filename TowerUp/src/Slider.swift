@@ -26,11 +26,11 @@ class Slider: Control {
         self.zPosition = Config.HUDZPosition/2
         
         let sliderTexture = SKTexture(imageNamed: "sliderYellow")
-        let sliderSpriteNode = SKSpriteNode(texture: sliderTexture, color: UIColor.whiteColor(), size: sliderTexture.size())
+        let sliderSpriteNode = SKSpriteNode(texture: sliderTexture, size: sliderTexture.size())
         self.addChild(sliderSpriteNode)
         
         let thumbTexture = SKTexture(imageNamed: "thumbRed")
-        self.thumbSpriteNode = SKSpriteNode(texture: thumbTexture, color: UIColor.whiteColor(), size: thumbTexture.size())
+        self.thumbSpriteNode = SKSpriteNode(texture: thumbTexture, size: thumbTexture.size())
         sliderSpriteNode.addChild(self.thumbSpriteNode)
         
         thumbSpriteNode.zPosition = sliderSpriteNode.zPosition + CGFloat(1)

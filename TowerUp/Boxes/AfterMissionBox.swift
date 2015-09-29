@@ -20,43 +20,83 @@ class AfterMissionBox: Box {
     var buttonNext:Button!
     
     init(background: String, time:String, deaths:String, bonus:String) {
-        super.init(background: background)
+        super.init(background: background, x:435, y:82, xAlign:.center, yAlign:.down)
         
-        self.buttonExit = Button(textureName: "buttonGraySquare", text:"X", x: 98, y: 590)
+        let afterMissionBoxBackground = Control(textureName: "afterMissionBoxBackground", x: 71, y: 172)
+        self.addChild(afterMissionBoxBackground)
+        
+        self.buttonExit = Button(textureName: "buttonGraySquare", icon:"home", x: 42, y: 466)
         self.addChild(self.buttonExit)
-        self.buttonRestart = Button(textureName: "buttonBlueSquare", text:"R", x: 238, y: 590)
+        self.buttonRestart = Button(textureName: "buttonBlueSquare", icon:"restart", x: 182, y: 466)
         self.addChild(self.buttonRestart)
-        self.buttonNext = Button(textureName: "buttonBlueSquare", text:"N",x: 378, y: 590)
+        self.buttonNext = Button(textureName: "buttonBlueSquare", icon:"end",x: 322, y: 466)
         self.addChild(self.buttonNext)
         
-        let aux = Int.random(4)//TODO: numero de estrelas baseado no desempenho do jogador.
-        for(var i = 0; i <= aux; i++){
+        var starsCount:Int = 0
+        
+        let towerData = MemoryCard.sharedInstance.playerData.towers[MapManager.tower] as! TowerData
+        let floorData = towerData.floors[MapManager.floor] as! FloorData
+        
+        let minCoins = Towers.types[MapManager.tower].floorTypes[MapManager.floor].minCoins
+        if(Int(bonus) >= minCoins) {
+            if(floorData.bonus == NSNumber(bool: false)) {
+               floorData.bonus = NSNumber(bool: true)
+            }
+            self.labelBonus = Label(color:GameColors.green, text: "\(bonus)/\(minCoins)", x: 266, y: 211)
+            starsCount++
+        } else {
+            self.labelBonus = Label(color:GameColors.red, text: "\(bonus)/\(minCoins)", x: 266, y: 211)
+        }
+        self.addChild(self.labelBonus)
+        
+        let maxDeathCount = Towers.types[MapManager.tower].floorTypes[MapManager.floor].maxDeathCount
+        if(Int(deaths) <= maxDeathCount) {
+            if(floorData.deaths == NSNumber(bool: false)) {
+                floorData.deaths = NSNumber(bool: true)
+            }
+            self.labelDeaths = Label(color:GameColors.green, text: "\(deaths)/\(maxDeathCount)", x: 266, y: 309)
+            starsCount++
+        } else {
+            self.labelDeaths = Label(color:GameColors.red, text: "\(deaths)/\(maxDeathCount)", x: 266, y: 309)
+        }
+        self.addChild(self.labelDeaths)
+        
+        let maxTime = Towers.types[MapManager.tower].floorTypes[MapManager.floor].maxTime
+        if(Int(time) <= maxTime) {
+            if(floorData.time == NSNumber(bool: false)) {
+                floorData.time = NSNumber(bool: true)
+            }
+            self.labelTime = Label(color:GameColors.green, text: "\(time)s/\(maxTime)s", x: 266, y: 407)
+            starsCount++
+        } else {
+            self.labelTime = Label(color:GameColors.red, text: "\(time)s/\(maxTime)s", x: 266, y: 407)
+        }
+        self.addChild(self.labelTime)
+        
+        floorData.stars = NSNumber(integer: floorData.bonus.integerValue + floorData.deaths.integerValue + floorData.time.integerValue)
+        
+        print(floorData.bonus.integerValue)
+        print(floorData.deaths.integerValue)
+        print(floorData.time.integerValue)
+        
+        for(var i = 0; i <= starsCount; i++) {
             switch(i){
             case 0:
                 break
             case 1:
-                self.addChild(Control(name: "star1", textureName: "starBig", x: 76, y: 40))
+                self.addChild(Control(textureName: "starBig", x: 20, y: 20))
                 break
             case 2:
-                self.addChild(Control(name: "star2", textureName: "starBig", x: 224, y: 40))
+                self.addChild(Control(textureName: "starBig", x: 168, y: 20))
                 break
             case 3:
-                self.addChild(Control(name: "star3", textureName: "starBig", x: 372, y: 40))
+                self.addChild(Control(textureName: "starBig", x: 316, y: 20))
                 break
                 
             default:
                 break
             }
         }
-        
-        self.labelTime = Label(text: "Time \(time)s", x: 288, y: 226)
-        self.addChild(self.labelTime)
-        
-        self.labelDeaths = Label(text: "Deaths \(deaths)", x: 288, y: 366)
-        self.addChild(self.labelDeaths)
-        
-        self.labelBonus = Label(text: "Coins \(bonus)", x: 288, y: 506)
-        self.addChild(self.labelBonus)
     }
     
     required init?(coder aDecoder: NSCoder) {

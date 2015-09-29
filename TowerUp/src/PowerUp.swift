@@ -63,8 +63,8 @@ class PowerUp: Button {
         self.powerUpType = PowerUps.types[powerUpData.index.integerValue]
         
         let texture = SKTexture(imageNamed: self.powerUpType.powerUpImage)
-        self.powerUp = SKSpriteNode(texture: texture, color: UIColor.whiteColor(), size: texture.size())
-        self.powerUpShadow = SKSpriteNode(texture: texture, color: UIColor.whiteColor(), size: texture.size())
+        self.powerUp = SKSpriteNode(texture: texture, size: texture.size())
+        self.powerUpShadow = SKSpriteNode(texture: texture, size: texture.size())
         self.powerUpShadow.color = GameColors.black
         self.powerUpShadow.colorBlendFactor = 1
         self.powerUpShadow.hidden = true
@@ -75,8 +75,8 @@ class PowerUp: Button {
         self.powerUp.addChild(self.powerUpShadow)
         
         let texturePressed = SKTexture(imageNamed: "\(self.powerUpType.powerUpImage)Pressed")
-        self.powerUpPressed = SKSpriteNode(texture: texturePressed, color: UIColor.whiteColor(), size: texturePressed.size())
-        self.powerUpPressedShadow = SKSpriteNode(texture: texturePressed, color: UIColor.whiteColor(), size: texturePressed.size())
+        self.powerUpPressed = SKSpriteNode(texture: texturePressed, size: texturePressed.size())
+        self.powerUpPressedShadow = SKSpriteNode(texture: texturePressed, size: texturePressed.size())
         self.powerUpPressedShadow.color = GameColors.black
         self.powerUpPressedShadow.colorBlendFactor = 1
         self.powerUpPressedShadow.hidden = true

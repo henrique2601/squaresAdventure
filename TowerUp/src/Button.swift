@@ -33,30 +33,46 @@ class Button: Control {
         super.init()
     }
     
-    init(textureName:String, text:String = "", x:Int = 0, y:Int = 0, xAlign:Control.xAlignments = .left, yAlign:Control.yAlignments = .up) {
+    init(textureName:String, icon:String = "", text:String = "", fontSize:GameFonts.fontSize = .medium, x:Int = 0, y:Int = 0, xAlign:Control.xAlignments = .left, yAlign:Control.yAlignments = .up) {
         super.init()
-        self.load(textureName, text:text, x:x, y:y, xAlign:xAlign, yAlign:yAlign)
+        self.load(textureName, icon:icon, text:text, fontSize:fontSize.rawValue, x:x, y:y, xAlign:xAlign, yAlign:yAlign)
     }
-
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func load(textureName:String, text:String, x:Int, y:Int, xAlign:Control.xAlignments, yAlign:Control.yAlignments) {
+    func load(textureName:String, icon:String, text:String, fontSize:CGFloat,  x:Int, y:Int, xAlign:Control.xAlignments, yAlign:Control.yAlignments) {
         self.sketchPosition = CGPoint(x: x, y: y)
         self.yAlign = yAlign
         self.xAlign = xAlign
         self.zPosition = Config.HUDZPosition
         
         let texture = SKTexture(imageNamed: textureName)
-        self.button = SKSpriteNode(texture: texture, color: UIColor.whiteColor(), size: texture.size())
+        self.button = SKSpriteNode(texture: texture, size: texture.size())
         self.button.anchorPoint = CGPoint(x: 0, y: 1)
         self.addChild(self.button)
+        
+        if (icon != "") {
+            let iconTexture = SKTexture(imageNamed: icon)
+            
+            let xScale = (self.button.size.width - 10) / iconTexture.size().width
+            let yScale = (self.button.size.height - 10) / iconTexture.size().height
+            let scale = min(xScale, yScale)
+            
+            let icon = SKSpriteNode(texture: iconTexture, size: CGSize(width: iconTexture.size().width * scale, height: iconTexture.size().height * scale))
+            
+            icon.color = GameColors.black
+            icon.colorBlendFactor = 1
+            self.button.addChild(icon)
+            icon.position = CGPoint(x: texture.size().width/2, y: -texture.size().height/2)
+            icon.zPosition = self.button.zPosition + 1
+        }
         
         if (text != "") {
             let labelNode = SKLabelNode(fontNamed: "Trebuchet MS")
             labelNode.text = NSLocalizedString(text, tableName: nil, comment:"")
-            labelNode.fontSize = 32/2
+            labelNode.fontSize = fontSize
             labelNode.fontColor = GameColors.black
             labelNode.verticalAlignmentMode = SKLabelVerticalAlignmentMode.Center
             labelNode.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Center
@@ -66,15 +82,30 @@ class Button: Control {
         }
         
         let texturePressed = SKTexture(imageNamed: "\(textureName)Pressed")
-        self.buttonPressed = SKSpriteNode(texture: texturePressed, color: UIColor.whiteColor(), size: texturePressed.size())
+        self.buttonPressed = SKSpriteNode(texture: texturePressed, size: texturePressed.size())
         self.buttonPressed.anchorPoint = CGPoint(x: 0, y: 1)
         self.buttonPressed.hidden = true
         self.addChild(self.buttonPressed)
         
+        if (icon != "") {
+            let iconTexturePressed = SKTexture(imageNamed: icon)
+            let xScale = (self.buttonPressed.size.width - 10) / iconTexturePressed.size().width
+            let yScale = (self.buttonPressed.size.height - 10) / iconTexturePressed.size().height
+            let scale = min(xScale, yScale)
+            
+            let iconPressed = SKSpriteNode(texture: iconTexturePressed, size: CGSize(width: iconTexturePressed.size().width * scale, height: iconTexturePressed.size().height * scale))
+            
+            iconPressed.color = GameColors.white
+            iconPressed.colorBlendFactor = 1
+            self.buttonPressed.addChild(iconPressed)
+            iconPressed.position = CGPoint(x: texturePressed.size().width/2, y: -texturePressed.size().height/2 - 2)
+            iconPressed.zPosition = self.buttonPressed.zPosition + 1
+        }
+        
         if (text != "") {
             let labelNodePressed = SKLabelNode(fontNamed: "Trebuchet MS")
             labelNodePressed.text = NSLocalizedString(text, tableName: nil, comment:"")
-            labelNodePressed.fontSize = 32/2
+            labelNodePressed.fontSize = fontSize
             labelNodePressed.fontColor = GameColors.white
             labelNodePressed.verticalAlignmentMode = SKLabelVerticalAlignmentMode.Center
             labelNodePressed.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Center

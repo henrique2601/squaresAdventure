@@ -13,7 +13,12 @@ import CoreData
 
 class FloorData: NSManagedObject {
 
-    @NSManaged var progress: NSNumber
+    @NSManaged var stars: NSNumber
+    
+    @NSManaged var deaths: NSNumber
+    @NSManaged var bonus: NSNumber
+    @NSManaged var time: NSNumber
+    
     @NSManaged var tower: TowerData
 
 }

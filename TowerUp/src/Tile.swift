@@ -11,6 +11,19 @@ import SpriteKit
 
 class Tile: SKSpriteNode {
     
+    internal enum specialTiles:Int {
+        case coinTile  = 65
+        case winTile   = 66
+        case spikeTile = 67
+        case bomb = 68
+        case boxCreate = 69
+        case gem = 70
+        //case ? = 71
+        //case ? = 72
+        case spring = 73
+        //case ? = 74
+    }
+    
     static var sizeInPoints:CGFloat = 128/2
     
     override init(texture: SKTexture?, color: UIColor, size: CGSize) {
@@ -19,7 +32,7 @@ class Tile: SKSpriteNode {
     
     init(imageName:String, x:Int, y:Int) {
         let texture = SKTexture(imageNamed: imageName)
-        super.init(texture: texture, color: UIColor.whiteColor(), size: texture.size())
+        super.init(texture: texture, color: UIColor.clearColor(), size: texture.size())
         self.position = CGPoint(x: x * (Int)(Tile.sizeInPoints), y: y * -(Int)(Tile.sizeInPoints) + (Int)(Chunk.sizeInPoints - Tile.sizeInPoints))
         self.zPosition = 0
     }
@@ -27,17 +40,4 @@ class Tile: SKSpriteNode {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-}
-
-public enum specialTiles:Int {
-    case coinTile  = 65
-    case winTile   = 66
-    case spikeTile = 67
-    case bomb = 68
-    case boxCreate = 69
-    case gem = 70
-    //case ? = 71
-    //case ? = 72
-    case spring = 73
-    //case ? = 74
 }

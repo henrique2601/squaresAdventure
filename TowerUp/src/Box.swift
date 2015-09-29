@@ -22,6 +22,15 @@ class Box: Control {
         self.hidden = false
     }
     
+    init(background:String, x:Int, y:Int, xAlign:Control.xAlignments = .center, yAlign:Control.yAlignments = .center) {
+        let texture = SKTexture(imageNamed: background)
+        super.init(texture: texture, x:x, y:y, xAlign:xAlign, yAlign:yAlign)
+        
+        self.zPosition = Config.HUDZPosition * CGFloat(2)
+        
+        self.hidden = false
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

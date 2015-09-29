@@ -91,7 +91,7 @@ class LocalGameScene: GameScene, SKPhysicsContactDelegate {
         self.addChild(Button(textureName: "buttonYellow", text:"Jump", x:1014, y:630, xAlign:.right, yAlign:.down))
         
         self.boxCoins = Control(name: "boxCoins", textureName: "boxCoins", x: 1058, y: 20, xAlign: .right, yAlign: .up)
-        self.boxCoins.addChild(Label(color: GameColors.black, text: "0", x: 160, y: 39))
+        self.boxCoins.addChild(Label(text: "0", x: 160, y: 39))
         self.addChild(self.boxCoins)
         
         self.addChild(Button(textureName: "buttonGraySquareSmall", text:"||" ,x:20, y:20, xAlign:.left, yAlign:.up))
