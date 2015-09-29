@@ -10,7 +10,7 @@ import UIKit
 import SpriteKit
 import ParseFacebookUtilsV4
 
-class OptionsScene: GameScene {
+class OptionsScene: GameScene, FBSDKAppInviteDialogDelegate {
     enum states {
         case options
         case deleteSavedGame
@@ -29,6 +29,7 @@ class OptionsScene: GameScene {
     var buttonChooseControls:Button!
     var buttonBack:Button!
     var buttonFacebook:Button!
+    var buttonInvite:Button!
     
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
@@ -36,6 +37,9 @@ class OptionsScene: GameScene {
         
         self.buttonFacebook = Button(textureName: "buttonBlueSmall", text:"FACEBOOK", x: 20, y: 406, xAlign:.center, yAlign:.center)
         self.addChild(self.buttonFacebook)
+        
+        self.buttonInvite = Button(textureName: "buttonBlueSmall", text:"INVITE", x: 20, y: 508, xAlign:.center, yAlign:.center)
+        self.addChild(self.buttonInvite)
         
         self.buttonDeleteSavedGame = Button(textureName: "buttonBlueSmall", text:"DELETE", x: 20, y: 202)
         self.addChild(self.buttonDeleteSavedGame)
@@ -192,6 +196,44 @@ class OptionsScene: GameScene {
                         return
                     }
                     
+                    if (self.buttonInvite.containsPoint(location)) {
+//                        var inviteDialog:FBSDKAppInviteDialog = FBSDKAppInviteDialog()
+//                        if(inviteDialog.canShow()){
+//                            let appLinkUrl:NSURL = NSURL(string: "https://fb.me/601931573277977")!
+//                            let previewImageUrl:NSURL = NSURL(string: "https://fbcdn-sphotos-d-a.akamaihd.net/hphotos-ak-xpt1/v/t1.0-9/12027606_1658940167685627_297851193751101361_n.png?oh=1e4991f86119694a07ed4da60ae0e042&oe=569E186E&__gda__=1452084842_5aff9f25cd9da648d102d73e085be287")!
+//                            
+//                            var inviteContent = FBSDKAppInviteContent()
+//                            inviteContent.previewImageURL = previewImageUrl
+//                            inviteContent.appLinkURL = appLinkUrl
+//                            
+//                            inviteDialog.content = inviteContent
+//                            inviteDialog.delegate = self
+//                            inviteDialog.show()
+//                        }
+                        
+                        
+                        
+//                        FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc]
+//                            initWithGraphPath:@"/me/invitable_friends"
+//                        parameters:params
+//                        HTTPMethod:@"GET"];
+//                        [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection,
+//                        id result,
+//                        NSError *error) {
+//                        // Handle the result
+//                        }];
+                        
+                        let params = ["fields": "name,picture" ]
+                        
+                        var request: FBSDKGraphRequest = FBSDKGraphRequest.init(graphPath: "me/invitable_friends", parameters: params, HTTPMethod: "GET")
+                        
+                        request.startWithCompletionHandler({ (FBSDKGraphRequestConnection, result, error) -> Void in
+                            print(result)
+                        })
+                        
+                        return
+                    }
+                    
                     if (self.buttonBack.containsPoint(location)) {
                         self.nextState = .mainMenu
                         return
@@ -203,5 +245,13 @@ class OptionsScene: GameScene {
                 break
             }
         }
+    }
+    
+    func appInviteDialog(appInviteDialog: FBSDKAppInviteDialog!, didCompleteWithResults results: [NSObject : AnyObject]!) {
+        print("Complete invite without error")
+    }
+    
+    func appInviteDialog(appInviteDialog: FBSDKAppInviteDialog!, didFailWithError error: NSError!) {
+        print("Error in invite \(error)")
     }
 }
