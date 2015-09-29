@@ -27,26 +27,27 @@ class LocalLobbyScene: GameScene {
     
     let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     var zeroTime: NSTimeInterval = 0
-    var buttonGo: Button!
+    
     var labelStatus: Label!
     
     var playerData = MemoryCard.sharedInstance.playerData
     //var mpcManager: MPCManager!
 
-    
+    var buttonGo: Button!
+    var buttonBack:Button!
     
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
-        self.addChild(Control(name: "lobby1Background", x:0, y:0, align:.center))
+        self.addChild(Control(textureName: "lobby1Background", xAlign: .center, yAlign: .center))
         self.backgroundColor = GameColors.blue
         
-        self.labelStatus = Label(name: "Status", color: GameColors.white, x: 215, y: 328)
+        self.labelStatus = Label(color: GameColors.white, text: "", x: 215, y: 328)
         self.addChild(self.labelStatus)
         
-        self.buttonGo = Button(name: "buttonGo", textureName: "buttonYellowSmall", text:"GO", x: 295, y: 560, align:.center)
+        self.buttonGo = Button(textureName: "buttonYellowSmall", text:"GO", x: 295, y: 560)
         self.buttonGo.hidden = true
         self.addChild(self.buttonGo)
-        self.addChild(Button(name: "buttonBack", textureName: "buttonGraySquareSmall", text:"<", x: 20, y: 652, xAlign:.left, yAlign:.down))
+        self.addChild(Button(textureName: "buttonGraySquareSmall", text:"<", x: 20, y: 652, xAlign:.left, yAlign:.down))
         
         
 //        self.mpcManager = MPCManager()
@@ -129,7 +130,7 @@ class LocalLobbyScene: GameScene {
                         switch (self.state) {
                         case states.hosting:
                             
-                            if (self.childNodeWithName("buttonGo")!.containsPoint(location)) {
+                            if (self.buttonGo.containsPoint(location)) {
                                 self.nextState = .localMission
                                 return
                             }
@@ -143,7 +144,7 @@ class LocalLobbyScene: GameScene {
                     
                     
                     
-                    if (self.childNodeWithName("buttonBack")!.containsPoint(location)) {
+                    if (self.buttonBack.containsPoint(location)) {
                         self.nextState = .lobby
                         return
                     }

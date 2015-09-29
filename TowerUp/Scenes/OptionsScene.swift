@@ -25,17 +25,27 @@ class OptionsScene: GameScene {
     
     var chooseControlsScrollNode:ScrollNode!
     
+    var buttonDeleteSavedGame:Button!
+    var buttonChooseControls:Button!
+    var buttonBack:Button!
+    var buttonFacebook:Button!
+    
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
         self.backgroundColor = GameColors.blue
         
-        self.addChild(Button(name: "buttonDeleteSavedGame", textureName: "buttonBlueSmall", text:"DELETE", x: 20, y: 202, align:.center))
-        self.addChild(Button(name: "buttonChooseControls", textureName: "buttonBlueSmall", text:"CONTROLS", x: 20, y: 304, align:.center))
-        self.addChild(Button(name: "buttonFacebook", textureName: "buttonBlueSmall", text:"FACEBOOK", x: 20, y: 406, align:.center))
+        self.buttonFacebook = Button(textureName: "buttonBlueSmall", text:"FACEBOOK", x: 20, y: 406, xAlign:.center, yAlign:.center)
+        self.addChild(self.buttonFacebook)
         
-        let buttonBack = Button(name: "buttonBack", textureName: "buttonGraySquareSmall", text:"<", x: 20, y: 652, xAlign:.left, yAlign:.down)
-        buttonBack.zPosition = Config.HUDZPosition * 2 + 1
-        self.addChild(buttonBack)
+        self.buttonDeleteSavedGame = Button(textureName: "buttonBlueSmall", text:"DELETE", x: 20, y: 202)
+        self.addChild(self.buttonDeleteSavedGame)
+        
+        self.buttonChooseControls = Button(textureName: "buttonBlueSmall", text:"CONTROLS", x: 20, y: 304)
+        self.addChild(self.buttonChooseControls)
+        
+        self.buttonBack = Button(textureName: "buttonGraySquareSmall", text:"<", x: 20, y: 652, xAlign:.left, yAlign:.down)
+        self.buttonBack.zPosition = Config.HUDZPosition * 2 + 1
+        self.addChild(self.buttonBack)
     }
     
     override func update(currentTime: NSTimeInterval) {
@@ -68,7 +78,7 @@ class OptionsScene: GameScene {
                 spriteNode = SKSpriteNode(imageNamed: "useLeftSliderAndScreenRight")
                 controlsArray.append(spriteNode)
                 
-                self.chooseControlsScrollNode = ScrollNode(name: "scrollNode", x: 667, y: 466, align: .center, cells:controlsArray, spacing:1, scaleNodes:true, scaleDistance:1334/4 + 100)
+                self.chooseControlsScrollNode = ScrollNode(x: 667, y: 466, cells:controlsArray, spacing:1, scaleNodes:true, scaleDistance:1334/4 + 100)
                 self.addChild(self.chooseControlsScrollNode)
                 
                 let size = self.size.width > self.size.height ? self.size.width : self.size.height
@@ -84,7 +94,7 @@ class OptionsScene: GameScene {
             case states.deleteSavedGame:
                 let box = Box(background: "messegeBox")
                 
-                let buttonOk = Button(name: "buttonRedSmall", text: "Ok", x: 266, y: 162)
+                let buttonOk = Button(textureName: "buttonRedSmall", text: "Ok", x: 266, y: 162)
                 buttonOk.addHandler({
                     MemoryCard.sharedInstance.reset()
                     self.nextState = .options
@@ -93,7 +103,7 @@ class OptionsScene: GameScene {
                     }
                 })
                 
-                let buttonCancel = Button(name: "buttonGraySmall", text: "Cancel", x: 12, y: 162)
+                let buttonCancel = Button(textureName: "buttonGraySmall", text: "Cancel", x: 12, y: 162)
                 buttonCancel.addHandler({
                     self.nextState = .options
                     if let parent = buttonCancel.parent {
@@ -124,7 +134,7 @@ class OptionsScene: GameScene {
                 for touch in (touches ) {
                     let location = touch.locationInNode(self)
                     
-                    if (self.childNodeWithName("buttonBack")!.containsPoint(location)) {
+                    if (self.buttonBack.containsPoint(location)) {
                         self.nextState = .options
                         return
                     }
@@ -155,17 +165,17 @@ class OptionsScene: GameScene {
                 for touch in (touches ) {
                     let location = touch.locationInNode(self)
                     
-                    if (self.childNodeWithName("buttonDeleteSavedGame")!.containsPoint(location)) {
+                    if (self.buttonDeleteSavedGame.containsPoint(location)) {
                         self.nextState = .deleteSavedGame
                         return
                     }
                     
-                    if (self.childNodeWithName("buttonChooseControls")!.containsPoint(location)) {
+                    if (self.buttonChooseControls.containsPoint(location)) {
                         self.nextState = .chooseControls
                         return
                     }
                     
-                    if (self.childNodeWithName("buttonFacebook")!.containsPoint(location)) {
+                    if (self.buttonFacebook.containsPoint(location)) {
                         var permissions = [ "public_profile", "email", "user_friends" ]
                         
                         PFFacebookUtils.logInInBackgroundWithReadPermissions(permissions,  block: {  (user: PFUser?, error: NSError?) -> Void in
@@ -182,7 +192,7 @@ class OptionsScene: GameScene {
                         return
                     }
                     
-                    if (self.childNodeWithName("buttonBack")!.containsPoint(location)) {
+                    if (self.buttonBack.containsPoint(location)) {
                         self.nextState = .mainMenu
                         return
                     }

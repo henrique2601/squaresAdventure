@@ -40,63 +40,21 @@ class Control: SKNode {
     
     override init() {
         super.init()
-        //Este inicializador deve ser sobreescrito nas subclasses
     }
     
-    init(name:String, x:Int, y:Int) {
+    init(name:String = "", textureName:String, x:Int = 0, y:Int = 0, xAlign:Control.xAlignments = .left, yAlign:Control.yAlignments = .up) {
         super.init()
-        self.load(name, textureName: name, x: x, y: y, xAlign: .left, yAlign: .up)
+        let texture = SKTexture(imageNamed: textureName)
+        self.load(name, texture: texture, x: x, y: y, xAlign: xAlign, yAlign: yAlign)
     }
     
-    init(name:String, textureName:String, x:Int, y:Int) {
+    init(name:String = "", texture:SKTexture, x:Int = 0, y:Int = 0, xAlign:Control.xAlignments = .left, yAlign:Control.yAlignments = .up) {
         super.init()
-        self.load(name, textureName: textureName, x: x, y: y, xAlign: .left, yAlign: .up)
-    }
-    
-    init(name:String, x:Int, y:Int, align:Control.xAlignments) {
-        super.init()
-        self.load(name, textureName: name, x: x, y: y, xAlign: align, yAlign: .center)
-    }
-    
-    init(name:String, x:Int, y:Int, xAlign:Control.xAlignments, yAlign:Control.yAlignments) {
-        super.init()
-        self.load(name, textureName: name, x: x, y: y, xAlign: xAlign, yAlign: yAlign)
-    }
-    
-    init(name:String, textureName:String, x:Int, y:Int, align:Control.xAlignments) {
-        super.init()
-        self.load(name, textureName: textureName, x: x, y: y, xAlign: align, yAlign: .center)
-    }
-    
-    init(name:String, texture:SKTexture, x:Int, y:Int, align:Control.xAlignments) {
-        super.init()
-        self.load(name, texture: texture, x: x, y: y, xAlign: align, yAlign: .center)
-    }
-    
-    init(name:String, textureName:String, x:Int, y:Int, xAlign:Control.xAlignments, yAlign:Control.yAlignments) {
-        super.init()
-        self.load(name, textureName: textureName, x: x, y: y, xAlign: xAlign, yAlign: yAlign)
+        self.load(name, texture: texture, x: x, y: y, xAlign: xAlign, yAlign: yAlign)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    //Esta função deve ser sobreescrita nas subclasses
-    func load(name:String, textureName:String, x:Int, y:Int, xAlign:Control.xAlignments, yAlign:Control.yAlignments) {
-        self.name = name
-        self.sketchPosition = CGPoint(x: x, y: y)
-        self.yAlign = yAlign
-        self.xAlign = xAlign
-        self.zPosition = Config.HUDZPosition/2
-        
-        let texture = SKTexture(imageNamed: textureName)
-        let spriteNode = SKSpriteNode(texture: texture, color: UIColor.whiteColor(), size: texture.size())
-        spriteNode.anchorPoint = CGPoint(x: 0, y: 1)
-        spriteNode.name = name
-        self.addChild(spriteNode)
-        
-        Control.controlList.insert(self)
     }
     
     func load(name:String, texture:SKTexture, x:Int, y:Int, xAlign:Control.xAlignments, yAlign:Control.yAlignments) {
@@ -113,7 +71,6 @@ class Control: SKNode {
         
         Control.controlList.insert(self)
     }
-    //
     
     class func resetControls() {
         for control in Control.controlList {

@@ -57,6 +57,8 @@ class LocalGameScene: GameScene, SKPhysicsContactDelegate {
     var numUpdates = 0
     var boxCoins:Control!
     
+    var buttonBack:Button!
+    
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
         self.backgroundColor = GameColors.blueSky
@@ -74,7 +76,7 @@ class LocalGameScene: GameScene, SKPhysicsContactDelegate {
         self.player = PlayerOnline(skinId: self.playerData.skinSlot.skin.index.integerValue, x: 200, y: 100, loadPhysics: true)
         self.world.addChild(self.player)
         
-        self.player.labelName = Label(name: "labelName", textureName: "", x: 0, y: 0)
+        self.player.labelName = Label(text: "")
         self.world.addChild(self.player.labelName)
         
         self.mapManager = MapManager()
@@ -84,19 +86,15 @@ class LocalGameScene: GameScene, SKPhysicsContactDelegate {
         
         self.mapManager.reloadMap(CGPoint(x: 10, y: Chunk.sizeInPoints + 10))
         
-        self.addChild(Button(name: "buttonLeft", textureName: "buttonYellowSquare", text:"<", x:20, y:630, xAlign:.left, yAlign:.down))
-        self.addChild(Button(name: "buttonRight", textureName: "buttonYellowSquare", text:">" ,x:160, y:630, xAlign:.left, yAlign:.down))
-        self.addChild(Button(name: "buttonJump", textureName: "buttonYellow", text:"Jump", x:1014, y:630, xAlign:.right, yAlign:.down))
-        
-        self.addChild(Button(name: "buttonPowerUp0", textureName: "buttonBlueSquare", text:"1", x: 497, y: 630, xAlign:.center, yAlign:.down))
-        self.addChild(Button(name: "buttonPowerUp1", textureName: "buttonOrangeSquare", text:"2", x: 617, y: 630, xAlign:.center, yAlign:.down))
-        self.addChild(Button(name: "buttonPowerUp2", textureName: "buttonYellowSquare", text:"3", x: 737, y: 630, xAlign:.center, yAlign:.down))
+        self.addChild(Button(textureName: "buttonYellowSquare", text:"<", x:20, y:630, xAlign:.left, yAlign:.down))
+        self.addChild(Button(textureName: "buttonYellowSquare", text:">" ,x:160, y:630, xAlign:.left, yAlign:.down))
+        self.addChild(Button(textureName: "buttonYellow", text:"Jump", x:1014, y:630, xAlign:.right, yAlign:.down))
         
         self.boxCoins = Control(name: "boxCoins", textureName: "boxCoins", x: 1058, y: 20, xAlign: .right, yAlign: .up)
-        self.boxCoins.addChild(Label(name: "lebelCoins", color: GameColors.black, textureName: "0", x: 160, y: 39))
+        self.boxCoins.addChild(Label(color: GameColors.black, text: "0", x: 160, y: 39))
         self.addChild(self.boxCoins)
         
-        self.addChild(Button(name: "buttonBack", textureName: "buttonGraySquareSmall", text:"||" ,x:20, y:20, xAlign:.left, yAlign:.up))
+        self.addChild(Button(textureName: "buttonGraySquareSmall", text:"||" ,x:20, y:20, xAlign:.left, yAlign:.up))
         
         //self.mpcManager.browser.startBrowsingForPeers()
         //self.mpcManager.advertiser.startAdvertisingPeer()
@@ -174,7 +172,7 @@ class LocalGameScene: GameScene, SKPhysicsContactDelegate {
             for touch in (touches ) {
                 let location = touch.locationInNode(self)
                 
-                if (self.childNodeWithName("buttonBack")!.containsPoint(location)) {
+                if (self.buttonBack.containsPoint(location)) {
                     
                     
                     

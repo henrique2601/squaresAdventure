@@ -15,12 +15,19 @@ class AfterMissionBox: Box {
     var labelDeaths:Label!
     var labelBonus:Label!
     
+    var buttonExit:Button!
+    var buttonRestart:Button!
+    var buttonNext:Button!
+    
     init(background: String, time:String, deaths:String, bonus:String) {
         super.init(background: background)
         
-        self.addChild(Button(name: "buttonExit", textureName: "buttonGraySquare", text:"X", x: 98, y: 590))
-        self.addChild(Button(name: "buttonRestart", textureName: "buttonBlueSquare", text:"R", x: 238, y: 590))
-        self.addChild(Button(name: "buttonNext", textureName: "buttonBlueSquare", text:"N",x: 378, y: 590))
+        self.buttonExit = Button(textureName: "buttonGraySquare", text:"X", x: 98, y: 590)
+        self.addChild(self.buttonExit)
+        self.buttonRestart = Button(textureName: "buttonBlueSquare", text:"R", x: 238, y: 590)
+        self.addChild(self.buttonRestart)
+        self.buttonNext = Button(textureName: "buttonBlueSquare", text:"N",x: 378, y: 590)
+        self.addChild(self.buttonNext)
         
         let aux = Int.random(4)//TODO: numero de estrelas baseado no desempenho do jogador.
         for(var i = 0; i <= aux; i++){
@@ -42,16 +49,16 @@ class AfterMissionBox: Box {
             }
         }
         
-        self.labelTime = Label(name: "labelTime", color:GameColors.black, textureName: "Time \(time)s", x: 288, y: 226)
+        self.labelTime = Label(text: "Time \(time)s", x: 288, y: 226)
         self.addChild(self.labelTime)
         
-        self.labelDeaths = Label(name: "labelDeaths", color:GameColors.black, textureName: "Deaths \(deaths)", x: 288, y: 366)
+        self.labelDeaths = Label(text: "Deaths \(deaths)", x: 288, y: 366)
         self.addChild(self.labelDeaths)
         
-        self.labelBonus = Label(name: "labelBonus", color:GameColors.black, textureName: "Coins \(bonus)", x: 288, y: 506)
+        self.labelBonus = Label(text: "Coins \(bonus)", x: 288, y: 506)
         self.addChild(self.labelBonus)
     }
-
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -61,7 +68,7 @@ class AfterMissionBox: Box {
         for touch in (touches ) {
             let location = touch.locationInNode(self)
             
-            if (self.childNodeWithName("buttonExit")!.containsPoint(location)) {
+            if (self.buttonExit.containsPoint(location)) {
                 if let scene = self.scene as? MissionScene {
                     scene.nextState = MissionScene.states.floors
                     scene.blackSpriteNode.removeFromParent()
@@ -69,7 +76,7 @@ class AfterMissionBox: Box {
                 }
                 return
             }
-            if (self.childNodeWithName("buttonRestart")!.containsPoint(location)) {
+            if (self.buttonRestart.containsPoint(location)) {
                 if let scene = self.scene as? MissionScene {
                     scene.nextState = MissionScene.states.mission
                     scene.blackSpriteNode.removeFromParent()
@@ -77,7 +84,7 @@ class AfterMissionBox: Box {
                 }
                 return
             }
-            if (self.childNodeWithName("buttonNext")!.containsPoint(location)) {
+            if (self.buttonNext.containsPoint(location)) {
                 //
                 if let scene = self.scene as? MissionScene {
                     scene.nextState = MissionScene.states.powerUp
@@ -90,7 +97,7 @@ class AfterMissionBox: Box {
                         if(MapManager.tower == towerIndex) {
                             //Encontrou torre selecionada
                             let towerType = Towers.types[towerIndex]
-                            if(MapManager.floor >= towerType.floorCount) {
+                            if(MapManager.floor >= towerType.floorTypes.count) {
                                 MapManager.floor = 0
                                 MapManager.tower++
                                 if(MapManager.tower >= Towers.types.count) {

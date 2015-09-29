@@ -26,13 +26,15 @@ class TowersScene: GameScene {
     
     var boxCoins:Control!
     
+    var buttonBack:Button!
+    
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
         self.backgroundColor = GameColors.blue
-        self.addChild(Control(name: "mainMenuBackground", x:0, y:0, align:.center))
+        self.addChild(Control(textureName: "mainMenuBackground", xAlign: .center, yAlign: .center))
         
         self.boxCoins = Control(name: "boxCoins", textureName: "boxCoins", x: 1058, y: 20, xAlign: .right, yAlign: .up)
-        self.boxCoins.addChild(Label(name: "lebelCoins", color: GameColors.black, textureName: self.playerData.coins.description, x: 160, y: 39))
+        self.boxCoins.addChild(Label(text: self.playerData.coins.description, x: 160, y: 39))
         self.addChild(self.boxCoins)
         
         var towersArray = Array<SKSpriteNode>()
@@ -44,8 +46,8 @@ class TowersScene: GameScene {
             if towerIndex < Towers.types.count {
                 let towerType = Towers.types[towerIndex]
                 let cell = SKSpriteNode(imageNamed: "towerBox")
-                let labelName = Label(name: "labelTowerName", color: GameColors.black, textureName: "Tower " + (towerIndex + 1).description, x: 0, y: 0)
-                let labelProgress = Label(name: "labelTowerProgress", color: GameColors.black, textureName: (tower.floors.count - 1).description + "/" + towerType.floorCount.description, x: 0, y: 64)
+                let labelName = Label(text: "Tower " + (towerIndex + 1).description)
+                let labelProgress = Label(text: (tower.floors.count - 1).description + "/" + towerType.floorTypes.count.description, x: 0, y: 64)
                 cell.addChild(labelName)
                 cell.addChild(labelProgress)
                 
@@ -62,7 +64,7 @@ class TowersScene: GameScene {
             spriteNode.zPosition = cell.zPosition + 1
             cell.addChild(spriteNode)
             
-            let labelName = Label(name: "labelTowerName", color: GameColors.black, textureName: "Locked", x: 0, y: 0)
+            let labelName = Label(text: "Locked")
             cell.addChild(labelName)
             
             towersArray.append(cell)
@@ -70,11 +72,12 @@ class TowersScene: GameScene {
         
         //TODO: torre "?"
         
-        self.towersScrollNode = ScrollNode(name: "scrollNode", x: 667, y: 466, align: .center, cells:towersArray, spacing:1, scaleNodes:true, scaleDistance:1334/4 + 100)
+        self.towersScrollNode = ScrollNode(x: 667, y: 466, cells:towersArray, spacing:1, scaleNodes:true, scaleDistance:1334/4 + 100)
         
         self.addChild(self.towersScrollNode)
         
-        self.addChild(Button(name: "buttonBack", textureName: "buttonGraySquareSmall", text:"<", x: 20, y: 652, xAlign:.left, yAlign:.down))
+        self.buttonBack = Button(textureName: "buttonGraySquareSmall", text:"<", x: 20, y: 652, xAlign:.left, yAlign:.down)
+        self.addChild(self.buttonBack)
     }
     
     override func update(currentTime: NSTimeInterval) {
@@ -111,7 +114,7 @@ class TowersScene: GameScene {
                 for touch in (touches ) {
                     let location = touch.locationInNode(self)
                     
-                    if (self.childNodeWithName("buttonBack")!.containsPoint(location)) {
+                    if (self.buttonBack.containsPoint(location)) {
                         self.nextState = .mainMenu
                         return
                     }

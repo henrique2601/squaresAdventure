@@ -27,13 +27,15 @@ class FloorsScene: GameScene {
     
     var boxCoins:Control!
     
+    var buttonBack:Button!
+    
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
         self.backgroundColor = GameColors.blue
-        self.addChild(Control(name: "mainMenuBackground", x:0, y:0, align:.center))
+        self.addChild(Control(textureName: "mainMenuBackground", xAlign: .center, yAlign: .center))
         
-        self.boxCoins = Control(name: "boxCoins", textureName: "boxCoins", x: 1058, y: 20, xAlign: .right, yAlign: .up)
-        self.boxCoins.addChild(Label(name: "lebelCoins", color: GameColors.black, textureName: self.playerData.coins.description, x: 160, y: 39))
+        self.boxCoins = Control(textureName: "boxCoins", x: 1058, y: 20)
+        self.boxCoins.addChild(Label(text: self.playerData.coins.description, x: 160, y: 39))
         self.addChild(self.boxCoins)
         
         var floorsArray = Array<SKSpriteNode>()
@@ -45,10 +47,10 @@ class FloorsScene: GameScene {
         let towerType = Towers.types[MapManager.tower]
         
         for _ in self.selectedTower.floors {
-            if(floorIndex < towerType.floorCount){
+            if(floorIndex < towerType.floorTypes.count){
                 let cell = SKSpriteNode(imageNamed: "boxSmall")//TODO: imagem do andar
                 
-                let labelName = Label(name: "labelFloorName", color: GameColors.black, textureName: "Floor " + (floorIndex + 1).description, x: 0, y: 0)
+                let labelName = Label(text: "Floor " + (floorIndex + 1).description, x: 0, y: 0)
                 cell.addChild(labelName)
                 
                 floorsArray.append(cell)
@@ -57,23 +59,24 @@ class FloorsScene: GameScene {
         }
         
         //Andares bloqueados, mostrar cadeado
-        for (0; floorIndex < towerType.floorCount; floorIndex++) {
+        for (0; floorIndex < towerType.floorTypes.count; floorIndex++) {
             let cell = SKSpriteNode(imageNamed: "boxSmall")//TODO: imagem do andar
             
             let spriteNode = SKSpriteNode(imageNamed: "boxSmallLocked")
             spriteNode.zPosition = cell.zPosition + 1
             cell.addChild(spriteNode)
             
-            let labelName = Label(name: "labelFloorName", color: GameColors.black, textureName: "Locked", x: 0, y: 0)
+            let labelName = Label(text: "Locked")
             cell.addChild(labelName)
             
             floorsArray.append(cell)
         }
         
-        self.floorsScrollNone = ScrollNode(name: "scrollNode", textureName: "boxSmall", x: 667, y: 466, align: .center, cells:floorsArray, spacing: 1, scrollDirection: ScrollNode.scrollTypes.horizontal, scaleNodes:true, scaleDistance:1334/4 + 100)
+        self.floorsScrollNone = ScrollNode(x: 667, y: 466, cells:floorsArray, spacing: 1, scrollDirection: ScrollNode.scrollTypes.horizontal, scaleNodes:true, scaleDistance:1334/4 + 100)
         self.addChild(self.floorsScrollNone)
         
-        self.addChild(Button(name: "buttonBack", textureName: "buttonGraySquareSmall", text:"<", x: 20, y: 652, xAlign:.left, yAlign:.down))
+        self.buttonBack = Button(textureName: "buttonGraySquareSmall", text:"<", x: 20, y: 652, xAlign:.left, yAlign:.down)
+        self.addChild(self.buttonBack)
     }
     
     override func update(currentTime: NSTimeInterval) {
@@ -110,7 +113,7 @@ class FloorsScene: GameScene {
                 for touch in (touches ) {
                     let location = touch.locationInNode(self)
                     
-                    if (self.childNodeWithName("buttonBack")!.containsPoint(location)) {
+                    if (self.buttonBack.containsPoint(location)) {
                         self.nextState = .towers
                         return
                     }

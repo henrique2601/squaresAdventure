@@ -25,6 +25,11 @@ class LobbyScene: GameScene, UITextFieldDelegate {
     var myTextField: Textfield!
     var playerData = MemoryCard.sharedInstance.playerData
     
+    var buttonOnline:Button!
+    var buttonQuick:Button!
+    var buttonLocal:Button!
+    var buttonBack:Button!
+    
     
     func randomStringWithLength (len : Int) -> NSString {
         
@@ -46,32 +51,24 @@ class LobbyScene: GameScene, UITextFieldDelegate {
     
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
-        self.addChild(Control(name: "lobby1Background", x:0, y:0, align:.center))
+        self.addChild(Control(textureName: "lobby1Background", xAlign: .center, yAlign: .center))
         self.backgroundColor = GameColors.blue
         
+        self.buttonOnline = Button(textureName: "buttonYellow", text:"ONLINE GAME", x: 229, y: 269, xAlign: .center, yAlign: .center)
+        self.addChild(self.buttonOnline)
         
+        self.buttonQuick = Button(textureName: "buttonYellow", text:"QUICKPLAY", x: 229, y: 393, xAlign: .center, yAlign: .center)
+        self.addChild(self.buttonQuick)
         
-        
-        
-        
-        self.addChild(Button(name: "buttonOnline", textureName: "buttonYellow", text:"ONLINE GAME", x: 229, y: 269, align:.center))
-        self.addChild(Button(name: "buttonQuick", textureName: "buttonYellow", text:"QUICKPLAY", x: 229, y: 393, align:.center))
-        self.addChild(Button(name: "buttonLocal", textureName: "buttonYellow", text:"LOCAL GAME", x: 229, y: 517, align:.center))
+        self.buttonLocal = Button(textureName: "buttonYellow", text:"LOCAL GAME", x: 229, y: 517, xAlign: .center, yAlign: .center)
+        self.addChild(self.buttonLocal)
         
         self.myTextField = Textfield(name: self.playerData.name , x: 741, y: 240, align:.center, view:self.view!)
         self.myTextField.myTextField.delegate = self
         self.addChild(self.myTextField)
         
-        
-        
-
-        
-        self.addChild(Button(name: "buttonBack", textureName: "buttonGraySquareSmall", text:"<", x: 20, y: 652, xAlign:.left, yAlign:.down))
-        
-        
-        
-
-        
+        self.buttonBack = Button(textureName: "buttonGraySquareSmall", text:"<", x: 20, y: 652, xAlign:.left, yAlign:.down)
+        self.addChild(self.buttonBack)
     }
     
     // Called by tapping return on the keyboard.
@@ -134,25 +131,25 @@ class LobbyScene: GameScene, UITextFieldDelegate {
                 for touch in (touches ) {
                     let location = touch.locationInNode(self)
                     
-                    if (self.childNodeWithName("buttonOnline")!.containsPoint(location)) {
+                    if (self.buttonOnline.containsPoint(location)) {
                         room = 0
                         self.nextState = .multiplayerMission
                         return
                     }
                     
-                    if (self.childNodeWithName("buttonQuick")!.containsPoint(location)) {
+                    if (self.buttonQuick.containsPoint(location)) {
                         room = 1
                         self.nextState = .multiplayerMission
                         return
                     }
                     
-                    if (self.childNodeWithName("buttonLocal")!.containsPoint(location)) {
+                    if (self.buttonLocal.containsPoint(location)) {
                         room = 2
                         self.nextState = .localLobby
                         return
                     }
                     
-                    if (self.childNodeWithName("buttonBack")!.containsPoint(location)) {
+                    if (self.buttonBack.containsPoint(location)) {
                         self.nextState = .mainMenu
                         return
                     }
