@@ -10,7 +10,7 @@ import UIKit
 import SpriteKit
 import ParseFacebookUtilsV4
 
-class OptionsScene: GameScene {
+class OptionsScene: GameScene, FBSDKGameRequestDialogDelegate {
     enum states {
         case options
         case deleteSavedGame
@@ -29,6 +29,7 @@ class OptionsScene: GameScene {
     var buttonChooseControls:Button!
     var buttonBack:Button!
     var buttonFacebook:Button!
+    var buttonInvite:Button!
     
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
@@ -36,6 +37,9 @@ class OptionsScene: GameScene {
         
         self.buttonFacebook = Button(textureName: "buttonBlueSmall", text:"FACEBOOK", x: 20, y: 406, xAlign:.center, yAlign:.center)
         self.addChild(self.buttonFacebook)
+        
+        self.buttonInvite = Button(textureName: "buttonBlueSmall", text:"INVITE", x: 20, y: 508, xAlign:.center, yAlign:.center)
+        self.addChild(self.buttonInvite)
         
         self.buttonDeleteSavedGame = Button(textureName: "buttonBlueSmall", text:"DELETE", x: 20, y: 202)
         self.addChild(self.buttonDeleteSavedGame)
@@ -192,6 +196,74 @@ class OptionsScene: GameScene {
                         return
                     }
                     
+                    
+                    
+                    if (self.buttonInvite.containsPoint(location)) {
+
+                        var idFriendArray = NSMutableArray()
+                        
+                        let params = ["fields": "name" ]
+                        
+                        var request: FBSDKGraphRequest = FBSDKGraphRequest.init(graphPath: "me/invitable_friends", parameters: params, HTTPMethod: "GET")
+                        
+                        request.startWithCompletionHandler({ (FBSDKGraphRequestConnection, result, error) -> Void in
+                            print(result)
+                            
+                            var friendArray = result.objectForKey("data") as! Array<NSDictionary>
+                            
+                            for item in friendArray
+                            {
+                                if let idFriend = item.objectForKey("id"){
+                                    idFriendArray.addObject(idFriend)
+                                }
+                            }
+                            print(idFriendArray.description)
+                            
+                            
+                            var gameRequestContent : FBSDKGameRequestContent = FBSDKGameRequestContent()
+                            gameRequestContent.message = "Venha jogar este divertido jogo comigo e ganhar muitos diamantes"
+                            gameRequestContent.title = "TowerUP"
+                            gameRequestContent.recipients = idFriendArray as [AnyObject]
+                            gameRequestContent.actionType = FBSDKGameRequestActionType.Turn
+                            
+                            var dialog : FBSDKGameRequestDialog = FBSDKGameRequestDialog()
+                            dialog.frictionlessRequestsEnabled = true
+                            dialog.content = gameRequestContent
+                            dialog.delegate = self
+                            
+                            if dialog.canShow(){
+                                dialog.show()
+                            }
+                            
+                        })
+                        
+                        
+                        
+//                        NSArray *friendArray = [result objectForKey:@"data"];
+//                        
+//                        for (NSDictionary* friendDict in friendArray) {
+//                            
+//                            FContact* contact = [[FContact alloc] initWithFaceBookID:friendDict[@"id"] name:friendDict[@"name"] avatarURL:friendDict[@"picture"][@"data"][@"url"]];
+//                            contact.hasMyGameInstalled = !invitable;
+//                            [[FStorage sharedInstance].friends addObject:contact];
+//                        }
+  
+
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+
+                        
+
+                        
+                        return
+                    }
+                    
                     if (self.buttonBack.containsPoint(location)) {
                         self.nextState = .mainMenu
                         return
@@ -204,4 +276,26 @@ class OptionsScene: GameScene {
             }
         }
     }
+    
+
+    func gameRequestDialog(gameRequestDialog: FBSDKGameRequestDialog!, didCompleteWithResults results: [NSObject : AnyObject]!){
+        print("complete, result:")
+        
+    }
+    
+
+    func gameRequestDialog(gameRequestDialog: FBSDKGameRequestDialog!, didFailWithError error: NSError!){
+        print("fail")
+        print(error)
+    }
+    
+    /*!
+    @abstract Sent to the delegate when the game request dialog is cancelled.
+    @param gameRequestDialog The FBSDKGameRequestDialog that completed.
+    */
+    func gameRequestDialogDidCancel(gameRequestDialog: FBSDKGameRequestDialog!){
+        print("cancel")
+    }
+    
+
 }

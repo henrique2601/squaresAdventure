@@ -1441,6 +1441,7 @@
 				TargetAttributes = {
 					81BA81441A49DA1800E65899 = {
 						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = ER489438ZX;
 					};
 				};
 			};
@@ -1713,6 +1714,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1723,6 +1725,7 @@
 				"OTHER_SWIFT_FLAGS[arch=*]" = "-D DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = com.WTFGames.TowerUp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "TowerUp/TowerUp-Bridging-Header.h";
 			};
 			name = Debug;
@@ -1733,6 +1736,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1743,6 +1747,7 @@
 				"OTHER_SWIFT_FLAGS[arch=*]" = "-D RELEASE";
 				PRODUCT_BUNDLE_IDENTIFIER = com.WTFGames.TowerUp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "TowerUp/TowerUp-Bridging-Header.h";
 			};
 			name = Release;
