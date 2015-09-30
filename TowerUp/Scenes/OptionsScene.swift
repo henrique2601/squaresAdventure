@@ -10,7 +10,7 @@ import UIKit
 import SpriteKit
 import ParseFacebookUtilsV4
 
-class OptionsScene: GameScene, FBSDKAppInviteDialogDelegate {
+class OptionsScene: GameScene, FBSDKGameRequestDialogDelegate {
     enum states {
         case options
         case deleteSavedGame
@@ -196,40 +196,70 @@ class OptionsScene: GameScene, FBSDKAppInviteDialogDelegate {
                         return
                     }
                     
+                    
+                    
                     if (self.buttonInvite.containsPoint(location)) {
-//                        var inviteDialog:FBSDKAppInviteDialog = FBSDKAppInviteDialog()
-//                        if(inviteDialog.canShow()){
-//                            let appLinkUrl:NSURL = NSURL(string: "https://fb.me/601931573277977")!
-//                            let previewImageUrl:NSURL = NSURL(string: "https://fbcdn-sphotos-d-a.akamaihd.net/hphotos-ak-xpt1/v/t1.0-9/12027606_1658940167685627_297851193751101361_n.png?oh=1e4991f86119694a07ed4da60ae0e042&oe=569E186E&__gda__=1452084842_5aff9f25cd9da648d102d73e085be287")!
-//                            
-//                            var inviteContent = FBSDKAppInviteContent()
-//                            inviteContent.previewImageURL = previewImageUrl
-//                            inviteContent.appLinkURL = appLinkUrl
-//                            
-//                            inviteDialog.content = inviteContent
-//                            inviteDialog.delegate = self
-//                            inviteDialog.show()
-//                        }
+
+                        var idFriendArray = NSMutableArray()
                         
-                        
-                        
-//                        FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc]
-//                            initWithGraphPath:@"/me/invitable_friends"
-//                        parameters:params
-//                        HTTPMethod:@"GET"];
-//                        [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection,
-//                        id result,
-//                        NSError *error) {
-//                        // Handle the result
-//                        }];
-                        
-                        let params = ["fields": "name,picture" ]
+                        let params = ["fields": "name" ]
                         
                         var request: FBSDKGraphRequest = FBSDKGraphRequest.init(graphPath: "me/invitable_friends", parameters: params, HTTPMethod: "GET")
                         
                         request.startWithCompletionHandler({ (FBSDKGraphRequestConnection, result, error) -> Void in
                             print(result)
+                            
+                            var friendArray = result.objectForKey("data") as! Array<NSDictionary>
+                            
+                            for item in friendArray
+                            {
+                                if let idFriend = item.objectForKey("id"){
+                                    idFriendArray.addObject(idFriend)
+                                }
+                            }
+                            print(idFriendArray.description)
+                            
+                            
+                            var gameRequestContent : FBSDKGameRequestContent = FBSDKGameRequestContent()
+                            gameRequestContent.message = "Venha jogar este divertido jogo comigo e ganhar muitos diamantes"
+                            gameRequestContent.title = "TowerUP"
+                            gameRequestContent.recipients = idFriendArray as [AnyObject]
+                            gameRequestContent.actionType = FBSDKGameRequestActionType.Turn
+                            
+                            var dialog : FBSDKGameRequestDialog = FBSDKGameRequestDialog()
+                            dialog.frictionlessRequestsEnabled = true
+                            dialog.content = gameRequestContent
+                            dialog.delegate = self
+                            
+                            if dialog.canShow(){
+                                dialog.show()
+                            }
+                            
                         })
+                        
+                        
+                        
+//                        NSArray *friendArray = [result objectForKey:@"data"];
+//                        
+//                        for (NSDictionary* friendDict in friendArray) {
+//                            
+//                            FContact* contact = [[FContact alloc] initWithFaceBookID:friendDict[@"id"] name:friendDict[@"name"] avatarURL:friendDict[@"picture"][@"data"][@"url"]];
+//                            contact.hasMyGameInstalled = !invitable;
+//                            [[FStorage sharedInstance].friends addObject:contact];
+//                        }
+  
+
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+
+                        
+
                         
                         return
                     }
@@ -247,11 +277,25 @@ class OptionsScene: GameScene, FBSDKAppInviteDialogDelegate {
         }
     }
     
-    func appInviteDialog(appInviteDialog: FBSDKAppInviteDialog!, didCompleteWithResults results: [NSObject : AnyObject]!) {
-        print("Complete invite without error")
+
+    func gameRequestDialog(gameRequestDialog: FBSDKGameRequestDialog!, didCompleteWithResults results: [NSObject : AnyObject]!){
+        print("complete, result:")
+        
     }
     
-    func appInviteDialog(appInviteDialog: FBSDKAppInviteDialog!, didFailWithError error: NSError!) {
-        print("Error in invite \(error)")
+
+    func gameRequestDialog(gameRequestDialog: FBSDKGameRequestDialog!, didFailWithError error: NSError!){
+        print("fail")
+        print(error)
     }
+    
+    /*!
+    @abstract Sent to the delegate when the game request dialog is cancelled.
+    @param gameRequestDialog The FBSDKGameRequestDialog that completed.
+    */
+    func gameRequestDialogDidCancel(gameRequestDialog: FBSDKGameRequestDialog!){
+        print("cancel")
+    }
+    
+
 }
