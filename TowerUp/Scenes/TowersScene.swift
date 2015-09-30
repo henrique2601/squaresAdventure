@@ -46,8 +46,18 @@ class TowersScene: GameScene {
             if towerIndex < Towers.types.count {
                 let towerType = Towers.types[towerIndex]
                 let cell = SKSpriteNode(imageNamed: "towerBox")
-                let labelName = Label(text: "Tower " + (towerIndex + 1).description)
-                let labelProgress = Label(text: (tower.floors.count - 1).description + "/" + towerType.floorTypes.count.description, x: 0, y: 64)
+                let spriteNode = SKSpriteNode(imageNamed: "towerBoxBackground")
+                spriteNode.zPosition = cell.zPosition + CGFloat(1)
+                cell.addChild(spriteNode)
+                let labelName = Label(text: (towerIndex + 1).description, x: 0, y: -109)
+                
+                var stars = 0
+                for item in tower.floors as NSOrderedSet {
+                    let floor = item as! FloorData
+                    stars += floor.stars.integerValue
+                }
+                
+                let labelProgress = Label(text: (stars).description + "/" + (towerType.floorTypes.count * 3).description, x: 42, y: 48)
                 cell.addChild(labelName)
                 cell.addChild(labelProgress)
                 
