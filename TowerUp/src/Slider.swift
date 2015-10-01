@@ -19,10 +19,8 @@ class Slider: Control {
     
     var limit:Int = 0
     
-    func load(textureName: String, x: Int, y: Int, xAlign: Control.xAlignments, yAlign: Control.yAlignments) {
-        self.sketchPosition = CGPoint(x: x, y: y)
-        self.yAlign = yAlign
-        self.xAlign = xAlign
+    override init() {
+        super.init()
         self.zPosition = Config.HUDZPosition/2
         
         let sliderTexture = SKTexture(imageNamed: "sliderYellow")
@@ -38,6 +36,10 @@ class Slider: Control {
         self.limit = Int(self.calculateAccumulatedFrame().width/2)
         
         Slider.sliderList.insert(self)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func removeFromParent() {
