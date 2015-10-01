@@ -15,6 +15,7 @@ class FloorData: NSManagedObject {
 
     @NSManaged var stars: NSNumber
     
+    @NSManaged var gemAvailable: NSNumber
     @NSManaged var deaths: NSNumber
     @NSManaged var bonus: NSNumber
     @NSManaged var time: NSNumber

@@ -34,8 +34,7 @@ class AfterMissionBox: Box {
         
         var starsCount:Int = 0
         
-        let towerData = MemoryCard.sharedInstance.playerData.towers[MapManager.tower] as! TowerData
-        let floorData = towerData.floors[MapManager.floor] as! FloorData
+        let floorData = MemoryCard.sharedInstance.currentFloor()
         
         let minCoins = Towers.types[MapManager.tower].floorTypes[MapManager.floor].minCoins
         if(Int(bonus) >= minCoins) {
@@ -74,10 +73,6 @@ class AfterMissionBox: Box {
         self.addChild(self.labelTime)
         
         floorData.stars = NSNumber(integer: floorData.bonus.integerValue + floorData.deaths.integerValue + floorData.time.integerValue)
-        
-        print(floorData.bonus.integerValue)
-        print(floorData.deaths.integerValue)
-        print(floorData.time.integerValue)
         
         for(var i = 0; i <= starsCount; i++) {
             switch(i){

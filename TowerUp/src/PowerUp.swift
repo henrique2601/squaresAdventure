@@ -154,10 +154,10 @@ class PowerUp: Button {
                         if(powerUp.lastUse != -1) {// -1 significa que o PowerUp não pode ser ativado.
                             playerData.coins = NSNumber(integer: Int(playerData.coins) - powerUp.powerUpType.price)
                             if let scene = powerUp.scene as? MissionScene {
-                                scene.labelCoins.setText(MemoryCard.sharedInstance.playerData.coins.description)
+                                scene.boxCoins.labelCoins.setText(MemoryCard.sharedInstance.playerData.coins.description)
                             }
                             if let scene = powerUp.scene as? MultiplayerMissionScene {
-                                scene.labelCoins.setText(MemoryCard.sharedInstance.playerData.coins.description)
+                                scene.boxCoins.labelCoins.setText(MemoryCard.sharedInstance.playerData.coins.description)
                             }
                             PowerUp.updatePowerUpLabels()
                             powerUp.inUse = true

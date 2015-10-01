@@ -69,6 +69,9 @@ class Chunk: SKSpriteNode {
     }
     
     func loadGround(data: [AnyObject]) {
+        
+        let floorData = MemoryCard.sharedInstance.currentFloor()
+        
         var i = 0
         let tiles:NSMutableArray = NSMutableArray()
         for (var y = 0; y < Int(Chunk.sizeInTiles); y++) {
@@ -97,7 +100,14 @@ class Chunk: SKSpriteNode {
                             break
                             
                         case Tile.specialTiles.gem.rawValue:
-                            tile = Gem(type: "Blue", x: x, y: y)
+                            if(floorData.gemAvailable == true) {
+                                tile = Gem(type: "Blue", x: x, y: y)
+                            } else {
+                                tile = Gem(type: "Blue", x: x, y: y)
+                                let gem = tile as! Gem
+                                gem.bonus = 0
+                                gem.hidden = true
+                            }
                             break
                             
                         case Tile.specialTiles.spring.rawValue:

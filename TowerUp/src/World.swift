@@ -88,5 +88,6 @@ struct physicsCategory : OptionSetType {
     static var bomb: physicsCategory { return physicsCategory(1 << 8) }
     static var spring: physicsCategory { return physicsCategory(1 << 9) }
     static var boxCrate: physicsCategory { return physicsCategory(1 << 10) }
+    static var gem: physicsCategory { return physicsCategory(1 << 11) }
     
 }

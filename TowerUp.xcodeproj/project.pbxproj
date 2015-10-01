@@ -56,6 +56,7 @@
 		137D3DBB1BB48B21003202D9 /* ground 1 1 0 0 in Resources */ = {isa = PBXBuildFile; fileRef = 137D3DBA1BB48B21003202D9 /* ground 1 1 0 0 */; settings = {ASSET_TAGS = (); }; };
 		137D3DBD1BB48B36003202D9 /* visual 1 1 0 0 in Resources */ = {isa = PBXBuildFile; fileRef = 137D3DBC1BB48B36003202D9 /* visual 1 1 0 0 */; settings = {ASSET_TAGS = (); }; };
 		137DC5151BA1C3E300D58DED /* PowerUpSlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137DC5141BA1C3E300D58DED /* PowerUpSlot.swift */; };
+		137F8DF11BBC66DF00B1C304 /* BoxCoins.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137F8DF01BBC66DF00B1C304 /* BoxCoins.swift */; settings = {ASSET_TAGS = (); }; };
 		1383FD5E1B7A49730012DA45 /* MapManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1383FD5D1B7A49730012DA45 /* MapManager.swift */; };
 		1383FD601B7A4A920012DA45 /* Chunk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1383FD5F1B7A4A920012DA45 /* Chunk.swift */; };
 		1383FD621B7A4B420012DA45 /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1383FD611B7A4B420012DA45 /* Tile.swift */; };
@@ -178,6 +179,7 @@
 		137D3DBA1BB48B21003202D9 /* ground 1 1 0 0 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "ground 1 1 0 0"; sourceTree = "<group>"; };
 		137D3DBC1BB48B36003202D9 /* visual 1 1 0 0 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "visual 1 1 0 0"; sourceTree = "<group>"; };
 		137DC5141BA1C3E300D58DED /* PowerUpSlot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PowerUpSlot.swift; path = src/PowerUpSlot.swift; sourceTree = "<group>"; };
+		137F8DF01BBC66DF00B1C304 /* BoxCoins.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BoxCoins.swift; path = src/BoxCoins.swift; sourceTree = "<group>"; };
 		1383FD5D1B7A49730012DA45 /* MapManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapManager.swift; path = src/MapManager.swift; sourceTree = "<group>"; };
 		1383FD5F1B7A4A920012DA45 /* Chunk.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Chunk.swift; path = src/Chunk.swift; sourceTree = "<group>"; };
 		1383FD611B7A4B420012DA45 /* Tile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Tile.swift; path = src/Tile.swift; sourceTree = "<group>"; };
@@ -341,6 +343,7 @@
 				137D3DA61BB45658003202D9 /* VisualTile.swift */,
 				1323B1511B83554A00174777 /* WinTile.swift */,
 				13EBD7BD1B7A65E5005F1CA4 /* World.swift */,
+				137F8DF01BBC66DF00B1C304 /* BoxCoins.swift */,
 			);
 			name = src;
 			sourceTree = "<group>";
@@ -1536,6 +1539,7 @@
 				3A979C641BA0773C00A8E09F /* MPCManager.swift in Sources */,
 				1326AE8A1B85FD8800D4563B /* Event.swift in Sources */,
 				13D8316D1BA7415D00A95FEB /* MessageBox.swift in Sources */,
+				137F8DF11BBC66DF00B1C304 /* BoxCoins.swift in Sources */,
 				13FC80081B86404500865C72 /* MultiplayerMissionScene.swift in Sources */,
 				13BC7ED61BAAE883003D6CCD /* SocketEngineClient.swift in Sources */,
 				139A0E8A1B73D05900EDE944 /* MissionScene.swift in Sources */,

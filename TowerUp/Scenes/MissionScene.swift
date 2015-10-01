@@ -40,10 +40,10 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
     
     var playerData = MemoryCard.sharedInstance.playerData
     
-    var labelCoins:Label!
+    var boxCoins:BoxCoins!
     var collectedBonus = 0 {
         didSet {
-            self.labelCoins.setText(MemoryCard.sharedInstance.playerData.coins.description)
+            self.boxCoins.labelCoins.setText(MemoryCard.sharedInstance.playerData.coins.description)
             PowerUp.updatePowerUpLabels()
         }
     }
@@ -62,7 +62,9 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
         super.didMoveToView(view)
         self.backgroundColor = GameColors.blueSky
         
-        self.parallax = Parallax(imageNamed: "grassBackground")
+        
+        
+        self.parallax = Parallax(imageNamed: Towers.types[MapManager.tower].tileset + "Background")
         self.addChild(self.parallax)
         
         self.world = World(physicsWorld: self.physicsWorld)
@@ -99,9 +101,7 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
             break
         }
         
-        let boxCoins = Control(name: "boxCoins", textureName: "boxCoins", x: 1058, y: 20, xAlign: .right, yAlign: .up)
-        self.labelCoins = Label(text: self.playerData.coins.description, x: 160, y: 39)
-        boxCoins.addChild(self.labelCoins)
+        self.boxCoins = BoxCoins()
         self.addChild(boxCoins)
         
         if(self.playerData.powerUps.count > 0) {

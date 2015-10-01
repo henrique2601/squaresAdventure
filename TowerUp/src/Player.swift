@@ -102,6 +102,7 @@ class Player: Square {
         self.physicsBody!.contactTestBitMask =
             physicsCategory.winTile.rawValue |
             physicsCategory.coin.rawValue |
+            physicsCategory.gem.rawValue |
             physicsCategory.spike.rawValue |
             physicsCategory.bomb.rawValue |
             physicsCategory.spring.rawValue |
@@ -123,6 +124,27 @@ class Player: Square {
         switch(physicsBody.categoryBitMask) {
             
         case physicsCategory.ground.rawValue:
+            break
+            
+        case physicsCategory.gem.rawValue:
+            if let node = physicsBody.node {
+                let gem = (node as! Gem)
+                if let scene = self.scene as? MissionScene {
+                    let playerData = MemoryCard.sharedInstance.playerData
+                    playerData.gems = NSNumber(integer: Int(playerData.gems) + gem.bonus)
+                    print("now i have \(playerData.gems.description ) gems =}")
+                    MemoryCard.sharedInstance.currentFloor().gemAvailable = false
+                    
+                    scene.boxCoins.labelGems.setText(playerData.gems.description)
+                } else {
+                    if let _ = self.scene as? MultiplayerMissionScene {
+                        let playerData = MemoryCard.sharedInstance.playerData
+                        playerData.gems = NSNumber(integer: Int(playerData.gems) + gem.bonus)
+                    }
+                }
+                gem.bonus = 0
+                gem.removeFromParent()
+            }
             break
             
         case physicsCategory.coin.rawValue:
