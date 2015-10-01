@@ -278,8 +278,10 @@ class Player: Square {
             if let physicsBody = self.physicsBody {
                 if(physicsBody.allContactedBodies().count > 0) {
                     for body in physicsBody.allContactedBodies() as NSArray {
-                        if(body.categoryBitMask == physicsCategory.ground.rawValue ||
-                            body.categoryBitMask == physicsCategory.boxCrate.rawValue) {
+                        if(
+                            body.categoryBitMask == physicsCategory.ground.rawValue ||
+                            body.categoryBitMask == physicsCategory.boxCrate.rawValue ||
+                            body.categoryBitMask == physicsCategory.player.rawValue) {
                             if (abs(self.physicsBody!.velocity.dy) < 200) {
                                 if(self.jump) {
                                     self.physicsBody?.velocity.dy = 900

@@ -116,7 +116,7 @@ class BeforeMissionScene: GameScene {
                         
                         let spriteNodeSkin = SKSpriteNode(imageNamed: skinType.imageName)
                         spriteNodeSkin.color = GameColors.black
-                        spriteNodeSkin.colorBlendFactor = 0.9
+                        
                         cell.addChild(spriteNodeSkin)
                         spriteNodeSkin.zPosition = 1
                         
@@ -124,9 +124,23 @@ class BeforeMissionScene: GameScene {
                         cell.addChild(spriteNodeBox)
                         spriteNodeBox.zPosition = 2
                         
+                        
+                        var spriteNodeIcon:SKSpriteNode!
+                        if (skinType.buyWithCoins == true) {
+                            spriteNodeIcon = SKSpriteNode(imageNamed: "hudCoin")
+                            spriteNodeSkin.colorBlendFactor = 0.9
+                        } else {
+                            spriteNodeIcon = SKSpriteNode(imageNamed: "hudJewel_blue")
+                            spriteNodeSkin.colorBlendFactor = 0.5
+                        }
+                        
+                        spriteNodeIcon.position = CGPoint(x: -32, y: -32)
+                        cell.addChild(spriteNodeIcon)
+                        spriteNodeIcon.zPosition = 3
+                        
                         cell.addChild(Label(color:GameColors.white, text: "?", x: 0, y: 0))
                         
-                        cell.addChild(Label(color:GameColors.white, text: skinType.price.description, x: 0, y: 100))
+                        cell.addChild(Label(color:GameColors.white, text: skinType.price.description, x: 64, y: 64))
                         
                         skinsArray.append(cell)
                     }
@@ -267,17 +281,34 @@ class BeforeMissionScene: GameScene {
                                             return
                                         }
                                         let skinType = Skins.types[cellIndex]
-                                        if(Int(self.playerData.coins) >= skinType.price) {
-                                            let skinData = MemoryCard.sharedInstance.newSkinData()
-                                            skinData.index = NSNumber(integer: Int(skin.name!)!)
-                                            self.playerData.addSkin(skinData)
-                                            self.playerData.skinSlot.skin = skinData
-                                            self.playerData.coins = NSNumber(integer: Int(self.playerData.coins) - skinType.price)
-                                            self.boxCoins.labelCoins.setText(self.playerData.coins.description)
-                                            self.nextState = states.beforeMission
+                                        
+                                        if (skinType.buyWithCoins == true) {
+                                            if(Int(self.playerData.coins) >= skinType.price) {
+                                                let skinData = MemoryCard.sharedInstance.newSkinData()
+                                                skinData.index = NSNumber(integer: Int(skin.name!)!)
+                                                self.playerData.addSkin(skinData)
+                                                self.playerData.skinSlot.skin = skinData
+                                                self.playerData.coins = NSNumber(integer: Int(self.playerData.coins) - skinType.price)
+                                                self.boxCoins.labelCoins.setText(self.playerData.coins.description)
+                                                self.nextState = states.beforeMission
+                                            } else {
+                                                //TODO: assistir video para ganhar mais moedas???
+                                                print("Não tenho dinheiro para comprar")
+                                            }
                                         } else {
-                                            //TODO: assistir video para ganhar mais moedas???
-                                            print("Não tenho dinheiro para comprar")
+                                            //Tentando comprar com gemas
+                                            if(Int(self.playerData.gems) >= skinType.price) {
+                                                let skinData = MemoryCard.sharedInstance.newSkinData()
+                                                skinData.index = NSNumber(integer: Int(skin.name!)!)
+                                                self.playerData.addSkin(skinData)
+                                                self.playerData.skinSlot.skin = skinData
+                                                self.playerData.gems = NSNumber(integer: Int(self.playerData.gems) - skinType.price)
+                                                self.boxCoins.labelGems.setText(self.playerData.gems.description)
+                                                self.nextState = states.beforeMission
+                                            } else {
+                                                //TODO: assistir video para ganhar mais gemas???
+                                                print("Não tenho gemas para comprar")
+                                            }
                                         }
                                     } else {
                                         for skinData in self.playerData.skins as! Set<SkinData> {
