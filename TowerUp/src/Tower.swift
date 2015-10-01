@@ -26,7 +26,7 @@ class Towers: NSObject {
             FloorType(maxDeathCount: 7, maxTime: 40, minCoins: 70)
             ])),
         
-        TowerType(tileset:"grass", floorTypes: Array<FloorType>([
+        TowerType(tileset:"sand", floorTypes: Array<FloorType>([
             FloorType(maxDeathCount: 8, maxTime: 45, minCoins: 80),
             FloorType(maxDeathCount: 9, maxTime: 50, minCoins: 90)
             ]))

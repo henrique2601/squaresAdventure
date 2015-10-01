@@ -14,6 +14,7 @@ import CoreData
 class PlayerData: NSManagedObject {
     
     @NSManaged var coins: NSNumber
+    @NSManaged var gems: NSNumber
     @NSManaged var configControls: NSNumber
     @NSManaged var name: String
     @NSManaged var powerUpSlots: NSOrderedSet

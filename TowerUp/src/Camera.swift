@@ -21,11 +21,9 @@ class GameCamera: SKNode {
          self.maxX = Chunk.sizeInPoints * CGFloat(Chunk.maxChunkX)
          self.maxY = Chunk.sizeInPoints * CGFloat(Chunk.maxChunkY)
         
-        self.position = CGPoint(x: newPosition.x - self.scene!.size.width/2 , y: newPosition.y + self.scene!.size.height/2)
-        
         //certo
         if(position.x < -Tile.sizeInPoints/2 ){
-            position.x = -Tile.sizeInPoints/2
+            position.x =  -Tile.sizeInPoints/2
         }
         
         //certo
@@ -34,7 +32,7 @@ class GameCamera: SKNode {
         }
         //certo
         
-        if(position.y > Chunk.sizeInPoints - Tile.sizeInPoints / 2 + self.maxY){
+        if(position.y > Chunk.sizeInPoints - Tile.sizeInPoints / 2 + self.maxY) {
             position.y = Chunk.sizeInPoints - Tile.sizeInPoints / 2 + self.maxY
         }
         
@@ -52,7 +50,9 @@ public extension SKScene {
     {
         if let parent = node.parent {
             let cameraPositionInScene:CGPoint = node.scene!.convertPoint(node.position, fromNode: parent)
-            parent.position = CGPoint(x: parent.position.x - cameraPositionInScene.x, y: parent.position.y - cameraPositionInScene.y)
+            parent.position = CGPoint(
+                x: CGFloat(Int(parent.position.x - cameraPositionInScene.x)),
+                y: CGFloat(Int(parent.position.y - cameraPositionInScene.y)))
         }
     }
 }

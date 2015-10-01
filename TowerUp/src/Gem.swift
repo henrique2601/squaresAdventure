@@ -16,13 +16,13 @@ class Gem: Coin {
         
         self.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: 32, height: 32))
         
-        self.physicsBody!.categoryBitMask = physicsCategory.coin.rawValue
+        self.physicsBody!.categoryBitMask = physicsCategory.gem.rawValue
         self.physicsBody!.contactTestBitMask = physicsCategory.none.rawValue
-        self.physicsBody!.collisionBitMask = physicsCategory.ground.rawValue | physicsCategory.coin.rawValue
+        self.physicsBody!.collisionBitMask = physicsCategory.ground.rawValue | physicsCategory.gem.rawValue
         
         self.physicsBody!.dynamic = false
         
-        self.bonus = 1000
+        self.bonus = 1
         
         Coin.coinList.addObject(self)
     }

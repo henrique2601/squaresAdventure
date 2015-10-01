@@ -59,10 +59,10 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
     //let socket = SocketIOClient(socketURL: "179.232.86.110:3001", opts: nil)
     let socket = SocketIOClient(socketURL: "181.41.197.181:3001", opts: nil)
     
-    var labelCoins:Label!
+    var boxCoins:BoxCoins!
     var collectedBonus = 0 {
         didSet {
-            self.labelCoins.setText(MemoryCard.sharedInstance.playerData.coins.description)
+            self.boxCoins.labelCoins.setText(MemoryCard.sharedInstance.playerData.coins.description)
             PowerUp.updatePowerUpLabels()
         }
     }
@@ -115,10 +115,8 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
             break
         }
         
-        let boxCoins = Control(textureName: "boxCoins", x: 1058, y: 20, xAlign: .right, yAlign: .up)
-        self.labelCoins = Label(text: self.playerData.coins.description, x: 160, y: 39)
-        boxCoins.addChild(self.labelCoins)
-        self.addChild(boxCoins)
+        self.boxCoins = BoxCoins()
+        self.addChild(self.boxCoins)
         
         if(self.playerData.powerUps.count > 0) {
             var powerUpsArray = Array<SKNode>()

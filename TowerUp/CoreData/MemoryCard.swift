@@ -28,6 +28,15 @@ class MemoryCard: NSObject {
         self.loadGame()
     }
     
+    func currentTower() -> TowerData {
+        return MemoryCard.sharedInstance.playerData.towers[MapManager.tower] as! TowerData
+    }
+    
+    func currentFloor() -> FloorData {
+        let towerData = MemoryCard.sharedInstance.playerData.towers[MapManager.tower] as! TowerData
+        return towerData.floors[MapManager.floor] as! FloorData
+    }
+    
     func newGame() {
         print("Creating new game...")
         
@@ -209,6 +218,7 @@ class MemoryCard: NSObject {
         floorData.bonus = NSNumber(bool: false)
         floorData.deaths = NSNumber(bool: false)
         floorData.time = NSNumber(bool: false)
+        floorData.gemAvailable = NSNumber(bool: true)
         return floorData
     }
     

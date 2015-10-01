@@ -24,6 +24,8 @@ class BeforeMissionScene: GameScene {
     
     var playerData = MemoryCard.sharedInstance.playerData
     
+    var boxCoins:BoxCoins!
+    
     var player:Player!
     var powerUpSlotsScrollNode:ScrollNode!
     
@@ -32,8 +34,6 @@ class BeforeMissionScene: GameScene {
     
     var mySkins = NSMutableArray()//Skins Desbloqueadas/Compradas
     //var myPowerUps = NSMutableArray()//PowerUps Desbloqueados/Comprados
-    
-    var labelCoins:Label!
     
     var buttonPlay:Button!
     var buttonBack:Button!
@@ -62,9 +62,7 @@ class BeforeMissionScene: GameScene {
         self.buttonBack = Button(textureName: "buttonGraySquareSmall", text:"<", x: 20, y: 652, xAlign:.left, yAlign:.down)
         self.addChild(self.buttonBack)
         
-        let boxCoins = Control(textureName: "boxCoins", x: 1058, y: 20, xAlign: .right, yAlign: .up)
-        self.labelCoins = Label(text: self.playerData.coins.description, x: 160, y: 39)
-        boxCoins.addChild(self.labelCoins)
+        self.boxCoins = BoxCoins()
         self.addChild(boxCoins)
     }
     
@@ -118,7 +116,7 @@ class BeforeMissionScene: GameScene {
                         
                         let spriteNodeSkin = SKSpriteNode(imageNamed: skinType.imageName)
                         spriteNodeSkin.color = GameColors.black
-                        spriteNodeSkin.colorBlendFactor = 1
+                        spriteNodeSkin.colorBlendFactor = 0.9
                         cell.addChild(spriteNodeSkin)
                         spriteNodeSkin.zPosition = 1
                         
@@ -275,7 +273,7 @@ class BeforeMissionScene: GameScene {
                                             self.playerData.addSkin(skinData)
                                             self.playerData.skinSlot.skin = skinData
                                             self.playerData.coins = NSNumber(integer: Int(self.playerData.coins) - skinType.price)
-                                            self.labelCoins.setText(self.playerData.coins.description)
+                                            self.boxCoins.labelCoins.setText(self.playerData.coins.description)
                                             self.nextState = states.beforeMission
                                         } else {
                                             //TODO: assistir video para ganhar mais moedas???

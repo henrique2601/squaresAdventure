@@ -33,8 +33,7 @@ class TowersScene: GameScene {
         self.backgroundColor = GameColors.blue
         self.addChild(Control(textureName: "mainMenuBackground", xAlign: .center, yAlign: .center))
         
-        self.boxCoins = Control(name: "boxCoins", textureName: "boxCoins", x: 1058, y: 20, xAlign: .right, yAlign: .up)
-        self.boxCoins.addChild(Label(text: self.playerData.coins.description, x: 160, y: 39))
+        self.boxCoins = BoxCoins()
         self.addChild(self.boxCoins)
         
         var towersArray = Array<SKSpriteNode>()
