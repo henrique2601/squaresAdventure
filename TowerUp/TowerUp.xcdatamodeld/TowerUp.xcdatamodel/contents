@@ -53,12 +53,12 @@
     <fetchRequest name="FetchRequest" entity="PlayerData"/>
     <elements>
         <element name="FloorData" positionX="-29" positionY="-147" width="128" height="135"/>
-        <element name="PlayerData" positionX="394" positionY="-486" width="128" height="180"/>
+        <element name="InvitedFriendData" positionX="126" positionY="-477" width="128" height="73"/>
+        <element name="PlayerData" positionX="394" positionY="-486" width="128" height="195"/>
         <element name="PowerUpData" positionX="711" positionY="-390" width="128" height="118"/>
         <element name="PowerUpSlotData" positionX="126" positionY="-378" width="128" height="73"/>
         <element name="SkinData" positionX="412" positionY="-126" width="128" height="118"/>
         <element name="SkinSlotData" positionX="682" positionY="-204" width="128" height="73"/>
         <element name="TowerData" positionX="198" positionY="-270" width="128" height="75"/>
-        <element name="InvitedFriendData" positionX="126" positionY="-477" width="128" height="73"/>
     </elements>
 </model>
