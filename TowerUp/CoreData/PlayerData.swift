@@ -22,6 +22,7 @@ class PlayerData: NSManagedObject {
     @NSManaged var powerUps: NSSet
     @NSManaged var skins: NSSet
     @NSManaged var towers: NSOrderedSet
+    @NSManaged var invitedFriends: NSSet
 }
 
 extension PlayerData{
@@ -38,6 +39,11 @@ extension PlayerData{
     
     func addTower(value: TowerData) {
         let items = self.mutableOrderedSetValueForKey("towers");
+        items.addObject(value)
+    }
+    
+    func addInvitedFriend(value: InvitedFriendData) {
+        let items = self.mutableSetValueForKey("invitedFriends");
         items.addObject(value)
     }
 }

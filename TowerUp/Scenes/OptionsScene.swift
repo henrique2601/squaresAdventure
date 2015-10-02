@@ -28,17 +28,20 @@ class OptionsScene: GameScene, FBSDKGameRequestDialogDelegate {
     var buttonDeleteSavedGame:Button!
     var buttonChooseControls:Button!
     var buttonBack:Button!
-    var buttonFacebook:Button!
     var buttonInvite:Button!
+    
+    var playerData = MemoryCard.sharedInstance.playerData
+    
+    //facebook Request
+    var after:String = ""
+    var idFriendArray = NSMutableArray()
+    var blockedArray = NSMutableArray()
     
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
         self.backgroundColor = GameColors.blue
         
-        self.buttonFacebook = Button(textureName: "buttonBlueSmall", text:"FACEBOOK", x: 20, y: 406, xAlign:.center, yAlign:.center)
-        self.addChild(self.buttonFacebook)
-        
-        self.buttonInvite = Button(textureName: "buttonBlueSmall", text:"INVITE", x: 20, y: 508, xAlign:.center, yAlign:.center)
+        self.buttonInvite = Button(textureName: "buttonBlueSmall", text:"INVITE", x: 20, y: 406, xAlign:.center, yAlign:.center)
         self.addChild(self.buttonInvite)
         
         self.buttonDeleteSavedGame = Button(textureName: "buttonBlueSmall", text:"DELETE", x: 20, y: 202)
@@ -178,88 +181,9 @@ class OptionsScene: GameScene, FBSDKGameRequestDialogDelegate {
                         self.nextState = .chooseControls
                         return
                     }
-                    
-                    if (self.buttonFacebook.containsPoint(location)) {
-                        var permissions = [ "public_profile", "email", "user_friends" ]
-                        
-                        PFFacebookUtils.logInInBackgroundWithReadPermissions(permissions,  block: {  (user: PFUser?, error: NSError?) -> Void in
-                            if let user = user {
-                                if user.isNew {
-                                    print("User signed up and logged in through Facebook!")
-                                } else {
-                                    print("User logged in through Facebook!")
-                                }
-                            } else {
-                                print("Uh oh. The user cancelled the Facebook login.")
-                            }
-                        })
-                        return
-                    }
-                    
-                    
-                    
+
                     if (self.buttonInvite.containsPoint(location)) {
-
-                        var idFriendArray = NSMutableArray()
-                        
-                        let params = ["fields": "name" ]
-                        
-                        var request: FBSDKGraphRequest = FBSDKGraphRequest.init(graphPath: "me/invitable_friends", parameters: params, HTTPMethod: "GET")
-                        
-                        request.startWithCompletionHandler({ (FBSDKGraphRequestConnection, result, error) -> Void in
-                            print(result)
-                            
-                            var friendArray = result.objectForKey("data") as! Array<NSDictionary>
-                            
-                            for item in friendArray
-                            {
-                                if let idFriend = item.objectForKey("id"){
-                                    idFriendArray.addObject(idFriend)
-                                }
-                            }
-                            print(idFriendArray.description)
-                            
-                            
-                            var gameRequestContent : FBSDKGameRequestContent = FBSDKGameRequestContent()
-                            gameRequestContent.message = "Venha jogar este divertido jogo comigo e ganhar muitos diamantes"
-                            gameRequestContent.title = "TowerUP"
-                            gameRequestContent.recipients = idFriendArray as [AnyObject]
-                            gameRequestContent.actionType = FBSDKGameRequestActionType.Turn
-                            
-                            var dialog : FBSDKGameRequestDialog = FBSDKGameRequestDialog()
-                            dialog.frictionlessRequestsEnabled = true
-                            dialog.content = gameRequestContent
-                            dialog.delegate = self
-                            
-                            if dialog.canShow(){
-                                dialog.show()
-                            }
-                            
-                        })
-                        
-                        
-                        
-//                        NSArray *friendArray = [result objectForKey:@"data"];
-//                        
-//                        for (NSDictionary* friendDict in friendArray) {
-//                            
-//                            FContact* contact = [[FContact alloc] initWithFaceBookID:friendDict[@"id"] name:friendDict[@"name"] avatarURL:friendDict[@"picture"][@"data"][@"url"]];
-//                            contact.hasMyGameInstalled = !invitable;
-//                            [[FStorage sharedInstance].friends addObject:contact];
-//                        }
-  
-
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-
-                        
-
+                        self.inviteFriends(nil, limit: 50)
                         
                         return
                     }
@@ -295,7 +219,219 @@ class OptionsScene: GameScene, FBSDKGameRequestDialogDelegate {
     */
     func gameRequestDialogDidCancel(gameRequestDialog: FBSDKGameRequestDialog!){
         print("cancel")
+        
+//        if (self.idFriendArray.count == 50 || after == "end"){
+//        
+//            for value in self.idFriendArray
+//            {
+//                self.playerData.addInvitedFriend(MemoryCard.sharedInstance.newInvitedFriend(value as! String))
+//            }
+//            
+            self.idFriendArray.removeAllObjects()
+//            
+//        }
+//        
+//        else {
+//            
+//            if (after != ""){
+//                //print(self.after)
+//                self.inviteFriends(self.after, limit: 50 - self.idFriendArray.count)
+//            }
+        
+//        }
+        
+        
+        
+        
+    }
+    
+    func inviteFriends(nextCursor : String? , limit: Int){
+        
+        
+        var params: NSMutableDictionary = ["fields": "name" ]
+        
+        if nextCursor != nil {
+            params.setObject(nextCursor!, forKey: "after")
+        }
+        
+        
+        for friend in self.playerData.invitedFriends as! Set<InvitedFriendData> {
+        
+            self.blockedArray.addObject(friend.id)
+        }
+        
+        
+//        if (self.blockedArray.count > 0 ) {
+//           //params.setObject(blockedArray, forKey: "excluded_ids")
+//        }
+        
+        
+        
+        
+        let request: FBSDKGraphRequest = FBSDKGraphRequest.init(graphPath: "me/invitable_friends?limit=\(limit)", parameters: params as [NSObject : AnyObject], HTTPMethod: "GET")
+        
+        request.startWithCompletionHandler({ (FBSDKGraphRequestConnection, result, error) -> Void in
+            
+            if (result != nil && error == nil){
+                
+                //print (result)
+                let resultdict = result as! NSDictionary
+                let friendArray = result.objectForKey("data") as! Array<NSDictionary>
+                
+//                for invitedFriendData in self.playerData.invitedFriends as! Set<InvitedFriendData> {
+//                    print(invitedFriendData.id)
+//                }
+                
+                
+                for item in friendArray
+                {
+                    var needInvite = true
+                    for invitedFriendData in self.playerData.invitedFriends as! Set<InvitedFriendData> {
+                        //print(invitedFriendData.id)
+                        if invitedFriendData.id == item.objectForKey("name") as! String {
+                            needInvite = false
+                            break
+                        }
+                    }
+                    
+                    if(needInvite) {
+                        if let idFriend = item.objectForKey("id"){
+                            self.idFriendArray.addObject(idFriend)
+                            //print(item.objectForKey("name") as! String + " adcionado")
+                            self.playerData.addInvitedFriend(MemoryCard.sharedInstance.newInvitedFriend(item.objectForKey("name") as! String))
+                        }
+                    }
+                }
+                
+                print(self.idFriendArray.count.description + "amigos")
+                
+                
+                if let test = ((resultdict.objectForKey("paging") as? NSDictionary)?.objectForKey("cursors") as? NSDictionary)?.objectForKey("after") as? String {
+                    self.after = test
+                }
+                
+                if let test2 = ((resultdict.objectForKey("paging") as? NSDictionary)?.objectForKey("next") as? String){
+                    
+                }
+                    
+                    
+                else {
+                    self.after = "end"
+                    print("fim")
+                }
+                
+                if (self.idFriendArray.count == 50 || self.after == "end" ){
+                    
+                    if (self.idFriendArray.count > 0){
+                        //print(idFriendArray.description)
+                        
+                        
+                        var gameRequestContent : FBSDKGameRequestContent = FBSDKGameRequestContent()
+                        gameRequestContent.message = "Venha jogar este divertido jogo comigo e ganhar muitos diamantes"
+                        gameRequestContent.title = "TowerUP"
+                        gameRequestContent.recipients = self.idFriendArray as [AnyObject]
+                        gameRequestContent.actionType = FBSDKGameRequestActionType.Turn
+                        
+                        
+                        var dialog : FBSDKGameRequestDialog = FBSDKGameRequestDialog()
+                        dialog.frictionlessRequestsEnabled = true
+                        dialog.content = gameRequestContent
+                        dialog.delegate = self
+                        
+                        if dialog.canShow(){
+                            dialog.show()
+                        }
+                    }
+                    
+                    else {
+                        print("assistir video")
+                        //assitir video aqui
+                    }
+                    
+
+                    
+                }
+                
+                else {
+                    
+                    
+                    self.inviteFriends(self.after, limit: 50 - self.idFriendArray.count)
+                    
+                }
+                
+            } else if (result == nil){
+                self.loginFromInvite()
+            }
+            
+        })
+    }
+    
+    
+    func loginFromInvite()
+    {
+        var permissions = [ "public_profile", "email", "user_friends" ]
+        
+        PFFacebookUtils.logInInBackgroundWithReadPermissions(permissions,  block: {  (user: PFUser?, error: NSError?) -> Void in
+            if let user = user {
+                if user.isNew {
+                    print("User signed up and logged in through Facebook!")
+                } else {
+                    print("User logged in through Facebook!")
+                }
+                
+                self.inviteFriends(nil, limit: 50)
+                
+            } else {
+                print("Uh oh. The user cancelled the Facebook login.")
+            }
+        })
+        return
     }
     
 
 }
+
+
+//func getFBTaggableFriends(nextCursor : String?, failureHandler: (error: NSError) -> Void) {
+//    var qry : String = "me/taggable_friends"
+//    var parameters = Dictionary<String, String>() as? Dictionary
+//    if nextCursor == nil {
+//        parameters = nil
+//    } else {
+//        parameters!["after"] = nextCursor
+//    }
+//    // Facebook: get taggable friends with pictures
+//    var request = FBSDKGraphRequest(graphPath: qry, parameters: parameters)
+//    request.startWithCompletionHandler { (connection : FBSDKGraphRequestConnection!, result : AnyObject!, error : NSError!) -> Void in
+//        if ((error) != nil)
+//        {
+//            // Process error
+//            print("Error: \(error)")
+//        }
+//        else
+//        {
+//            //println("fetched user: \(result)")
+//            var resultdict = result as! NSDictionary
+//            var data : NSArray = resultdict.objectForKey("data") as! NSArray
+//            
+//            for i in 0..<data.count {
+//                let valueDict : NSDictionary = data[i] as! NSDictionary
+//                let id = valueDict.objectForKey("id") as! String
+//                let name = valueDict.objectForKey("name") as! String
+//                let pictureDict = valueDict.objectForKey("picture") as! NSDictionary
+//                let pictureData = pictureDict.objectForKey("data") as! NSDictionary
+//                let pictureURL = pictureData.objectForKey("url") as! String
+//                print("Name: \(name)")
+//                //println("ID: \(id)")
+//                //println("URL: \(pictureURL)")
+//            }
+//            if let after = ((resultdict.objectForKey("paging") as? NSDictionary)?.objectForKey("cursors") as? NSDictionary)?.objectForKey("after") as? String {
+//                self.getFBTaggableFriends(after, failureHandler: {(error) in
+//                    println("error")})
+//            } else {
+//                print("Can't read next!!!")
+//            }
+//        }
+//    }
+
+//}

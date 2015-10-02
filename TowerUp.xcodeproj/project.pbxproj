@@ -111,6 +111,7 @@
 		3A979C641BA0773C00A8E09F /* MPCManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A979C631BA0773C00A8E09F /* MPCManager.swift */; };
 		3A979C661BA0780100A8E09F /* LocalGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A979C651BA0780100A8E09F /* LocalGameScene.swift */; };
 		3A979C681BA1BB9500A8E09F /* LocalLobbyScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A979C671BA1BB9500A8E09F /* LocalLobbyScene.swift */; };
+		3AF2530E1BBD6E8D0089BF7A /* InvitedFriendData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF2530C1BBD6E8D0089BF7A /* InvitedFriendData.swift */; settings = {ASSET_TAGS = (); }; };
 		5C48055E1B84CFF60066E151 /* DoorTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C48055D1B84CFF60066E151 /* DoorTile.swift */; };
 		5CF8A3A61B8F39A000C16CA9 /* PowerUpData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF8A3A51B8F39A000C16CA9 /* PowerUpData.swift */; };
 		5CF8A3A81B8F39A000C16CA9 /* FloorData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF8A3A71B8F39A000C16CA9 /* FloorData.swift */; };
@@ -235,6 +236,7 @@
 		3A979C651BA0780100A8E09F /* LocalGameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalGameScene.swift; sourceTree = "<group>"; };
 		3A979C671BA1BB9500A8E09F /* LocalLobbyScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocalLobbyScene.swift; path = Scenes/LocalLobbyScene.swift; sourceTree = "<group>"; };
 		3AF2530A1BBAB13E0089BF7A /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		3AF2530C1BBD6E8D0089BF7A /* InvitedFriendData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InvitedFriendData.swift; path = CoreData/InvitedFriendData.swift; sourceTree = "<group>"; };
 		5C48055D1B84CFF60066E151 /* DoorTile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoorTile.swift; sourceTree = "<group>"; };
 		5CF8A3A51B8F39A000C16CA9 /* PowerUpData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PowerUpData.swift; path = CoreData/PowerUpData.swift; sourceTree = "<group>"; };
 		5CF8A3A71B8F39A000C16CA9 /* FloorData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FloorData.swift; path = CoreData/FloorData.swift; sourceTree = "<group>"; };
@@ -386,6 +388,7 @@
 		139A0E8D1B74319000EDE944 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				3AF2530C1BBD6E8D0089BF7A /* InvitedFriendData.swift */,
 				5CF8A3A71B8F39A000C16CA9 /* FloorData.swift */,
 				139A0E8E1B7431CB00EDE944 /* MemoryCard.swift */,
 				135C5CA11BA8310A006643BB /* PlayerData.swift */,
@@ -1560,6 +1563,7 @@
 				139A0E881B73D00200EDE944 /* BeforeMissionScene.swift in Sources */,
 				1326AE881B85FCA300D4563B /* Box.swift in Sources */,
 				1359DD101B7287A7006C12FA /* Button.swift in Sources */,
+				3AF2530E1BBD6E8D0089BF7A /* InvitedFriendData.swift in Sources */,
 				13FC800A1B8640B800865C72 /* PlayerOnline.swift in Sources */,
 				137D3DA71BB45658003202D9 /* VisualTile.swift in Sources */,
 				132FB8681B828FF80012A7D3 /* Parallax.swift in Sources */,
@@ -1717,7 +1721,6 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1728,7 +1731,6 @@
 				"OTHER_SWIFT_FLAGS[arch=*]" = "-D DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = com.WTFGames.TowerUp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "TowerUp/TowerUp-Bridging-Header.h";
 			};
 			name = Debug;
@@ -1739,7 +1741,6 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1750,7 +1751,6 @@
 				"OTHER_SWIFT_FLAGS[arch=*]" = "-D RELEASE";
 				PRODUCT_BUNDLE_IDENTIFIER = com.WTFGames.TowerUp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "TowerUp/TowerUp-Bridging-Header.h";
 			};
 			name = Release;

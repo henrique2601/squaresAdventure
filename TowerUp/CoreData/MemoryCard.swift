@@ -79,6 +79,9 @@ class MemoryCard: NSObject {
         self.playerData.skinSlot = self.newSkinSlotData()
         self.playerData.skinSlot.skin = skin
         
+        
+
+        
         self.autoSave = true
         
         self.saveGame()
@@ -236,6 +239,12 @@ class MemoryCard: NSObject {
     
     func newPowerUpSlotData() -> PowerUpSlotData {
         return NSEntityDescription.insertNewObjectForEntityForName("PowerUpSlotData", inManagedObjectContext: self.managedObjectContext!) as! PowerUpSlotData
+    }
+    
+    func newInvitedFriend(id:String) -> InvitedFriendData {
+        let invitedFriendData = NSEntityDescription.insertNewObjectForEntityForName("InvitedFriendData", inManagedObjectContext: self.managedObjectContext!) as! InvitedFriendData
+        invitedFriendData.id = id
+        return invitedFriendData
     }
 }
 
