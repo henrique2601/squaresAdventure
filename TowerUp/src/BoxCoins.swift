@@ -26,7 +26,7 @@ class BoxCoins: Control {
         self.addChild(self.labelCoins)
         self.addChild(self.labelGems)
         
-        self.zPosition = Config.HUDZPosition * CGFloat(2)
+        self.zPosition = Config.HUDZPosition 
     }
 
     required init?(coder aDecoder: NSCoder) {

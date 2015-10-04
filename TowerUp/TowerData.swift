@@ -12,7 +12,8 @@ import CoreData
 @objc(TowerData)
 
 class TowerData: NSManagedObject {
-
+    
+    @NSManaged var lastPlayedFloor:NSNumber
     @NSManaged var floors: NSOrderedSet
     @NSManaged var playerData: PlayerData
 

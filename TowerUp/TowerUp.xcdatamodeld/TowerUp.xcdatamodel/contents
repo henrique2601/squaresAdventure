@@ -16,6 +16,7 @@
         <attribute name="coins" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="configControls" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="gems" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="lastPlayedTower" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="invitedFriends" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="InvitedFriendData" inverseName="playerData" inverseEntity="InvitedFriendData" syncable="YES"/>
         <relationship name="powerUps" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PowerUpData" inverseName="playerData" inverseEntity="PowerUpData" syncable="YES"/>
@@ -47,6 +48,7 @@
         <relationship name="skin" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SkinData" inverseName="slot" inverseEntity="SkinData" syncable="YES"/>
     </entity>
     <entity name="TowerData" representedClassName="TowerData" syncable="YES">
+        <attribute name="lastPlayedFloor" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <relationship name="floors" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="FloorData" inverseName="tower" inverseEntity="FloorData" syncable="YES"/>
         <relationship name="playerData" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PlayerData" inverseName="towers" inverseEntity="PlayerData" syncable="YES"/>
     </entity>
@@ -54,11 +56,11 @@
     <elements>
         <element name="FloorData" positionX="-29" positionY="-147" width="128" height="135"/>
         <element name="InvitedFriendData" positionX="126" positionY="-477" width="128" height="73"/>
-        <element name="PlayerData" positionX="394" positionY="-486" width="128" height="195"/>
+        <element name="PlayerData" positionX="394" positionY="-486" width="128" height="210"/>
         <element name="PowerUpData" positionX="711" positionY="-390" width="128" height="118"/>
         <element name="PowerUpSlotData" positionX="126" positionY="-378" width="128" height="73"/>
         <element name="SkinData" positionX="412" positionY="-126" width="128" height="118"/>
         <element name="SkinSlotData" positionX="682" positionY="-204" width="128" height="73"/>
-        <element name="TowerData" positionX="198" positionY="-270" width="128" height="75"/>
+        <element name="TowerData" positionX="198" positionY="-270" width="128" height="90"/>
     </elements>
 </model>

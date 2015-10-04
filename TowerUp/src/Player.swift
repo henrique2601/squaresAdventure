@@ -23,7 +23,13 @@ class Player: Square {
     var maxDeathCount = 10
     var maxHealthPoints = 2
     var healthPoints = 2
-    var deathCount = 0
+    var deathCount = 0 {
+        didSet {
+            if let scene = self.scene as? MissionScene {
+               scene.boxDeathsAndTime.labelDeaths.setText(deathCount.description)
+            }
+        }
+    }
     var lastAlive:NSTimeInterval = 0
     var lastHeal:NSTimeInterval = 0
     
@@ -34,6 +40,13 @@ class Player: Square {
     //Controls
     var jump:Bool = false
     var move:Int = 0
+    
+    //Effects
+    var needToPlayDeathAnimation:Bool = true
+    var redSpritekitNode:SKSpriteNode!
+    var spriteNode:SKSpriteNode!
+    var spriteNodeDead:SKSpriteNode!
+    
     
     var playerData = MemoryCard.sharedInstance.playerData
     
@@ -61,22 +74,20 @@ class Player: Square {
     func loadNewPlayer(name:String, texture:String, x:Int, y:Int, loadPhysics:Bool) {
         self.name = name
         
-        
         let texture = SKTexture(imageNamed: texture)
-        var spriteNode:SKSpriteNode!
         
         if(loadPhysics) {
             self.zPosition = Config.HUDZPosition/2
-            spriteNode = SKSpriteNode(texture: texture, size: texture.size())
-            spriteNode.name = name
+            self.spriteNode = SKSpriteNode(texture: texture, size: texture.size())
+            self.spriteNode.name = name
             
             self.position = CGPoint(x: x, y: y)
             self.startingPosition = self.position
             self.loadPhysics()
         } else {
             self.zPosition = Config.HUDZPosition
-            spriteNode = SKSpriteNode(texture: texture, size: CGSize(width: texture.size().width, height: texture.size().height))
-            spriteNode.name = name
+            self.spriteNode = SKSpriteNode(texture: texture, size: CGSize(width: texture.size().width, height: texture.size().height))
+            self.spriteNode.name = name
             
             //spriteNode.anchorPoint = CGPoint(x: 0, y: 1)
             self.sketchPosition = CGPoint(x: x, y: y)
@@ -293,9 +304,10 @@ class Player: Square {
                         }
                     }
                 }
-            } else {
-                //Player esta no ar
-                self.needAngularImpulse = 3
+                else {
+                    //Player esta no ar
+                    self.needAngularImpulse = 3
+                }
             }
             
             if self.move != 0 {
@@ -310,6 +322,22 @@ class Player: Square {
                 self.ajustAngle()
             }
         } else {
+            
+            if(self.needToPlayDeathAnimation) {
+                self.redSpritekitNode = SKSpriteNode(color: UIColor(red: 1, green: 0, blue: 0, alpha: 0.75), size: Config.currentSceneSize)
+                self.redSpritekitNode.anchorPoint = CGPoint(x: 0, y: 1)
+                self.redSpritekitNode.runAction(SKAction.fadeOutWithDuration(1))
+                self.redSpritekitNode.zPosition = Config.HUDZPosition * 2
+                self.scene?.addChild(redSpritekitNode)
+                self.needToPlayDeathAnimation = false
+                
+                let skinType = Skins.types[playerData.skinSlot.skin.index.integerValue]
+                
+                self.spriteNodeDead = SKSpriteNode(imageNamed: skinType.imageName + "Dead")
+                self.spriteNodeDead.zPosition = self.spriteNode.zPosition + 1
+                self.addChild(self.spriteNodeDead)
+            }
+            
             for touch in Control.touchesArray {
                 if(touch.tapCount >= 2) {
                     self.respawn()
@@ -342,6 +370,16 @@ class Player: Square {
         self.zRotation = 0
         self.healthPoints = self.maxHealthPoints
         self.deathCount++
+        
+        self.needToPlayDeathAnimation = true
+        if let _ = self.redSpritekitNode {
+            self.redSpritekitNode.removeFromParent()
+            
+        }
+        if let _ = self.spriteNodeDead {
+            self.spriteNodeDead.removeFromParent()
+        }
+        
     }
     
     func reset() {

@@ -16,6 +16,7 @@ class OptionsScene: GameScene, FBSDKGameRequestDialogDelegate {
         case deleteSavedGame
         case chooseControls
         case mainMenu
+        case invite
     }
     
     var state = states.options
@@ -24,6 +25,10 @@ class OptionsScene: GameScene, FBSDKGameRequestDialogDelegate {
     var blackSpriteNode:SKSpriteNode!
     
     var chooseControlsScrollNode:ScrollNode!
+    
+    var labelLoading:Label!
+    var labelScale: CGFloat! = 1
+    var growing : Bool = true
     
     var buttonDeleteSavedGame:Button!
     var buttonChooseControls:Button!
@@ -36,12 +41,14 @@ class OptionsScene: GameScene, FBSDKGameRequestDialogDelegate {
     var after:String = ""
     var idFriendArray = NSMutableArray()
     var blockedArray = NSMutableArray()
+    var nameFriendArray = NSMutableArray()
+    var loadingImage:SKSpriteNode!
     
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
         self.backgroundColor = GameColors.blue
         
-        self.buttonInvite = Button(textureName: "buttonBlueSmall", text:"INVITE", x: 20, y: 406, xAlign:.center, yAlign:.center)
+        self.buttonInvite = Button(textureName: "buttonBlueSmall", text:"INVITE", x: 20, y: 406)
         self.addChild(self.buttonInvite)
         
         self.buttonDeleteSavedGame = Button(textureName: "buttonBlueSmall", text:"DELETE", x: 20, y: 202)
@@ -58,6 +65,11 @@ class OptionsScene: GameScene, FBSDKGameRequestDialogDelegate {
     override func update(currentTime: NSTimeInterval) {
         if(self.state == self.nextState){
             switch (self.state) {
+                
+            case states.invite:
+                
+                break
+                
             default:
                 break
             }
@@ -70,7 +82,12 @@ class OptionsScene: GameScene, FBSDKGameRequestDialogDelegate {
                 if let teste = self.chooseControlsScrollNode {
                     teste.removeFromParent()
                 }
+                
                 if let teste = self.blackSpriteNode {
+                    teste.removeFromParent()
+                }
+                
+                if let teste = self.loadingImage {
                     teste.removeFromParent()
                 }
                 break
@@ -85,7 +102,7 @@ class OptionsScene: GameScene, FBSDKGameRequestDialogDelegate {
                 spriteNode = SKSpriteNode(imageNamed: "useLeftSliderAndScreenRight")
                 controlsArray.append(spriteNode)
                 
-                self.chooseControlsScrollNode = ScrollNode(x: 667, y: 466, cells:controlsArray, spacing:1, scaleNodes:true, scaleDistance:1334/4 + 100)
+                self.chooseControlsScrollNode = ScrollNode(x: 667, y: 466, cells:controlsArray, spacing:1, scaleNodes:true, scaleDistance:1334/4 + 100, index:self.playerData.configControls.integerValue)
                 self.addChild(self.chooseControlsScrollNode)
                 
                 let size = self.size.width > self.size.height ? self.size.width : self.size.height
@@ -95,6 +112,27 @@ class OptionsScene: GameScene, FBSDKGameRequestDialogDelegate {
                 
                 self.blackSpriteNode.zPosition = Config.HUDZPosition * 2
                 self.chooseControlsScrollNode.zPosition = self.blackSpriteNode.zPosition + 1
+                
+                break
+                
+            case states.invite:
+                
+                let size = self.size.width > self.size.height ? self.size.width : self.size.height
+                
+                self.loadingImage = SKSpriteNode(imageNamed: "circleLoading")
+                self.loadingImage.position = CGPoint(x: 1334/4, y: -750/4)
+                self.addChild(self.loadingImage)
+                
+                self.loadingImage.runAction(SKAction.repeatActionForever(SKAction.rotateByAngle(CGFloat(M_PI * 2), duration: 1)))
+                
+                self.blackSpriteNode = SKSpriteNode(color: GameColors.black, size: CGSize(width: size * 2, height: size * 2))
+                self.blackSpriteNode.anchorPoint = CGPoint(x: 0, y: 1)
+                self.addChild(self.blackSpriteNode)
+                
+                self.blackSpriteNode.zPosition = Config.HUDZPosition * 2
+                self.loadingImage.zPosition = self.blackSpriteNode.zPosition + 1
+                
+                self.inviteFriends(nil, limit: 50)
                 
                 break
                 
@@ -168,6 +206,20 @@ class OptionsScene: GameScene, FBSDKGameRequestDialogDelegate {
                 }
                 
                 break
+                
+            case states.invite:
+                
+                for touch in (touches ) {
+                    let location = touch.locationInNode(self)
+                    
+                    if (self.buttonBack.containsPoint(location)) {
+                        self.nextState = .options
+                        return
+                    }
+                }
+                
+                break
+                
             case states.options:
                 for touch in (touches ) {
                     let location = touch.locationInNode(self)
@@ -183,8 +235,8 @@ class OptionsScene: GameScene, FBSDKGameRequestDialogDelegate {
                     }
 
                     if (self.buttonInvite.containsPoint(location)) {
-                        self.inviteFriends(nil, limit: 50)
-                        
+                        //self.inviteFriends(nil, limit: 50)
+                        self.nextState = .invite
                         return
                     }
                     
@@ -220,25 +272,37 @@ class OptionsScene: GameScene, FBSDKGameRequestDialogDelegate {
     func gameRequestDialogDidCancel(gameRequestDialog: FBSDKGameRequestDialog!){
         print("cancel")
         
-//        if (self.idFriendArray.count == 50 || after == "end"){
-//        
-//            for value in self.idFriendArray
-//            {
-//                self.playerData.addInvitedFriend(MemoryCard.sharedInstance.newInvitedFriend(value as! String))
-//            }
-//            
-            self.idFriendArray.removeAllObjects()
-//            
-//        }
-//        
-//        else {
-//            
-//            if (after != ""){
-//                //print(self.after)
-//                self.inviteFriends(self.after, limit: 50 - self.idFriendArray.count)
-//            }
         
-//        }
+        if (self.idFriendArray.count == 50 || after == "end"){
+        
+            for value in self.nameFriendArray
+            {
+                self.playerData.addInvitedFriend(MemoryCard.sharedInstance.newInvitedFriend(value as! String))
+            }
+            
+            self.playerData.coins = NSNumber(integer: self.playerData.coins.integerValue + self.nameFriendArray.count )
+            
+            
+            
+            self.idFriendArray.removeAllObjects()
+            self.nameFriendArray.removeAllObjects()
+            
+            if ( after != "end"){
+                self.inviteFriends(after, limit: 50)
+            }
+            
+        }
+        
+        else {
+            
+            if (after != ""){
+                //print(self.after)
+                self.inviteFriends(self.after, limit: 50 - self.idFriendArray.count)
+            }
+        
+        }
+        
+        
         
         
         
@@ -259,15 +323,8 @@ class OptionsScene: GameScene, FBSDKGameRequestDialogDelegate {
         
             self.blockedArray.addObject(friend.id)
         }
-        
-        
-//        if (self.blockedArray.count > 0 ) {
-//           //params.setObject(blockedArray, forKey: "excluded_ids")
-//        }
-        
-        
-        
-        
+
+       
         let request: FBSDKGraphRequest = FBSDKGraphRequest.init(graphPath: "me/invitable_friends?limit=\(limit)", parameters: params as [NSObject : AnyObject], HTTPMethod: "GET")
         
         request.startWithCompletionHandler({ (FBSDKGraphRequestConnection, result, error) -> Void in
@@ -277,17 +334,11 @@ class OptionsScene: GameScene, FBSDKGameRequestDialogDelegate {
                 //print (result)
                 let resultdict = result as! NSDictionary
                 let friendArray = result.objectForKey("data") as! Array<NSDictionary>
-                
-//                for invitedFriendData in self.playerData.invitedFriends as! Set<InvitedFriendData> {
-//                    print(invitedFriendData.id)
-//                }
-                
-                
+            
                 for item in friendArray
                 {
                     var needInvite = true
                     for invitedFriendData in self.playerData.invitedFriends as! Set<InvitedFriendData> {
-                        //print(invitedFriendData.id)
                         if invitedFriendData.id == item.objectForKey("name") as! String {
                             needInvite = false
                             break
@@ -297,8 +348,8 @@ class OptionsScene: GameScene, FBSDKGameRequestDialogDelegate {
                     if(needInvite) {
                         if let idFriend = item.objectForKey("id"){
                             self.idFriendArray.addObject(idFriend)
-                            //print(item.objectForKey("name") as! String + " adcionado")
-                            self.playerData.addInvitedFriend(MemoryCard.sharedInstance.newInvitedFriend(item.objectForKey("name") as! String))
+                            self.nameFriendArray.addObject(item.objectForKey("name")!)
+                            //self.playerData.addInvitedFriend(MemoryCard.sharedInstance.newInvitedFriend(item.objectForKey("name") as! String))
                         }
                     }
                 }
@@ -346,6 +397,7 @@ class OptionsScene: GameScene, FBSDKGameRequestDialogDelegate {
                     else {
                         print("assistir video")
                         //assitir video aqui
+                        self.nextState = .options
                     }
                     
 

@@ -46,9 +46,16 @@ class TowersScene: GameScene {
                 let towerType = Towers.types[towerIndex]
                 let cell = SKSpriteNode(imageNamed: "towerBox")
                 let spriteNode = SKSpriteNode(imageNamed: "towerBoxBackground")
-                spriteNode.zPosition = cell.zPosition + CGFloat(1)
+                spriteNode.zPosition = cell.zPosition + CGFloat(2)
                 cell.addChild(spriteNode)
+                
+                //towerType.tileset
+                let backgroundNode = SKSpriteNode(imageNamed: "grassTower")
+                backgroundNode.zPosition = cell.zPosition + CGFloat(1)
+                cell.addChild(backgroundNode)
+                
                 let labelName = Label(text: (towerIndex + 1).description, x: 0, y: -109)
+                labelName.zPosition = cell.zPosition + CGFloat(3)
                 
                 var stars = 0
                 for item in tower.floors as NSOrderedSet {
@@ -56,7 +63,8 @@ class TowersScene: GameScene {
                     stars += floor.stars.integerValue
                 }
                 
-                let labelProgress = Label(text: (stars).description + "/" + (towerType.floorTypes.count * 3).description, x: 42, y: 48)
+                let labelProgress = Label(text: (stars).description + "/" + (towerType.floorTypes.count * 3).description, x: 42, y: 176)
+                labelProgress.zPosition = cell.zPosition + CGFloat(3)
                 cell.addChild(labelName)
                 cell.addChild(labelProgress)
                 
@@ -81,7 +89,7 @@ class TowersScene: GameScene {
         
         //TODO: torre "?"
         
-        self.towersScrollNode = ScrollNode(x: 667, y: 466, cells:towersArray, spacing:1, scaleNodes:true, scaleDistance:1334/4 + 100)
+        self.towersScrollNode = ScrollNode(x: 667, y: 466, cells:towersArray, spacing:1, scaleNodes:true, scaleDistance:1334/4 + 100, index:self.playerData.lastPlayedTower.integerValue)
         
         self.addChild(self.towersScrollNode)
         
@@ -138,6 +146,7 @@ class TowersScene: GameScene {
                                 if(cell.containsPoint(locationInScrollNode)) {
                                     if(i < self.playerData.towers.count) {
                                         MapManager.tower = i
+                                        
                                         self.nextState = .floors
                                     } else {
                                         print("Torre \(i) ainda não foi desbloqueada")

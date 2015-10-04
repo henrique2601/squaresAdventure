@@ -19,7 +19,7 @@ class AfterMissionBox: Box {
     var buttonRestart:Button!
     var buttonNext:Button!
     
-    init(background: String, time:String, deaths:String, bonus:String) {
+    init(background: String, time:String, deaths:String, bonus:String, scene:SKScene?) {
         super.init(background: background, x:435, y:82, xAlign:.center, yAlign:.down)
         
         let afterMissionBoxBackground = Control(textureName: "afterMissionBoxBackground", x: 71, y: 172)
@@ -37,44 +37,76 @@ class AfterMissionBox: Box {
         let floorData = MemoryCard.sharedInstance.currentFloor()
         
         let minCoins = Towers.types[MapManager.tower].floorTypes[MapManager.floor].minCoins
-        if(Int(bonus) >= minCoins) {
-            if(floorData.bonus == NSNumber(bool: false)) {
-               floorData.bonus = NSNumber(bool: true)
+        if(floorData.bonus == NSNumber(bool: false)) {
+            if(Int(bonus) >= minCoins) {
+                floorData.bonus = NSNumber(bool: true)
+                self.labelBonus = Label(color:GameColors.green, text: "\(bonus)/\(minCoins)", x: 266, y: 211)
+                starsCount++
+            } else {
+                self.labelBonus = Label(color:GameColors.red, text: "\(bonus)/\(minCoins)", x: 266, y: 211)
             }
-            self.labelBonus = Label(color:GameColors.green, text: "\(bonus)/\(minCoins)", x: 266, y: 211)
-            starsCount++
         } else {
-            self.labelBonus = Label(color:GameColors.red, text: "\(bonus)/\(minCoins)", x: 266, y: 211)
+            self.labelBonus = Label(color:GameColors.gray, text: "\(bonus)/\(minCoins)", x: 266, y: 211)
         }
         self.addChild(self.labelBonus)
         
+        
         let maxDeathCount = Towers.types[MapManager.tower].floorTypes[MapManager.floor].maxDeathCount
-        if(Int(deaths) <= maxDeathCount) {
-            if(floorData.deaths == NSNumber(bool: false)) {
+        if(floorData.deaths == NSNumber(bool: false)) {
+            if(Int(deaths) <= maxDeathCount) {
                 floorData.deaths = NSNumber(bool: true)
+                self.labelDeaths = Label(color:GameColors.green, text: "\(deaths)/\(maxDeathCount)", x: 266, y: 309)
+                starsCount++
+            } else {
+                self.labelDeaths = Label(color:GameColors.red, text: "\(deaths)/\(maxDeathCount)", x: 266, y: 309)
             }
-            self.labelDeaths = Label(color:GameColors.green, text: "\(deaths)/\(maxDeathCount)", x: 266, y: 309)
-            starsCount++
         } else {
-            self.labelDeaths = Label(color:GameColors.red, text: "\(deaths)/\(maxDeathCount)", x: 266, y: 309)
+            //TODO: separar os icons e botar a cor cinza, adicionar visto ao final do completo
+            self.labelDeaths = Label(color:GameColors.gray, text: "\(deaths)/\(maxDeathCount)", x: 266, y: 309)
         }
         self.addChild(self.labelDeaths)
         
+        
+        
         let maxTime = Towers.types[MapManager.tower].floorTypes[MapManager.floor].maxTime
-        if(Int(time) <= maxTime) {
-            if(floorData.time == NSNumber(bool: false)) {
+        if(floorData.time == NSNumber(bool: false)) {
+            if(Int(time) <= maxTime) {
                 floorData.time = NSNumber(bool: true)
+                self.labelTime = Label(color:GameColors.green, text: "\(time)s/\(maxTime)s", x: 266, y: 407)
+                starsCount++
+            } else {
+                self.labelTime = Label(color:GameColors.red, text: "\(time)s/\(maxTime)s", x: 266, y: 407)
             }
-            self.labelTime = Label(color:GameColors.green, text: "\(time)s/\(maxTime)s", x: 266, y: 407)
-            starsCount++
         } else {
-            self.labelTime = Label(color:GameColors.red, text: "\(time)s/\(maxTime)s", x: 266, y: 407)
+            self.labelTime = Label(color:GameColors.gray, text: "\(time)s/\(maxTime)s", x: 266, y: 407)
         }
         self.addChild(self.labelTime)
-        
+        let lastStars = floorData.stars.integerValue
         floorData.stars = NSNumber(integer: floorData.bonus.integerValue + floorData.deaths.integerValue + floorData.time.integerValue)
+        if(lastStars < 3 && floorData.stars.integerValue == 3) {
+            
+            let playerData = MemoryCard.sharedInstance.playerData
+            
+            if let teste = scene {
+                teste.addChild(MessageBox(text: "3 stars : + 50 coins", textureName: "messegeBox", type: MessageBox.messageType.OK))
+                playerData.coins = NSNumber(integer: playerData.coins.integerValue + 50)
+            }
+            
+            var towerStars = 0
+            for item in MemoryCard.sharedInstance.currentTower().floors {
+                let floorData = item as! FloorData
+                towerStars = towerStars + floorData.bonus.integerValue + floorData.deaths.integerValue + floorData.time.integerValue
+            }
+            
+            if (towerStars == Towers.types[MapManager.tower].floorTypes.count * 3) {
+                if let teste = scene {
+                    teste.addChild(MessageBox(text: "Tower 100% : + 10 diamonds", textureName: "messegeBox", type: MessageBox.messageType.OK))
+                    playerData.gems = NSNumber(integer: playerData.gems.integerValue + 10)
+                }
+            }
+        }
         
-        for(var i = 0; i <= starsCount; i++) {
+        for(var i = 0; i <= floorData.stars.integerValue; i++) {
             switch(i){
             case 0:
                 break

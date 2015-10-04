@@ -23,6 +23,9 @@ class GameScene: SKScene {
         Textfield.textfieldList = Set<Textfield>()
         PowerUp.powerUpList = Set<PowerUp>()
         PlayerOnline.playerOnlineList = Set<PlayerOnline>()
+        
+        MessageBox.messageBoxCount = 0
+        
         super.init(size: Config.sceneSize())
     }
     

@@ -46,17 +46,17 @@ class PowerUp: Button {
         }
     }
     
-    init(powerUpData:PowerUpData) {
+    init(powerUpData:PowerUpData, colorBlendFactor:CGFloat = 1) {
         self.powerUpData = powerUpData
         super.init()
-        self.load()
+        self.load(colorBlendFactor)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func load() {
+    func load(colorBlendFactor:CGFloat) {
         let name:String = powerUpData.index.description
         self.name = name
         
@@ -64,8 +64,10 @@ class PowerUp: Button {
         
         let texture = SKTexture(imageNamed: self.powerUpType.powerUpImage)
         self.powerUp = SKSpriteNode(texture: texture, size: texture.size())
+        self.powerUp.color = UIColor(red: 1, green: 1, blue: 1, alpha: colorBlendFactor)
+        self.powerUp.colorBlendFactor = 1
         self.powerUpShadow = SKSpriteNode(texture: texture, size: texture.size())
-        self.powerUpShadow.color = GameColors.black
+        self.powerUpShadow.color = UIColor(red: 0, green: 0, blue: 0, alpha: 0.75 * colorBlendFactor)
         self.powerUpShadow.colorBlendFactor = 1
         self.powerUpShadow.hidden = true
         
@@ -76,8 +78,10 @@ class PowerUp: Button {
         
         let texturePressed = SKTexture(imageNamed: "\(self.powerUpType.powerUpImage)Pressed")
         self.powerUpPressed = SKSpriteNode(texture: texturePressed, size: texturePressed.size())
+        self.powerUpPressed.color = UIColor(red: 1, green: 1, blue: 1, alpha: colorBlendFactor)
+        self.powerUpPressed.colorBlendFactor = 1
         self.powerUpPressedShadow = SKSpriteNode(texture: texturePressed, size: texturePressed.size())
-        self.powerUpPressedShadow.color = GameColors.black
+        self.powerUpPressedShadow.color = UIColor(red: 0, green: 0, blue: 0, alpha: 0.75 * colorBlendFactor)
         self.powerUpPressedShadow.colorBlendFactor = 1
         self.powerUpPressedShadow.hidden = true
         
@@ -127,6 +131,7 @@ class PowerUp: Button {
             self.eventBegin?.addHandler({
                 if(player.healthPoints <= 0) {
                     player.healthPoints = player.maxHealthPoints
+                    player.needToPlayDeathAnimation = true
                 } else {
                     self.lastUse = -1
                 }

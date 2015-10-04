@@ -17,6 +17,7 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
         case win
         case floors
         case powerUp
+        case restart
     }
     
     var state = states.loading
@@ -41,6 +42,7 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
     var playerData = MemoryCard.sharedInstance.playerData
     
     var boxCoins:BoxCoins!
+    var boxDeathsAndTime:BoxDeathsAndTime!
     var collectedBonus = 0 {
         didSet {
             self.boxCoins.labelCoins.setText(MemoryCard.sharedInstance.playerData.coins.description)
@@ -55,6 +57,7 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
     var buttonRight:Button!
     var buttonJump:Button!
     var buttonBack:Button!
+    var buttonRestart:Button!
     
     var slider:Slider!
     
@@ -87,13 +90,13 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
         switch(self.playerData.configControls.integerValue) {
             
         case 1: //controlsConfig.useButtons.rawValue:
-            self.buttonLeft = Button(textureName: "buttonYellowSquare", text:"<", x:20, y:630, xAlign:.left, yAlign:.down)
+            self.buttonLeft = Button(textureName: "buttonYellowSquare", text:"<", x:20, y:630, xAlign:.left, yAlign:.down, colorBlendFactor:0.5)
             self.addChild(self.buttonLeft)
             
-            self.buttonRight = Button(textureName: "buttonYellowSquare", text:">" ,x:160, y:630, xAlign:.left, yAlign:.down)
+            self.buttonRight = Button(textureName: "buttonYellowSquare", text:">" ,x:160, y:630, xAlign:.left, yAlign:.down, colorBlendFactor:0.5)
             self.addChild(self.buttonRight)
             
-            self.buttonJump = Button(textureName: "buttonYellow", text:"Jump", x:1014, y:630, xAlign:.right, yAlign:.down)
+            self.buttonJump = Button(textureName: "buttonYellow", text:"Jump", x:1014, y:630, xAlign:.right, yAlign:.down, colorBlendFactor:0.5)
             self.addChild(self.buttonJump)
             break
             
@@ -102,7 +105,9 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
         }
         
         self.boxCoins = BoxCoins()
+        self.boxDeathsAndTime = BoxDeathsAndTime()
         self.addChild(boxCoins)
+        self.addChild(boxDeathsAndTime)
         
         if(self.playerData.powerUps.count > 0) {
             var powerUpsArray = Array<SKNode>()
@@ -110,7 +115,7 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
             for item in self.playerData.powerUpSlots {
                 if let powerUpSlotData = item as? PowerUpSlotData {
                     if let powerUpData = powerUpSlotData.powerUp {
-                        let powerUp = PowerUp(powerUpData: powerUpData)
+                        let powerUp = PowerUp(powerUpData: powerUpData, colorBlendFactor: 0.5)
                         powerUp.loadEvent(self.player)
                         powerUpsArray.append(powerUp)
                     }
@@ -118,6 +123,7 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
             }
             
             self.powerUpsScrollNode = ScrollNode(x: 547, y: 680, xAlign: .center, yAlign: .down, cells: powerUpsArray, scrollDirection: ScrollNode.scrollTypes.horizontal, scaleNodes: false)
+
             self.powerUpsScrollNode.canScroll = false
             self.addChild(self.powerUpsScrollNode)
             
@@ -126,6 +132,9 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
         
         self.buttonBack = Button(textureName: "buttonGraySquareSmall", text:"X" ,x:20, y:20, xAlign:.left, yAlign:.up)
         self.addChild(self.buttonBack)
+        
+        self.buttonRestart = Button(textureName: "buttonBlueSquareSmall", icon:"restart" ,x:118, y:20, xAlign:.left, yAlign:.up)
+        self.addChild(self.buttonRestart)
     }
     
     func didBeginContact(contact: SKPhysicsContact) {
@@ -140,6 +149,11 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
         if(self.state == self.nextState){
             switch (self.state) {
             case states.mission:
+                
+                if(self.boxDeathsAndTime.time < Int(currentTime - self.lastReset)) {
+                    self.boxDeathsAndTime.time = Int(currentTime - self.lastReset)
+                    
+                }
                 
                 switch(self.playerData.configControls.integerValue) {
                 case 1: //controlsConfig.useButtons.rawValue:
@@ -200,6 +214,11 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
             
             switch (self.nextState) {
                 
+                
+            case states.restart:
+                self.view!.presentScene(MissionScene(), transition: Config.defaultGoTransition)
+                break
+                
             case states.mission:
                 self.mapManager.reloadMap(CGPoint(x: 10, y: Chunk.sizeInPoints + 10))
                 self.player.reset()
@@ -242,7 +261,7 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
                 self.blackSpriteNode = SKSpriteNode(color: GameColors.black, size: self.size)
                 self.blackSpriteNode.anchorPoint = CGPoint(x: 0, y: 1)
                 self.addChild(self.blackSpriteNode)
-                let box = AfterMissionBox(background: "boxWhite", time: Int(currentTime - self.lastReset).description, deaths: self.player.deathCount.description, bonus: self.collectedBonus.description)
+                let box = AfterMissionBox(background: "boxWhite", time: Int(currentTime - self.lastReset).description, deaths: self.player.deathCount.description, bonus: self.collectedBonus.description, scene: self.scene)
                 self.collectedBonus = 0
                 
                 self.addChild(box)
@@ -330,6 +349,11 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
                     self.nextState = .floors
                     return
                 }
+                if (self.buttonRestart.containsPoint(location)) {
+                    self.nextState = .restart
+                    return
+                }
+                
             }
         }
     }

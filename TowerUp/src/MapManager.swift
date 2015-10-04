@@ -16,8 +16,16 @@ class MapManager: SKNode {
     var loadedRegionX = 0
     var loadedRegionY = 0
     
-    static var tower = 0
-    static var floor = 0
+    static var tower = 0 {
+        didSet {
+            MemoryCard.sharedInstance.playerData.lastPlayedTower = NSNumber(integer: MapManager.tower)
+        }
+    }
+    static var floor = 0 {
+        didSet {
+            MemoryCard.sharedInstance.currentTower().lastPlayedFloor = NSNumber(integer: MapManager.floor)
+        }
+    }
     
     static var bodies = [SKPhysicsBody]()
     

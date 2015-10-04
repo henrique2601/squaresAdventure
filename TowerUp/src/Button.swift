@@ -33,23 +33,26 @@ class Button: Control {
         super.init()
     }
     
-    init(textureName:String, icon:String = "", text:String = "", fontSize:GameFonts.fontSize = .medium, x:Int = 0, y:Int = 0, xAlign:Control.xAlignments = .left, yAlign:Control.yAlignments = .up) {
+    init(textureName:String, icon:String = "", text:String = "", fontSize:GameFonts.fontSize = .medium, x:Int = 0, y:Int = 0, xAlign:Control.xAlignments = .left, yAlign:Control.yAlignments = .up, colorBlendFactor:CGFloat = CGFloat(1)) {
         super.init()
-        self.load(textureName, icon:icon, text:text, fontSize:fontSize.rawValue, x:x, y:y, xAlign:xAlign, yAlign:yAlign)
+        self.load(textureName, icon:icon, text:text, fontSize:fontSize.rawValue, x:x, y:y, xAlign:xAlign, yAlign:yAlign, colorBlendFactor:colorBlendFactor)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func load(textureName:String, icon:String, text:String, fontSize:CGFloat,  x:Int, y:Int, xAlign:Control.xAlignments, yAlign:Control.yAlignments) {
+    func load(textureName:String, icon:String, text:String, fontSize:CGFloat,  x:Int, y:Int, xAlign:Control.xAlignments, yAlign:Control.yAlignments, colorBlendFactor:CGFloat) {
         self.sketchPosition = CGPoint(x: x, y: y)
         self.yAlign = yAlign
         self.xAlign = xAlign
         self.zPosition = Config.HUDZPosition
         
+        
         let texture = SKTexture(imageNamed: textureName)
         self.button = SKSpriteNode(texture: texture, size: texture.size())
+        self.button.color = UIColor(red: 1, green: 1, blue: 1, alpha: colorBlendFactor)
+        self.button.colorBlendFactor = 1
         self.button.anchorPoint = CGPoint(x: 0, y: 1)
         self.addChild(self.button)
         
@@ -83,6 +86,8 @@ class Button: Control {
         
         let texturePressed = SKTexture(imageNamed: "\(textureName)Pressed")
         self.buttonPressed = SKSpriteNode(texture: texturePressed, size: texturePressed.size())
+        self.buttonPressed.color = UIColor(red: 1, green: 1, blue: 1, alpha: colorBlendFactor)
+        self.buttonPressed.colorBlendFactor = 1
         self.buttonPressed.anchorPoint = CGPoint(x: 0, y: 1)
         self.buttonPressed.hidden = true
         self.addChild(self.buttonPressed)

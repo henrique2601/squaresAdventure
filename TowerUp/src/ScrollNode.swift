@@ -31,9 +31,9 @@ class ScrollNode: Control {
         self.load(textureName, x:x, y:y, xAlign:xAlign, yAlign:yAlign, count:count, spacing:spacing, scrollDirection:scrollDirection, scaleNodes:scaleNodes, scaleDistance:scaleDistance)
     }
     
-    init(x:Int = 0, y:Int = 0, xAlign:Control.xAlignments = .center, yAlign:Control.yAlignments = .center, cells:Array<SKNode>, spacing:Int = 10, scrollDirection:scrollTypes = scrollTypes.horizontal, scaleNodes:Bool = false, scaleDistance:Int = 1000) {
+    init(x:Int = 0, y:Int = 0, xAlign:Control.xAlignments = .center, yAlign:Control.yAlignments = .center, cells:Array<SKNode>, spacing:Int = 10, scrollDirection:scrollTypes = scrollTypes.horizontal, scaleNodes:Bool = false, scaleDistance:Int = 1000, index:Int = 0) {
         super.init()
-        self.load(x, y:y, xAlign:xAlign, yAlign:yAlign, cells:cells, spacing:spacing, scrollDirection:scrollDirection, scaleNodes:scaleNodes, scaleDistance:scaleDistance)
+        self.load(x, y:y, xAlign:xAlign, yAlign:yAlign, cells:cells, spacing:spacing, scrollDirection:scrollDirection, scaleNodes:scaleNodes, scaleDistance:scaleDistance, index:index)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -77,7 +77,7 @@ class ScrollNode: Control {
         self.canScroll = (self.cells.count > 1)
     }
     
-    func load(x:Int, y:Int, xAlign:Control.xAlignments, yAlign:Control.yAlignments, cells:Array<SKNode>, spacing:Int, scrollDirection:scrollTypes, scaleNodes:Bool, scaleDistance:Int) {
+    func load(x:Int, y:Int, xAlign:Control.xAlignments, yAlign:Control.yAlignments, cells:Array<SKNode>, spacing:Int, scrollDirection:scrollTypes, scaleNodes:Bool, scaleDistance:Int, index:Int) {
         
         self.scrollType = scrollDirection
         
@@ -94,7 +94,7 @@ class ScrollNode: Control {
         for spriteNode in self.cells {
             switch(scrollDirection) {
             case scrollTypes.horizontal:
-                spriteNode.position = CGPoint(x: (Int(spriteNode.calculateAccumulatedFrame().width) + spacing) * i, y: 0)
+                spriteNode.position = CGPoint(x: (Int(spriteNode.calculateAccumulatedFrame().width) + spacing) * (i - index), y: 0)
                 break
             case scrollTypes.vertical:
                 spriteNode.position = CGPoint(x: 0, y: (Int(spriteNode.calculateAccumulatedFrame().height) + spacing) * i)

@@ -17,16 +17,37 @@ class MessageBox: Control {
     var buttonCancel:Button!
     var buttonOK:Button!
     
-    init(text:String, textureName:String) {
-        super.init(name: "messegeBox", textureName:textureName, x: 412, y: 283)
+    enum messageType {
+        case OKCancel
+        case OK
+    }
+    
+    static var messageBoxCount = 0
+    
+    init(text:String, textureName:String, type:MessageBox.messageType) {
         
-        self.zPosition = Config.HUDZPosition * CGFloat(2)
+        let texture = SKTexture(imageNamed: "messegeBox")
+        let position = CGPoint(x: 1334/2 - texture.size().width,
+            y: 750/2  - texture.size().height)
+        super.init(texture: texture, x: Int(position.x), y: Int(position.y), xAlign:.center, yAlign:.center)
+        
+        MessageBox.messageBoxCount++
+        self.zPosition = Config.HUDZPosition * CGFloat(3 + MessageBox.messageBoxCount)
         
         self.addChild(Label(text:text, x:255, y:46))
-        self.buttonOK = Button(textureName: "buttonOK", x:262, y:93)
-        self.addChild(self.buttonOK)
-        self.buttonCancel = Button(textureName: "buttonCancel", x:14, y:93)
-        self.addChild(self.buttonCancel)
+        
+        switch (type) {
+        case messageType.OK:
+            self.buttonOK = Button(textureName: "buttonBlueSmall", text: "Ok", x:139, y:162)
+            self.addChild(self.buttonOK)
+            break
+        case messageType.OKCancel:
+            self.buttonOK = Button(textureName: "buttonBlueSmall", text: "Ok", x:262, y:162)
+            self.addChild(self.buttonOK)
+            self.buttonCancel = Button(textureName: "buttonRedSmall", text: "Cancel", x:14, y:162)
+            self.addChild(self.buttonCancel)
+            break
+        }
         
         self.hidden = false
     }
@@ -40,18 +61,22 @@ class MessageBox: Control {
         for touch in (touches ) {
             let location = touch.locationInNode(self)
             
-            if (self.buttonCancel.containsPoint(location) == true) {
-                self.hidden = true
-                self.touchesEndedAtButtonCancel.raise()
-                self.removeFromParent()
-                return
+            if let _ = self.buttonCancel {
+                if (self.buttonCancel.containsPoint(location) == true) {
+                    self.hidden = true
+                    self.touchesEndedAtButtonCancel.raise()
+                    self.removeFromParent()
+                    return
+                }
             }
             
-            if (self.buttonOK.containsPoint(location) == true) {
-                self.hidden = true
-                self.touchesEndedAtButtonOK.raise()
-                self.removeFromParent()
-                return
+            if let _ = self.buttonOK {
+                if (self.buttonOK.containsPoint(location) == true) {
+                    self.hidden = true
+                    self.touchesEndedAtButtonOK.raise()
+                    self.removeFromParent()
+                    return
+                }
             }
         }
     }
