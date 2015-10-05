@@ -59,6 +59,8 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
     //let socket = SocketIOClient(socketURL: "179.232.86.110:3001", opts: nil)
     let socket = SocketIOClient(socketURL: "181.41.197.181:3001", opts: nil)
     
+    var winPlayersList = Dictionary<String,Int>()
+    
     var boxCoins:BoxCoins!
     var collectedBonus = 0 {
         didSet {
@@ -243,7 +245,7 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
         }
         
         self.socket.on(messages.didJoin.rawValue) {[weak self] data, ack in
-            self!.socket.emit(messages.joinRoom.rawValue, self!.localName! , self!.room, self!.playerData.skinSlot.skin.index.integerValue)
+            self!.socket.emit(messages.joinRoom.rawValue, self!.localName! , self!.playerData.skinSlot.skin.index.integerValue)
         }
         
         self.socket.on(messages.join.rawValue) {[weak self] data, ack in

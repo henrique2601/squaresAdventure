@@ -51,7 +51,7 @@ class FloorsScene: GameScene {
             let floorData = item as! FloorData
             
             if(floorIndex < towerType.floorTypes.count){
-                let cell = SKSpriteNode(imageNamed: "boxSmall")//TODO: imagem do andar
+                let cell = SKSpriteNode(imageNamed: Towers.types[MapManager.tower].tileset + "Floor")//TODO: imagem do andar
                 
                 for(var i = 0; i <= floorData.stars.integerValue; i++) {
                     switch(i){

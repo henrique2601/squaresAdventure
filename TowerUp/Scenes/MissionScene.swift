@@ -222,6 +222,7 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
             case states.mission:
                 self.mapManager.reloadMap(CGPoint(x: 10, y: Chunk.sizeInPoints + 10))
                 self.player.reset()
+                self.boxDeathsAndTime.reset()
                 self.lastReset = currentTime
                 break
             case states.win:
