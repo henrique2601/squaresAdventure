@@ -17,6 +17,7 @@ class PlayerData: NSManagedObject {
     @NSManaged var gems: NSNumber
     @NSManaged var configControls: NSNumber
     @NSManaged var lastPlayedTower: NSNumber
+    @NSManaged var musicEnabled: NSNumber
     @NSManaged var name: String
     @NSManaged var powerUpSlots: NSOrderedSet
     @NSManaged var skinSlot: SkinSlotData
@@ -24,6 +25,7 @@ class PlayerData: NSManagedObject {
     @NSManaged var skins: NSSet
     @NSManaged var towers: NSOrderedSet
     @NSManaged var invitedFriends: NSSet
+    @NSManaged var soundEnabled: NSNumber
 }
 
 extension PlayerData{

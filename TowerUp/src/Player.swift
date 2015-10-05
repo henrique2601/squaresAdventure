@@ -47,6 +47,8 @@ class Player: Square {
     var spriteNode:SKSpriteNode!
     var spriteNodeDead:SKSpriteNode!
     
+    //Sound Effects
+    var boom:SoundEffect!
     
     var playerData = MemoryCard.sharedInstance.playerData
     
@@ -106,6 +108,11 @@ class Player: Square {
     override func loadPhysics() {
         super.loadPhysics()
         self.resetCategoryBitMasks()
+        self.loadSoundEffects()
+    }
+    
+    func loadSoundEffects() {
+        self.boom = SoundEffect(soundFile: SoundEffect.files.boom.rawValue, node: self)
     }
     
     func resetCategoryBitMasks() {
@@ -193,6 +200,7 @@ class Player: Square {
             break
             
         case physicsCategory.bomb.rawValue:
+            self.boom.play()
             self.healthPoints = 0
             
             if let node = physicsBody.node {

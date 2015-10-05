@@ -152,11 +152,15 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
         
         self.socket.on(messages.addPlayers.rawValue) {[weak self] data, ack in
             
-            self!.player.name = self!.localName
+            guard let this = self else {
+                return
+            }
             
-            self!.player.labelName.position = CGPoint(x: self!.player!.position.x, y: self!.player!.position.y + 32)
-            self!.player.labelName.zPosition = self!.player!.zPosition + 1
-            self!.player.labelName.setText(self!.localName!, color: GameColors.black)
+            this.player.name = this.localName
+            
+            this.player.labelName.position = CGPoint(x: this.player!.position.x, y: this.player!.position.y + 32)
+            this.player.labelName.zPosition = this.player!.zPosition + 1
+            this.player.labelName.setText(this.localName!, color: GameColors.black)
             
             
             
@@ -187,13 +191,13 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
                         player2.name = nameTest!.objectForKey("name") as? String
                         player2.id = nameTest!.objectForKey("id") as? Int
                         player2.position = CGPoint(x: 200, y: 48)
-                        self!.world.addChild(player2)
+                        this.world.addChild(player2)
                         
                         var labelName2: Label!
                         labelName2 = Label(text: "")
                         Control.controlList.remove(labelName2)
                         labelName2.position = CGPoint(x: player2.position.x, y: player2.position.y + 32)
-                        self!.world.addChild(labelName2)
+                        this.world.addChild(labelName2)
                         labelName2.zPosition = player2.zPosition + 1
                         labelName2.setText(player2.name!, color: GameColors.black)
                         player2.labelName = labelName2
@@ -204,20 +208,25 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
         }
         
         self.socket.on("win") {[weak self] data, ack in
+            
+            guard let this = self else {
+                return
+            }
+            
             if let name = data?[0] as? Int {
                 for player in PlayerOnline.playerOnlineList {
                     if let id = player.id
                     {
                         if id == name{
                             print(player.name! + " win")
-                            self!.blackSpriteNode = SKSpriteNode(color: GameColors.black, size: self!.size)
-                            self!.blackSpriteNode.anchorPoint = CGPoint(x: 0, y: 1)
-                            self!.addChild(self!.blackSpriteNode)
+                            this.blackSpriteNode = SKSpriteNode(color: GameColors.black, size: this.size)
+                            this.blackSpriteNode.anchorPoint = CGPoint(x: 0, y: 1)
+                            this.addChild(this.blackSpriteNode)
                             let box = MultiplayerWinBox(background: "boxWhite", name:player.name! + " win!!!")
-                            self!.addChild(box)
+                            this.addChild(box)
                             
-                            self!.blackSpriteNode.zPosition = box.zPosition - 1
-                            self!.nextState = states.loose
+                            this.blackSpriteNode.zPosition = box.zPosition - 1
+                            this.nextState = states.loose
                             
                         }
                     }
@@ -243,10 +252,19 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
         }
         
         self.socket.on(messages.didJoin.rawValue) {[weak self] data, ack in
-            self!.socket.emit(messages.joinRoom.rawValue, self!.localName! , self!.room, self!.playerData.skinSlot.skin.index.integerValue)
+            
+            guard let this = self else {
+                return
+            }
+            
+            this.socket.emit(messages.joinRoom.rawValue, this.localName! , this.room, this.playerData.skinSlot.skin.index.integerValue)
         }
         
         self.socket.on(messages.join.rawValue) {[weak self] data, ack in
+            
+            guard let this = self else {
+                return
+            }
             
             if let name = data?[0] as? NSDictionary {
                 
@@ -258,13 +276,13 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
                 player.id = name.objectForKey("id") as? Int
                 print(player.id.description)
                 player.position = CGPoint(x: xPos, y: 48)
-                self!.world.addChild(player)
+                this.world.addChild(player)
                 
                 var labelName2: Label!
                 labelName2 = Label(text: "")
                 Control.controlList.remove(labelName2)
                 labelName2.position = CGPoint(x: player.position.x, y: player.position.y + 32)
-                self!.world.addChild(labelName2)
+                this.world.addChild(labelName2)
                 labelName2.zPosition = player.zPosition + 1
                 labelName2.setText(player.name!, color: GameColors.black)
                 

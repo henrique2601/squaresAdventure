@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="8195" systemVersion="14E46" minimumToolsVersion="Xcode 4.3">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="8195" systemVersion="14F27" minimumToolsVersion="Xcode 4.3">
     <entity name="FloorData" representedClassName="FloorData" syncable="YES">
         <attribute name="bonus" optional="YES" attributeType="Boolean" defaultValueString="0" syncable="YES"/>
         <attribute name="deaths" optional="YES" attributeType="Boolean" syncable="YES"/>
@@ -17,7 +17,9 @@
         <attribute name="configControls" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
         <attribute name="gems" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="lastPlayedTower" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="musicEnabled" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="soundEnabled" optional="YES" attributeType="Boolean" syncable="YES"/>
         <relationship name="invitedFriends" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="InvitedFriendData" inverseName="playerData" inverseEntity="InvitedFriendData" syncable="YES"/>
         <relationship name="powerUps" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PowerUpData" inverseName="playerData" inverseEntity="PowerUpData" syncable="YES"/>
         <relationship name="powerUpSlots" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="PowerUpSlotData" inverseName="playerData" inverseEntity="PowerUpSlotData" syncable="YES"/>
@@ -56,7 +58,7 @@
     <elements>
         <element name="FloorData" positionX="-29" positionY="-147" width="128" height="135"/>
         <element name="InvitedFriendData" positionX="126" positionY="-477" width="128" height="73"/>
-        <element name="PlayerData" positionX="394" positionY="-486" width="128" height="210"/>
+        <element name="PlayerData" positionX="394" positionY="-486" width="128" height="240"/>
         <element name="PowerUpData" positionX="711" positionY="-390" width="128" height="118"/>
         <element name="PowerUpSlotData" positionX="126" positionY="-378" width="128" height="73"/>
         <element name="SkinData" positionX="412" positionY="-126" width="128" height="118"/>

@@ -29,11 +29,11 @@ class MemoryCard: NSObject {
     }
     
     func currentTower() -> TowerData {
-        return MemoryCard.sharedInstance.playerData.towers[MapManager.tower] as! TowerData
+        return MemoryCard.sharedInstance.playerData.towers[MapManager.tower < 0 ? 0 : MapManager.tower] as! TowerData
     }
     
     func currentFloor() -> FloorData {
-        let towerData = MemoryCard.sharedInstance.playerData.towers[MapManager.tower] as! TowerData
+        let towerData = self.currentTower()
         return towerData.floors[MapManager.floor] as! FloorData
     }
     
@@ -42,10 +42,6 @@ class MemoryCard: NSObject {
         
         //Player
         self.playerData = self.newPlayerData()
-        self.playerData.name = String.randomStringWithLength(8)
-        self.playerData.coins = NSNumber(int: 1000)
-        self.playerData.configControls = NSNumber(integer: controlsConfig.useButtons.rawValue)
-
         
         //Towers e Floors
         let tower = self.newTowerData()
@@ -209,7 +205,16 @@ class MemoryCard: NSObject {
     }
     
     func newPlayerData() -> PlayerData {
-        return NSEntityDescription.insertNewObjectForEntityForName("PlayerData", inManagedObjectContext: self.managedObjectContext!) as! PlayerData
+        let playerData = NSEntityDescription.insertNewObjectForEntityForName("PlayerData", inManagedObjectContext: self.managedObjectContext!) as! PlayerData
+        
+        playerData.name = String.randomStringWithLength(8)
+        playerData.coins = NSNumber(int: 1000)
+        playerData.configControls = NSNumber(integer: controlsConfig.useButtons.rawValue)
+        
+        playerData.soundEnabled = NSNumber(bool: true)
+        playerData.musicEnabled = NSNumber(bool: true)
+        
+        return playerData
     }
     
     func newTowerData() -> TowerData {
