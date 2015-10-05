@@ -63,6 +63,8 @@ class Towers: NSObject {
         TowerType(tileset:"tundra", floorTypes: Array<FloorType>([
             FloorType(maxDeathCount: 8, maxTime: 45, minCoins: 80)
             ]))
+        
+        
         ])
 }
 
