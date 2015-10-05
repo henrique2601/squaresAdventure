@@ -23,13 +23,25 @@ class Towers: NSObject {
             FloorType(maxDeathCount: 4, maxTime: 25, minCoins: 40),
             FloorType(maxDeathCount: 5, maxTime: 30, minCoins: 50),
             FloorType(maxDeathCount: 6, maxTime: 35, minCoins: 60),
-            FloorType(maxDeathCount: 7, maxTime: 40, minCoins: 70)
+            FloorType(maxDeathCount: 7, maxTime: 40, minCoins: 70),
+            FloorType(maxDeathCount: 1, maxTime: 15, minCoins: 44),
+            FloorType(maxDeathCount: 1, maxTime: 15, minCoins: 44)
             ])),
         
         TowerType(tileset:"sand", floorTypes: Array<FloorType>([
             FloorType(maxDeathCount: 8, maxTime: 45, minCoins: 80),
             FloorType(maxDeathCount: 9, maxTime: 50, minCoins: 90)
+            ])),
+        
+        TowerType(tileset:"metal", floorTypes: Array<FloorType>([
+            FloorType(maxDeathCount: 1, maxTime: 60, minCoins: 10)
+            ])),
+        
+        TowerType(tileset:"cake", floorTypes: Array<FloorType>([
+            FloorType(maxDeathCount: 1, maxTime: 60, minCoins: 10)
             ]))
+        
+        
         ])
 }
 

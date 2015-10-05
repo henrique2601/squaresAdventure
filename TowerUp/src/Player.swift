@@ -177,6 +177,8 @@ class Player: Square {
             
         case physicsCategory.spring.rawValue:
             self.physicsBody!.applyImpulse(CGVector(dx: 0, dy: 25))
+            self.physicsBody!.angularVelocity = self.physicsBody!.angularVelocity/2
+            self.physicsBody!.velocity.dx = self.physicsBody!.velocity.dx/2
             break
             
         case physicsCategory.bomb.rawValue:
@@ -292,10 +294,10 @@ class Player: Square {
                             break
                         }
                     }
+                } else {
+                    //Player esta no ar
+                    self.needAngularImpulse = 3
                 }
-            } else {
-                //Player esta no ar
-                self.needAngularImpulse = 3
             }
             
             if self.move != 0 {
@@ -324,7 +326,7 @@ class Player: Square {
     
     func ajustAngle() {
         if let physicsBody = self.physicsBody {
-            if(abs(physicsBody.angularVelocity) < CGFloat(M_PI)) {
+            if(abs(physicsBody.angularVelocity) < CGFloat(M_PI) * 2) {
                 self.totalRotation = self.auxRotation - self.zRotation
                 
                 while(self.totalRotation < -CGFloat(M_PI)) { self.totalRotation += CGFloat(M_PI * 2) }
