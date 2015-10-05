@@ -36,5 +36,13 @@ class BoxDeathsAndTime: Control {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    func reset()
+    {
+        self.labelTime.setText("0")
+        self.labelDeaths.setText("0")
+        self.time = 0 
+        
+    }
 
 }

@@ -18,12 +18,17 @@ class MapManager: SKNode {
     
     static var tower = 0 {
         didSet {
-            MemoryCard.sharedInstance.playerData.lastPlayedTower = NSNumber(integer: MapManager.tower)
+            if MapManager.tower >= 0 {
+                
+                MemoryCard.sharedInstance.playerData.lastPlayedTower = NSNumber(integer: MapManager.tower)
+            }
         }
     }
     static var floor = 0 {
         didSet {
-            MemoryCard.sharedInstance.currentTower().lastPlayedFloor = NSNumber(integer: MapManager.floor)
+            if MapManager.tower >= 0 {
+                MemoryCard.sharedInstance.currentTower().lastPlayedFloor = NSNumber(integer: MapManager.floor)
+            }
         }
     }
     

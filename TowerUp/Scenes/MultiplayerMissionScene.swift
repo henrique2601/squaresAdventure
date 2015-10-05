@@ -59,6 +59,8 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
     //let socket = SocketIOClient(socketURL: "179.232.86.110:3001", opts: nil)
     let socket = SocketIOClient(socketURL: "181.41.197.181:3001", opts: nil)
     
+    var winPlayersList = Dictionary<String,Int>()
+    
     var boxCoins:BoxCoins!
     var collectedBonus = 0 {
         didSet {
