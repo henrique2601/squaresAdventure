@@ -44,6 +44,10 @@ class OptionsScene: GameScene, FBSDKGameRequestDialogDelegate {
     var nameFriendArray = NSMutableArray()
     var loadingImage:SKSpriteNode!
     
+    lazy var deathEffect:SKAction = {
+        return SKAction.repeatActionForever(SKAction.rotateByAngle(CGFloat(M_PI * 2), duration: 1))
+        }()
+    
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
         self.backgroundColor = GameColors.blue
@@ -102,7 +106,7 @@ class OptionsScene: GameScene, FBSDKGameRequestDialogDelegate {
                 spriteNode = SKSpriteNode(imageNamed: "useLeftSliderAndScreenRight")
                 controlsArray.append(spriteNode)
                 
-                self.chooseControlsScrollNode = ScrollNode(x: 667, y: 466, cells:controlsArray, spacing:1, scaleNodes:true, scaleDistance:1334/4 + 100, index:self.playerData.configControls.integerValue)
+                self.chooseControlsScrollNode = ScrollNode(x: 667, y: 466, cells:controlsArray, spacing:1, scaleNodes:true, scaleDistance:1334/4 + 100, index:self.playerData.configControls.integerValue - 1)
                 self.addChild(self.chooseControlsScrollNode)
                 
                 let size = self.size.width > self.size.height ? self.size.width : self.size.height
@@ -123,7 +127,7 @@ class OptionsScene: GameScene, FBSDKGameRequestDialogDelegate {
                 self.loadingImage.position = CGPoint(x: 1334/4, y: -750/4)
                 self.addChild(self.loadingImage)
                 
-                self.loadingImage.runAction(SKAction.repeatActionForever(SKAction.rotateByAngle(CGFloat(M_PI * 2), duration: 1)))
+                self.loadingImage.runAction(self.deathEffect)
                 
                 self.blackSpriteNode = SKSpriteNode(color: GameColors.black, size: CGSize(width: size * 2, height: size * 2))
                 self.blackSpriteNode.anchorPoint = CGPoint(x: 0, y: 1)

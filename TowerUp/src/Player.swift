@@ -309,10 +309,6 @@ class Player: Square {
                     //Player esta no ar
                     self.needAngularImpulse = 3
                 }
-                else {
-                    //Player esta no ar
-                    self.needAngularImpulse = 3
-                }
             }
             
             if self.move != 0 {

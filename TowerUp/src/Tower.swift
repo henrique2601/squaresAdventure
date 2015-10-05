@@ -17,14 +17,15 @@ class Towers: NSObject {
     
     static var types = Array<TowerType>([
         TowerType(tileset:"grass", floorTypes: Array<FloorType>([
-            FloorType(maxDeathCount: 1, maxTime: 10, minCoins: 1),
-            FloorType(maxDeathCount: 10, maxTime: 150, minCoins: 1)
-//            ,
-//            FloorType(maxDeathCount: 3, maxTime: 20, minCoins: 30),
-//            FloorType(maxDeathCount: 4, maxTime: 25, minCoins: 40),
-//            FloorType(maxDeathCount: 5, maxTime: 30, minCoins: 50),
-//            FloorType(maxDeathCount: 6, maxTime: 35, minCoins: 60),
-//            FloorType(maxDeathCount: 7, maxTime: 40, minCoins: 70)
+            FloorType(maxDeathCount: 1, maxTime: 10, minCoins: 10),
+            FloorType(maxDeathCount: 2, maxTime: 15, minCoins: 20),
+            FloorType(maxDeathCount: 3, maxTime: 20, minCoins: 30),
+            FloorType(maxDeathCount: 4, maxTime: 25, minCoins: 40),
+            FloorType(maxDeathCount: 5, maxTime: 30, minCoins: 50),
+            FloorType(maxDeathCount: 6, maxTime: 35, minCoins: 60),
+            FloorType(maxDeathCount: 7, maxTime: 40, minCoins: 70),
+            FloorType(maxDeathCount: 1, maxTime: 15, minCoins: 44),
+            FloorType(maxDeathCount: 1, maxTime: 15, minCoins: 44)
             ])),
         
         TowerType(tileset:"sand", floorTypes: Array<FloorType>([
@@ -49,22 +50,9 @@ class Towers: NSObject {
             ])),
         
         TowerType(tileset:"metal", floorTypes: Array<FloorType>([
-            FloorType(maxDeathCount: 8, maxTime: 45, minCoins: 80)
-            ])),
-        
-        TowerType(tileset:"purple", floorTypes: Array<FloorType>([
-            FloorType(maxDeathCount: 8, maxTime: 45, minCoins: 80)
-            ])),
-        
-        TowerType(tileset:"snow", floorTypes: Array<FloorType>([
-            FloorType(maxDeathCount: 8, maxTime: 45, minCoins: 80)
-            ])),
-        
-        TowerType(tileset:"tundra", floorTypes: Array<FloorType>([
-            FloorType(maxDeathCount: 8, maxTime: 45, minCoins: 80)
+            FloorType(maxDeathCount: 8, maxTime: 45, minCoins: 80),
+            FloorType(maxDeathCount: 1, maxTime: 60, minCoins: 10)
             ]))
-        
-        
         ])
 }
 
