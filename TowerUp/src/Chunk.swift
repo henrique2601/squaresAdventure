@@ -17,7 +17,7 @@ class Chunk: SKSpriteNode {
     static var maxChunkX = 0
     static var maxChunkY = 0
     
-    var type:String = MapManager.tower == -1 ? Towers.types[Int.random(Towers.types.count)].tileset : Towers.types[MapManager.tower].tileset
+    var type:String = MapManager.tower == -1 ? Towers.types[MapManager.floor % Towers.types.count].tileset : Towers.types[MapManager.tower].tileset
     
     init(tower:Int, floor:Int, regionX:Int, regionY:Int) {
         super.init(texture: nil, color: UIColor.clearColor(), size: CGSize(width: Chunk.sizeInPoints, height: Chunk.sizeInPoints))

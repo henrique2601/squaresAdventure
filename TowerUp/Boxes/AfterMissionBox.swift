@@ -107,7 +107,7 @@ class AfterMissionBox: Box {
         }
         
         for(var i = 0; i <= floorData.stars.integerValue; i++) {
-            switch(i){
+            switch(i) {
             case 0:
                 break
             case 1:
@@ -124,6 +124,10 @@ class AfterMissionBox: Box {
                 break
             }
         }
+        
+        self.labelBonus.zPosition = afterMissionBoxBackground.zPosition + 1
+        self.labelDeaths.zPosition = afterMissionBoxBackground.zPosition + 1
+        self.labelTime.zPosition = afterMissionBoxBackground.zPosition + 1
     }
     
     required init?(coder aDecoder: NSCoder) {

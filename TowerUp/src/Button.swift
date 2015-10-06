@@ -65,7 +65,7 @@ class Button: Control {
             
             let icon = SKSpriteNode(texture: iconTexture, size: CGSize(width: iconTexture.size().width * scale, height: iconTexture.size().height * scale))
             
-            icon.color = GameColors.black
+            icon.color = UIColor(red: 0, green: 0, blue: 0, alpha: 0.75 * colorBlendFactor)
             icon.colorBlendFactor = 1
             self.button.addChild(icon)
             icon.position = CGPoint(x: texture.size().width/2, y: -texture.size().height/2)
@@ -100,7 +100,7 @@ class Button: Control {
             
             let iconPressed = SKSpriteNode(texture: iconTexturePressed, size: CGSize(width: iconTexturePressed.size().width * scale, height: iconTexturePressed.size().height * scale))
             
-            iconPressed.color = GameColors.white
+            iconPressed.color = UIColor(red: 1, green: 1, blue: 1, alpha: 0.75 * colorBlendFactor)
             iconPressed.colorBlendFactor = 1
             self.buttonPressed.addChild(iconPressed)
             iconPressed.position = CGPoint(x: texturePressed.size().width/2, y: -texturePressed.size().height/2 - 2)
