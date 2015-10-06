@@ -12,7 +12,7 @@ import SpriteKit
 class SoundEffect: NSObject {
     
     enum files : String {
-        case boom = "boom4"
+        case boom = "boom4.wav"
     }
     
     var sound:SKAction!

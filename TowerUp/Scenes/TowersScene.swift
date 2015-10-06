@@ -50,7 +50,7 @@ class TowersScene: GameScene {
                 cell.addChild(spriteNode)
                 
                 //towerType.tileset
-                let backgroundNode = SKSpriteNode(imageNamed: "grassTower")
+                let backgroundNode = SKSpriteNode(imageNamed: Towers.types[towerIndex].tileset + "Tower")
                 backgroundNode.zPosition = cell.zPosition + CGFloat(1)
                 cell.addChild(backgroundNode)
                 

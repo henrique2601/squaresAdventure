@@ -159,6 +159,10 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
             }
             
             this.player.name = this.localName
+            this.room = data?[1] as! Int
+            MapManager.floor = data?[2] as! Int
+            this.mapManager.reloadMap(CGPoint(x: 10, y: Chunk.sizeInPoints + 10))
+            this.player.reset()
             
             this.player.labelName.position = CGPoint(x: this.player!.position.x, y: this.player!.position.y + 32)
             this.player.labelName.zPosition = this.player!.zPosition + 1
@@ -259,7 +263,7 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
                 return
             }
             
-            this.socket.emit(messages.joinRoom.rawValue, this.localName! , this.room, this.playerData.skinSlot.skin.index.integerValue)
+            this.socket.emit(messages.joinRoom.rawValue, this.localName! , this.playerData.skinSlot.skin.index.integerValue)
         }
         
         self.socket.on(messages.join.rawValue) {[weak self] data, ack in
