@@ -211,8 +211,8 @@ class MemoryCard: NSObject {
         playerData.coins = NSNumber(int: 1000)
         playerData.configControls = NSNumber(integer: controlsConfig.useButtons.rawValue)
         
-        playerData.soundEnabled = NSNumber(bool: true)
-        playerData.musicEnabled = NSNumber(bool: true)
+        playerData.soundEnabled = NSNumber(bool: false)
+        playerData.musicEnabled = NSNumber(bool: false)
         
         return playerData
     }

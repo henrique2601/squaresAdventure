@@ -31,28 +31,42 @@ class Towers: NSObject {
         TowerType(tileset:"sand", floorTypes: Array<FloorType>([
             FloorType(maxDeathCount: 8, maxTime: 45, minCoins: 80),
             FloorType(maxDeathCount: 9, maxTime: 50, minCoins: 90)
-            ])),
+            ]))
         
+        /*,
         TowerType(tileset:"cake", floorTypes: Array<FloorType>([
-            FloorType(maxDeathCount: 8, maxTime: 45, minCoins: 80)
-            ])),
+        FloorType(maxDeathCount: 8, maxTime: 45, minCoins: 80)
+        ])),
         
         TowerType(tileset:"castle", floorTypes: Array<FloorType>([
-            FloorType(maxDeathCount: 8, maxTime: 45, minCoins: 80)
-            ])),
+        FloorType(maxDeathCount: 8, maxTime: 45, minCoins: 80)
+        ])),
         
         TowerType(tileset:"choco", floorTypes: Array<FloorType>([
-            FloorType(maxDeathCount: 8, maxTime: 45, minCoins: 80)
-            ])),
+        FloorType(maxDeathCount: 8, maxTime: 45, minCoins: 80)
+        ])),
         
         TowerType(tileset:"dirt", floorTypes: Array<FloorType>([
-            FloorType(maxDeathCount: 8, maxTime: 45, minCoins: 80)
-            ])),
+        FloorType(maxDeathCount: 8, maxTime: 45, minCoins: 80)
+        ])),
         
         TowerType(tileset:"metal", floorTypes: Array<FloorType>([
-            FloorType(maxDeathCount: 8, maxTime: 45, minCoins: 80),
-            FloorType(maxDeathCount: 1, maxTime: 60, minCoins: 10)
-            ]))
+        FloorType(maxDeathCount: 8, maxTime: 45, minCoins: 80)
+        ])),
+        
+        TowerType(tileset:"purple", floorTypes: Array<FloorType>([
+        FloorType(maxDeathCount: 8, maxTime: 45, minCoins: 80)
+        ])),
+        
+        TowerType(tileset:"snow", floorTypes: Array<FloorType>([
+        FloorType(maxDeathCount: 8, maxTime: 45, minCoins: 80)
+        ])),
+        
+        TowerType(tileset:"tundra", floorTypes: Array<FloorType>([
+        FloorType(maxDeathCount: 8, maxTime: 45, minCoins: 80)
+        ]))
+        */
+        
         ])
 }
 

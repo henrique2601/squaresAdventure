@@ -61,6 +61,8 @@ class OptionsScene: GameScene, FBSDKGameRequestDialogDelegate {
         self.buttonChooseControls = Button(textureName: "buttonBlueSmall", text:"CONTROLS", x: 20, y: 304)
         self.addChild(self.buttonChooseControls)
         
+        //self.addChild(Button(textureName: "buttonBlueSquare", icon:"music", x: 182, y: 466))
+        
         self.buttonBack = Button(textureName: "buttonGraySquareSmall", text:"<", x: 20, y: 652, xAlign:.left, yAlign:.down)
         self.buttonBack.zPosition = Config.HUDZPosition * 2 + 1
         self.addChild(self.buttonBack)
