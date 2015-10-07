@@ -17,6 +17,7 @@ class OptionsScene: GameScene, FBSDKGameRequestDialogDelegate {
         case chooseControls
         case mainMenu
         case invite
+        case soundConfig
     }
     
     var state = states.options
@@ -34,6 +35,7 @@ class OptionsScene: GameScene, FBSDKGameRequestDialogDelegate {
     var buttonChooseControls:Button!
     var buttonBack:Button!
     var buttonInvite:Button!
+    var buttonSoundConfig:Button!
     
     var playerData = MemoryCard.sharedInstance.playerData
     
@@ -61,7 +63,8 @@ class OptionsScene: GameScene, FBSDKGameRequestDialogDelegate {
         self.buttonChooseControls = Button(textureName: "buttonBlueSmall", text:"CONTROLS", x: 20, y: 304)
         self.addChild(self.buttonChooseControls)
         
-        //self.addChild(Button(textureName: "buttonBlueSquare", icon:"music", x: 182, y: 466))
+        self.buttonSoundConfig = Button(textureName: "buttonBlueSmall", icon:"music", x: 274, y: 202)
+        self.addChild(self.buttonSoundConfig)
         
         self.buttonBack = Button(textureName: "buttonGraySquareSmall", text:"<", x: 20, y: 652, xAlign:.left, yAlign:.down)
         self.buttonBack.zPosition = Config.HUDZPosition * 2 + 1
@@ -139,6 +142,23 @@ class OptionsScene: GameScene, FBSDKGameRequestDialogDelegate {
                 self.loadingImage.zPosition = self.blackSpriteNode.zPosition + 1
                 
                 self.inviteFriends(nil, limit: 50)
+                
+                break
+                
+            case states.soundConfig:
+                
+                let box = SoundConfigBox()
+                
+                let buttonOk = Button(textureName: "buttonBlueSmall", text: "Ok", x: 53, y: 253)
+                buttonOk.addHandler({
+                    self.nextState = .options
+                    if let parent = buttonOk.parent {
+                        parent.removeFromParent()
+                    }
+                })
+                
+                self.addChild(box)
+                box.addChild(buttonOk)
                 
                 break
                 
@@ -243,6 +263,11 @@ class OptionsScene: GameScene, FBSDKGameRequestDialogDelegate {
                     if (self.buttonInvite.containsPoint(location)) {
                         //self.inviteFriends(nil, limit: 50)
                         self.nextState = .invite
+                        return
+                    }
+                    
+                    if (self.buttonSoundConfig.containsPoint(location)) {
+                        self.nextState = .soundConfig
                         return
                     }
                     

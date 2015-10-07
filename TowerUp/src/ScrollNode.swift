@@ -137,6 +137,8 @@ class ScrollNode: Control {
                                             cell.position = CGPoint(x: Int(position.x) + dx, y: Int(position.y))
                                             if(scrollNode.scaleNodes) {
                                                 scrollNode.setCellScale(cell)
+                                            } else {
+                                                scrollNode.setCellHidden(cell)
                                             }
                                         }
                                     } else {
@@ -146,6 +148,8 @@ class ScrollNode: Control {
                                             cell.position = CGPoint(x: Int(position.x) - auxMove, y: Int(position.y))
                                             if(scrollNode.scaleNodes) {
                                                 scrollNode.setCellScale(cell)
+                                            } else {
+                                                scrollNode.setCellHidden(cell)
                                             }
                                         }
                                     }
@@ -157,6 +161,8 @@ class ScrollNode: Control {
                                             cell.position = CGPoint(x: Int(position.x) + dx, y: Int(position.y))
                                             if(scrollNode.scaleNodes) {
                                                 scrollNode.setCellScale(cell)
+                                            } else {
+                                                scrollNode.setCellHidden(cell)
                                             }
                                         }
                                     } else {
@@ -196,6 +202,8 @@ class ScrollNode: Control {
                                             cell.position = CGPoint(x: Int(position.x), y: Int(position.y) + dy)
                                             if(scrollNode.scaleNodes) {
                                                 scrollNode.setCellScale(cell)
+                                            } else {
+                                                scrollNode.setCellHidden(cell)
                                             }
                                         }
                                     } else {
@@ -205,6 +213,8 @@ class ScrollNode: Control {
                                             cell.position = CGPoint(x: Int(position.x), y: Int(position.y) - auxMove)
                                             if(scrollNode.scaleNodes) {
                                                 scrollNode.setCellScale(cell)
+                                            } else {
+                                                scrollNode.setCellHidden(cell)
                                             }
                                         }
                                     }
@@ -216,6 +226,8 @@ class ScrollNode: Control {
                                             cell.position = CGPoint(x: Int(position.x), y: Int(position.y) + dy)
                                             if(scrollNode.scaleNodes) {
                                                 scrollNode.setCellScale(cell)
+                                            } else {
+                                                scrollNode.setCellHidden(cell)
                                             }
                                         }
                                     } else {
@@ -225,6 +237,8 @@ class ScrollNode: Control {
                                             cell.position = CGPoint(x: Int(position.x), y: Int(position.y) - auxMove)
                                             if(scrollNode.scaleNodes) {
                                                 scrollNode.setCellScale(cell)
+                                            } else {
+                                                scrollNode.setCellHidden(cell)
                                             }
                                         }
                                     }
@@ -236,6 +250,18 @@ class ScrollNode: Control {
                 }
             }
         }
+    }
+    
+    private func setCellHidden(spriteNode:SKNode) {
+        switch(self.scrollType) {
+        case scrollTypes.horizontal:
+            spriteNode.hidden = abs(spriteNode.position.x) > self.scaleDistance
+            break
+        case scrollTypes.vertical:
+            spriteNode.setScale(max(0, 1 - abs(spriteNode.position.y/self.scaleDistance)))
+            break
+        }
+        
     }
     
     private func setCellScale(spriteNode:SKNode) {

@@ -16,19 +16,34 @@ class Switch: Control {
     var switch0:SKSpriteNode!
     var switch1:SKSpriteNode!
     
-    func load(textureName: String, x: Int, y: Int, xAlign: Control.xAlignments, yAlign:Control.yAlignments) {
-        self.position = CGPoint(x: x/2 + Int(Config.translate.x), y: -y/2 - Int(Config.translate.y))
+    var on:Bool = false
+    
+    init(textureName:String, on:Bool = true, x:Int = 0, y:Int = 0, xAlign:Control.xAlignments = .left, yAlign:Control.yAlignments = .up) {
+        super.init()
+        self.load(textureName, on:on, x: x, y: y, xAlign: xAlign, yAlign: yAlign)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func load(textureName: String, on:Bool, x: Int, y: Int, xAlign: Control.xAlignments, yAlign:Control.yAlignments) {
+        
+        self.sketchPosition = CGPoint(x: x, y: y)
+        self.yAlign = yAlign
+        self.xAlign = xAlign
         self.zPosition = Config.HUDZPosition
         
         let texture0 = SKTexture(imageNamed: "\(textureName)0")
         self.switch0 = SKSpriteNode(texture: texture0, size: texture0.size())
         self.switch0.anchorPoint = CGPoint(x: 0, y: 1)
+        self.switch0.hidden = on
         self.addChild(self.switch0)
         
         let texture1 = SKTexture(imageNamed: "\(textureName)1")
         self.switch1 = SKSpriteNode(texture: texture1, size: texture1.size())
         self.switch1.anchorPoint = CGPoint(x: 0, y: 1)
-        self.switch1.hidden = true
+        self.switch1.hidden = !on
         self.addChild(self.switch1)
         
         Switch.switchList.insert(self)
@@ -53,9 +68,11 @@ class Switch: Control {
         }
     }
     
-    func switchPressed() {
-        self.switch0.hidden = self.switch0.hidden
-        self.switch1.hidden = self.switch1.hidden
+    private func switchPressed() {
+        self.switch0.hidden = !self.switch0.hidden
+        self.switch1.hidden = !self.switch1.hidden
+        
+        self.on = self.switch0.hidden
     }
     
     override func removeFromParent() {

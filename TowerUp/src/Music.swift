@@ -28,12 +28,20 @@ class Music: NSObject {
                 try self.audioPlayer = AVAudioPlayer(contentsOfURL: backgroundMusicURL!)
                 self.audioPlayer.numberOfLoops = -1
                 self.audioPlayer.prepareToPlay()
-                self.audioPlayer.play()
+                self.play()
             } catch {
                 #if DEBUG
                     fatalError()
                 #endif
             }
+        }
+    }
+    
+    func play() {
+        if(MemoryCard.sharedInstance.playerData.musicEnabled.boolValue == true) {
+            self.audioPlayer.play()
+        } else {
+            self.audioPlayer.pause()
         }
     }
 }
