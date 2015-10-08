@@ -42,27 +42,29 @@ class Control: SKNode {
         super.init()
     }
     
-    init(name:String = "", textureName:String, x:Int = 0, y:Int = 0, xAlign:Control.xAlignments = .left, yAlign:Control.yAlignments = .up) {
+    init(name:String = "", textureName:String, x:Int = 0, y:Int = 0, z:Int = 0, xAlign:Control.xAlignments = .left, yAlign:Control.yAlignments = .up) {
         super.init()
         let texture = SKTexture(imageNamed: textureName)
-        self.load(name, texture: texture, x: x, y: y, xAlign: xAlign, yAlign: yAlign)
+        self.load(name, texture: texture, x: x, y: y, z:z, xAlign: xAlign, yAlign: yAlign)
     }
     
-    init(name:String = "", texture:SKTexture, x:Int = 0, y:Int = 0, xAlign:Control.xAlignments = .left, yAlign:Control.yAlignments = .up) {
+    init(name:String = "", texture:SKTexture, x:Int = 0, y:Int = 0, z:Int = 0, xAlign:Control.xAlignments = .left, yAlign:Control.yAlignments = .up) {
         super.init()
-        self.load(name, texture: texture, x: x, y: y, xAlign: xAlign, yAlign: yAlign)
+        self.load(name, texture: texture, x: x, y: y, z:z, xAlign: xAlign, yAlign: yAlign)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func load(name:String, texture:SKTexture, x:Int, y:Int, xAlign:Control.xAlignments, yAlign:Control.yAlignments) {
+    func load(name:String, texture:SKTexture, x:Int, y:Int, z:Int, xAlign:Control.xAlignments, yAlign:Control.yAlignments) {
         self.name = name
         self.sketchPosition = CGPoint(x: x, y: y)
         self.yAlign = yAlign
         self.xAlign = xAlign
-        self.zPosition = Config.HUDZPosition/2
+        
+        self.zPosition = (z == 0 ? Config.HUDZPosition/2 : CGFloat(z))
+        
         
         let spriteNode = SKSpriteNode(texture: texture, size: texture.size())
         spriteNode.anchorPoint = CGPoint(x: 0, y: 1)
