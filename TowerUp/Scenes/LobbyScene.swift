@@ -66,7 +66,8 @@ class LobbyScene: GameScene, UITextFieldDelegate {
     
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
-        self.addChild(Control(textureName: "lobby1Background", xAlign: .center, yAlign: .center))
+        self.addChild(Control(textureName: "mainMenuBackground", z: -1001, xAlign: .center, yAlign: .center))
+        self.addChild(Control(textureName: "lobbyBackground", z: -1000, xAlign: .center, yAlign: .center))
         self.backgroundColor = GameColors.blue
         
         self.buttonOnline = Button(textureName: "buttonYellow", text:"ONLINE GAME", x: 229, y: 269, xAlign: .center, yAlign: .center)
