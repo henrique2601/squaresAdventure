@@ -13,6 +13,9 @@ class SoundEffect: NSObject {
     
     enum files : String {
         case boom = "boom4.wav"
+        case coin = "Coin.wav"
+        case jump = "jump_01.wav"
+        case player_Spike = "qubodupImpactMeat01.wav"
     }
     
     var sound:SKAction!
