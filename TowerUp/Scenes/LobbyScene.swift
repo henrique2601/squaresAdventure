@@ -90,7 +90,7 @@ class LobbyScene: GameScene, UITextFieldDelegate {
                 powerUpSlotsArray.append(PowerUpSlot(powerUpSlotData: item as! PowerUpSlotData))
             }
             
-            self.powerUpSlotsScrollNode = ScrollNode(x: 768, y: 591, xAlign: .center, yAlign: .down, cells: powerUpSlotsArray, scrollDirection: ScrollNode.scrollTypes.horizontal, scaleNodes: false)
+            self.powerUpSlotsScrollNode = ScrollNode(x: 768, y: 591, xAlign: .center, yAlign: .center, cells: powerUpSlotsArray, scrollDirection: ScrollNode.scrollTypes.horizontal, scaleNodes: false)
             self.powerUpSlotsScrollNode.canScroll = false
             self.addChild(self.powerUpSlotsScrollNode)
         }
