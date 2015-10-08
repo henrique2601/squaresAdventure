@@ -291,7 +291,7 @@
 		5CF8A3A51B8F39A000C16CA9 /* PowerUpData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PowerUpData.swift; path = CoreData/PowerUpData.swift; sourceTree = "<group>"; };
 		5CF8A3A71B8F39A000C16CA9 /* FloorData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FloorData.swift; path = CoreData/FloorData.swift; sourceTree = "<group>"; };
 		5CF8A3A91B8F39A000C16CA9 /* SkinData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SkinData.swift; path = CoreData/SkinData.swift; sourceTree = "<group>"; };
-		81BA81451A49DA1800E65899 /* TowerUp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TowerUp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		81BA81451A49DA1800E65899 /* Squares Adventure.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Squares Adventure.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81BA81491A49DA1800E65899 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		81BA814A1A49DA1800E65899 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		81BA814C1A49DA1800E65899 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -1442,7 +1442,7 @@
 		81BA81461A49DA1800E65899 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				81BA81451A49DA1800E65899 /* TowerUp.app */,
+				81BA81451A49DA1800E65899 /* Squares Adventure.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1508,9 +1508,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		81BA81441A49DA1800E65899 /* TowerUp */ = {
+		81BA81441A49DA1800E65899 /* Squares Adventure */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 81BA81641A49DA1800E65899 /* Build configuration list for PBXNativeTarget "TowerUp" */;
+			buildConfigurationList = 81BA81641A49DA1800E65899 /* Build configuration list for PBXNativeTarget "Squares Adventure" */;
 			buildPhases = (
 				81BA81411A49DA1800E65899 /* Sources */,
 				81BA81421A49DA1800E65899 /* Frameworks */,
@@ -1521,9 +1521,9 @@
 			);
 			dependencies = (
 			);
-			name = TowerUp;
+			name = "Squares Adventure";
 			productName = TowerUp;
-			productReference = 81BA81451A49DA1800E65899 /* TowerUp.app */;
+			productReference = 81BA81451A49DA1800E65899 /* Squares Adventure.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -1542,7 +1542,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 81BA81401A49DA1800E65899 /* Build configuration list for PBXProject "TowerUp" */;
+			buildConfigurationList = 81BA81401A49DA1800E65899 /* Build configuration list for PBXProject "Squares Adventure" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -1557,7 +1557,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				81BA81441A49DA1800E65899 /* TowerUp */,
+				81BA81441A49DA1800E65899 /* Squares Adventure */,
 			);
 		};
 /* End PBXProject section */
@@ -1846,7 +1846,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				"OTHER_SWIFT_FLAGS[arch=*]" = "-D DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = com.WTFGames.TowerUp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Squares Adventure";
 				SWIFT_OBJC_BRIDGING_HEADER = "TowerUp/TowerUp-Bridging-Header.h";
 			};
 			name = Debug;
@@ -1866,7 +1866,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				"OTHER_SWIFT_FLAGS[arch=*]" = "-D RELEASE";
 				PRODUCT_BUNDLE_IDENTIFIER = com.WTFGames.TowerUp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Squares Adventure";
 				SWIFT_OBJC_BRIDGING_HEADER = "TowerUp/TowerUp-Bridging-Header.h";
 			};
 			name = Release;
@@ -1874,7 +1874,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		81BA81401A49DA1800E65899 /* Build configuration list for PBXProject "TowerUp" */ = {
+		81BA81401A49DA1800E65899 /* Build configuration list for PBXProject "Squares Adventure" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				81BA81621A49DA1800E65899 /* Debug */,
@@ -1883,7 +1883,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		81BA81641A49DA1800E65899 /* Build configuration list for PBXNativeTarget "TowerUp" */ = {
+		81BA81641A49DA1800E65899 /* Build configuration list for PBXNativeTarget "Squares Adventure" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				81BA81651A49DA1800E65899 /* Debug */,

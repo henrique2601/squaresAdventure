@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:TowerUp.xcodeproj">
+      location = "self:/Users/paulo/Documents/aplicativos/TowerUp/Squares Adventure.xcodeproj">
    </FileRef>
 </Workspace>

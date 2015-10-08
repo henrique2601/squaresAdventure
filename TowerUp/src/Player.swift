@@ -215,8 +215,10 @@ class Player: Square {
             break
             
         case physicsCategory.winTile.rawValue:
-            self.physicsBody?.dynamic = false
-            self.win = true
+            if (self.healthPoints > 0) {
+                self.physicsBody?.dynamic = false
+                self.win = true
+            }
             break
             
         default:
