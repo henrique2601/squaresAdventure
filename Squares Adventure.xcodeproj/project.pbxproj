@@ -69,6 +69,7 @@
 		1383FD641B7A50990012DA45 /* Ground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1383FD631B7A50990012DA45 /* Ground.swift */; };
 		138F29031B8F8E28000DC7E7 /* ground -1 1 0 0 in Resources */ = {isa = PBXBuildFile; fileRef = 138F29021B8F8E28000DC7E7 /* ground -1 1 0 0 */; };
 		139501A31BC54AE90053EA5D /* SoundConfigBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139501A21BC54AE90053EA5D /* SoundConfigBox.swift */; settings = {ASSET_TAGS = (); }; };
+		139501A51BC6F98D0053EA5D /* Saw.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139501A41BC6F98D0053EA5D /* Saw.swift */; settings = {ASSET_TAGS = (); }; };
 		139A0E881B73D00200EDE944 /* BeforeMissionScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139A0E871B73D00200EDE944 /* BeforeMissionScene.swift */; };
 		139A0E8A1B73D05900EDE944 /* MissionScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139A0E891B73D05900EDE944 /* MissionScene.swift */; };
 		139A0E8F1B7431CB00EDE944 /* MemoryCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139A0E8E1B7431CB00EDE944 /* MemoryCard.swift */; };
@@ -221,6 +222,7 @@
 		1383FD631B7A50990012DA45 /* Ground.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ground.swift; sourceTree = "<group>"; };
 		138F29021B8F8E28000DC7E7 /* ground -1 1 0 0 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "ground -1 1 0 0"; sourceTree = "<group>"; };
 		139501A21BC54AE90053EA5D /* SoundConfigBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SoundConfigBox.swift; path = Boxes/SoundConfigBox.swift; sourceTree = "<group>"; };
+		139501A41BC6F98D0053EA5D /* Saw.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Saw.swift; path = src/Saw.swift; sourceTree = "<group>"; };
 		139A0E871B73D00200EDE944 /* BeforeMissionScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BeforeMissionScene.swift; path = Scenes/BeforeMissionScene.swift; sourceTree = "<group>"; };
 		139A0E891B73D05900EDE944 /* MissionScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MissionScene.swift; path = Scenes/MissionScene.swift; sourceTree = "<group>"; };
 		139A0E8E1B7431CB00EDE944 /* MemoryCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MemoryCard.swift; path = CoreData/MemoryCard.swift; sourceTree = "<group>"; };
@@ -402,6 +404,7 @@
 				1323FF5E1B90C7AF00EF4C2E /* PowerUp.swift */,
 				137DC5141BA1C3E300D58DED /* PowerUpSlot.swift */,
 				1308A4691BC2E35000D4F85B /* RandomSoundEffect.swift */,
+				139501A41BC6F98D0053EA5D /* Saw.swift */,
 				13DE13041B94C38E0092D50B /* ScrollNode.swift */,
 				1323FF601B90C83300EF4C2E /* Skin.swift */,
 				1305E4EC1BB18B1B009F9B0A /* Slider.swift */,
@@ -1720,6 +1723,7 @@
 				137D3D9D1BB42DDF003202D9 /* Bug.swift in Sources */,
 				135EA4911BBAE375006C765F /* GameFonts.swift in Sources */,
 				133184A21B83AADB00DF11D5 /* Spike.swift in Sources */,
+				139501A51BC6F98D0053EA5D /* Saw.swift in Sources */,
 				1305E4ED1BB18B1B009F9B0A /* Slider.swift in Sources */,
 				135C5CA61BA8364C006643BB /* SkinSlotData.swift in Sources */,
 				1323FF611B90C83300EF4C2E /* Skin.swift in Sources */,

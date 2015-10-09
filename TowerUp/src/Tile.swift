@@ -18,8 +18,8 @@ class Tile: SKSpriteNode {
         case bomb = 68
         case boxCreate = 69
         case gem = 70
-        //case ? = 71
-        //case ? = 72
+        case saw = 71
+        case woodenBridge = 72
         case spring = 73
         //case ? = 74
     }
