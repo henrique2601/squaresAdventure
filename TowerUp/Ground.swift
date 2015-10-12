@@ -25,6 +25,20 @@ class Ground: Tile {
         
         self.physicsBody!.dynamic = false
     }
+    
+    init(type:String, imageName:String, x:Int, y:Int) {
+        super.init(imageName: imageName, x: x, y: y)
+        
+        self.name = "ground"
+        let texture = SKTexture(imageNamed: imageName)
+        self.physicsBody = SKPhysicsBody(texture: texture, alphaThreshold: 0.7,  size: texture.size())
+        
+        self.physicsBody!.categoryBitMask = physicsCategory.ground.rawValue
+        self.physicsBody!.contactTestBitMask = physicsCategory.none.rawValue
+        self.physicsBody!.collisionBitMask = physicsCategory.none.rawValue
+        
+        self.physicsBody!.dynamic = false
+    }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

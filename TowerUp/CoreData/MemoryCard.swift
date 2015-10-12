@@ -208,7 +208,7 @@ class MemoryCard: NSObject {
         let playerData = NSEntityDescription.insertNewObjectForEntityForName("PlayerData", inManagedObjectContext: self.managedObjectContext!) as! PlayerData
         
         playerData.name = String.randomStringWithLength(8)
-        playerData.coins = NSNumber(int: 1000)
+        playerData.coins = NSNumber(int: 100000)
         playerData.configControls = NSNumber(integer: controlsConfig.useButtons.rawValue)
         
         playerData.soundEnabled = NSNumber(bool: false)

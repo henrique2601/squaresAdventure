@@ -13,9 +13,11 @@ class World: SKNode {
     
     var bodyA: SKPhysicsBody!
     var bodyB: SKPhysicsBody!
+    var physicsWorld:SKPhysicsWorld!
     
     init(physicsWorld:SKPhysicsWorld) {
         super.init()
+        self.physicsWorld = physicsWorld
         physicsWorld.gravity = CGVector(dx: 0.0, dy: -9.8)
     }
     
@@ -89,5 +91,6 @@ struct physicsCategory : OptionSetType {
     static var spring: physicsCategory { return physicsCategory(1 << 9) }
     static var boxCrate: physicsCategory { return physicsCategory(1 << 10) }
     static var gem: physicsCategory { return physicsCategory(1 << 11) }
+    static var saw: physicsCategory { return physicsCategory(1 << 12) }
     
 }

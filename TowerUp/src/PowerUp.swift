@@ -94,7 +94,7 @@ class PowerUp: Button {
         PowerUp.powerUpList.insert(self)
     }
     
-    func loadEvent(player:Player) {
+    func loadEvent(player:Player, world:World) {
         
         self.eventBegin = Event<Void>()
         self.eventUpdate = Event<Void>()
@@ -135,6 +135,19 @@ class PowerUp: Button {
                 } else {
                     self.lastUse = -1
                 }
+            })
+            break
+            
+        case 3://Reverse Gravity
+            self.eventBegin?.addHandler({
+                if(player.healthPoints > 0) {
+                    world.physicsWorld.gravity = CGVector(dx: 0.0, dy: 9.8)
+                } else {
+                    self.lastUse = -1
+                }
+            })
+            self.eventEnd?.addHandler({
+                world.physicsWorld.gravity = CGVector(dx: 0.0, dy: -9.8)
             })
             break
             
@@ -260,6 +273,7 @@ class PowerUps :NSObject {
     static var types = Array<PowerUpType>([
         PowerUpType(powerUpImage:"powerUp A", price:50, coolDown:5, duration:3),
         PowerUpType(powerUpImage:"powerUp B", price:75, coolDown:10, duration:5),
-        PowerUpType(powerUpImage:"powerUp C", price:150, coolDown:10, duration:0)
+        PowerUpType(powerUpImage:"powerUp C", price:150, coolDown:10, duration:0),
+        PowerUpType(powerUpImage:"powerUp D", price:500, coolDown:30, duration:2)
         ])
 }

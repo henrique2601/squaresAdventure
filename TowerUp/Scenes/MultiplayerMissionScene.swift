@@ -127,7 +127,7 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
                 if let powerUpSlotData = item as? PowerUpSlotData {
                     if let powerUpData = powerUpSlotData.powerUp {
                         let powerUp = PowerUp(powerUpData: powerUpData, colorBlendFactor: 0.5)
-                        powerUp.loadEvent(self.player)
+                        powerUp.loadEvent(self.player, world: self.world)
                         powerUpsArray.append(powerUp)
                     }
                 }

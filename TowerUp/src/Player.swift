@@ -128,6 +128,7 @@ class Player: Square {
             physicsCategory.coin.rawValue |
             physicsCategory.gem.rawValue |
             physicsCategory.spike.rawValue |
+            physicsCategory.saw.rawValue |
             physicsCategory.bomb.rawValue |
             physicsCategory.spring.rawValue |
             physicsCategory.doorTile.rawValue
@@ -136,6 +137,7 @@ class Player: Square {
         self.physicsBody!.collisionBitMask =
             physicsCategory.ground.rawValue |
             physicsCategory.spike.rawValue |
+            physicsCategory.saw.rawValue |
             physicsCategory.bomb.rawValue |
             physicsCategory.spring.rawValue |
             physicsCategory.boxCrate.rawValue |
@@ -193,6 +195,15 @@ class Player: Square {
             }
             break
             
+        case physicsCategory.saw.rawValue:
+            self.spikeSound.play()//TODO: novo som
+            if(self.healthPoints > 0) {
+                self.physicsBody!.applyImpulse(CGVector(dx: 0, dy: 10))
+                self.physicsBody!.applyAngularImpulse(0.1)
+                self.healthPoints = 0
+            }
+            break
+            
         case physicsCategory.spike.rawValue:
             self.spikeSound.play()
             if(self.healthPoints > 0) {
@@ -242,6 +253,9 @@ class Player: Square {
             
             break
         case physicsCategory.coin.rawValue:
+            
+            break
+        case physicsCategory.saw.rawValue:
             
             break
         case physicsCategory.spike.rawValue:

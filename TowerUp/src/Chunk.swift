@@ -119,6 +119,14 @@ class Chunk: SKSpriteNode {
                         case Tile.specialTiles.spring.rawValue:
                             tile = Spring(x: x, y: y)
                             break
+                            
+                        case Tile.specialTiles.saw.rawValue:
+                            tile = Saw(x: x, y: y)
+                            break
+                            
+                        case Tile.specialTiles.woodenBridge.rawValue:
+                            tile = Ground(type: self.type, imageName: "bridgeB", x: x, y: y)
+                            break
 
                         default:
                             tile = Bug(x: x, y: y)

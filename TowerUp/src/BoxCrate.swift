@@ -21,6 +21,7 @@ class BoxCrate: Tile {
         self.physicsBody!.collisionBitMask =
             physicsCategory.ground.rawValue |
             physicsCategory.spike.rawValue |
+            physicsCategory.saw.rawValue |
             physicsCategory.spring.rawValue |
             physicsCategory.player.rawValue |
             physicsCategory.boxCrate.rawValue
