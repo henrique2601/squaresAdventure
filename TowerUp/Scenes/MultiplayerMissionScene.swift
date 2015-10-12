@@ -103,13 +103,17 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
         switch(self.playerData.configControls.integerValue) {
             
         case 1: //controlsConfig.useButtons.rawValue:
-            self.buttonLeft = Button(textureName: "buttonYellowSquare", text:"<", x:20, y:630, xAlign:.left, yAlign:.down)
+            self.buttonLeft = Button(textureName: "buttonYellowSquare", text:"<", x:20, y:580, xAlign:.left, yAlign:.down, colorBlendFactor:0.5)
+            self.buttonLeft.setScale(1.5)
+            
             self.addChild(self.buttonLeft)
             
-            self.buttonRight = Button(textureName: "buttonYellowSquare", text:">" ,x:160, y:630, xAlign:.left, yAlign:.down)
+            self.buttonRight = Button(textureName: "buttonYellowSquare", text:">" ,x:220, y:580, xAlign:.left, yAlign:.down, colorBlendFactor:0.5)
+            self.buttonRight.setScale(1.5)
             self.addChild(self.buttonRight)
             
-            self.buttonJump = Button(textureName: "buttonYellow", text:"Jump", x:1014, y:630, xAlign:.right, yAlign:.down)
+            self.buttonJump = Button(textureName: "buttonYellow", text:"Jump", x:880, y:580, xAlign:.right, yAlign:.down, colorBlendFactor:0.5)
+            self.buttonJump.setScale(1.5)
             self.addChild(self.buttonJump)
             break
             
