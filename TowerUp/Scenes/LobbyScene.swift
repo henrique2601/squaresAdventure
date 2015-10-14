@@ -15,7 +15,7 @@ class LobbyScene: GameScene, UITextFieldDelegate {
         case lobby
         case choosePowerUps
         case chooseSkin
-        case multiplayerMission
+        case multiplayerLobby
         case localLobby
         case mainMenu
     }
@@ -67,7 +67,7 @@ class LobbyScene: GameScene, UITextFieldDelegate {
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
         self.addChild(Control(textureName: "mainMenuBackground", z: -1001, xAlign: .center, yAlign: .center))
-        self.addChild(Control(textureName: "lobbyBackground", z: -1000, xAlign: .center, yAlign: .center))
+        self.addChild(Control(textureName: "lobby1", z: -1000, xAlign: .center, yAlign: .center))
         self.backgroundColor = GameColors.blue
         
         self.buttonOnline = Button(textureName: "buttonYellow", text:"ONLINE GAME", x: 229, y: 269, xAlign: .center, yAlign: .center)
@@ -79,7 +79,7 @@ class LobbyScene: GameScene, UITextFieldDelegate {
         self.buttonLocal = Button(textureName: "buttonYellow", text:"LOCAL GAME", x: 229, y: 517, xAlign: .center, yAlign: .center)
         self.addChild(self.buttonLocal)
         
-        self.myTextField = Textfield(name: self.playerData.name , x: 741, y: 240, align:.center, view:self.view!)
+        self.myTextField = Textfield(name: self.playerData.name , x: 820, y: 270, align:.center, view:self.view!)
         self.myTextField.myTextField.delegate = self
         self.addChild(self.myTextField)
         
@@ -90,7 +90,7 @@ class LobbyScene: GameScene, UITextFieldDelegate {
                 powerUpSlotsArray.append(PowerUpSlot(powerUpSlotData: item as! PowerUpSlotData))
             }
             
-            self.powerUpSlotsScrollNode = ScrollNode(x: 768, y: 591, xAlign: .center, yAlign: .center, cells: powerUpSlotsArray, scrollDirection: ScrollNode.scrollTypes.horizontal, scaleNodes: false)
+            self.powerUpSlotsScrollNode = ScrollNode(x: 970, y: 610, xAlign: .center, yAlign: .center, cells: powerUpSlotsArray, scrollDirection: ScrollNode.scrollTypes.horizontal, scaleNodes: false, index:1)
             self.powerUpSlotsScrollNode.canScroll = false
             self.addChild(self.powerUpSlotsScrollNode)
         }
@@ -257,27 +257,15 @@ class LobbyScene: GameScene, UITextFieldDelegate {
                     powerUpsArray.append(powerUp)
                 }
                 
-                // PowerUp "?"
-                //                let cell = SKSpriteNode(imageNamed: "powerUpSlot")
-                //                cell.name = "-1"
-                //
-                //                let spriteNode = SKSpriteNode(imageNamed: "powerUpSlot")
-                //                spriteNode.color = GameColors.black
-                //                spriteNode.colorBlendFactor = 1
-                //                cell.addChild(spriteNode)
-                //
-                //                cell.addChild(Label(name: "lebelName", color:GameColors.white, textureName: "?", x: 0, y: 0))
-                //                //
-                //
-                //                powerUpsArray.append(cell)
+       
                 
-                self.powerUpsScrollNode = ScrollNode(x: 883, y: 436, cells: powerUpsArray, scrollDirection: .horizontal, scaleNodes: false, scaleDistance:100)
+                self.powerUpsScrollNode = ScrollNode(x: 970, y: 436, cells: powerUpsArray, scrollDirection: .horizontal, scaleNodes: false, scaleDistance:95)
                 self.addChild(self.powerUpsScrollNode)
                 
                 break
                 
             case states.lobby:
-                self.player = Player(playerData: self.playerData, x: 883, y: 436, loadPhysics: false)
+                self.player = Player(playerData: self.playerData, x: 970, y: 459, loadPhysics: false)
                 self.addChild(self.player)
                 
                 self.myTextField.myTextField.hidden = false
@@ -292,12 +280,10 @@ class LobbyScene: GameScene, UITextFieldDelegate {
                 if let teste = self.blackSpriteNode {
                     teste.removeFromParent()
                 }
+                break
                 
-            case states.multiplayerMission:
-                let nextScene = MultiplayerMissionScene()
-                nextScene.room = self.room
-                nextScene.localName = self.myTextField.myTextField.text
-                self.view!.presentScene(nextScene, transition: Config.defaultGoTransition)
+            case states.multiplayerLobby:
+                self.view!.presentScene(MultiPlayerLobbyScene(), transition: Config.defaultGoTransition)
                 break
                 
             case states.mainMenu:
@@ -327,13 +313,13 @@ class LobbyScene: GameScene, UITextFieldDelegate {
                     
                     if (self.buttonOnline.containsPoint(location)) {
                         room = 0
-                        self.nextState = .multiplayerMission
+                        self.nextState = .multiplayerLobby
                         return
                     }
                     
                     if (self.buttonQuick.containsPoint(location)) {
                         room = 1
-                        self.nextState = .multiplayerMission
+                        self.nextState = .multiplayerLobby
                         return
                     }
                     

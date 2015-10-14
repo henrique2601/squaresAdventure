@@ -192,6 +192,7 @@ class Chunk: SKSpriteNode {
         self.position = CGPoint(x: self.size.width * (CGFloat)(regionX), y: self.size.height * (CGFloat)(regionY))
 
         if let path = NSBundle.mainBundle().pathForResource("ground \(tower) \(floor) \(regionX) \(regionY)", ofType: "") {
+            self
             let data = (try! NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding)).componentsSeparatedByString(",")
             self.loadGround(data)
         }
