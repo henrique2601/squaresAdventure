@@ -33,23 +33,30 @@ class Button: Control {
         super.init()
     }
     
-    init(textureName:String, icon:String = "", text:String = "", fontSize:GameFonts.fontSize = .medium, x:Int = 0, y:Int = 0, xAlign:Control.xAlignments = .left, yAlign:Control.yAlignments = .up, colorBlendFactor:CGFloat = CGFloat(1)) {
+    init(textureName:String, icon:String = "", text:String = "", fontSize:GameFonts.fontSize = .medium, x:Int = 0, y:Int = 0, xAlign:Control.xAlignments = .left, yAlign:Control.yAlignments = .up, colorBlendFactor:CGFloat = CGFloat(1), touchArea:CGSize = CGSize.zero,
+        top:Int = 0, bottom:Int = 0, left:Int = 0, right:Int = 0) {
         super.init()
-        self.load(textureName, icon:icon, text:text, fontSize:fontSize.rawValue, x:x, y:y, xAlign:xAlign, yAlign:yAlign, colorBlendFactor:colorBlendFactor)
+        self.load(textureName, icon:icon, text:text, fontSize:fontSize.rawValue, x:x, y:y, xAlign:xAlign, yAlign:yAlign, colorBlendFactor:colorBlendFactor, top:top, bottom:bottom, left:left, right:right)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func load(textureName:String, icon:String, text:String, fontSize:CGFloat,  x:Int, y:Int, xAlign:Control.xAlignments, yAlign:Control.yAlignments, colorBlendFactor:CGFloat) {
+    func load(textureName:String, icon:String, text:String, fontSize:CGFloat,  x:Int, y:Int, xAlign:Control.xAlignments, yAlign:Control.yAlignments, colorBlendFactor:CGFloat, top:Int, bottom:Int, left:Int, right:Int) {
         self.sketchPosition = CGPoint(x: x, y: y)
         self.yAlign = yAlign
         self.xAlign = xAlign
         self.zPosition = Config.HUDZPosition
         
-        
         let texture = SKTexture(imageNamed: textureName)
+        
+        let spriteNode = SKSpriteNode(texture: nil, color: UIColor.clearColor(),
+            size: CGSize(width: Int(texture.size().width) + left + right, height: Int(texture.size().height) + top + bottom))
+        spriteNode.anchorPoint = CGPoint(x: 0, y: 1)
+        self.addChild(spriteNode)
+        spriteNode.position = CGPoint(x: -left, y: top)
+        
         self.button = SKSpriteNode(texture: texture, size: texture.size())
         self.button.color = UIColor(red: 1, green: 1, blue: 1, alpha: colorBlendFactor)
         self.button.colorBlendFactor = 1

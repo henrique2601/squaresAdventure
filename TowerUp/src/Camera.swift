@@ -12,32 +12,32 @@ import SpriteKit
 class GameCamera: SKNode {
     
     var maxX:CGFloat = 0
-    var maxY:CGFloat = 0
+    //var maxY:CGFloat = 0
     
     func update(newPosition:CGPoint) {
         
         self.position = CGPoint(x: Int(newPosition.x - self.scene!.size.width/2), y: Int(newPosition.y + self.scene!.size.height/2))
         
-         self.maxX = Chunk.sizeInPoints * CGFloat(Chunk.maxChunkX)
-         self.maxY = Chunk.sizeInPoints * CGFloat(Chunk.maxChunkY)
+         self.maxX = Chunk.sizeInPoints * CGFloat(Chunk.maxChunkX + 1) - self.scene!.size.width - Tile.sizeInPoints/2
+         //self.maxY = Chunk.sizeInPoints * CGFloat(Chunk.maxChunkY + 1) - self.scene!.size.height - Tile.sizeInPoints/2
         
         //certo
-        if(position.x < -Tile.sizeInPoints/2 ){
-            position.x =  -Tile.sizeInPoints/2
+        if(Int(position.x) <= Int(-Tile.sizeInPoints/2)) {
+            position.x = -Tile.sizeInPoints/2
         }
-        
+
         //certo
-        if(position.x > self.scene!.size.width - Tile.sizeInPoints/2 + self.maxX){
-            position.x = self.scene!.size.width - Tile.sizeInPoints/2 + self.maxX
+        if(Int(position.x) >= Int(self.maxX)) {
+            position.x = self.maxX
         }
         //certo
         
-        if(position.y > Chunk.sizeInPoints - Tile.sizeInPoints / 2 + self.maxY) {
-            position.y = Chunk.sizeInPoints - Tile.sizeInPoints / 2 + self.maxY
-        }
-        
+//        if(Int(position.y) >= Int(Chunk.sizeInPoints - Tile.sizeInPoints/2 + self.maxY)) {
+//            position.y = self.maxY
+//        }
+
         //certo
-        if(position.y < self.scene!.size.height - Tile.sizeInPoints/2  ){
+        if(Int(position.y) <= Int(self.scene!.size.height - Tile.sizeInPoints/2)) {
             position.y = self.scene!.size.height - Tile.sizeInPoints/2
         }
         

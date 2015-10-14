@@ -195,6 +195,12 @@ class Chunk: SKSpriteNode {
             self
             let data = (try! NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding)).componentsSeparatedByString(",")
             self.loadGround(data)
+            Chunk.maxChunkX = max(regionX, Chunk.maxChunkX)
+            Chunk.maxChunkY = max(regionY, Chunk.maxChunkY)
+            
+            if(Chunk.sizeInTiles * Chunk.sizeInTiles != CGFloat(data.count)) {
+                print("ERROR: ground \(tower) \(floor) \(regionX) \(regionY) data.count: " + data.count.description)
+            }
         }
         
         if let path = NSBundle.mainBundle().pathForResource("visual \(tower) \(floor) \(regionX) \(regionY)", ofType: "") {

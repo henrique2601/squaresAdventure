@@ -22,7 +22,9 @@ class Music: NSObject {
         if (self.musicName != name) {
             self.musicName = name
             
-            let backgroundMusicURL = NSBundle.mainBundle().URLForResource(name, withExtension: "mp3")
+            var auxName:[String] = name.componentsSeparatedByString(".")
+            
+            let backgroundMusicURL = NSBundle.mainBundle().URLForResource(auxName[0], withExtension: auxName[1])
             
             do {
                 try self.audioPlayer = AVAudioPlayer(contentsOfURL: backgroundMusicURL!)
