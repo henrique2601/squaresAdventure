@@ -73,7 +73,7 @@ class LocalGameScene: GameScene, SKPhysicsContactDelegate {
         self.myCamera = GameCamera()
         self.world.addChild(self.myCamera)
         
-        self.player = PlayerOnline(skinId: self.playerData.skinSlot.skin.index.integerValue, x: 200, y: 100, loadPhysics: true)
+        self.player = PlayerOnline(skinId: self.playerData.skinSlot.skin.index.integerValue, x: 128, y: 128, loadPhysics: true)
         self.world.addChild(self.player)
         
         self.player.labelName = Label(text: "")

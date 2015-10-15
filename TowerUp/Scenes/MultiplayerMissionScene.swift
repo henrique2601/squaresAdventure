@@ -89,7 +89,7 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
         self.myCamera = GameCamera()
         self.world.addChild(self.myCamera)
         
-        self.player = PlayerOnline(skinId: self.playerData.skinSlot.skin.index.integerValue, x: 200, y: 100, loadPhysics: true)
+        self.player = PlayerOnline(skinId: self.playerData.skinSlot.skin.index.integerValue, x: 128, y: 128, loadPhysics: true)
         self.world.addChild(self.player)
         
         self.player.labelName = Label(text: "???")
@@ -199,7 +199,7 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
                         print(nameTest)
                         
                         let skin = nameTest!.objectForKey("skin") as? Int
-                        let player2 = PlayerOnline(skinId: skin! ,x: 200, y: 48, loadPhysics: true)
+                        let player2 = PlayerOnline(skinId: skin! ,x: 128, y: 128, loadPhysics: true)
                         player2.name = nameTest!.objectForKey("name") as? String
                         player2.id = nameTest!.objectForKey("id") as? Int
                         player2.position = CGPoint(x: 200, y: 48)
@@ -280,9 +280,9 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
             
             if let name = data?[0] as? NSDictionary {
                 
-                let xPos = 144
+                let xPos = 128
                 let skin = name.objectForKey("skin") as? Int
-                let player = PlayerOnline(skinId: skin!, x: xPos, y: 48, loadPhysics: true)
+                let player = PlayerOnline(skinId: skin!, x: xPos, y: 128, loadPhysics: true)
                 player.name = name.objectForKey("name") as? String
                 print(player.name)
                 player.id = name.objectForKey("id") as? Int

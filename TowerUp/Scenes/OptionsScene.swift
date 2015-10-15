@@ -392,7 +392,7 @@ class OptionsScene: GameScene, FBSDKGameRequestDialogDelegate {
                     self.after = test
                 }
                 
-                if let test2 = ((resultdict.objectForKey("paging") as? NSDictionary)?.objectForKey("next") as? String){
+                if let _ = ((resultdict.objectForKey("paging") as? NSDictionary)?.objectForKey("next") as? String){
                     
                 }
                     

@@ -17,7 +17,7 @@ class Player: Square {
     var auxRotation:CGFloat = 0
     
     //Respawn
-    var startingPosition:CGPoint = CGPoint.zero
+    var startingPosition:CGPoint!
     
     //Vida
     var maxDeathCount = 10
@@ -88,6 +88,7 @@ class Player: Square {
             
             self.position = CGPoint(x: x, y: y)
             self.startingPosition = self.position
+            
             self.loadPhysics()
         } else {
             self.zPosition = Config.HUDZPosition

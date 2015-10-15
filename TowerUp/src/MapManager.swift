@@ -40,6 +40,7 @@ class MapManager: SKNode {
     func reloadMap(position:CGPoint) {
         Chunk.maxChunkX = 0
         Chunk.maxChunkY = 0
+        
         self.removeAllChildren()
         
         self.updatePlayerRegion(position)
