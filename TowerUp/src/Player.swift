@@ -176,6 +176,7 @@ class Player: Square {
         case physicsCategory.coin.rawValue:
             if let node = physicsBody.node {
                 let coin = (node as! Coin)
+                
                 if let scene = self.scene as? MissionScene {
                     let playerData = MemoryCard.sharedInstance.playerData
                     playerData.coins = NSNumber(integer: Int(playerData.coins) + coin.bonus)
@@ -189,6 +190,7 @@ class Player: Square {
                         scene.collectedBonus = scene.collectedBonus + coin.bonus
                     }
                 }
+                
                 coin.bonus = 0
                 self.coinSound.play()
                 
@@ -196,17 +198,17 @@ class Player: Square {
                 
                 particles?.position.x = coin.position.x
                 particles?.position.y = coin.position.y
+                particles?.zPosition = coin.zPosition
                 particles?.name = "particles"
                 self.parent!.addChild(particles!)
                 
-                let action = SKAction.fadeOutWithDuration(0.5)
+                let action = SKAction()
+                action.duration = 2
                 particles?.runAction(action , completion: { () -> Void in
                     particles?.removeFromParent()
                 })
 
                 coin.removeFromParent()
-                
-                
             }
             break
             
@@ -234,29 +236,29 @@ class Player: Square {
             break
             
         case physicsCategory.bomb.rawValue:
-            self.boom.play()
-            self.healthPoints = 0
             
             if let node = physicsBody.node {
                 let bomb = (node as! Bomb)
+                
+                self.boom.play()
+                self.healthPoints = 0
                 
                 let particles = SKEmitterNode(fileNamed: "Particle.sks")
                 
                 particles?.position.x = bomb.position.x
                 particles?.position.y = bomb.position.y
+                particles?.zPosition = bomb.zPosition
                 particles?.name = "particles"
                 self.parent!.addChild(particles!)
                 
-                bomb.removeFromParent()
-                
-                let action = SKAction.fadeOutWithDuration(0.5)
+                let action = SKAction()
+                action.duration = 2
                 particles?.runAction(action , completion: { () -> Void in
                     particles?.removeFromParent()
+                    
                 })
-                
+                bomb.removeFromParent()
             }
-            
-            
             break
             
         case physicsCategory.doorTile.rawValue:
