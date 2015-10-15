@@ -13,9 +13,13 @@ class IAPHelper: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObserv
     
     static var sharedInstance = IAPHelper()
     
-    var productIdentifiers = Set<String>(arrayLiteral:
+    let productIdentifiers = Set<String>(arrayLiteral:
+        "com.PabloHenri91.TowerUp.Diamonds2",
+        "Diamonds!",
         "com.PabloHenri91.TowerUp.Diamonds",
-        "1049785515"
+        "1049877538",
+        "1049785515",
+        "Bostaaa!!!"
     )
     
     override init() {
@@ -34,6 +38,9 @@ class IAPHelper: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObserv
         print(request.description)
         print("didReceiveResponse")
         print(response.description)
+        
+        print("response.invalidProductIdentifiers")
+        print(response.invalidProductIdentifiers.description)
         
         print(response.products.count)
         for skProduct in response.products {

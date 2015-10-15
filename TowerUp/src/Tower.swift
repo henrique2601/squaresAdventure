@@ -41,7 +41,7 @@ class Towers: NSObject {
         
         TowerType(tileset:"sand", floorTypes: Array<FloorType>([
             FloorType(maxDeathCount: 1, maxTime: 10, minCoins: 10),//0
-            FloorType(maxDeathCount: 2, maxTime: 15, minCoins: 20),//1
+            FloorType(maxDeathCount: 0, maxTime: 8, minCoins: 20),//1
             FloorType(maxDeathCount: 3, maxTime: 20, minCoins: 30),//2
             FloorType(maxDeathCount: 4, maxTime: 25, minCoins: 40),//3
             FloorType(maxDeathCount: 5, maxTime: 30, minCoins: 50),//4

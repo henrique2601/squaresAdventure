@@ -40,6 +40,7 @@ class ViewController: UIViewController {
         
         //TODO: musica
         Music.sharedInstance.play(musicNamed: "A New Camp.mp3")
+        IAPHelper.sharedInstance.requestProducts()
     }
     
     override func viewWillLayoutSubviews() {
