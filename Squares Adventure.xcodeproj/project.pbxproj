@@ -39,6 +39,9 @@
 		135C5CA21BA8310A006643BB /* PlayerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135C5CA11BA8310A006643BB /* PlayerData.swift */; };
 		135C5CA41BA8364B006643BB /* PowerUpSlotData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135C5CA31BA8364B006643BB /* PowerUpSlotData.swift */; };
 		135C5CA61BA8364C006643BB /* SkinSlotData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135C5CA51BA8364C006643BB /* SkinSlotData.swift */; };
+		135DF9591BCFF95F004342AB /* Coin.sks in Resources */ = {isa = PBXBuildFile; fileRef = 135DF9561BCFF95F004342AB /* Coin.sks */; settings = {ASSET_TAGS = (); }; };
+		135DF95A1BCFF95F004342AB /* Particle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 135DF9571BCFF95F004342AB /* Particle.sks */; settings = {ASSET_TAGS = (); }; };
+		135DF95B1BCFF95F004342AB /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 135DF9581BCFF95F004342AB /* spark.png */; settings = {ASSET_TAGS = (); }; };
 		135EA4911BBAE375006C765F /* GameFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135EA4901BBAE375006C765F /* GameFonts.swift */; settings = {ASSET_TAGS = (); }; };
 		137D3D9D1BB42DDF003202D9 /* Bug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137D3D9C1BB42DDF003202D9 /* Bug.swift */; settings = {ASSET_TAGS = (); }; };
 		137D3D9F1BB43097003202D9 /* Bomb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137D3D9E1BB43097003202D9 /* Bomb.swift */; settings = {ASSET_TAGS = (); }; };
@@ -562,6 +565,9 @@
 		135C5CA11BA8310A006643BB /* PlayerData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayerData.swift; path = CoreData/PlayerData.swift; sourceTree = "<group>"; };
 		135C5CA31BA8364B006643BB /* PowerUpSlotData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PowerUpSlotData.swift; path = CoreData/PowerUpSlotData.swift; sourceTree = "<group>"; };
 		135C5CA51BA8364C006643BB /* SkinSlotData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SkinSlotData.swift; path = CoreData/SkinSlotData.swift; sourceTree = "<group>"; };
+		135DF9561BCFF95F004342AB /* Coin.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Coin.sks; sourceTree = "<group>"; };
+		135DF9571BCFF95F004342AB /* Particle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Particle.sks; sourceTree = "<group>"; };
+		135DF9581BCFF95F004342AB /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
 		135EA4901BBAE375006C765F /* GameFonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameFonts.swift; path = src/GameFonts.swift; sourceTree = "<group>"; };
 		137D3D9C1BB42DDF003202D9 /* Bug.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Bug.swift; path = src/Bug.swift; sourceTree = "<group>"; };
 		137D3D9E1BB43097003202D9 /* Bomb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Bomb.swift; path = src/Bomb.swift; sourceTree = "<group>"; };
@@ -1182,6 +1188,16 @@
 				13CCB6FD1B72B9010060334C /* TowersScene.swift */,
 			);
 			name = Scenes;
+			sourceTree = "<group>";
+		};
+		135DF9551BCFF951004342AB /* Particles */ = {
+			isa = PBXGroup;
+			children = (
+				135DF9561BCFF95F004342AB /* Coin.sks */,
+				135DF9571BCFF95F004342AB /* Particle.sks */,
+				135DF9581BCFF95F004342AB /* spark.png */,
+			);
+			name = Particles;
 			sourceTree = "<group>";
 		};
 		139A0E8D1B74319000EDE944 /* CoreData */ = {
@@ -3355,6 +3371,7 @@
 				1326AE8B1B86278C00D4563B /* Boxes */,
 				139A0E8D1B74319000EDE944 /* CoreData */,
 				1305E4EE1BB1D663009F9B0A /* Music */,
+				135DF9551BCFF951004342AB /* Particles */,
 				1359DD021B728114006C12FA /* Scenes */,
 				13BC7EC31BAAE883003D6CCD /* SocketIOClientSwift */,
 				1308A4661BC2C3A400D4F85B /* SoundEffects */,
@@ -3639,6 +3656,7 @@
 				3A390B521BCC7A4900F948F6 /* ground 2 4 0 0 in Resources */,
 				3AB95A181BC2F79A00368009 /* boom4.wav in Resources */,
 				3A390B5C1BCC7A4900F948F6 /* ground 2 9 0 0 in Resources */,
+				135DF95A1BCFF95F004342AB /* Particle.sks in Resources */,
 				3A390C7E1BCC949200F948F6 /* ground 0 10 0 0 in Resources */,
 				3A390BB11BCC7A4900F948F6 /* visual 5 1 0 0 in Resources */,
 				3A390B901BCC7A4900F948F6 /* ground 4 13 0 0 in Resources */,
@@ -3762,6 +3780,7 @@
 				3A390B9C1BCC7A4900F948F6 /* ground 4 19 0 0 in Resources */,
 				3A390BAC1BCC7A4900F948F6 /* ground 4 9 0 0 in Resources */,
 				3A390B011BCC7A4900F948F6 /* visual 0 3 0 0 in Resources */,
+				135DF95B1BCFF95F004342AB /* spark.png in Resources */,
 				3A390BF91BCC7A4900F948F6 /* visual 6 7 0 0 in Resources */,
 				3A390C121BCC7A4900F948F6 /* ground 7 18 0 0 in Resources */,
 				3A390C161BCC7A4900F948F6 /* ground 7 2 0 0 in Resources */,
@@ -3860,6 +3879,7 @@
 				3A390B1A1BCC7A4900F948F6 /* ground 1 14 0 0 in Resources */,
 				3A390C2C1BCC7A4900F948F6 /* ground 8 11 0 0 in Resources */,
 				3A390BB21BCC7A4900F948F6 /* ground 5 10 0 0 in Resources */,
+				135DF9591BCFF95F004342AB /* Coin.sks in Resources */,
 				3A390B981BCC7A4900F948F6 /* ground 4 17 0 0 in Resources */,
 				3A390C6B1BCC7A4900F948F6 /* visual 9 4 0 0 in Resources */,
 				3A390B2B1BCC7A4900F948F6 /* visual 1 4 0 0 in Resources */,

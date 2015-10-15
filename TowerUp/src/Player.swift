@@ -190,8 +190,23 @@ class Player: Square {
                     }
                 }
                 coin.bonus = 0
-                coin.removeFromParent()
                 self.coinSound.play()
+                
+                let particles = SKEmitterNode(fileNamed: "Coin.sks")
+                
+                particles?.position.x = coin.position.x
+                particles?.position.y = coin.position.y
+                particles?.name = "particles"
+                self.parent!.addChild(particles!)
+                
+                let action = SKAction.fadeOutWithDuration(0.5)
+                particles?.runAction(action , completion: { () -> Void in
+                    particles?.removeFromParent()
+                })
+
+                coin.removeFromParent()
+                
+                
             }
             break
             
@@ -224,8 +239,23 @@ class Player: Square {
             
             if let node = physicsBody.node {
                 let bomb = (node as! Bomb)
+                
+                let particles = SKEmitterNode(fileNamed: "Particle.sks")
+                
+                particles?.position.x = bomb.position.x
+                particles?.position.y = bomb.position.y
+                particles?.name = "particles"
+                self.parent!.addChild(particles!)
+                
                 bomb.removeFromParent()
+                
+                let action = SKAction.fadeOutWithDuration(0.5)
+                particles?.runAction(action , completion: { () -> Void in
+                    particles?.removeFromParent()
+                })
+                
             }
+            
             
             break
             
@@ -414,7 +444,7 @@ class Player: Square {
         if let _ = self.spriteNodeDead {
             self.spriteNodeDead.removeFromParent()
         }
-        
+    
     }
     
     func reset() {
