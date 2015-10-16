@@ -502,6 +502,9 @@
 		3A390C841BCC949200F948F6 /* visual 0 10 1 0 in Resources */ = {isa = PBXBuildFile; fileRef = 3A390C7C1BCC949200F948F6 /* visual 0 10 1 0 */; settings = {ASSET_TAGS = (); }; };
 		3A390C851BCC949200F948F6 /* visual 0 10 1 1 in Resources */ = {isa = PBXBuildFile; fileRef = 3A390C7D1BCC949200F948F6 /* visual 0 10 1 1 */; settings = {ASSET_TAGS = (); }; };
 		3A390C871BCCB42D00F948F6 /* MultiPlayerLobbyScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A390C861BCCB42D00F948F6 /* MultiPlayerLobbyScene.swift */; settings = {ASSET_TAGS = (); }; };
+		3A390C8F1BCE950000F948F6 /* GBPing.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A390C8B1BCE950000F948F6 /* GBPing.m */; settings = {ASSET_TAGS = (); }; };
+		3A390C901BCE950000F948F6 /* GBPingSummary.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A390C8D1BCE950000F948F6 /* GBPingSummary.m */; settings = {ASSET_TAGS = (); }; };
+		3A390C921BD0576F00F948F6 /* ServerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A390C911BD0576F00F948F6 /* ServerManager.swift */; settings = {ASSET_TAGS = (); }; };
 		3A8223CE1BC6BDA70029C75D /* Coin.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3A8223CD1BC6BDA70029C75D /* Coin.wav */; settings = {ASSET_TAGS = (); }; };
 		3A8223D01BC6C0360029C75D /* jump_01.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3A8223CF1BC6C0360029C75D /* jump_01.wav */; settings = {ASSET_TAGS = (); }; };
 		3A8223D41BC6C6300029C75D /* qubodupImpactMeat01.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3A8223D31BC6C6300029C75D /* qubodupImpactMeat01.wav */; settings = {ASSET_TAGS = (); }; };
@@ -1025,6 +1028,13 @@
 		3A390C7C1BCC949200F948F6 /* visual 0 10 1 0 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "visual 0 10 1 0"; sourceTree = "<group>"; };
 		3A390C7D1BCC949200F948F6 /* visual 0 10 1 1 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "visual 0 10 1 1"; sourceTree = "<group>"; };
 		3A390C861BCCB42D00F948F6 /* MultiPlayerLobbyScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MultiPlayerLobbyScene.swift; path = Scenes/MultiPlayerLobbyScene.swift; sourceTree = "<group>"; };
+		3A390C891BCE950000F948F6 /* GBPing-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GBPing-Prefix.pch"; sourceTree = "<group>"; };
+		3A390C8A1BCE950000F948F6 /* GBPing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBPing.h; sourceTree = "<group>"; };
+		3A390C8B1BCE950000F948F6 /* GBPing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GBPing.m; sourceTree = "<group>"; };
+		3A390C8C1BCE950000F948F6 /* GBPingSummary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBPingSummary.h; sourceTree = "<group>"; };
+		3A390C8D1BCE950000F948F6 /* GBPingSummary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GBPingSummary.m; sourceTree = "<group>"; };
+		3A390C8E1BCE950000F948F6 /* ICMPHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICMPHeader.h; sourceTree = "<group>"; };
+		3A390C911BD0576F00F948F6 /* ServerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ServerManager.swift; path = src/ServerManager.swift; sourceTree = "<group>"; };
 		3A8223CD1BC6BDA70029C75D /* Coin.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Coin.wav; sourceTree = "<group>"; };
 		3A8223CF1BC6C0360029C75D /* jump_01.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = jump_01.wav; sourceTree = "<group>"; };
 		3A8223D31BC6C6300029C75D /* qubodupImpactMeat01.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = qubodupImpactMeat01.wav; sourceTree = "<group>"; };
@@ -1146,6 +1156,7 @@
 				1308A4691BC2E35000D4F85B /* RandomSoundEffect.swift */,
 				139501A41BC6F98D0053EA5D /* Saw.swift */,
 				13DE13041B94C38E0092D50B /* ScrollNode.swift */,
+				3A390C911BD0576F00F948F6 /* ServerManager.swift */,
 				1323FF601B90C83300EF4C2E /* Skin.swift */,
 				1305E4EC1BB18B1B009F9B0A /* Slider.swift */,
 				1308A4641BC2BFAD00D4F85B /* SoundEffect.swift */,
@@ -3327,6 +3338,19 @@
 			path = Floor9;
 			sourceTree = "<group>";
 		};
+		3A390C881BCE950000F948F6 /* GBPing */ = {
+			isa = PBXGroup;
+			children = (
+				3A390C891BCE950000F948F6 /* GBPing-Prefix.pch */,
+				3A390C8A1BCE950000F948F6 /* GBPing.h */,
+				3A390C8B1BCE950000F948F6 /* GBPing.m */,
+				3A390C8C1BCE950000F948F6 /* GBPingSummary.h */,
+				3A390C8D1BCE950000F948F6 /* GBPingSummary.m */,
+				3A390C8E1BCE950000F948F6 /* ICMPHeader.h */,
+			);
+			path = GBPing;
+			sourceTree = "<group>";
+		};
 		81BA813C1A49DA1800E65899 = {
 			isa = PBXGroup;
 			children = (
@@ -3347,6 +3371,7 @@
 		81BA81471A49DA1800E65899 /* TowerUp */ = {
 			isa = PBXGroup;
 			children = (
+				3A390C881BCE950000F948F6 /* GBPing */,
 				81BA81511A49DA1800E65899 /* Images.xcassets */,
 				13CCB6FB1B72AD310060334C /* LaunchScreen.xib */,
 				13D8316A1BA7329900A95FEB /* Localizable.strings */,
@@ -3948,6 +3973,8 @@
 				139A0E881B73D00200EDE944 /* BeforeMissionScene.swift in Sources */,
 				1326AE881B85FCA300D4563B /* Box.swift in Sources */,
 				1359DD101B7287A7006C12FA /* Button.swift in Sources */,
+				3A390C901BCE950000F948F6 /* GBPingSummary.m in Sources */,
+				3A390C8F1BCE950000F948F6 /* GBPing.m in Sources */,
 				3AF2530E1BBD6E8D0089BF7A /* InvitedFriendData.swift in Sources */,
 				13FC800A1B8640B800865C72 /* PlayerOnline.swift in Sources */,
 				137D3DA71BB45658003202D9 /* VisualTile.swift in Sources */,
@@ -3995,6 +4022,7 @@
 				13BC7ED81BAAE883003D6CCD /* SocketFixUTF8.swift in Sources */,
 				3A390C871BCCB42D00F948F6 /* MultiPlayerLobbyScene.swift in Sources */,
 				1359DC9A1B727726006C12FA /* TowerUp.xcdatamodeld in Sources */,
+				3A390C921BD0576F00F948F6 /* ServerManager.swift in Sources */,
 				13CCB7041B7373D00060334C /* FloorsScene.swift in Sources */,
 				1308A4651BC2BFAD00D4F85B /* SoundEffect.swift in Sources */,
 			);
@@ -4120,6 +4148,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.WTFGames.TowerUp;
 				PRODUCT_NAME = "Squares Adventure";
 				SWIFT_OBJC_BRIDGING_HEADER = "TowerUp/TowerUp-Bridging-Header.h";
+				"SWIFT_OPTIMIZATION_LEVEL[arch=*]" = "-Onone";
 			};
 			name = Debug;
 		};

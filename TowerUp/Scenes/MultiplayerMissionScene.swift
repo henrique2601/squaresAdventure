@@ -10,6 +10,7 @@ import UIKit
 import SpriteKit
 
 class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
+    
     enum states {
         case mission
         case paused
@@ -59,7 +60,7 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
     //let socket = SocketIOClient(socketURL: "179.232.86.110:3001", opts: nil)
     let socket = SocketIOClient(socketURL: "181.41.197.181:3001", opts: nil)
     
-    var teste: NSURL
+    //var teste: NSURL
     
     var winPlayersList = Dictionary<String,Int>()
     
