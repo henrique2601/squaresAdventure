@@ -88,7 +88,14 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
         
         self.buttonBack = Button(textureName: "buttonGraySquareSmall", text:"<", x: 20, y: 652, xAlign:.left, yAlign:.down)
         self.addChild(self.buttonBack)
+        
+        
+        
+        
+        
     }
+    
+    
     
     // Called by tapping return on the keyboard.
     func textFieldShouldReturn(textField: UITextField) -> Bool {
@@ -109,6 +116,40 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
         let newLength = textField.text!.utf16.count + string.utf16.count - range.length
         return newLength <= 20 // Bool
     }
+    
+    
+    
+    //ping protocol
+    
+    func ping(pinger: GBPing!, didReceiveReplyWithSummary summary: GBPingSummary!) {
+        print(summary.rtt)
+        self.responseTime = self.responseTime + Int(summary.rtt * 1000)
+        self.numResponses = self.numResponses + 1
+    }
+    
+//    func ping(pinger: GBPing!, didFailToSendPingWithSummary summary: GBPingSummary!, error: NSError!) {
+//        print(summary)
+//        print(error)
+//    }
+//    
+//    func ping(pinger: GBPing!, didFailWithError error: NSError!) {
+//        //print(error)
+//    }
+//    
+//    func ping(pinger: GBPing!, didReceiveUnexpectedReplyWithSummary summary: GBPingSummary!) {
+//        print(summary)
+//    }
+//    
+//    func ping(pinger: GBPing!, didSendPingWithSummary summary: GBPingSummary!) {
+//        print(summary)
+//    }
+//    
+//    func ping(pinger: GBPing!, didTimeoutWithSummary summary: GBPingSummary!) {
+//        print(summary)
+//    }
+    
+    
+    
     
     
     

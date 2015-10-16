@@ -10,6 +10,7 @@ import UIKit
 import SpriteKit
 
 class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
+    
     enum states {
         case mission
         case paused

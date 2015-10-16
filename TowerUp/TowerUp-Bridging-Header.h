@@ -13,5 +13,6 @@
 #import <ParseFacebookUtilsV4/PFFacebookUtils.h>// But now we should import this framework as well to use Facebook utilitis
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKShareKit/FBSDKShareKit.h>
+#import "GBPing.h"
 
 #endif
