@@ -33,7 +33,7 @@ class Tile: SKSpriteNode {
     init(imageName:String, x:Int, y:Int) {
         let texture = SKTexture(imageNamed: imageName)
         super.init(texture: texture, color: UIColor.clearColor(), size: texture.size())
-        self.position = CGPoint(x: x * (Int)(Tile.sizeInPoints), y: y * -(Int)(Tile.sizeInPoints) + (Int)(Chunk.sizeInPoints - Tile.sizeInPoints))
+        self.position = CGPoint(x: x * (Int)(Tile.sizeInPoints), y: y * -(Int)(Tile.sizeInPoints) + (Int)(Chunk.sizeInPointsY - Tile.sizeInPoints))
         self.zPosition = 0
     }
 

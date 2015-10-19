@@ -84,7 +84,7 @@ class LocalGameScene: GameScene, SKPhysicsContactDelegate {
         MapManager.floor = 1//TODO: altas gambs
         self.world.addChild(self.mapManager)
         
-        self.mapManager.reloadMap(CGPoint(x: 10, y: Chunk.sizeInPoints + 10))
+        self.mapManager.reloadMap(CGPoint(x: 10, y: 10))
         
         self.addChild(Button(textureName: "buttonYellowSquare", text:"<", x:20, y:630, xAlign:.left, yAlign:.down))
         self.addChild(Button(textureName: "buttonYellowSquare", text:">" ,x:160, y:630, xAlign:.left, yAlign:.down))

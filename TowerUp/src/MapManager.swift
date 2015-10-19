@@ -47,15 +47,18 @@ class MapManager: SKNode {
         
         self.loadPhysics()
         
-        var i = 0
-        for (var y = self.playerRegionY - 1; y <= self.playerRegionY + 1 ; y++) {
-            for (var x = self.playerRegionX - 1; x <= self.playerRegionX + 1 ; x++) {
-                let chunk = Chunk(tower: MapManager.tower, floor:MapManager.floor, regionX: x, regionY: y)
-                chunk.name = "chunk\(i)"
-                self.addChild(chunk)
-                i++
-            }
-        }
+        let chunk = Chunk(tower: MapManager.tower, floor:MapManager.floor)
+        self.addChild(chunk)
+        
+//        var i = 0
+//        for (var y = self.playerRegionY - 1; y <= self.playerRegionY + 1 ; y++) {
+//            for (var x = self.playerRegionX - 1; x <= self.playerRegionX + 1 ; x++) {
+//                let chunk = Chunk(tower: MapManager.tower, floor:MapManager.floor, regionX: x, regionY: y)
+//                chunk.name = "chunk\(i)"
+//                self.addChild(chunk)
+//                i++
+//            }
+//        }
         
         self.loadedRegionX = self.playerRegionX
         self.loadedRegionY = self.playerRegionY
@@ -112,17 +115,17 @@ class MapManager: SKNode {
         let positionX = position.x
         let positionY = position.y
         
-        self.playerRegionX = Int(positionX / Chunk.sizeInPoints)
-        self.playerRegionY = Int(positionY / Chunk.sizeInPoints)
+        self.playerRegionX = Int(positionX / Chunk.sizeInPointsX)
+        self.playerRegionY = Int(positionY / Chunk.sizeInPointsY)
         
         if (self.playerRegionY <= 0) {
-            if (position.y / CGFloat(Chunk.sizeInPoints) < 0) {
+            if (position.y / CGFloat(Chunk.sizeInPointsY) < 0) {
                 self.playerRegionY--
             }
         }
         
         if (self.playerRegionX <= 0) {
-            if (position.x / CGFloat(Chunk.sizeInPoints) < 0) {
+            if (position.x / CGFloat(Chunk.sizeInPointsX) < 0) {
                 self.playerRegionX--
             }
         }

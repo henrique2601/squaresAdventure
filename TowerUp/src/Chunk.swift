@@ -9,10 +9,17 @@
 import UIKit
 import SpriteKit
 
-class Chunk: SKSpriteNode {
+class Chunk: SKSpriteNode, NSXMLParserDelegate {
     
-    static var sizeInTiles:CGFloat = 21
-    static var sizeInPoints:CGFloat = Tile.sizeInPoints * sizeInTiles
+    var layer = ""
+    var height = ""
+    var width = ""
+    
+    static var sizeInTilesX:CGFloat = 21
+    static var sizeInTilesY:CGFloat = 21
+    
+    static var sizeInPointsX:CGFloat = Tile.sizeInPoints * sizeInTilesX
+    static var sizeInPointsY:CGFloat = Tile.sizeInPoints * sizeInTilesY
     
     static var maxChunkX = 0
     static var maxChunkY = 0
@@ -22,10 +29,17 @@ class Chunk: SKSpriteNode {
     
     
     init(tower:Int, floor:Int, regionX:Int, regionY:Int) {
-        super.init(texture: nil, color: UIColor.clearColor(), size: CGSize(width: Chunk.sizeInPoints, height: Chunk.sizeInPoints))
+        super.init(texture: nil, color: UIColor.clearColor(), size: CGSize(width: Chunk.sizeInPointsX, height: Chunk.sizeInPointsY))
         
         self.anchorPoint = CGPointZero
         self.load(tower, floor:floor, regionX: regionX, regionY: regionY)
+    }
+    
+    init(tower:Int, floor:Int) {
+        super.init(texture: nil, color: UIColor.clearColor(), size: CGSize.zero)
+        
+        self.anchorPoint = CGPointZero
+        self.load(tower, floor:floor)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -38,11 +52,11 @@ class Chunk: SKSpriteNode {
         }
     }
     
-    func loadVisual(data: [AnyObject]) {
+    func loadVisual(data: [AnyObject], width:CGFloat = Chunk.sizeInTilesX, height:CGFloat = Chunk.sizeInTilesY) {
         var i = 0
         let tiles:NSMutableArray = NSMutableArray()
-        for (var y = 0; y < Int(Chunk.sizeInTiles); y++) {
-            for (var x = 0; x <  Int(Chunk.sizeInTiles); x++) {
+        for (var y = 0; y < Int(height); y++) {
+            for (var x = 0; x <  Int(width); x++) {
                 let id = data[i].integerValue
                 if(id != 0) {
                     var tile:Tile!
@@ -70,7 +84,7 @@ class Chunk: SKSpriteNode {
         }
     }
     
-    func loadGround(data: [AnyObject]) {
+    func loadGround(data: [AnyObject], width:CGFloat = Chunk.sizeInTilesX, height:CGFloat = Chunk.sizeInTilesY) {
         var floorData:FloorData!
         
         if (MapManager.tower >= 0) {
@@ -79,9 +93,10 @@ class Chunk: SKSpriteNode {
         
         var i = 0
         let tiles:NSMutableArray = NSMutableArray()
-        for (var y = 0; y < Int(Chunk.sizeInTiles); y++) {
-            for (var x = 0; x <  Int(Chunk.sizeInTiles); x++) {
-                let id = data[i].integerValue
+        for (var y = 0; y < Int(height); y++) {
+            for (var x = 0; x <  Int(width); x++) {
+                let aux = String(data[i]).stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+                let id = Int(aux)!
                 if(id != 0) {
                     var tile:Tile!
                     if(id > 64) {
@@ -198,7 +213,7 @@ class Chunk: SKSpriteNode {
             Chunk.maxChunkX = max(regionX, Chunk.maxChunkX)
             Chunk.maxChunkY = max(regionY, Chunk.maxChunkY)
             
-            if(Chunk.sizeInTiles * Chunk.sizeInTiles != CGFloat(data.count)) {
+            if(Chunk.sizeInTilesX * Chunk.sizeInTilesY != CGFloat(data.count)) {
                 print("ERROR: ground \(tower) \(floor) \(regionX) \(regionY) data.count: " + data.count.description)
             }
         }
@@ -206,6 +221,74 @@ class Chunk: SKSpriteNode {
         if let path = NSBundle.mainBundle().pathForResource("visual \(tower) \(floor) \(regionX) \(regionY)", ofType: "") {
             let data = (try! NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding)).componentsSeparatedByString(",")
             self.loadVisual(data)
+        }
+    }
+    
+    func load(tower:Int, floor:Int) {
+        
+        if let url = NSBundle.mainBundle().URLForResource("\(tower) \(floor)", withExtension: "tmx") {
+            
+            let xmlParser = NSXMLParser.init(contentsOfURL: url)!
+            xmlParser.delegate = self
+            
+            xmlParser.parse()
+            
+            
+//            let data = (try! NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding)).componentsSeparatedByString(",")
+//            self.loadGround(data)
+        }
+        
+//        if let path = NSBundle.mainBundle().pathForResource("visual \(tower) \(floor) \(regionX) \(regionY)", ofType: "") {
+//            let data = (try! NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding)).componentsSeparatedByString(",")
+//            self.loadVisual(data)
+//        }
+    }
+    
+    func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
+//        print(elementName)
+//        print(namespaceURI)
+//        print(qName)
+//        print(attributeDict)
+        
+        switch elementName {
+        case "layer":
+            self.layer = attributeDict["name"]!
+            self.width = attributeDict["width"]!
+            self.height = attributeDict["height"]!
+            
+            
+            Chunk.sizeInTilesX = CGFloat(Int(self.width)!)
+            Chunk.sizeInTilesY = CGFloat(Int(self.height)!)
+            
+            Chunk.sizeInPointsX = Tile.sizeInPoints * Chunk.sizeInTilesX
+            Chunk.sizeInPointsY = Tile.sizeInPoints * Chunk.sizeInTilesY
+            
+            Chunk.maxChunkX = 0
+            Chunk.maxChunkY = 0
+            
+            self.position = CGPoint(x: 0, y: 0)
+            
+            break
+        default:
+            break
+        }
+    }
+    
+    func parser(parser: NSXMLParser, foundCharacters string: String) {
+        
+        let data = string.componentsSeparatedByString(",")
+        
+        if(data.count >= 441) {
+            switch self.layer {
+            case "ground":
+                self.loadGround(data, width:CGFloat(Int(self.width)!), height:CGFloat(Int(self.height)!))
+                break
+            case "visual":
+                self.loadVisual(data, width:CGFloat(Int(self.width)!), height:CGFloat(Int(self.height)!))
+                break
+            default:
+                break
+            }
         }
     }
 }

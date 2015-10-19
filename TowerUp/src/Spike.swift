@@ -11,9 +11,7 @@ import SpriteKit
 
 class Spike: Tile {
     init(x:Int, y:Int) {
-        let texture = SKTexture(imageNamed: "spikes")//Só vai ter um tipo de spike?
-        super.init(texture: texture, color: UIColor.clearColor(), size: texture.size())
-        self.position = CGPoint(x: x * (Int)(Tile.sizeInPoints), y: y * -(Int)(Tile.sizeInPoints) + (Int)(Chunk.sizeInPoints - Tile.sizeInPoints))
+        super.init(imageName: "spikes", x: x, y: y)
         
         self.name = "spike"
         

@@ -84,7 +84,7 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
         self.player = Player(playerData: self.playerData, x: 128, y: 128, loadPhysics: true)
         self.world.addChild(self.player)
         
-        self.mapManager.reloadMap(CGPoint(x: 10, y: Chunk.sizeInPoints + 10))
+        self.mapManager.reloadMap(CGPoint(x: 10, y: 10))
         
         switch(self.playerData.configControls.integerValue) {
             
@@ -221,7 +221,7 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
                 break
                 
             case states.mission:
-                self.mapManager.reloadMap(CGPoint(x: 10, y: Chunk.sizeInPoints + 10))
+                self.mapManager.reloadMap(CGPoint(x: 10, y: 10))
                 self.player.reset()
                 self.boxDeathsAndTime.reset()
                 self.lastReset = currentTime

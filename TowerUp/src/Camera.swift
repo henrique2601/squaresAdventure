@@ -18,7 +18,7 @@ class GameCamera: SKNode {
         
         self.position = CGPoint(x: Int(newPosition.x - self.scene!.size.width/2), y: Int(newPosition.y + self.scene!.size.height/2))
         
-         self.maxX = Chunk.sizeInPoints * CGFloat(Chunk.maxChunkX + 1) - self.scene!.size.width - Tile.sizeInPoints/2
+         self.maxX = Chunk.sizeInPointsX * CGFloat(Chunk.maxChunkX + 1) - self.scene!.size.width - Tile.sizeInPoints/2
          //self.maxY = Chunk.sizeInPoints * CGFloat(Chunk.maxChunkY + 1) - self.scene!.size.height - Tile.sizeInPoints/2
         
         //certo
