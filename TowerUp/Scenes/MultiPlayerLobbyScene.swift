@@ -123,8 +123,8 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
     
     func ping(pinger: GBPing!, didReceiveReplyWithSummary summary: GBPingSummary!) {
         print(summary.rtt)
-        self.responseTime = self.responseTime + Int(summary.rtt * 1000)
-        self.numResponses = self.numResponses + 1
+        //self.responseTime = self.responseTime + Int(summary.rtt * 1000)
+        //self.numResponses = self.numResponses + 1
     }
     
 //    func ping(pinger: GBPing!, didFailToSendPingWithSummary summary: GBPingSummary!, error: NSError!) {
