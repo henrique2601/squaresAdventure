@@ -43,7 +43,7 @@ class Towers: NSObject {
             FloorType(maxDeathCount: 1, maxTime: 10, minCoins: 10),//0
             FloorType(maxDeathCount: 0, maxTime: 8, minCoins: 20),//1
             FloorType(maxDeathCount: 3, maxTime: 20, minCoins: 30),//2
-            FloorType(maxDeathCount: 4, maxTime: 25, minCoins: 40),//3
+            FloorType(maxDeathCount: 1, maxTime: 13, minCoins: 40),//3
             FloorType(maxDeathCount: 5, maxTime: 30, minCoins: 50),//4
             FloorType(maxDeathCount: 6, maxTime: 35, minCoins: 60),//5
             FloorType(maxDeathCount: 7, maxTime: 40, minCoins: 70),//6

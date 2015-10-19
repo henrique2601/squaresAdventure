@@ -101,7 +101,7 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
         MapManager.floor = 1//TODO: altas gambs
         self.world.addChild(self.mapManager)
         
-        self.mapManager.reloadMap(CGPoint(x: 10, y: Chunk.sizeInPoints + 10))
+        self.mapManager.reloadMap(CGPoint(x: 10, y: 10))
         
         switch(self.playerData.configControls.integerValue) {
             
@@ -168,7 +168,7 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
             this.player.name = this.localName
             this.room = data?[1] as! Int
             MapManager.floor = data?[2] as! Int
-            this.mapManager.reloadMap(CGPoint(x: 10, y: Chunk.sizeInPoints + 10))
+            this.mapManager.reloadMap(CGPoint(x: 10, y: 10))
             this.player.reset()
             
             this.player.labelName.position = CGPoint(x: this.player!.position.x, y: this.player!.position.y + 32)
