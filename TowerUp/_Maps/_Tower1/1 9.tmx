@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="21" height="21" tilewidth="128" tileheight="128" nextobjectid="1">
- <tileset firstgid="1" name="purple" tilewidth="128" tileheight="128" tilecount="64">
-  <image source="../../../Tilesets/purple.png" width="1024" height="1024"/>
+ <tileset firstgid="1" name="sand" tilewidth="128" tileheight="128" tilecount="64">
+  <image source="../../../Tilesets/sand.png" width="1024" height="1024"/>
  </tileset>
  <tileset firstgid="65" name="specialTiles" tilewidth="128" tileheight="128" tilecount="64">
   <image source="../../../Tilesets/specialTiles.png" width="1024" height="1024"/>
@@ -64,8 +64,8 @@
  </layer>
  <layer name="ground" width="21" height="21">
   <data encoding="csv">
-0,0,0,0,0,0,0,65,65,65,0,65,65,65,0,0,65,65,65,65,70,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,65,65,65,0,65,65,65,0,0,65,65,65,65,70,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,65,65,65,0,0,0,0,0,0,0,0,0,0,0,67,0,0,0,66,0,
 0,65,65,65,0,0,0,1,2,3,0,0,0,1,2,3,0,0,1,2,3,
@@ -84,7 +84,7 @@
 0,0,0,0,0,0,0,0,0,1,2,3,0,0,0,1,2,3,0,0,65,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,67,0,0,0,0,0,0,0,0,0,0,67,0,0,0,0,0,0,0,0,
-1,2,3,0,0,0,1,2,3,0,0,1,2,3,0,0,1,2,3,0,0
+1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,3,0
 </data>
  </layer>
 </map>

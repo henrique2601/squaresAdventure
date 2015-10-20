@@ -92,5 +92,6 @@ struct physicsCategory : OptionSetType {
     static var boxCrate: physicsCategory { return physicsCategory(1 << 10) }
     static var gem: physicsCategory { return physicsCategory(1 << 11) }
     static var saw: physicsCategory { return physicsCategory(1 << 12) }
+    static var slime: physicsCategory { return physicsCategory(1 << 13) }
     
 }

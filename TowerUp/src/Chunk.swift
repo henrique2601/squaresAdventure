@@ -57,7 +57,8 @@ class Chunk: SKSpriteNode, NSXMLParserDelegate {
         let tiles:NSMutableArray = NSMutableArray()
         for (var y = 0; y < Int(height); y++) {
             for (var x = 0; x <  Int(width); x++) {
-                let id = data[i].integerValue
+                let aux = String(data[i]).stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+                let id = Int(aux)!
                 if(id != 0) {
                     var tile:Tile!
                     
@@ -90,7 +91,7 @@ class Chunk: SKSpriteNode, NSXMLParserDelegate {
         if (MapManager.tower >= 0) {
             floorData = MemoryCard.sharedInstance.currentFloor()
         }
-        
+        var coinsInChunk = 0
         var i = 0
         let tiles:NSMutableArray = NSMutableArray()
         for (var y = 0; y < Int(height); y++) {
@@ -103,6 +104,7 @@ class Chunk: SKSpriteNode, NSXMLParserDelegate {
                         switch(id) {
                         case Tile.specialTiles.coinTile.rawValue:
                             tile = Coin(type: "Gold", x: x, y: y)
+                            coinsInChunk++
                             break
                         case Tile.specialTiles.winTile.rawValue:
                             tile = WinTile(type: self.type, x: x, y: y)
@@ -142,6 +144,10 @@ class Chunk: SKSpriteNode, NSXMLParserDelegate {
                         case Tile.specialTiles.woodenBridge.rawValue:
                             tile = Ground(type: self.type, imageName: "bridgeB", x: x, y: y)
                             break
+                            
+                        case Tile.specialTiles.slime.rawValue:
+                            tile = Slime(x: x, y: y)
+                            break
 
                         default:
                             tile = Bug(x: x, y: y)
@@ -177,6 +183,12 @@ class Chunk: SKSpriteNode, NSXMLParserDelegate {
                 i++
             }
         }
+        
+        if(Towers.types[MapManager.tower].floorTypes[MapManager.floor].minCoins == 0) {
+           Towers.types[MapManager.tower].floorTypes[MapManager.floor].minCoins = coinsInChunk
+        }
+    
+        
         
         //TODO: let tempo, numero de moedas e numero de mortes
         
@@ -245,10 +257,10 @@ class Chunk: SKSpriteNode, NSXMLParserDelegate {
     }
     
     func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
-//        print(elementName)
-//        print(namespaceURI)
-//        print(qName)
-//        print(attributeDict)
+        print(elementName)
+        print(namespaceURI)
+        print(qName)
+        print(attributeDict)
         
         switch elementName {
         case "layer":
@@ -268,6 +280,11 @@ class Chunk: SKSpriteNode, NSXMLParserDelegate {
             
             self.position = CGPoint(x: 0, y: 0)
             
+            break
+        case "tileset":
+            if(attributeDict["firstgid"] == "1"){
+                self.type = attributeDict["name"]!
+            }
             break
         default:
             break

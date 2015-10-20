@@ -40,7 +40,7 @@
 		135C5CA41BA8364B006643BB /* PowerUpSlotData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135C5CA31BA8364B006643BB /* PowerUpSlotData.swift */; };
 		135C5CA61BA8364C006643BB /* SkinSlotData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135C5CA51BA8364C006643BB /* SkinSlotData.swift */; };
 		135DF9591BCFF95F004342AB /* Coin.sks in Resources */ = {isa = PBXBuildFile; fileRef = 135DF9561BCFF95F004342AB /* Coin.sks */; settings = {ASSET_TAGS = (); }; };
-		135DF95A1BCFF95F004342AB /* Particle.sks in Resources */ = {isa = PBXBuildFile; fileRef = 135DF9571BCFF95F004342AB /* Particle.sks */; settings = {ASSET_TAGS = (); }; };
+		135DF95A1BCFF95F004342AB /* Gem.sks in Resources */ = {isa = PBXBuildFile; fileRef = 135DF9571BCFF95F004342AB /* Gem.sks */; settings = {ASSET_TAGS = (); }; };
 		135DF95B1BCFF95F004342AB /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 135DF9581BCFF95F004342AB /* spark.png */; settings = {ASSET_TAGS = (); }; };
 		135EA4911BBAE375006C765F /* GameFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135EA4901BBAE375006C765F /* GameFonts.swift */; settings = {ASSET_TAGS = (); }; };
 		137D3D9D1BB42DDF003202D9 /* Bug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137D3D9C1BB42DDF003202D9 /* Bug.swift */; settings = {ASSET_TAGS = (); }; };
@@ -51,6 +51,9 @@
 		137D3DA71BB45658003202D9 /* VisualTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137D3DA61BB45658003202D9 /* VisualTile.swift */; settings = {ASSET_TAGS = (); }; };
 		137DC5151BA1C3E300D58DED /* PowerUpSlot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137DC5141BA1C3E300D58DED /* PowerUpSlot.swift */; };
 		137F8DF11BBC66DF00B1C304 /* BoxCoins.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137F8DF01BBC66DF00B1C304 /* BoxCoins.swift */; settings = {ASSET_TAGS = (); }; };
+		1383005D1BD66C3C0099D1A5 /* 1 17.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 1383005C1BD66C3C0099D1A5 /* 1 17.tmx */; settings = {ASSET_TAGS = (); }; };
+		1383005F1BD69F330099D1A5 /* Slime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1383005E1BD69F330099D1A5 /* Slime.swift */; settings = {ASSET_TAGS = (); }; };
+		138300611BD6B7510099D1A5 /* Bomb.sks in Resources */ = {isa = PBXBuildFile; fileRef = 138300601BD6B7510099D1A5 /* Bomb.sks */; settings = {ASSET_TAGS = (); }; };
 		1383FD5E1B7A49730012DA45 /* MapManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1383FD5D1B7A49730012DA45 /* MapManager.swift */; };
 		1383FD601B7A4A920012DA45 /* Chunk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1383FD5F1B7A4A920012DA45 /* Chunk.swift */; };
 		1383FD621B7A4B420012DA45 /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1383FD611B7A4B420012DA45 /* Tile.swift */; };
@@ -198,7 +201,7 @@
 		135C5CA31BA8364B006643BB /* PowerUpSlotData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PowerUpSlotData.swift; path = CoreData/PowerUpSlotData.swift; sourceTree = "<group>"; };
 		135C5CA51BA8364C006643BB /* SkinSlotData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SkinSlotData.swift; path = CoreData/SkinSlotData.swift; sourceTree = "<group>"; };
 		135DF9561BCFF95F004342AB /* Coin.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Coin.sks; sourceTree = "<group>"; };
-		135DF9571BCFF95F004342AB /* Particle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Particle.sks; sourceTree = "<group>"; };
+		135DF9571BCFF95F004342AB /* Gem.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Gem.sks; sourceTree = "<group>"; };
 		135DF9581BCFF95F004342AB /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
 		135EA4901BBAE375006C765F /* GameFonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameFonts.swift; path = src/GameFonts.swift; sourceTree = "<group>"; };
 		137D3D9C1BB42DDF003202D9 /* Bug.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Bug.swift; path = src/Bug.swift; sourceTree = "<group>"; };
@@ -209,6 +212,9 @@
 		137D3DA61BB45658003202D9 /* VisualTile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VisualTile.swift; path = src/VisualTile.swift; sourceTree = "<group>"; };
 		137DC5141BA1C3E300D58DED /* PowerUpSlot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PowerUpSlot.swift; path = src/PowerUpSlot.swift; sourceTree = "<group>"; };
 		137F8DF01BBC66DF00B1C304 /* BoxCoins.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BoxCoins.swift; path = src/BoxCoins.swift; sourceTree = "<group>"; };
+		1383005C1BD66C3C0099D1A5 /* 1 17.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "1 17.tmx"; sourceTree = "<group>"; };
+		1383005E1BD69F330099D1A5 /* Slime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Slime.swift; path = src/Slime.swift; sourceTree = "<group>"; };
+		138300601BD6B7510099D1A5 /* Bomb.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Bomb.sks; sourceTree = "<group>"; };
 		1383FD5D1B7A49730012DA45 /* MapManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MapManager.swift; path = src/MapManager.swift; sourceTree = "<group>"; };
 		1383FD5F1B7A4A920012DA45 /* Chunk.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Chunk.swift; path = src/Chunk.swift; sourceTree = "<group>"; };
 		1383FD611B7A4B420012DA45 /* Tile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Tile.swift; path = src/Tile.swift; sourceTree = "<group>"; };
@@ -424,6 +430,7 @@
 				3A390C911BD0576F00F948F6 /* ServerManager.swift */,
 				1323FF601B90C83300EF4C2E /* Skin.swift */,
 				1305E4EC1BB18B1B009F9B0A /* Slider.swift */,
+				1383005E1BD69F330099D1A5 /* Slime.swift */,
 				1308A4641BC2BFAD00D4F85B /* SoundEffect.swift */,
 				133184A11B83AADB00DF11D5 /* Spike.swift */,
 				137D3DA41BB43DB3003202D9 /* Spring.swift */,
@@ -463,8 +470,9 @@
 		135DF9551BCFF951004342AB /* Particles */ = {
 			isa = PBXGroup;
 			children = (
+				138300601BD6B7510099D1A5 /* Bomb.sks */,
 				135DF9561BCFF95F004342AB /* Coin.sks */,
-				135DF9571BCFF95F004342AB /* Particle.sks */,
+				135DF9571BCFF95F004342AB /* Gem.sks */,
 				135DF9581BCFF95F004342AB /* spark.png */,
 			);
 			name = Particles;
@@ -566,6 +574,7 @@
 				13F390861BD543B60089BF15 /* 1 14.tmx */,
 				13F390871BD543B60089BF15 /* 1 15.tmx */,
 				13F390881BD543B60089BF15 /* 1 16.tmx */,
+				1383005C1BD66C3C0099D1A5 /* 1 17.tmx */,
 			);
 			path = _Tower1;
 			sourceTree = "<group>";
@@ -733,13 +742,15 @@
 				13F390A61BD543B60089BF15 /* 1 0.tmx in Resources */,
 				3A8223D41BC6C6300029C75D /* qubodupImpactMeat01.wav in Resources */,
 				13F390AC1BD543B60089BF15 /* 1 14.tmx in Resources */,
+				1383005D1BD66C3C0099D1A5 /* 1 17.tmx in Resources */,
 				13F390A91BD543B60089BF15 /* 1 11.tmx in Resources */,
 				13F390961BD543B60089BF15 /* 0 12.tmx in Resources */,
 				13F390951BD543B60089BF15 /* 0 11.tmx in Resources */,
 				3AB95A181BC2F79A00368009 /* boom4.wav in Resources */,
 				13F3909E1BD543B60089BF15 /* 0 2.tmx in Resources */,
-				135DF95A1BCFF95F004342AB /* Particle.sks in Resources */,
+				135DF95A1BCFF95F004342AB /* Gem.sks in Resources */,
 				13F3909A1BD543B60089BF15 /* 0 16.tmx in Resources */,
+				138300611BD6B7510099D1A5 /* Bomb.sks in Resources */,
 				81BA81501A49DA1800E65899 /* Main.storyboard in Resources */,
 				13F390B21BD543B60089BF15 /* 1 5.tmx in Resources */,
 				13F390921BD543B60089BF15 /* 0 0.tmx in Resources */,
@@ -879,6 +890,7 @@
 				133184A21B83AADB00DF11D5 /* Spike.swift in Sources */,
 				139501A51BC6F98D0053EA5D /* Saw.swift in Sources */,
 				1305E4ED1BB18B1B009F9B0A /* Slider.swift in Sources */,
+				1383005F1BD69F330099D1A5 /* Slime.swift in Sources */,
 				135C5CA61BA8364C006643BB /* SkinSlotData.swift in Sources */,
 				1323FF611B90C83300EF4C2E /* Skin.swift in Sources */,
 				1383FD5E1B7A49730012DA45 /* MapManager.swift in Sources */,

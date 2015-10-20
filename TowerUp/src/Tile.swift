@@ -21,7 +21,7 @@ class Tile: SKSpriteNode {
         case saw = 71
         case woodenBridge = 72
         case spring = 73
-        //case ? = 74
+        case slime = 74
     }
     
     static var sizeInPoints:CGFloat = 128/2

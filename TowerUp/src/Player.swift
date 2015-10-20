@@ -142,6 +142,7 @@ class Player: Square {
             physicsCategory.bomb.rawValue |
             physicsCategory.spring.rawValue |
             physicsCategory.boxCrate.rawValue |
+            physicsCategory.slime.rawValue |
             physicsCategory.player.rawValue
         
     }
@@ -171,6 +172,19 @@ class Player: Square {
                 }
                 gem.bonus = 0
                 gem.removeFromParent()
+                
+                let particles = SKEmitterNode(fileNamed: "Gem.sks")
+                
+                particles?.position.x = gem.position.x
+                particles?.position.y = gem.position.y
+                particles?.zPosition = gem.zPosition
+                self.parent!.addChild(particles!)
+                
+                let action = SKAction()
+                action.duration = 2
+                particles?.runAction(action , completion: { () -> Void in
+                    particles?.removeFromParent()
+                })
             }
             break
             
@@ -244,7 +258,7 @@ class Player: Square {
                 self.boom.play()
                 self.healthPoints = 0
                 
-                let particles = SKEmitterNode(fileNamed: "Particle.sks")
+                let particles = SKEmitterNode(fileNamed: "Bomb.sks")
                 
                 particles?.position.x = bomb.position.x
                 particles?.position.y = bomb.position.y

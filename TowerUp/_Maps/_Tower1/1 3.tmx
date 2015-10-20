@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="21" height="21" tilewidth="128" tileheight="128" nextobjectid="1">
- <tileset firstgid="1" name="grass" tilewidth="128" tileheight="128" tilecount="64">
-  <image source="../../../Tilesets/grass.png" width="1024" height="1024"/>
+ <tileset firstgid="1" name="sand" tilewidth="128" tileheight="128" tilecount="64">
+  <image source="../../../Tilesets/sand.png" width="1024" height="1024"/>
  </tileset>
  <tileset firstgid="65" name="specialTiles" tilewidth="128" tileheight="128" tilecount="64">
   <image source="../../../Tilesets/specialTiles.png" width="1024" height="1024"/>
@@ -56,9 +56,9 @@
 0,0,0,0,0,0,0,0,130,130,136,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,129,132,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,129,135,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,132,0,131,129,0,0,0,131,136,136,136,136,136,136,0,0,131,0,0,0,
+0,135,0,131,129,0,0,0,131,136,136,136,136,136,136,0,0,131,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
