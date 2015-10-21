@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="21" height="21" tilewidth="128" tileheight="128" nextobjectid="1">
+ <tileset firstgid="1" name="Sand1024" tilewidth="128" tileheight="128" tilecount="64">
+  <image source="../../../../Tilesets/Sand1024.png" width="1024" height="1024"/>
+ </tileset>
+ <tileset firstgid="65" name="sky" tilewidth="128" tileheight="128" tilecount="1">
+  <image source="../../../../Tilesets/sky.png" width="128" height="128"/>
+ </tileset>
+ <tileset firstgid="66" name="specialTiles" tilewidth="128" tileheight="128" tilecount="64">
+  <image source="../../../../Tilesets/specialTiles.png" width="1024" height="1024"/>
+ </tileset>
+ <tileset firstgid="130" name="visualTiles" tilewidth="128" tileheight="128" tilecount="64">
+  <image source="../../../../Tilesets/visualTiles.png" width="1024" height="1024"/>
+ </tileset>
+ <layer name="sky" width="21" height="21">
+  <data encoding="base64" compression="zlib">
+   eJxzZGBgcBzFo3gUj+JRPIqHIQYAxVZv+g==
+  </data>
+ </layer>
+ <layer name="visual" width="21" height="21">
+  <data encoding="base64" compression="zlib">
+   eJxjYKAPaIdiEOiigZnUApSa2QKlO4C4h0gzO5DYxIYNLfxOa4Du3m4GRHhRy8zBCEDxC4rX7oF2CB7QjoMNAh0M5AF8Zg5VQGz+JDfMKAUtFNhNThwh24ctfWPL85QCUt0JAJqpFK4=
+  </data>
+ </layer>
+ <layer name="ground" width="21" height="21">
+  <data encoding="base64" compression="zlib">
+   eJzNU0EKhDAMjOtF8eKyHnxPtQr+/0GbxRZqTNq0KuzAYEiTsU0YgDPeyA+T/1cYZPOAZl/YO0XOqKZx3xm5CD0V8uVYu5x15DTD+rAnB2NBTylMwB9spJaC1tK3X5lBLgyJN9j3epcm97ZaqNVqpqD1FVdnhXiA/d7hzjnk+q9L6JVoaiBpziSW/M3NjvNfav+aO8Ugzc7/d8jQoVo01yJXOHrezyvlYaus8+dfkZsLgg==
+  </data>
+ </layer>
+</map>

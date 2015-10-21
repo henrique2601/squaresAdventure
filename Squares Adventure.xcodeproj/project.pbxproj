@@ -153,6 +153,9 @@
 		5CF8A3A61B8F39A000C16CA9 /* PowerUpData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF8A3A51B8F39A000C16CA9 /* PowerUpData.swift */; };
 		5CF8A3A81B8F39A000C16CA9 /* FloorData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF8A3A71B8F39A000C16CA9 /* FloorData.swift */; };
 		5CF8A3AA1B8F39A000C16CA9 /* SkinData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF8A3A91B8F39A000C16CA9 /* SkinData.swift */; };
+		5CFD53B41BD7AC97002B79D7 /* 1 18.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 5CFD53B11BD7AC97002B79D7 /* 1 18.tmx */; settings = {ASSET_TAGS = (); }; };
+		5CFD53B51BD7AC97002B79D7 /* 1 19.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 5CFD53B21BD7AC97002B79D7 /* 1 19.tmx */; settings = {ASSET_TAGS = (); }; };
+		5CFD53B61BD7AC97002B79D7 /* 1 20.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 5CFD53B31BD7AC97002B79D7 /* 1 20.tmx */; settings = {ASSET_TAGS = (); }; };
 		81BA814B1A49DA1800E65899 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BA814A1A49DA1800E65899 /* AppDelegate.swift */; };
 		81BA814D1A49DA1800E65899 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BA814C1A49DA1800E65899 /* ViewController.swift */; };
 		81BA81501A49DA1800E65899 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81BA814E1A49DA1800E65899 /* Main.storyboard */; };
@@ -319,6 +322,9 @@
 		5CF8A3A51B8F39A000C16CA9 /* PowerUpData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PowerUpData.swift; path = CoreData/PowerUpData.swift; sourceTree = "<group>"; };
 		5CF8A3A71B8F39A000C16CA9 /* FloorData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FloorData.swift; path = CoreData/FloorData.swift; sourceTree = "<group>"; };
 		5CF8A3A91B8F39A000C16CA9 /* SkinData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SkinData.swift; path = CoreData/SkinData.swift; sourceTree = "<group>"; };
+		5CFD53B11BD7AC97002B79D7 /* 1 18.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "1 18.tmx"; sourceTree = "<group>"; };
+		5CFD53B21BD7AC97002B79D7 /* 1 19.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "1 19.tmx"; sourceTree = "<group>"; };
+		5CFD53B31BD7AC97002B79D7 /* 1 20.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "1 20.tmx"; sourceTree = "<group>"; };
 		81BA81451A49DA1800E65899 /* Squares Adventure.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Squares Adventure.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81BA81491A49DA1800E65899 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		81BA814A1A49DA1800E65899 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -575,6 +581,9 @@
 				13F390871BD543B60089BF15 /* 1 15.tmx */,
 				13F390881BD543B60089BF15 /* 1 16.tmx */,
 				1383005C1BD66C3C0099D1A5 /* 1 17.tmx */,
+				5CFD53B11BD7AC97002B79D7 /* 1 18.tmx */,
+				5CFD53B21BD7AC97002B79D7 /* 1 19.tmx */,
+				5CFD53B31BD7AC97002B79D7 /* 1 20.tmx */,
 			);
 			path = _Tower1;
 			sourceTree = "<group>";
@@ -740,6 +749,7 @@
 			files = (
 				13F390B01BD543B60089BF15 /* 1 3.tmx in Resources */,
 				13F390A61BD543B60089BF15 /* 1 0.tmx in Resources */,
+				5CFD53B61BD7AC97002B79D7 /* 1 20.tmx in Resources */,
 				3A8223D41BC6C6300029C75D /* qubodupImpactMeat01.wav in Resources */,
 				13F390AC1BD543B60089BF15 /* 1 14.tmx in Resources */,
 				1383005D1BD66C3C0099D1A5 /* 1 17.tmx in Resources */,
@@ -747,6 +757,8 @@
 				13F390961BD543B60089BF15 /* 0 12.tmx in Resources */,
 				13F390951BD543B60089BF15 /* 0 11.tmx in Resources */,
 				3AB95A181BC2F79A00368009 /* boom4.wav in Resources */,
+				5CFD53B41BD7AC97002B79D7 /* 1 18.tmx in Resources */,
+				5CFD53B51BD7AC97002B79D7 /* 1 19.tmx in Resources */,
 				13F3909E1BD543B60089BF15 /* 0 2.tmx in Resources */,
 				135DF95A1BCFF95F004342AB /* Gem.sks in Resources */,
 				13F3909A1BD543B60089BF15 /* 0 16.tmx in Resources */,
