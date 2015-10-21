@@ -143,10 +143,10 @@ class LocalGameScene: GameScene, SKPhysicsContactDelegate {
                 self.blackSpriteNode = SKSpriteNode(color: GameColors.black, size: self.size)
                 self.blackSpriteNode.anchorPoint = CGPoint(x: 0, y: 1)
                 self.addChild(self.blackSpriteNode)
-                let box = MultiplayerWinBox(background: "boxWhite", name:"You Win!!")
-                self.addChild(box)
+                //let box = MultiplayerWinBox(background: "boxWhite")
+                //self.addChild(box)
                 
-                self.blackSpriteNode.zPosition = box.zPosition - 1
+                //self.blackSpriteNode.zPosition = box.zPosition - 1
                 break
                 
             default:

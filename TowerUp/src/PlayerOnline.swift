@@ -13,6 +13,7 @@ class PlayerOnline: Player {
     var id : Int!
     var lastCurrentTime: NSTimeInterval = 0
     var labelName: Label!
+    var skin: Int!
     static var playerOnlineList = Set<PlayerOnline>()
     
     
@@ -24,6 +25,7 @@ class PlayerOnline: Player {
     override init(skinId:Int, x:Int, y:Int, loadPhysics:Bool) {
         super.init(skinId: skinId, x: x, y: y, loadPhysics: loadPhysics)
         PlayerOnline.playerOnlineList.insert(self)
+        self.skin = skinId
     }
     
     required init?(coder aDecoder: NSCoder) {
