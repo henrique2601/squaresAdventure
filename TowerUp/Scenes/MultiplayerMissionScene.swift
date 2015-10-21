@@ -12,6 +12,7 @@ import SpriteKit
 class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
     
     enum states {
+        case loading
         case mission
         case paused
         case win
@@ -24,9 +25,12 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
     var buttonJump:Button!
     
     var slider:Slider!
+
     
     //Effect
     var blackSpriteNode:SKSpriteNode!
+    var labelWin:Label?
+    
     
     enum messages : String {
         case disconnect = "q"
@@ -38,7 +42,7 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
     }
     
     var message = messages.addPlayers
-    var state = states.mission
+    var state = states.loading
     var nextState = states.mission
     
     var xPos = 500
@@ -50,7 +54,9 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
     var parallax:Parallax!
     var room:Int = 0
     let velo:CGFloat = 3
-    var currentTime: NSTimeInterval = 0
+    var time: NSTimeInterval = 0
+    var currentTime:NSTimeInterval!
+    var lastReset:NSTimeInterval!
     
     var playerData = MemoryCard.sharedInstance.playerData
     
@@ -62,7 +68,7 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
     
     //var teste: NSURL
     
-    var winPlayersList = Dictionary<String,Int>()
+    var winPlayersList = Array<String>()
     
     var boxCoins:BoxCoins!
     var collectedBonus = 0 {
@@ -103,20 +109,20 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
         
         self.mapManager.reloadMap(CGPoint(x: 10, y: 10))
         
+        self.localName = MemoryCard.sharedInstance.playerData.name
+        
         switch(self.playerData.configControls.integerValue) {
             
         case 1: //controlsConfig.useButtons.rawValue:
-            self.buttonLeft = Button(textureName: "buttonYellowSquare", text:"<", x:20, y:580, xAlign:.left, yAlign:.down, colorBlendFactor:0.5)
-            self.buttonLeft.setScale(1.5)
+            self.buttonLeft = Button(textureName: "buttonYellowSquare", text:"<", x:20, y:626, xAlign:.left, yAlign:.down, colorBlendFactor:0.5, top:39, bottom: 39, left:39, right:39)
             
             self.addChild(self.buttonLeft)
             
-            self.buttonRight = Button(textureName: "buttonYellowSquare", text:">" ,x:220, y:580, xAlign:.left, yAlign:.down, colorBlendFactor:0.5)
-            self.buttonRight.setScale(1.5)
+            self.buttonRight = Button(textureName: "buttonYellowSquare", text:">" ,x:276, y:626, xAlign:.left, yAlign:.down, colorBlendFactor:0.5, top:39, bottom: 39, left:39, right:39)
             self.addChild(self.buttonRight)
             
-            self.buttonJump = Button(textureName: "buttonYellow", text:"Jump", x:880, y:580, xAlign:.right, yAlign:.down, colorBlendFactor:0.5)
-            self.buttonJump.setScale(1.5)
+            self.buttonJump = Button(textureName: "buttonYellow", text:"Jump", x:1014, y:626, xAlign:.right, yAlign:.down, colorBlendFactor:0.5, top:39, bottom: 39, left:39, right:39)
+            
             self.addChild(self.buttonJump)
             break
             
@@ -176,7 +182,7 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
             this.player.labelName.setText(this.localName!, color: GameColors.black)
             
             
-            
+            print(data?[0])
             
             if let playersArray = data?[0] as? NSArray {
                 for onlinePlayer in playersArray {
@@ -231,15 +237,26 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
                     if let id = player.id
                     {
                         if id == name{
-                            print(player.name! + " win")
-                            this.blackSpriteNode = SKSpriteNode(color: GameColors.black, size: this.size)
-                            this.blackSpriteNode.anchorPoint = CGPoint(x: 0, y: 1)
-                            this.addChild(this.blackSpriteNode)
-                            let box = MultiplayerWinBox(background: "boxWhite", name:player.name! + " win!!!")
-                            this.addChild(box)
+//                            print(player.name! + " win")
+//                            this.blackSpriteNode = SKSpriteNode(color: GameColors.black, size: this.size)
+//                            this.blackSpriteNode.anchorPoint = CGPoint(x: 0, y: 1)
+//                            this.addChild(this.blackSpriteNode)
+//                            let box = MultiplayerWinBox(background: "boxWhite", name:player.name! + " win!!!")
+//                            this.addChild(box)
+//                            
+//                            this.blackSpriteNode.zPosition = box.zPosition - 1
+//                            this.nextState = states.loose
                             
-                            this.blackSpriteNode.zPosition = box.zPosition - 1
-                            this.nextState = states.loose
+                            this.labelWin = Label(text: "\(player.name!) finish with \(Int(this.time)) seconds", x: 675, y: 375, xAlign: Control.xAlignments.center, yAlign: Control.yAlignments.center)
+                            this.addChild(this.labelWin!)
+                            this.labelWin?.runAction(SKAction.fadeOutWithDuration(2), completion: { () -> Void in
+                                this.labelWin?.removeFromParent()
+                                
+                            })
+                            this.winPlayersList.append("\(player.skin!),\(player.name!),\(Int(this.time))")
+                            print(this.winPlayersList)
+                            
+                        
                             
                         }
                     }
@@ -331,10 +348,11 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
     
     override func update(currentTime: NSTimeInterval) {
         self.currentTime = currentTime
+        
         if(self.state == self.nextState){
             switch (self.state) {
             case states.mission:
-                
+                self.time = currentTime - lastReset
                 switch(self.playerData.configControls.integerValue) {
                 case 1: //controlsConfig.useButtons.rawValue:
                     self.player.jump = self.buttonJump.pressed
@@ -396,13 +414,15 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
             switch (self.nextState) {
                 
             case states.mission:
+                self.lastReset = currentTime
                 break
             case states.win:
                 self.socket.emit("win", self.room)
                 self.blackSpriteNode = SKSpriteNode(color: GameColors.black, size: self.size)
                 self.blackSpriteNode.anchorPoint = CGPoint(x: 0, y: 1)
                 self.addChild(self.blackSpriteNode)
-                let box = MultiplayerWinBox(background: "boxWhite", name:"You Win!!")
+                self.winPlayersList.append("\(self.playerData.skinSlot.skin.index),\(self.localName),\(Int(self.time))")
+                let box = MultiplayerWinBox(background: "boxWinBackground", winPlayersList: self.winPlayersList)
                 self.addChild(box)
                 
                 self.blackSpriteNode.zPosition = box.zPosition - 1
