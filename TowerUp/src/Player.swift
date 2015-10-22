@@ -286,6 +286,8 @@ class Player: Square {
         case physicsCategory.winTile.rawValue:
             if (self.healthPoints > 0) {
                 self.physicsBody?.dynamic = false
+                self.physicsBody?.categoryBitMask = physicsCategory.none.rawValue
+                self.hidden = true
                 self.win = true
                 self.winSound.play()
             }
