@@ -54,6 +54,8 @@ class OptionsScene: GameScene, FBSDKGameRequestDialogDelegate {
         super.didMoveToView(view)
         self.backgroundColor = GameColors.blue
         
+        Music.sharedInstance.play(musicNamed: "som de fundo do menu.wav")
+        
         self.buttonInvite = Button(textureName: "buttonBlueSmall", text:"INVITE", x: 20, y: 406)
         self.addChild(self.buttonInvite)
         

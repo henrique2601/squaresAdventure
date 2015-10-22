@@ -24,6 +24,8 @@
 		132FB8681B828FF80012A7D3 /* Parallax.swift in Sources */ = {isa = PBXBuildFile; fileRef = 132FB8671B828FF80012A7D3 /* Parallax.swift */; };
 		133184A01B83679200DF11D5 /* Coin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1331849F1B83679200DF11D5 /* Coin.swift */; };
 		133184A21B83AADB00DF11D5 /* Spike.swift in Sources */ = {isa = PBXBuildFile; fileRef = 133184A11B83AADB00DF11D5 /* Spike.swift */; };
+		133B8DEF1BD8EDDC00E93718 /* som de fundo do menu.wav in Resources */ = {isa = PBXBuildFile; fileRef = 133B8DEE1BD8EDDC00E93718 /* som de fundo do menu.wav */; settings = {ASSET_TAGS = (); }; };
+		133B8DF11BD8F0CF00E93718 /* som de termino da fase.wav in Resources */ = {isa = PBXBuildFile; fileRef = 133B8DF01BD8F0CF00E93718 /* som de termino da fase.wav */; settings = {ASSET_TAGS = (); }; };
 		13428EBE1B7CB0BC0017D23A /* Square.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13428EBD1B7CB0BC0017D23A /* Square.swift */; };
 		13428EC01B7CB4A90017D23A /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13428EBF1B7CB4A90017D23A /* Player.swift */; };
 		1359DC9A1B727726006C12FA /* TowerUp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1359DC981B727726006C12FA /* TowerUp.xcdatamodeld */; };
@@ -190,6 +192,8 @@
 		132FB8671B828FF80012A7D3 /* Parallax.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Parallax.swift; path = src/Parallax.swift; sourceTree = "<group>"; };
 		1331849F1B83679200DF11D5 /* Coin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Coin.swift; path = src/Coin.swift; sourceTree = "<group>"; };
 		133184A11B83AADB00DF11D5 /* Spike.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Spike.swift; path = src/Spike.swift; sourceTree = "<group>"; };
+		133B8DEE1BD8EDDC00E93718 /* som de fundo do menu.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "som de fundo do menu.wav"; sourceTree = "<group>"; };
+		133B8DF01BD8F0CF00E93718 /* som de termino da fase.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "som de termino da fase.wav"; sourceTree = "<group>"; };
 		13428EBD1B7CB0BC0017D23A /* Square.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Square.swift; path = src/Square.swift; sourceTree = "<group>"; };
 		13428EBF1B7CB4A90017D23A /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Player.swift; path = src/Player.swift; sourceTree = "<group>"; };
 		1359DC991B727726006C12FA /* TowerUp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TowerUp.xcdatamodel; sourceTree = "<group>"; };
@@ -374,6 +378,8 @@
 		1305E4EE1BB1D663009F9B0A /* Music */ = {
 			isa = PBXGroup;
 			children = (
+				133B8DF01BD8F0CF00E93718 /* som de termino da fase.wav */,
+				133B8DEE1BD8EDDC00E93718 /* som de fundo do menu.wav */,
 				1305E4EF1BB1D676009F9B0A /* A New Camp.mp3 */,
 			);
 			name = Music;
@@ -785,8 +791,10 @@
 				13F390AD1BD543B60089BF15 /* 1 15.tmx in Resources */,
 				13F390AF1BD543B60089BF15 /* 1 2.tmx in Resources */,
 				13CCB6FC1B72AD310060334C /* LaunchScreen.xib in Resources */,
+				133B8DF11BD8F0CF00E93718 /* som de termino da fase.wav in Resources */,
 				13F390AB1BD543B60089BF15 /* 1 13.tmx in Resources */,
 				13F390B11BD543B60089BF15 /* 1 4.tmx in Resources */,
+				133B8DEF1BD8EDDC00E93718 /* som de fundo do menu.wav in Resources */,
 				13F390B31BD543B60089BF15 /* 1 6.tmx in Resources */,
 				13F390B61BD543B60089BF15 /* 1 9.tmx in Resources */,
 				135DF95B1BCFF95F004342AB /* spark.png in Resources */,

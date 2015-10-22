@@ -64,6 +64,9 @@ class LocalGameScene: GameScene, SKPhysicsContactDelegate {
         self.backgroundColor = GameColors.blueSky
         
         self.parallax = Parallax(imageNamed: "grassBackground")
+        
+        Music.sharedInstance.play(musicNamed: "som de fundo do menu.wav")
+        
         self.addChild(self.parallax)
         
         self.world = World(physicsWorld: self.physicsWorld)

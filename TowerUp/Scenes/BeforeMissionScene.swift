@@ -43,6 +43,8 @@ class BeforeMissionScene: GameScene {
         self.backgroundColor = GameColors.blue
         self.addChild(Control(textureName: "mainMenuBackground", xAlign: .center, yAlign: .center))
         
+        Music.sharedInstance.play(musicNamed: "som de fundo do menu.wav")
+        
         //PowerUps
         if(self.playerData.powerUps.count > 0) {
             var powerUpSlotsArray = Array<SKNode>()

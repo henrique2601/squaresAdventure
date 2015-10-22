@@ -34,6 +34,8 @@ class MainMenuScene: GameScene {
         
         self.addChild(Control(textureName: "mainMenuBackground", xAlign: .center, yAlign: .center))
         
+        Music.sharedInstance.play(musicNamed: "som de fundo do menu.wav")
+        
         self.buttonPlay = Button(textureName: "buttonYellow", text:"SINGLEPLAYER", x: 517, y: 263, xAlign: .center, yAlign: .center)
         self.addChild(self.buttonPlay)
         
