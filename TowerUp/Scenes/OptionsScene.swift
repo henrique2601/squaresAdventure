@@ -290,24 +290,8 @@ class OptionsScene: GameScene, FBSDKGameRequestDialogDelegate {
     func gameRequestDialog(gameRequestDialog: FBSDKGameRequestDialog!, didCompleteWithResults results: [NSObject : AnyObject]!){
         print("complete, result:")
         
-    }
-    
-
-    func gameRequestDialog(gameRequestDialog: FBSDKGameRequestDialog!, didFailWithError error: NSError!){
-        print("fail")
-        print(error)
-    }
-    
-    /*!
-    @abstract Sent to the delegate when the game request dialog is cancelled.
-    @param gameRequestDialog The FBSDKGameRequestDialog that completed.
-    */
-    func gameRequestDialogDidCancel(gameRequestDialog: FBSDKGameRequestDialog!){
-        print("cancel")
-        
-        
         if (self.idFriendArray.count == 50 || after == "end"){
-        
+            
             for value in self.nameFriendArray
             {
                 self.playerData.addInvitedFriend(MemoryCard.sharedInstance.newInvitedFriend(value as! String))
@@ -325,21 +309,31 @@ class OptionsScene: GameScene, FBSDKGameRequestDialogDelegate {
             }
             
         }
-        
+            
         else {
             
             if (after != ""){
                 //print(self.after)
                 self.inviteFriends(self.after, limit: 50 - self.idFriendArray.count)
             }
-        
+            
         }
         
-        
-        
-        
-        
-        
+    }
+    
+
+    func gameRequestDialog(gameRequestDialog: FBSDKGameRequestDialog!, didFailWithError error: NSError!){
+        print("fail")
+        print(error)
+    }
+    
+    /*!
+    @abstract Sent to the delegate when the game request dialog is cancelled.
+    @param gameRequestDialog The FBSDKGameRequestDialog that completed.
+    */
+    func gameRequestDialogDidCancel(gameRequestDialog: FBSDKGameRequestDialog!){
+        print("cancel")
+     
     }
     
     func inviteFriends(nextCursor : String? , limit: Int){
