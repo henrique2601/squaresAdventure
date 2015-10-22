@@ -26,13 +26,13 @@ class MultiplayerWinBox: Box {
             let time = Int(playerArray[2])
             let cell = WinCell(position: i, skin: skin!, name: name, time: time!)
             nodesList.append(cell)
-            nodesList.append(WinCell(position: 1, skin: 1, name: "teste1", time: 20))
-            nodesList.append(WinCell(position: 2, skin: 2, name: "teste2", time: 30))
-            nodesList.append(WinCell(position: 3, skin: 3, name: "teste3", time: 40))
-            nodesList.append(WinCell(position: 4, skin: 4, name: "teste4", time: 50))
-            nodesList.append(WinCell(position: 5, skin: 5, name: "teste5", time: 60))
-            nodesList.append(WinCell(position: 6, skin: 6, name: "teste6", time: 70))
-            nodesList.append(WinCell(position: 7, skin: 7, name: "teste7", time: 80))
+//            nodesList.append(WinCell(position: 1, skin: 1, name: "teste1", time: 20))
+//            nodesList.append(WinCell(position: 2, skin: 2, name: "teste2", time: 30))
+//            nodesList.append(WinCell(position: 3, skin: 3, name: "teste3", time: 40))
+//            nodesList.append(WinCell(position: 4, skin: 4, name: "teste4", time: 50))
+//            nodesList.append(WinCell(position: 5, skin: 5, name: "teste5", time: 60))
+//            nodesList.append(WinCell(position: 6, skin: 6, name: "teste6", time: 70))
+//            nodesList.append(WinCell(position: 7, skin: 7, name: "teste7", time: 80))
         }
         
         

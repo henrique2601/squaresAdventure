@@ -184,9 +184,13 @@ class Chunk: SKSpriteNode, NSXMLParserDelegate {
             }
         }
         
-        if(Towers.types[MapManager.tower].floorTypes[MapManager.floor].minCoins == 0) {
-           Towers.types[MapManager.tower].floorTypes[MapManager.floor].minCoins = coinsInChunk
+        if ( MapManager.tower >= 0) {
+            if(Towers.types[MapManager.tower].floorTypes[MapManager.floor].minCoins == 0) {
+                Towers.types[MapManager.tower].floorTypes[MapManager.floor].minCoins = coinsInChunk
+            }
         }
+        
+        
     
         
         
