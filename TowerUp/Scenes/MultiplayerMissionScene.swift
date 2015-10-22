@@ -80,6 +80,8 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
         super.didMoveToView(view)
         self.backgroundColor = GameColors.blueSky
         
+        Music.sharedInstance.play(musicNamed: "A New Camp.mp3")
+        
         self.parallax = Parallax(imageNamed: "grassBackground")
         self.addChild(self.parallax)
         

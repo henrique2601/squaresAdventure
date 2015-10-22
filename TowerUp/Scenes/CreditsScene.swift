@@ -24,6 +24,8 @@ class CreditsScene: GameScene {
         super.didMoveToView(view)
         self.addChild(Control(textureName: "creditsBackground", xAlign: .center, yAlign: .center))
         
+        Music.sharedInstance.play(musicNamed: "som de fundo do menu.wav")
+        
         self.buttonBack = Button(textureName: "buttonGraySquareSmall", text:"<", x: 20, y: 652, xAlign:.left, yAlign:.down)
         self.addChild(self.buttonBack)
     }

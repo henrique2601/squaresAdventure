@@ -52,6 +52,7 @@ class Player: Square {
     var coinSound:SoundEffect!
     var jumpSound:SoundEffect!
     var spikeSound:SoundEffect!
+    var winSound:SoundEffect!
     
     var playerData = MemoryCard.sharedInstance.playerData
     
@@ -118,8 +119,10 @@ class Player: Square {
     func loadSoundEffects() {
         self.boom = SoundEffect(soundFile: SoundEffect.files.boom.rawValue, node: self)
         self.coinSound = SoundEffect(soundFile: SoundEffect.files.coin.rawValue, node: self)
-        self.jumpSound = SoundEffect(soundFile: SoundEffect.files.jump.rawValue, node: self)
+        //self.jumpSound = SoundEffect(soundFile: SoundEffect.files.jump.rawValue, node: self)
         self.spikeSound = SoundEffect(soundFile: SoundEffect.files.player_Spike.rawValue, node: self)
+        
+        self.winSound = SoundEffect(soundFile: SoundEffect.files.win.rawValue, node: self)
     }
     
     func resetCategoryBitMasks() {
@@ -284,6 +287,7 @@ class Player: Square {
             if (self.healthPoints > 0) {
                 self.physicsBody?.dynamic = false
                 self.win = true
+                self.winSound.play()
             }
             break
             
@@ -376,7 +380,7 @@ class Player: Square {
                             body.categoryBitMask == physicsCategory.player.rawValue) {
                             if (abs(self.physicsBody!.velocity.dy) < 200) {
                                 if(self.jump) {
-                                    self.jumpSound.play()
+                                    //self.jumpSound.play()
                                     
                                     self.physicsBody?.velocity.dy = 900
                                     //self.physicsBody?.applyForce(CGVector(dx: 0, dy: 2100))

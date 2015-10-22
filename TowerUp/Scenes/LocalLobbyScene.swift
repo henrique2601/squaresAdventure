@@ -39,6 +39,9 @@ class LocalLobbyScene: GameScene {
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
         self.addChild(Control(textureName: "lobby1Background", xAlign: .center, yAlign: .center))
+        
+        Music.sharedInstance.play(musicNamed: "som de fundo do menu.wav")
+        
         self.backgroundColor = GameColors.blue
         
         self.labelStatus = Label(color: GameColors.white, text: "", x: 215, y: 328)

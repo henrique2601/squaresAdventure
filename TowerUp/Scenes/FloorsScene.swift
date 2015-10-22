@@ -34,6 +34,8 @@ class FloorsScene: GameScene {
         self.backgroundColor = GameColors.blue
         self.addChild(Control(textureName: "mainMenuBackground", xAlign: .center, yAlign: .center))
         
+        Music.sharedInstance.play(musicNamed: "som de fundo do menu.wav")
+        
         self.boxCoins = BoxCoins()
         self.addChild(self.boxCoins)
         

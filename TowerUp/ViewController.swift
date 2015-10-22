@@ -39,7 +39,7 @@ class ViewController: UIViewController {
         skView.presentScene(scene)
         
         //TODO: musica
-        Music.sharedInstance.play(musicNamed: "A New Camp.mp3")
+        
         IAPHelper.sharedInstance.requestProducts()
     }
     
