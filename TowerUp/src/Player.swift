@@ -452,6 +452,8 @@ class Player: Square {
     }
     
     func respawn(){
+        self.resetCategoryBitMasks()
+        self.hidden = false
         self.position = self.startingPosition
         self.physicsBody!.velocity = CGVector(dx: 0, dy: 1)
         self.physicsBody!.angularVelocity = 0

@@ -53,7 +53,7 @@ class FloorsScene: GameScene {
             let floorData = item as! FloorData
             
             if(floorIndex < towerType.floorTypes.count){
-                let cell = SKSpriteNode(imageNamed: Towers.types[MapManager.tower].tileset + "Floor")//TODO: imagem do andar
+                let cell = SKSpriteNode(imageNamed: Towers.types[MapManager.tower].tileset + "Floor")
                 
                 for(var i = 0; i <= floorData.stars.integerValue; i++) {
                     switch(i){
@@ -87,7 +87,7 @@ class FloorsScene: GameScene {
         
         //Andares bloqueados, mostrar cadeado
         for (0; floorIndex < towerType.floorTypes.count; floorIndex++) {
-            let cell = SKSpriteNode(imageNamed: "boxSmall")//TODO: imagem do andar
+            let cell = SKSpriteNode(imageNamed: "boxSmall")
             
             let spriteNode = SKSpriteNode(imageNamed: "boxSmallLocked")
             spriteNode.zPosition = cell.zPosition + 1

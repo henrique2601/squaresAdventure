@@ -16,7 +16,11 @@ class Spike: Tile {
         self.name = "spike"
         
         let mask = SKTexture(imageNamed: "spikesMask")
-        self.physicsBody = SKPhysicsBody(texture: mask, alphaThreshold: 0.7, size: mask.size())
+        if #available(iOS 8.0, *) {
+            self.physicsBody = SKPhysicsBody(texture: mask, alphaThreshold: 0.7, size: mask.size())
+        } else {
+            // Fallback on earlier versions
+            self.physicsBody = SKPhysicsBody(rectangleOfSize: mask.size())        }
         
         self.physicsBody!.categoryBitMask = physicsCategory.spike.rawValue
         self.physicsBody!.contactTestBitMask = physicsCategory.none.rawValue

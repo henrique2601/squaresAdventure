@@ -61,7 +61,6 @@ class AfterMissionBox: Box {
                 self.labelDeaths = Label(color:GameColors.red, text: "\(deaths)/\(maxDeathCount)", x: 266, y: 309)
             }
         } else {
-            //TODO: separar os icons e botar a cor cinza, adicionar visto ao final do completo
             self.labelDeaths = Label(color:GameColors.gray, text: "\(deaths)/\(maxDeathCount)", x: 266, y: 309)
         }
         self.addChild(self.labelDeaths)

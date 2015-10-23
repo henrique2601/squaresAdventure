@@ -38,8 +38,6 @@ class ViewController: UIViewController {
         let scene = MainMenuScene()
         skView.presentScene(scene)
         
-        //TODO: musica
-        
         IAPHelper.sharedInstance.requestProducts()
     }
     

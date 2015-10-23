@@ -190,12 +190,6 @@ class Chunk: SKSpriteNode, NSXMLParserDelegate {
             }
         }
         
-        
-    
-        
-        
-        //TODO: let tempo, numero de moedas e numero de mortes
-        
         if(MapManager.loading){
             dispatch_async(dispatch_get_main_queue()) {
                 for tile in tiles {

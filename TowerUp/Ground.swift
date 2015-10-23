@@ -31,7 +31,12 @@ class Ground: Tile {
         
         self.name = "ground"
         let texture = SKTexture(imageNamed: imageName)
-        self.physicsBody = SKPhysicsBody(texture: texture, alphaThreshold: 0.7,  size: texture.size())
+        if #available(iOS 8.0, *) {
+            self.physicsBody = SKPhysicsBody(texture: texture, alphaThreshold: 0.7,  size: texture.size())
+        } else {
+            // Fallback on earlier versions
+            self.physicsBody = SKPhysicsBody(rectangleOfSize: texture.size())
+        }
         
         self.physicsBody!.categoryBitMask = physicsCategory.ground.rawValue
         self.physicsBody!.contactTestBitMask = physicsCategory.none.rawValue

@@ -13,7 +13,12 @@ class Slime: Tile {
         super.init(imageName: "slimeBlock", x: x, y: y)
         
         let mask = SKTexture(imageNamed: "slimeBlock")
-        self.physicsBody = SKPhysicsBody(texture: mask, alphaThreshold: 0.7, size: mask.size())
+        if #available(iOS 8.0, *) {
+            self.physicsBody = SKPhysicsBody(texture: mask, alphaThreshold: 0.7, size: mask.size())
+        } else {
+            // Fallback on earlier versions
+            self.physicsBody = SKPhysicsBody(rectangleOfSize: mask.size())
+        }
         
         self.physicsBody!.categoryBitMask = physicsCategory.slime.rawValue
         self.physicsBody!.contactTestBitMask = physicsCategory.none.rawValue
