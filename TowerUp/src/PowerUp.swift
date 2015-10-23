@@ -102,15 +102,29 @@ class PowerUp: Button {
         switch(self.powerUpData.index.integerValue) {
             
         case 0://Antigravidade
+            
+            var emitterNode:SKEmitterNode!
+            
             self.eventBegin?.addHandler({
+                //
+                emitterNode = SKEmitterNode(fileNamed: "PowerUp.sks")!
+                emitterNode.targetNode = player.parent!
+                print(emitterNode.zPosition.description)
+                player.parent!.addChild(emitterNode)
+                //
+                
                 if(player.healthPoints > 0) {
                     player.physicsBody!.affectedByGravity = false
                 } else {
                     self.lastUse = -1
                 }
             })
+            self.eventUpdate?.addHandler({
+                emitterNode.position = player.position
+            })
             self.eventEnd?.addHandler({
                 player.physicsBody!.affectedByGravity = true
+                emitterNode.removeFromParent()
             })
             break
             
