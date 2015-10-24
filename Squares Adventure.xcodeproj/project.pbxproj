@@ -142,6 +142,8 @@
 		3A390C8F1BCE950000F948F6 /* GBPing.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A390C8B1BCE950000F948F6 /* GBPing.m */; };
 		3A390C901BCE950000F948F6 /* GBPingSummary.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A390C8D1BCE950000F948F6 /* GBPingSummary.m */; };
 		3A390C921BD0576F00F948F6 /* ServerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A390C911BD0576F00F948F6 /* ServerManager.swift */; };
+		3A453D6C1BDAA04800224EA8 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A453D6B1BDAA04800224EA8 /* Reachability.swift */; };
+		3A453D6E1BDABB6700224EA8 /* MultiplayerLobbyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A453D6D1BDABB6700224EA8 /* MultiplayerLobbyCell.swift */; };
 		3A8223CE1BC6BDA70029C75D /* Coin.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3A8223CD1BC6BDA70029C75D /* Coin.wav */; };
 		3A8223D01BC6C0360029C75D /* jump_01.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3A8223CF1BC6C0360029C75D /* jump_01.wav */; };
 		3A8223D41BC6C6300029C75D /* qubodupImpactMeat01.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3A8223D31BC6C6300029C75D /* qubodupImpactMeat01.wav */; };
@@ -314,6 +316,8 @@
 		3A390C8D1BCE950000F948F6 /* GBPingSummary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GBPingSummary.m; sourceTree = "<group>"; };
 		3A390C8E1BCE950000F948F6 /* ICMPHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ICMPHeader.h; sourceTree = "<group>"; };
 		3A390C911BD0576F00F948F6 /* ServerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ServerManager.swift; path = src/ServerManager.swift; sourceTree = "<group>"; };
+		3A453D6B1BDAA04800224EA8 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Reachability.swift; path = src/Reachability.swift; sourceTree = "<group>"; };
+		3A453D6D1BDABB6700224EA8 /* MultiplayerLobbyCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MultiplayerLobbyCell.swift; path = src/MultiplayerLobbyCell.swift; sourceTree = "<group>"; };
 		3A8223CD1BC6BDA70029C75D /* Coin.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Coin.wav; sourceTree = "<group>"; };
 		3A8223CF1BC6C0360029C75D /* jump_01.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = jump_01.wav; sourceTree = "<group>"; };
 		3A8223D31BC6C6300029C75D /* qubodupImpactMeat01.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = qubodupImpactMeat01.wav; sourceTree = "<group>"; };
@@ -460,6 +464,8 @@
 				3AB2D4A61BD7B36C004375B3 /* WinCell.swift */,
 				1323B1511B83554A00174777 /* WinTile.swift */,
 				13EBD7BD1B7A65E5005F1CA4 /* World.swift */,
+				3A453D6B1BDAA04800224EA8 /* Reachability.swift */,
+				3A453D6D1BDABB6700224EA8 /* MultiplayerLobbyCell.swift */,
 			);
 			name = src;
 			sourceTree = "<group>";
@@ -920,6 +926,7 @@
 				3AB2D4A71BD7B36C004375B3 /* WinCell.swift in Sources */,
 				13CCB7021B72B9D90060334C /* CreditsScene.swift in Sources */,
 				3A979BF31B987B3300A8E09F /* Textfield.swift in Sources */,
+				3A453D6E1BDABB6700224EA8 /* MultiplayerLobbyCell.swift in Sources */,
 				13CCB6FE1B72B9010060334C /* TowersScene.swift in Sources */,
 				137D3D9D1BB42DDF003202D9 /* Bug.swift in Sources */,
 				135EA4911BBAE375006C765F /* GameFonts.swift in Sources */,
@@ -929,6 +936,7 @@
 				1383005F1BD69F330099D1A5 /* Slime.swift in Sources */,
 				135C5CA61BA8364C006643BB /* SkinSlotData.swift in Sources */,
 				1323FF611B90C83300EF4C2E /* Skin.swift in Sources */,
+				3A453D6C1BDAA04800224EA8 /* Reachability.swift in Sources */,
 				1383FD5E1B7A49730012DA45 /* MapManager.swift in Sources */,
 				1359DD181B728D3E006C12FA /* Label.swift in Sources */,
 				137D3DA31BB438D5003202D9 /* Gem.swift in Sources */,

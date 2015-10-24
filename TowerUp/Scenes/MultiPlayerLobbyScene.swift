@@ -13,6 +13,7 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
     
     enum states {
         case loading
+        case searching
         case connecting
         case multiPlayerLobby
         case choosePowerUps
@@ -30,6 +31,7 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
         case update = "u"
     }
     
+    var server: String = "nao"
     var message = messages.addPlayers
     
     var room: Int = 0
@@ -41,7 +43,7 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
     var buttonBack:Button!
     
     var state = states.loading
-    var nextState = states.multiPlayerLobby
+    var nextState = states.searching
     
     var boxCoins:BoxCoins!
     
@@ -55,8 +57,136 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
     var mySkins = NSMutableArray()//Skins Desbloqueadas/Compradas
     
     
+    var socket = SocketIOClient(socketURL: "teste", opts: nil)
     
     
+    
+    func addHandlers(){
+        
+        self.socket.on(messages.addPlayers.rawValue) {[weak self] data, ack in
+            
+            guard let this = self else {
+                return
+            }
+            
+            print(data?[0])
+            
+            if let playersArray = data?[0] as? NSArray {
+                for onlinePlayer in playersArray {
+                    let nameTest = onlinePlayer as? NSDictionary
+                    
+                    var test = 0
+                    
+                    for player in PlayerOnline.playerOnlineList {
+                        if let aux = player as PlayerOnline? {
+                            if let id = aux.id
+                            {
+                                if id == nameTest!.objectForKey("id") as? Int{
+                                    test++
+                                }
+                            }
+                        }
+                    }
+                    
+                    if (test == 0) {
+                        
+                        print(nameTest)
+                        
+                        let skin = nameTest!.objectForKey("skin") as? Int
+                        let player2 = PlayerOnline(skinId: skin! ,x: 128, y: 128, loadPhysics: true)
+                        player2.name = nameTest!.objectForKey("name") as? String
+                        player2.id = nameTest!.objectForKey("id") as? Int
+                        player2.position = CGPoint(x: 200, y: 48)
+                        this.world.addChild(player2)
+                        
+                        var labelName2: Label!
+                        labelName2 = Label(text: "")
+                        Control.controlList.remove(labelName2)
+                        labelName2.position = CGPoint(x: player2.position.x, y: player2.position.y + 32)
+                        this.world.addChild(labelName2)
+                        labelName2.zPosition = player2.zPosition + 1
+                        labelName2.setText(player2.name!, color: GameColors.black)
+                        player2.labelName = labelName2
+                    }
+                }
+            }
+            print("Added Players")
+        }
+        
+                
+        self.socket.on(messages.disconnect.rawValue) {[weak self] data, ack in
+            if let name = data?[0] as? Int {
+                
+                for player in PlayerOnline.playerOnlineList {
+                    if let aux = player as PlayerOnline? {
+                        if let id = aux.id
+                        {
+                            if id == name{
+                                aux.removeFromParent()
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        self.socket.on(messages.didJoin.rawValue) {[weak self] data, ack in
+            
+            guard let this = self else {
+                return
+            }
+            
+            this.socket.emit(messages.joinRoom.rawValue, this.localName! , this.playerData.skinSlot.skin.index.integerValue)
+        }
+        
+        self.socket.on(messages.join.rawValue) {[weak self] data, ack in
+            
+            guard let this = self else {
+                return
+            }
+            
+            if let name = data?[0] as? NSDictionary {
+                
+                let xPos = 128
+                let skin = name.objectForKey("skin") as? Int
+                let player = PlayerOnline(skinId: skin!, x: xPos, y: 128, loadPhysics: true)
+                player.name = name.objectForKey("name") as? String
+                print(player.name)
+                player.id = name.objectForKey("id") as? Int
+                print(player.id.description)
+                player.position = CGPoint(x: xPos, y: 48)
+                this.world.addChild(player)
+                
+                var labelName2: Label!
+                labelName2 = Label(text: "")
+                Control.controlList.remove(labelName2)
+                labelName2.position = CGPoint(x: player.position.x, y: player.position.y + 32)
+                this.world.addChild(labelName2)
+                labelName2.zPosition = player.zPosition + 1
+                labelName2.setText(player.name!, color: GameColors.black)
+                
+                player.labelName = labelName2
+            }
+        }
+        
+        self.socket.on(messages.update.rawValue) {[weak self] data, ack in
+            
+            if let name = data?[0] as? Int {
+                for player in PlayerOnline.playerOnlineList {
+                    if let aux = player as PlayerOnline? {
+                        if let id = aux.id
+                        {
+                            if id == name{
+                                aux.updateOnline(data?[1] as! CGFloat, y: data?[2] as! CGFloat, vx: data?[3] as! CGFloat, vy: data?[4] as! CGFloat, rotation: data?[5] as! CGFloat, vrotation: data?[6] as! CGFloat )
+                                aux.labelName.position = CGPoint(x: player.position.x, y: player.position.y + 32)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     
     
     override func didMoveToView(view: SKView) {
@@ -120,46 +250,13 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
     }
     
     
-    
-    //ping protocol
-    
-    func ping(pinger: GBPing!, didReceiveReplyWithSummary summary: GBPingSummary!) {
-        print(summary.rtt)
-        //self.responseTime = self.responseTime + Int(summary.rtt * 1000)
-        //self.numResponses = self.numResponses + 1
-    }
-    
-//    func ping(pinger: GBPing!, didFailToSendPingWithSummary summary: GBPingSummary!, error: NSError!) {
-//        print(summary)
-//        print(error)
-//    }
-//    
-//    func ping(pinger: GBPing!, didFailWithError error: NSError!) {
-//        //print(error)
-//    }
-//    
-//    func ping(pinger: GBPing!, didReceiveUnexpectedReplyWithSummary summary: GBPingSummary!) {
-//        print(summary)
-//    }
-//    
-//    func ping(pinger: GBPing!, didSendPingWithSummary summary: GBPingSummary!) {
-//        print(summary)
-//    }
-//    
-//    func ping(pinger: GBPing!, didTimeoutWithSummary summary: GBPingSummary!) {
-//        print(summary)
-//    }
-    
-    
-    
-    
-    
-    
-    
+
     
     override func update(currentTime: NSTimeInterval) {
         if(self.state == self.nextState){
             switch (self.state) {
+            
+                
             default:
                 break
             }
@@ -169,6 +266,40 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
             switch (self.nextState) {
                 
                 
+            case states.searching:
+                
+                if ( Reachability.isConnectedToNetwork() ){
+                    ServerManager.sharedInstance.bestServer { serverStr in
+                        self.server = serverStr
+                        print(self.server)
+                        self.nextState = .connecting
+                    }
+                } else {
+                    let box = MessageBox(text: "You not connect to internet", textureName: "messegeBox", type: MessageBox.messageType.OK)
+                    box.touchesEndedAtButtonOK.addHandler({
+                        self.nextState = .lobby
+                    })
+                    
+                    let size = self.size.width > self.size.height ? self.size.width : self.size.height
+                    self.blackSpriteNode = SKSpriteNode(color: GameColors.black, size: CGSize(width: size * 2, height: size * 2))
+                    self.blackSpriteNode.anchorPoint = CGPoint(x: 0, y: 1)
+                    self.addChild(self.blackSpriteNode)
+                    self.addChild(box)
+                    self.myTextField.myTextField.hidden = true
+                    self.powerUpSlotsScrollNode.removeFromParent()
+                    
+                }
+                
+                
+                
+                
+                break
+                
+            case states.connecting:
+                self.socket.socketURL = self.server
+                socket.connect()
+                self.addHandlers()
+                break
                 
             case states.chooseSkin:
                 self.player.removeFromParent()
