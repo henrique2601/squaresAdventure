@@ -38,7 +38,7 @@ class ServerManager: NSObject, GBPingDelegate {
                 
                 dispatch_after(
                     dispatch_time(DISPATCH_TIME_NOW,
-                        numericCast(UInt64(5 *
+                        numericCast(UInt64(1 *
                             Double(NSEC_PER_SEC)))),
                     dispatch_get_global_queue(
                         DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),
@@ -54,6 +54,7 @@ class ServerManager: NSObject, GBPingDelegate {
                                 self.bestServer(returnBlock)
                             } else {
                                 returnBlock(self.minServer)
+                                self.count = 0
                             }
                             
                         }
