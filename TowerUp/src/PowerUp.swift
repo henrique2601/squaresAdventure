@@ -107,14 +107,14 @@ class PowerUp: Button {
             
             self.eventBegin?.addHandler({
                 //
-                emitterNode = SKEmitterNode(fileNamed: "PowerUp.sks")!
+                emitterNode = SKEmitterNode(fileNamed: "PowerUp0.sks")!
                 emitterNode.targetNode = player.parent!
                 print(emitterNode.zPosition.description)
                 player.parent!.addChild(emitterNode)
                 //
                 
                 if(player.healthPoints > 0) {
-                    player.physicsBody!.affectedByGravity = false
+                    world.physicsWorld.gravity = CGVector(dx: 0.0, dy: -0.98)
                 } else {
                     self.lastUse = -1
                 }
@@ -123,21 +123,41 @@ class PowerUp: Button {
                 emitterNode.position = player.position
             })
             self.eventEnd?.addHandler({
-                player.physicsBody!.affectedByGravity = true
-                emitterNode.removeFromParent()
+                world.physicsWorld.gravity = world.defaultGravity
+                emitterNode.particleAlpha = 0
+                emitterNode.particleAlphaRange = 0
+                emitterNode.runAction(SKAction.fadeOutWithDuration(1), completion: {
+                    emitterNode.removeFromParent()
+                })
+                
             })
             break
             
         case 1://Invencibilidade
+            var emitterNode:SKEmitterNode!
+            
             self.eventBegin?.addHandler({
+                
                 if(player.healthPoints > 0) {
-                    
+                    //
+                    emitterNode = SKEmitterNode(fileNamed: "PowerUp1.sks")!
+                    print(emitterNode.zPosition.description)
+                    player.addChild(emitterNode)
+                    //
                 } else {
                     self.lastUse = -1
                 }
             })
             self.eventUpdate?.addHandler({
                 player.healthPoints = player.maxHealthPoints
+            })
+            
+            self.eventEnd?.addHandler({
+                emitterNode.particleAlpha = 0
+                emitterNode.particleAlphaRange = 0
+                emitterNode.runAction(SKAction.fadeOutWithDuration(1), completion: {
+                    emitterNode.removeFromParent()
+                })
             })
             break
             
@@ -161,7 +181,7 @@ class PowerUp: Button {
                 }
             })
             self.eventEnd?.addHandler({
-                world.physicsWorld.gravity = CGVector(dx: 0.0, dy: -9.8)
+                world.physicsWorld.gravity = world.defaultGravity
             })
             break
             

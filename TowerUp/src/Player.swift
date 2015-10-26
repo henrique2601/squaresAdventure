@@ -248,9 +248,10 @@ class Player: Square {
             break
             
         case physicsCategory.spring.rawValue:
-            self.physicsBody!.applyImpulse(CGVector(dx: 0, dy: 25))
-            self.physicsBody!.angularVelocity = self.physicsBody!.angularVelocity/2
-            self.physicsBody!.velocity.dx = self.physicsBody!.velocity.dx/2
+            if let node = physicsBody.node {
+                let spring = node as! Spring
+                spring.doLogic(self)
+            }
             break
             
         case physicsCategory.bomb.rawValue:
