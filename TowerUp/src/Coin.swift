@@ -15,14 +15,29 @@ class Coin: Tile {
     
     var bonus = 1//Valor da moeda
     
+    static var animation:SKAction = {
+        let textures = [
+            SKTexture(imageNamed: "gold_1"),
+            SKTexture(imageNamed: "gold_2"),
+            SKTexture(imageNamed: "gold_3"),
+            SKTexture(imageNamed: "gold_4"),
+            SKTexture(imageNamed: "gold_5"),
+            SKTexture(imageNamed: "gold_6")
+        ]
+        return SKAction.repeatActionForever(SKAction.animateWithTextures(textures, timePerFrame: 1/60 * 4))
+    }()
+    
     override init(imageName:String, x:Int, y:Int) {
         super.init(imageName: imageName, x: x, y: y)
     }
     
     init(type:String, x:Int, y:Int) {
-        super.init(imageName: "coin\(type)", x: x, y: y)
+        super.init(imageName: "gold_1", x: x, y: y)
+        self.runAction(Coin.animation)
         
         self.name = "coin"
+        
+        self.zPosition = Config.HUDZPosition - CGFloat(1)
         
         self.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: 32, height: 32))
         
