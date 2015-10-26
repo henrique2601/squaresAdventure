@@ -235,7 +235,7 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
         self.player = Player(playerData: self.playerData, x: 970, y: 459, loadPhysics: false)
         self.addChild(self.player)
         
-        
+        self.localName = MemoryCard.sharedInstance.playerData.name
         
     }
     
