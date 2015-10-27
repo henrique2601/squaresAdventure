@@ -9,6 +9,7 @@
 import UIKit
 import SpriteKit
 
+
 class CreditsScene: GameScene {
     enum states {
         case credits
@@ -19,6 +20,7 @@ class CreditsScene: GameScene {
     var nextState = states.credits
     
     var buttonBack:Button!
+    var buttonAd:Button!
     
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
@@ -28,6 +30,11 @@ class CreditsScene: GameScene {
         
         self.buttonBack = Button(textureName: "buttonGraySquareSmall", text:"<", x: 20, y: 652, xAlign:.left, yAlign:.down)
         self.addChild(self.buttonBack)
+        
+        self.buttonAd = Button(textureName: "buttonGraySquareSmall", text:"Ad", x: 20, y: 500, xAlign:.left, yAlign:.down)
+        self.addChild(self.buttonAd)
+        
+        
     }
     
     override func update(currentTime: NSTimeInterval) {
@@ -64,6 +71,12 @@ class CreditsScene: GameScene {
                         self.nextState = .mainMenu
                         return
                     }
+                    
+                    if(self.buttonAd.containsPoint(location)){
+                    
+                        ViewController.triggerVideo()
+                    
+                    }
                 }
                 break
                 
@@ -72,4 +85,5 @@ class CreditsScene: GameScene {
             }
         }
     }
+    
 }
