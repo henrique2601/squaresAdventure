@@ -18,7 +18,8 @@ class Bomb: Tile {
         self.physicsBody!.categoryBitMask = physicsCategory.bomb.rawValue
         self.physicsBody!.contactTestBitMask = physicsCategory.none.rawValue
         self.physicsBody!.collisionBitMask = physicsCategory.none.rawValue
-        
+        self.color = UIColor.blackColor()
+        self.colorBlendFactor = 0.2
         self.physicsBody!.restitution = 4
         
         self.physicsBody!.dynamic = false
