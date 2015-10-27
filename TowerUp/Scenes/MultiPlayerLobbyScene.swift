@@ -311,14 +311,14 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
                 break
                 
             case states.lobby:
-                self.view!.presentScene(LobbyScene(), transition: Config.defaultBackTransition)
+                self.view!.presentScene(LobbyScene(), transition: Config.defaultTransition)
                 break
                 
             case states.multiplayerMission:
                 let nextScene = MultiplayerMissionScene()
                 nextScene.room = self.room
                 nextScene.localName = self.myTextField.myTextField.text
-                self.view!.presentScene(nextScene, transition: Config.defaultGoTransition)
+                self.view!.presentScene(nextScene, transition: Config.defaultTransition)
                 break
                 
                 

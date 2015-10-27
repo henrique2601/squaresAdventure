@@ -214,18 +214,18 @@ class Player: Square {
                 coin.bonus = 0
                 self.coinSound.play()
                 
-                let particles = SKEmitterNode(fileNamed: "Coin.sks")
+                let particles = SKEmitterNode(fileNamed: "Coin.sks")!
                 
-                particles?.position.x = coin.position.x
-                particles?.position.y = coin.position.y
-                particles?.zPosition = coin.zPosition
-                particles?.name = "particles"
-                self.parent!.addChild(particles!)
+                particles.position.x = coin.position.x
+                particles.position.y = coin.position.y
+                particles.zPosition = coin.zPosition
+                
+                self.parent!.addChild(particles)
                 
                 let action = SKAction()
                 action.duration = 2
-                particles?.runAction(action , completion: { () -> Void in
-                    particles?.removeFromParent()
+                particles.runAction(action , completion: { () -> Void in
+                    particles.removeFromParent()
                 })
 
                 coin.removeFromParent()
@@ -264,18 +264,17 @@ class Player: Square {
                 self.boom.play()
                 self.healthPoints = 0
                 
-                let particles = SKEmitterNode(fileNamed: "Bomb.sks")
+                let particles = SKEmitterNode(fileNamed: "Bomb.sks")!
                 
-                particles?.position.x = bomb.position.x
-                particles?.position.y = bomb.position.y
-                particles?.zPosition = bomb.zPosition
-                particles?.name = "particles"
-                self.parent!.addChild(particles!)
+                particles.position.x = bomb.position.x
+                particles.position.y = bomb.position.y
+                particles.zPosition = bomb.zPosition
+                self.parent!.addChild(particles)
                 
                 let action = SKAction()
                 action.duration = 2
-                particles?.runAction(action , completion: { () -> Void in
-                    particles?.removeFromParent()
+                particles.runAction(action , completion: { () -> Void in
+                    particles.removeFromParent()
                     
                 })
                 bomb.removeFromParent()
@@ -482,6 +481,12 @@ class Player: Square {
     }
     
     func respawn(){
+        
+        let emitterNode = SKEmitterNode(fileNamed: "PlayerSpawn.sks")!
+        self.parent!.addChild(emitterNode)
+        emitterNode.zPosition = self.zPosition + 1
+        emitterNode.position = self.startingPosition
+        
         self.resetCategoryBitMasks()
         self.hidden = false
         self.position = self.startingPosition
@@ -499,6 +504,9 @@ class Player: Square {
         if let _ = self.spriteNodeDead {
             self.spriteNodeDead.removeFromParent()
         }
+        
+        self.runAction(SKAction.fadeAlphaTo(-1, duration: 0))
+        self.runAction(SKAction.fadeAlphaTo(1, duration: 0.2))
     
     }
     

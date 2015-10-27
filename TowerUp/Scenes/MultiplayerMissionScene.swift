@@ -431,7 +431,7 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
                 break
                 
             case states.loose:
-                self.view!.presentScene(LobbyScene(), transition: Config.defaultGoTransition)
+                self.view!.presentScene(LobbyScene(), transition: Config.defaultTransition)
                 break
                 
             default:

@@ -111,11 +111,11 @@ class TowersScene: GameScene {
             switch (self.nextState) {
                 
             case states.floors:
-                self.view!.presentScene(FloorsScene(), transition: Config.defaultGoTransition)
+                self.view!.presentScene(FloorsScene(), transition: Config.defaultTransition)
                 break
                 
             case states.mainMenu:
-                self.view!.presentScene(MainMenuScene(), transition: Config.defaultBackTransition)
+                self.view!.presentScene(MainMenuScene(), transition: Config.defaultTransition)
                 break
                 
             default:

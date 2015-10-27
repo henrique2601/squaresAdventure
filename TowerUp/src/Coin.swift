@@ -35,8 +35,6 @@ class Coin: Tile {
         super.init(imageName: "gold_1", x: x, y: y)
         self.runAction(Coin.animation)
         
-        self.name = "coin"
-        
         self.zPosition = Config.HUDZPosition - CGFloat(1)
         
         self.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: 32, height: 32))

@@ -13,8 +13,6 @@ class Spike: Tile {
     init(x:Int, y:Int) {
         super.init(imageName: "spikes", x: x, y: y)
         
-        self.name = "spike"
-        
         let mask = SKTexture(imageNamed: "spikesMask")
         if #available(iOS 8.0, *) {
             self.physicsBody = SKPhysicsBody(texture: mask, alphaThreshold: 0.7, size: mask.size())

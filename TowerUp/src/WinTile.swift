@@ -13,8 +13,6 @@ class WinTile: Tile {
     init(type:String, x:Int, y:Int) {
         super.init(imageName: "winTile", x: x, y: y)//TODO: winTile vai mudar de acordo com o tipo de torre
         
-        self.name = "winTile"
-        
         self.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: 32, height: 32))
         
         self.physicsBody!.categoryBitMask = physicsCategory.winTile.rawValue

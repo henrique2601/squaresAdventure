@@ -109,7 +109,6 @@ class PowerUp: Button {
                 //
                 emitterNode = SKEmitterNode(fileNamed: "PowerUp0.sks")!
                 emitterNode.targetNode = player.parent!
-                print(emitterNode.zPosition.description)
                 player.parent!.addChild(emitterNode)
                 //
                 
@@ -140,15 +139,16 @@ class PowerUp: Button {
                 
                 if(player.healthPoints > 0) {
                     //
-                    emitterNode = SKEmitterNode(fileNamed: "PowerUp1.sks")!
-                    print(emitterNode.zPosition.description)
-                    player.addChild(emitterNode)
+                    emitterNode = SKEmitterNode(fileNamed: "PowerUp1_2.sks")!
+                    emitterNode.targetNode = player.parent!
+                    player.parent!.addChild(emitterNode)
                     //
                 } else {
                     self.lastUse = -1
                 }
             })
             self.eventUpdate?.addHandler({
+                emitterNode.position = player.position
                 player.healthPoints = player.maxHealthPoints
             })
             
@@ -162,8 +162,17 @@ class PowerUp: Button {
             break
             
         case 2://Fenix Caida :D
+            var emitterNode:SKEmitterNode!
+            
             self.eventBegin?.addHandler({
+                
                 if(player.healthPoints <= 0) {
+                    
+                    emitterNode = SKEmitterNode(fileNamed: "PlayerSpawn.sks")!
+                    player.parent?.addChild(emitterNode)
+                    emitterNode.zPosition = player.zPosition + 1
+                    emitterNode.position = player.position
+                    
                     player.healthPoints = player.maxHealthPoints
                     player.needToPlayDeathAnimation = true
                 } else {

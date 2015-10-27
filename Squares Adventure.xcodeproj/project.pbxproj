@@ -13,6 +13,8 @@
 		1308A4651BC2BFAD00D4F85B /* SoundEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1308A4641BC2BFAD00D4F85B /* SoundEffect.swift */; };
 		1308A46A1BC2E35000D4F85B /* RandomSoundEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1308A4691BC2E35000D4F85B /* RandomSoundEffect.swift */; };
 		1309B4241BDFB58C000F0B9E /* BoxExplosive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1309B4231BDFB58C000F0B9E /* BoxExplosive.swift */; };
+		1309B4261BDFDE4D000F0B9E /* PlayerSpawn.sks in Resources */ = {isa = PBXBuildFile; fileRef = 1309B4251BDFDE4D000F0B9E /* PlayerSpawn.sks */; };
+		1312DB301BDFEB1500401497 /* PowerUp1_2.sks in Resources */ = {isa = PBXBuildFile; fileRef = 1312DB2F1BDFEB1500401497 /* PowerUp1_2.sks */; };
 		1323B1521B83554A00174777 /* WinTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1323B1511B83554A00174777 /* WinTile.swift */; };
 		1323FF5D1B90817F00EF4C2E /* MultiplayerWinBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1323FF5C1B90817F00EF4C2E /* MultiplayerWinBox.swift */; };
 		1323FF5F1B90C7AF00EF4C2E /* PowerUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1323FF5E1B90C7AF00EF4C2E /* PowerUp.swift */; };
@@ -183,6 +185,8 @@
 		1308A4641BC2BFAD00D4F85B /* SoundEffect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SoundEffect.swift; path = src/SoundEffect.swift; sourceTree = "<group>"; };
 		1308A4691BC2E35000D4F85B /* RandomSoundEffect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RandomSoundEffect.swift; path = src/RandomSoundEffect.swift; sourceTree = "<group>"; };
 		1309B4231BDFB58C000F0B9E /* BoxExplosive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BoxExplosive.swift; path = src/BoxExplosive.swift; sourceTree = "<group>"; };
+		1309B4251BDFDE4D000F0B9E /* PlayerSpawn.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = PlayerSpawn.sks; sourceTree = "<group>"; };
+		1312DB2F1BDFEB1500401497 /* PowerUp1_2.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = PowerUp1_2.sks; sourceTree = "<group>"; };
 		1323B1511B83554A00174777 /* WinTile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WinTile.swift; path = src/WinTile.swift; sourceTree = "<group>"; };
 		1323FF5C1B90817F00EF4C2E /* MultiplayerWinBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MultiplayerWinBox.swift; path = Boxes/MultiplayerWinBox.swift; sourceTree = "<group>"; };
 		1323FF5E1B90C7AF00EF4C2E /* PowerUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PowerUp.swift; path = src/PowerUp.swift; sourceTree = "<group>"; };
@@ -418,8 +422,8 @@
 				1326AE871B85FCA300D4563B /* Box.swift */,
 				137F8DF01BBC66DF00B1C304 /* BoxCoins.swift */,
 				137D3DA01BB435DE003202D9 /* BoxCrate.swift */,
-				1309B4231BDFB58C000F0B9E /* BoxExplosive.swift */,
 				3A2484291BC0E370002C5411 /* BoxDeathsAndTime.swift */,
+				1309B4231BDFB58C000F0B9E /* BoxExplosive.swift */,
 				137D3D9C1BB42DDF003202D9 /* Bug.swift */,
 				1359DD0F1B7287A7006C12FA /* Button.swift */,
 				13EBD7BF1B7A6614005F1CA4 /* Camera.swift */,
@@ -534,7 +538,9 @@
 				13E0C0B71BDA7ECE00D4E249 /* Bomb.sks */,
 				13E0C0B81BDA7ECE00D4E249 /* Coin.sks */,
 				13E0C0B91BDA7ECE00D4E249 /* Gem.sks */,
+				1309B4251BDFDE4D000F0B9E /* PlayerSpawn.sks */,
 				13E0C0BF1BDA7F0500D4E249 /* PowerUp0.sks */,
+				1312DB2F1BDFEB1500401497 /* PowerUp1_2.sks */,
 				13FF272A1BDAB01100D49E81 /* PowerUp1.sks */,
 			);
 			path = VisualEffects;
@@ -777,6 +783,7 @@
 				13F390B01BD543B60089BF15 /* 1 3.tmx in Resources */,
 				13F390A61BD543B60089BF15 /* 1 0.tmx in Resources */,
 				5CFD53B61BD7AC97002B79D7 /* 1 20.tmx in Resources */,
+				1312DB301BDFEB1500401497 /* PowerUp1_2.sks in Resources */,
 				3A8223D41BC6C6300029C75D /* qubodupImpactMeat01.wav in Resources */,
 				13F390AC1BD543B60089BF15 /* 1 14.tmx in Resources */,
 				1383005D1BD66C3C0099D1A5 /* 1 17.tmx in Resources */,
@@ -806,6 +813,7 @@
 				13F390B31BD543B60089BF15 /* 1 6.tmx in Resources */,
 				13F390B61BD543B60089BF15 /* 1 9.tmx in Resources */,
 				13F390991BD543B60089BF15 /* 0 15.tmx in Resources */,
+				1309B4261BDFDE4D000F0B9E /* PlayerSpawn.sks in Resources */,
 				13F390A41BD543B60089BF15 /* 0 8.tmx in Resources */,
 				13F390B41BD543B60089BF15 /* 1 7.tmx in Resources */,
 				1305E4F01BB1D676009F9B0A /* A New Camp.mp3 in Resources */,

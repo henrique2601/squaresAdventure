@@ -13,8 +13,6 @@ class DoorTile: Tile {
     init(type:String, x:Int, y:Int) {
         super.init(imageName: "winTile", x: x, y: y)//TODO: door vai mudar de acordo com o tipo de torre?
         
-        self.name = "doorTile"
-        
         self.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: 32, height: 32))
         
         self.physicsBody!.categoryBitMask = physicsCategory.doorTile.rawValue

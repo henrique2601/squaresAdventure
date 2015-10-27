@@ -218,7 +218,7 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
                 
                 
             case states.restart:
-                self.view!.presentScene(MissionScene(), transition: Config.defaultGoTransition)
+                self.view!.presentScene(MissionScene(), transition: Config.defaultTransition)
                 break
                 
             case states.mission:
@@ -273,10 +273,10 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
                 
                 break
             case states.floors:
-                self.view!.presentScene(FloorsScene(), transition: Config.defaultGoTransition)
+                self.view!.presentScene(FloorsScene(), transition: Config.defaultTransition)
                 break
             case states.powerUp:
-                self.view!.presentScene(MissionScene(), transition: Config.defaultGoTransition)
+                self.view!.presentScene(MissionScene(), transition: Config.defaultTransition)
                 break
                 
             default:
