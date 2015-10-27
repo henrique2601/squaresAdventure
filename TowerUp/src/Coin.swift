@@ -24,7 +24,7 @@ class Coin: Tile {
             SKTexture(imageNamed: "gold_5"),
             SKTexture(imageNamed: "gold_6")
         ]
-        return SKAction.repeatActionForever(SKAction.animateWithTextures(textures, timePerFrame: 1/60 * 4))
+        return SKAction.repeatActionForever(SKAction.animateWithTextures(textures, timePerFrame: 1/60 * 6))
     }()
     
     override init(imageName:String, x:Int, y:Int) {

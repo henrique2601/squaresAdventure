@@ -135,7 +135,8 @@ class Player: Square {
             physicsCategory.saw.rawValue |
             physicsCategory.bomb.rawValue |
             physicsCategory.spring.rawValue |
-            physicsCategory.doorTile.rawValue
+            physicsCategory.doorTile.rawValue |
+            physicsCategory.boxExplosive.rawValue
         
         
         self.physicsBody!.collisionBitMask =
@@ -146,7 +147,8 @@ class Player: Square {
             physicsCategory.spring.rawValue |
             physicsCategory.boxCrate.rawValue |
             physicsCategory.slime.rawValue |
-            physicsCategory.player.rawValue
+            physicsCategory.player.rawValue |
+            physicsCategory.boxExplosive.rawValue
         
     }
     
@@ -294,8 +296,35 @@ class Player: Square {
             }
             break
             
+        case physicsCategory.boxExplosive.rawValue:
+            
+            if let node = physicsBody.node {
+                let boxCrateBomb = (node as! BoxExplosive)
+                
+                self.boom.play()
+                self.healthPoints = 0
+                
+                let particles = SKEmitterNode(fileNamed: "Bomb.sks")!
+                
+                particles.position.x = boxCrateBomb.position.x
+                particles.position.y = boxCrateBomb.position.y
+                particles.zPosition = boxCrateBomb.zPosition
+                self.parent!.addChild(particles)
+                
+                let action = SKAction()
+                action.duration = 2
+                particles.runAction(action , completion: { () -> Void in
+                    particles.removeFromParent()
+                    
+                })
+                boxCrateBomb.removeFromParent()
+            }
+            
+            
+            break
+            
         default:
-            print("didBeginContact de player com \(physicsBody.node!.name!) não está sendo processado")
+            print("didBeginContact de player com \(physicsBody.node!.name) não está sendo processado")
             break
         }
     }
@@ -334,7 +363,7 @@ class Player: Square {
             break
             
         default:
-            print("didEndContact de player com \(physicsBody.node?.name!) não está sendo processado")
+            print("didEndContact de player com \(physicsBody.node?.name) não está sendo processado")
             break
         }
     }

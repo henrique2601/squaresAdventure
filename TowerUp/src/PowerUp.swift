@@ -185,6 +185,22 @@ class PowerUp: Button {
             })
             break
             
+        case 4://Bomba Caixa! :D
+            var bomb:BoxExplosive!
+            
+            self.eventBegin?.addHandler({
+                if(player.healthPoints > 0) {
+                    bomb = BoxExplosive(position: player.position)
+                    player.parent?.addChild(bomb)
+                } else {
+                    self.lastUse = -1
+                }
+            })
+            self.eventEnd?.addHandler({
+                bomb.activate()
+            })
+            break
+            
         default:
             self.eventBegin = nil
             self.eventUpdate = nil
@@ -308,6 +324,7 @@ class PowerUps :NSObject {
         PowerUpType(powerUpImage:"powerUp A", price:50, coolDown:5, duration:3),
         PowerUpType(powerUpImage:"powerUp B", price:75, coolDown:10, duration:5),
         PowerUpType(powerUpImage:"powerUp C", price:150, coolDown:10, duration:0),
-        PowerUpType(powerUpImage:"powerUp D", price:500, coolDown:30, duration:2)
+        PowerUpType(powerUpImage:"powerUp D", price:500, coolDown:30, duration:2),
+        PowerUpType(powerUpImage:"powerUp E", price:50, coolDown:3, duration:1)
         ])
 }
