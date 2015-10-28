@@ -34,7 +34,6 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
     let velo:CGFloat = 3
     
     //Effect
-    var blackSpriteNode:SKSpriteNode!
     
     //Gameplay
     var lastReset:NSTimeInterval!
@@ -64,6 +63,8 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
         self.backgroundColor = GameColors.blueSky
+        
+        self.boxDeathsAndTime = BoxDeathsAndTime()
         
         Music.sharedInstance.play(musicNamed: "A New Camp.mp3")
         
@@ -107,7 +108,7 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
         }
         
         self.boxCoins = BoxCoins()
-        self.boxDeathsAndTime = BoxDeathsAndTime()
+        
         self.addChild(boxCoins)
         self.addChild(boxDeathsAndTime)
         
@@ -261,14 +262,12 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
                     towerIndex++
                 }
                 
-                self.blackSpriteNode = SKSpriteNode(color: GameColors.black, size: self.size)
-                self.blackSpriteNode.anchorPoint = CGPoint(x: 0, y: 1)
-                self.addChild(self.blackSpriteNode)
                 let box = AfterMissionBox(background: "boxWhite", time: Int(currentTime - self.lastReset).description, deaths: self.player.deathCount.description, bonus: self.collectedBonus.description, scene: self.scene)
                 self.collectedBonus = 0
                 
                 self.addChild(box)
                 
+                self.blackSpriteNode.hidden = false
                 self.blackSpriteNode.zPosition = box.zPosition - 1
                 
                 break

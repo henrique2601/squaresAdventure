@@ -11,6 +11,8 @@ import SpriteKit
 
 class GameScene: SKScene {
     
+    var blackSpriteNode:BlackSpriteNode!
+    
     override init() {
         Control.touchesArray = Set<UITouch>()
         
@@ -27,6 +29,9 @@ class GameScene: SKScene {
         MessageBox.messageBoxCount = 0
         
         super.init(size: Config.sceneSize())
+        
+        self.blackSpriteNode = BlackSpriteNode()
+        self.addChild(self.blackSpriteNode)
     }
     
     required init?(coder aDecoder: NSCoder) {

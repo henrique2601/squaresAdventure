@@ -141,7 +141,7 @@ class AfterMissionBox: Box {
             if (self.buttonExit.containsPoint(location)) {
                 if let scene = self.scene as? MissionScene {
                     scene.nextState = MissionScene.states.floors
-                    scene.blackSpriteNode.removeFromParent()
+                    scene.blackSpriteNode.hidden = true
                     self.removeFromParent()
                 }
                 return
@@ -149,7 +149,7 @@ class AfterMissionBox: Box {
             if (self.buttonRestart.containsPoint(location)) {
                 if let scene = self.scene as? MissionScene {
                     scene.nextState = MissionScene.states.mission
-                    scene.blackSpriteNode.removeFromParent()
+                    scene.blackSpriteNode.hidden = true
                     self.removeFromParent()
                 }
                 return
@@ -158,7 +158,7 @@ class AfterMissionBox: Box {
                 //
                 if let scene = self.scene as? MissionScene {
                     scene.nextState = MissionScene.states.powerUp
-                    scene.blackSpriteNode.removeFromParent()
+                    scene.blackSpriteNode.hidden = true
                     self.removeFromParent()
                     MapManager.floor++
                     

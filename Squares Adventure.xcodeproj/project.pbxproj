@@ -45,6 +45,7 @@
 		135C5CA41BA8364B006643BB /* PowerUpSlotData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135C5CA31BA8364B006643BB /* PowerUpSlotData.swift */; };
 		135C5CA61BA8364C006643BB /* SkinSlotData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135C5CA51BA8364C006643BB /* SkinSlotData.swift */; };
 		135EA4911BBAE375006C765F /* GameFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135EA4901BBAE375006C765F /* GameFonts.swift */; };
+		137153BF1BE11864004F5F3F /* BlackSpriteNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137153BE1BE11864004F5F3F /* BlackSpriteNode.swift */; };
 		137D3D9D1BB42DDF003202D9 /* Bug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137D3D9C1BB42DDF003202D9 /* Bug.swift */; };
 		137D3D9F1BB43097003202D9 /* Bomb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137D3D9E1BB43097003202D9 /* Bomb.swift */; };
 		137D3DA11BB435DE003202D9 /* BoxCrate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137D3DA01BB435DE003202D9 /* BoxCrate.swift */; };
@@ -219,6 +220,7 @@
 		135C5CA31BA8364B006643BB /* PowerUpSlotData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PowerUpSlotData.swift; path = CoreData/PowerUpSlotData.swift; sourceTree = "<group>"; };
 		135C5CA51BA8364C006643BB /* SkinSlotData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SkinSlotData.swift; path = CoreData/SkinSlotData.swift; sourceTree = "<group>"; };
 		135EA4901BBAE375006C765F /* GameFonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameFonts.swift; path = src/GameFonts.swift; sourceTree = "<group>"; };
+		137153BE1BE11864004F5F3F /* BlackSpriteNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BlackSpriteNode.swift; path = src/BlackSpriteNode.swift; sourceTree = "<group>"; };
 		137D3D9C1BB42DDF003202D9 /* Bug.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Bug.swift; path = src/Bug.swift; sourceTree = "<group>"; };
 		137D3D9E1BB43097003202D9 /* Bomb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Bomb.swift; path = src/Bomb.swift; sourceTree = "<group>"; };
 		137D3DA01BB435DE003202D9 /* BoxCrate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BoxCrate.swift; path = src/BoxCrate.swift; sourceTree = "<group>"; };
@@ -475,6 +477,7 @@
 				13EBD7BD1B7A65E5005F1CA4 /* World.swift */,
 				3A453D6B1BDAA04800224EA8 /* Reachability.swift */,
 				3A453D6D1BDABB6700224EA8 /* MultiplayerLobbyCell.swift */,
+				137153BE1BE11864004F5F3F /* BlackSpriteNode.swift */,
 			);
 			name = src;
 			sourceTree = "<group>";
@@ -932,6 +935,7 @@
 				13D2521A1BCEE31F002E5F59 /* IAPHelper.swift in Sources */,
 				1359DD0C1B7286D3006C12FA /* MainMenuScene.swift in Sources */,
 				13DE13051B94C38E0092D50B /* ScrollNode.swift in Sources */,
+				137153BF1BE11864004F5F3F /* BlackSpriteNode.swift in Sources */,
 				13BC7ED71BAAE883003D6CCD /* SocketEventHandler.swift in Sources */,
 				13428EBE1B7CB0BC0017D23A /* Square.swift in Sources */,
 				139A0E8F1B7431CB00EDE944 /* MemoryCard.swift in Sources */,

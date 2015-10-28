@@ -51,6 +51,10 @@ class ViewController: UIViewController {
         
         skView.scene?.size = Config.sceneSize()
         Control.resetControls()
+        
+        if let gameScene = skView.scene as? GameScene {
+            gameScene.blackSpriteNode.update()
+        }
     }
     
     override func shouldAutorotate() -> Bool {

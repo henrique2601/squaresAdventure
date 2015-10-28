@@ -41,7 +41,6 @@ class LobbyScene: GameScene, UITextFieldDelegate {
     
     var skinsScrollNode:ScrollNode!
     var powerUpsScrollNode:ScrollNode!
-    var blackSpriteNode:SKSpriteNode!
     
     var mySkins = NSMutableArray()//Skins Desbloqueadas/Compradas
     
@@ -223,15 +222,11 @@ class LobbyScene: GameScene, UITextFieldDelegate {
                 //
                 
                 let size = self.size.width > self.size.height ? self.size.width : self.size.height
-                self.blackSpriteNode = SKSpriteNode(color: GameColors.black, size: CGSize(width: size * 2, height: size * 2))
-                self.blackSpriteNode.anchorPoint = CGPoint(x: 0, y: 1)
-                self.addChild(self.blackSpriteNode)
-                
-                
                 
                 self.skinsScrollNode = ScrollNode(x: 836, y: 466, cells: skinsArray, spacing: 0, scrollDirection: ScrollNode.scrollTypes.horizontal, scaleNodes: true, scaleDistance:1334/4 + 100)
                 self.addChild(skinsScrollNode)
                 
+                self.blackSpriteNode.hidden = false
                 self.blackSpriteNode.zPosition = Config.HUDZPosition * 2
                 self.skinsScrollNode.zPosition = self.blackSpriteNode.zPosition + 1
                 
@@ -277,10 +272,6 @@ class LobbyScene: GameScene, UITextFieldDelegate {
                     teste.removeFromParent()
                 }
                 if let teste = self.powerUpsScrollNode {
-                    teste.removeFromParent()
-                }
-                
-                if let teste = self.blackSpriteNode {
                     teste.removeFromParent()
                 }
                 break

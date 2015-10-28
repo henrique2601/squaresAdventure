@@ -22,9 +22,6 @@ class LocalGameScene: GameScene, SKPhysicsContactDelegate {
         case afterMission
     }
     
-    //Effect
-    var blackSpriteNode:SKSpriteNode!
-    
     enum messages : String {
         case disconnect = "q"
         case addPlayers = "a"
@@ -143,13 +140,8 @@ class LocalGameScene: GameScene, SKPhysicsContactDelegate {
                 self.zeroTime = currentTime
                 break
             case states.afterMission:
-                self.blackSpriteNode = SKSpriteNode(color: GameColors.black, size: self.size)
-                self.blackSpriteNode.anchorPoint = CGPoint(x: 0, y: 1)
-                self.addChild(self.blackSpriteNode)
-                //let box = MultiplayerWinBox(background: "boxWhite")
-                //self.addChild(box)
+                self.blackSpriteNode.hidden = false
                 
-                //self.blackSpriteNode.zPosition = box.zPosition - 1
                 break
                 
             default:

@@ -22,9 +22,7 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
 
     
     //Effect
-    var blackSpriteNode:SKSpriteNode!
     var labelWin:Label?
-    
     
     enum messages : String {
         case disconnect = "q"
@@ -350,14 +348,14 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
                 break
             case states.win:
                 self.socket.emit("win", self.room)
-                self.blackSpriteNode = SKSpriteNode(color: GameColors.black, size: self.size)
-                self.blackSpriteNode.anchorPoint = CGPoint(x: 0, y: 1)
-                self.addChild(self.blackSpriteNode)
+                
                 self.winPlayersList.append("\(self.playerData.skinSlot.skin.index),\(self.localName),\(Int(self.time))")
                 let box = MultiplayerWinBox(background: "boxWinBackground", winPlayersList: self.winPlayersList)
                 self.addChild(box)
                 
+                self.blackSpriteNode.hidden = false
                 self.blackSpriteNode.zPosition = box.zPosition - 1
+                
                 break
                 
             case states.loose:
