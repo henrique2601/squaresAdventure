@@ -10,10 +10,21 @@ import UIKit
 import SpriteKit
 
 class Saw: Tile {
+    
+    static var animation:SKAction = {
+        let textures = [
+            SKTexture(imageNamed: "sawHalf"),
+            SKTexture(imageNamed: "sawHalf_move")
+        ]
+        return SKAction.repeatActionForever(SKAction.animateWithTextures(textures, timePerFrame: 1/60 * 4))
+    }()
+    
     init(x:Int, y:Int) {
         super.init(imageName: "sawHalf", x: x, y: y)
         
-        let mask = SKTexture(imageNamed: "spikesMask")
+        self.runAction(Saw.animation)
+        
+        let mask = SKTexture(imageNamed: "sawHalf")//TODO: criar mask
         if #available(iOS 8.0, *) {
             self.physicsBody = SKPhysicsBody(texture: mask, alphaThreshold: 0.7, size: mask.size())
         } else {

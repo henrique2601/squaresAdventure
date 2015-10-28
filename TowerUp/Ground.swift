@@ -15,8 +15,6 @@ class Ground: Tile {
     init(type:String, id:Int, x:Int, y:Int) {
         super.init(imageName: type + String(id), x: x, y: y)
         
-        self.name = "ground"
-        
         self.physicsBody = SKPhysicsBody(bodies: [MapManager.bodies[id - 1]])
         
         self.physicsBody!.categoryBitMask = physicsCategory.ground.rawValue
@@ -28,9 +26,8 @@ class Ground: Tile {
     
     init(type:String, imageName:String, x:Int, y:Int) {
         super.init(imageName: imageName, x: x, y: y)
-        
-        self.name = "ground"
         let texture = SKTexture(imageNamed: imageName)
+        
         if #available(iOS 8.0, *) {
             self.physicsBody = SKPhysicsBody(texture: texture, alphaThreshold: 0.7,  size: texture.size())
         } else {

@@ -49,7 +49,7 @@ class CreditsScene: GameScene {
             switch (self.nextState) {
                 
             case states.mainMenu:
-                self.view!.presentScene(MainMenuScene(), transition: Config.defaultBackTransition)
+                self.view!.presentScene(MainMenuScene(), transition: Config.defaultTransition)
                 break
                 
             default:

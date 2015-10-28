@@ -191,7 +191,7 @@ class OptionsScene: GameScene, FBSDKGameRequestDialogDelegate {
                 break
                 
             case states.mainMenu:
-                self.view!.presentScene(MainMenuScene(), transition: Config.defaultBackTransition)
+                self.view!.presentScene(MainMenuScene(), transition: Config.defaultTransition)
                 break
             }
         }

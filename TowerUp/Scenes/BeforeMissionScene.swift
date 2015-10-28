@@ -80,7 +80,7 @@ class BeforeMissionScene: GameScene {
             switch (self.nextState) {
                 
             case states.mission:
-                self.view!.presentScene(MissionScene(), transition: Config.defaultGoTransition)
+                self.view!.presentScene(MissionScene(), transition: Config.defaultTransition)
                 break
                 
             case states.chooseSkin:
@@ -218,7 +218,7 @@ class BeforeMissionScene: GameScene {
                 break
                 
             case states.floors:
-                self.view!.presentScene(FloorsScene(), transition: Config.defaultBackTransition)
+                self.view!.presentScene(FloorsScene(), transition: Config.defaultTransition)
                 break
                 
             default:

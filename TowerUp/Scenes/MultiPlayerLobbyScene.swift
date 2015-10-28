@@ -13,6 +13,7 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
     
     enum states {
         case loading
+        case searching
         case connecting
         case multiPlayerLobby
         case choosePowerUps
@@ -28,8 +29,11 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
         case join = "j"
         case joinRoom = "r"
         case update = "u"
+        case countDown = "c"
+        case begin = "b"
     }
     
+    var server: String = "nao"
     var message = messages.addPlayers
     
     var room: Int = 0
@@ -41,7 +45,9 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
     var buttonBack:Button!
     
     var state = states.loading
-    var nextState = states.multiPlayerLobby
+    var nextState = states.searching
+    var labelState: Label!
+    var labelCountDown: Label!
     
     var boxCoins:BoxCoins!
     
@@ -56,7 +62,214 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
     
     
     
+    var socket = SocketIOClient(socketURL: "teste", opts: nil)
+    var playersNodes = Array<SKNode>()
+    var playerScrollNode : ScrollNode!
     
+    var localName: String = "teste"
+    
+    
+    
+    func addHandlers(){
+        
+        self.socket.on(messages.addPlayers.rawValue) {[weak self] data, ack in
+            
+            guard let this = self else {
+                return
+            }
+            
+            
+            this.room = data?[1] as! Int
+            MapManager.floor = data?[2] as! Int
+            
+            print(data?[0])
+            
+            if let playersArray = data?[0] as? NSArray {
+                for onlinePlayer in playersArray {
+                    let nameTest = onlinePlayer as? NSDictionary
+                    
+                    var test = 0
+                    
+                    for player in PlayerOnline.playerOnlineList {
+                        if let aux = player as PlayerOnline? {
+                            if let id = aux.id
+                            {
+                                if id == nameTest!.objectForKey("id") as? Int{
+                                    test++
+                                }
+                            }
+                        }
+                    }
+                    
+                    if (test == 0) {
+                        
+                        print(nameTest)
+                        
+                        let skin = nameTest!.objectForKey("skin") as? Int
+                        let player2 = PlayerOnline(skinId: skin! ,x: 128, y: 128, loadPhysics: true)
+                        player2.name = nameTest!.objectForKey("name") as? String
+                        player2.id = nameTest!.objectForKey("id") as? Int
+                        
+                        var labelName2: Label!
+                        labelName2 = Label(text: "")
+                        Control.controlList.remove(labelName2)
+                        labelName2.zPosition = player2.zPosition + 1
+                        labelName2.setText(player2.name!, color: GameColors.black)
+                        player2.labelName = labelName2
+
+                        
+                        let cell = SKSpriteNode(imageNamed: "lobbyCell")
+                        cell.addChild(Label(text: player2.name!, x: -89, y: 0))
+                        let playerSkin = SKSpriteNode(imageNamed: Skins.types[skin!].imageName)
+                        playerSkin.position = CGPoint(x: -193/2, y: 0)
+                        cell.addChild(playerSkin)
+                        cell.name = player2.id!.description
+        
+                        
+                        
+                        this.playersNodes.append(cell)
+                        
+                        
+                    }
+                }
+            }
+            print("Added Players")
+            
+            this.playerScrollNode = ScrollNode(x: 388, y: 459,  cells: this.playersNodes, spacing: 0, scrollDirection: ScrollNode.scrollTypes.vertical , scaleNodes: false )
+            
+            this.addChild(this.playerScrollNode)
+            
+            
+            
+            
+            
+            
+        }
+        
+                
+        self.socket.on(messages.disconnect.rawValue) {[weak self] data, ack in
+            
+            guard let this = self else {
+                return
+            }
+            
+            if let name = data?[0] as? Int {
+                
+                for player in PlayerOnline.playerOnlineList {
+                    if let aux = player as PlayerOnline? {
+                        if let id = aux.id
+                        {
+                            if id == name{
+                                
+                                aux.removeFromParent()
+                                
+                                var index: Int?
+                                for (idx, objectToCompare) in this.playersNodes.enumerate() {
+                                    if let to = objectToCompare.name! as String! {
+                                        if aux.id.description == to {
+                                            index = idx
+                                        }
+                                    }
+                                }
+                                
+                                if((index) != nil) {
+                                    this.playersNodes.removeAtIndex(index!)
+                                }
+                                
+                                print(this.playersNodes)
+                                
+                                
+                                
+                                this.playerScrollNode.removeFromParent()
+                                
+                                this.playerScrollNode = ScrollNode(x: 388, y: 459,  cells: this.playersNodes, spacing: 0, scrollDirection: ScrollNode.scrollTypes.vertical , scaleNodes: false )
+                                
+                                this.addChild(this.playerScrollNode)
+                                
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        self.socket.on(messages.didJoin.rawValue) {[weak self] data, ack in
+            
+            guard let this = self else {
+                return
+            }
+            
+            this.socket.emit(messages.joinRoom.rawValue, this.localName , this.playerData.skinSlot.skin.index.integerValue)
+        }
+        
+        
+        
+        self.socket.on(messages.countDown.rawValue) {[weak self] data, ack in
+            
+            guard let this = self else {
+                return
+            }
+            
+            if let count = data?[0] as? Int {
+                this.labelCountDown.setText(count.description + "s")
+            }
+            
+            if let count = data?[0] as? String {
+                this.labelCountDown.setText(count)
+            }
+        }
+        
+        
+        self.socket.on(messages.begin.rawValue) {[weak self] data, ack in
+            
+            guard let this = self else {
+                return
+            }
+            
+            this.nextState = .multiplayerMission
+            print(PlayerOnline.playerOnlineList)
+        }
+        
+        
+        
+        self.socket.on(messages.join.rawValue) {[weak self] data, ack in
+            
+            guard let this = self else {
+                return
+            }
+            
+            if let name = data?[0] as? NSDictionary {
+                
+                let xPos = 128
+                let skin = name.objectForKey("skin") as? Int
+                let player = PlayerOnline(skinId: skin!, x: xPos, y: 128, loadPhysics: true)
+                player.name = name.objectForKey("name") as? String
+                player.id = name.objectForKey("id") as? Int
+                
+                
+                var labelName: Label!
+                labelName = Label(text: "")
+                Control.controlList.remove(labelName)
+                labelName.setText(player.name!, color: GameColors.black)
+                player.labelName = labelName
+
+                
+                
+                
+                let cell = SKSpriteNode(imageNamed: "lobbyCell")
+                cell.addChild(Label(text: player.name!, x: -89, y: 0))
+                let playerSkin = SKSpriteNode(imageNamed: Skins.types[skin!].imageName)
+                playerSkin.position = CGPoint(x: -193/2, y: 0)
+                cell.addChild(playerSkin)
+                cell.name = player.id!.description
+                
+                this.playerScrollNode.append(cell)
+            }
+        }
+        
+        
+    }
+
     
     
     override func didMoveToView(view: SKView) {
@@ -69,6 +282,7 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
         
         self.myTextField = Textfield(name: self.playerData.name , x: 820, y: 270, align:.center, view:self.view!)
         self.myTextField.myTextField.delegate = self
+        self.myTextField.myTextField.enabled = false
         self.addChild(self.myTextField)
         
         if(self.playerData.powerUps.count > 0) {
@@ -81,8 +295,16 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
             self.powerUpSlotsScrollNode = ScrollNode(x: 970, y: 610, xAlign: .center, yAlign: .center, cells: powerUpSlotsArray, scrollDirection: ScrollNode.scrollTypes.horizontal, scaleNodes: false, index:1)
             self.powerUpSlotsScrollNode.canScroll = false
             self.addChild(self.powerUpSlotsScrollNode)
+            
+            
         }
         
+        
+        self.labelState = Label(text: "Loading", x: 375, y: 275)
+        self.addChild(self.labelState)
+        
+        self.labelCountDown = Label(text: "", x: 375, y: 310)
+        self.addChild(self.labelCountDown)
         
         self.boxCoins = BoxCoins()
         self.addChild(boxCoins)
@@ -91,9 +313,10 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
         self.buttonBack = Button(textureName: "buttonGraySquareSmall", text:"<", x: 20, y: 652, xAlign:.left, yAlign:.down)
         self.addChild(self.buttonBack)
         
+        self.player = Player(playerData: self.playerData, x: 970, y: 459, loadPhysics: false)
+        self.addChild(self.player)
         
-        
-        
+        self.localName = MemoryCard.sharedInstance.playerData.name
         
     }
     
@@ -120,46 +343,13 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
     }
     
     
-    
-    //ping protocol
-    
-    func ping(pinger: GBPing!, didReceiveReplyWithSummary summary: GBPingSummary!) {
-        print(summary.rtt)
-        //self.responseTime = self.responseTime + Int(summary.rtt * 1000)
-        //self.numResponses = self.numResponses + 1
-    }
-    
-//    func ping(pinger: GBPing!, didFailToSendPingWithSummary summary: GBPingSummary!, error: NSError!) {
-//        print(summary)
-//        print(error)
-//    }
-//    
-//    func ping(pinger: GBPing!, didFailWithError error: NSError!) {
-//        //print(error)
-//    }
-//    
-//    func ping(pinger: GBPing!, didReceiveUnexpectedReplyWithSummary summary: GBPingSummary!) {
-//        print(summary)
-//    }
-//    
-//    func ping(pinger: GBPing!, didSendPingWithSummary summary: GBPingSummary!) {
-//        print(summary)
-//    }
-//    
-//    func ping(pinger: GBPing!, didTimeoutWithSummary summary: GBPingSummary!) {
-//        print(summary)
-//    }
-    
-    
-    
-    
-    
-    
-    
+
     
     override func update(currentTime: NSTimeInterval) {
         if(self.state == self.nextState){
             switch (self.state) {
+            
+                
             default:
                 break
             }
@@ -169,128 +359,45 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
             switch (self.nextState) {
                 
                 
+            case states.searching:
                 
-            case states.chooseSkin:
-                self.player.removeFromParent()
-                
-                var skinsArray = Array<SKNode>()
-                self.mySkins = NSMutableArray()
-                
-                //Skins desbloqueadas
-                for skin in self.playerData.skins as! Set<SkinData> {
-                    self.mySkins.addObject(skin.index.description)//Gravando indices das minhas skins
-                    
-                    let cell = SKSpriteNode(imageNamed: "boxSmall")
-                    cell.name = String(skin.index.description)
-                    
-                    let skinType = Skins.types[skin.index.integerValue]
-                    
-                    let spriteNodeSkin = SKSpriteNode(imageNamed: skinType.imageName)
-                    spriteNodeSkin.zPosition = cell.zPosition + 1
-                    cell.addChild(spriteNodeSkin)
-                    
-                    //cell.addChild(Label(name: "lebelName", color:GameColors.black, textureName: "", x: 0, y: -100))
-                    
-                    //cell.addChild(Label(name: "lebelPrice", color:GameColors.black, textureName: skinType.price.description, x: 0, y: 100))
-                    
-                    skinsArray.append(cell)
-                }
-                
-                //Skins bloqueadas
-                var skinIndex = 0
-                for skinType in Skins.types {
-                    if(!self.mySkins.containsObject(skinIndex.description)) {
-                        let cell = SKSpriteNode(imageNamed: "boxSmall")
-                        cell.name = skinIndex.description
-                        
-                        let spriteNodeSkin = SKSpriteNode(imageNamed: skinType.imageName)
-                        spriteNodeSkin.color = GameColors.black
-                        
-                        cell.addChild(spriteNodeSkin)
-                        spriteNodeSkin.zPosition = 1
-                        
-                        let spriteNodeBox = SKSpriteNode(imageNamed: "boxSmallLocked")
-                        cell.addChild(spriteNodeBox)
-                        spriteNodeBox.zPosition = 2
-                        
-                        
-                        var spriteNodeIcon:SKSpriteNode!
-                        if (skinType.buyWithCoins == true) {
-                            spriteNodeIcon = SKSpriteNode(imageNamed: "hudCoin")
-                            spriteNodeSkin.colorBlendFactor = 0.9
-                        } else {
-                            spriteNodeIcon = SKSpriteNode(imageNamed: "hudJewel_blue")
-                            spriteNodeSkin.colorBlendFactor = 0.5
-                        }
-                        
-                        spriteNodeIcon.position = CGPoint(x: -32, y: -32)
-                        cell.addChild(spriteNodeIcon)
-                        spriteNodeIcon.zPosition = 3
-                        
-                        cell.addChild(Label(color:GameColors.white, text: "?", x: 0, y: 0))
-                        
-                        cell.addChild(Label(color:GameColors.white, text: skinType.price.description, x: 64, y: 64))
-                        
-                        skinsArray.append(cell)
+                if ( Reachability.isConnectedToNetwork() ){
+                    self.labelState.setText("Searching Best Server")
+                    ServerManager.sharedInstance.bestServer { serverStr in
+                        self.server = serverStr
+                        print(self.server)
+                        self.nextState = .connecting
                     }
-                    skinIndex++
+                } else {
+                    let box = MessageBox(text: "You not connect to internet", textureName: "messegeBox", type: MessageBox.messageType.OK)
+                    box.touchesEndedAtButtonOK.addHandler({
+                        self.nextState = .lobby
+                    })
+                    
+                    let size = self.size.width > self.size.height ? self.size.width : self.size.height
+                    self.blackSpriteNode = SKSpriteNode(color: GameColors.black, size: CGSize(width: size * 2, height: size * 2))
+                    self.blackSpriteNode.anchorPoint = CGPoint(x: 0, y: 1)
+                    self.addChild(self.blackSpriteNode)
+                    self.addChild(box)
+                    self.myTextField.myTextField.hidden = true
+                    self.powerUpSlotsScrollNode.removeFromParent()
+                    
                 }
                 
-                //Skin misteriosa =}
-                let cell = SKSpriteNode(imageNamed: "boxSmall")
-                cell.name = skinIndex.description
                 
-                let spriteNodeBox = SKSpriteNode(imageNamed: "boxSmallLocked")
-                cell.addChild(spriteNodeBox)
-                
-                cell.addChild(Label(color:GameColors.white, text: "?"))
-                
-                skinsArray.append(cell)
-                //
-                
-                let size = self.size.width > self.size.height ? self.size.width : self.size.height
-                self.blackSpriteNode = SKSpriteNode(color: GameColors.black, size: CGSize(width: size * 2, height: size * 2))
-                self.blackSpriteNode.anchorPoint = CGPoint(x: 0, y: 1)
-                self.addChild(self.blackSpriteNode)
-                
-                
-                
-                self.skinsScrollNode = ScrollNode(x: 836, y: 466, cells: skinsArray, spacing: 0, scrollDirection: ScrollNode.scrollTypes.horizontal, scaleNodes: true, scaleDistance:1334/4 + 100)
-                self.addChild(skinsScrollNode)
-                
-                self.blackSpriteNode.zPosition = Config.HUDZPosition * 2
-                self.skinsScrollNode.zPosition = self.blackSpriteNode.zPosition + 1
-                
-                self.myTextField.myTextField.hidden = true
                 
                 
                 break
                 
-                
-            case states.choosePowerUps:
-                self.player.removeFromParent()
-                
-                var powerUpsArray = Array<PowerUp>()
-                
-                //PowerUps desbloqueados
-                for item in self.playerData.powerUps {
-                    let powerUp = PowerUp(powerUpData: item as! PowerUpData)
-                    for item in self.powerUpSlotsScrollNode.cells {
-                        if let powerUpSlot = item as? PowerUpSlot {
-                            if powerUpSlot.powerUpSlotData.powerUp?.index == powerUp.powerUpData.index {
-                                powerUp.inUse = true
-                                break
-                            }
-                        }
-                    }
-                    powerUpsArray.append(powerUp)
-                }
-  
-                
-                self.powerUpsScrollNode = ScrollNode(x: 970, y: 436, cells: powerUpsArray, scrollDirection: .horizontal, scaleNodes: false, scaleDistance:100)
-                self.addChild(self.powerUpsScrollNode)
-                
+            case states.connecting:
+                self.socket.socketURL = self.server
+                socket.connect()
+                self.labelState.setText("Waiting Other Players")
+                self.addHandlers()
+                self.nextState = .multiPlayerLobby
                 break
+                
+
                 
             case states.multiPlayerLobby:
                 self.player = Player(playerData: self.playerData, x: 970, y: 459, loadPhysics: false)
@@ -311,14 +418,14 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
                 break
                 
             case states.lobby:
-                self.view!.presentScene(LobbyScene(), transition: Config.defaultBackTransition)
+                self.view!.presentScene(LobbyScene(), transition: Config.defaultTransition)
                 break
                 
             case states.multiplayerMission:
-                let nextScene = MultiplayerMissionScene()
+                let nextScene = MultiplayerMissionScene(socket: self.socket)
                 nextScene.room = self.room
                 nextScene.localName = self.myTextField.myTextField.text
-                self.view!.presentScene(nextScene, transition: Config.defaultGoTransition)
+                self.view!.presentScene(nextScene, transition: Config.defaultTransition)
                 break
                 
                 
@@ -345,151 +452,13 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
                         return
                     }
                     
-                    if (self.player.containsPoint(location)) {
-                        self.nextState = .chooseSkin
-                        return
-                    }
-                    
-                    if(self.playerData.powerUps.count > 0) {
-                        if(self.powerUpSlotsScrollNode.containsPoint(location)) {
-                            self.nextState = .choosePowerUps
-                            return
-                        }
-                    }
+
                     
                     
                 }
                 break
                 
-            case states.chooseSkin:
-                for touch in (touches ) {
-                    let location = touch.locationInNode(self)
-                    
-                    
-                    if (self.buttonBack.containsPoint(location)) {
-                        self.nextState = .multiPlayerLobby
-                        return
-                    }
-                    
-                    if(touch.tapCount > 0) {
-                        if (self.skinsScrollNode.containsPoint(location)) {
-                            let locationInScrollNode = touch.locationInNode(self.skinsScrollNode)
-                            
-                            for skin in self.skinsScrollNode.cells {
-                                if(skin.containsPoint(locationInScrollNode)) {
-                                    if(!self.mySkins.containsObject(skin.name!)) {
-                                        let cellIndex:Int = Int(skin.name!)!
-                                        if(cellIndex >= Skins.types.count) {
-                                            return
-                                        }
-                                        let skinType = Skins.types[cellIndex]
-                                        
-                                        if (skinType.buyWithCoins == true) {
-                                            if(Int(self.playerData.coins) >= skinType.price) {
-                                                let skinData = MemoryCard.sharedInstance.newSkinData()
-                                                skinData.index = NSNumber(integer: Int(skin.name!)!)
-                                                self.playerData.addSkin(skinData)
-                                                self.playerData.skinSlot.skin = skinData
-                                                self.playerData.coins = NSNumber(integer: Int(self.playerData.coins) - skinType.price)
-                                                self.boxCoins.labelCoins.setText(self.playerData.coins.description)
-                                                self.nextState = states.multiPlayerLobby
-                                            } else {
-                                                //TODO: assistir video para ganhar mais moedas???
-                                                print("Não tenho dinheiro para comprar")
-                                            }
-                                        } else {
-                                            //Tentando comprar com gemas
-                                            if(Int(self.playerData.gems) >= skinType.price) {
-                                                let skinData = MemoryCard.sharedInstance.newSkinData()
-                                                skinData.index = NSNumber(integer: Int(skin.name!)!)
-                                                self.playerData.addSkin(skinData)
-                                                self.playerData.skinSlot.skin = skinData
-                                                self.playerData.gems = NSNumber(integer: Int(self.playerData.gems) - skinType.price)
-                                                self.boxCoins.labelGems.setText(self.playerData.gems.description)
-                                                self.nextState = states.multiPlayerLobby
-                                            } else {
-                                                //TODO: assistir video para ganhar mais gemas???
-                                                print("Não tenho gemas para comprar")
-                                            }
-                                        }
-                                    } else {
-                                        for skinData in self.playerData.skins as! Set<SkinData> {
-                                            if (skinData.index.description == skin.name!) {
-                                                self.playerData.skinSlot.skin = skinData
-                                                self.nextState = states.multiPlayerLobby
-                                                return
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        } else {
-                            self.nextState = states.multiPlayerLobby
-                        }
-                    }
-                }
-                break
-                
-            case states.choosePowerUps:
-                for touch in (touches ) {
-                    let location = touch.locationInNode(self)
-                    
-                    
-                    
-                    if (self.buttonBack.containsPoint(location)) {
-                        self.nextState = states.multiPlayerLobby
-                        return
-                    }
-                    
-                    if(touch.tapCount > 0) {
-                        if (self.powerUpSlotsScrollNode.containsPoint(location)) {
-                            let locationInScrollNode = touch.locationInNode(self.powerUpSlotsScrollNode)
-                            
-                            for powerUpSlot in self.powerUpSlotsScrollNode.cells {
-                                if(powerUpSlot.containsPoint(locationInScrollNode)) {
-                                    if let powerUpSlot = powerUpSlot as? PowerUpSlot {
-                                        for powerUp in self.powerUpsScrollNode.cells {
-                                            if let powerUp = powerUp as? PowerUp {
-                                                if (powerUp.powerUpData.index == powerUpSlot.powerUpSlotData.powerUp?.index) {
-                                                    powerUp.inUse = false
-                                                    break
-                                                }
-                                            }
-                                        }
-                                        powerUpSlot.reset()
-                                    }
-                                }
-                            }
-                            return
-                        }
-                        
-                        if (self.powerUpsScrollNode.containsPoint(location)) {
-                            let locationInScrollNode = touch.locationInNode(self.powerUpsScrollNode)
-                            
-                            for cell in self.powerUpsScrollNode.cells {
-                                if(cell.containsPoint(locationInScrollNode)) {
-                                    
-                                    for powerUpSlot in self.powerUpSlotsScrollNode.cells as! Array<PowerUpSlot> {
-                                        if(powerUpSlot.empty) {
-                                            if let powerUp = cell as? PowerUp {
-                                                if(!powerUp.inUse) {
-                                                    powerUp.inUse = true
-                                                    powerUpSlot.setPowerUp(powerUp.powerUpData)
-                                                }
-                                            }
-                                            break
-                                        }
-                                    }
-                                    return
-                                }
-                            }
-                        } else {
-                            self.nextState = states.multiPlayerLobby
-                            return
-                        }
-                    }
-                }
-                break
+ 
                 
                 
             default:

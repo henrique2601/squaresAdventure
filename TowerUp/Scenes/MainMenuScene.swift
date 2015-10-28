@@ -61,19 +61,19 @@ class MainMenuScene: GameScene {
             switch (self.nextState) {
                 
             case states.towers:
-                self.view!.presentScene(TowersScene(), transition: Config.defaultGoTransition)
+                self.view!.presentScene(TowersScene(), transition: Config.defaultTransition)
                 break
                 
             case states.multiplayer:
-                self.view!.presentScene(LobbyScene(), transition: Config.defaultGoTransition)
+                self.view!.presentScene(LobbyScene(), transition: Config.defaultTransition)
                 break
                 
             case states.options:
-                self.view!.presentScene(OptionsScene(), transition: Config.defaultGoTransition)
+                self.view!.presentScene(OptionsScene(), transition: Config.defaultTransition)
                 break
                 
             case states.credits:
-                self.view!.presentScene(CreditsScene(), transition: Config.defaultGoTransition)
+                self.view!.presentScene(CreditsScene(), transition: Config.defaultTransition)
                 break
                 
             default:
