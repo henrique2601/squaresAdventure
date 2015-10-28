@@ -33,6 +33,7 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
         case join = "j"
         case joinRoom = "r"
         case update = "u"
+        case bomb = "bomb"
     }
     
     var message = messages.addPlayers
@@ -249,6 +250,39 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
                     }
                 }
             }
+        }
+        
+        
+        self.socket.on(messages.bomb.rawValue) {[weak self] data, ack in
+            
+            guard let this = self else {
+                return
+            }
+            
+            print(data)
+            
+            if let x = data?[0] as? Int, let y = data?[1] as? Int {
+                
+                let bomb = BoxExplosive(position: CGPoint(x: x, y: y))
+                this.world.addChild(bomb)
+                
+                print("bomb at " + x.description + " " + y.description )
+                
+                bomb.runAction({
+                    let action = SKAction()
+                    action.duration = 1
+                    return action
+                    }(), completion: { () -> Void in
+                        bomb.activate()
+                })
+                
+                
+                
+            }
+            
+            
+            
+            
         }
         
         self.socket.on(messages.update.rawValue) {[weak self] data, ack in
