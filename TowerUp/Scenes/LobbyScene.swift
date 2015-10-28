@@ -286,7 +286,7 @@ class LobbyScene: GameScene, UITextFieldDelegate {
                 break
                 
             case states.multiplayerLobby:
-                self.view!.presentScene(MultiplayerMissionScene(), transition: Config.defaultTransition)
+                self.view!.presentScene(MultiPlayerLobbyScene(), transition: Config.defaultTransition)
                 break
                 
             case states.mainMenu:
