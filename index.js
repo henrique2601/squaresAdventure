@@ -25,65 +25,106 @@ function Player(socket) {
 
 
     this.socket.on('disconnect', function(){
-            console.log( self.name + " disconnect" )
+        console.log( self.name + " disconnect" )
+        console.log( self.room + "room")
+
+        // console.log(self.game.rooms)
+        self.socket.broadcast.to(self.room).emit("q", self.id )
             
-            self.socket.broadcast.to(self.room).emit("q", self.id )
-            var aux = self.game.rooms[self.room]
+            if (self.game.rooms[self.room] !== undefined) {
 
-            console.log(self.game.rooms[self.room])
+                var aux = self.game.rooms[self.room].players
 
-            for(var i = aux.length - 1; i >= 0; i--) {
-                if(aux[i].id === self.id) {
-                    aux.splice(i, 1)
-                    console.log(i)
-                }
+                console.log(self.game.rooms[self.room].players)
+
+                for(var i = aux.length - 1; i >= 0; i--) {
+                    if(aux[i].id === self.id) {
+                        console.log
+                        aux.splice(i, 1)
+                    }
             }
 
-            self.game.rooms[self.room] = aux
-            console.log(self.game.rooms[self.room])
+            self.game.rooms[self.room].players = aux
+            console.log(self.game.rooms[self.room].players) 
+                
+            }
 
+               
+            
+  
     });
     
 }
 
 
 
-Player.prototype.joinRoom = function(name,room,skin) {
+Player.prototype.joinRoom = function(name,skin) {
+    
     this.name = name
-    this.room = room
     this.skin = skin
-    this.socket.join(this.room)
 
-    if (this.game.rooms[this.room] === undefined) {
-        this.game.rooms[this.room] = new Array()
-        this.id = 0
-    } 
+    //console.log("dei join")
 
-    else if (this.game.rooms[this.room].length == 0) {
-        console.log("sala vazia")
-        this.id = 0
-    } 
+   
+    //console.log("Salas : " + this.game.rooms.length)
+    for( var i = 0 ; i < this.game.rooms.length ; i++) {    
+        console.log("Sala " + i)
+        // console.log("maxLength " + this.game.rooms[i].maxLength) 
+        console.log("players " + this.game.rooms[i].players)
+        if((this.game.rooms[i].players.length < this.game.rooms[i].maxLength)) {
+            //console.log("Entrei na sala" + i)
 
-    else {
-        var aux = this.game.rooms[this.room]
-        var last = aux[this.game.rooms[this.room].length - 1]
-        this.id = last.id + 1
+            if (this.game.rooms[i].players.length > 0) {
+                var aux = this.game.rooms[i].players
+                var last = aux[this.game.rooms[i].players.length - 1]
+                this.id = last.id + 1
+                console.log("Ja tinha alguem " + this.name + " " + this.id)   
+            } 
+            else {
+                this.id = 0
+                console.log("Nao tinha ninguem " + this.name + " " + this.id)
+            }
+
+            this.room = i
+            break 
+            
+        }
     }
+
+    if (this.id === 9999999) {
+        console.log("criei nova sala " + this.game.rooms.length)
+        this.room = this.game.rooms.length
+        this.game.rooms.push(new Room())
+        // console.log(this.game.rooms)
+        // console.log(this.game.rooms.length)
+        this.id = 0    
+    } 
+
     
     var teste = {name : this.name , id : this.id, skin: this.skin}
-    this.socket.emit("a", this.game.rooms[this.room])
+    this.socket.emit("a", this.game.rooms[this.room].players, this.room, this.game.rooms[this.room].floor)
     this.socket.broadcast.to(this.room).emit("j" , teste)
 
-    this.game.rooms[this.room].push(teste)
+    this.game.rooms[this.room].players.push(teste)
+    this.socket.join(this.room)
+    console.log( this.name + " Entrou na sala " + this.room)
 
-    console.log(this.game.rooms[this.room])
+    //console.log(this.game.rooms)
 
-    
- 
 }
 
 
+function Room() {
+    
+    this.players = new Array()
+    //this.floor = Math.floor( Math.random() * 1 )
+    this.floor = 0
+    this.maxLength = 100
+    this.started = false
 
+    console.log( "andar " + this.floor )
+
+}
 
 
 function Game() {
@@ -105,42 +146,27 @@ Game.prototype.addHandlers = function() {
         game.addPlayer(new Player(socket))
         socket.emit("d")
 
-        
-
-        
-
     })
 }
 
 Game.prototype.addPlayer = function(player) {
     
-    
     player.game = this
-    
 
 }
 
 
-
 Game.prototype.update = function(socket, id, room, x, y , vx , vy , rotation , vrotation) {
 
-    
-        socket.broadcast.to(room).emit("u", id , x, y , vx , vy , rotation , vrotation )
-    
-    
 
+        socket.broadcast.to(room).emit("u", id , x, y , vx , vy , rotation , vrotation )
 }
 
 
 Game.prototype.win = function(socket, id, room) {
 
-    
         socket.broadcast.to(room).emit("win", id)
-    
-    
-
 }
-
 
 
 Game.prototype.startGame = function() {

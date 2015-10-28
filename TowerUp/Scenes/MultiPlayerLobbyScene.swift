@@ -29,6 +29,8 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
         case join = "j"
         case joinRoom = "r"
         case update = "u"
+        case countDown = "c"
+        case begin = "b"
     }
     
     var server: String = "nao"
@@ -45,6 +47,7 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
     var state = states.loading
     var nextState = states.searching
     var labelState: Label!
+    var labelCountDown: Label!
     
     var boxCoins:BoxCoins!
     
@@ -75,6 +78,10 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
                 return
             }
             
+            
+            this.room = data?[1] as! Int
+            MapManager.floor = data?[2] as! Int
+            
             print(data?[0])
             
             if let playersArray = data?[0] as? NSArray {
@@ -103,11 +110,21 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
                         player2.name = nameTest!.objectForKey("name") as? String
                         player2.id = nameTest!.objectForKey("id") as? Int
                         
+                        var labelName2: Label!
+                        labelName2 = Label(text: "")
+                        Control.controlList.remove(labelName2)
+                        labelName2.zPosition = player2.zPosition + 1
+                        labelName2.setText(player2.name!, color: GameColors.black)
+                        player2.labelName = labelName2
+
+                        
                         let cell = SKSpriteNode(imageNamed: "lobbyCell")
                         cell.addChild(Label(text: player2.name!, x: -89, y: 0))
                         let playerSkin = SKSpriteNode(imageNamed: Skins.types[skin!].imageName)
                         playerSkin.position = CGPoint(x: -193/2, y: 0)
                         cell.addChild(playerSkin)
+                        cell.name = player2.id!.description
+        
                         
                         
                         this.playersNodes.append(cell)
@@ -131,18 +148,48 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
         
                 
         self.socket.on(messages.disconnect.rawValue) {[weak self] data, ack in
+            
+            guard let this = self else {
+                return
+            }
+            
             if let name = data?[0] as? Int {
                 
-//                for player in PlayerOnline.playerOnlineList {
-//                    if let aux = player as PlayerOnline? {
-//                        if let id = aux.id
-//                        {
-//                            if id == name{
-//                                aux.removeFromParent()
-//                            }
-//                        }
-//                    }
-//                }
+                for player in PlayerOnline.playerOnlineList {
+                    if let aux = player as PlayerOnline? {
+                        if let id = aux.id
+                        {
+                            if id == name{
+                                
+                                aux.removeFromParent()
+                                
+                                var index: Int?
+                                for (idx, objectToCompare) in this.playersNodes.enumerate() {
+                                    if let to = objectToCompare.name! as String! {
+                                        if aux.id.description == to {
+                                            index = idx
+                                        }
+                                    }
+                                }
+                                
+                                if((index) != nil) {
+                                    this.playersNodes.removeAtIndex(index!)
+                                }
+                                
+                                print(this.playersNodes)
+                                
+                                
+                                
+                                this.playerScrollNode.removeFromParent()
+                                
+                                this.playerScrollNode = ScrollNode(x: 388, y: 459,  cells: this.playersNodes, spacing: 0, scrollDirection: ScrollNode.scrollTypes.vertical , scaleNodes: false )
+                                
+                                this.addChild(this.playerScrollNode)
+                                
+                            }
+                        }
+                    }
+                }
             }
         }
         
@@ -154,6 +201,36 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
             
             this.socket.emit(messages.joinRoom.rawValue, this.localName , this.playerData.skinSlot.skin.index.integerValue)
         }
+        
+        
+        
+        self.socket.on(messages.countDown.rawValue) {[weak self] data, ack in
+            
+            guard let this = self else {
+                return
+            }
+            
+            if let count = data?[0] as? Int {
+                this.labelCountDown.setText(count.description + "s")
+            }
+            
+            if let count = data?[0] as? String {
+                this.labelCountDown.setText(count)
+            }
+        }
+        
+        
+        self.socket.on(messages.begin.rawValue) {[weak self] data, ack in
+            
+            guard let this = self else {
+                return
+            }
+            
+            this.nextState = .multiplayerMission
+            print(PlayerOnline.playerOnlineList)
+        }
+        
+        
         
         self.socket.on(messages.join.rawValue) {[weak self] data, ack in
             
@@ -167,10 +244,15 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
                 let skin = name.objectForKey("skin") as? Int
                 let player = PlayerOnline(skinId: skin!, x: xPos, y: 128, loadPhysics: true)
                 player.name = name.objectForKey("name") as? String
-                print(player.name)
                 player.id = name.objectForKey("id") as? Int
-                print(player.id.description)
-                player.position = CGPoint(x: xPos, y: 48)
+                
+                
+                var labelName: Label!
+                labelName = Label(text: "")
+                Control.controlList.remove(labelName)
+                labelName.setText(player.name!, color: GameColors.black)
+                player.labelName = labelName
+
                 
                 
                 
@@ -179,15 +261,9 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
                 let playerSkin = SKSpriteNode(imageNamed: Skins.types[skin!].imageName)
                 playerSkin.position = CGPoint(x: -193/2, y: 0)
                 cell.addChild(playerSkin)
+                cell.name = player.id!.description
                 
-                
-                this.playersNodes.append(cell)
-                
-                this.playerScrollNode.removeFromParent()
-                
-                this.playerScrollNode = ScrollNode(x: 388, y: 459,  cells: this.playersNodes, spacing: 0, scrollDirection: ScrollNode.scrollTypes.vertical , scaleNodes: false )
-                
-                this.addChild(this.playerScrollNode)
+                this.playerScrollNode.append(cell)
             }
         }
         
@@ -220,10 +296,15 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
             self.powerUpSlotsScrollNode.canScroll = false
             self.addChild(self.powerUpSlotsScrollNode)
             
-            self.labelState = Label(text: "Loading", x: 375, y: 275)
-            self.addChild(self.labelState)
+            
         }
         
+        
+        self.labelState = Label(text: "Loading", x: 375, y: 275)
+        self.addChild(self.labelState)
+        
+        self.labelCountDown = Label(text: "", x: 375, y: 310)
+        self.addChild(self.labelCountDown)
         
         self.boxCoins = BoxCoins()
         self.addChild(boxCoins)
@@ -341,7 +422,7 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
                 break
                 
             case states.multiplayerMission:
-                let nextScene = MultiplayerMissionScene()
+                let nextScene = MultiplayerMissionScene(socket: self.socket)
                 nextScene.room = self.room
                 nextScene.localName = self.myTextField.myTextField.text
                 self.view!.presentScene(nextScene, transition: Config.defaultGoTransition)

@@ -19,6 +19,7 @@ class ScrollNode: Control {
     var scaleNodes = false
     var scaleDistance:CGFloat = 1000
     var canScroll:Bool!
+    var spacing:Int = 0
     
     static var scrollNodeList = Set<ScrollNode>()
     
@@ -41,6 +42,8 @@ class ScrollNode: Control {
     }
     
     func load(textureName:String, x:Int, y:Int, xAlign:Control.xAlignments, yAlign:Control.yAlignments, count:Int, spacing:Int, scrollDirection:scrollTypes, scaleNodes:Bool, scaleDistance:Int) {
+        
+        self.spacing = spacing
         
         self.scrollType = scrollDirection
         
@@ -78,6 +81,8 @@ class ScrollNode: Control {
     }
     
     func load(x:Int, y:Int, xAlign:Control.xAlignments, yAlign:Control.yAlignments, cells:Array<SKNode>, spacing:Int, scrollDirection:scrollTypes, scaleNodes:Bool, scaleDistance:Int, index:Int) {
+        
+        self.spacing = spacing
         
         self.scrollType = scrollDirection
         
@@ -280,6 +285,26 @@ class ScrollNode: Control {
         for scrollNode in ScrollNode.scrollNodeList {
             scrollNode.resetPosition()
         }
+    }
+    
+    func append(cell:SKNode) {
+        
+        var i = 0
+        for _ in self.cells {
+            i++
+        }
+        
+        switch(self.scrollType) {
+        case scrollTypes.horizontal:
+            cell.position = CGPoint(x: (Int(cell.calculateAccumulatedFrame().width) + self.spacing) * i, y: 0)
+            break
+        case scrollTypes.vertical:
+            cell.position = CGPoint(x: 0, y: (Int(cell.calculateAccumulatedFrame().height) + self.spacing) * i)
+            break
+        }
+        
+        self.cells.append(cell)
+        self.addChild(cell)
     }
     
     override func removeFromParent() {
