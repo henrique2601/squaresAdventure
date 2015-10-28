@@ -28,7 +28,7 @@ public final class SocketIOClient: NSObject, SocketEngineClient {
     private let emitQueue = dispatch_queue_create("emitQueue", DISPATCH_QUEUE_SERIAL)
     private let handleQueue: dispatch_queue_t!
 
-    public let socketURL: String
+    public var socketURL: String
 
     public private(set) var engine: SocketEngine?
     public private(set) var secure = false

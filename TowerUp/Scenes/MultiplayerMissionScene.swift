@@ -11,13 +11,7 @@ import SpriteKit
 
 class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
     
-    enum states {
-        case loading
-        case mission
-        case paused
-        case win
-        case loose
-    }
+    
     
     //Controls
     var buttonLeft:Button!
@@ -64,7 +58,7 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
     var localName:String!
     //let socket = SocketIOClient(socketURL: "https://squaregame.mybluemix.net", opts: nil)
     //let socket = SocketIOClient(socketURL: "179.232.86.110:3001", opts: nil)
-    let socket = SocketIOClient(socketURL: "181.41.197.181:3001", opts: nil)
+    var socket = SocketIOClient(socketURL: "181.41.197.181:3001", opts: nil)
     
     //var teste: NSURL
     
@@ -82,8 +76,29 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
     
     var buttonBack:Button!
     
+    
+    init(socket:SocketIOClient) {
+        super.init()
+        self.socket = socket
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    enum states {
+        case loading
+        case mission
+        case paused
+        case win
+        case loose
+    }
+    
+    
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
+        
+        print(PlayerOnline.playerOnlineList)
         self.backgroundColor = GameColors.blueSky
         
         Music.sharedInstance.play(musicNamed: "A New Camp.mp3")
@@ -106,7 +121,6 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
         
         self.mapManager = MapManager()
         MapManager.tower = -1//TODO: altas gambs
-        MapManager.floor = 1//TODO: altas gambs
         self.world.addChild(self.mapManager)
         
         self.mapManager.reloadMap(CGPoint(x: 10, y: 10))
@@ -157,76 +171,39 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
         
         self.buttonBack = Button(textureName: "buttonGraySquareSmall", text:"X" ,x:20, y:20, xAlign:.left, yAlign:.up)
         self.addChild(self.buttonBack)
+
+        self.player.name = self.localName
+        self.player.labelName.setText(self.localName, color: GameColors.black)
         
-        //Multiplayer
-        self.socket.connect()
+        for player in PlayerOnline.playerOnlineList {
+            if let aux = player as PlayerOnline? {
+                if let name = aux.name
+                {
+                    if name != self.localName {
+                        print("adicionei")
+                        print(aux)
+                        aux.position = CGPoint(x: 200, y: 48)
+                        self.world.addChild(aux)
+                        
+                        var labelName2: Label!
+                        labelName2 = Label(text: "")
+                        Control.controlList.remove(labelName2)
+                        labelName2.position = CGPoint(x: aux.position.x, y: aux.position.y + 32)
+                        self.world.addChild(labelName2)
+                        labelName2.zPosition = aux.zPosition + 1
+                        labelName2.setText(aux.name!, color: GameColors.black)
+                        aux.labelName = labelName2
+                    }
+                }
+            }
+        }
+        
         
         self.addHandlers()
        
     }
     
     func addHandlers(){
-        
-        self.socket.on(messages.addPlayers.rawValue) {[weak self] data, ack in
-            
-            guard let this = self else {
-                return
-            }
-            
-            this.player.name = this.localName
-            this.room = data?[1] as! Int
-            MapManager.floor = data?[2] as! Int
-            this.mapManager.reloadMap(CGPoint(x: 10, y: 10))
-            this.player.reset()
-            
-            this.player.labelName.position = CGPoint(x: this.player!.position.x, y: this.player!.position.y + 32)
-            this.player.labelName.zPosition = this.player!.zPosition + 1
-            this.player.labelName.setText(this.localName!, color: GameColors.black)
-            
-            
-            print(data?[0])
-            
-            if let playersArray = data?[0] as? NSArray {
-                for onlinePlayer in playersArray {
-                    let nameTest = onlinePlayer as? NSDictionary
-                    
-                    var test = 0
-                    
-                    for player in PlayerOnline.playerOnlineList {
-                        if let aux = player as PlayerOnline? {
-                            if let id = aux.id
-                            {
-                                if id == nameTest!.objectForKey("id") as? Int{
-                                    test++
-                                }
-                            }
-                        }
-                    }
-                    
-                    if (test == 0) {
-                        
-                        print(nameTest)
-                        
-                        let skin = nameTest!.objectForKey("skin") as? Int
-                        let player2 = PlayerOnline(skinId: skin! ,x: 128, y: 128, loadPhysics: true)
-                        player2.name = nameTest!.objectForKey("name") as? String
-                        player2.id = nameTest!.objectForKey("id") as? Int
-                        player2.position = CGPoint(x: 200, y: 48)
-                        this.world.addChild(player2)
-                        
-                        var labelName2: Label!
-                        labelName2 = Label(text: "")
-                        Control.controlList.remove(labelName2)
-                        labelName2.position = CGPoint(x: player2.position.x, y: player2.position.y + 32)
-                        this.world.addChild(labelName2)
-                        labelName2.zPosition = player2.zPosition + 1
-                        labelName2.setText(player2.name!, color: GameColors.black)
-                        player2.labelName = labelName2
-                    }
-                }
-            }
-            print("Added Players")
-        }
         
         self.socket.on("win") {[weak self] data, ack in
             
@@ -239,15 +216,6 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
                     if let id = player.id
                     {
                         if id == name{
-//                            print(player.name! + " win")
-//                            this.blackSpriteNode = SKSpriteNode(color: GameColors.black, size: this.size)
-//                            this.blackSpriteNode.anchorPoint = CGPoint(x: 0, y: 1)
-//                            this.addChild(this.blackSpriteNode)
-//                            let box = MultiplayerWinBox(background: "boxWhite", name:player.name! + " win!!!")
-//                            this.addChild(box)
-//                            
-//                            this.blackSpriteNode.zPosition = box.zPosition - 1
-//                            this.nextState = states.loose
                             
                             this.labelWin = Label(text: "\(player.name!) finish with \(Int(this.time)) seconds", x: 675, y: 375, xAlign: Control.xAlignments.center, yAlign: Control.yAlignments.center)
                             this.addChild(this.labelWin!)
@@ -266,7 +234,7 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
             }
             
         }
-        
+
         self.socket.on(messages.disconnect.rawValue) {[weak self] data, ack in
             if let name = data?[0] as? Int {
                 
@@ -280,45 +248,6 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
                         }
                     }
                 }
-            }
-        }
-        
-        self.socket.on(messages.didJoin.rawValue) {[weak self] data, ack in
-            
-            guard let this = self else {
-                return
-            }
-            
-            this.socket.emit(messages.joinRoom.rawValue, this.localName! , this.playerData.skinSlot.skin.index.integerValue)
-        }
-        
-        self.socket.on(messages.join.rawValue) {[weak self] data, ack in
-            
-            guard let this = self else {
-                return
-            }
-            
-            if let name = data?[0] as? NSDictionary {
-                
-                let xPos = 128
-                let skin = name.objectForKey("skin") as? Int
-                let player = PlayerOnline(skinId: skin!, x: xPos, y: 128, loadPhysics: true)
-                player.name = name.objectForKey("name") as? String
-                print(player.name)
-                player.id = name.objectForKey("id") as? Int
-                print(player.id.description)
-                player.position = CGPoint(x: xPos, y: 48)
-                this.world.addChild(player)
-                
-                var labelName2: Label!
-                labelName2 = Label(text: "")
-                Control.controlList.remove(labelName2)
-                labelName2.position = CGPoint(x: player.position.x, y: player.position.y + 32)
-                this.world.addChild(labelName2)
-                labelName2.zPosition = player.zPosition + 1
-                labelName2.setText(player.name!, color: GameColors.black)
-                
-                player.labelName = labelName2
             }
         }
         
@@ -339,6 +268,7 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
             }
         }
     }
+    
     
     func didBeginContact(contact: SKPhysicsContact) {
         world.didBeginContact(contact)
