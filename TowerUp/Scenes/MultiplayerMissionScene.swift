@@ -235,6 +235,31 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
             }
             
         }
+        
+        
+        
+        self.socket.on("removeBoxCrateBomb") {[weak self] data, ack in
+            
+            guard let this = self else {
+                return
+            }
+            
+            print("removeBoxCrateBomb")
+            
+            if let boxCrateBomb = data?[0] as? Int {
+                for crateBomb in BoxExplosive.boxExplosiveList {
+                    if let id = crateBomb.listPosition
+                    {
+                        if id == boxCrateBomb{
+                            
+                            crateBomb.removeFromParent()
+                            
+                        }
+                    }
+                }
+            }
+            
+        }
 
         self.socket.on(messages.disconnect.rawValue) {[weak self] data, ack in
             if let name = data?[0] as? Int {

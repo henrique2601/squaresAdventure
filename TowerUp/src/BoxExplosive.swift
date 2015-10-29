@@ -11,7 +11,11 @@ import SpriteKit
 
 class BoxExplosive: Tile {
     
+    static var boxExplosiveList = Array<BoxExplosive>()
+    var listPosition: Int!
+    
     init(position:CGPoint) {
+        
         
         let positionX = position.x
         let positionY = position.y
@@ -32,6 +36,17 @@ class BoxExplosive: Tile {
         self.physicsBody!.dynamic = false
         
         self.zPosition = Config.HUDZPosition - 1
+        
+        if (BoxExplosive.boxExplosiveList.count > 0) {
+            self.listPosition = (BoxExplosive.boxExplosiveList.last?.listPosition)! + 1
+        }
+        
+        else {
+            self.listPosition = 0
+        }
+        
+
+        BoxExplosive.boxExplosiveList.append(self)
     }
     
     func activate() {
@@ -41,5 +56,16 @@ class BoxExplosive: Tile {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func removeFromParent() {
+        
+        for (var i=0 ; i < BoxExplosive.boxExplosiveList.count ; i++) {
+            if (BoxExplosive.boxExplosiveList[i].listPosition == self.listPosition){
+                BoxExplosive.boxExplosiveList.removeAtIndex(i)
+            }
+        }
+        super.removeFromParent()
+        
     }
 }
