@@ -19,8 +19,7 @@ class Config: NSObject {
     
     static var currentSceneSize:CGSize!
     
-    static var defaultGoTransition:SKTransition = SKTransition.pushWithDirection(SKTransitionDirection.Left, duration: 0)
-    static var defaultBackTransition:SKTransition = SKTransition.pushWithDirection(SKTransitionDirection.Right, duration: 0)
+    static var defaultTransition = SKTransition.crossFadeWithDuration(0.5)
     
     static func sceneSize() -> CGSize {
         

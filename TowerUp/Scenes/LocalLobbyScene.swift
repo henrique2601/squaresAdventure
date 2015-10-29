@@ -106,11 +106,11 @@ class LocalLobbyScene: GameScene {
                 break
                 
             case states.lobby:
-                self.view!.presentScene(LobbyScene(), transition: Config.defaultBackTransition)
+                self.view!.presentScene(LobbyScene(), transition: Config.defaultTransition)
                 break
                 
             case states.localMission:
-                self.view!.presentScene(LocalGameScene(), transition: Config.defaultBackTransition)
+                self.view!.presentScene(LocalGameScene(), transition: Config.defaultTransition)
                 break
                 
 

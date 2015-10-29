@@ -57,11 +57,11 @@ class MultiplayerWinBox: Box {
             
             if (self.buttonExit.containsPoint(location)) {
                 if let scene = self.scene as? MultiplayerMissionScene {
-                    scene.view!.presentScene(LobbyScene(), transition: Config.defaultGoTransition)
+                    scene.view!.presentScene(LobbyScene(), transition: Config.defaultTransition)
                 }
                 
                 if let scene = self.scene as? LocalGameScene {
-                    scene.view!.presentScene(MainMenuScene(), transition: Config.defaultGoTransition)
+                    scene.view!.presentScene(MainMenuScene(), transition: Config.defaultTransition)
                 }
                 
                 return

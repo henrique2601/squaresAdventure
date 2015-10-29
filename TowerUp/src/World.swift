@@ -14,11 +14,12 @@ class World: SKNode {
     var bodyA: SKPhysicsBody!
     var bodyB: SKPhysicsBody!
     var physicsWorld:SKPhysicsWorld!
+    var defaultGravity = CGVector(dx: 0.0, dy: -9.8)
     
     init(physicsWorld:SKPhysicsWorld) {
         super.init()
         self.physicsWorld = physicsWorld
-        physicsWorld.gravity = CGVector(dx: 0.0, dy: -9.8)
+        physicsWorld.gravity = self.defaultGravity
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -93,5 +94,7 @@ struct physicsCategory : OptionSetType {
     static var gem: physicsCategory { return physicsCategory(1 << 11) }
     static var saw: physicsCategory { return physicsCategory(1 << 12) }
     static var slime: physicsCategory { return physicsCategory(1 << 13) }
+    static var boxExplosive: physicsCategory { return physicsCategory(1 << 14) }
+    static var boxExplosiveDisabled: physicsCategory { return physicsCategory(1 << 15) }
     
 }

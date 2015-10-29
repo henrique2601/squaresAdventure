@@ -135,7 +135,8 @@ class Player: Square {
             physicsCategory.saw.rawValue |
             physicsCategory.bomb.rawValue |
             physicsCategory.spring.rawValue |
-            physicsCategory.doorTile.rawValue
+            physicsCategory.doorTile.rawValue |
+            physicsCategory.boxExplosive.rawValue
         
         
         self.physicsBody!.collisionBitMask =
@@ -146,7 +147,8 @@ class Player: Square {
             physicsCategory.spring.rawValue |
             physicsCategory.boxCrate.rawValue |
             physicsCategory.slime.rawValue |
-            physicsCategory.player.rawValue
+            physicsCategory.player.rawValue |
+            physicsCategory.boxExplosive.rawValue
         
     }
     
@@ -212,18 +214,18 @@ class Player: Square {
                 coin.bonus = 0
                 self.coinSound.play()
                 
-                let particles = SKEmitterNode(fileNamed: "Coin.sks")
+                let particles = SKEmitterNode(fileNamed: "Coin.sks")!
                 
-                particles?.position.x = coin.position.x
-                particles?.position.y = coin.position.y
-                particles?.zPosition = coin.zPosition
-                particles?.name = "particles"
-                self.parent!.addChild(particles!)
+                particles.position.x = coin.position.x
+                particles.position.y = coin.position.y
+                particles.zPosition = coin.zPosition
+                
+                self.parent!.addChild(particles)
                 
                 let action = SKAction()
                 action.duration = 2
-                particles?.runAction(action , completion: { () -> Void in
-                    particles?.removeFromParent()
+                particles.runAction(action , completion: { () -> Void in
+                    particles.removeFromParent()
                 })
 
                 coin.removeFromParent()
@@ -248,9 +250,10 @@ class Player: Square {
             break
             
         case physicsCategory.spring.rawValue:
-            self.physicsBody!.applyImpulse(CGVector(dx: 0, dy: 25))
-            self.physicsBody!.angularVelocity = self.physicsBody!.angularVelocity/2
-            self.physicsBody!.velocity.dx = self.physicsBody!.velocity.dx/2
+            if let node = physicsBody.node {
+                let spring = node as! Spring
+                spring.doLogic(self)
+            }
             break
             
         case physicsCategory.bomb.rawValue:
@@ -261,18 +264,17 @@ class Player: Square {
                 self.boom.play()
                 self.healthPoints = 0
                 
-                let particles = SKEmitterNode(fileNamed: "Bomb.sks")
+                let particles = SKEmitterNode(fileNamed: "Bomb.sks")!
                 
-                particles?.position.x = bomb.position.x
-                particles?.position.y = bomb.position.y
-                particles?.zPosition = bomb.zPosition
-                particles?.name = "particles"
-                self.parent!.addChild(particles!)
+                particles.position.x = bomb.position.x
+                particles.position.y = bomb.position.y
+                particles.zPosition = bomb.zPosition
+                self.parent!.addChild(particles)
                 
                 let action = SKAction()
                 action.duration = 2
-                particles?.runAction(action , completion: { () -> Void in
-                    particles?.removeFromParent()
+                particles.runAction(action , completion: { () -> Void in
+                    particles.removeFromParent()
                     
                 })
                 bomb.removeFromParent()
@@ -293,8 +295,35 @@ class Player: Square {
             }
             break
             
+        case physicsCategory.boxExplosive.rawValue:
+            
+            if let node = physicsBody.node {
+                let boxCrateBomb = (node as! BoxExplosive)
+                
+                self.boom.play()
+                self.healthPoints = 0
+                
+                let particles = SKEmitterNode(fileNamed: "Bomb.sks")!
+                
+                particles.position.x = boxCrateBomb.position.x
+                particles.position.y = boxCrateBomb.position.y
+                particles.zPosition = boxCrateBomb.zPosition
+                self.parent!.addChild(particles)
+                
+                let action = SKAction()
+                action.duration = 2
+                particles.runAction(action , completion: { () -> Void in
+                    particles.removeFromParent()
+                    
+                })
+                boxCrateBomb.removeFromParent()
+            }
+            
+            
+            break
+            
         default:
-            print("didBeginContact de player com \(physicsBody.node!.name!) não está sendo processado")
+            print("didBeginContact de player com \(physicsBody.node!.name) não está sendo processado")
             break
         }
     }
@@ -333,7 +362,7 @@ class Player: Square {
             break
             
         default:
-            print("didEndContact de player com \(physicsBody.node?.name!) não está sendo processado")
+            print("didEndContact de player com \(physicsBody.node?.name) não está sendo processado")
             break
         }
     }
@@ -452,6 +481,12 @@ class Player: Square {
     }
     
     func respawn(){
+        
+        let emitterNode = SKEmitterNode(fileNamed: "PlayerSpawn.sks")!
+        self.parent!.addChild(emitterNode)
+        emitterNode.zPosition = self.zPosition + 1
+        emitterNode.position = self.startingPosition
+        
         self.resetCategoryBitMasks()
         self.hidden = false
         self.position = self.startingPosition
@@ -469,6 +504,9 @@ class Player: Square {
         if let _ = self.spriteNodeDead {
             self.spriteNodeDead.removeFromParent()
         }
+        
+        self.runAction(SKAction.fadeAlphaTo(-1, duration: 0))
+        self.runAction(SKAction.fadeAlphaTo(1, duration: 0.2))
     
     }
     
