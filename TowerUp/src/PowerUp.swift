@@ -175,6 +175,10 @@ class PowerUp: Button {
                     
                     player.healthPoints = player.maxHealthPoints
                     player.needToPlayDeathAnimation = true
+                    
+                    if let _ = player.spriteNodeDead {
+                        player.spriteNodeDead.removeFromParent()
+                    }
                 } else {
                     self.lastUse = -1
                 }

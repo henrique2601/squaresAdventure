@@ -480,7 +480,7 @@ class Player: Square {
         }
     }
     
-    func respawn(){
+    func respawn() {
         
         let emitterNode = SKEmitterNode(fileNamed: "PlayerSpawn.sks")!
         self.parent!.addChild(emitterNode)

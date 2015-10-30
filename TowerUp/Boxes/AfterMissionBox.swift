@@ -110,13 +110,56 @@ class AfterMissionBox: Box {
             case 0:
                 break
             case 1:
-                self.addChild(Control(textureName: "starBig", x: 20, y: 20))
+                let star = Control(textureName: "starBig", x: 20, y: 20)
+                let startingPosition = star.position
+                let randonPosition = CGPoint(x: Int.random(min: -2000, max: 2000), y: Int.random(min: -2000, max: 2000))
+                star.position = randonPosition
+                self.addChild(star)
+                let emitterNode = SKEmitterNode(fileNamed: "Win.sks")!
+                star.runAction(SKAction.moveTo(startingPosition, duration: 1), completion: {
+                    emitterNode.particleBirthRate = 1000000
+                    emitterNode.particleSpeedRange = 10000
+                })
+                emitterNode.position = CGPoint(
+                    x: star.calculateAccumulatedFrame().width/2,
+                    y: -star.calculateAccumulatedFrame().height/2)
+                emitterNode.targetNode = star.parent!
+                star.addChild(emitterNode)
+                
                 break
             case 2:
-                self.addChild(Control(textureName: "starBig", x: 168, y: 20))
+                let star = Control(textureName: "starBig", x: 168, y: 20)
+                let startingPosition = star.position
+                let randonPosition = CGPoint(x: Int.random(min: -2000, max: 2000), y: Int.random(min: -2000, max: 2000))
+                star.position = randonPosition
+                self.addChild(star)
+                let emitterNode = SKEmitterNode(fileNamed: "Win.sks")!
+                star.runAction(SKAction.moveTo(startingPosition, duration: 1), completion: {
+                    emitterNode.particleBirthRate = 1000000
+                    emitterNode.particleSpeedRange = 10000
+                })
+                emitterNode.position = CGPoint(
+                    x: star.calculateAccumulatedFrame().width/2,
+                    y: -star.calculateAccumulatedFrame().height/2)
+                emitterNode.targetNode = star.parent!
+                star.addChild(emitterNode)
                 break
             case 3:
-                self.addChild(Control(textureName: "starBig", x: 316, y: 20))
+                let star = Control(textureName: "starBig", x: 316, y: 20)
+                let startingPosition = star.position
+                let randonPosition = CGPoint(x: Int.random(min: -2000, max: 2000), y: Int.random(min: -2000, max: 2000))
+                star.position = randonPosition
+                self.addChild(star)
+                let emitterNode = SKEmitterNode(fileNamed: "Win.sks")!
+                star.runAction(SKAction.moveTo(startingPosition, duration: 1), completion: {
+                    emitterNode.particleBirthRate = 1000000
+                    emitterNode.particleSpeedRange = 10000
+                })
+                emitterNode.position = CGPoint(
+                    x: star.calculateAccumulatedFrame().width/2,
+                    y: -star.calculateAccumulatedFrame().height/2)
+                emitterNode.targetNode = star.parent!
+                star.addChild(emitterNode)
                 break
                 
             default:
