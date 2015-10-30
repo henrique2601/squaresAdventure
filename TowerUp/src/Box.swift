@@ -36,7 +36,7 @@ class Box: Control {
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        Control.touchesBegan(touches )
+        Control.touchesBegan(touches)
     }
     
     override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -44,7 +44,7 @@ class Box: Control {
     }
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        Control.touchesEnded(touches )
+        Control.touchesEnded(touches)
     }
     
     override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {

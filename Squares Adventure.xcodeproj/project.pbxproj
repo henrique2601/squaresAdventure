@@ -196,6 +196,7 @@
 		81BA817B1A49E0E500E65899 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81BA817A1A49E0E500E65899 /* SystemConfiguration.framework */; };
 		81BA817F1A49E0F000E65899 /* libstdc++.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 81BA817E1A49E0F000E65899 /* libstdc++.6.dylib */; };
 		81BA81811A49E10C00E65899 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81BA81801A49E10C00E65899 /* ParseUI.framework */; };
+		844F3D2B1BE26EF1000AAD31 /* Win.sks in Resources */ = {isa = PBXBuildFile; fileRef = 844F3D2A1BE26EF1000AAD31 /* Win.sks */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -396,6 +397,7 @@
 		81BA817E1A49E0F000E65899 /* libstdc++.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.dylib"; path = "usr/lib/libstdc++.6.dylib"; sourceTree = SDKROOT; };
 		81BA81801A49E10C00E65899 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
 		81BA81821A49E27F00E65899 /* TowerUp-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TowerUp-Bridging-Header.h"; sourceTree = "<group>"; };
+		844F3D2A1BE26EF1000AAD31 /* Win.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Win.sks; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -602,6 +604,7 @@
 				13E0C0BF1BDA7F0500D4E249 /* PowerUp0.sks */,
 				1312DB2F1BDFEB1500401497 /* PowerUp1_2.sks */,
 				13FF272A1BDAB01100D49E81 /* PowerUp1.sks */,
+				844F3D2A1BE26EF1000AAD31 /* Win.sks */,
 			);
 			path = VisualEffects;
 			sourceTree = "<group>";
@@ -886,6 +889,7 @@
 				13F390A71BD543B60089BF15 /* 1 1.tmx in Resources */,
 				13F390A31BD543B60089BF15 /* 0 7.tmx in Resources */,
 				13FF272B1BDAB01100D49E81 /* PowerUp1.sks in Resources */,
+				844F3D2B1BE26EF1000AAD31 /* Win.sks in Resources */,
 				13F390AD1BD543B60089BF15 /* 1 15.tmx in Resources */,
 				13F390AF1BD543B60089BF15 /* 1 2.tmx in Resources */,
 				13CCB6FC1B72AD310060334C /* LaunchScreen.xib in Resources */,
