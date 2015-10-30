@@ -10,6 +10,7 @@ import Parse
 import CoreData
 import ParseFacebookUtilsV4
 
+
 // If you want to use any of the UI components, uncomment this line
 // import ParseUI
 
@@ -18,6 +19,8 @@ import ParseFacebookUtilsV4
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    
+    
 
     var window: UIWindow?
     

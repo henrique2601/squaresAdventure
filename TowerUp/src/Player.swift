@@ -316,7 +316,18 @@ class Player: Square {
                     particles.removeFromParent()
                     
                 })
-                boxCrateBomb.removeFromParent()
+                
+                if let scene = self.scene as? MultiplayerMissionScene {
+                    
+                    
+                    if (scene.localName == self.name!){
+                        
+                        scene.socket.emit("removeBoxCrateBomb", scene.room , boxCrateBomb.listPosition)
+                        boxCrateBomb.removeFromParent()
+                        
+                        
+                    }
+                }
             }
             
             
