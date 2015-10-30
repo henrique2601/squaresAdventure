@@ -23,7 +23,8 @@ class Spike: Tile {
         self.physicsBody!.categoryBitMask = physicsCategory.spike.rawValue
         self.physicsBody!.contactTestBitMask = physicsCategory.none.rawValue
         self.physicsBody!.collisionBitMask = physicsCategory.none.rawValue
-        
+        self.color = UIColor.blackColor()
+        self.colorBlendFactor = 0.2
         self.physicsBody!.dynamic = false
         
         self.physicsBody!.restitution = 2

@@ -3,19 +3,19 @@
     {
       "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "Icon-29@2x-1.png",
+      "filename" : "Icon-29@2x.png",
       "scale" : "2x"
     },
     {
       "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "Icon-29@3x-1.png",
+      "filename" : "Icon-29@3x.png",
       "scale" : "3x"
     },
     {
       "size" : "40x40",
       "idiom" : "iphone",
-      "filename" : "Icon-40@2x-1.png",
+      "filename" : "Icon-41.png",
       "scale" : "2x"
     },
     {
@@ -27,13 +27,13 @@
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "Icon-60@2x.png",
+      "filename" : "Icon-61.png",
       "scale" : "2x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "Icon-60@3x.png",
+      "filename" : "Icon-62.png",
       "scale" : "3x"
     },
     {
@@ -45,7 +45,7 @@
     {
       "size" : "29x29",
       "idiom" : "ipad",
-      "filename" : "Icon-29@2x-2.png",
+      "filename" : "Icon-30.png",
       "scale" : "2x"
     },
     {
@@ -73,6 +73,18 @@
       "scale" : "2x"
     },
     {
+      "size" : "60x60",
+      "idiom" : "car",
+      "filename" : "Icon-60@2x.png",
+      "scale" : "2x"
+    },
+    {
+      "size" : "60x60",
+      "idiom" : "car",
+      "filename" : "Icon-60@3x.png",
+      "scale" : "3x"
+    },
+    {
       "size" : "24x24",
       "idiom" : "watch",
       "scale" : "2x",
@@ -89,14 +101,12 @@
     {
       "size" : "29x29",
       "idiom" : "watch",
-      "filename" : "Icon-29@2x.png",
       "role" : "companionSettings",
       "scale" : "2x"
     },
     {
       "size" : "29x29",
       "idiom" : "watch",
-      "filename" : "Icon-29@3x.png",
       "role" : "companionSettings",
       "scale" : "3x"
     },
@@ -127,6 +137,20 @@
       "scale" : "2x",
       "role" : "quickLook",
       "subtype" : "42mm"
+    },
+    {
+      "idiom" : "mac",
+      "size" : "512x512",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "mac",
+      "size" : "512x512",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "Icon-76@3x.png",
+      "unassigned" : true
     }
   ],
   "info" : {

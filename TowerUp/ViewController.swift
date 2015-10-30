@@ -77,5 +77,11 @@ class ViewController: UIViewController {
     override func prefersStatusBarHidden() -> Bool {
         return true
     }
+    
+    static func triggerVideo()
+    {
+        AdColony.playVideoAdForZone("vzcc126525fc244e9da4", withDelegate: nil)
+    }
+
 }
 

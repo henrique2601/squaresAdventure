@@ -14,5 +14,6 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKShareKit/FBSDKShareKit.h>
 #import "GBPing.h"
+#import <AdColony/AdColony.h>
 
 #endif

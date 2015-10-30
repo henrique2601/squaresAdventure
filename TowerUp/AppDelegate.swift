@@ -9,6 +9,7 @@ import Bolts
 import Parse
 import CoreData
 import ParseFacebookUtilsV4
+import AdSupport
 
 
 // If you want to use any of the UI components, uncomment this line
@@ -51,6 +52,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // ****************************************************************************
 
         PFUser.enableAutomaticUser()
+        
+        //Configure AdColony once on app launch
+        AdColony.configureWithAppID("app49bfd82f46044e2086", zoneIDs: ["vzcc126525fc244e9da4"], delegate: nil, logging: true)
 
         let defaultACL = PFACL()
 
