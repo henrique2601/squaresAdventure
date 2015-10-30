@@ -303,19 +303,6 @@ class Player: Square {
                 self.boom.play()
                 self.healthPoints = 0
                 
-                let particles = SKEmitterNode(fileNamed: "Bomb.sks")!
-                
-                particles.position.x = boxCrateBomb.position.x
-                particles.position.y = boxCrateBomb.position.y
-                particles.zPosition = boxCrateBomb.zPosition
-                self.parent!.addChild(particles)
-                
-                let action = SKAction()
-                action.duration = 2
-                particles.runAction(action , completion: { () -> Void in
-                    particles.removeFromParent()
-                    
-                })
                 
                 if let scene = self.scene as? MultiplayerMissionScene {
                     
@@ -323,10 +310,12 @@ class Player: Square {
                     if (scene.localName == self.name!){
                         
                         scene.socket.emit("removeBoxCrateBomb", scene.room , boxCrateBomb.listPosition)
-                        boxCrateBomb.removeFromParent()
+                        
                         
                         
                     }
+                } else {
+                        boxCrateBomb.removeFromParent()
                 }
             }
             

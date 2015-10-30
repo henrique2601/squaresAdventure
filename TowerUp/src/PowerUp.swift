@@ -203,7 +203,7 @@ class PowerUp: Button {
                     player.parent?.addChild(bomb)
                      if let scene = player.scene as? MultiplayerMissionScene {
                         print(scene.room.description + "room")
-                        scene.socket.emit("bomb", scene.room ,Int(player.position.x) , Int(player.position.y) )
+                        scene.socket.emit("crateBomb", scene.room ,Int(player.position.x) , Int(player.position.y) )
                     }
                 } else {
                     self.lastUse = -1
