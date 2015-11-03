@@ -26,7 +26,8 @@ class MainMenuScene: GameScene {
     var buttonPlay:Button!
     var buttonPlayOnline:Button!
     var buttonOptions:Button!
-    var buttonCredits:Button!
+    var buttonBuyCoin:Button!
+    var buttonVideoCoin:Button!
     
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
@@ -36,17 +37,20 @@ class MainMenuScene: GameScene {
         
         Music.sharedInstance.play(musicNamed: "som de fundo do menu.wav")
         
-        self.buttonPlay = Button(textureName: "buttonYellow", text:"SINGLEPLAYER", x: 517, y: 263, xAlign: .center, yAlign: .center)
+        self.buttonPlay = Button(textureName: "singleplayer" , x: 372, y: 266 , xAlign: .center, yAlign: .center)
         self.addChild(self.buttonPlay)
         
-        self.buttonPlayOnline = Button(textureName: "buttonYellow", text:"MULTIPLAYER", x: 517, y: 387, xAlign: .center, yAlign: .center)
+        self.buttonPlayOnline = Button(textureName: "multiplayer", x: 372, y: 486, xAlign: .center, yAlign: .center)
         self.addChild(self.buttonPlayOnline)
         
-        self.buttonOptions = Button(textureName: "buttonBlueSmall", text:"OPTIONS", x: 550, y: 511, xAlign: .center, yAlign: .center)
+        self.buttonOptions = Button(textureName: "options", x: 1218, y: 640, xAlign: .center, yAlign: .center)
         self.addChild(self.buttonOptions)
         
-        self.buttonCredits = Button(textureName: "buttonBlueSmall", text:"CREDITS", x: 550, y: 613, xAlign: .center, yAlign: .center)
-        self.addChild(self.buttonCredits)
+        self.buttonBuyCoin = Button(textureName: "buycoins", x: 1074, y: 26, xAlign: .center, yAlign: .center)
+        self.addChild(self.buttonBuyCoin)
+        
+        self.buttonVideoCoin = Button(textureName: "earncoins", x: 1074, y: 118, xAlign: .center, yAlign: .center)
+        self.addChild(self.buttonVideoCoin)
     }
     
     override func update(currentTime: NSTimeInterval) {
@@ -101,10 +105,6 @@ class MainMenuScene: GameScene {
                     }
                     if (self.buttonOptions.containsPoint(location)) {
                         self.nextState = .options
-                        return
-                    }
-                    if (self.buttonCredits.containsPoint(location)) {
-                        self.nextState = .credits
                         return
                     }
                 }
