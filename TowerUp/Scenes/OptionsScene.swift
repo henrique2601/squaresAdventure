@@ -23,8 +23,6 @@ class OptionsScene: GameScene, FBSDKGameRequestDialogDelegate {
     var state = states.options
     var nextState = states.options
     
-    var blackSpriteNode:SKSpriteNode!
-    
     var chooseControlsScrollNode:ScrollNode!
     
     var labelLoading:Label!
@@ -94,13 +92,12 @@ class OptionsScene: GameScene, FBSDKGameRequestDialogDelegate {
                     teste.removeFromParent()
                 }
                 
-                if let teste = self.blackSpriteNode {
-                    teste.removeFromParent()
-                }
-                
                 if let teste = self.loadingImage {
                     teste.removeFromParent()
                 }
+                
+                self.blackSpriteNode.hidden = true
+                
                 break
                 
             case states.chooseControls:
@@ -117,10 +114,8 @@ class OptionsScene: GameScene, FBSDKGameRequestDialogDelegate {
                 self.addChild(self.chooseControlsScrollNode)
                 
                 let size = self.size.width > self.size.height ? self.size.width : self.size.height
-                self.blackSpriteNode = SKSpriteNode(color: GameColors.black, size: CGSize(width: size * 2, height: size * 2))
-                self.blackSpriteNode.anchorPoint = CGPoint(x: 0, y: 1)
-                self.addChild(self.blackSpriteNode)
                 
+                self.blackSpriteNode.hidden = false
                 self.blackSpriteNode.zPosition = Config.HUDZPosition * 2
                 self.chooseControlsScrollNode.zPosition = self.blackSpriteNode.zPosition + 1
                 
@@ -128,18 +123,13 @@ class OptionsScene: GameScene, FBSDKGameRequestDialogDelegate {
                 
             case states.invite:
                 
-                let size = self.size.width > self.size.height ? self.size.width : self.size.height
-                
                 self.loadingImage = SKSpriteNode(imageNamed: "circleLoading")
                 self.loadingImage.position = CGPoint(x: 1334/4, y: -750/4)
                 self.addChild(self.loadingImage)
                 
                 self.loadingImage.runAction(self.deathEffect)
                 
-                self.blackSpriteNode = SKSpriteNode(color: GameColors.black, size: CGSize(width: size * 2, height: size * 2))
-                self.blackSpriteNode.anchorPoint = CGPoint(x: 0, y: 1)
-                self.addChild(self.blackSpriteNode)
-                
+                self.blackSpriteNode.hidden = false
                 self.blackSpriteNode.zPosition = Config.HUDZPosition * 2
                 self.loadingImage.zPosition = self.blackSpriteNode.zPosition + 1
                 

@@ -14,7 +14,7 @@ class BeforeMissionScene: GameScene {
         case loading
         case beforeMission
         case mission
-        case chooseSkin
+        //case chooseSkin
         case choosePowerUps
         case floors
     }
@@ -66,6 +66,100 @@ class BeforeMissionScene: GameScene {
         
         self.boxCoins = BoxCoins()
         self.addChild(boxCoins)
+        
+        self.showSkins()
+    }
+    
+    func showSkins() {
+        
+        if let teste = self.skinsScrollNode {
+            teste.removeFromParent()
+        }
+        
+        var skinsArray = Array<SKNode>()
+        self.mySkins = NSMutableArray()
+        
+        var i = 0
+        var index = 0
+        
+        //Skins desbloqueadas
+        for skin in self.playerData.skins as! Set<SkinData> {
+            self.mySkins.addObject(skin.index.description)//Gravando indices das minhas skins
+            
+            let cell = SKSpriteNode(imageNamed: "boxSmall")
+            cell.name = String(skin.index.description)
+            
+            let skinType = Skins.types[skin.index.integerValue]
+            
+            let spriteNodeSkin = SKSpriteNode(imageNamed: skinType.imageName)
+            spriteNodeSkin.zPosition = cell.zPosition + 1
+            cell.addChild(spriteNodeSkin)
+            
+            //cell.addChild(Label(name: "lebelName", color:GameColors.black, textureName: "", x: 0, y: -100))
+            
+            //cell.addChild(Label(name: "lebelPrice", color:GameColors.black, textureName: skinType.price.description, x: 0, y: 100))
+            
+            skinsArray.append(cell)
+            if(self.playerData.skinSlot.skin == skin) {
+                index = i
+            }
+            i++
+        }
+        
+        //Skins bloqueadas
+        var skinIndex = 0
+        for skinType in Skins.types {
+            if(!self.mySkins.containsObject(skinIndex.description)) {
+                let cell = SKSpriteNode(imageNamed: "boxSmall")
+                cell.name = skinIndex.description
+                
+                let spriteNodeSkin = SKSpriteNode(imageNamed: skinType.imageName)
+                spriteNodeSkin.color = GameColors.black
+                
+                cell.addChild(spriteNodeSkin)
+                spriteNodeSkin.zPosition = 1
+                
+                let spriteNodeBox = SKSpriteNode(imageNamed: "boxSmallLocked")
+                cell.addChild(spriteNodeBox)
+                spriteNodeBox.zPosition = 2
+                
+                
+                var spriteNodeIcon:SKSpriteNode!
+                if (skinType.buyWithCoins == true) {
+                    spriteNodeIcon = SKSpriteNode(imageNamed: "hudCoin")
+                    spriteNodeSkin.colorBlendFactor = 0.9
+                } else {
+                    spriteNodeIcon = SKSpriteNode(imageNamed: "hudJewel_blue")
+                    spriteNodeSkin.colorBlendFactor = 0.5
+                }
+                
+                spriteNodeIcon.position = CGPoint(x: -32, y: -32)
+                cell.addChild(spriteNodeIcon)
+                spriteNodeIcon.zPosition = 3
+                
+                cell.addChild(Label(color:GameColors.white, text: "?", x: 0, y: 0))
+                
+                cell.addChild(Label(color:GameColors.white, text: skinType.price.description, x: 64, y: 64))
+                
+                skinsArray.append(cell)
+            }
+            skinIndex++
+        }
+        
+        //Skin misteriosa =}
+        let cell = SKSpriteNode(imageNamed: "boxSmall")
+        cell.name = skinIndex.description
+        
+        let spriteNodeBox = SKSpriteNode(imageNamed: "boxSmallLocked")
+        cell.addChild(spriteNodeBox)
+        
+        cell.addChild(Label(color:GameColors.white, text: "?"))
+        
+        skinsArray.append(cell)
+        //
+        
+        self.skinsScrollNode = ScrollNode(x: 667, y: 366, cells: skinsArray, spacing: 0, scrollDirection: ScrollNode.scrollTypes.horizontal, scaleNodes: true, scaleDistance:1334/4 + 100, index:index)
+        self.addChild(skinsScrollNode)
     }
     
     override func update(currentTime: NSTimeInterval) {
@@ -82,90 +176,6 @@ class BeforeMissionScene: GameScene {
             case states.mission:
                 self.view!.presentScene(MissionScene(), transition: Config.defaultTransition)
                 break
-                
-            case states.chooseSkin:
-                self.player.removeFromParent()
-                
-                var skinsArray = Array<SKNode>()
-                self.mySkins = NSMutableArray()
-                
-                //Skins desbloqueadas
-                for skin in self.playerData.skins as! Set<SkinData> {
-                    self.mySkins.addObject(skin.index.description)//Gravando indices das minhas skins
-                    
-                    let cell = SKSpriteNode(imageNamed: "boxSmall")
-                    cell.name = String(skin.index.description)
-                    
-                    let skinType = Skins.types[skin.index.integerValue]
-                    
-                    let spriteNodeSkin = SKSpriteNode(imageNamed: skinType.imageName)
-                    spriteNodeSkin.zPosition = cell.zPosition + 1
-                    cell.addChild(spriteNodeSkin)
-                    
-                    //cell.addChild(Label(name: "lebelName", color:GameColors.black, textureName: "", x: 0, y: -100))
-                    
-                    //cell.addChild(Label(name: "lebelPrice", color:GameColors.black, textureName: skinType.price.description, x: 0, y: 100))
-                    
-                    skinsArray.append(cell)
-                }
-                
-                //Skins bloqueadas
-                var skinIndex = 0
-                for skinType in Skins.types {
-                    if(!self.mySkins.containsObject(skinIndex.description)) {
-                        let cell = SKSpriteNode(imageNamed: "boxSmall")
-                        cell.name = skinIndex.description
-                        
-                        let spriteNodeSkin = SKSpriteNode(imageNamed: skinType.imageName)
-                        spriteNodeSkin.color = GameColors.black
-                        
-                        cell.addChild(spriteNodeSkin)
-                        spriteNodeSkin.zPosition = 1
-                        
-                        let spriteNodeBox = SKSpriteNode(imageNamed: "boxSmallLocked")
-                        cell.addChild(spriteNodeBox)
-                        spriteNodeBox.zPosition = 2
-                        
-                        
-                        var spriteNodeIcon:SKSpriteNode!
-                        if (skinType.buyWithCoins == true) {
-                            spriteNodeIcon = SKSpriteNode(imageNamed: "hudCoin")
-                            spriteNodeSkin.colorBlendFactor = 0.9
-                        } else {
-                            spriteNodeIcon = SKSpriteNode(imageNamed: "hudJewel_blue")
-                            spriteNodeSkin.colorBlendFactor = 0.5
-                        }
-                        
-                        spriteNodeIcon.position = CGPoint(x: -32, y: -32)
-                        cell.addChild(spriteNodeIcon)
-                        spriteNodeIcon.zPosition = 3
-                        
-                        cell.addChild(Label(color:GameColors.white, text: "?", x: 0, y: 0))
-                        
-                        cell.addChild(Label(color:GameColors.white, text: skinType.price.description, x: 64, y: 64))
-                        
-                        skinsArray.append(cell)
-                    }
-                    skinIndex++
-                }
-                
-                //Skin misteriosa =}
-                let cell = SKSpriteNode(imageNamed: "boxSmall")
-                cell.name = skinIndex.description
-                
-                let spriteNodeBox = SKSpriteNode(imageNamed: "boxSmallLocked")
-                cell.addChild(spriteNodeBox)
-                
-                cell.addChild(Label(color:GameColors.white, text: "?"))
-                
-                skinsArray.append(cell)
-                //
-                
-                self.skinsScrollNode = ScrollNode(x: 667, y: 466, cells: skinsArray, spacing: 0, scrollDirection: ScrollNode.scrollTypes.horizontal, scaleNodes: true, scaleDistance:1334/4 + 100)
-                self.addChild(skinsScrollNode)
-                
-                break
-
                 
             case states.choosePowerUps:
                 self.player.removeFromParent()
@@ -200,18 +210,16 @@ class BeforeMissionScene: GameScene {
 //                
 //                powerUpsArray.append(cell)
                 
-                self.powerUpsScrollNode = ScrollNode(x: 667, y: 466, cells: powerUpsArray, scrollDirection: .horizontal, scaleNodes: true, scaleDistance:1334 + 100)
+                self.powerUpsScrollNode = ScrollNode(x: 667, y: 566, cells: powerUpsArray, scrollDirection: .horizontal, scaleNodes: true, scaleDistance:1334 + 100)
                 self.addChild(self.powerUpsScrollNode)
                 
                 break
                 
             case states.beforeMission:
                 self.player = Player(playerData: self.playerData, x: 667, y: 466, loadPhysics: false)
+                self.player.hidden = true
                 self.addChild(self.player)
                 
-                if let teste = self.skinsScrollNode {
-                    teste.removeFromParent()
-                }
                 if let teste = self.powerUpsScrollNode {
                     teste.removeFromParent()
                 }
@@ -223,6 +231,63 @@ class BeforeMissionScene: GameScene {
                 
             default:
                 break
+            }
+        }
+    }
+    
+    func touchesEndedSkins(touch:UITouch, location:CGPoint) {
+        if(touch.tapCount > 0) {
+            if (self.skinsScrollNode.containsPoint(location)) {
+                let locationInScrollNode = touch.locationInNode(self.skinsScrollNode)
+                
+                for skin in self.skinsScrollNode.cells {
+                    if(skin.containsPoint(locationInScrollNode)) {
+                        if(!self.mySkins.containsObject(skin.name!)) {
+                            let cellIndex:Int = Int(skin.name!)!
+                            if(cellIndex >= Skins.types.count) {
+                                return
+                            }
+                            let skinType = Skins.types[cellIndex]
+                            
+                            if (skinType.buyWithCoins == true) {
+                                if(Int(self.playerData.coins) >= skinType.price) {
+                                    let skinData = MemoryCard.sharedInstance.newSkinData()
+                                    skinData.index = NSNumber(integer: Int(skin.name!)!)
+                                    self.playerData.addSkin(skinData)
+                                    self.playerData.skinSlot.skin = skinData
+                                    self.playerData.coins = NSNumber(integer: Int(self.playerData.coins) - skinType.price)
+                                    self.boxCoins.labelCoins.setText(self.playerData.coins.description)
+                                    self.showSkins()
+                                } else {
+                                    //TODO: assistir video para ganhar mais moedas???
+                                    print("Não tenho dinheiro para comprar")
+                                }
+                            } else {
+                                //Tentando comprar com gemas
+                                if(Int(self.playerData.gems) >= skinType.price) {
+                                    let skinData = MemoryCard.sharedInstance.newSkinData()
+                                    skinData.index = NSNumber(integer: Int(skin.name!)!)
+                                    self.playerData.addSkin(skinData)
+                                    self.playerData.skinSlot.skin = skinData
+                                    self.playerData.gems = NSNumber(integer: Int(self.playerData.gems) - skinType.price)
+                                    self.boxCoins.labelGems.setText(self.playerData.gems.description)
+                                    self.showSkins()
+                                } else {
+                                    //TODO: assistir video para ganhar mais gemas???
+                                    print("Não tenho gemas para comprar")
+                                }
+                            }
+                        } else {
+                            for skinData in self.playerData.skins as! Set<SkinData> {
+                                if (skinData.index.description == skin.name!) {
+                                    self.playerData.skinSlot.skin = skinData
+                                    self.showSkins()
+                                    break
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     }
@@ -245,86 +310,12 @@ class BeforeMissionScene: GameScene {
                         return
                     }
                     
-                    if (self.player.containsPoint(location)) {
-                        self.nextState = .chooseSkin
-                        return
-                    }
+                    self.touchesEndedSkins(touch, location: location)
                     
                     if(self.playerData.powerUps.count > 0) {
                         if(self.powerUpSlotsScrollNode.containsPoint(location)) {
                             self.nextState = .choosePowerUps
                             return
-                        }
-                    }
-                }
-                break
-            case states.chooseSkin:
-                for touch in (touches ) {
-                    let location = touch.locationInNode(self)
-                    
-                    if (self.buttonPlay.containsPoint(location)) {
-                        self.nextState = .mission
-                        return
-                    }
-                    if (self.buttonBack.containsPoint(location)) {
-                        self.nextState = .beforeMission
-                        return
-                    }
-                    
-                    if(touch.tapCount > 0) {
-                        if (self.skinsScrollNode.containsPoint(location)) {
-                            let locationInScrollNode = touch.locationInNode(self.skinsScrollNode)
-                            
-                            for skin in self.skinsScrollNode.cells {
-                                if(skin.containsPoint(locationInScrollNode)) {
-                                    if(!self.mySkins.containsObject(skin.name!)) {
-                                        let cellIndex:Int = Int(skin.name!)!
-                                        if(cellIndex >= Skins.types.count) {
-                                            return
-                                        }
-                                        let skinType = Skins.types[cellIndex]
-                                        
-                                        if (skinType.buyWithCoins == true) {
-                                            if(Int(self.playerData.coins) >= skinType.price) {
-                                                let skinData = MemoryCard.sharedInstance.newSkinData()
-                                                skinData.index = NSNumber(integer: Int(skin.name!)!)
-                                                self.playerData.addSkin(skinData)
-                                                self.playerData.skinSlot.skin = skinData
-                                                self.playerData.coins = NSNumber(integer: Int(self.playerData.coins) - skinType.price)
-                                                self.boxCoins.labelCoins.setText(self.playerData.coins.description)
-                                                self.nextState = states.beforeMission
-                                            } else {
-                                                //TODO: assistir video para ganhar mais moedas???
-                                                print("Não tenho dinheiro para comprar")
-                                            }
-                                        } else {
-                                            //Tentando comprar com gemas
-                                            if(Int(self.playerData.gems) >= skinType.price) {
-                                                let skinData = MemoryCard.sharedInstance.newSkinData()
-                                                skinData.index = NSNumber(integer: Int(skin.name!)!)
-                                                self.playerData.addSkin(skinData)
-                                                self.playerData.skinSlot.skin = skinData
-                                                self.playerData.gems = NSNumber(integer: Int(self.playerData.gems) - skinType.price)
-                                                self.boxCoins.labelGems.setText(self.playerData.gems.description)
-                                                self.nextState = states.beforeMission
-                                            } else {
-                                                //TODO: assistir video para ganhar mais gemas???
-                                                print("Não tenho gemas para comprar")
-                                            }
-                                        }
-                                    } else {
-                                        for skinData in self.playerData.skins as! Set<SkinData> {
-                                            if (skinData.index.description == skin.name!) {
-                                                self.playerData.skinSlot.skin = skinData
-                                                self.nextState = states.beforeMission
-                                                return
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        } else {
-                            self.nextState = states.beforeMission
                         }
                     }
                 }

@@ -45,6 +45,7 @@
 		135C5CA41BA8364B006643BB /* PowerUpSlotData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135C5CA31BA8364B006643BB /* PowerUpSlotData.swift */; };
 		135C5CA61BA8364C006643BB /* SkinSlotData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135C5CA51BA8364C006643BB /* SkinSlotData.swift */; };
 		135EA4911BBAE375006C765F /* GameFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135EA4901BBAE375006C765F /* GameFonts.swift */; };
+		137153BF1BE11864004F5F3F /* BlackSpriteNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137153BE1BE11864004F5F3F /* BlackSpriteNode.swift */; };
 		137D3D9D1BB42DDF003202D9 /* Bug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137D3D9C1BB42DDF003202D9 /* Bug.swift */; };
 		137D3D9F1BB43097003202D9 /* Bomb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137D3D9E1BB43097003202D9 /* Bomb.swift */; };
 		137D3DA11BB435DE003202D9 /* BoxCrate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137D3DA01BB435DE003202D9 /* BoxCrate.swift */; };
@@ -195,6 +196,9 @@
 		81BA817B1A49E0E500E65899 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81BA817A1A49E0E500E65899 /* SystemConfiguration.framework */; };
 		81BA817F1A49E0F000E65899 /* libstdc++.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 81BA817E1A49E0F000E65899 /* libstdc++.6.dylib */; };
 		81BA81811A49E10C00E65899 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81BA81801A49E10C00E65899 /* ParseUI.framework */; };
+		84087EFB1BE8E504000301C4 /* Blood.sks in Resources */ = {isa = PBXBuildFile; fileRef = 84087EFA1BE8E504000301C4 /* Blood.sks */; };
+		844F3D2B1BE26EF1000AAD31 /* Win.sks in Resources */ = {isa = PBXBuildFile; fileRef = 844F3D2A1BE26EF1000AAD31 /* Win.sks */; };
+		84DB73F11BE8C42500C92525 /* Smoke.sks in Resources */ = {isa = PBXBuildFile; fileRef = 84DB73F01BE8C42500C92525 /* Smoke.sks */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -236,6 +240,7 @@
 		135C5CA31BA8364B006643BB /* PowerUpSlotData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PowerUpSlotData.swift; path = CoreData/PowerUpSlotData.swift; sourceTree = "<group>"; };
 		135C5CA51BA8364C006643BB /* SkinSlotData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SkinSlotData.swift; path = CoreData/SkinSlotData.swift; sourceTree = "<group>"; };
 		135EA4901BBAE375006C765F /* GameFonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameFonts.swift; path = src/GameFonts.swift; sourceTree = "<group>"; };
+		137153BE1BE11864004F5F3F /* BlackSpriteNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BlackSpriteNode.swift; path = src/BlackSpriteNode.swift; sourceTree = "<group>"; };
 		137D3D9C1BB42DDF003202D9 /* Bug.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Bug.swift; path = src/Bug.swift; sourceTree = "<group>"; };
 		137D3D9E1BB43097003202D9 /* Bomb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Bomb.swift; path = src/Bomb.swift; sourceTree = "<group>"; };
 		137D3DA01BB435DE003202D9 /* BoxCrate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BoxCrate.swift; path = src/BoxCrate.swift; sourceTree = "<group>"; };
@@ -394,6 +399,9 @@
 		81BA817E1A49E0F000E65899 /* libstdc++.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.dylib"; path = "usr/lib/libstdc++.6.dylib"; sourceTree = SDKROOT; };
 		81BA81801A49E10C00E65899 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
 		81BA81821A49E27F00E65899 /* TowerUp-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TowerUp-Bridging-Header.h"; sourceTree = "<group>"; };
+		84087EFA1BE8E504000301C4 /* Blood.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Blood.sks; sourceTree = "<group>"; };
+		844F3D2A1BE26EF1000AAD31 /* Win.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Win.sks; sourceTree = "<group>"; };
+		84DB73F01BE8C42500C92525 /* Smoke.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Smoke.sks; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -526,6 +534,7 @@
 				13EBD7BD1B7A65E5005F1CA4 /* World.swift */,
 				3A453D6B1BDAA04800224EA8 /* Reachability.swift */,
 				3A453D6D1BDABB6700224EA8 /* MultiplayerLobbyCell.swift */,
+				137153BE1BE11864004F5F3F /* BlackSpriteNode.swift */,
 			);
 			name = src;
 			sourceTree = "<group>";
@@ -592,6 +601,7 @@
 		13E0C0B61BDA7ECE00D4E249 /* VisualEffects */ = {
 			isa = PBXGroup;
 			children = (
+				84087EFA1BE8E504000301C4 /* Blood.sks */,
 				13E0C0B71BDA7ECE00D4E249 /* Bomb.sks */,
 				13E0C0B81BDA7ECE00D4E249 /* Coin.sks */,
 				13E0C0B91BDA7ECE00D4E249 /* Gem.sks */,
@@ -599,6 +609,8 @@
 				13E0C0BF1BDA7F0500D4E249 /* PowerUp0.sks */,
 				1312DB2F1BDFEB1500401497 /* PowerUp1_2.sks */,
 				13FF272A1BDAB01100D49E81 /* PowerUp1.sks */,
+				84DB73F01BE8C42500C92525 /* Smoke.sks */,
+				844F3D2A1BE26EF1000AAD31 /* Win.sks */,
 			);
 			path = VisualEffects;
 			sourceTree = "<group>";
@@ -825,7 +837,7 @@
 				TargetAttributes = {
 					81BA81441A49DA1800E65899 = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = GJXSLWWRF6;
+						DevelopmentTeam = ER489438ZX;
 						SystemCapabilities = {
 							com.apple.InAppPurchase = {
 								enabled = 1;
@@ -860,6 +872,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13E0C0C01BDA7F0500D4E249 /* PowerUp0.sks in Resources */,
+				84DB73F11BE8C42500C92525 /* Smoke.sks in Resources */,
 				13F390B01BD543B60089BF15 /* 1 3.tmx in Resources */,
 				13F390A61BD543B60089BF15 /* 1 0.tmx in Resources */,
 				5CFD53B61BD7AC97002B79D7 /* 1 20.tmx in Resources */,
@@ -883,7 +896,9 @@
 				13F390A71BD543B60089BF15 /* 1 1.tmx in Resources */,
 				13F390A31BD543B60089BF15 /* 0 7.tmx in Resources */,
 				13FF272B1BDAB01100D49E81 /* PowerUp1.sks in Resources */,
+				844F3D2B1BE26EF1000AAD31 /* Win.sks in Resources */,
 				13F390AD1BD543B60089BF15 /* 1 15.tmx in Resources */,
+				84087EFB1BE8E504000301C4 /* Blood.sks in Resources */,
 				13F390AF1BD543B60089BF15 /* 1 2.tmx in Resources */,
 				13CCB6FC1B72AD310060334C /* LaunchScreen.xib in Resources */,
 				133B8DF11BD8F0CF00E93718 /* som de termino da fase.wav in Resources */,
@@ -1006,6 +1021,7 @@
 				13D2521A1BCEE31F002E5F59 /* IAPHelper.swift in Sources */,
 				1359DD0C1B7286D3006C12FA /* MainMenuScene.swift in Sources */,
 				13DE13051B94C38E0092D50B /* ScrollNode.swift in Sources */,
+				137153BF1BE11864004F5F3F /* BlackSpriteNode.swift in Sources */,
 				13BC7ED71BAAE883003D6CCD /* SocketEventHandler.swift in Sources */,
 				13428EBE1B7CB0BC0017D23A /* Square.swift in Sources */,
 				139A0E8F1B7431CB00EDE944 /* MemoryCard.swift in Sources */,
@@ -1155,6 +1171,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1168,8 +1185,9 @@
 					"$(PROJECT_DIR)",
 				);
 				"OTHER_SWIFT_FLAGS[arch=*]" = "-D DEBUG";
-				PRODUCT_BUNDLE_IDENTIFIER = com.WTFGames.TowerUp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.WTFGames.SquareAdventures;
 				PRODUCT_NAME = "Squares Adventure";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "TowerUp/TowerUp-Bridging-Header.h";
 				"SWIFT_OPTIMIZATION_LEVEL[arch=*]" = "-Onone";
 			};
@@ -1181,6 +1199,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1194,8 +1213,9 @@
 					"$(PROJECT_DIR)",
 				);
 				"OTHER_SWIFT_FLAGS[arch=*]" = "-D RELEASE";
-				PRODUCT_BUNDLE_IDENTIFIER = com.WTFGames.TowerUp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.PabloHenri91.SquareAdventures;
 				PRODUCT_NAME = "Squares Adventure";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "TowerUp/TowerUp-Bridging-Header.h";
 			};
 			name = Release;

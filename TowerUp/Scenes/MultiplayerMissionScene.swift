@@ -22,9 +22,7 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
 
     
     //Effect
-    var blackSpriteNode:SKSpriteNode!
     var labelWin:Label?
-    
     
     enum messages : String {
         case disconnect = "q"
@@ -33,6 +31,7 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
         case join = "j"
         case joinRoom = "r"
         case update = "u"
+        case bomb = "bomb"
     }
     
     var message = messages.addPlayers
@@ -234,6 +233,31 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
             }
             
         }
+        
+        
+        
+        self.socket.on("removeBoxCrateBomb") {[weak self] data, ack in
+            
+            guard let this = self else {
+                return
+            }
+            
+            print("removeBoxCrateBomb")
+            
+            if let boxCrateBomb = data?[0] as? Int {
+                for crateBomb in BoxExplosive.boxExplosiveList {
+                    if let id = crateBomb.listPosition
+                    {
+                        if id == boxCrateBomb{
+                            
+                            crateBomb.removeFromParent()
+                            
+                        }
+                    }
+                }
+            }
+            
+        }
 
         self.socket.on(messages.disconnect.rawValue) {[weak self] data, ack in
             if let name = data?[0] as? Int {
@@ -249,6 +273,39 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
                     }
                 }
             }
+        }
+        
+        
+        self.socket.on(messages.bomb.rawValue) {[weak self] data, ack in
+            
+            guard let this = self else {
+                return
+            }
+            
+            print(data)
+            
+            if let x = data?[0] as? Int, let y = data?[1] as? Int {
+                
+                let bomb = BoxExplosive(position: CGPoint(x: x, y: y))
+                this.world.addChild(bomb)
+                
+                print("bomb at " + x.description + " " + y.description )
+                
+                bomb.runAction({
+                    let action = SKAction()
+                    action.duration = 1
+                    return action
+                    }(), completion: { () -> Void in
+                        bomb.activate()
+                })
+                
+                
+                
+            }
+            
+            
+            
+            
         }
         
         self.socket.on(messages.update.rawValue) {[weak self] data, ack in
@@ -350,14 +407,14 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
                 break
             case states.win:
                 self.socket.emit("win", self.room)
-                self.blackSpriteNode = SKSpriteNode(color: GameColors.black, size: self.size)
-                self.blackSpriteNode.anchorPoint = CGPoint(x: 0, y: 1)
-                self.addChild(self.blackSpriteNode)
+                
                 self.winPlayersList.append("\(self.playerData.skinSlot.skin.index),\(self.localName),\(Int(self.time))")
                 let box = MultiplayerWinBox(background: "boxWinBackground", winPlayersList: self.winPlayersList)
                 self.addChild(box)
                 
+                self.blackSpriteNode.hidden = false
                 self.blackSpriteNode.zPosition = box.zPosition - 1
+                
                 break
                 
             case states.loose:

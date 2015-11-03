@@ -56,11 +56,8 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
     
     var skinsScrollNode:ScrollNode!
     var powerUpsScrollNode:ScrollNode!
-    var blackSpriteNode:SKSpriteNode!
     
     var mySkins = NSMutableArray()//Skins Desbloqueadas/Compradas
-    
-    
     
     var socket = SocketIOClient(socketURL: "teste", opts: nil)
     var playersNodes = Array<SKNode>()
@@ -375,9 +372,7 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
                     })
                     
                     let size = self.size.width > self.size.height ? self.size.width : self.size.height
-                    self.blackSpriteNode = SKSpriteNode(color: GameColors.black, size: CGSize(width: size * 2, height: size * 2))
-                    self.blackSpriteNode.anchorPoint = CGPoint(x: 0, y: 1)
-                    self.addChild(self.blackSpriteNode)
+                    self.blackSpriteNode.hidden = false
                     self.addChild(box)
                     self.myTextField.myTextField.hidden = true
                     self.powerUpSlotsScrollNode.removeFromParent()
@@ -412,9 +407,8 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
                     teste.removeFromParent()
                 }
                 
-                if let teste = self.blackSpriteNode {
-                    teste.removeFromParent()
-                }
+                self.blackSpriteNode.hidden = true
+                
                 break
                 
             case states.lobby:

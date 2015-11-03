@@ -175,6 +175,10 @@ class PowerUp: Button {
                     
                     player.healthPoints = player.maxHealthPoints
                     player.needToPlayDeathAnimation = true
+                    
+                    if let _ = player.spriteNodeDead {
+                        player.spriteNodeDead.removeFromParent()
+                    }
                 } else {
                     self.lastUse = -1
                 }
@@ -201,6 +205,10 @@ class PowerUp: Button {
                 if(player.healthPoints > 0) {
                     bomb = BoxExplosive(position: player.position)
                     player.parent?.addChild(bomb)
+                     if let scene = player.scene as? MultiplayerMissionScene {
+                        print(scene.room.description + "room")
+                        scene.socket.emit("crateBomb", scene.room ,Int(player.position.x) , Int(player.position.y) )
+                    }
                 } else {
                     self.lastUse = -1
                 }

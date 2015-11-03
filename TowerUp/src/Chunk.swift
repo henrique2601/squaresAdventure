@@ -255,10 +255,10 @@ class Chunk: SKSpriteNode, NSXMLParserDelegate {
     }
     
     func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
-        print(elementName)
-        print(namespaceURI)
-        print(qName)
-        print(attributeDict)
+//        print(elementName)
+//        print(namespaceURI)
+//        print(qName)
+//        print(attributeDict)
         
         switch elementName {
         case "layer":
