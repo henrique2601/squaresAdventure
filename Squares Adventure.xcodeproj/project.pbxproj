@@ -196,7 +196,9 @@
 		81BA817B1A49E0E500E65899 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81BA817A1A49E0E500E65899 /* SystemConfiguration.framework */; };
 		81BA817F1A49E0F000E65899 /* libstdc++.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 81BA817E1A49E0F000E65899 /* libstdc++.6.dylib */; };
 		81BA81811A49E10C00E65899 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81BA81801A49E10C00E65899 /* ParseUI.framework */; };
+		84087EFB1BE8E504000301C4 /* Blood.sks in Resources */ = {isa = PBXBuildFile; fileRef = 84087EFA1BE8E504000301C4 /* Blood.sks */; };
 		844F3D2B1BE26EF1000AAD31 /* Win.sks in Resources */ = {isa = PBXBuildFile; fileRef = 844F3D2A1BE26EF1000AAD31 /* Win.sks */; };
+		84DB73F11BE8C42500C92525 /* Smoke.sks in Resources */ = {isa = PBXBuildFile; fileRef = 84DB73F01BE8C42500C92525 /* Smoke.sks */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -397,7 +399,9 @@
 		81BA817E1A49E0F000E65899 /* libstdc++.6.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.dylib"; path = "usr/lib/libstdc++.6.dylib"; sourceTree = SDKROOT; };
 		81BA81801A49E10C00E65899 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
 		81BA81821A49E27F00E65899 /* TowerUp-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TowerUp-Bridging-Header.h"; sourceTree = "<group>"; };
+		84087EFA1BE8E504000301C4 /* Blood.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Blood.sks; sourceTree = "<group>"; };
 		844F3D2A1BE26EF1000AAD31 /* Win.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Win.sks; sourceTree = "<group>"; };
+		84DB73F01BE8C42500C92525 /* Smoke.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Smoke.sks; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -597,6 +601,7 @@
 		13E0C0B61BDA7ECE00D4E249 /* VisualEffects */ = {
 			isa = PBXGroup;
 			children = (
+				84087EFA1BE8E504000301C4 /* Blood.sks */,
 				13E0C0B71BDA7ECE00D4E249 /* Bomb.sks */,
 				13E0C0B81BDA7ECE00D4E249 /* Coin.sks */,
 				13E0C0B91BDA7ECE00D4E249 /* Gem.sks */,
@@ -604,6 +609,7 @@
 				13E0C0BF1BDA7F0500D4E249 /* PowerUp0.sks */,
 				1312DB2F1BDFEB1500401497 /* PowerUp1_2.sks */,
 				13FF272A1BDAB01100D49E81 /* PowerUp1.sks */,
+				84DB73F01BE8C42500C92525 /* Smoke.sks */,
 				844F3D2A1BE26EF1000AAD31 /* Win.sks */,
 			);
 			path = VisualEffects;
@@ -866,6 +872,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13E0C0C01BDA7F0500D4E249 /* PowerUp0.sks in Resources */,
+				84DB73F11BE8C42500C92525 /* Smoke.sks in Resources */,
 				13F390B01BD543B60089BF15 /* 1 3.tmx in Resources */,
 				13F390A61BD543B60089BF15 /* 1 0.tmx in Resources */,
 				5CFD53B61BD7AC97002B79D7 /* 1 20.tmx in Resources */,
@@ -891,6 +898,7 @@
 				13FF272B1BDAB01100D49E81 /* PowerUp1.sks in Resources */,
 				844F3D2B1BE26EF1000AAD31 /* Win.sks in Resources */,
 				13F390AD1BD543B60089BF15 /* 1 15.tmx in Resources */,
+				84087EFB1BE8E504000301C4 /* Blood.sks in Resources */,
 				13F390AF1BD543B60089BF15 /* 1 2.tmx in Resources */,
 				13CCB6FC1B72AD310060334C /* LaunchScreen.xib in Resources */,
 				133B8DF11BD8F0CF00E93718 /* som de termino da fase.wav in Resources */,
@@ -1205,7 +1213,7 @@
 					"$(PROJECT_DIR)",
 				);
 				"OTHER_SWIFT_FLAGS[arch=*]" = "-D RELEASE";
-				PRODUCT_BUNDLE_IDENTIFIER = com.WTFGames.SquareAdventures;
+				PRODUCT_BUNDLE_IDENTIFIER = com.PabloHenri91.SquareAdventures;
 				PRODUCT_NAME = "Squares Adventure";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "TowerUp/TowerUp-Bridging-Header.h";

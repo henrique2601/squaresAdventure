@@ -128,6 +128,10 @@ class Player: Square {
     func resetCategoryBitMasks() {
         self.physicsBody!.categoryBitMask = physicsCategory.player.rawValue
         self.physicsBody!.contactTestBitMask =
+            physicsCategory.ground.rawValue |
+            physicsCategory.boxCrate.rawValue |
+            physicsCategory.player.rawValue |
+            
             physicsCategory.winTile.rawValue |
             physicsCategory.coin.rawValue |
             physicsCategory.gem.rawValue |
@@ -149,14 +153,66 @@ class Player: Square {
             physicsCategory.slime.rawValue |
             physicsCategory.player.rawValue |
             physicsCategory.boxExplosive.rawValue
-        
     }
     
-    func didBeginContact(physicsBody:SKPhysicsBody) {
+//    func blood(contact: SKPhysicsContact) {
+//        let particles = SKEmitterNode(fileNamed: "Blood.sks")!
+//        //particles.particleSpeed = contact.collisionImpulse * 1
+//        //particles.emissionAngle = atan2(contact.contactNormal.dx, contact.contactNormal.dy) - CGFloat(M_PI/2)
+//        
+//        particles.emissionAngle = atan2(
+//            -self.physicsBody!.velocity.dx,
+//            -self.physicsBody!.velocity.dy)
+//        
+//        particles.position = CGPoint(
+//            x: Int(self.position.x),
+//            y: Int(self.position.y))
+//        particles.zPosition = self.zPosition
+//        self.parent!.addChild(particles)
+//        
+//        let action = SKAction()
+//        action.duration = 2
+//        particles.runAction(action , completion: { () -> Void in
+//            particles.removeFromParent()
+//        })
+//    }
+    
+    func smoke(contact: SKPhysicsContact) {
+        let particles = SKEmitterNode(fileNamed: "Smoke.sks")!
+        particles.particleSpeed = contact.collisionImpulse * 1
+        //particles.emissionAngle = atan2(contact.contactNormal.dx, contact.contactNormal.dy) - CGFloat(M_PI/2)
+        
+        particles.emissionAngle = atan2(
+            self.physicsBody!.velocity.dx,
+            self.physicsBody!.velocity.dy) - CGFloat(M_PI/2)
+        
+        particles.position = CGPoint(
+            x: Int(self.position.x),
+            y: Int(self.position.y))
+        particles.zPosition = self.zPosition
+        self.parent!.addChild(particles)
+        
+        let action = SKAction()
+        action.duration = 2
+        particles.runAction(action , completion: { () -> Void in
+            particles.removeFromParent()
+        })
+    }
+    
+    func didBeginContact(physicsBody:SKPhysicsBody, contact: SKPhysicsContact) {
         
         switch(physicsBody.categoryBitMask) {
             
         case physicsCategory.ground.rawValue:
+            self.smoke(contact)
+            break
+            
+        case physicsCategory.boxCrate.rawValue:
+            self.smoke(contact)
+            break
+            
+        case physicsCategory.player.rawValue:
+            self.smoke(contact)
             break
             
         case physicsCategory.gem.rawValue:
@@ -233,6 +289,7 @@ class Player: Square {
             break
             
         case physicsCategory.saw.rawValue:
+            //self.blood(contact)
             self.spikeSound.play()//TODO: novo som
             if(self.healthPoints > 0) {
                 self.physicsBody!.applyImpulse(CGVector(dx: 0, dy: 10))
@@ -242,6 +299,7 @@ class Player: Square {
             break
             
         case physicsCategory.spike.rawValue:
+            //self.blood(contact)
             self.spikeSound.play()
             if(self.healthPoints > 0) {
                 self.physicsBody!.applyImpulse(CGVector(dx: 0, dy: 25))
@@ -250,6 +308,7 @@ class Player: Square {
             break
             
         case physicsCategory.spring.rawValue:
+            self.smoke(contact)
             if let node = physicsBody.node {
                 let spring = node as! Spring
                 spring.doLogic(self)
@@ -257,6 +316,7 @@ class Player: Square {
             break
             
         case physicsCategory.bomb.rawValue:
+            //self.blood(contact)
             
             if let node = physicsBody.node {
                 let bomb = (node as! Bomb)
@@ -328,7 +388,7 @@ class Player: Square {
         }
     }
     
-    func didEndContact(physicsBody:SKPhysicsBody) {
+    func didEndContact(physicsBody:SKPhysicsBody, contact:SKPhysicsContact) {
         //physicsBody.node pode ter sido removido(nulo) em didBeginContact. Use ? no lugar de !
         switch(physicsBody.categoryBitMask) {
         case physicsCategory.ground.rawValue:

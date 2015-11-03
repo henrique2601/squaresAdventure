@@ -39,7 +39,7 @@ class World: SKNode {
         
         switch(self.bodyA.categoryBitMask) {
         case physicsCategory.player.rawValue:
-            (self.bodyA.node as! Player).didBeginContact(self.bodyB)
+            (self.bodyA.node as! Player).didBeginContact(self.bodyB, contact: contact)
             break
         default:
             print("didBeginContact de \(self.bodyA.node?.name) não está sendo processado")
@@ -60,7 +60,7 @@ class World: SKNode {
         
         switch(self.bodyA.categoryBitMask) {
         case physicsCategory.player.rawValue:
-            (self.bodyA.node as! Player).didEndContact(self.bodyB)
+            (self.bodyA.node as! Player).didEndContact(self.bodyB, contact: contact)
             break
         default:
             print("didEndContact de \(self.bodyA.node?.name) não está sendo processado")
