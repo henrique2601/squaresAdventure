@@ -1,3 +1,4 @@
+
 //
 //  MultiPlayerLobbyScene.swift
 //  Squares Adventure
@@ -59,7 +60,7 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
     
     var mySkins = NSMutableArray()//Skins Desbloqueadas/Compradas
     
-    var socket = SocketIOClient(socketURL: "teste", opts: nil)
+    var socket : SocketIOClient!
     var playersNodes = Array<SKNode>()
     var playerScrollNode : ScrollNode!
     
@@ -219,6 +220,8 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
         
         self.socket.on(messages.begin.rawValue) {[weak self] data, ack in
             
+            print("begin Recieved")
+            
             guard let this = self else {
                 return
             }
@@ -237,6 +240,7 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
             
             if let name = data?[0] as? NSDictionary {
                 
+                print(data![0])
                 let xPos = 128
                 let skin = name.objectForKey("skin") as? Int
                 let player = PlayerOnline(skinId: skin!, x: xPos, y: 128, loadPhysics: true)
@@ -385,8 +389,8 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
                 break
                 
             case states.connecting:
-                self.socket.socketURL = self.server
-                socket.connect()
+                self.socket = SocketIOClient(socketURL: self.server, opts: nil)
+                self.socket.connect()
                 self.labelState.setText("Waiting Other Players")
                 self.addHandlers()
                 self.nextState = .multiPlayerLobby
