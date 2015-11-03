@@ -243,7 +243,7 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
             }
             
             print("removeBoxCrateBomb")
-            
+           
             if let boxCrateBomb = data?[0] as? Int {
                 for crateBomb in BoxExplosive.boxExplosiveList {
                     if let id = crateBomb.listPosition
@@ -492,6 +492,8 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
                 let location = touch.locationInNode(self)
                 
                 if (self.buttonBack.containsPoint(location)) {
+                    self.socket.disconnect(fast: true)
+                    PlayerOnline.playerOnlineList = Set<PlayerOnline>()
                     self.nextState = .loose
                     return
                 }

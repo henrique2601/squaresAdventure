@@ -367,8 +367,14 @@ class Player: Square {
                 if let scene = self.scene as? MultiplayerMissionScene {
                     
                     
+                    print("toquei na caixa")
+                    print(scene.localName)
+                    print(self.name)
+                    
                     if (scene.localName == self.name!){
+                        print("mandei pro servidor")
                         
+                        boxCrateBomb.removeFromParent()
                         scene.socket.emit("removeBoxCrateBomb", scene.room , boxCrateBomb.listPosition)
                         
                         
