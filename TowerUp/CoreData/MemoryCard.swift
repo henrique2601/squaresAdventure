@@ -102,6 +102,16 @@ class MemoryCard: NSObject {
             if(fetchRequestData.count > 0){
                 print("Loading game...")
                 self.playerData = (fetchRequestData.lastObject as! PlayerData)
+                
+                if(self.playerData.powerUps.count < PowerUps.types.count) {
+                    for (var i = self.playerData.powerUps.count; i < PowerUps.types.count; i++) {//Teste com todos os PowerUps desbloqueados no inicio do jogo
+                        let powerUp = self.newPowerUpData()
+                        powerUp.index = NSNumber(integer: i)
+                        powerUp.available = NSNumber(integer: 10)
+                        self.playerData.addPowerUp(powerUp)
+                    }
+                }
+                
                 self.autoSave = true
             } else {
                 self.newGame()
