@@ -36,7 +36,7 @@ extension PlayerData{
     }
     
     func addSkin(value: SkinData) {
-        let items = self.mutableSetValueForKey("skins");
+        let items = self.mutableOrderedSetValueForKey("skins");
         items.addObject(value)
     }
     
