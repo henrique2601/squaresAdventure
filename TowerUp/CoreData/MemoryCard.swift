@@ -172,6 +172,8 @@ class MemoryCard: NSObject {
             
             try! ALIterativeMigrator.iterativeMigrateURL(url, ofType: NSSQLiteStoreType, toModel: self.managedObjectModel, orderedModelNames: modelNames)
             
+            coordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
+            
             try! coordinator!.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: nil)
             
             return coordinator
