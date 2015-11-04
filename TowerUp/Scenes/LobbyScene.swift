@@ -150,7 +150,8 @@ class LobbyScene: GameScene, UITextFieldDelegate {
                 self.mySkins = NSMutableArray()
                 
                 //Skins desbloqueadas
-                for skin in self.playerData.skins as! Set<SkinData> {
+                for item in self.playerData.skins as NSOrderedSet {
+                    let skin = item as! SkinData
                     self.mySkins.addObject(skin.index.description)//Gravando indices das minhas skins
                     
                     let cell = SKSpriteNode(imageNamed: "boxSmall")

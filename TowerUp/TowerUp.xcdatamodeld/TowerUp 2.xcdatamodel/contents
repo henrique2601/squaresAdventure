@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9057" systemVersion="14F1021" minimumToolsVersion="Xcode 4.3">
+    <entity name="FloorData" representedClassName="FloorData" syncable="YES">
+        <attribute name="bonus" optional="YES" attributeType="Boolean" defaultValueString="0" syncable="YES"/>
+        <attribute name="deaths" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="gemAvailable" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="stars" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="time" optional="YES" attributeType="Boolean" defaultValueString="0" syncable="YES"/>
+        <relationship name="tower" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TowerData" inverseName="floors" inverseEntity="TowerData" syncable="YES"/>
+    </entity>
+    <entity name="InvitedFriendData" representedClassName="InvitedFriendData" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="playerData" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PlayerData" inverseName="invitedFriends" inverseEntity="PlayerData" syncable="YES"/>
+    </entity>
+    <entity name="PlayerData" representedClassName="PlayerData" syncable="YES">
+        <attribute name="coins" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="configControls" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="gems" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="lastPlayedTower" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="musicEnabled" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="soundEnabled" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <relationship name="invitedFriends" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="InvitedFriendData" inverseName="playerData" inverseEntity="InvitedFriendData" syncable="YES"/>
+        <relationship name="powerUps" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PowerUpData" inverseName="playerData" inverseEntity="PowerUpData" syncable="YES"/>
+        <relationship name="powerUpSlots" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="PowerUpSlotData" inverseName="playerData" inverseEntity="PowerUpSlotData" syncable="YES"/>
+        <relationship name="skins" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="SkinData" inverseName="playerData" inverseEntity="SkinData" syncable="YES"/>
+        <relationship name="skinSlot" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SkinSlotData" inverseName="playerData" inverseEntity="SkinSlotData" syncable="YES"/>
+        <relationship name="towers" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="TowerData" inverseName="playerData" inverseEntity="TowerData" syncable="YES"/>
+    </entity>
+    <entity name="PowerUpData" representedClassName="PowerUpData" syncable="YES">
+        <attribute name="available" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="index" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="locked" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <relationship name="playerData" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PlayerData" inverseName="powerUps" inverseEntity="PlayerData" syncable="YES"/>
+        <relationship name="slot" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PowerUpSlotData" inverseName="powerUp" inverseEntity="PowerUpSlotData" syncable="YES"/>
+    </entity>
+    <entity name="PowerUpSlotData" representedClassName="PowerUpSlotData" syncable="YES">
+        <relationship name="playerData" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PlayerData" inverseName="powerUpSlots" inverseEntity="PlayerData" syncable="YES"/>
+        <relationship name="powerUp" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PowerUpData" inverseName="slot" inverseEntity="PowerUpData" syncable="YES"/>
+    </entity>
+    <entity name="SkinData" representedClassName="SkinData" syncable="YES">
+        <attribute name="available" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="index" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="locked" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <relationship name="playerData" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PlayerData" inverseName="skins" inverseEntity="PlayerData" syncable="YES"/>
+        <relationship name="slot" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SkinSlotData" inverseName="skin" inverseEntity="SkinSlotData" syncable="YES"/>
+    </entity>
+    <entity name="SkinSlotData" representedClassName="SkinSlotData" syncable="YES">
+        <relationship name="playerData" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PlayerData" inverseName="skinSlot" inverseEntity="PlayerData" syncable="YES"/>
+        <relationship name="skin" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SkinData" inverseName="slot" inverseEntity="SkinData" syncable="YES"/>
+    </entity>
+    <entity name="TowerData" representedClassName="TowerData" syncable="YES">
+        <attribute name="lastPlayedFloor" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="floors" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="FloorData" inverseName="tower" inverseEntity="FloorData" syncable="YES"/>
+        <relationship name="playerData" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PlayerData" inverseName="towers" inverseEntity="PlayerData" syncable="YES"/>
+    </entity>
+    <fetchRequest name="FetchRequest" entity="PlayerData"/>
+    <elements>
+        <element name="FloorData" positionX="-29" positionY="-147" width="128" height="135"/>
+        <element name="InvitedFriendData" positionX="126" positionY="-477" width="128" height="73"/>
+        <element name="PlayerData" positionX="394" positionY="-486" width="128" height="240"/>
+        <element name="PowerUpData" positionX="711" positionY="-390" width="128" height="118"/>
+        <element name="PowerUpSlotData" positionX="126" positionY="-378" width="128" height="73"/>
+        <element name="SkinData" positionX="412" positionY="-126" width="128" height="118"/>
+        <element name="SkinSlotData" positionX="682" positionY="-204" width="128" height="73"/>
+        <element name="TowerData" positionX="198" positionY="-270" width="128" height="90"/>
+    </elements>
+</model>

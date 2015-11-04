@@ -200,6 +200,7 @@
 		84087EFB1BE8E504000301C4 /* Blood.sks in Resources */ = {isa = PBXBuildFile; fileRef = 84087EFA1BE8E504000301C4 /* Blood.sks */; };
 		844F3D2B1BE26EF1000AAD31 /* Win.sks in Resources */ = {isa = PBXBuildFile; fileRef = 844F3D2A1BE26EF1000AAD31 /* Win.sks */; };
 		84DB73F11BE8C42500C92525 /* Smoke.sks in Resources */ = {isa = PBXBuildFile; fileRef = 84DB73F01BE8C42500C92525 /* Smoke.sks */; };
+		84E0882F1BEA37FD00D3C82C /* ALIterativeMigrator.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E0882E1BEA37FD00D3C82C /* ALIterativeMigrator.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -404,6 +405,9 @@
 		84087EFA1BE8E504000301C4 /* Blood.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Blood.sks; sourceTree = "<group>"; };
 		844F3D2A1BE26EF1000AAD31 /* Win.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Win.sks; sourceTree = "<group>"; };
 		84DB73F01BE8C42500C92525 /* Smoke.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Smoke.sks; sourceTree = "<group>"; };
+		84E088271BEA0ACE00D3C82C /* TowerUp 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TowerUp 2.xcdatamodel"; sourceTree = "<group>"; };
+		84E0882D1BEA37FD00D3C82C /* ALIterativeMigrator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALIterativeMigrator.h; sourceTree = "<group>"; };
+		84E0882E1BEA37FD00D3C82C /* ALIterativeMigrator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALIterativeMigrator.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -564,8 +568,10 @@
 		139A0E8D1B74319000EDE944 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				3AF2530C1BBD6E8D0089BF7A /* InvitedFriendData.swift */,
+				84E0882D1BEA37FD00D3C82C /* ALIterativeMigrator.h */,
+				84E0882E1BEA37FD00D3C82C /* ALIterativeMigrator.m */,
 				5CF8A3A71B8F39A000C16CA9 /* FloorData.swift */,
+				3AF2530C1BBD6E8D0089BF7A /* InvitedFriendData.swift */,
 				139A0E8E1B7431CB00EDE944 /* MemoryCard.swift */,
 				135C5CA11BA8310A006643BB /* PlayerData.swift */,
 				5CF8A3A51B8F39A000C16CA9 /* PowerUpData.swift */,
@@ -840,7 +846,7 @@
 				TargetAttributes = {
 					81BA81441A49DA1800E65899 = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = ER489438ZX;
+						DevelopmentTeam = JZ3J7RVLD7;
 						SystemCapabilities = {
 							com.apple.InAppPurchase = {
 								enabled = 1;
@@ -1031,6 +1037,7 @@
 				139A0E8F1B7431CB00EDE944 /* MemoryCard.swift in Sources */,
 				1323FF5D1B90817F00EF4C2E /* MultiplayerWinBox.swift in Sources */,
 				1383FD641B7A50990012DA45 /* Ground.swift in Sources */,
+				84E0882F1BEA37FD00D3C82C /* ALIterativeMigrator.m in Sources */,
 				13BC7EDF1BAAE883003D6CCD /* SocketTypes.swift in Sources */,
 				3AB2D4A71BD7B36C004375B3 /* WinCell.swift in Sources */,
 				13CCB7021B72B9D90060334C /* CreditsScene.swift in Sources */,
@@ -1189,7 +1196,7 @@
 					"$(PROJECT_DIR)",
 				);
 				"OTHER_SWIFT_FLAGS[arch=*]" = "-D DEBUG";
-				PRODUCT_BUNDLE_IDENTIFIER = com.WTFGames.SquareAdventures;
+				PRODUCT_BUNDLE_IDENTIFIER = com.PabloHenri91.SquareAdventures;
 				PRODUCT_NAME = "Squares Adventure";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "TowerUp/TowerUp-Bridging-Header.h";
@@ -1251,9 +1258,10 @@
 		1359DC981B727726006C12FA /* TowerUp.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				84E088271BEA0ACE00D3C82C /* TowerUp 2.xcdatamodel */,
 				1359DC991B727726006C12FA /* TowerUp.xcdatamodel */,
 			);
-			currentVersion = 1359DC991B727726006C12FA /* TowerUp.xcdatamodel */;
+			currentVersion = 84E088271BEA0ACE00D3C82C /* TowerUp 2.xcdatamodel */;
 			path = TowerUp.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

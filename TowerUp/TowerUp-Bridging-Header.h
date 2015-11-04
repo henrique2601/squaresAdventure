@@ -16,4 +16,6 @@
 #import "GBPing.h"
 #import <AdColony/AdColony.h>
 
+#import "ALIterativeMigrator.h"
+
 #endif
