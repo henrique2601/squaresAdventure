@@ -165,8 +165,8 @@ class MemoryCard: NSObject {
             // Replace this with code to handle the error appropriately.
             // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
             NSLog("Unresolved error \(error), \(error!.userInfo)")
-            print("Deleta o App e teste de novo. =}")
-            //abort()
+            
+            abort()
         } catch {
             fatalError()
         }
@@ -178,7 +178,23 @@ class MemoryCard: NSObject {
         // Returns the managed object context for the application (which is already bound to the persistent store coordinator for the application.) This property is optional since there are legitimate error conditions that could cause the creation of the context to fail.
         let coordinator = self.persistentStoreCoordinator
         if coordinator == nil {
+            
+            
+            
+            let directoryURL:NSURL = NSFileManager.defaultManager().URLsForDirectory(NSSearchPathDirectory.DocumentDirectory, inDomains: NSSearchPathDomainMask.UserDomainMask).last!
+            let storeURL:NSURL = directoryURL.URLByAppendingPathComponent("TowerUp.sqlite")
+            
+            var persistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
+            
+            let modelNames = Array<String>(arrayLiteral:
+                "TowerUp ",
+                "TowerUp 2"
+            )
+            
+            try! ALIterativeMigrator.iterativeMigrateURL(storeURL, ofType: NSSQLiteStoreType, toModel: self.managedObjectModel, orderedModelNames: modelNames)
+            
             return nil
+            
         }
         var managedObjectContext = NSManagedObjectContext()
         managedObjectContext.persistentStoreCoordinator = coordinator

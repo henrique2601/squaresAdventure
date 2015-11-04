@@ -123,7 +123,10 @@ class BeforeMissionScene: GameScene {
         var index = 0
         
         //Skins desbloqueadas
-        for skin in self.playerData.skins as! Set<SkinData> {
+        for item in self.playerData.skins as NSOrderedSet {
+            
+            let skin = item as! SkinData
+            
             self.mySkins.addObject(skin.index.description)//Gravando indices das minhas skins
             
             let cell = SKSpriteNode(imageNamed: "boxSmall")
@@ -324,7 +327,8 @@ class BeforeMissionScene: GameScene {
                                 }
                             }
                         } else {
-                            for skinData in self.playerData.skins as! Set<SkinData> {
+                            for item in self.playerData.skins as! NSOrderedSet {
+                                let skinData = item as! SkinData
                                 if (skinData.index.description == skin.name!) {
                                     self.playerData.skinSlot.skin = skinData
                                     self.showSkins()

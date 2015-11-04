@@ -22,7 +22,7 @@ class PlayerData: NSManagedObject {
     @NSManaged var powerUpSlots: NSOrderedSet
     @NSManaged var skinSlot: SkinSlotData
     @NSManaged var powerUps: NSSet
-    @NSManaged var skins: NSSet
+    @NSManaged var skins: NSOrderedSet
     @NSManaged var towers: NSOrderedSet
     @NSManaged var invitedFriends: NSSet
     @NSManaged var soundEnabled: NSNumber
