@@ -258,6 +258,31 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
             }
             
         }
+        
+        
+        
+        self.socket.on("removeBomb") {[weak self] data, ack in
+            
+            guard let this = self else {
+                return
+            }
+            
+            
+            if let bomb = data?[0] as? Int {
+                
+                for bombItem in Bomb.bombList {
+                    if let id = bombItem.listPosition
+                    {
+                        if id == bomb{
+                            
+                            bombItem.removeFromParent()
+                            
+                        }
+                    }
+                }
+            }
+            
+        }
 
         self.socket.on(messages.disconnect.rawValue) {[weak self] data, ack in
             if let name = data?[0] as? Int {

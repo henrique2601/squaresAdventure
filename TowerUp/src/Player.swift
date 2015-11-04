@@ -324,20 +324,25 @@ class Player: Square {
                 self.boom.play()
                 self.healthPoints = 0
                 
-                let particles = SKEmitterNode(fileNamed: "Bomb.sks")!
-                
-                particles.position.x = bomb.position.x
-                particles.position.y = bomb.position.y
-                particles.zPosition = bomb.zPosition
-                self.parent!.addChild(particles)
-                
-                let action = SKAction()
-                action.duration = 2
-                particles.runAction(action , completion: { () -> Void in
-                    particles.removeFromParent()
+                if let scene = self.scene as? MultiplayerMissionScene {
                     
-                })
-                bomb.removeFromParent()
+                    
+                    //print("toquei na caixa")
+                    //print(scene.localName)
+                    //print(self.name)
+                    
+                    if (scene.localName == self.name!){
+                        //print("mandei pro servidor")
+                        
+                        
+                        scene.socket.emit("removeBomb", scene.room , bomb.listPosition)
+                        bomb.removeFromParent()
+                        
+                        
+                    }
+                } else {
+                    bomb.removeFromParent()
+                }
             }
             break
             
@@ -367,16 +372,16 @@ class Player: Square {
                 if let scene = self.scene as? MultiplayerMissionScene {
                     
                     
-                    print("toquei na caixa")
-                    print(scene.localName)
-                    print(self.name)
+                    //print("toquei na caixa")
+                    //print(scene.localName)
+                    //print(self.name)
                     
                     if (scene.localName == self.name!){
-                        print("mandei pro servidor")
+                        //print("mandei pro servidor")
                         
-                        boxCrateBomb.removeFromParent()
+                        
                         scene.socket.emit("removeBoxCrateBomb", scene.room , boxCrateBomb.listPosition)
-                        
+                        boxCrateBomb.removeFromParent()
                         
                         
                     }
@@ -384,7 +389,6 @@ class Player: Square {
                         boxCrateBomb.removeFromParent()
                 }
             }
-            
             
             break
             

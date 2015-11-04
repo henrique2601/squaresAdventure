@@ -10,6 +10,10 @@ import UIKit
 import SpriteKit
 
 class Bomb: Tile {
+    
+    static var bombList = Array<Bomb>()
+    var listPosition: Int!
+    
     init(x:Int, y:Int) {
         super.init(imageName: "bomb", x: x, y: y)
         
@@ -23,9 +27,47 @@ class Bomb: Tile {
         self.physicsBody!.restitution = 4
         
         self.physicsBody!.dynamic = false
+        
+        if (Bomb.bombList.count > 0) {
+            self.listPosition = (Bomb.bombList.last?.listPosition)! + 1
+        }
+            
+        else {
+            self.listPosition = 0
+        }
+        
+        
+        Bomb.bombList.append(self)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    
+    override func removeFromParent() {
+        
+        let particles = SKEmitterNode(fileNamed: "Bomb.sks")!
+        
+        particles.position.x = self.position.x
+        particles.position.y = self.position.y
+        particles.zPosition = self.zPosition
+        self.parent!.addChild(particles)
+        
+        let action = SKAction()
+        action.duration = 2
+        particles.runAction(action , completion: { () -> Void in
+            particles.removeFromParent()
+            
+        })
+        
+        for (var i=0 ; i < Bomb.bombList.count ; i++) {
+            if (Bomb.bombList[i].listPosition == self.listPosition){
+                Bomb.bombList.removeAtIndex(i)
+            }
+        }
+        super.removeFromParent()
+        
+    }
+    
 }
