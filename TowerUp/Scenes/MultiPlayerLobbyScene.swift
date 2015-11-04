@@ -446,6 +446,8 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
                   
                     
                     if (self.buttonBack.containsPoint(location)) {
+                        self.socket.disconnect(fast: true)
+                        PlayerOnline.playerOnlineList = Set<PlayerOnline>()
                         self.nextState = states.lobby
                         return
                     }
