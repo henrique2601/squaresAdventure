@@ -90,6 +90,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             application.registerForRemoteNotificationTypes(types)
         }
         */
+        
+        //Delay the fade of the HYDRA LOGO
+        
+        sleep(1 as UInt32)
 
         return true
     }
