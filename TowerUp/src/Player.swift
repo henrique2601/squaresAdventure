@@ -332,7 +332,7 @@ class Player: Square {
                     //print(self.name)
                     
                     if (scene.localName == self.name!){
-                        //print("mandei pro servidor")
+                        print("mandei pro servidor " + bomb.listPosition.description )
                         
                         
                         scene.socket.emit("removeBomb", scene.room , bomb.listPosition)

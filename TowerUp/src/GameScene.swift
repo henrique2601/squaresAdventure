@@ -15,7 +15,7 @@ class GameScene: SKScene {
     
     override init() {
         Control.touchesArray = Set<UITouch>()
-        
+        Bomb.bombList = Array<Bomb>()
         Control.controlList = Set<Control>()
         Button.buttonList = Set<Button>()
         ScrollNode.scrollNodeList = Set<ScrollNode>()
