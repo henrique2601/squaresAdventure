@@ -57,6 +57,8 @@ class MultiplayerWinBox: Box {
             
             if (self.buttonExit.containsPoint(location)) {
                 if let scene = self.scene as? MultiplayerMissionScene {
+                    scene.socket.disconnect(fast: true)
+                    PlayerOnline.playerOnlineList = Set<PlayerOnline>()
                     scene.view!.presentScene(LobbyScene(), transition: Config.defaultTransition)
                 }
                 

@@ -216,6 +216,10 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
                     {
                         if id == name{
                             
+                            player.hidden = true
+                            player.physicsBody?.categoryBitMask = physicsCategory.none.rawValue
+                            player.labelName.setText("")
+                            
                             this.labelWin = Label(text: "\(player.name!) finish with \(Int(this.time)) seconds", x: 675, y: 375, xAlign: Control.xAlignments.center, yAlign: Control.yAlignments.center)
                             this.addChild(this.labelWin!)
                             this.labelWin?.runAction(SKAction.fadeOutWithDuration(2), completion: { () -> Void in
@@ -446,6 +450,8 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
                 break
                 
             case states.loose:
+                self.socket.disconnect(fast: true)
+                PlayerOnline.playerOnlineList = Set<PlayerOnline>()
                 self.view!.presentScene(LobbyScene(), transition: Config.defaultTransition)
                 break
                 
@@ -520,8 +526,6 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
                 let location = touch.locationInNode(self)
                 
                 if (self.buttonBack.containsPoint(location)) {
-                    self.socket.disconnect(fast: true)
-                    PlayerOnline.playerOnlineList = Set<PlayerOnline>()
                     self.nextState = .loose
                     return
                 }
