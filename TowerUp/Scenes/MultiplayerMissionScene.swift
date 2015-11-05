@@ -268,18 +268,21 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
             }
             
             
+            print("removeBomb test")
+            
             if let bomb = data?[0] as? Int {
+            
+                print("removeBomb" + bomb.description)
                 
-                for bombItem in Bomb.bombList {
-                    if let id = bombItem.listPosition
-                    {
-                        if id == bomb{
-                            
-                            bombItem.removeFromParent()
-                            
-                        }
+                
+                for item in Bomb.bombList{
+                    print("Bomba " + item.listPosition.description)
+                    if (item.listPosition == bomb){
+                        print("achei a bomba " + item.listPosition.description)
+                        item.removeFromParent()
                     }
                 }
+                
             }
             
         }
