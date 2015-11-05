@@ -17,6 +17,7 @@ class MainMenuScene: GameScene {
         case multiplayer
         case options
         case credits
+        case inApp
     }
     
     var state = states.mainMenu
@@ -46,11 +47,11 @@ class MainMenuScene: GameScene {
         self.buttonOptions = Button(textureName: "options", x: 1218, y: 640, xAlign: .center, yAlign: .center)
         self.addChild(self.buttonOptions)
         
-        self.buttonBuyCoin = Button(textureName: "buycoins", x: 1074, y: 26, xAlign: .center, yAlign: .center)
-        self.addChild(self.buttonBuyCoin)
+        //self.buttonBuyCoin = Button(textureName: "buycoins", x: 1074, y: 26, xAlign: .center, yAlign: .center)
+        //self.addChild(self.buttonBuyCoin)
         
-        self.buttonVideoCoin = Button(textureName: "earncoins", x: 1074, y: 118, xAlign: .center, yAlign: .center)
-        self.addChild(self.buttonVideoCoin)
+        //self.buttonVideoCoin = Button(textureName: "earncoins", x: 1074, y: 118, xAlign: .center, yAlign: .center)
+        //self.addChild(self.buttonVideoCoin)
     }
     
     override func update(currentTime: NSTimeInterval) {
@@ -80,6 +81,10 @@ class MainMenuScene: GameScene {
                 self.view!.presentScene(CreditsScene(), transition: Config.defaultTransition)
                 break
                 
+            case states.inApp:
+                self.view!.presentScene(InAppScene(), transition: Config.defaultTransition)
+                break
+
             default:
                 break
             }
@@ -107,6 +112,11 @@ class MainMenuScene: GameScene {
                         self.nextState = .options
                         return
                     }
+                   // if (self.buttonBuyCoin.containsPoint(location)) {
+                      //  self.nextState = .inApp
+                    // return
+                    //}
+
                 }
                 break
                 

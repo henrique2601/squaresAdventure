@@ -14,12 +14,12 @@ class IAPHelper: NSObject, SKProductsRequestDelegate, SKPaymentTransactionObserv
     static var sharedInstance = IAPHelper()
     
     let productIdentifiers = Set<String>(arrayLiteral:
-        "com.PabloHenri91.TowerUp.Diamonds2",
-        "Diamonds!",
-        "com.PabloHenri91.TowerUp.Diamonds",
-        "1049877538",
-        "1049785515",
-        "Bostaaa!!!"
+        "diamondPackage1",
+        "diamondPackage2",
+        "diamondPackage3",
+        "coinsPackage1",
+        "coinsPackage2",
+        "coinsPackage3"
     )
     
     override init() {
