@@ -15,10 +15,13 @@ class Spring: Tile {
     
     lazy var animation:SKAction = {
         let textures = [
-            SKTexture(imageNamed: "spring1"),
-            SKTexture(imageNamed: "spring0")
+            SKTexture(imageNamed: "spring1")
         ]
         return SKAction.animateWithTextures(textures, timePerFrame: 0.5)
+    }()
+    
+    lazy var endAnimation:SKAction = {
+        SKAction.setTexture(SKTexture(imageNamed: "spring0"))
     }()
     
     init(x:Int, y:Int) {
@@ -44,7 +47,7 @@ class Spring: Tile {
     func doLogic(player:Player) {
         if (self.doingLogic == false) {
             
-            if(player.position.y > self.position.y){
+            if(player.position.y > self.position.y) {
                 self.doingLogic = true
                 
                 player.physicsBody!.applyImpulse(CGVector(dx: 0, dy: 25))
@@ -53,6 +56,7 @@ class Spring: Tile {
                 
                 self.runAction(self.animation, completion: { () -> Void in
                     self.doingLogic = false
+                    self.runAction(self.endAnimation)
                 })
                 
             }
