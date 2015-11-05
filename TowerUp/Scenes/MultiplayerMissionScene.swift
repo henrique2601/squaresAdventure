@@ -254,7 +254,23 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
                     {
                         if id == boxCrateBomb{
                             
+                            let particles = SKEmitterNode(fileNamed: "Bomb.sks")!
+                            
+                            particles.position.x = crateBomb.position.x
+                            particles.position.y = crateBomb.position.y
+                            particles.zPosition = crateBomb.zPosition
+                            crateBomb.parent!.addChild(particles)
+                            
+                            let action = SKAction()
+                            action.duration = 2
+                            particles.runAction(action , completion: { () -> Void in
+                                particles.removeFromParent()
+                                
+                            })
+                            
                             crateBomb.removeFromParent()
+                            
+                            break;
                             
                         }
                     }
