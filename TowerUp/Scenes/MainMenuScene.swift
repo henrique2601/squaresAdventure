@@ -47,11 +47,11 @@ class MainMenuScene: GameScene {
         self.buttonOptions = Button(textureName: "options", x: 1218, y: 640, xAlign: .center, yAlign: .center)
         self.addChild(self.buttonOptions)
         
-        self.buttonBuyCoin = Button(textureName: "buycoins", x: 1074, y: 26, xAlign: .center, yAlign: .center)
-        self.addChild(self.buttonBuyCoin)
+        //self.buttonBuyCoin = Button(textureName: "buycoins", x: 1074, y: 26, xAlign: .center, yAlign: .center)
+        //self.addChild(self.buttonBuyCoin)
         
-        self.buttonVideoCoin = Button(textureName: "earncoins", x: 1074, y: 118, xAlign: .center, yAlign: .center)
-        self.addChild(self.buttonVideoCoin)
+        //self.buttonVideoCoin = Button(textureName: "earncoins", x: 1074, y: 118, xAlign: .center, yAlign: .center)
+        //self.addChild(self.buttonVideoCoin)
     }
     
     override func update(currentTime: NSTimeInterval) {
@@ -112,10 +112,10 @@ class MainMenuScene: GameScene {
                         self.nextState = .options
                         return
                     }
-                    if (self.buttonBuyCoin.containsPoint(location)) {
-                        self.nextState = .inApp
-                        return
-                    }
+                   // if (self.buttonBuyCoin.containsPoint(location)) {
+                      //  self.nextState = .inApp
+                    // return
+                    //}
 
                 }
                 break

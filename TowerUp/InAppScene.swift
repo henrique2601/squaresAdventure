@@ -32,6 +32,9 @@ class InAppScene: GameScene {
        
         super.didMoveToView(view)
         
+        
+        IAPHelper.sharedInstance.requestProducts()
+        
         self.addChild(Control(textureName: "inAppBackGround", xAlign: .center, yAlign: .center))
         
         Music.sharedInstance.play(musicNamed: "som de fundo do menu.wav")

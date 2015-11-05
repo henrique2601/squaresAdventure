@@ -178,7 +178,6 @@
 		5C609C6A1BDF9F2300872C34 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C609C5D1BDF9F2300872C34 /* QuartzCore.framework */; };
 		5C609C6B1BDF9F2300872C34 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C609C5E1BDF9F2300872C34 /* Social.framework */; };
 		5C609C6C1BDF9F2300872C34 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C609C5F1BDF9F2300872C34 /* WebKit.framework */; };
-		5CB1A4041BDE6FDD007EB123 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CB1A4031BDE6FDD007EB123 /* StoreKit.framework */; };
 		5CB1A4061BDE7007007EB123 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CB1A4051BDE7007007EB123 /* iAd.framework */; };
 		5CF8A3A61B8F39A000C16CA9 /* PowerUpData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF8A3A51B8F39A000C16CA9 /* PowerUpData.swift */; };
 		5CF8A3A81B8F39A000C16CA9 /* FloorData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF8A3A71B8F39A000C16CA9 /* FloorData.swift */; };
@@ -382,7 +381,6 @@
 		5C609C5D1BDF9F2300872C34 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		5C609C5E1BDF9F2300872C34 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		5C609C5F1BDF9F2300872C34 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
-		5CB1A4031BDE6FDD007EB123 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		5CB1A4051BDE7007007EB123 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		5CF8A3A51B8F39A000C16CA9 /* PowerUpData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PowerUpData.swift; path = CoreData/PowerUpData.swift; sourceTree = "<group>"; };
 		5CF8A3A71B8F39A000C16CA9 /* FloorData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FloorData.swift; path = CoreData/FloorData.swift; sourceTree = "<group>"; };
@@ -438,7 +436,6 @@
 				5C609C6B1BDF9F2300872C34 /* Social.framework in Frameworks */,
 				5C609C6C1BDF9F2300872C34 /* WebKit.framework in Frameworks */,
 				81BA81791A49E0DB00E65899 /* AudioToolbox.framework in Frameworks */,
-				5CB1A4041BDE6FDD007EB123 /* StoreKit.framework in Frameworks */,
 				81BA817B1A49E0E500E65899 /* SystemConfiguration.framework in Frameworks */,
 				3A037DD81BB9A7F300D30AE5 /* FBSDKLoginKit.framework in Frameworks */,
 				3A037DD71BB9A7F300D30AE5 /* FBSDKCoreKit.framework in Frameworks */,
@@ -791,7 +788,6 @@
 				5C609C511BDF9DE800872C34 /* AdColony.framework */,
 				5C609C4E1BDF9C5D00872C34 /* AdSupport.framework */,
 				5CB1A4051BDE7007007EB123 /* iAd.framework */,
-				5CB1A4031BDE6FDD007EB123 /* StoreKit.framework */,
 				3A037DD11BB9A7F300D30AE5 /* FBAudienceNetwork.framework */,
 				3A037DD21BB9A7F300D30AE5 /* FBSDKCoreKit.framework */,
 				3A037DDB1BB9B7F100D30AE5 /* ParseFacebookUtilsV4.framework */,
@@ -855,7 +851,7 @@
 						DevelopmentTeam = GJXSLWWRF6;
 						SystemCapabilities = {
 							com.apple.InAppPurchase = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
