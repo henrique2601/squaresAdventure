@@ -17,6 +17,7 @@ class MainMenuScene: GameScene {
         case multiplayer
         case options
         case credits
+        case inApp
     }
     
     var state = states.mainMenu
@@ -80,6 +81,10 @@ class MainMenuScene: GameScene {
                 self.view!.presentScene(CreditsScene(), transition: Config.defaultTransition)
                 break
                 
+            case states.inApp:
+                self.view!.presentScene(InAppScene(), transition: Config.defaultTransition)
+                break
+
             default:
                 break
             }
@@ -107,6 +112,11 @@ class MainMenuScene: GameScene {
                         self.nextState = .options
                         return
                     }
+                    if (self.buttonBuyCoin.containsPoint(location)) {
+                        self.nextState = .inApp
+                        return
+                    }
+
                 }
                 break
                 

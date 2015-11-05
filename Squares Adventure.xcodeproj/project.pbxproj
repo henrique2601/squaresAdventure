@@ -161,6 +161,7 @@
 		3AED55DA1BEA2DF40078F59C /* -1 1.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 3AED55D91BEA2DF40078F59C /* -1 1.tmx */; };
 		3AED55DC1BEA2F4F0078F59C /* 0 0.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 3AED55DB1BEA2F4F0078F59C /* 0 0.tmx */; };
 		3AF2530E1BBD6E8D0089BF7A /* InvitedFriendData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF2530C1BBD6E8D0089BF7A /* InvitedFriendData.swift */; };
+		5C1D159B1BEB784D00A19114 /* InAppScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C1D159A1BEB784D00A19114 /* InAppScene.swift */; };
 		5C48055E1B84CFF60066E151 /* DoorTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C48055D1B84CFF60066E151 /* DoorTile.swift */; };
 		5C609C4F1BDF9C5D00872C34 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C609C4E1BDF9C5D00872C34 /* AdSupport.framework */; };
 		5C609C521BDF9DE800872C34 /* AdColony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C609C511BDF9DE800872C34 /* AdColony.framework */; };
@@ -364,6 +365,7 @@
 		3AED55DB1BEA2F4F0078F59C /* 0 0.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "0 0.tmx"; sourceTree = "<group>"; };
 		3AF2530A1BBAB13E0089BF7A /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3AF2530C1BBD6E8D0089BF7A /* InvitedFriendData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InvitedFriendData.swift; path = CoreData/InvitedFriendData.swift; sourceTree = "<group>"; };
+		5C1D159A1BEB784D00A19114 /* InAppScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InAppScene.swift; sourceTree = "<group>"; };
 		5C48055D1B84CFF60066E151 /* DoorTile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoorTile.swift; sourceTree = "<group>"; };
 		5C609C4E1BDF9C5D00872C34 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		5C609C511BDF9DE800872C34 /* AdColony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AdColony.framework; sourceTree = "<group>"; };
@@ -563,6 +565,7 @@
 				13FC80071B86404500865C72 /* MultiplayerMissionScene.swift */,
 				13CCB6FF1B72B9A70060334C /* OptionsScene.swift */,
 				13CCB6FD1B72B9010060334C /* TowersScene.swift */,
+				5C1D159A1BEB784D00A19114 /* InAppScene.swift */,
 			);
 			name = Scenes;
 			sourceTree = "<group>";
@@ -849,7 +852,7 @@
 				TargetAttributes = {
 					81BA81441A49DA1800E65899 = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = ER489438ZX;
+						DevelopmentTeam = GJXSLWWRF6;
 						SystemCapabilities = {
 							com.apple.InAppPurchase = {
 								enabled = 1;
@@ -1052,6 +1055,7 @@
 				135EA4911BBAE375006C765F /* GameFonts.swift in Sources */,
 				133184A21B83AADB00DF11D5 /* Spike.swift in Sources */,
 				139501A51BC6F98D0053EA5D /* Saw.swift in Sources */,
+				5C1D159B1BEB784D00A19114 /* InAppScene.swift in Sources */,
 				1305E4ED1BB18B1B009F9B0A /* Slider.swift in Sources */,
 				1383005F1BD69F330099D1A5 /* Slime.swift in Sources */,
 				135C5CA61BA8364C006643BB /* SkinSlotData.swift in Sources */,
@@ -1200,7 +1204,7 @@
 					"$(PROJECT_DIR)",
 				);
 				"OTHER_SWIFT_FLAGS[arch=*]" = "-D DEBUG";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Paulo.SquareAdventures;
+				PRODUCT_BUNDLE_IDENTIFIER = com.WTFGames.TowerUp;
 				PRODUCT_NAME = "Squares Adventure";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "TowerUp/TowerUp-Bridging-Header.h";
@@ -1228,7 +1232,7 @@
 					"$(PROJECT_DIR)",
 				);
 				"OTHER_SWIFT_FLAGS[arch=*]" = "-D RELEASE";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Paulo.SquareAdventures;
+				PRODUCT_BUNDLE_IDENTIFIER = com.WTFGames.TowerUp;
 				PRODUCT_NAME = "Squares Adventure";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "TowerUp/TowerUp-Bridging-Header.h";
