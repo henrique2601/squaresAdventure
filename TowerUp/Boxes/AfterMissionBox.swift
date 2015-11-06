@@ -32,54 +32,98 @@ class AfterMissionBox: Box {
         self.buttonNext = Button(textureName: "buttonBlueSquare", icon:"end",x: 322, y: 466)
         self.addChild(self.buttonNext)
         
-        var starsCount:Int = 0
-        
         let floorData = MemoryCard.sharedInstance.currentFloor()
         
+        /*
+        se esta completa
+            cinza++
+            se completou
+                amarela++
+        senao
+            se completou
+                novaAmarela++
+        
+        for i de 0 ate estrelacinza.count
+            exibe estrela cinza
+        
+        
+        for j de 0 ate amarela count
+            exibe amarela na posicao i - j
+        
+        for h 0 ate nova amarela
+            exibe amarela na posicao i + h
+        
+        */
+        
+        var starsYellowNew:Int = 0
+        var starsYellow:Int = 0
+        var starsGray:Int = 0
+        
         let minCoins = Towers.types[MapManager.tower].floorTypes[MapManager.floor].minCoins
-        if(floorData.bonus == NSNumber(bool: false)) {
+        
+        if(floorData.bonus == NSNumber(bool: true)) {
+            
+            starsGray++
+            self.labelBonus = Label(color:GameColors.gray, text: "\(bonus)/\(minCoins)", x: 266, y: 211)
+            
             if(Int(bonus) >= minCoins) {
-                floorData.bonus = NSNumber(bool: true)
+                starsYellow++
+            }
+            
+        } else {
+            if(Int(bonus) >= minCoins) {
+                 floorData.bonus = NSNumber(bool: true)
+                starsYellowNew++
                 self.labelBonus = Label(color:GameColors.green, text: "\(bonus)/\(minCoins)", x: 266, y: 211)
-                starsCount++
             } else {
                 self.labelBonus = Label(color:GameColors.red, text: "\(bonus)/\(minCoins)", x: 266, y: 211)
             }
-        } else {
-            self.labelBonus = Label(color:GameColors.gray, text: "\(bonus)/\(minCoins)", x: 266, y: 211)
         }
         self.addChild(self.labelBonus)
         
         
         let maxDeathCount = Towers.types[MapManager.tower].floorTypes[MapManager.floor].maxDeathCount
-        if(floorData.deaths == NSNumber(bool: false)) {
+        
+        if(floorData.deaths == NSNumber(bool: true)) {
+            starsGray++
+            self.labelDeaths = Label(color:GameColors.gray, text: "\(deaths)/\(maxDeathCount)", x: 266, y: 309)
+            if(Int(deaths) <= maxDeathCount) {
+                starsYellow++
+                
+            }
+        } else {
             if(Int(deaths) <= maxDeathCount) {
                 floorData.deaths = NSNumber(bool: true)
+                starsYellowNew++
                 self.labelDeaths = Label(color:GameColors.green, text: "\(deaths)/\(maxDeathCount)", x: 266, y: 309)
-                starsCount++
             } else {
                 self.labelDeaths = Label(color:GameColors.red, text: "\(deaths)/\(maxDeathCount)", x: 266, y: 309)
             }
-        } else {
-            self.labelDeaths = Label(color:GameColors.gray, text: "\(deaths)/\(maxDeathCount)", x: 266, y: 309)
         }
         self.addChild(self.labelDeaths)
         
         
-        
         let maxTime = Towers.types[MapManager.tower].floorTypes[MapManager.floor].maxTime
-        if(floorData.time == NSNumber(bool: false)) {
+        
+        
+        if(floorData.time == NSNumber(bool: true)) {
+            starsGray++
+            self.labelTime = Label(color:GameColors.gray, text: "\(time)s/\(maxTime)s", x: 266, y: 407)
             if(Int(time) <= maxTime) {
-                floorData.time = NSNumber(bool: true)
+                starsYellow++
+            }
+        } else {
+            if(Int(time) <= maxTime) {
+                 floorData.time = NSNumber(bool: true)
+                starsYellowNew++
                 self.labelTime = Label(color:GameColors.green, text: "\(time)s/\(maxTime)s", x: 266, y: 407)
-                starsCount++
             } else {
                 self.labelTime = Label(color:GameColors.red, text: "\(time)s/\(maxTime)s", x: 266, y: 407)
             }
-        } else {
-            self.labelTime = Label(color:GameColors.gray, text: "\(time)s/\(maxTime)s", x: 266, y: 407)
         }
         self.addChild(self.labelTime)
+        
+        
         let lastStars = floorData.stars.integerValue
         floorData.stars = NSNumber(integer: floorData.bonus.integerValue + floorData.deaths.integerValue + floorData.time.integerValue)
         if(lastStars < 3 && floorData.stars.integerValue == 3) {
@@ -105,71 +149,127 @@ class AfterMissionBox: Box {
             }
         }
         
-        for(var i = 0; i <= floorData.stars.integerValue; i++) {
-            switch(i) {
-            case 0:
-                break
-            case 1:
-                let star = Control(textureName: "starBig", x: 20, y: 20)
-                let startingPosition = star.position
-                let randonPosition = CGPoint(x: Int.random(min: -2000, max: 2000), y: Int.random(min: -2000, max: 2000))
-                star.position = randonPosition
-                self.addChild(star)
-                let emitterNode = SKEmitterNode(fileNamed: "Win.sks")!
-                star.runAction(SKAction.moveTo(startingPosition, duration: 1), completion: {
-                    emitterNode.particleBirthRate = 1000000
-                    emitterNode.particleSpeedRange = 10000
-                })
-                emitterNode.position = CGPoint(
-                    x: star.calculateAccumulatedFrame().width/2,
-                    y: -star.calculateAccumulatedFrame().height/2)
-                emitterNode.targetNode = star.parent!
-                star.addChild(emitterNode)
-                
-                break
-            case 2:
-                let star = Control(textureName: "starBig", x: 168, y: 20)
-                let startingPosition = star.position
-                let randonPosition = CGPoint(x: Int.random(min: -2000, max: 2000), y: Int.random(min: -2000, max: 2000))
-                star.position = randonPosition
-                self.addChild(star)
-                let emitterNode = SKEmitterNode(fileNamed: "Win.sks")!
-                star.runAction(SKAction.moveTo(startingPosition, duration: 1), completion: {
-                    emitterNode.particleBirthRate = 1000000
-                    emitterNode.particleSpeedRange = 10000
-                })
-                emitterNode.position = CGPoint(
-                    x: star.calculateAccumulatedFrame().width/2,
-                    y: -star.calculateAccumulatedFrame().height/2)
-                emitterNode.targetNode = star.parent!
-                star.addChild(emitterNode)
-                break
-            case 3:
-                let star = Control(textureName: "starBig", x: 316, y: 20)
-                let startingPosition = star.position
-                let randonPosition = CGPoint(x: Int.random(min: -2000, max: 2000), y: Int.random(min: -2000, max: 2000))
-                star.position = randonPosition
-                self.addChild(star)
-                let emitterNode = SKEmitterNode(fileNamed: "Win.sks")!
-                star.runAction(SKAction.moveTo(startingPosition, duration: 1), completion: {
-                    emitterNode.particleBirthRate = 1000000
-                    emitterNode.particleSpeedRange = 10000
-                })
-                emitterNode.position = CGPoint(
-                    x: star.calculateAccumulatedFrame().width/2,
-                    y: -star.calculateAccumulatedFrame().height/2)
-                emitterNode.targetNode = star.parent!
-                star.addChild(emitterNode)
-                break
-                
-            default:
-                break
-            }
+        /*
+        for i de 0 ate estrelacinza.count
+            exibe estrela cinza
+        
+        
+        for j de 0 ate amarela count
+            exibe amarela na posicao i - j
+        
+        for h 0 ate nova amarela
+            exibe amarela na posicao i + h
+        */
+        
+        var i = 0
+        var j = 0
+        var h = 0
+        
+        for i = 0; i < starsGray; i++ {
+            showStarGrayAt(i)
+        }
+        i--
+        
+        for j = 0; j < starsYellow; j++ {
+            self.showStarAt(i - j)
+        }
+        i++
+        for h = 0; h < starsYellowNew; h++ {
+            self.showStarAt(i + h)
         }
         
         self.labelBonus.zPosition = afterMissionBoxBackground.zPosition + 1
         self.labelDeaths.zPosition = afterMissionBoxBackground.zPosition + 1
         self.labelTime.zPosition = afterMissionBoxBackground.zPosition + 1
+    }
+    
+    
+    
+    func showStarGrayAt(i:Int) {
+        
+        let starTexture = SKTexture(imageNamed: "starBig")
+        let starSpriteNode = SKSpriteNode(texture: starTexture, color: UIColor.clearColor(), size: starTexture.size())
+        
+        starSpriteNode.color = UIColor.blackColor()
+        starSpriteNode.colorBlendFactor = 0.5
+        
+        switch(i) {
+        case 0:
+            let star = Control(spriteNode:starSpriteNode, x: 20, y: 20)
+            self.addChild(star)
+            break
+        case 1:
+            let star = Control(spriteNode:starSpriteNode, x: 168, y: 20)
+            self.addChild(star)
+            break
+        case 2:
+            let star = Control(spriteNode:starSpriteNode, x: 316, y: 20)
+            self.addChild(star)
+            break
+            
+        default:
+            break
+        }
+    }
+    
+    func showStarAt(i:Int) {
+        switch(i) {
+        case 0:
+            let star = Control(textureName: "starBig", x: 20, y: 20)
+            let startingPosition = star.position
+            let randonPosition = CGPoint(x: Int.random(min: -2000, max: 2000), y: Int.random(min: -2000, max: 2000))
+            star.position = randonPosition
+            self.addChild(star)
+            let emitterNode = SKEmitterNode(fileNamed: "Win.sks")!
+            star.runAction(SKAction.moveTo(startingPosition, duration: 1), completion: {
+                emitterNode.particleBirthRate = 1000000
+                emitterNode.particleSpeedRange = 10000
+            })
+            emitterNode.position = CGPoint(
+                x: star.calculateAccumulatedFrame().width/2,
+                y: -star.calculateAccumulatedFrame().height/2)
+            emitterNode.targetNode = star.parent!
+            star.addChild(emitterNode)
+            
+            break
+        case 1:
+            let star = Control(textureName: "starBig", x: 168, y: 20)
+            let startingPosition = star.position
+            let randonPosition = CGPoint(x: Int.random(min: -2000, max: 2000), y: Int.random(min: -2000, max: 2000))
+            star.position = randonPosition
+            self.addChild(star)
+            let emitterNode = SKEmitterNode(fileNamed: "Win.sks")!
+            star.runAction(SKAction.moveTo(startingPosition, duration: 1), completion: {
+                emitterNode.particleBirthRate = 1000000
+                emitterNode.particleSpeedRange = 10000
+            })
+            emitterNode.position = CGPoint(
+                x: star.calculateAccumulatedFrame().width/2,
+                y: -star.calculateAccumulatedFrame().height/2)
+            emitterNode.targetNode = star.parent!
+            star.addChild(emitterNode)
+            break
+        case 2:
+            let star = Control(textureName: "starBig", x: 316, y: 20)
+            let startingPosition = star.position
+            let randonPosition = CGPoint(x: Int.random(min: -2000, max: 2000), y: Int.random(min: -2000, max: 2000))
+            star.position = randonPosition
+            self.addChild(star)
+            let emitterNode = SKEmitterNode(fileNamed: "Win.sks")!
+            star.runAction(SKAction.moveTo(startingPosition, duration: 1), completion: {
+                emitterNode.particleBirthRate = 1000000
+                emitterNode.particleSpeedRange = 10000
+            })
+            emitterNode.position = CGPoint(
+                x: star.calculateAccumulatedFrame().width/2,
+                y: -star.calculateAccumulatedFrame().height/2)
+            emitterNode.targetNode = star.parent!
+            star.addChild(emitterNode)
+            break
+            
+        default:
+            break
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
