@@ -17,7 +17,9 @@ class BoxCoins: Control {
     override init() {
         let texture = SKTexture(imageNamed: "boxCoins")
         
-        super.init(texture: texture, x: 1058, y: 20, xAlign: .right, yAlign: .up)
+        let spriteNode = SKSpriteNode(texture: texture, color: UIColor.clearColor(), size: texture.size())
+        
+        super.init(spriteNode: spriteNode, x: 1058, y: 20, xAlign: .right, yAlign: .up)
         
         let playerData = MemoryCard.sharedInstance.playerData
         

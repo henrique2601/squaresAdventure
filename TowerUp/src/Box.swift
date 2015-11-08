@@ -15,7 +15,9 @@ class Box: Control {
         let texture = SKTexture(imageNamed: background)
         let position = CGPoint(x: 1334/2 - texture.size().width,
                                y: 750/2  - texture.size().height)
-        super.init(texture: texture, x: Int(position.x), y: Int(position.y), xAlign:.center, yAlign:.center)
+        let spriteNode = SKSpriteNode(texture: texture, color: UIColor.clearColor(), size: texture.size())
+        
+        super.init(spriteNode: spriteNode, x: Int(position.x), y: Int(position.y), xAlign:.center, yAlign:.center)
         
         self.zPosition = Config.HUDZPosition * CGFloat(2)
         
@@ -24,7 +26,8 @@ class Box: Control {
     
     init(background:String, x:Int, y:Int, xAlign:Control.xAlignments = .center, yAlign:Control.yAlignments = .center) {
         let texture = SKTexture(imageNamed: background)
-        super.init(texture: texture, x:x, y:y, xAlign:xAlign, yAlign:yAlign)
+        let spriteNode = SKSpriteNode(texture: texture, color: UIColor.clearColor(), size: texture.size())
+        super.init(spriteNode: spriteNode, x:x, y:y, xAlign:xAlign, yAlign:yAlign)
         
         self.zPosition = Config.HUDZPosition * CGFloat(2)
         

@@ -27,9 +27,11 @@ class MessageBox: Control {
     init(text:String, textureName:String, type:MessageBox.messageType) {
         
         let texture = SKTexture(imageNamed: "messegeBox")
+        let spriteNode = SKSpriteNode(texture: texture, color: UIColor.clearColor(), size: texture.size())
+        
         let position = CGPoint(x: 1334/2 - texture.size().width,
             y: 750/2  - texture.size().height)
-        super.init(texture: texture, x: Int(position.x), y: Int(position.y), xAlign:.center, yAlign:.center)
+        super.init(spriteNode: spriteNode, x: Int(position.x), y: Int(position.y), xAlign:.center, yAlign:.center)
         
         MessageBox.messageBoxCount++
         self.zPosition = Config.HUDZPosition * CGFloat(3 + MessageBox.messageBoxCount)
