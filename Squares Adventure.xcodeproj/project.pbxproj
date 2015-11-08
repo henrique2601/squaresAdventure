@@ -172,6 +172,7 @@
 		5C2535F91BEFAD8E005EFA80 /* 2 7.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 5C2535F01BEFAD8E005EFA80 /* 2 7.tmx */; };
 		5C2535FA1BEFAD8E005EFA80 /* 2 8.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 5C2535F11BEFAD8E005EFA80 /* 2 8.tmx */; };
 		5C2535FB1BEFAD8E005EFA80 /* 2 9.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 5C2535F21BEFAD8E005EFA80 /* 2 9.tmx */; };
+		5C2535FD1BEFBB55005EFA80 /* Emitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2535FC1BEFBB55005EFA80 /* Emitter.swift */; };
 		5C48055E1B84CFF60066E151 /* DoorTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C48055D1B84CFF60066E151 /* DoorTile.swift */; };
 		5C609C4F1BDF9C5D00872C34 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C609C4E1BDF9C5D00872C34 /* AdSupport.framework */; };
 		5C609C521BDF9DE800872C34 /* AdColony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C609C511BDF9DE800872C34 /* AdColony.framework */; };
@@ -388,6 +389,7 @@
 		5C2535F01BEFAD8E005EFA80 /* 2 7.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "2 7.tmx"; sourceTree = "<group>"; };
 		5C2535F11BEFAD8E005EFA80 /* 2 8.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "2 8.tmx"; sourceTree = "<group>"; };
 		5C2535F21BEFAD8E005EFA80 /* 2 9.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "2 9.tmx"; sourceTree = "<group>"; };
+		5C2535FC1BEFBB55005EFA80 /* Emitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Emitter.swift; path = src/Emitter.swift; sourceTree = "<group>"; };
 		5C48055D1B84CFF60066E151 /* DoorTile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoorTile.swift; sourceTree = "<group>"; };
 		5C609C4E1BDF9C5D00872C34 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		5C609C511BDF9DE800872C34 /* AdColony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AdColony.framework; sourceTree = "<group>"; };
@@ -514,6 +516,7 @@
 			isa = PBXGroup;
 			children = (
 				81BA814A1A49DA1800E65899 /* AppDelegate.swift */,
+				137153BE1BE11864004F5F3F /* BlackSpriteNode.swift */,
 				137D3D9E1BB43097003202D9 /* Bomb.swift */,
 				1326AE871B85FCA300D4563B /* Box.swift */,
 				137F8DF01BBC66DF00B1C304 /* BoxCoins.swift */,
@@ -528,6 +531,7 @@
 				1359DD031B728168006C12FA /* Config.swift */,
 				1359DD0D1B72874C006C12FA /* Control.swift */,
 				5C48055D1B84CFF60066E151 /* DoorTile.swift */,
+				5C2535FC1BEFBB55005EFA80 /* Emitter.swift */,
 				1326AE891B85FD8800D4563B /* Event.swift */,
 				1359DD071B728611006C12FA /* GameColors.swift */,
 				135EA4901BBAE375006C765F /* GameFonts.swift */,
@@ -539,6 +543,7 @@
 				1383FD5D1B7A49730012DA45 /* MapManager.swift */,
 				13D8316C1BA7415D00A95FEB /* MessageBox.swift */,
 				3A979C631BA0773C00A8E09F /* MPCManager.swift */,
+				3A453D6D1BDABB6700224EA8 /* MultiplayerLobbyCell.swift */,
 				1305E4F11BB1D6AC009F9B0A /* Music.swift */,
 				132FB8671B828FF80012A7D3 /* Parallax.swift */,
 				13428EBF1B7CB4A90017D23A /* Player.swift */,
@@ -546,6 +551,7 @@
 				1323FF5E1B90C7AF00EF4C2E /* PowerUp.swift */,
 				137DC5141BA1C3E300D58DED /* PowerUpSlot.swift */,
 				1308A4691BC2E35000D4F85B /* RandomSoundEffect.swift */,
+				3A453D6B1BDAA04800224EA8 /* Reachability.swift */,
 				139501A41BC6F98D0053EA5D /* Saw.swift */,
 				13DE13041B94C38E0092D50B /* ScrollNode.swift */,
 				3A390C911BD0576F00F948F6 /* ServerManager.swift */,
@@ -565,9 +571,6 @@
 				3AB2D4A61BD7B36C004375B3 /* WinCell.swift */,
 				1323B1511B83554A00174777 /* WinTile.swift */,
 				13EBD7BD1B7A65E5005F1CA4 /* World.swift */,
-				3A453D6B1BDAA04800224EA8 /* Reachability.swift */,
-				3A453D6D1BDABB6700224EA8 /* MultiplayerLobbyCell.swift */,
-				137153BE1BE11864004F5F3F /* BlackSpriteNode.swift */,
 			);
 			name = src;
 			sourceTree = "<group>";
@@ -720,7 +723,7 @@
 		13F390911BD543B60089BF15 /* _Tower2 */ = {
 			isa = PBXGroup;
 			children = (
-				5C2535E81BEFA6C8005EFA80 /* 2 0.tmx */,
+				5C2535E81BEFA6C8005EFA80 /* 0 0.tmx */,
 				5C2535EA1BEFAD8E005EFA80 /* 2 1.tmx */,
 				5C2535EB1BEFAD8E005EFA80 /* 2 2.tmx */,
 				5C2535EC1BEFAD8E005EFA80 /* 2 3.tmx */,
@@ -953,7 +956,7 @@
 				844F3D2B1BE26EF1000AAD31 /* Win.sks in Resources */,
 				5C2535F51BEFAD8E005EFA80 /* 2 3.tmx in Resources */,
 				13F390AD1BD543B60089BF15 /* 1 15.tmx in Resources */,
-				5C2535E91BEFA6C8005EFA80 /* 2 0.tmx in Resources */,
+				5C2535E91BEFA6C8005EFA80 /* 0 0.tmx in Resources */,
 				84087EFB1BE8E504000301C4 /* Blood.sks in Resources */,
 				13F390AF1BD543B60089BF15 /* 1 2.tmx in Resources */,
 				13CCB6FC1B72AD310060334C /* LaunchScreen.xib in Resources */,
@@ -1086,6 +1089,7 @@
 				13D2521A1BCEE31F002E5F59 /* IAPHelper.swift in Sources */,
 				1359DD0C1B7286D3006C12FA /* MainMenuScene.swift in Sources */,
 				13DE13051B94C38E0092D50B /* ScrollNode.swift in Sources */,
+				5C2535FD1BEFBB55005EFA80 /* Emitter.swift in Sources */,
 				137153BF1BE11864004F5F3F /* BlackSpriteNode.swift in Sources */,
 				13BC7ED71BAAE883003D6CCD /* SocketEventHandler.swift in Sources */,
 				13428EBE1B7CB0BC0017D23A /* Square.swift in Sources */,

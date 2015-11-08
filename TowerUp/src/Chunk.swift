@@ -148,6 +148,22 @@ class Chunk: SKSpriteNode, NSXMLParserDelegate {
                         case Tile.specialTiles.slime.rawValue:
                             tile = Slime(x: x, y: y)
                             break
+                            
+                        case Tile.specialTiles.emitterLeft.rawValue:
+                            tile = Emitter(x: x, y: y, specialTiles: id)
+                            break
+                            
+                        case Tile.specialTiles.emitterUp.rawValue:
+                            tile = Emitter(x: x, y: y, specialTiles: id)
+                            break
+                            
+                        case Tile.specialTiles.emitterRight.rawValue:
+                            tile = Emitter(x: x, y: y, specialTiles: id)
+                            break
+                            
+                        case Tile.specialTiles.emitterDown.rawValue:
+                            tile = Emitter(x: x, y: y, specialTiles: id)
+                            break
 
                         default:
                             tile = Bug(x: x, y: y)
