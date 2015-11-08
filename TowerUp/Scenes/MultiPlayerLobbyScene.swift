@@ -301,10 +301,10 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
         }
         
         
-        self.labelState = Label(text: "Loading", x: 375, y: 275)
+        self.labelState = Label(text: "Loading", x: 375, y: 275, xAlign:.center, yAlign:.center)
         self.addChild(self.labelState)
         
-        self.labelCountDown = Label(text: "", x: 375, y: 310)
+        self.labelCountDown = Label(text: "", x: 375, y: 310, xAlign:.center, yAlign:.center)
         self.addChild(self.labelCountDown)
         
         self.boxCoins = BoxCoins()
