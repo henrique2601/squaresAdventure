@@ -367,7 +367,26 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
                     ServerManager.sharedInstance.bestServer { serverStr in
                         self.server = serverStr
                         print(self.server)
-                        self.nextState = .connecting
+                        
+                        if (self.server == "erro") {
+                            
+                            let box = MessageBox(text: "Error connecting to server", textureName: "messegeBox", type: MessageBox.messageType.OK)
+                            box.touchesEndedAtButtonOK.addHandler({
+                                self.nextState = .lobby
+                            })
+                            
+                            let size = self.size.width > self.size.height ? self.size.width : self.size.height
+                            self.player.removeFromParent()
+                            self.blackSpriteNode.hidden = false
+                            self.addChild(box)
+                            self.myTextField.myTextField.hidden = true
+                            self.powerUpSlotsScrollNode.removeFromParent()
+                            
+                        } else {
+                           self.nextState = .connecting
+                        }
+                        
+                        
                     }
                 } else {
                     let box = MessageBox(text: "You not connect to internet", textureName: "messegeBox", type: MessageBox.messageType.OK)
@@ -376,6 +395,7 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
                     })
                     
                     let size = self.size.width > self.size.height ? self.size.width : self.size.height
+                    self.player.removeFromParent()
                     self.blackSpriteNode.hidden = false
                     self.addChild(box)
                     self.myTextField.myTextField.hidden = true

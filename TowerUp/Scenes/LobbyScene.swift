@@ -275,6 +275,9 @@ class LobbyScene: GameScene, UITextFieldDelegate {
                 if let teste = self.powerUpsScrollNode {
                     teste.removeFromParent()
                 }
+                
+                self.blackSpriteNode.hidden = true
+                
                 break
                 
             case states.multiplayerLobby:
@@ -397,11 +400,12 @@ class LobbyScene: GameScene, UITextFieldDelegate {
                                             }
                                         }
                                     } else {
-                                        for skinData in self.playerData.skins as! Set<SkinData> {
+                                        for item in self.playerData.skins as! NSOrderedSet {
+                                            let skinData = item as! SkinData
                                             if (skinData.index.description == skin.name!) {
                                                 self.playerData.skinSlot.skin = skinData
                                                 self.nextState = states.lobby
-                                                return
+                                                break
                                             }
                                         }
                                     }
