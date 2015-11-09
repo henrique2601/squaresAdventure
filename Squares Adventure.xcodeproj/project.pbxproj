@@ -148,6 +148,8 @@
 		3A390C921BD0576F00F948F6 /* ServerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A390C911BD0576F00F948F6 /* ServerManager.swift */; };
 		3A453D6C1BDAA04800224EA8 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A453D6B1BDAA04800224EA8 /* Reachability.swift */; };
 		3A453D6E1BDABB6700224EA8 /* MultiplayerLobbyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A453D6D1BDABB6700224EA8 /* MultiplayerLobbyCell.swift */; };
+		3A4C7A451BF0E1E9006DD731 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A4C7A431BF0E1E9006DD731 /* Fabric.framework */; };
+		3A4C7A461BF0E1E9006DD731 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A4C7A441BF0E1E9006DD731 /* Crashlytics.framework */; };
 		3A8223CE1BC6BDA70029C75D /* Coin.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3A8223CD1BC6BDA70029C75D /* Coin.wav */; };
 		3A8223D01BC6C0360029C75D /* jump_01.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3A8223CF1BC6C0360029C75D /* jump_01.wav */; };
 		3A8223D41BC6C6300029C75D /* qubodupImpactMeat01.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3A8223D31BC6C6300029C75D /* qubodupImpactMeat01.wav */; };
@@ -364,6 +366,8 @@
 		3A390C911BD0576F00F948F6 /* ServerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ServerManager.swift; path = src/ServerManager.swift; sourceTree = "<group>"; };
 		3A453D6B1BDAA04800224EA8 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Reachability.swift; path = src/Reachability.swift; sourceTree = "<group>"; };
 		3A453D6D1BDABB6700224EA8 /* MultiplayerLobbyCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MultiplayerLobbyCell.swift; path = src/MultiplayerLobbyCell.swift; sourceTree = "<group>"; };
+		3A4C7A431BF0E1E9006DD731 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
+		3A4C7A441BF0E1E9006DD731 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		3A8223CD1BC6BDA70029C75D /* Coin.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Coin.wav; sourceTree = "<group>"; };
 		3A8223CF1BC6C0360029C75D /* jump_01.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = jump_01.wav; sourceTree = "<group>"; };
 		3A8223D31BC6C6300029C75D /* qubodupImpactMeat01.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = qubodupImpactMeat01.wav; sourceTree = "<group>"; };
@@ -471,10 +475,12 @@
 				3A037DD91BB9A7F300D30AE5 /* FBSDKMessengerShareKit.framework in Frameworks */,
 				81BA81771A49E0D500E65899 /* libsqlite3.dylib in Frameworks */,
 				81BA81711A49DB6800E65899 /* Parse.framework in Frameworks */,
+				3A4C7A461BF0E1E9006DD731 /* Crashlytics.framework in Frameworks */,
 				81BA81721A49DB6800E65899 /* ParseCrashReporting.framework in Frameworks */,
 				3A037DDA1BB9A7F300D30AE5 /* FBSDKShareKit.framework in Frameworks */,
 				81BA81811A49E10C00E65899 /* ParseUI.framework in Frameworks */,
 				81BA81701A49DB6800E65899 /* Bolts.framework in Frameworks */,
+				3A4C7A451BF0E1E9006DD731 /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -766,6 +772,8 @@
 		81BA813C1A49DA1800E65899 = {
 			isa = PBXGroup;
 			children = (
+				3A4C7A431BF0E1E9006DD731 /* Fabric.framework */,
+				3A4C7A441BF0E1E9006DD731 /* Crashlytics.framework */,
 				81BA816A1A49DB5600E65899 /* Frameworks */,
 				81BA81461A49DA1800E65899 /* Products */,
 				81BA81471A49DA1800E65899 /* TowerUp */,
@@ -867,6 +875,7 @@
 				81BA81421A49DA1800E65899 /* Frameworks */,
 				81BA81431A49DA1800E65899 /* Resources */,
 				81CC85E11A49F6D40076DE19 /* Upload Symbol Files */,
+				3A4C7A421BF0E13C006DD731 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -883,6 +892,9 @@
 		81BA813D1A49DA1800E65899 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				KnownAssetTags = (
+					New,
+				);
 				LastSwiftMigration = 0700;
 				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0700;
@@ -1008,6 +1020,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		3A4C7A421BF0E13C006DD731 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run cd1df67a6122636fb31c48b8886ef27326202193 0c14db341c9848f33d16ff3bac36e9d26006be0f6dd61fc529dc6564651472c1";
+		};
 		81CC85E11A49F6D40076DE19 /* Upload Symbol Files */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

@@ -50,11 +50,25 @@ class ServerManager: NSObject, GBPingDelegate {
 //                            print(self.servers.count)
                             
                             self.count++
+                            print("self.count " + self.count.description)
+                            print("self.servers.count " + self.servers.count.description)
                             if (self.count < self.servers.count ) {
                                 self.bestServer(returnBlock)
                             } else {
-                                returnBlock(self.minServer)
+                                
                                 self.count = 0
+                                
+                                print("fim")
+                                
+                                if let _ = self.minServer {
+                                  returnBlock(self.minServer)
+                                } else {
+                                    print("erro fim")
+                                    returnBlock("erro")
+                                }
+                                
+                                
+                                
                             }
                             
                         }

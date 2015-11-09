@@ -10,7 +10,8 @@ import Parse
 import CoreData
 import ParseFacebookUtilsV4
 import AdSupport
-
+import Fabric
+import Crashlytics
 
 // If you want to use any of the UI components, uncomment this line
 // import ParseUI
@@ -33,7 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Remove this line if you don't want to use Local Datastore features or want to use cachePolicy.
         
         
-        
+        Fabric.with([Crashlytics.self])
         Parse.enableLocalDatastore()
 
         // ****************************************************************************
