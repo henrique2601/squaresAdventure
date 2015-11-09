@@ -208,6 +208,8 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
                 
                 self.player.update(currentTime)
                 self.mapManager.update(currentTime)
+                //Emitter.update(currentTime)
+                
                 break
             default:
                 break

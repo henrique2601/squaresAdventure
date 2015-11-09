@@ -259,6 +259,7 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
                             particles.position.x = crateBomb.position.x
                             particles.position.y = crateBomb.position.y
                             particles.zPosition = crateBomb.zPosition
+                            //TODO: quebrou aqui
                             crateBomb.parent!.addChild(particles)
                             
                             let action = SKAction()

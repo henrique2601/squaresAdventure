@@ -26,6 +26,8 @@ class GameScene: SKScene {
         PowerUp.powerUpList = Set<PowerUp>()
         //PlayerOnline.playerOnlineList = Set<PlayerOnline>()
         
+        Emitter.emitterList = Set<Emitter>()
+        
         MessageBox.messageBoxCount = 0
         
         super.init(size: Config.sceneSize())
