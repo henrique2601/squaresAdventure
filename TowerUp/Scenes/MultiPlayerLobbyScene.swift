@@ -177,7 +177,7 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
                                 print(this.playersNodes)
                                 
                                 
-                                
+                                this.playerScrollNode.removeAllChildren()
                                 this.playerScrollNode.removeFromParent()
                                 
                                 //TODO: quebrou aqui
