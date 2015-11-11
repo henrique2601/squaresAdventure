@@ -252,22 +252,24 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
                 for crateBomb in BoxExplosive.boxExplosiveList {
                     if let id = crateBomb.listPosition
                     {
-                        if id == boxCrateBomb{
+                        if id == boxCrateBomb {
                             
                             let particles = SKEmitterNode(fileNamed: "Bomb.sks")!
                             
                             particles.position.x = crateBomb.position.x
                             particles.position.y = crateBomb.position.y
                             particles.zPosition = crateBomb.zPosition
-                            //TODO: quebrou aqui
-                            crateBomb.parent!.addChild(particles)
                             
-                            let action = SKAction()
-                            action.duration = 2
-                            particles.runAction(action , completion: { () -> Void in
-                                particles.removeFromParent()
+                            //TODO: quebrou aqui
+                            if let parent = crateBomb.parent {
+                                parent.addChild(particles)
                                 
-                            })
+                                let action = SKAction()
+                                action.duration = 2
+                                particles.runAction(action , completion: {
+                                    particles.removeFromParent()
+                                })
+                            }
                             
                             crateBomb.removeFromParent()
                             

@@ -108,7 +108,6 @@ class ScrollNode: Control {
             if(self.scaleNodes) {
                 self.setCellScale(spriteNode)
             }
-            //TODO: quebrou aqui
             self.addChild(spriteNode)
             i++
         }

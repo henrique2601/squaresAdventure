@@ -60,13 +60,13 @@ class BoxExplosive: Tile {
     
     override func removeFromParent() {
         
-        
-        for (var i=0 ; i < BoxExplosive.boxExplosiveList.count ; i++) {
-            if (BoxExplosive.boxExplosiveList[i].listPosition == self.listPosition){
+        for (var i = 0 ; i < BoxExplosive.boxExplosiveList.count ; i++) {
+            if (BoxExplosive.boxExplosiveList[i].listPosition == self.listPosition) {
                 BoxExplosive.boxExplosiveList.removeAtIndex(i)
+                //break usado para evitar continuar enumerando a lista apos ela ter sido alterada.
+                break
             }
         }
         super.removeFromParent()
-        
     }
 }
