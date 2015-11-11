@@ -59,7 +59,7 @@ class BeforeMissionScene: GameScene {
         }
         //
         
-        self.buttonPlay = Button(textureName: "buttonYellow", text:"GO!", x: 1014, y: 630, xAlign:.right, yAlign:.down)
+        self.buttonPlay = Button(textureName: "buttonPink", text:"GO!", x: 1014, y: 630, xAlign:.right, yAlign:.down)
         self.addChild(self.buttonPlay)
         self.buttonBack = Button(textureName: "buttonGraySquareSmall", text:"<", x: 20, y: 652, xAlign:.left, yAlign:.down)
         self.addChild(self.buttonBack)

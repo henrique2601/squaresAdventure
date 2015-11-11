@@ -40,11 +40,11 @@ class MessageBox: Control {
         
         switch (type) {
         case messageType.OK:
-            self.buttonOK = Button(textureName: "buttonBlueSmall", text: "Ok", x:139, y:162)
+            self.buttonOK = Button(textureName: "buttonSandSmall", text: "Ok", x:139, y:162)
             self.addChild(self.buttonOK)
             break
         case messageType.OKCancel:
-            self.buttonOK = Button(textureName: "buttonBlueSmall", text: "Ok", x:262, y:162)
+            self.buttonOK = Button(textureName: "buttonSandSmall", text: "Ok", x:262, y:162)
             self.addChild(self.buttonOK)
             self.buttonCancel = Button(textureName: "buttonRedSmall", text: "Cancel", x:14, y:162)
             self.addChild(self.buttonCancel)

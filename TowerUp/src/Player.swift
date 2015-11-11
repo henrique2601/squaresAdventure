@@ -152,7 +152,8 @@ class Player: Square {
             physicsCategory.boxCrate.rawValue |
             physicsCategory.slime.rawValue |
             physicsCategory.player.rawValue |
-            physicsCategory.boxExplosive.rawValue
+            physicsCategory.boxExplosive.rawValue |
+            physicsCategory.bullet.rawValue
     }
     
 //    func blood(contact: SKPhysicsContact) {

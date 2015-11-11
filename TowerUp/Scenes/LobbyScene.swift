@@ -72,13 +72,13 @@ class LobbyScene: GameScene, UITextFieldDelegate {
         self.addChild(Control(textureName: "lobby1", z: -1000, xAlign: .center, yAlign: .center))
         self.backgroundColor = GameColors.blue
         
-        self.buttonOnline = Button(textureName: "buttonYellow", text:"ONLINE GAME", x: 229, y: 393, xAlign: .center, yAlign: .center)
+        self.buttonOnline = Button(textureName: "buttonPink", text:"ONLINE GAME", x: 229, y: 393, xAlign: .center, yAlign: .center)
         self.addChild(self.buttonOnline)
         
-//        self.buttonQuick = Button(textureName: "buttonYellow", text:"QUICKPLAY", x: 229, y: 393, xAlign: .center, yAlign: .center)
+//        self.buttonQuick = Button(textureName: "buttonPink", text:"QUICKPLAY", x: 229, y: 393, xAlign: .center, yAlign: .center)
 //        self.addChild(self.buttonQuick)
         
-//        self.buttonLocal = Button(textureName: "buttonYellow", text:"LOCAL GAME", x: 229, y: 517, xAlign: .center, yAlign: .center)
+//        self.buttonLocal = Button(textureName: "buttonPink", text:"LOCAL GAME", x: 229, y: 517, xAlign: .center, yAlign: .center)
 //        self.addChild(self.buttonLocal)
         
         self.myTextField = Textfield(name: self.playerData.name , x: 820, y: 270, align:.center, view:self.view!)

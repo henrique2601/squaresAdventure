@@ -27,9 +27,9 @@ class AfterMissionBox: Box {
         
         self.buttonExit = Button(textureName: "buttonGraySquare", icon:"home", x: 42, y: 466)
         self.addChild(self.buttonExit)
-        self.buttonRestart = Button(textureName: "buttonBlueSquare", icon:"restart", x: 182, y: 466)
+        self.buttonRestart = Button(textureName: "buttonSandSquare", icon:"restart", x: 182, y: 466)
         self.addChild(self.buttonRestart)
-        self.buttonNext = Button(textureName: "buttonBlueSquare", icon:"end",x: 322, y: 466)
+        self.buttonNext = Button(textureName: "buttonSandSquare", icon:"end",x: 322, y: 466)
         self.addChild(self.buttonNext)
         
         let floorData = MemoryCard.sharedInstance.currentFloor()
