@@ -52,14 +52,16 @@ class Bomb: Tile {
         particles.position.x = self.position.x
         particles.position.y = self.position.y
         particles.zPosition = self.zPosition
-        self.parent!.addChild(particles)
         
-        let action = SKAction()
-        action.duration = 2
-        particles.runAction(action , completion: { () -> Void in
-            particles.removeFromParent()
+        if let parent = self.parent {
+            parent.addChild(particles)
             
-        })
+            let action = SKAction()
+            action.duration = 2
+            particles.runAction(action , completion: {
+                particles.removeFromParent()
+            })
+        }
         
         for (var i=0 ; i < Bomb.bombList.count ; i++) {
             if (Bomb.bombList[i].listPosition == self.listPosition){

@@ -50,7 +50,7 @@ class LocalLobbyScene: GameScene {
         self.buttonGo = Button(textureName: "buttonPinkSmall", text:"GO", x: 295, y: 560)
         self.buttonGo.hidden = true
         self.addChild(self.buttonGo)
-        self.addChild(Button(textureName: "buttonGraySquareSmall", text:"<", x: 20, y: 652, xAlign:.left, yAlign:.down))
+        self.addChild(Button(textureName: "buttonGraySquareSmall", icon:"return", x: 20, y: 652, xAlign:.left, yAlign:.down))
         
         
 //        self.mpcManager = MPCManager()

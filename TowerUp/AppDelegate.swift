@@ -92,7 +92,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //Delay the fade of the HYDRA LOGO
         
-        sleep(1 as UInt32)
+        //sleep(1 as UInt32)
 
         return true
     }

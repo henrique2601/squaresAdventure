@@ -102,7 +102,7 @@ class LobbyScene: GameScene, UITextFieldDelegate {
         self.addChild(boxCoins)
         
         
-        self.buttonBack = Button(textureName: "buttonGraySquareSmall", text:"<", x: 20, y: 652, xAlign:.left, yAlign:.down)
+        self.buttonBack = Button(textureName: "buttonGraySquareSmall", icon:"return", x: 20, y: 652, xAlign:.left, yAlign:.down)
         self.addChild(self.buttonBack)
     }
     

@@ -66,7 +66,7 @@ class OptionsScene: GameScene, FBSDKGameRequestDialogDelegate {
         self.buttonSoundConfig = Button(textureName: "buttonSandSmall", icon:"music", x: 274, y: 202)
         self.addChild(self.buttonSoundConfig)
         
-        self.buttonBack = Button(textureName: "buttonGraySquareSmall", text:"<", x: 20, y: 652, xAlign:.left, yAlign:.down)
+        self.buttonBack = Button(textureName: "buttonGraySquareSmall", icon:"return", x: 20, y: 652, xAlign:.left, yAlign:.down)
         self.buttonBack.zPosition = Config.HUDZPosition * 2 + 1
         self.addChild(self.buttonBack)
     }

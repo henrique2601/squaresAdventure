@@ -65,7 +65,7 @@ class ViewController: UIViewController {
     
     override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
         if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
-            return UIInterfaceOrientationMask.Landscape
+            return UIInterfaceOrientationMask.All
         } else {
             return UIInterfaceOrientationMask.All
         }

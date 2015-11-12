@@ -332,14 +332,11 @@ class Player: Square {
                     //print(scene.localName)
                     //print(self.name)
                     
-                    if (scene.localName == self.name!){
-                        print("mandei pro servidor " + bomb.listPosition.description )
-                        
+                    if (scene.localName == self.name!) {
+                        print("mandei pro servidor " + bomb.listPosition.description)
                         
                         scene.socket.emit("removeBomb", scene.room , bomb.listPosition)
                         bomb.removeFromParent()
-                        
-                        
                     }
                 } else {
                     bomb.removeFromParent()
@@ -387,6 +384,7 @@ class Player: Square {
                         
                     }
                 } else {
+                    
                         boxCrateBomb.removeFromParent()
                 }
             }

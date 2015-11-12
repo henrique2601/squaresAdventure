@@ -44,6 +44,8 @@ class GameScene: SKScene {
         self.scaleMode = SKSceneScaleMode.AspectFit
         self.anchorPoint = CGPoint(x: 0, y: 1)
         MemoryCard.sharedInstance.saveGame()
+        
+        self.setBackground()
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -60,5 +62,17 @@ class GameScene: SKScene {
     
     override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
         Control.touchesEnded(touches! as Set<UITouch>)
+    }
+    
+    func setBackground() {
+        var spriteNode = SKSpriteNode(texture: nil, color: GameColors.blueSky, size: self.size)
+        let size = CGSize(width: self.size.width, height: self.size.height/CGFloat(2))
+        
+        var control = Control(spriteNode: spriteNode, x: 0, y: 0, z: -20000, size:size, xAlign: .center, yAlign: .up)
+        self.addChild(control)
+        
+        spriteNode = SKSpriteNode(texture: nil, color: GameColors.greenGrass, size: self.size)
+        control = Control(spriteNode: spriteNode, x: 0, y: 375, z: -20000, size:size, xAlign: .center, yAlign: .center)
+        self.addChild(control)
     }
 }

@@ -93,6 +93,9 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
         case loose
     }
     
+    override func setBackground() {
+        return
+    }
     
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
@@ -253,23 +256,6 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
                     if let id = crateBomb.listPosition
                     {
                         if id == boxCrateBomb {
-                            
-                            let particles = SKEmitterNode(fileNamed: "Bomb.sks")!
-                            
-                            particles.position.x = crateBomb.position.x
-                            particles.position.y = crateBomb.position.y
-                            particles.zPosition = crateBomb.zPosition
-                            
-                            //TODO: quebrou aqui
-                            if let parent = crateBomb.parent {
-                                parent.addChild(particles)
-                                
-                                let action = SKAction()
-                                action.duration = 2
-                                particles.runAction(action , completion: {
-                                    particles.removeFromParent()
-                                })
-                            }
                             
                             crateBomb.removeFromParent()
                             
