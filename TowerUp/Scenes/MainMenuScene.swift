@@ -34,17 +34,17 @@ class MainMenuScene: GameScene {
         super.didMoveToView(view)
         self.backgroundColor = GameColors.blue
         
-        self.addChild(Control(textureName: "mainMenuBackground", xAlign: .center, yAlign: .center))
+        self.addChild(Control(textureName: "mainMenuBackground", x:-49, y:-32, xAlign: .center, yAlign: .center))
         
         Music.sharedInstance.play(musicNamed: "som de fundo do menu.wav")
         
-        self.buttonPlay = Button(textureName: "singleplayer" , x: 372, y: 266 , xAlign: .center, yAlign: .center)
+        self.buttonPlay = Button(textureName: "buttonPink", text:"SINGLEPLAYER" , x: 519, y: 428 , xAlign: .center, yAlign: .center)
         self.addChild(self.buttonPlay)
         
-        self.buttonPlayOnline = Button(textureName: "multiplayer", x: 372, y: 486, xAlign: .center, yAlign: .center)
+        self.buttonPlayOnline = Button(textureName: "buttonPink", text:"MULTIPLAYER", x: 519, y: 548, xAlign: .center, yAlign: .center)
         self.addChild(self.buttonPlayOnline)
         
-        self.buttonOptions = Button(textureName: "options", x: 1218, y: 640, xAlign: .center, yAlign: .center)
+        self.buttonOptions = Button(textureName: "buttonSandSquareSmall", icon:"settings", x: 1236, y: 20, xAlign: .right, yAlign: .up)
         self.addChild(self.buttonOptions)
         
         //self.buttonBuyCoin = Button(textureName: "buycoins", x: 1074, y: 26, xAlign: .center, yAlign: .center)

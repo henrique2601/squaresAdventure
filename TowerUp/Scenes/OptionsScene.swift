@@ -54,6 +54,8 @@ class OptionsScene: GameScene, FBSDKGameRequestDialogDelegate {
         
         Music.sharedInstance.play(musicNamed: "som de fundo do menu.wav")
         
+        self.addChild(Control(textureName: "background", xAlign: .center, yAlign: .center))
+        
         self.buttonInvite = Button(textureName: "buttonSandSmall", text:"INVITE", x: 20, y: 406)
         self.addChild(self.buttonInvite)
         

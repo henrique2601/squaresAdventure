@@ -65,7 +65,7 @@ class LobbyScene: GameScene, UITextFieldDelegate {
     
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
-        self.addChild(Control(textureName: "mainMenuBackground", z: -1001, xAlign: .center, yAlign: .center))
+        self.addChild(Control(textureName: "background", z: -1001, xAlign: .center, yAlign: .center))
         
         Music.sharedInstance.play(musicNamed: "som de fundo do menu.wav")
         
