@@ -18,6 +18,7 @@ class GameScene: SKScene {
         Bomb.bombList = Array<Bomb>()
         Control.controlList = Set<Control>()
         Button.buttonList = Set<Button>()
+        Switch.switchList = Set<Switch>()
         ScrollNode.scrollNodeList = Set<ScrollNode>()
         for textfield in Textfield.textfieldList {
             textfield.myTextField.removeFromSuperview()

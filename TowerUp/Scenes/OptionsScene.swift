@@ -23,6 +23,9 @@ class OptionsScene: GameScene, FBSDKGameRequestDialogDelegate {
     var state = states.options
     var nextState = states.options
     
+    var soundConfigBox:SoundConfigBox!
+    var deleteSavedGameBox:Box!
+    
     var chooseControlsScrollNode:ScrollNode!
     
     var labelLoading:Label!
@@ -32,7 +35,7 @@ class OptionsScene: GameScene, FBSDKGameRequestDialogDelegate {
     var buttonDeleteSavedGame:Button!
     var buttonChooseControls:Button!
     var buttonBack:Button!
-    var buttonInvite:Button!
+    //var buttonInvite:Button!
     var buttonSoundConfig:Button!
     
     var playerData = MemoryCard.sharedInstance.playerData
@@ -56,16 +59,17 @@ class OptionsScene: GameScene, FBSDKGameRequestDialogDelegate {
         
         self.addChild(Control(textureName: "background", xAlign: .center, yAlign: .center))
         
-        self.buttonInvite = Button(textureName: "buttonSandSmall", text:"INVITE", x: 20, y: 406)
-        self.addChild(self.buttonInvite)
-        
-        self.buttonDeleteSavedGame = Button(textureName: "buttonSandSmall", text:"DELETE", x: 20, y: 202)
-        self.addChild(self.buttonDeleteSavedGame)
-        
-        self.buttonChooseControls = Button(textureName: "buttonSandSmall", text:"CONTROLS", x: 20, y: 304)
+        self.buttonChooseControls = Button(textureName: "buttonSand", icon:"controller", x: 517, y: 181)
         self.addChild(self.buttonChooseControls)
         
-        self.buttonSoundConfig = Button(textureName: "buttonSandSmall", icon:"music", x: 274, y: 202)
+        self.buttonSoundConfig = Button(textureName: "buttonSand", icon:"music", x: 517, y: 325)
+        
+//        self.buttonInvite = Button(textureName: "buttonSand", icon:"invite", x: 347, y: 397)
+//        self.addChild(self.buttonInvite)
+        
+        self.buttonDeleteSavedGame = Button(textureName: "buttonSand", icon:"delete", x: 517, y: 469)
+        self.addChild(self.buttonDeleteSavedGame)
+        
         self.addChild(self.buttonSoundConfig)
         
         self.buttonBack = Button(textureName: "buttonGraySquareSmall", icon:"return", x: 20, y: 652, xAlign:.left, yAlign:.down)
@@ -141,7 +145,7 @@ class OptionsScene: GameScene, FBSDKGameRequestDialogDelegate {
                 
             case states.soundConfig:
                 
-                let box = SoundConfigBox()
+                self.soundConfigBox = SoundConfigBox()
                 
                 let buttonOk = Button(textureName: "buttonSandSmall", text: "Ok", x: 53, y: 253)
                 buttonOk.addHandler({
@@ -151,13 +155,19 @@ class OptionsScene: GameScene, FBSDKGameRequestDialogDelegate {
                     }
                 })
                 
-                self.addChild(box)
-                box.addChild(buttonOk)
+                self.addChild(self.soundConfigBox)
+                self.soundConfigBox.addChild(buttonOk)
+                
+                self.blackSpriteNode.hidden = false
+                self.blackSpriteNode.zPosition = Config.HUDZPosition * 2
+                self.soundConfigBox.zPosition = self.blackSpriteNode.zPosition + 1
                 
                 break
                 
             case states.deleteSavedGame:
-                let box = Box(background: "messegeBox")
+                self.deleteSavedGameBox = Box(background: "messegeBox")
+                
+                self.deleteSavedGameBox.addChild(Label(text: "Delete saved game?", x:256, y:64))
                 
                 let buttonOk = Button(textureName: "buttonRedSmall", text: "Ok", x: 266, y: 162)
                 buttonOk.addHandler({
@@ -176,9 +186,13 @@ class OptionsScene: GameScene, FBSDKGameRequestDialogDelegate {
                     }
                 })
                 
-                self.addChild(box)
-                box.addChild(buttonCancel)
-                box.addChild(buttonOk)
+                self.addChild(self.deleteSavedGameBox)
+                self.deleteSavedGameBox.addChild(buttonCancel)
+                self.deleteSavedGameBox.addChild(buttonOk)
+                
+                self.blackSpriteNode.hidden = false
+                self.blackSpriteNode.zPosition = Config.HUDZPosition * 2
+                self.deleteSavedGameBox.zPosition = self.blackSpriteNode.zPosition + 1
                 
                 break
                 
@@ -240,6 +254,27 @@ class OptionsScene: GameScene, FBSDKGameRequestDialogDelegate {
                 
                 break
                 
+            case states.deleteSavedGame:
+                for touch in touches {
+                    let location = touch.locationInNode(self)
+                    if !(self.deleteSavedGameBox.containsPoint(location)) {
+                        self.deleteSavedGameBox.removeFromParent()
+                        self.nextState = .options
+                    }
+                }
+                break
+                
+            case states.soundConfig:
+                for touch in touches {
+                    let location = touch.locationInNode(self)
+                    
+                    if !(self.soundConfigBox.containsPoint(location)) {
+                        self.soundConfigBox.removeFromParent()
+                        self.nextState = .options
+                    }
+                }
+                break
+                
             case states.options:
                 for touch in (touches ) {
                     let location = touch.locationInNode(self)
@@ -254,11 +289,11 @@ class OptionsScene: GameScene, FBSDKGameRequestDialogDelegate {
                         return
                     }
 
-                    if (self.buttonInvite.containsPoint(location)) {
-                        //self.inviteFriends(nil, limit: 50)
-                        self.nextState = .invite
-                        return
-                    }
+//                    if (self.buttonInvite.containsPoint(location)) {
+//                        //self.inviteFriends(nil, limit: 50)
+//                        self.nextState = .invite
+//                        return
+//                    }
                     
                     if (self.buttonSoundConfig.containsPoint(location)) {
                         self.nextState = .soundConfig
