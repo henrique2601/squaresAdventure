@@ -489,6 +489,7 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
                         if(location.x < (self.scene?.size.width)!/2) {
                             self.slider = Slider()
                             self.slider.touch = touch
+                            Control.touchesArray.remove(touch)
                             self.addChild(self.slider)
                             self.slider.position = location
                         }

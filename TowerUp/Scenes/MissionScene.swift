@@ -312,6 +312,7 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
                         if(location.x < (self.scene?.size.width)!/2) {
                             self.slider = Slider()
                             self.slider.touch = touch
+                            Control.touchesArray.remove(touch)
                             self.addChild(self.slider)
                             self.slider.position = CGPoint(x: Int(location.x), y: Int(location.y) + 32)
                         }
