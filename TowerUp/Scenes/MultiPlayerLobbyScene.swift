@@ -177,10 +177,9 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
                                 print(this.playersNodes)
                                 
                                 
-                                
+                                this.playerScrollNode.removeAllChildren()
                                 this.playerScrollNode.removeFromParent()
                                 
-                                //TODO: quebrou aqui
                                 this.playerScrollNode = ScrollNode(x: 388, y: 459,  cells: this.playersNodes, spacing: 0, scrollDirection: ScrollNode.scrollTypes.vertical , scaleNodes: false )
                                 
                                 this.addChild(this.playerScrollNode)

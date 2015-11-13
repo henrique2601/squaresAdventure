@@ -122,7 +122,7 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
         self.world.addChild(self.player.labelName)
         
         self.mapManager = MapManager()
-        MapManager.tower = -1//TODO: altas gambs
+        MapManager.tower = -1
         self.world.addChild(self.mapManager)
         
         self.mapManager.reloadMap(CGPoint(x: 10, y: 10))
