@@ -41,6 +41,9 @@ class World: SKNode {
         case physicsCategory.player.rawValue:
             (self.bodyA.node as! Player).didBeginContact(self.bodyB, contact: contact)
             break
+        case physicsCategory.bullet.rawValue:
+            (self.bodyA.node as? Shot)?.didBeginContact(self.bodyB, contact: contact)
+            break
         default:
             print("didBeginContact de \(self.bodyA.node?.name) não está sendo processado")
             break
@@ -62,6 +65,7 @@ class World: SKNode {
         case physicsCategory.player.rawValue:
             (self.bodyA.node as! Player).didEndContact(self.bodyB, contact: contact)
             break
+        
         default:
             print("didEndContact de \(self.bodyA.node?.name) não está sendo processado")
             break

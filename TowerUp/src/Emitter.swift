@@ -60,11 +60,13 @@ class Emitter: Tile {
     
     func update(currentTime: NSTimeInterval) {
         if(currentTime - self.lastShot > self.shotInterval) {
-            
-            //self.addChild(Shot(shotDirection: self.shotDirection))
+            let shot = Shot(shotDirection: self.shotDirection)
+            shot.position = self.position
+            shot.zPosition = self.zPosition - 1
+            self.parent?.addChild(shot)
             
             self.lastShot = currentTime
-            self.shotInterval = Double.random(min: 1, max: 3)
+            self.shotInterval = Double.random(min: 0.5, max: 1)
         }
     }
 }

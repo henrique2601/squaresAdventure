@@ -152,7 +152,8 @@ class Player: Square {
             physicsCategory.boxCrate.rawValue |
             physicsCategory.slime.rawValue |
             physicsCategory.player.rawValue |
-            physicsCategory.boxExplosive.rawValue
+            physicsCategory.boxExplosive.rawValue |
+            physicsCategory.bullet.rawValue
     }
     
 //    func blood(contact: SKPhysicsContact) {
@@ -331,14 +332,11 @@ class Player: Square {
                     //print(scene.localName)
                     //print(self.name)
                     
-                    if (scene.localName == self.name!){
-                        print("mandei pro servidor " + bomb.listPosition.description )
-                        
+                    if (scene.localName == self.name!) {
+                        print("mandei pro servidor " + bomb.listPosition.description)
                         
                         scene.socket.emit("removeBomb", scene.room , bomb.listPosition)
                         bomb.removeFromParent()
-                        
-                        
                     }
                 } else {
                     bomb.removeFromParent()
@@ -386,6 +384,7 @@ class Player: Square {
                         
                     }
                 } else {
+                    
                         boxCrateBomb.removeFromParent()
                 }
             }

@@ -275,7 +275,7 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
     
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
-        self.addChild(Control(textureName: "mainMenuBackground", z: -1001, xAlign: .center, yAlign: .center))
+        self.addChild(Control(textureName: "background", z: -1001, xAlign: .center, yAlign: .center))
         
         Music.sharedInstance.play(musicNamed: "som de fundo do menu.wav")
         self.addChild(Control(textureName: "lobby2", z: -1000, xAlign: .center, yAlign: .center))
@@ -311,7 +311,7 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
         self.addChild(boxCoins)
         
         
-        self.buttonBack = Button(textureName: "buttonGraySquareSmall", text:"<", x: 20, y: 652, xAlign:.left, yAlign:.down)
+        self.buttonBack = Button(textureName: "buttonGraySquareSmall", icon:"return", x: 20, y: 652, xAlign:.left, yAlign:.down)
         self.addChild(self.buttonBack)
         
         self.player = Player(playerData: self.playerData, x: 970, y: 459, loadPhysics: false)

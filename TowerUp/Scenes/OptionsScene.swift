@@ -54,19 +54,21 @@ class OptionsScene: GameScene, FBSDKGameRequestDialogDelegate {
         
         Music.sharedInstance.play(musicNamed: "som de fundo do menu.wav")
         
-        self.buttonInvite = Button(textureName: "buttonBlueSmall", text:"INVITE", x: 20, y: 406)
+        self.addChild(Control(textureName: "background", xAlign: .center, yAlign: .center))
+        
+        self.buttonInvite = Button(textureName: "buttonSandSmall", text:"INVITE", x: 20, y: 406)
         self.addChild(self.buttonInvite)
         
-        self.buttonDeleteSavedGame = Button(textureName: "buttonBlueSmall", text:"DELETE", x: 20, y: 202)
+        self.buttonDeleteSavedGame = Button(textureName: "buttonSandSmall", text:"DELETE", x: 20, y: 202)
         self.addChild(self.buttonDeleteSavedGame)
         
-        self.buttonChooseControls = Button(textureName: "buttonBlueSmall", text:"CONTROLS", x: 20, y: 304)
+        self.buttonChooseControls = Button(textureName: "buttonSandSmall", text:"CONTROLS", x: 20, y: 304)
         self.addChild(self.buttonChooseControls)
         
-        self.buttonSoundConfig = Button(textureName: "buttonBlueSmall", icon:"music", x: 274, y: 202)
+        self.buttonSoundConfig = Button(textureName: "buttonSandSmall", icon:"music", x: 274, y: 202)
         self.addChild(self.buttonSoundConfig)
         
-        self.buttonBack = Button(textureName: "buttonGraySquareSmall", text:"<", x: 20, y: 652, xAlign:.left, yAlign:.down)
+        self.buttonBack = Button(textureName: "buttonGraySquareSmall", icon:"return", x: 20, y: 652, xAlign:.left, yAlign:.down)
         self.buttonBack.zPosition = Config.HUDZPosition * 2 + 1
         self.addChild(self.buttonBack)
     }
@@ -141,7 +143,7 @@ class OptionsScene: GameScene, FBSDKGameRequestDialogDelegate {
                 
                 let box = SoundConfigBox()
                 
-                let buttonOk = Button(textureName: "buttonBlueSmall", text: "Ok", x: 53, y: 253)
+                let buttonOk = Button(textureName: "buttonSandSmall", text: "Ok", x: 53, y: 253)
                 buttonOk.addHandler({
                     self.nextState = .options
                     if let parent = buttonOk.parent {

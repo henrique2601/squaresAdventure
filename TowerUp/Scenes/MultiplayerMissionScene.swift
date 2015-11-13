@@ -93,6 +93,9 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
         case loose
     }
     
+    override func setBackground() {
+        return
+    }
     
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
@@ -129,14 +132,14 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
         switch(self.playerData.configControls.integerValue) {
             
         case 1: //controlsConfig.useButtons.rawValue:
-            self.buttonLeft = Button(textureName: "buttonYellowSquare", text:"<", x:20, y:626, xAlign:.left, yAlign:.down, colorBlendFactor:0.5, top:39, bottom: 39, left:39, right:39)
+            self.buttonLeft = Button(textureName: "buttonPinkSquare", text:"<", x:20, y:626, xAlign:.left, yAlign:.down, colorBlendFactor:0.5, top:39, bottom: 39, left:39, right:39)
             
             self.addChild(self.buttonLeft)
             
-            self.buttonRight = Button(textureName: "buttonYellowSquare", text:">" ,x:276, y:626, xAlign:.left, yAlign:.down, colorBlendFactor:0.5, top:39, bottom: 39, left:39, right:39)
+            self.buttonRight = Button(textureName: "buttonPinkSquare", text:">" ,x:276, y:626, xAlign:.left, yAlign:.down, colorBlendFactor:0.5, top:39, bottom: 39, left:39, right:39)
             self.addChild(self.buttonRight)
             
-            self.buttonJump = Button(textureName: "buttonYellow", text:"Jump", x:1014, y:626, xAlign:.right, yAlign:.down, colorBlendFactor:0.5, top:39, bottom: 39, left:39, right:39)
+            self.buttonJump = Button(textureName: "buttonPink", text:"Jump", x:1014, y:626, xAlign:.right, yAlign:.down, colorBlendFactor:0.5, top:39, bottom: 39, left:39, right:39)
             
             self.addChild(self.buttonJump)
             break
@@ -252,22 +255,7 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
                 for crateBomb in BoxExplosive.boxExplosiveList {
                     if let id = crateBomb.listPosition
                     {
-                        if id == boxCrateBomb{
-                            
-                            let particles = SKEmitterNode(fileNamed: "Bomb.sks")!
-                            
-                            particles.position.x = crateBomb.position.x
-                            particles.position.y = crateBomb.position.y
-                            particles.zPosition = crateBomb.zPosition
-                            //TODO: quebrou aqui
-                            crateBomb.parent!.addChild(particles)
-                            
-                            let action = SKAction()
-                            action.duration = 2
-                            particles.runAction(action , completion: { () -> Void in
-                                particles.removeFromParent()
-                                
-                            })
+                        if id == boxCrateBomb {
                             
                             crateBomb.removeFromParent()
                             

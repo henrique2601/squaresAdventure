@@ -65,20 +65,20 @@ class LobbyScene: GameScene, UITextFieldDelegate {
     
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
-        self.addChild(Control(textureName: "mainMenuBackground", z: -1001, xAlign: .center, yAlign: .center))
+        self.addChild(Control(textureName: "background", z: -1001, xAlign: .center, yAlign: .center))
         
         Music.sharedInstance.play(musicNamed: "som de fundo do menu.wav")
         
         self.addChild(Control(textureName: "lobby1", z: -1000, xAlign: .center, yAlign: .center))
         self.backgroundColor = GameColors.blue
         
-        self.buttonOnline = Button(textureName: "buttonYellow", text:"ONLINE GAME", x: 229, y: 393, xAlign: .center, yAlign: .center)
+        self.buttonOnline = Button(textureName: "buttonPink", text:"ONLINE GAME", x: 229, y: 393, xAlign: .center, yAlign: .center)
         self.addChild(self.buttonOnline)
         
-//        self.buttonQuick = Button(textureName: "buttonYellow", text:"QUICKPLAY", x: 229, y: 393, xAlign: .center, yAlign: .center)
+//        self.buttonQuick = Button(textureName: "buttonPink", text:"QUICKPLAY", x: 229, y: 393, xAlign: .center, yAlign: .center)
 //        self.addChild(self.buttonQuick)
         
-//        self.buttonLocal = Button(textureName: "buttonYellow", text:"LOCAL GAME", x: 229, y: 517, xAlign: .center, yAlign: .center)
+//        self.buttonLocal = Button(textureName: "buttonPink", text:"LOCAL GAME", x: 229, y: 517, xAlign: .center, yAlign: .center)
 //        self.addChild(self.buttonLocal)
         
         self.myTextField = Textfield(name: self.playerData.name , x: 820, y: 270, align:.center, view:self.view!)
@@ -102,7 +102,7 @@ class LobbyScene: GameScene, UITextFieldDelegate {
         self.addChild(boxCoins)
         
         
-        self.buttonBack = Button(textureName: "buttonGraySquareSmall", text:"<", x: 20, y: 652, xAlign:.left, yAlign:.down)
+        self.buttonBack = Button(textureName: "buttonGraySquareSmall", icon:"return", x: 20, y: 652, xAlign:.left, yAlign:.down)
         self.addChild(self.buttonBack)
     }
     

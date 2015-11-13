@@ -32,7 +32,7 @@ class FloorsScene: GameScene {
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
         self.backgroundColor = GameColors.blue
-        self.addChild(Control(textureName: "mainMenuBackground", xAlign: .center, yAlign: .center))
+        self.addChild(Control(textureName: "background", xAlign: .center, yAlign: .center))
         
         Music.sharedInstance.play(musicNamed: "som de fundo do menu.wav")
         
@@ -102,7 +102,7 @@ class FloorsScene: GameScene {
         self.floorsScrollNone = ScrollNode(x: 667, y: 466, cells:floorsArray, spacing: 1, scrollDirection: ScrollNode.scrollTypes.horizontal, scaleNodes:true, scaleDistance:1334/4 + 100, index: MemoryCard.sharedInstance.currentTower().lastPlayedFloor.integerValue)
         self.addChild(self.floorsScrollNone)
         
-        self.buttonBack = Button(textureName: "buttonGraySquareSmall", text:"<", x: 20, y: 652, xAlign:.left, yAlign:.down)
+        self.buttonBack = Button(textureName: "buttonGraySquareSmall", icon:"return", x: 20, y: 652, xAlign:.left, yAlign:.down)
         self.addChild(self.buttonBack)
     }
     

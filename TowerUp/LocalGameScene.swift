@@ -86,9 +86,9 @@ class LocalGameScene: GameScene, SKPhysicsContactDelegate {
         
         self.mapManager.reloadMap(CGPoint(x: 10, y: 10))
         
-        self.addChild(Button(textureName: "buttonYellowSquare", text:"<", x:20, y:630, xAlign:.left, yAlign:.down))
-        self.addChild(Button(textureName: "buttonYellowSquare", text:">" ,x:160, y:630, xAlign:.left, yAlign:.down))
-        self.addChild(Button(textureName: "buttonYellow", text:"Jump", x:1014, y:630, xAlign:.right, yAlign:.down))
+        self.addChild(Button(textureName: "buttonPinkSquare", text:"<", x:20, y:630, xAlign:.left, yAlign:.down))
+        self.addChild(Button(textureName: "buttonPinkSquare", text:">" ,x:160, y:630, xAlign:.left, yAlign:.down))
+        self.addChild(Button(textureName: "buttonPink", text:"Jump", x:1014, y:630, xAlign:.right, yAlign:.down))
         
         self.boxCoins = BoxCoins()
         self.addChild(self.boxCoins)

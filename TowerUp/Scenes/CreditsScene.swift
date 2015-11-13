@@ -24,11 +24,11 @@ class CreditsScene: GameScene {
     
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
-        self.addChild(Control(textureName: "creditsBackground", xAlign: .center, yAlign: .center))
+        self.addChild(Control(textureName: "background", xAlign: .center, yAlign: .center))
         
         Music.sharedInstance.play(musicNamed: "som de fundo do menu.wav")
         
-        self.buttonBack = Button(textureName: "buttonGraySquareSmall", text:"<", x: 20, y: 652, xAlign:.left, yAlign:.down)
+        self.buttonBack = Button(textureName: "buttonGraySquareSmall", icon:"return", x: 20, y: 652, xAlign:.left, yAlign:.down)
         self.addChild(self.buttonBack)
         
         self.buttonAd = Button(textureName: "buttonGraySquareSmall", text:"Ad", x: 20, y: 500, xAlign:.left, yAlign:.down)

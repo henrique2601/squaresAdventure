@@ -108,7 +108,7 @@ class ScrollNode: Control {
             if(self.scaleNodes) {
                 self.setCellScale(spriteNode)
             }
-           
+            
             self.addChild(spriteNode)
             i++
         }

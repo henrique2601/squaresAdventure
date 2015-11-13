@@ -15,18 +15,29 @@ class Shot: SKSpriteNode {
         let texture = SKTexture(imageNamed: "shot")
         super.init(texture: texture, color: UIColor.clearColor(), size: texture.size())
         
-        self.physicsBody = SKPhysicsBody(circleOfRadius: 32)
+        self.physicsBody = SKPhysicsBody(circleOfRadius: 16)
         
         self.physicsBody!.categoryBitMask = physicsCategory.bullet.rawValue
-        self.physicsBody!.contactTestBitMask = physicsCategory.none.rawValue
-        self.physicsBody!.collisionBitMask = physicsCategory.none.rawValue
+        self.physicsBody!.contactTestBitMask = physicsCategory.ground.rawValue
+        self.physicsBody!.collisionBitMask =
+            physicsCategory.ground.rawValue |
+            physicsCategory.player.rawValue
+            
         
         self.physicsBody!.restitution = 2
+        self.physicsBody!.linearDamping = 0
+        self.physicsBody!.affectedByGravity = false
         
-        self.physicsBody!.velocity = CGVector(dx: shotDirection.dx * 10, dy: shotDirection.dy * 10)
+        self.physicsBody!.velocity = CGVector(dx: shotDirection.dx * 750, dy: shotDirection.dy * 750)
+        
+    
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func didBeginContact(physicsBody:SKPhysicsBody, contact:SKPhysicsContact) {
+        self.removeFromParent()
     }
 }

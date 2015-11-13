@@ -211,6 +211,7 @@
 		81BA817F1A49E0F000E65899 /* libstdc++.6.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 81BA817E1A49E0F000E65899 /* libstdc++.6.dylib */; };
 		81BA81811A49E10C00E65899 /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 81BA81801A49E10C00E65899 /* ParseUI.framework */; };
 		84087EFB1BE8E504000301C4 /* Blood.sks in Resources */ = {isa = PBXBuildFile; fileRef = 84087EFA1BE8E504000301C4 /* Blood.sks */; };
+		8414F3D11BF200B100202AFA /* Shot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8414F3D01BF200B100202AFA /* Shot.swift */; };
 		8429BBC31BEB7B9F00F96F83 /* -1 3.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 8429BBC21BEB7B9F00F96F83 /* -1 3.tmx */; };
 		8429BBC61BEB802100F96F83 /* -1 4.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 8429BBC41BEB802100F96F83 /* -1 4.tmx */; };
 		8429BBC71BEB802100F96F83 /* -1 5.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 8429BBC51BEB802100F96F83 /* -1 5.tmx */; };
@@ -433,6 +434,7 @@
 		81BA81801A49E10C00E65899 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
 		81BA81821A49E27F00E65899 /* TowerUp-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TowerUp-Bridging-Header.h"; sourceTree = "<group>"; };
 		84087EFA1BE8E504000301C4 /* Blood.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Blood.sks; sourceTree = "<group>"; };
+		8414F3D01BF200B100202AFA /* Shot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Shot.swift; path = src/Shot.swift; sourceTree = "<group>"; };
 		8429BBC21BEB7B9F00F96F83 /* -1 3.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "-1 3.tmx"; sourceTree = "<group>"; };
 		8429BBC41BEB802100F96F83 /* -1 4.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "-1 4.tmx"; sourceTree = "<group>"; };
 		8429BBC51BEB802100F96F83 /* -1 5.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "-1 5.tmx"; sourceTree = "<group>"; };
@@ -561,6 +563,7 @@
 				139501A41BC6F98D0053EA5D /* Saw.swift */,
 				13DE13041B94C38E0092D50B /* ScrollNode.swift */,
 				3A390C911BD0576F00F948F6 /* ServerManager.swift */,
+				8414F3D01BF200B100202AFA /* Shot.swift */,
 				1323FF601B90C83300EF4C2E /* Skin.swift */,
 				1305E4EC1BB18B1B009F9B0A /* Slider.swift */,
 				1383005E1BD69F330099D1A5 /* Slime.swift */,
@@ -729,7 +732,7 @@
 		13F390911BD543B60089BF15 /* _Tower2 */ = {
 			isa = PBXGroup;
 			children = (
-				5C2535E81BEFA6C8005EFA80 /* 0 0.tmx */,
+				5C2535E81BEFA6C8005EFA80 /* 2 0.tmx */,
 				5C2535EA1BEFAD8E005EFA80 /* 2 1.tmx */,
 				5C2535EB1BEFAD8E005EFA80 /* 2 2.tmx */,
 				5C2535EC1BEFAD8E005EFA80 /* 2 3.tmx */,
@@ -902,7 +905,7 @@
 				TargetAttributes = {
 					81BA81441A49DA1800E65899 = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = GJXSLWWRF6;
+						DevelopmentTeam = JZ3J7RVLD7;
 						SystemCapabilities = {
 							com.apple.InAppPurchase = {
 								enabled = 0;
@@ -968,7 +971,7 @@
 				844F3D2B1BE26EF1000AAD31 /* Win.sks in Resources */,
 				5C2535F51BEFAD8E005EFA80 /* 2 3.tmx in Resources */,
 				13F390AD1BD543B60089BF15 /* 1 15.tmx in Resources */,
-				5C2535E91BEFA6C8005EFA80 /* 0 0.tmx in Resources */,
+				5C2535E91BEFA6C8005EFA80 /* 2 0.tmx in Resources */,
 				84087EFB1BE8E504000301C4 /* Blood.sks in Resources */,
 				13F390AF1BD543B60089BF15 /* 1 2.tmx in Resources */,
 				13CCB6FC1B72AD310060334C /* LaunchScreen.xib in Resources */,
@@ -1141,6 +1144,7 @@
 				1383FD5E1B7A49730012DA45 /* MapManager.swift in Sources */,
 				1359DD181B728D3E006C12FA /* Label.swift in Sources */,
 				137D3DA31BB438D5003202D9 /* Gem.swift in Sources */,
+				8414F3D11BF200B100202AFA /* Shot.swift in Sources */,
 				1309B4241BDFB58C000F0B9E /* BoxExplosive.swift in Sources */,
 				5CF8A3A81B8F39A000C16CA9 /* FloorData.swift in Sources */,
 				135C5CA21BA8310A006643BB /* PlayerData.swift in Sources */,
@@ -1281,7 +1285,7 @@
 					"$(PROJECT_DIR)",
 				);
 				"OTHER_SWIFT_FLAGS[arch=*]" = "-D DEBUG";
-				PRODUCT_BUNDLE_IDENTIFIER = com.WTFGames.TowerUp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.PabloHenri91.TowerUp;
 				PRODUCT_NAME = "Squares Adventure";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "TowerUp/TowerUp-Bridging-Header.h";
@@ -1309,7 +1313,7 @@
 					"$(PROJECT_DIR)",
 				);
 				"OTHER_SWIFT_FLAGS[arch=*]" = "-D RELEASE";
-				PRODUCT_BUNDLE_IDENTIFIER = com.WTFGames.TowerUp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.PabloHenri91.TowerUp;
 				PRODUCT_NAME = "Squares Adventure";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "TowerUp/TowerUp-Bridging-Header.h";

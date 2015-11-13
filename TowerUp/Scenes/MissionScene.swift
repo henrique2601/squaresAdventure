@@ -60,6 +60,10 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
     
     var slider:Slider!
     
+    override func setBackground() {
+        return
+    }
+    
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
         self.backgroundColor = GameColors.blueSky
@@ -91,14 +95,14 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
         switch(self.playerData.configControls.integerValue) {
             
         case 1: //controlsConfig.useButtons.rawValue:
-            self.buttonLeft = Button(textureName: "buttonYellowSquare", text:"<", x:20, y:626, xAlign:.left, yAlign:.down, colorBlendFactor:0.5, top:Int(Config.currentSceneSize.height/2), bottom: 39, left:39, right:39)
+            self.buttonLeft = Button(textureName: "buttonSandSquare", icon:"arrowLeft", x:20, y:626, xAlign:.left, yAlign:.down, colorBlendFactor:0.5, top:Int(Config.currentSceneSize.height/2), bottom: 39, left:39, right:39)
             
             self.addChild(self.buttonLeft)
             
-            self.buttonRight = Button(textureName: "buttonYellowSquare", text:">" ,x:276, y:626, xAlign:.left, yAlign:.down, colorBlendFactor:0.5, top:Int(Config.currentSceneSize.height/2), bottom: 39, left:39, right:39)
+            self.buttonRight = Button(textureName: "buttonSandSquare", icon:"arrowRight" ,x:276, y:626, xAlign:.left, yAlign:.down, colorBlendFactor:0.5, top:Int(Config.currentSceneSize.height/2), bottom: 39, left:39, right:39)
             self.addChild(self.buttonRight)
             
-            self.buttonJump = Button(textureName: "buttonYellow", text:"Jump", x:1014, y:626, xAlign:.right, yAlign:.down, colorBlendFactor:0.5, top:Int(Config.currentSceneSize.height/2), bottom: 39, left:39, right:39)
+            self.buttonJump = Button(textureName: "buttonSand", icon:"arrowUp", x:1014, y:626, xAlign:.right, yAlign:.down, colorBlendFactor:0.5, top:Int(Config.currentSceneSize.height/2), bottom: 39, left:39, right:39)
             
             self.addChild(self.buttonJump)
             break
@@ -133,10 +137,10 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
             PowerUp.updatePowerUpLabels()
         }
         
-        self.buttonBack = Button(textureName: "buttonGraySquareSmall", text:"X" ,x:20, y:20, xAlign:.left, yAlign:.up)
+        self.buttonBack = Button(textureName: "buttonGraySquareSmall", icon:"return" ,x:20, y:20, xAlign:.left, yAlign:.up)
         self.addChild(self.buttonBack)
         
-        self.buttonRestart = Button(textureName: "buttonBlueSquareSmall", icon:"restart" ,x:118, y:20, xAlign:.left, yAlign:.up)
+        self.buttonRestart = Button(textureName: "buttonSandSquareSmall", icon:"restart" ,x:118, y:20, xAlign:.left, yAlign:.up)
         self.addChild(self.buttonRestart)
     }
     
@@ -208,7 +212,7 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
                 
                 self.player.update(currentTime)
                 self.mapManager.update(currentTime)
-                //Emitter.update(currentTime)
+                Emitter.update(currentTime)
                 
                 break
             default:

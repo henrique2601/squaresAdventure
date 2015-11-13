@@ -60,13 +60,30 @@ class BoxExplosive: Tile {
     
     override func removeFromParent() {
         
+        let particles = SKEmitterNode(fileNamed: "Bomb.sks")!
         
-        for (var i=0 ; i < BoxExplosive.boxExplosiveList.count ; i++) {
-            if (BoxExplosive.boxExplosiveList[i].listPosition == self.listPosition){
+        particles.position.x = self.position.x
+        particles.position.y = self.position.y
+        particles.zPosition = self.zPosition
+        
+        if let parent = self.parent {
+            parent.addChild(particles)
+            
+            let action = SKAction()
+            action.duration = 2
+            particles.runAction(action , completion: {
+                particles.removeFromParent()
+            })
+        }
+        
+        for (var i = 0 ; i < BoxExplosive.boxExplosiveList.count ; i++) {
+            if (BoxExplosive.boxExplosiveList[i].listPosition == self.listPosition) {
                 BoxExplosive.boxExplosiveList.removeAtIndex(i)
+                //break usado para evitar continuar enumerando a lista apos ela ter sido alterada.
+                break
             }
         }
-        super.removeFromParent()
         
+        super.removeFromParent()
     }
 }

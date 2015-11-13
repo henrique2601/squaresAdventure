@@ -30,6 +30,8 @@ class ViewController: UIViewController {
 //            skView.showsQuadCount = true
         #endif
         
+        //skView.showsPhysics = true
+        
         /* Sprite Kit applies additional optimizations to improve rendering performance */
         skView.ignoresSiblingOrder = true
         
@@ -63,7 +65,7 @@ class ViewController: UIViewController {
     
     override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
         if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
-            return UIInterfaceOrientationMask.Landscape
+            return UIInterfaceOrientationMask.All
         } else {
             return UIInterfaceOrientationMask.All
         }
