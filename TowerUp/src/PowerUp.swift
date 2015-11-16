@@ -204,10 +204,11 @@ class PowerUp: Button {
             self.eventBegin?.addHandler({
                 if(player.healthPoints > 0) {
                     bomb = BoxExplosive(position: player.position)
+                    bomb.creator = player.name
                     player.parent?.addChild(bomb)
                      if let scene = player.scene as? MultiplayerMissionScene {
                         print(scene.room.description + "room")
-                        scene.socket.emit("crateBomb", scene.room ,Int(player.position.x) , Int(player.position.y) )
+                        scene.socket.emit("crateBomb", scene.room ,Int(player.position.x) , Int(player.position.y), scene.localName)
                     }
                 } else {
                     self.lastUse = -1

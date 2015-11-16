@@ -251,11 +251,30 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
             
             print("removeBoxCrateBomb")
            
-            if let boxCrateBomb = data?[0] as? Int {
+            if let boxCrateBomb = data?[0] as? Int, let victim = data?[1] as? String {
+        
                 for crateBomb in BoxExplosive.boxExplosiveList {
                     if let id = crateBomb.listPosition
                     {
                         if id == boxCrateBomb {
+                            
+                            if (crateBomb.creator == this.localName) {
+                                if (victim != this.localName){
+                                    
+                                    this.labelWin = Label(text: "\(victim) died in your bomb", x: 675, y: 375, xAlign: Control.xAlignments.center, yAlign: Control.yAlignments.center)
+                                    this.addChild(this.labelWin!)
+                                    this.labelWin?.runAction(SKAction.fadeOutWithDuration(2), completion: { () -> Void in
+                                        this.labelWin?.removeFromParent()
+                                        
+                                    })
+                                    
+                                    let playerData = MemoryCard.sharedInstance.playerData
+                                    playerData.coins = NSNumber(integer: Int(playerData.coins) + 60)
+                                    
+                                    this.collectedBonus = this.collectedBonus + 60
+                                    
+                                }
+                            }
                             
                             crateBomb.removeFromParent()
                             
@@ -321,20 +340,28 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
             
             print(data)
             
-            if let x = data?[0] as? Int, let y = data?[1] as? Int {
+            if let x = data?[0] as? Int, let y = data?[1] as? Int, let name = data?[2] as? String {
                 
-                let bomb = BoxExplosive(position: CGPoint(x: x, y: y))
-                this.world.addChild(bomb)
+                if (name != this.localName) {
+                    
+                    let bomb = BoxExplosive(position: CGPoint(x: x, y: y))
+                    bomb.creator = name
+                    this.world.addChild(bomb)
+                    
+                    print("bomb at " + x.description + " " + y.description )
+                    
+                    bomb.runAction({
+                        let action = SKAction()
+                        action.duration = 1
+                        return action
+                        }(), completion: { () -> Void in
+                            bomb.activate()
+                    })
+                    
+                    
+                }
                 
-                print("bomb at " + x.description + " " + y.description )
                 
-                bomb.runAction({
-                    let action = SKAction()
-                    action.duration = 1
-                    return action
-                    }(), completion: { () -> Void in
-                        bomb.activate()
-                })
                 
                 
                 

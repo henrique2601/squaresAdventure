@@ -255,16 +255,24 @@ class Player: Square {
                 let coin = (node as! Coin)
                 
                 if let scene = self.scene as? MissionScene {
+                    
                     let playerData = MemoryCard.sharedInstance.playerData
                     playerData.coins = NSNumber(integer: Int(playerData.coins) + coin.bonus)
                     
                     scene.collectedBonus = scene.collectedBonus + coin.bonus
                 } else {
                     if let scene = self.scene as? MultiplayerMissionScene {
-                        let playerData = MemoryCard.sharedInstance.playerData
-                        playerData.coins = NSNumber(integer: Int(playerData.coins) + coin.bonus)
                         
-                        scene.collectedBonus = scene.collectedBonus + coin.bonus
+                        if ( scene.localName == self.name ) {
+                            
+                            let playerData = MemoryCard.sharedInstance.playerData
+                            playerData.coins = NSNumber(integer: Int(playerData.coins) + coin.bonus)
+                            
+                            scene.collectedBonus = scene.collectedBonus + coin.bonus
+                            
+                        }
+                        
+                        
                     }
                 }
                 
@@ -378,7 +386,7 @@ class Player: Square {
                         //print("mandei pro servidor")
                         
                         
-                        scene.socket.emit("removeBoxCrateBomb", scene.room , boxCrateBomb.listPosition)
+                        scene.socket.emit("removeBoxCrateBomb", scene.room , boxCrateBomb.listPosition , self.name!)
                         boxCrateBomb.removeFromParent()
                         
                         
