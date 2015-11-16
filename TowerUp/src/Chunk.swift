@@ -27,6 +27,8 @@ class Chunk: SKSpriteNode, NSXMLParserDelegate {
     //var type:String = MapManager.tower == -1 ? Towers.types[Int.random(Towers.types.count)].tileset : Towers.types[MapManager.tower].tileset
     var type:String = MapManager.tower == -1 ? Towers.types[MapManager.floor % Towers.types.count].tileset : Towers.types[MapManager.tower].tileset
     
+    static var lastType:String!
+    
     
     init(tower:Int, floor:Int, regionX:Int, regionY:Int) {
         super.init(texture: nil, color: UIColor.clearColor(), size: CGSize(width: Chunk.sizeInPointsX, height: Chunk.sizeInPointsY))
@@ -296,8 +298,9 @@ class Chunk: SKSpriteNode, NSXMLParserDelegate {
             
             break
         case "tileset":
-            if(attributeDict["firstgid"] == "1"){
+            if(attributeDict["firstgid"] == "1") {
                 self.type = attributeDict["name"]!
+                Chunk.lastType = self.type
             }
             break
         default:

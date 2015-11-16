@@ -105,9 +105,6 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
         
         Music.sharedInstance.play(musicNamed: "A New Camp.mp3")
         
-        self.parallax = Parallax(imageNamed: "grassBackground")
-        self.addChild(self.parallax)
-        
         self.world = World(physicsWorld: self.physicsWorld)
         self.addChild(self.world)
         self.physicsWorld.contactDelegate = self
@@ -126,6 +123,9 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
         self.world.addChild(self.mapManager)
         
         self.mapManager.reloadMap(CGPoint(x: 10, y: 10))
+        
+        self.parallax = Parallax(imageNamed: Chunk.lastType + "Background")
+        self.addChild(self.parallax)
         
         self.localName = MemoryCard.sharedInstance.playerData.name
         
