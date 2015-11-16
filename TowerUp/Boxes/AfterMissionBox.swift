@@ -20,7 +20,7 @@ class AfterMissionBox: Box {
     var buttonNext:Button!
     
     init(background: String, time:String, deaths:String, bonus:String, scene:SKScene?) {
-        super.init(background: background, x:435, y:82, xAlign:.center, yAlign:.down)
+        super.init(textureName: background, x:435, y:82, xAlign:.center, yAlign:.down)
         
         let afterMissionBoxBackground = Control(textureName: "afterMissionBoxBackground", x: 71, y: 172)
         self.addChild(afterMissionBoxBackground)

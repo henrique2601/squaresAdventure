@@ -305,6 +305,7 @@ class ScrollNode: Control {
         }
         
         self.cells.append(cell)
+        self.canScroll = (self.cells.count > 1)
         self.addChild(cell)
     }
     

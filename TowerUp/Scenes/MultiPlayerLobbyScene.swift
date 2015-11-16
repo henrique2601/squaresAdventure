@@ -66,7 +66,7 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
     
     var localName: String = "teste"
     
-    
+    var lobby2:CropBox!
     
     func addHandlers(){
         
@@ -114,7 +114,6 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
                         labelName2.zPosition = player2.zPosition + 1
                         labelName2.setText(player2.name!, color: GameColors.black)
                         player2.labelName = labelName2
-
                         
                         let cell = SKSpriteNode(imageNamed: "lobbyCell")
                         cell.addChild(Label(text: player2.name!, x: -89, y: 0))
@@ -122,12 +121,8 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
                         playerSkin.position = CGPoint(x: -193/2, y: 0)
                         cell.addChild(playerSkin)
                         cell.name = player2.id!.description
-        
-                        
                         
                         this.playersNodes.append(cell)
-                        
-                        
                     }
                 }
             }
@@ -135,13 +130,7 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
             
             this.playerScrollNode = ScrollNode(x: 388, y: 459,  cells: this.playersNodes, spacing: 0, scrollDirection: ScrollNode.scrollTypes.vertical , scaleNodes: false )
             
-            this.addChild(this.playerScrollNode)
-            
-            
-            
-            
-            
-            
+            this.lobby2.addChild(this.playerScrollNode)
         }
         
                 
@@ -182,8 +171,7 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
                                 
                                 this.playerScrollNode = ScrollNode(x: 388, y: 459,  cells: this.playersNodes, spacing: 0, scrollDirection: ScrollNode.scrollTypes.vertical , scaleNodes: false )
                                 
-                                this.addChild(this.playerScrollNode)
-                                
+                                this.lobby2.addChild(this.playerScrollNode)
                             }
                         }
                     }
@@ -253,9 +241,6 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
                 Control.controlList.remove(labelName)
                 labelName.setText(player.name!, color: GameColors.black)
                 player.labelName = labelName
-
-                
-                
                 
                 let cell = SKSpriteNode(imageNamed: "lobbyCell")
                 cell.addChild(Label(text: player.name!, x: -89, y: 0))
@@ -267,18 +252,15 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
                 this.playerScrollNode.append(cell)
             }
         }
-        
-        
     }
-
-    
     
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
         self.addChild(Control(textureName: "background", z: -1001, xAlign: .center, yAlign: .center))
         
         Music.sharedInstance.play(musicNamed: "som de fundo do menu.wav")
-        self.addChild(Control(textureName: "lobby2", z: -1000, xAlign: .center, yAlign: .center))
+        self.lobby2 = CropBox(textureName: "lobby2", z: -1000, xAlign: .center, yAlign: .center)
+        self.addChild(self.lobby2)
         self.backgroundColor = GameColors.blue
         
         self.myTextField = Textfield(name: self.playerData.name , x: 820, y: 270, align:.center, view:self.view!)

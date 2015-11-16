@@ -34,7 +34,7 @@ class GameScene: SKScene {
         
         MessageBox.messageBoxCount = 0
         
-        super.init(size: Config.sceneSize())
+        super.init(size: Config.currentSceneSize)
         
         self.blackSpriteNode = BlackSpriteNode()
         self.addChild(self.blackSpriteNode)
