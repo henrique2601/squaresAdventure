@@ -165,7 +165,7 @@ class OptionsScene: GameScene, FBSDKGameRequestDialogDelegate {
                 break
                 
             case states.deleteSavedGame:
-                self.deleteSavedGameBox = Box(background: "messegeBox")
+                self.deleteSavedGameBox = Box(textureName: "messegeBox")
                 
                 self.deleteSavedGameBox.addChild(Label(text: "Delete saved game?", x:256, y:64))
                 

@@ -216,6 +216,7 @@
 		8429BBC61BEB802100F96F83 /* -1 4.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 8429BBC41BEB802100F96F83 /* -1 4.tmx */; };
 		8429BBC71BEB802100F96F83 /* -1 5.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 8429BBC51BEB802100F96F83 /* -1 5.tmx */; };
 		844F3D2B1BE26EF1000AAD31 /* Win.sks in Resources */ = {isa = PBXBuildFile; fileRef = 844F3D2A1BE26EF1000AAD31 /* Win.sks */; };
+		849B35F01BFA020E008C7A83 /* CropBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849B35EF1BFA020E008C7A83 /* CropBox.swift */; };
 		84A7808F1BEA557300AC96AD /* -1 2.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 84A7808E1BEA557300AC96AD /* -1 2.tmx */; };
 		84DB73F11BE8C42500C92525 /* Smoke.sks in Resources */ = {isa = PBXBuildFile; fileRef = 84DB73F01BE8C42500C92525 /* Smoke.sks */; };
 		84E0882F1BEA37FD00D3C82C /* ALIterativeMigrator.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E0882E1BEA37FD00D3C82C /* ALIterativeMigrator.m */; };
@@ -439,6 +440,7 @@
 		8429BBC41BEB802100F96F83 /* -1 4.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "-1 4.tmx"; sourceTree = "<group>"; };
 		8429BBC51BEB802100F96F83 /* -1 5.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "-1 5.tmx"; sourceTree = "<group>"; };
 		844F3D2A1BE26EF1000AAD31 /* Win.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Win.sks; sourceTree = "<group>"; };
+		849B35EF1BFA020E008C7A83 /* CropBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CropBox.swift; path = src/CropBox.swift; sourceTree = "<group>"; };
 		84A7808E1BEA557300AC96AD /* -1 2.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "-1 2.tmx"; sourceTree = "<group>"; };
 		84DB73F01BE8C42500C92525 /* Smoke.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Smoke.sks; sourceTree = "<group>"; };
 		84E088271BEA0ACE00D3C82C /* TowerUp 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TowerUp 2.xcdatamodel"; sourceTree = "<group>"; };
@@ -538,6 +540,7 @@
 				1331849F1B83679200DF11D5 /* Coin.swift */,
 				1359DD031B728168006C12FA /* Config.swift */,
 				1359DD0D1B72874C006C12FA /* Control.swift */,
+				849B35EF1BFA020E008C7A83 /* CropBox.swift */,
 				5C48055D1B84CFF60066E151 /* DoorTile.swift */,
 				5C2535FC1BEFBB55005EFA80 /* Emitter.swift */,
 				1326AE891B85FD8800D4563B /* Event.swift */,
@@ -1153,6 +1156,7 @@
 				5CF8A3A61B8F39A000C16CA9 /* PowerUpData.swift in Sources */,
 				135C5CA41BA8364B006643BB /* PowerUpSlotData.swift in Sources */,
 				13BC7ED81BAAE883003D6CCD /* SocketFixUTF8.swift in Sources */,
+				849B35F01BFA020E008C7A83 /* CropBox.swift in Sources */,
 				3A390C871BCCB42D00F948F6 /* MultiPlayerLobbyScene.swift in Sources */,
 				1359DC9A1B727726006C12FA /* TowerUp.xcdatamodeld in Sources */,
 				3A390C921BD0576F00F948F6 /* ServerManager.swift in Sources */,

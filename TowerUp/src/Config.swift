@@ -21,12 +21,13 @@ class Config: NSObject {
     
     static var defaultTransition = SKTransition.crossFadeWithDuration(0.5)
     
-    static func sceneSize() -> CGSize {
+    static let sceneSize:CGSize = CGSize(width: 1334/2, height: 750/2)
+    
+    static func updateSceneSize() -> CGSize {
         
         switch(Int(UIDevice.currentDevice().systemVersion[0] as String)!) {
             
         case 9:
-            let sceneSize:CGSize = CGSize(width: 1334/2, height: 750/2)
             
             let xScale = skViewBoundsSize.width / sceneSize.width
             let yScale = skViewBoundsSize.height / sceneSize.height

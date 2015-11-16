@@ -44,6 +44,8 @@ class LobbyScene: GameScene, UITextFieldDelegate {
     
     var mySkins = NSMutableArray()//Skins Desbloqueadas/Compradas
     
+    var cropBox:CropBox!
+    
     
     func randomStringWithLength (len : Int) -> NSString {
         
@@ -69,7 +71,9 @@ class LobbyScene: GameScene, UITextFieldDelegate {
         
         Music.sharedInstance.play(musicNamed: "som de fundo do menu.wav")
         
-        self.addChild(Control(textureName: "lobby1", z: -1000, xAlign: .center, yAlign: .center))
+        self.cropBox = CropBox(textureName: "lobby1", z: -1000, xAlign: .center, yAlign: .center)
+        
+        self.addChild(self.cropBox)
         self.backgroundColor = GameColors.blue
         
         self.buttonOnline = Button(textureName: "buttonPink", text:"ONLINE GAME", x: 229, y: 393, xAlign: .center, yAlign: .center)
@@ -259,7 +263,7 @@ class LobbyScene: GameScene, UITextFieldDelegate {
        
                 
                 self.powerUpsScrollNode = ScrollNode(x: 970, y: 436, cells: powerUpsArray, scrollDirection: .horizontal, scaleNodes: false, scaleDistance:95)
-                self.addChild(self.powerUpsScrollNode)
+                self.cropBox.addChild(self.powerUpsScrollNode)
                 
                 break
                 

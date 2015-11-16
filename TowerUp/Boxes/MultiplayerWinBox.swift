@@ -15,7 +15,7 @@ class MultiplayerWinBox: Box {
     var buttonExit:Button!
     
     init(background: String, winPlayersList: Array<String>) {
-        super.init(background: background)
+        super.init(textureName: background)
         
         var nodesList = Array<WinCell>()
         

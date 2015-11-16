@@ -17,7 +17,7 @@ class SoundConfigBox: Box {
     var playerData = MemoryCard.sharedInstance.playerData
     
     init() {
-        super.init(background: "box340x355")
+        super.init(textureName: "box340x355")
         
         self.switchMusic = Switch(textureName: "music", on:self.playerData.musicEnabled.boolValue, x:20, y:20)
         self.addChild(self.switchMusic)

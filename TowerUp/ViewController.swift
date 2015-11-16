@@ -36,7 +36,7 @@ class ViewController: UIViewController {
         skView.ignoresSiblingOrder = true
         
         Config.skViewBoundsSize = skView.bounds.size
-        
+        Config.updateSceneSize()
         let scene = MainMenuScene()
         skView.presentScene(scene)
         
@@ -51,7 +51,7 @@ class ViewController: UIViewController {
         
         Config.skViewBoundsSize = skView.bounds.size
         
-        skView.scene?.size = Config.sceneSize()
+        skView.scene?.size = Config.updateSceneSize()
         Control.resetControls()
         
         if let gameScene = skView.scene as? GameScene {
