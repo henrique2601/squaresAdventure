@@ -31,7 +31,7 @@ class TowersScene: GameScene {
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
         self.backgroundColor = GameColors.blue
-        self.addChild(Control(textureName: "background", xAlign: .center, yAlign: .center))
+        self.addChild(Control(textureName: "background", x:-49, y:-32, xAlign: .center, yAlign: .center))
         
         Music.sharedInstance.play(musicNamed: "som de fundo do menu.wav")
         
