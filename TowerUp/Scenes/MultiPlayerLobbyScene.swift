@@ -128,7 +128,7 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
             }
             print("Added Players")
             
-            this.playerScrollNode = ScrollNode(x: 388, y: 459,  cells: this.playersNodes, spacing: 0, scrollDirection: ScrollNode.scrollTypes.vertical , scaleNodes: false )
+            this.playerScrollNode = ScrollNode(x: 388, y: 359,  cells: this.playersNodes, spacing: 0, scrollDirection: ScrollNode.scrollTypes.vertical , scaleNodes: false )
             
             this.lobby2.addChild(this.playerScrollNode)
         }
@@ -169,7 +169,7 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
                                 this.playerScrollNode.removeAllChildren()
                                 this.playerScrollNode.removeFromParent()
                                 
-                                this.playerScrollNode = ScrollNode(x: 388, y: 459,  cells: this.playersNodes, spacing: 0, scrollDirection: ScrollNode.scrollTypes.vertical , scaleNodes: false )
+                                this.playerScrollNode = ScrollNode(x: 388, y: 359,  cells: this.playersNodes, spacing: 0, scrollDirection: ScrollNode.scrollTypes.vertical , scaleNodes: false )
                                 
                                 this.lobby2.addChild(this.playerScrollNode)
                             }
@@ -242,6 +242,9 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
                 labelName.setText(player.name!, color: GameColors.black)
                 player.labelName = labelName
                 
+                
+                for var i = 0; i < 10; i++ {
+                
                 let cell = SKSpriteNode(imageNamed: "lobbyCell")
                 cell.addChild(Label(text: player.name!, x: -89, y: 0))
                 let playerSkin = SKSpriteNode(imageNamed: Skins.types[skin!].imageName)
@@ -250,6 +253,8 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
                 cell.name = player.id!.description
                 
                 this.playerScrollNode.append(cell)
+                    
+                }
             }
         }
     }
@@ -283,10 +288,10 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
         }
         
         
-        self.labelState = Label(text: "Loading", x: 375, y: 275, xAlign:.center, yAlign:.center)
+        self.labelState = Label(text: "Loading", x: 375, y: 175, xAlign:.center, yAlign:.center)
         self.addChild(self.labelState)
         
-        self.labelCountDown = Label(text: "", x: 375, y: 310, xAlign:.center, yAlign:.center)
+        self.labelCountDown = Label(text: "", x: 375, y: 210, xAlign:.center, yAlign:.center)
         self.addChild(self.labelCountDown)
         
         self.boxCoins = BoxCoins()
