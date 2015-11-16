@@ -13,9 +13,11 @@ class BoxExplosive: Tile {
     
     static var boxExplosiveList = Array<BoxExplosive>()
     var listPosition: Int!
+    var creator: String!
     
     init(position:CGPoint) {
         
+        print("criei a bomba")
         
         let positionX = position.x
         let positionY = position.y
@@ -75,14 +77,16 @@ class BoxExplosive: Tile {
                 particles.removeFromParent()
             })
         }
-        
+                
         for (var i = 0 ; i < BoxExplosive.boxExplosiveList.count ; i++) {
             if (BoxExplosive.boxExplosiveList[i].listPosition == self.listPosition) {
+         
                 BoxExplosive.boxExplosiveList.removeAtIndex(i)
                 //break usado para evitar continuar enumerando a lista apos ela ter sido alterada.
                 break
             }
         }
+        
         
         super.removeFromParent()
     }
