@@ -453,6 +453,9 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
                         self.nextState = states.lobby
                         return
                     }
+                    if(self.boxCoins.containsPoint(location)) {
+                        self.boxCoins.containsPoint()
+                    }
                     
 
                     

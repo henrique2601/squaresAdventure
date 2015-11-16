@@ -81,9 +81,9 @@ class ViewController: UIViewController {
         return true
     }
     
-    static func triggerVideo()
+    static func triggerVideo(withDelegate:AdColonyAdDelegate)
     {
-        AdColony.playVideoAdForZone("vzcc126525fc244e9da4", withDelegate: nil)
+        AdColony.playVideoAdForZone("vz8a4089d331e742a9a1", withDelegate: withDelegate)
     }
 
 }

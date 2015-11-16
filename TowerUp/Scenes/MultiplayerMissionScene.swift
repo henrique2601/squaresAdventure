@@ -557,6 +557,9 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
                     self.nextState = .loose
                     return
                 }
+                if(self.boxCoins.containsPoint(location)) {
+                    self.boxCoins.containsPoint()
+                }
             }
         }
     }

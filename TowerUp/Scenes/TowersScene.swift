@@ -24,7 +24,7 @@ class TowersScene: GameScene {
     
     var towersScrollNode:ScrollNode!
     
-    var boxCoins:Control!
+    var boxCoins:BoxCoins!
     
     var buttonBack:Button!
     
@@ -136,6 +136,10 @@ class TowersScene: GameScene {
                     if (self.buttonBack.containsPoint(location)) {
                         self.nextState = .mainMenu
                         return
+                    }
+                    
+                    if(self.boxCoins.containsPoint(location)) {
+                        self.boxCoins.containsPoint()
                     }
                     
                     if (self.towersScrollNode.containsPoint(location)) {

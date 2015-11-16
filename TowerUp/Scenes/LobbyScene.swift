@@ -336,6 +336,10 @@ class LobbyScene: GameScene, UITextFieldDelegate {
                         return
                     }
                     
+                    if(self.boxCoins.containsPoint(location)) {
+                        self.boxCoins.containsPoint()
+                    }
+                    
                     if (self.player.containsPoint(location)) {
                         self.nextState = .chooseSkin
                         return

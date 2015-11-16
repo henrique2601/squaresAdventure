@@ -74,7 +74,7 @@ class CreditsScene: GameScene {
                     
                     if(self.buttonAd.containsPoint(location)){
                     
-                        ViewController.triggerVideo()
+                        //ViewController.triggerVideo
                     
                     }
                 }

@@ -355,6 +355,9 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
                     self.nextState = .floors
                     return
                 }
+                if(self.boxCoins.containsPoint(location)) {
+                    self.boxCoins.containsPoint()
+                }
                 if (self.buttonRestart.containsPoint(location)) {
                     self.nextState = .restart
                     return

@@ -360,6 +360,10 @@ class BeforeMissionScene: GameScene {
                         return
                     }
                     
+                    if(self.boxCoins.containsPoint(location)) {
+                        self.boxCoins.containsPoint()
+                    }
+                    
                     self.touchesEndedSkins(touch, location: location)
                     
                     self.touchesEndedPowerUps(touch, location: location)

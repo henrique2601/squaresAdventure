@@ -25,7 +25,7 @@ class FloorsScene: GameScene {
     
     var selectedTower:TowerData!
     
-    var boxCoins:Control!
+    var boxCoins:BoxCoins!
     
     var buttonBack:Button!
     
@@ -143,6 +143,10 @@ class FloorsScene: GameScene {
                     if (self.buttonBack.containsPoint(location)) {
                         self.nextState = .towers
                         return
+                    }
+                    
+                    if(self.boxCoins.containsPoint(location)) {
+                        self.boxCoins.containsPoint()
                     }
                     
                     if (self.floorsScrollNone.containsPoint(location)) {
