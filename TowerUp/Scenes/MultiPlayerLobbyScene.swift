@@ -242,9 +242,6 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
                 labelName.setText(player.name!, color: GameColors.black)
                 player.labelName = labelName
                 
-                
-                for var i = 0; i < 10; i++ {
-                
                 let cell = SKSpriteNode(imageNamed: "lobbyCell")
                 cell.addChild(Label(text: player.name!, x: -89, y: 0))
                 let playerSkin = SKSpriteNode(imageNamed: Skins.types[skin!].imageName)
@@ -253,8 +250,6 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
                 cell.name = player.id!.description
                 
                 this.playerScrollNode.append(cell)
-                    
-                }
             }
         }
     }
