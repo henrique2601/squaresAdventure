@@ -56,6 +56,7 @@ class ViewController: UIViewController {
         
         if let gameScene = skView.scene as? GameScene {
             gameScene.blackSpriteNode.update()
+            gameScene.setBackground()
         }
     }
     

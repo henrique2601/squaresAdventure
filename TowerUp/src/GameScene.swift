@@ -13,6 +13,9 @@ class GameScene: SKScene {
     
     var blackSpriteNode:BlackSpriteNode!
     
+    var backgroundUp:Control!
+    var backgroundDown:Control!
+    
     override init() {
         Control.touchesArray = Set<UITouch>()
         Bomb.bombList = Array<Bomb>()
@@ -66,14 +69,23 @@ class GameScene: SKScene {
     }
     
     func setBackground() {
+        
+        if let _ = self.backgroundUp {
+            self.backgroundUp.removeFromParent()
+        }
+        if let _ = self.backgroundDown {
+            self.backgroundDown.removeFromParent()
+        }
+        
         var spriteNode = SKSpriteNode(texture: nil, color: GameColors.blueSky, size: self.size)
         let size = CGSize(width: self.size.width, height: self.size.height/CGFloat(2))
         
-        var control = Control(spriteNode: spriteNode, x: 0, y: 0, z: -20000, size:size, xAlign: .center, yAlign: .up)
-        self.addChild(control)
+        self.backgroundUp = Control(spriteNode: spriteNode, x: 0, y: 0, z: -20000, size:size, xAlign: .center, yAlign: .up)
+        
+        self.addChild(self.backgroundUp)
         
         spriteNode = SKSpriteNode(texture: nil, color: GameColors.greenGrass, size: self.size)
-        control = Control(spriteNode: spriteNode, x: 0, y: 375, z: -20000, size:size, xAlign: .center, yAlign: .center)
-        self.addChild(control)
+        self.backgroundDown = Control(spriteNode: spriteNode, x: 0, y: 375, z: -20000, size:size, xAlign: .center, yAlign: .center)
+        self.addChild(self.backgroundDown)
     }
 }

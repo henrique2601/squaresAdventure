@@ -489,7 +489,7 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
                         if(location.x < (self.scene?.size.width)!/2) {
                             self.slider = Slider()
                             self.slider.touch = touch
-                            Control.touchesArray.remove(touch)
+                            Control.touchesArray.remove(self.slider.touch)
                             self.addChild(self.slider)
                             self.slider.position = location
                         }
@@ -506,23 +506,18 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
         super.touchesEnded(touches, withEvent: event)
         
         switch(self.playerData.configControls.integerValue) {
+            
         case 2: //controlsConfig.useLeftSliderAndScreenRight.rawValue:
-            if Control.touchesArray.count <= 0 {
-                if let slider = self.slider {
-                    slider.removeFromParent()
-                    self.slider = nil
-                }
-            } else {
-                if let slider = self.slider {
-                    for touch in touches {
-                        if (slider.touch == touch) {
-                            slider.removeFromParent()
-                            self.slider = nil
-                        }
+            if let slider = self.slider {
+                for touch in touches {
+                    if (slider.touch == touch) {
+                        slider.removeFromParent()
+                        self.slider = nil
                     }
                 }
             }
             break
+            
         default:
             break
         }
