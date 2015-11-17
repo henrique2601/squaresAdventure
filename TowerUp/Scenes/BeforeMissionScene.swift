@@ -17,7 +17,16 @@ class BeforeMissionScene: GameScene {
         //case chooseSkin
         //case choosePowerUps
         case floors
+        case tutorial4
+        case tutorial5
     }
+    
+    //variavel para teste deve ser substituida por uma que fique salva no banco de dados
+    
+    var tutorialD = false
+    
+    var tutorial4:Control!
+    var tutorial5:Control!
     
     var state = states.loading
     var nextState = states.beforeMission
@@ -203,6 +212,14 @@ class BeforeMissionScene: GameScene {
         
         self.skinsScrollNode = ScrollNode(x: 667, y: 366, cells: skinsArray, spacing: 0, scrollDirection: ScrollNode.scrollTypes.horizontal, scaleNodes: true, scaleDistance:1334/4 + 100, index:index)
         self.addChild(skinsScrollNode)
+        
+        
+        if (!tutorialD){
+            
+            self.nextState = states.tutorial4
+        }
+        
+        
     }
     
     override func update(currentTime: NSTimeInterval) {
@@ -230,6 +247,29 @@ class BeforeMissionScene: GameScene {
             case states.floors:
                 self.view!.presentScene(FloorsScene(), transition: Config.defaultTransition)
                 break
+                
+            case states.tutorial4:
+                
+                self.tutorial4 = Control(textureName: "tutorialBR3", x: 30, y: 80, xAlign: .center, yAlign: .center)
+                self.addChild(self.tutorial4)
+                self.blackSpriteNode.hidden = false
+                self.skinsScrollNode.zPosition += 1
+                self.tutorial4.zPosition = self.skinsScrollNode.zPosition + 1
+                
+                break
+
+            case states.tutorial5:
+                
+                self.tutorial4.zPosition = self.blackSpriteNode.zPosition - 5
+                self.skinsScrollNode.zPosition = self.blackSpriteNode.zPosition - 20
+                
+                self.tutorial5 = Control(textureName: "tutorialBR4", x: 30, y: 445, xAlign: .center, yAlign: .center)
+                self.addChild(self.tutorial5)
+                self.skinsScrollNode.zPosition = self.buttonPlay.zPosition + 20
+                self.tutorial5.zPosition = self.skinsScrollNode.zPosition + 10
+                
+                break
+
                 
             default:
                 break
@@ -285,10 +325,16 @@ class BeforeMissionScene: GameScene {
     }
     
     func touchesEndedSkins(touch:UITouch, location:CGPoint) {
+        
+        if(!self.tutorialD){
+            
+            self.nextState = states.tutorial5
+            
+        }
         if(touch.tapCount > 0) {
             if (self.skinsScrollNode.containsPoint(location)) {
                 let locationInScrollNode = touch.locationInNode(self.skinsScrollNode)
-                
+
                 for skin in self.skinsScrollNode.cells {
                     if(skin.containsPoint(locationInScrollNode)) {
                         if(!self.mySkins.containsObject(skin.name!)) {
@@ -366,6 +412,31 @@ class BeforeMissionScene: GameScene {
                     
                 }
                 break
+            case states.tutorial4:
+                for touch in (touches ) {
+                    let location = touch.locationInNode(self)
+                    
+                    self.touchesEndedSkins(touch, location: location)
+                    
+                    
+                    
+                }
+                break
+
+            case states.tutorial5:
+                for touch in (touches ) {
+                    let location = touch.locationInNode(self)
+                    
+                    if (self.buttonPlay.containsPoint(location)) {
+                        self.nextState = .mission
+                        return
+                    }
+                    
+                    self.touchesEndedPowerUps(touch, location: location)
+                    
+                }
+                break
+
                 
             default:
                 break

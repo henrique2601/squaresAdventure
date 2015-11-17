@@ -15,7 +15,14 @@ class TowersScene: GameScene {
         case towers
         case floors
         case mainMenu
+        case tutorial2
     }
+    
+    //variavel para teste deve ser substituida por uma que fique salva no banco de dados
+    
+    var tutorialD = false
+    
+    var tutorial2:Control!
     
     var state = states.towers
     var nextState = states.towers
@@ -97,6 +104,14 @@ class TowersScene: GameScene {
         
         self.buttonBack = Button(textureName: "buttonGraySquareSmall", icon:"return", x: 20, y: 652, xAlign:.left, yAlign:.down)
         self.addChild(self.buttonBack)
+        
+        if (!tutorialD){
+            
+            self.nextState = states.tutorial2
+        }
+
+        
+        
     }
     
     override func update(currentTime: NSTimeInterval) {
@@ -118,6 +133,18 @@ class TowersScene: GameScene {
                 self.view!.presentScene(MainMenuScene(), transition: Config.defaultTransition)
                 break
                 
+            case states.tutorial2:
+                
+                self.tutorial2 = Control(textureName: "tutorialBR1", x: 120, y: 30, xAlign: .center, yAlign: .center)
+                self.addChild(self.tutorial2)
+                self.blackSpriteNode.hidden = false
+                self.towersScrollNode.zPosition += 1
+                self.tutorial2.zPosition = self.towersScrollNode.zPosition + 1
+                self.buttonBack.zPosition -= 1
+
+                
+                break
+                
             default:
                 break
             }
@@ -130,6 +157,40 @@ class TowersScene: GameScene {
         if (self.state == self.nextState) {
             switch (self.state) {
             case states.towers:
+                for touch in (touches ) {
+                    let location = touch.locationInNode(self)
+                    
+                    if (self.buttonBack.containsPoint(location)) {
+                        self.nextState = .mainMenu
+                        return
+                    }
+                    
+                    if (self.towersScrollNode.containsPoint(location)) {
+                        if(touch.tapCount > 0) {
+                            
+                            var i = 0
+                            let locationInScrollNode = touch.locationInNode(self.towersScrollNode)
+                            
+                            for cell in self.towersScrollNode.cells {
+                                if(cell.containsPoint(locationInScrollNode)) {
+                                    if(i < self.playerData.towers.count) {
+                                        MapManager.tower = i
+                                        
+                                        self.nextState = .floors
+                                    } else {
+                                        print("Torre \(i) ainda não foi desbloqueada")
+                                    }
+                                    return
+                                }
+                                i++
+                            }
+                        }
+                    }
+                }
+                break
+                
+                
+            case states.tutorial2:
                 for touch in (touches ) {
                     let location = touch.locationInNode(self)
                     
