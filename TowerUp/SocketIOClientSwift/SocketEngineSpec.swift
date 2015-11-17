@@ -1,8 +1,8 @@
 //
-//  SocketEngineClient.swift
+//  SocketEngineSpec.swift
 //  Socket.IO-Client-Swift
 //
-//  Created by Erik Little on 3/19/15.
+//  Created by Erik Little on 10/7/15.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -25,9 +25,18 @@
 
 import Foundation
 
-@objc public protocol SocketEngineClient {
-    func didError(reason: AnyObject)
-    func engineDidClose(reason: String)
-    func parseSocketMessage(msg: String)
-    func parseBinaryData(data: NSData)
+@objc public protocol SocketEngineSpec {
+    weak var client: SocketEngineClient? {get set}
+    var cookies: [NSHTTPCookie]? {get}
+    var sid: String {get}
+    var socketPath: String {get}
+    var urlPolling: String {get}
+    var urlWebSocket: String {get}
+    
+    init(client: SocketEngineClient, url: String, options: NSDictionary?)
+    
+    func close()
+    func open(opts: [String: AnyObject]?)
+    func send(msg: String, withData datas: [NSData]?)
+    func write(msg: String, withType type: SocketEnginePacketType, withData data: [NSData]?)
 }
