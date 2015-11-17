@@ -150,6 +150,10 @@
 		3A453D6E1BDABB6700224EA8 /* MultiplayerLobbyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A453D6D1BDABB6700224EA8 /* MultiplayerLobbyCell.swift */; };
 		3A4C7A451BF0E1E9006DD731 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A4C7A431BF0E1E9006DD731 /* Fabric.framework */; };
 		3A4C7A461BF0E1E9006DD731 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A4C7A441BF0E1E9006DD731 /* Crashlytics.framework */; };
+		3A79EFD11BFB635200FB42F2 /* SocketAckEmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A79EFCD1BFB635200FB42F2 /* SocketAckEmitter.swift */; };
+		3A79EFD21BFB635200FB42F2 /* SocketEnginePacketType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A79EFCE1BFB635200FB42F2 /* SocketEnginePacketType.swift */; };
+		3A79EFD31BFB635200FB42F2 /* SocketEngineSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A79EFCF1BFB635200FB42F2 /* SocketEngineSpec.swift */; };
+		3A79EFD41BFB635200FB42F2 /* SocketIOClientOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A79EFD01BFB635200FB42F2 /* SocketIOClientOption.swift */; };
 		3A8223CE1BC6BDA70029C75D /* Coin.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3A8223CD1BC6BDA70029C75D /* Coin.wav */; };
 		3A8223D01BC6C0360029C75D /* jump_01.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3A8223CF1BC6C0360029C75D /* jump_01.wav */; };
 		3A8223D41BC6C6300029C75D /* qubodupImpactMeat01.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3A8223D31BC6C6300029C75D /* qubodupImpactMeat01.wav */; };
@@ -370,6 +374,10 @@
 		3A453D6D1BDABB6700224EA8 /* MultiplayerLobbyCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MultiplayerLobbyCell.swift; path = src/MultiplayerLobbyCell.swift; sourceTree = "<group>"; };
 		3A4C7A431BF0E1E9006DD731 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		3A4C7A441BF0E1E9006DD731 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		3A79EFCD1BFB635200FB42F2 /* SocketAckEmitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketAckEmitter.swift; sourceTree = "<group>"; };
+		3A79EFCE1BFB635200FB42F2 /* SocketEnginePacketType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketEnginePacketType.swift; sourceTree = "<group>"; };
+		3A79EFCF1BFB635200FB42F2 /* SocketEngineSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketEngineSpec.swift; sourceTree = "<group>"; };
+		3A79EFD01BFB635200FB42F2 /* SocketIOClientOption.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketIOClientOption.swift; sourceTree = "<group>"; };
 		3A8223CD1BC6BDA70029C75D /* Coin.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Coin.wav; sourceTree = "<group>"; };
 		3A8223CF1BC6C0360029C75D /* jump_01.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = jump_01.wav; sourceTree = "<group>"; };
 		3A8223D31BC6C6300029C75D /* qubodupImpactMeat01.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = qubodupImpactMeat01.wav; sourceTree = "<group>"; };
@@ -630,6 +638,10 @@
 		13BC7EC31BAAE883003D6CCD /* SocketIOClientSwift */ = {
 			isa = PBXGroup;
 			children = (
+				3A79EFCD1BFB635200FB42F2 /* SocketAckEmitter.swift */,
+				3A79EFCE1BFB635200FB42F2 /* SocketEnginePacketType.swift */,
+				3A79EFCF1BFB635200FB42F2 /* SocketEngineSpec.swift */,
+				3A79EFD01BFB635200FB42F2 /* SocketIOClientOption.swift */,
 				13BC7EC41BAAE883003D6CCD /* SocketAckManager.swift */,
 				13BC7EC51BAAE883003D6CCD /* SocketAnyEvent.swift */,
 				13BC7EC61BAAE883003D6CCD /* SocketEngine.swift */,
@@ -1132,11 +1144,13 @@
 				13CCB7021B72B9D90060334C /* CreditsScene.swift in Sources */,
 				3A979BF31B987B3300A8E09F /* Textfield.swift in Sources */,
 				3A453D6E1BDABB6700224EA8 /* MultiplayerLobbyCell.swift in Sources */,
+				3A79EFD21BFB635200FB42F2 /* SocketEnginePacketType.swift in Sources */,
 				13CCB6FE1B72B9010060334C /* TowersScene.swift in Sources */,
 				137D3D9D1BB42DDF003202D9 /* Bug.swift in Sources */,
 				135EA4911BBAE375006C765F /* GameFonts.swift in Sources */,
 				133184A21B83AADB00DF11D5 /* Spike.swift in Sources */,
 				139501A51BC6F98D0053EA5D /* Saw.swift in Sources */,
+				3A79EFD41BFB635200FB42F2 /* SocketIOClientOption.swift in Sources */,
 				5C1D159B1BEB784D00A19114 /* InAppScene.swift in Sources */,
 				1305E4ED1BB18B1B009F9B0A /* Slider.swift in Sources */,
 				1383005F1BD69F330099D1A5 /* Slime.swift in Sources */,
@@ -1150,12 +1164,14 @@
 				1309B4241BDFB58C000F0B9E /* BoxExplosive.swift in Sources */,
 				5CF8A3A81B8F39A000C16CA9 /* FloorData.swift in Sources */,
 				135C5CA21BA8310A006643BB /* PlayerData.swift in Sources */,
+				3A79EFD11BFB635200FB42F2 /* SocketAckEmitter.swift in Sources */,
 				13BC7EE11BAAE883003D6CCD /* WebSocket.swift in Sources */,
 				137D3D9F1BB43097003202D9 /* Bomb.swift in Sources */,
 				13BC7EDE1BAAE883003D6CCD /* SocketStringReader.swift in Sources */,
 				5CF8A3A61B8F39A000C16CA9 /* PowerUpData.swift in Sources */,
 				135C5CA41BA8364B006643BB /* PowerUpSlotData.swift in Sources */,
 				13BC7ED81BAAE883003D6CCD /* SocketFixUTF8.swift in Sources */,
+				3A79EFD31BFB635200FB42F2 /* SocketEngineSpec.swift in Sources */,
 				849B35F01BFA020E008C7A83 /* CropBox.swift in Sources */,
 				3A390C871BCCB42D00F948F6 /* MultiPlayerLobbyScene.swift in Sources */,
 				1359DC9A1B727726006C12FA /* TowerUp.xcdatamodeld in Sources */,
@@ -1316,7 +1332,7 @@
 					"$(PROJECT_DIR)",
 				);
 				"OTHER_SWIFT_FLAGS[arch=*]" = "-D RELEASE";
-				PRODUCT_BUNDLE_IDENTIFIER = com.WTFGames.TowerUp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Paulo.TowerUp;
 				PRODUCT_NAME = "Squares Adventure";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "TowerUp/TowerUp-Bridging-Header.h";

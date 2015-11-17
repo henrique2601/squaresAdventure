@@ -57,7 +57,7 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
     var localName:String!
     //let socket = SocketIOClient(socketURL: "https://squaregame.mybluemix.net", opts: nil)
     //let socket = SocketIOClient(socketURL: "179.232.86.110:3001", opts: nil)
-    var socket = SocketIOClient(socketURL: "181.41.197.181:3001", opts: nil)
+    var socket = SocketIOClient(socketURL: "181.41.197.181:3001", options: nil)
     
     //var teste: NSURL
     
@@ -213,7 +213,7 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
                 return
             }
             
-            if let name = data?[0] as? Int {
+            if let name = data[0] as? Int {
                 for player in PlayerOnline.playerOnlineList {
                     if let id = player.id
                     {
@@ -251,7 +251,7 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
             
             print("removeBoxCrateBomb")
            
-            if let boxCrateBomb = data?[0] as? Int, let victim = data?[1] as? String {
+            if let boxCrateBomb = data[0] as? Int, let victim = data[1] as? String {
         
                 for crateBomb in BoxExplosive.boxExplosiveList {
                     if let id = crateBomb.listPosition
@@ -298,7 +298,7 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
             
             print("removeBomb test")
             
-            if let bomb = data?[0] as? Int {
+            if let bomb = data[0] as? Int {
             
                 print("removeBomb" + bomb.description)
                 
@@ -316,7 +316,7 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
         }
 
         self.socket.on(messages.disconnect.rawValue) {[weak self] data, ack in
-            if let name = data?[0] as? Int {
+            if let name = data[0] as? Int {
                 
                 for player in PlayerOnline.playerOnlineList {
                     if let aux = player as PlayerOnline? {
@@ -340,7 +340,7 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
             
             print(data)
             
-            if let x = data?[0] as? Int, let y = data?[1] as? Int, let name = data?[2] as? String {
+            if let x = data[0] as? Int, let y = data[1] as? Int, let name = data[2] as? String {
                 
                 if (name != this.localName) {
                     
@@ -374,13 +374,13 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
         
         self.socket.on(messages.update.rawValue) {[weak self] data, ack in
             
-            if let name = data?[0] as? Int {
+            if let name = data[0] as? Int {
                 for player in PlayerOnline.playerOnlineList {
                     if let aux = player as PlayerOnline? {
                         if let id = aux.id
                         {
                             if id == name{
-                                aux.updateOnline(data?[1] as! CGFloat, y: data?[2] as! CGFloat, vx: data?[3] as! CGFloat, vy: data?[4] as! CGFloat, rotation: data?[5] as! CGFloat, vrotation: data?[6] as! CGFloat )
+                                aux.updateOnline(data[1] as! CGFloat, y: data[2] as! CGFloat, vx: data[3] as! CGFloat, vy: data[4] as! CGFloat, rotation: data[5] as! CGFloat, vrotation: data[6] as! CGFloat )
                                 aux.labelName.position = CGPoint(x: player.position.x, y: player.position.y + 32)
                             }
                         }
@@ -482,7 +482,7 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
                 break
                 
             case states.loose:
-                self.socket.disconnect(fast: true)
+                self.socket.disconnect()
                 PlayerOnline.playerOnlineList = Set<PlayerOnline>()
                 self.view!.presentScene(LobbyScene(), transition: Config.defaultTransition)
                 break

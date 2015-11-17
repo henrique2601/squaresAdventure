@@ -77,12 +77,12 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
             }
             
             
-            this.room = data?[1] as! Int
-            MapManager.floor = data?[2] as! Int
+            this.room = data[1] as! Int
+            MapManager.floor = data[2] as! Int
             
-            print(data?[0])
+            print(data[0])
             
-            if let playersArray = data?[0] as? NSArray {
+            if let playersArray = data[0] as? NSArray {
                 for onlinePlayer in playersArray {
                     let nameTest = onlinePlayer as? NSDictionary
                     
@@ -140,7 +140,7 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
                 return
             }
             
-            if let name = data?[0] as? Int {
+            if let name = data[0] as? Int {
                 
                 for player in PlayerOnline.playerOnlineList {
                     if let aux = player as PlayerOnline? {
@@ -196,11 +196,11 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
                 return
             }
             
-            if let count = data?[0] as? Int {
+            if let count = data[0] as? Int {
                 this.labelCountDown.setText(count.description + "s")
             }
             
-            if let count = data?[0] as? String {
+            if let count = data[0] as? String {
                 this.labelCountDown.setText(count)
             }
         }
@@ -226,9 +226,9 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
                 return
             }
             
-            if let name = data?[0] as? NSDictionary {
+            if let name = data[0] as? NSDictionary {
                 
-                print(data![0])
+                print(data[0])
                 let xPos = 128
                 let skin = name.objectForKey("skin") as? Int
                 let player = PlayerOnline(skinId: skin!, x: xPos, y: 128, loadPhysics: true)
@@ -391,7 +391,7 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
                 break
                 
             case states.connecting:
-                self.socket = SocketIOClient(socketURL: self.server, opts: nil)
+                self.socket = SocketIOClient(socketURL: self.server, options: nil)
                 self.socket.connect()
                 self.labelState.setText("Waiting Other Players")
                 self.addHandlers()
@@ -448,7 +448,7 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
                   
                     
                     if (self.buttonBack.containsPoint(location)) {
-                        self.socket.disconnect(fast: true)
+                        self.socket.disconnect()
                         PlayerOnline.playerOnlineList = Set<PlayerOnline>()
                         self.nextState = states.lobby
                         return
