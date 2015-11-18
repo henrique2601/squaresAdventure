@@ -50,6 +50,17 @@ class GameScene: SKScene {
         MemoryCard.sharedInstance.saveGame()
         
         self.setBackground()
+        
+        Control.gameScene = self
+    }
+    
+    override func update(currentTime: NSTimeInterval) {
+        ScrollNode.update()
+    }
+    
+    override func didFinishUpdate() {
+        Control.dx = 0
+        Control.dy = 0
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {

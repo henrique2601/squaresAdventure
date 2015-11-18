@@ -11,6 +11,8 @@ import SpriteKit
 
 class Control: SKNode {
     
+    static var gameScene:GameScene!
+    
     static var touchesArray = Set<UITouch>()
     
     static var controlList = Set<Control>()
@@ -37,6 +39,9 @@ class Control: SKNode {
     var size:CGSize!
     
     var sketchPosition:CGPoint = CGPointZero
+    
+    static var dx:CGFloat = 0
+    static var dy:CGFloat = 0
     
     override init() {
         super.init()
@@ -102,12 +107,22 @@ class Control: SKNode {
     }
     
     class func touchesMoved() {
+        
+        for touch in Control.touchesArray {
+            let location = touch.locationInNode(Control.gameScene)
+            let previousLocation = touch.previousLocationInNode(Control.gameScene)
+            
+            Control.dx += location.x - previousLocation.x
+            Control.dy += location.y - previousLocation.y
+        }
+        
         Button.update()
         PowerUp.update()
-        ScrollNode.update()
+        ScrollNode.updateOnTouchesMoved()
     }
     
     class func touchesEnded(touches: Set<UITouch>) {
+        ScrollNode.updateOnTouchesEnded()
         for touch in touches {
             Control.touchesArray.remove(touch)
         }
