@@ -91,7 +91,7 @@ class TowersScene: GameScene {
         
         //TODO: torre "?"
         
-        self.towersScrollNode = ScrollNode(x: 667, y: 466, cells:towersArray, spacing:1, scaleNodes:true, scaleDistance:1334/4 + 100, index:self.playerData.lastPlayedTower.integerValue)
+        self.towersScrollNode = ScrollNode(x: 667, y: 466, cells:towersArray, spacing:5, scaleNodes:true, scaleDistance:1334/4 + 100, index:self.playerData.lastPlayedTower.integerValue)
         
         self.addChild(self.towersScrollNode)
         
@@ -100,6 +100,7 @@ class TowersScene: GameScene {
     }
     
     override func update(currentTime: NSTimeInterval) {
+        super.update(currentTime)
         if(self.state == self.nextState) {
             switch (self.state) {
             default:

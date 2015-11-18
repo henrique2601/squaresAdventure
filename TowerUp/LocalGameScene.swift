@@ -119,6 +119,7 @@ class LocalGameScene: GameScene, SKPhysicsContactDelegate {
     }
     
     override func update(currentTime: NSTimeInterval) {
+        super.update(currentTime)
         self.currentTime = currentTime
         if(self.state == self.nextState){
             switch (self.state) {
@@ -151,6 +152,7 @@ class LocalGameScene: GameScene, SKPhysicsContactDelegate {
     }
     
     override func didFinishUpdate() {
+        super.didFinishUpdate()
         if(self.player.healthPoints > 0){
             self.myCamera.update(self.player.position)
         }

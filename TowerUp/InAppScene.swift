@@ -66,6 +66,7 @@ class InAppScene: GameScene {
     }
     
     override func update(currentTime: NSTimeInterval) {
+        super.update(currentTime)
         if(self.state == self.nextState){
             switch (self.state) {
             default:
