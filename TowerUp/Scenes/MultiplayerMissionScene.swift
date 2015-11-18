@@ -57,7 +57,7 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
     var localName:String!
     //let socket = SocketIOClient(socketURL: "https://squaregame.mybluemix.net", opts: nil)
     //let socket = SocketIOClient(socketURL: "179.232.86.110:3001", opts: nil)
-    var socket = SocketIOClient(socketURL: "181.41.197.181:3001", options: nil)
+    var socket = SocketIOClient(socketURL: "seila", options: nil)
     
     //var teste: NSURL
     
@@ -79,6 +79,7 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
     init(socket:SocketIOClient) {
         super.init()
         self.socket = socket
+        self.socket.reconnects = false
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -100,7 +101,7 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
         
-        print(PlayerOnline.playerOnlineList)
+        //print(PlayerOnline.playerOnlineList)
         self.backgroundColor = GameColors.blueSky
         
         Music.sharedInstance.play(musicNamed: "A New Camp.mp3")
@@ -388,6 +389,8 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
                 }
             }
         }
+        
+        
     }
     
     
@@ -403,9 +406,26 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
         super.update(currentTime)
         self.currentTime = currentTime
         
+        
         if(self.state == self.nextState){
             switch (self.state) {
             case states.mission:
+                
+                if (self.socket.status.description != "Connected") {
+                    
+                    self.nextState = .paused
+                    
+                    let box = MessageBox(text: "Fail in connection whith the server", textureName: "messegeBox", type: MessageBox.messageType.OK)
+                    box.touchesEndedAtButtonOK.addHandler({
+                        self.nextState = .loose
+                    })
+                    
+                    self.addChild(box)
+                    
+                    self.blackSpriteNode.hidden = false
+                    
+                }
+                
                 self.time = currentTime - lastReset
                 switch(self.playerData.configControls.integerValue) {
                 case 1: //controlsConfig.useButtons.rawValue:
