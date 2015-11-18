@@ -76,7 +76,7 @@ class LobbyScene: GameScene, UITextFieldDelegate {
         self.addChild(self.cropBox)
         self.backgroundColor = GameColors.blue
         
-        self.buttonOnline = Button(textureName: "buttonPink", text:"ONLINE GAME", x: 229, y: 393, xAlign: .center, yAlign: .center)
+        self.buttonOnline = Button(textureName: "buttonPink", text:"ONLINE GAME", x: 229, y: 393, xAlign: .center, yAlign: .center, fontColor:.white)
         self.addChild(self.buttonOnline)
         
 //        self.buttonQuick = Button(textureName: "buttonPink", text:"QUICKPLAY", x: 229, y: 393, xAlign: .center, yAlign: .center)

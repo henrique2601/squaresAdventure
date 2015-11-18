@@ -132,14 +132,14 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
         switch(self.playerData.configControls.integerValue) {
             
         case 1: //controlsConfig.useButtons.rawValue:
-            self.buttonLeft = Button(textureName: "buttonPinkSquare", text:"<", x:20, y:626, xAlign:.left, yAlign:.down, colorBlendFactor:0.5, top:39, bottom: 39, left:39, right:39)
+            self.buttonLeft = Button(textureName: "buttonSandSquare", icon:"arrowLeft", x:20, y:626, xAlign:.left, yAlign:.down, colorBlendFactor:0.5, top:Int(Config.currentSceneSize.height/2), bottom: 39, left:39, right:39)
             
             self.addChild(self.buttonLeft)
             
-            self.buttonRight = Button(textureName: "buttonPinkSquare", text:">" ,x:276, y:626, xAlign:.left, yAlign:.down, colorBlendFactor:0.5, top:39, bottom: 39, left:39, right:39)
+            self.buttonRight = Button(textureName: "buttonSandSquare", icon:"arrowRight" ,x:276, y:626, xAlign:.left, yAlign:.down, colorBlendFactor:0.5, top:Int(Config.currentSceneSize.height/2), bottom: 39, left:39, right:39)
             self.addChild(self.buttonRight)
             
-            self.buttonJump = Button(textureName: "buttonPink", text:"Jump", x:1014, y:626, xAlign:.right, yAlign:.down, colorBlendFactor:0.5, top:39, bottom: 39, left:39, right:39)
+            self.buttonJump = Button(textureName: "buttonSand", icon:"arrowUp", x:1014, y:626, xAlign:.right, yAlign:.down, colorBlendFactor:0.5, top:Int(Config.currentSceneSize.height/2), bottom: 39, left:39, right:39)
             
             self.addChild(self.buttonJump)
             break

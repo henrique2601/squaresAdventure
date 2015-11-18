@@ -29,21 +29,29 @@ class Button: Control {
         self.event!.addHandler(handler)
     }
     
+    enum labelColors {
+        case black
+        case white
+    }
+    
+    private var labelColor = labelColors.black
+    
     override init() {
         super.init()
     }
     
     init(textureName:String, icon:String = "", text:String = "", fontSize:GameFonts.fontSize = .medium, x:Int = 0, y:Int = 0, xAlign:Control.xAlignments = .left, yAlign:Control.yAlignments = .up, colorBlendFactor:CGFloat = CGFloat(1), touchArea:CGSize = CGSize.zero,
-        top:Int = 0, bottom:Int = 0, left:Int = 0, right:Int = 0) {
+        top:Int = 0, bottom:Int = 0, left:Int = 0, right:Int = 0, fontColor:labelColors = .black) {
         super.init()
-        self.load(textureName, icon:icon, text:text, fontSize:fontSize.rawValue, x:x, y:y, xAlign:xAlign, yAlign:yAlign, colorBlendFactor:colorBlendFactor, top:top, bottom:bottom, left:left, right:right)
+            self.load(textureName, icon:icon, text:text, fontSize:fontSize.rawValue, x:x, y:y, xAlign:xAlign, yAlign:yAlign, colorBlendFactor:colorBlendFactor, top:top, bottom:bottom, left:left, right:right, fontColor:fontColor)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func load(textureName:String, icon:String, text:String, fontSize:CGFloat,  x:Int, y:Int, xAlign:Control.xAlignments, yAlign:Control.yAlignments, colorBlendFactor:CGFloat, top:Int, bottom:Int, left:Int, right:Int) {
+    func load(textureName:String, icon:String, text:String, fontSize:CGFloat,  x:Int, y:Int, xAlign:Control.xAlignments, yAlign:Control.yAlignments, colorBlendFactor:CGFloat, top:Int, bottom:Int, left:Int, right:Int, fontColor:labelColors) {
+        self.labelColor = fontColor
         self.sketchPosition = CGPoint(x: x, y: y)
         self.yAlign = yAlign
         self.xAlign = xAlign
@@ -83,7 +91,16 @@ class Button: Control {
             let labelNode = SKLabelNode(fontNamed: "Trebuchet MS")
             labelNode.text = NSLocalizedString(text, tableName: nil, comment:"")
             labelNode.fontSize = fontSize
-            labelNode.fontColor = GameColors.black
+            
+            switch self.labelColor {
+            case .black:
+                labelNode.fontColor = GameColors.black
+                break
+            case .white:
+                labelNode.fontColor = GameColors.white
+                break
+            }
+            
             labelNode.verticalAlignmentMode = SKLabelVerticalAlignmentMode.Center
             labelNode.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Center
             labelNode.position = CGPoint(x: texture.size().width/2, y: -texture.size().height/2)
@@ -118,7 +135,16 @@ class Button: Control {
             let labelNodePressed = SKLabelNode(fontNamed: "Trebuchet MS")
             labelNodePressed.text = NSLocalizedString(text, tableName: nil, comment:"")
             labelNodePressed.fontSize = fontSize
-            labelNodePressed.fontColor = GameColors.white
+            
+            switch self.labelColor {
+            case .black:
+                labelNodePressed.fontColor = GameColors.white
+                break
+            case .white:
+                labelNodePressed.fontColor = GameColors.black
+                break
+            }
+            
             labelNodePressed.verticalAlignmentMode = SKLabelVerticalAlignmentMode.Center
             labelNodePressed.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Center
             //TODO: deslocamento vindo por parâmetro

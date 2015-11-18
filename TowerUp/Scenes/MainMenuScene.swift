@@ -38,10 +38,10 @@ class MainMenuScene: GameScene {
         
         Music.sharedInstance.play(musicNamed: "som de fundo do menu.wav")
         
-        self.buttonPlay = Button(textureName: "buttonPink", text:"SINGLEPLAYER" , x: 519, y: 428 , xAlign: .center, yAlign: .center)
+        self.buttonPlay = Button(textureName: "buttonPink", text:"SINGLEPLAYER" , x: 519, y: 428 , xAlign: .center, yAlign: .center, fontColor:.white)
         self.addChild(self.buttonPlay)
         
-        self.buttonPlayOnline = Button(textureName: "buttonPink", text:"MULTIPLAYER", x: 519, y: 548, xAlign: .center, yAlign: .center)
+        self.buttonPlayOnline = Button(textureName: "buttonPink", text:"MULTIPLAYER", x: 519, y: 548, xAlign: .center, yAlign: .center, fontColor:.white)
         self.addChild(self.buttonPlayOnline)
         
         self.buttonOptions = Button(textureName: "buttonSandSquareSmall", icon:"settings", x: 1236, y: 20, xAlign: .right, yAlign: .up)
