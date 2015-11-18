@@ -18,7 +18,16 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
         case floors
         case powerUp
         case restart
+        case tutorial5
+        case tutorial6
     }
+    
+    //variavel para teste deve ser substituida por uma que fique salva no banco de dados
+    
+    var tutorialD = false
+    
+    var tutorial5:Control!
+    var tutorial6:Control!
     
     var state = states.loading
     var nextState = states.mission
@@ -142,6 +151,14 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
         
         self.buttonRestart = Button(textureName: "buttonSandSquareSmall", icon:"restart" ,x:118, y:20, xAlign:.left, yAlign:.up)
         self.addChild(self.buttonRestart)
+        
+        if(!tutorialD){
+        
+            self.nextState = states.tutorial5
+            
+        }
+        
+        
     }
     
     func didBeginContact(contact: SKPhysicsContact) {
@@ -282,6 +299,16 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
                 break
             case states.powerUp:
                 self.view!.presentScene(MissionScene(), transition: Config.defaultTransition)
+                break
+                
+                
+            case states.tutorial5:
+                
+                
+                
+                
+                print("Entrou neste caso")
+                
                 break
                 
             default:
