@@ -78,7 +78,9 @@ class ScrollNode: Control {
             
             spriteNode.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: 10, height: 10))
             spriteNode.physicsBody!.affectedByGravity = false
-            spriteNode.physicsBody!.categoryBitMask = 0
+            spriteNode.physicsBody!.categoryBitMask = physicsCategory.scrollNodeCell.rawValue
+            spriteNode.physicsBody!.contactTestBitMask = physicsCategory.none.rawValue
+            spriteNode.physicsBody!.collisionBitMask = physicsCategory.none.rawValue
             spriteNode.physicsBody!.linearDamping = 4
             
             self.addChild(spriteNode)

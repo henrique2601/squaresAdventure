@@ -100,5 +100,6 @@ struct physicsCategory : OptionSetType {
     static var slime: physicsCategory { return physicsCategory(1 << 13) }
     static var boxExplosive: physicsCategory { return physicsCategory(1 << 14) }
     static var boxExplosiveDisabled: physicsCategory { return physicsCategory(1 << 15) }
+    static var scrollNodeCell: physicsCategory { return physicsCategory(1 << 16) }
     
 }
