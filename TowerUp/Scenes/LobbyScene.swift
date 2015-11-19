@@ -16,7 +16,7 @@ class LobbyScene: GameScene, UITextFieldDelegate {
         case choosePowerUps
         case chooseSkin
         case multiplayerLobby
-        case localLobby
+        case privateLobby
         case mainMenu
     }
     
@@ -27,8 +27,7 @@ class LobbyScene: GameScene, UITextFieldDelegate {
     var playerData = MemoryCard.sharedInstance.playerData
     
     var buttonOnline:Button!
-    var buttonQuick:Button!
-    var buttonLocal:Button!
+    var buttonPrivate:Button!
     var buttonBack:Button!
     
     var state = states.loading
@@ -76,14 +75,12 @@ class LobbyScene: GameScene, UITextFieldDelegate {
         self.addChild(self.cropBox)
         self.backgroundColor = GameColors.blue
         
-        self.buttonOnline = Button(textureName: "buttonPink", text:"ONLINE GAME", x: 229, y: 393, xAlign: .center, yAlign: .center, fontColor:.white)
+        self.buttonOnline = Button(textureName: "buttonPink", text:"PUBLIC", x: 229, y: 325, xAlign: .center, yAlign: .center, fontColor:.white)
         self.addChild(self.buttonOnline)
         
-//        self.buttonQuick = Button(textureName: "buttonPink", text:"QUICKPLAY", x: 229, y: 393, xAlign: .center, yAlign: .center)
-//        self.addChild(self.buttonQuick)
+        self.buttonPrivate = Button(textureName: "buttonPink", text:"PRIVATE", x: 229, y: 476, xAlign: .center, yAlign: .center, fontColor:.white)
+        self.addChild(self.buttonPrivate)
         
-//        self.buttonLocal = Button(textureName: "buttonPink", text:"LOCAL GAME", x: 229, y: 517, xAlign: .center, yAlign: .center)
-//        self.addChild(self.buttonLocal)
         
         self.myTextField = Textfield(name: self.playerData.name , x: 820, y: 270, align:.center, view:self.view!)
         self.myTextField.myTextField.delegate = self
@@ -293,8 +290,8 @@ class LobbyScene: GameScene, UITextFieldDelegate {
                 self.view!.presentScene(MainMenuScene(), transition: Config.defaultTransition)
                 break
                 
-            case states.localLobby:
-                self.view!.presentScene(LocalLobbyScene(), transition: Config.defaultTransition)
+            case states.privateLobby:
+                self.view!.presentScene(PrivateLobbyScene(), transition: Config.defaultTransition)
                 break
                 
             
@@ -320,17 +317,12 @@ class LobbyScene: GameScene, UITextFieldDelegate {
                         return
                     }
                     
-//                    if (self.buttonQuick.containsPoint(location)) {
-//                        room = 1
-//                        self.nextState = .multiplayerLobby
-//                        return
-//                    }
-//                    
-//                    if (self.buttonLocal.containsPoint(location)) {
-//                        room = 2
-//                        self.nextState = .localLobby
-//                        return
-//                    }
+                    if (self.buttonPrivate.containsPoint(location)) {
+                        room = 1
+                        self.nextState = .privateLobby
+                        return
+                    }
+
                     
                     if (self.buttonBack.containsPoint(location)) {
                         self.nextState = .mainMenu
