@@ -76,12 +76,7 @@ class ScrollNode: Control {
                 self.setCellScale(spriteNode)
             }
             
-            spriteNode.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: 10, height: 10))
-            spriteNode.physicsBody!.affectedByGravity = false
-            spriteNode.physicsBody!.categoryBitMask = physicsCategory.scrollNodeCell.rawValue
-            spriteNode.physicsBody!.contactTestBitMask = physicsCategory.none.rawValue
-            spriteNode.physicsBody!.collisionBitMask = physicsCategory.none.rawValue
-            spriteNode.physicsBody!.linearDamping = 4
+            self.initPhysics(spriteNode)
             
             self.addChild(spriteNode)
             i++
@@ -89,6 +84,15 @@ class ScrollNode: Control {
         
         ScrollNode.scrollNodeList.insert(self)
         self.canScroll = (self.cells.count > 1)
+    }
+    
+    func initPhysics(node:SKNode) {
+        node.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: 10, height: 10))
+        node.physicsBody!.affectedByGravity = false
+        node.physicsBody!.categoryBitMask = physicsCategory.scrollNodeCell.rawValue
+        node.physicsBody!.contactTestBitMask = physicsCategory.none.rawValue
+        node.physicsBody!.collisionBitMask = physicsCategory.none.rawValue
+        node.physicsBody!.linearDamping = 4
     }
     
     class func update() {
@@ -361,6 +365,8 @@ class ScrollNode: Control {
         self.cells.append(cell)
         self.canScroll = (self.cells.count > 1)
         self.addChild(cell)
+        
+        self.initPhysics(cell)
     }
     
     override func removeFromParent() {

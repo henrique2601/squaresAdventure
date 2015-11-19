@@ -39,7 +39,7 @@ class BoxCoins: Control, AdColonyAdDelegate {
         
         if let gameScene = self.parent as? GameScene {
             
-            let box = MessageBox(text: "Veja um vídeo e ganhe moedas.", textureName: "boxWhite", type: MessageBox.messageType.OKCancel)
+            let box = MessageBox(text: "Watch a video ad and get free coins.", textureName: "boxWhite", type: MessageBox.messageType.OKCancel)
             
             self.parent?.addChild(box)
             
