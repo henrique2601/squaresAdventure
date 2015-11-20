@@ -260,10 +260,10 @@ class BeforeMissionScene: GameScene {
 
             case states.tutorial5:
                 
-                self.tutorial4.zPosition = self.blackSpriteNode.zPosition - 5
-                self.skinsScrollNode.zPosition = self.blackSpriteNode.zPosition - 20
-                
-                self.tutorial5 = Control(textureName: "tutorialBR4", x: 30, y: 445, xAlign: .center, yAlign: .center)
+                self.tutorial4.hidden = true
+                self.skinsScrollNode.hidden = true
+                    
+                self.tutorial5 = Control(textureName: "tutorialBR4", x: 30, y: 345, xAlign: .center, yAlign: .center)
                 self.addChild(self.tutorial5)
                 self.skinsScrollNode.zPosition = self.buttonPlay.zPosition + 20
                 self.tutorial5.zPosition = self.skinsScrollNode.zPosition + 10

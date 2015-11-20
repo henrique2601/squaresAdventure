@@ -26,8 +26,10 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
     
     var tutorialD = false
     
-    var tutorial5:Control!
-    var tutorial6:Control!
+    var tutorial5:SKSpriteNode!
+    var tutorial6:SKSpriteNode!
+    var labelTutorial5:Control!
+    var labelTutorial6:Control!
     
     var state = states.loading
     var nextState = states.mission
@@ -152,11 +154,6 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
         self.buttonRestart = Button(textureName: "buttonSandSquareSmall", icon:"restart" ,x:118, y:20, xAlign:.left, yAlign:.up)
         self.addChild(self.buttonRestart)
         
-        if(!tutorialD){
-        
-            self.nextState = states.tutorial5
-            
-        }
         
         
     }
@@ -231,6 +228,13 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
                 self.mapManager.update(currentTime)
                 Emitter.update(currentTime)
                 
+                if(!tutorialD){
+                    
+                    self.nextState = states.tutorial5
+                    
+                }
+                
+                
                 break
             default:
                 break
@@ -301,17 +305,26 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
                 self.view!.presentScene(MissionScene(), transition: Config.defaultTransition)
                 break
                 
-                
             case states.tutorial5:
                 
                 
+                self.tutorial5 = SKSpriteNode(imageNamed: "spring0")
+                self.tutorial5.position = CGPoint(x: 290,y: -110)
+                self.tutorial5.size.height = 128
+                self.tutorial5.size.width = 256
+                self.addChild(tutorial5)
+                self.tutorial5.runAction(self.tutorialAnimation)
+                self.labelTutorial5 = Control(textureName: "tutorialBR5", x:120 , y:120)
+                self.labelTutorial5.zPosition = self.tutorial5.zPosition - 1
+                self.addChild(labelTutorial5)
                 
                 
-                print("Entrou neste caso")
+                self.nextState  = states.mission
+                self.tutorialD = true
                 
                 break
                 
-            default:
+                default:
                 break
             }
         }
@@ -390,4 +403,52 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
             }
         }
     }
+    
+    
+    lazy var tutorialAnimation:SKAction = {
+        let textures = [
+            SKTexture(imageNamed: "finger00"),
+            SKTexture(imageNamed: "finger01"),
+            SKTexture(imageNamed: "finger02"),
+            SKTexture(imageNamed: "finger03"),
+            SKTexture(imageNamed: "finger04"),
+            SKTexture(imageNamed: "finger05"),
+            SKTexture(imageNamed: "finger06"),
+            SKTexture(imageNamed: "finger07"),
+            SKTexture(imageNamed: "finger08"),
+            SKTexture(imageNamed: "finger09"),
+            SKTexture(imageNamed: "finger10"),
+            SKTexture(imageNamed: "finger11"),
+            SKTexture(imageNamed: "finger12"),
+            SKTexture(imageNamed: "finger13"),
+            SKTexture(imageNamed: "finger14"),
+            SKTexture(imageNamed: "finger15"),
+            SKTexture(imageNamed: "finger16"),
+            SKTexture(imageNamed: "finger17"),
+            SKTexture(imageNamed: "finger18"),
+            SKTexture(imageNamed: "finger19"),
+            SKTexture(imageNamed: "finger20"),
+            SKTexture(imageNamed: "finger21"),
+            SKTexture(imageNamed: "finger22"),
+            SKTexture(imageNamed: "finger23"),
+            SKTexture(imageNamed: "finger24"),
+            SKTexture(imageNamed: "finger25"),
+            SKTexture(imageNamed: "finger26"),
+            SKTexture(imageNamed: "finger27"),
+            SKTexture(imageNamed: "finger28"),
+            SKTexture(imageNamed: "finger29"),
+            SKTexture(imageNamed: "finger30"),
+            SKTexture(imageNamed: "finger31"),
+            SKTexture(imageNamed: "finger32"),
+            SKTexture(imageNamed: "finger33")
+        ]
+        
+        let a = SKAction.animateWithTextures(textures, timePerFrame: 0.08)
+        
+        let b = SKAction.repeatAction(a, count: 12)
+        
+        return b
+    }()
+    
+    
 }
