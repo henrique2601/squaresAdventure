@@ -270,7 +270,6 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
                 }
                 
                 let box = AfterMissionBox(background: "boxWhite", time: Int(currentTime - self.lastReset).description, deaths: self.player.deathCount.description, bonus: self.collectedBonus.description, scene: self.scene)
-                self.collectedBonus = 0
                 
                 self.addChild(box)
                 

@@ -19,6 +19,8 @@ class AfterMissionBox: Box {
     var buttonRestart:Button!
     var buttonNext:Button!
     
+    lazy var coinSound:SoundEffect = SoundEffect(soundFile: SoundEffect.files.coin.rawValue, node: self)
+    
     init(background: String, time:String, deaths:String, bonus:String, scene:SKScene?) {
         super.init(textureName: background, x:435, y:82, xAlign:.center, yAlign:.down)
         
@@ -123,16 +125,50 @@ class AfterMissionBox: Box {
         }
         self.addChild(self.labelTime)
         
-        
         let lastStars = floorData.stars.integerValue
         floorData.stars = NSNumber(integer: floorData.bonus.integerValue + floorData.deaths.integerValue + floorData.time.integerValue)
+        
         if(lastStars < 3 && floorData.stars.integerValue == 3) {
             
             let playerData = MemoryCard.sharedInstance.playerData
             
-            if let teste = scene {
-                teste.addChild(MessageBox(text: "3 stars : + 50 coins", textureName: "messegeBox", type: MessageBox.messageType.OK))
-                playerData.coins = NSNumber(integer: playerData.coins.integerValue + 50)
+            if let teste = scene as? MissionScene {
+                let bonusCoins = 100
+                playerData.coins = NSNumber(integer: playerData.coins.integerValue + bonusCoins)
+                
+                var labelCoinsCount = Int(teste.boxCoins.labelCoins.getText())!
+                let labelCoins = teste.boxCoins.labelCoins
+                
+                let texture = SKTexture(imageNamed: "gold_1")
+                let size = CGSize(width: 32, height: 32)
+                
+                self.runAction({ let a = SKAction(); a.duration = 1; return a }(), completion: {
+                    for var i = 0; i < bonusCoins; i++ {
+                        let spriteNode = SKSpriteNode(texture: texture, color: UIColor.clearColor(), size: size)
+                        spriteNode.position = CGPoint(x: Int(Config.sceneSize.width/2), y: -Int(Config.sceneSize.height/2))
+                        spriteNode.zPosition = self.zPosition * 10
+                        teste.addChild(spriteNode)
+                        
+                        
+                        spriteNode.runAction(SKAction.fadeAlphaBy(-0.5, duration: 0))
+                        
+                        let duration = Double.random(min: 0.25, max: 1)
+                        spriteNode.runAction(SKAction.fadeAlphaBy(0.5, duration: duration))
+                        spriteNode.runAction(SKAction.moveTo(CGPoint(x: Int.random(min: -Int(Config.sceneSize.width), max: Int(Config.sceneSize.width) * 2),
+                            y: -Int.random(min: -Int(Config.sceneSize.height), max: Int(Config.sceneSize.height) * 2)), duration: duration), completion: {
+                                
+                                let duration = Double.random(min: 0.25, max: 1)
+                                spriteNode.runAction(SKAction.fadeAlphaBy(-1, duration: duration))
+                                
+                                spriteNode.runAction(SKAction.moveTo(CGPoint(x: Int(Config.sceneSize.width) - 50, y: -40), duration: duration), completion: {
+                                    self.coinSound.play()
+                                    spriteNode.removeFromParent()
+                                    labelCoinsCount++
+                                    labelCoins.setText(labelCoinsCount.description)
+                                })
+                        })
+                    }
+                })
             }
             
             var towerStars = 0
