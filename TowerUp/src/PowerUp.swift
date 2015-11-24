@@ -328,21 +328,23 @@ class PowerUpType: NSObject {
     var coolDown:NSTimeInterval
     var duration:NSTimeInterval
     var price:Int
+    var text:String!
     
-    init(powerUpImage:String, price:Int, coolDown:NSTimeInterval, duration:NSTimeInterval) {
+    init(powerUpImage:String, price:Int, coolDown:NSTimeInterval, duration:NSTimeInterval, text:String) {
         self.powerUpImage = powerUpImage
         self.coolDown = coolDown
         self.duration = duration
         self.price = price
+        self.text = text
     }
 }
 
 class PowerUps :NSObject {
     static var types = Array<PowerUpType>([
-        PowerUpType(powerUpImage:"powerUp A", price:50, coolDown:5, duration:3),
-        PowerUpType(powerUpImage:"powerUp B", price:75, coolDown:10, duration:5),
-        PowerUpType(powerUpImage:"powerUp C", price:150, coolDown:10, duration:0),
-        PowerUpType(powerUpImage:"powerUp D", price:500, coolDown:30, duration:2),
-        PowerUpType(powerUpImage:"powerUp E", price:50, coolDown:3, duration:1)
+        PowerUpType(powerUpImage:"powerUp A", price:50, coolDown:5, duration:4, text: "You can fly like a butterfly. Don't try it at home."),
+        PowerUpType(powerUpImage:"powerUp B", price:75, coolDown:10, duration:5, text: "Seven lifes, like a cat, for 5 seconds."),
+        PowerUpType(powerUpImage:"powerUp C", price:150, coolDown:10, duration:0, text: "When down, you can use this to get back to the game."),
+        PowerUpType(powerUpImage:"powerUp D", price:500, coolDown:30, duration:2, text: "Use this to activate reverse gravity for 2 seconds."),
+        PowerUpType(powerUpImage:"powerUp E", price:50, coolDown:3, duration:1, text: "Try this if you want to explode something.")
         ])
 }
