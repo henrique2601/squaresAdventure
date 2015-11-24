@@ -178,9 +178,45 @@ class AfterMissionBox: Box {
             }
             
             if (towerStars == Towers.types[MapManager.tower].floorTypes.count * 3) {
-                if let teste = scene {
-                    teste.addChild(MessageBox(text: "Tower 100% : + 10 diamonds", textureName: "messegeBox", type: MessageBox.messageType.OK))
-                    playerData.gems = NSNumber(integer: playerData.gems.integerValue + 10)
+                if let teste = scene as? MissionScene {
+                    
+                    let bonusGems = 10
+                    
+                    var labelGemsCount = Int(teste.boxCoins.labelGems.getText())!
+                    let labelGems = teste.boxCoins.labelGems
+                    
+                    let texture = SKTexture(imageNamed: "gemBlue")
+                    let size = CGSize(width: 64, height: 64)
+                    
+                    self.runAction({ let a = SKAction(); a.duration = 2; return a }(), completion: {
+                        for var i = 0; i < bonusGems; i++ {
+                            let spriteNode = SKSpriteNode(texture: texture, color: UIColor.clearColor(), size: size)
+                            spriteNode.position = CGPoint(x: Int(Config.sceneSize.width/2), y: -Int(Config.sceneSize.height/2))
+                            spriteNode.zPosition = self.zPosition * 11
+                            teste.addChild(spriteNode)
+                            
+                            
+                            spriteNode.runAction(SKAction.fadeAlphaBy(-0.5, duration: 0))
+                            
+                            let duration = Double.random(min: 0.25, max: 1)
+                            spriteNode.runAction(SKAction.fadeAlphaBy(0.5, duration: duration))
+                            spriteNode.runAction(SKAction.moveTo(CGPoint(x: Int.random(min: -Int(Config.sceneSize.width), max: Int(Config.sceneSize.width) * 2),
+                                y: -Int.random(min: -Int(Config.sceneSize.height), max: Int(Config.sceneSize.height) * 2)), duration: duration), completion: {
+                                    
+                                    let duration = Double.random(min: 0.25, max: 1)
+                                    spriteNode.runAction(SKAction.fadeAlphaBy(-1, duration: duration))
+                                    
+                                    spriteNode.runAction(SKAction.moveTo(CGPoint(x: Int(Config.sceneSize.width) - 50, y: -40), duration: duration), completion: {
+                                        self.coinSound.play()
+                                        spriteNode.removeFromParent()
+                                        labelGemsCount++
+                                        labelGems.setText(labelGemsCount.description)
+                                    })
+                            })
+                        }
+                    })
+                    
+                    playerData.gems = NSNumber(integer: playerData.gems.integerValue + bonusGems)
                 }
             }
         }
