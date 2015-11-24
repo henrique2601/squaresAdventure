@@ -94,7 +94,7 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
         
         switch(self.playerData.configControls.integerValue) {
             
-        case 1: //controlsConfig.useButtons.rawValue:
+        case controlsConfig.useButtons.rawValue:
             self.buttonLeft = Button(textureName: "buttonSandSquare", icon:"arrowLeft", x:20, y:626, xAlign:.left, yAlign:.down, colorBlendFactor:0.5, top:Int(Config.currentSceneSize.height/2), bottom: 39, left:39, right:39)
             
             self.addChild(self.buttonLeft)
@@ -164,7 +164,7 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
                 }
                 
                 switch(self.playerData.configControls.integerValue) {
-                case 1: //controlsConfig.useButtons.rawValue:
+                case controlsConfig.useButtons.rawValue:
                     self.player.jump = self.buttonJump.pressed
                     
                     self.player.move = 0
@@ -175,7 +175,7 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
                         self.player.move += 100
                     }
                     break
-                case 2: //controlsConfig.useLeftSliderAndScreenRight:
+                case controlsConfig.useLeftSliderAndScreenRight.rawValue:
                     
                     var jump = 0
                     for touch in Control.touchesArray {
@@ -304,7 +304,7 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
         super.touchesBegan(touches, withEvent: event)
         
         switch(self.playerData.configControls.integerValue) {
-        case 2: //controlsConfig.useLeftSliderAndScreenRight.rawValue:
+        case controlsConfig.useLeftSliderAndScreenRight.rawValue:
             if (self.state == self.nextState) {
                 for touch in touches {
                     
@@ -333,7 +333,7 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
         super.touchesEnded(touches, withEvent: event)
         
         switch(self.playerData.configControls.integerValue) {
-        case 2: //controlsConfig.useLeftSliderAndScreenRight.rawValue:
+        case controlsConfig.useLeftSliderAndScreenRight.rawValue:
             
             if let slider = self.slider {
                 for touch in touches {

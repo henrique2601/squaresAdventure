@@ -9,6 +9,12 @@
 import UIKit
 import CoreData
 
+public enum controlsConfig:Int {
+    case none  = 0
+    case useButtons = 2
+    case useLeftSliderAndScreenRight = 1
+}
+
 class MemoryCard: NSObject {
     
     static let sharedInstance = MemoryCard()
@@ -16,12 +22,6 @@ class MemoryCard: NSObject {
     private var autoSave:Bool = false
     
     var playerData:PlayerData!
-    
-    internal enum controlsConfig:Int {
-        case none  = 0
-        case useButtons = 1
-        case useLeftSliderAndScreenRight = 2
-    }
     
     override init() {
         super.init()
