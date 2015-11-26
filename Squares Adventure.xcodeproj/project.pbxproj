@@ -175,8 +175,8 @@
 		5C2535FB1BEFAD8E005EFA80 /* 2 9.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 5C2535F21BEFAD8E005EFA80 /* 2 9.tmx */; };
 		5C2535FD1BEFBB55005EFA80 /* Emitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2535FC1BEFBB55005EFA80 /* Emitter.swift */; };
 		5C48055E1B84CFF60066E151 /* DoorTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C48055D1B84CFF60066E151 /* DoorTile.swift */; };
-		5C5FACF81C07309200CF641C /* TutorialData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5FACF61C07309200CF641C /* TutorialData.swift */; };
 		5C5FACFC1C07320E00CF641C /* PlayerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5FACFA1C07320E00CF641C /* PlayerData.swift */; };
+		5C5FAD001C073C7000CF641C /* TutorialData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5FACFE1C073C7000CF641C /* TutorialData.swift */; };
 		5C609C4F1BDF9C5D00872C34 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C609C4E1BDF9C5D00872C34 /* AdSupport.framework */; };
 		5C609C521BDF9DE800872C34 /* AdColony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C609C511BDF9DE800872C34 /* AdColony.framework */; };
 		5C609C601BDF9F2300872C34 /* AdColony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C609C531BDF9F2200872C34 /* AdColony.framework */; };
@@ -396,8 +396,8 @@
 		5C2535F21BEFAD8E005EFA80 /* 2 9.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "2 9.tmx"; sourceTree = "<group>"; };
 		5C2535FC1BEFBB55005EFA80 /* Emitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Emitter.swift; path = src/Emitter.swift; sourceTree = "<group>"; };
 		5C48055D1B84CFF60066E151 /* DoorTile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoorTile.swift; sourceTree = "<group>"; };
-		5C5FACF61C07309200CF641C /* TutorialData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TutorialData.swift; path = CoreData/TutorialData.swift; sourceTree = "<group>"; };
 		5C5FACFA1C07320E00CF641C /* PlayerData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayerData.swift; path = CoreData/PlayerData.swift; sourceTree = "<group>"; };
+		5C5FACFE1C073C7000CF641C /* TutorialData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TutorialData.swift; path = CoreData/TutorialData.swift; sourceTree = "<group>"; };
 		5C609C4E1BDF9C5D00872C34 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		5C609C511BDF9DE800872C34 /* AdColony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AdColony.framework; sourceTree = "<group>"; };
 		5C609C531BDF9F2200872C34 /* AdColony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdColony.framework; path = "../Documents/Game/AdColony-iOS-SDK-master 2/AdColony.framework"; sourceTree = "<group>"; };
@@ -623,7 +623,7 @@
 				5CF8A3A91B8F39A000C16CA9 /* SkinData.swift */,
 				135C5CA51BA8364C006643BB /* SkinSlotData.swift */,
 				132D229E1B9875230094CF53 /* TowerData.swift */,
-				5C5FACF61C07309200CF641C /* TutorialData.swift */,
+				5C5FACFE1C073C7000CF641C /* TutorialData.swift */,
 			);
 			name = CoreData;
 			sourceTree = "<group>";
@@ -1119,7 +1119,7 @@
 				5CF8A3AA1B8F39A000C16CA9 /* SkinData.swift in Sources */,
 				13D2521A1BCEE31F002E5F59 /* IAPHelper.swift in Sources */,
 				1359DD0C1B7286D3006C12FA /* MainMenuScene.swift in Sources */,
-				5C5FACF81C07309200CF641C /* TutorialData.swift in Sources */,
+				5C5FAD001C073C7000CF641C /* TutorialData.swift in Sources */,
 				13DE13051B94C38E0092D50B /* ScrollNode.swift in Sources */,
 				5C2535FD1BEFBB55005EFA80 /* Emitter.swift in Sources */,
 				137153BF1BE11864004F5F3F /* BlackSpriteNode.swift in Sources */,

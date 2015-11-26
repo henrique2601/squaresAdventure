@@ -12,8 +12,8 @@ import CoreData
 @objc(TutorialData)
 
 class TutorialData: NSManagedObject {
-
-    @NSManaged var tutorial0: NSNumber
+    
+    @NSManaged var tutorial0: NSNumber?
     @NSManaged var playerData: PlayerData?
-
+    
 }

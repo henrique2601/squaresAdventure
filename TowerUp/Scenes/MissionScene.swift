@@ -229,7 +229,7 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
                 self.mapManager.update(currentTime)
                 Emitter.update(currentTime)
                 
-                if(!tutorialD){
+                if(!tutorialD) {
                     
                     self.nextState = states.tutorial5
                     

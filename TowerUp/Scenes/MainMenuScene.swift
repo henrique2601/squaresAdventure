@@ -43,7 +43,13 @@ class MainMenuScene: GameScene {
         super.didMoveToView(view)
         self.backgroundColor = GameColors.blue
         
-        self.tutorialD = self.playerData.tutorial!.tutorial0.boolValue
+        if let _ = self.playerData.tutorial {
+            
+        } else {
+            self.playerData.tutorial = MemoryCard.sharedInstance.newTutorial()
+        }
+        
+        self.tutorialD = self.playerData.tutorial!.tutorial0!.boolValue
         
         self.addChild(Control(textureName: "mainMenuBackground", x:-49, y:-32, xAlign: .center, yAlign: .center))
         

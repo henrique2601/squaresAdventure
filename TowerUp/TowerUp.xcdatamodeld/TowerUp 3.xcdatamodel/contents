@@ -56,7 +56,7 @@
         <relationship name="playerData" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PlayerData" inverseName="towers" inverseEntity="PlayerData" syncable="YES"/>
     </entity>
     <entity name="TutorialData" representedClassName="TutorialData" syncable="YES">
-        <attribute name="tutorial0" attributeType="Boolean" syncable="YES"/>
+        <attribute name="tutorial0" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <relationship name="playerData" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PlayerData" inverseName="tutorial" inverseEntity="PlayerData" syncable="YES"/>
     </entity>
     <fetchRequest name="FetchRequest" entity="PlayerData"/>
