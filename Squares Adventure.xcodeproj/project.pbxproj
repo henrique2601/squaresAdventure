@@ -41,7 +41,6 @@
 		1359DD101B7287A7006C12FA /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1359DD0F1B7287A7006C12FA /* Button.swift */; };
 		1359DD161B728C95006C12FA /* Switch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1359DD151B728C95006C12FA /* Switch.swift */; };
 		1359DD181B728D3E006C12FA /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1359DD171B728D3E006C12FA /* Label.swift */; };
-		135C5CA21BA8310A006643BB /* PlayerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135C5CA11BA8310A006643BB /* PlayerData.swift */; };
 		135C5CA41BA8364B006643BB /* PowerUpSlotData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135C5CA31BA8364B006643BB /* PowerUpSlotData.swift */; };
 		135C5CA61BA8364C006643BB /* SkinSlotData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135C5CA51BA8364C006643BB /* SkinSlotData.swift */; };
 		135EA4911BBAE375006C765F /* GameFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 135EA4901BBAE375006C765F /* GameFonts.swift */; };
@@ -176,6 +175,8 @@
 		5C2535FB1BEFAD8E005EFA80 /* 2 9.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 5C2535F21BEFAD8E005EFA80 /* 2 9.tmx */; };
 		5C2535FD1BEFBB55005EFA80 /* Emitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C2535FC1BEFBB55005EFA80 /* Emitter.swift */; };
 		5C48055E1B84CFF60066E151 /* DoorTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C48055D1B84CFF60066E151 /* DoorTile.swift */; };
+		5C5FACF81C07309200CF641C /* TutorialData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5FACF61C07309200CF641C /* TutorialData.swift */; };
+		5C5FACFC1C07320E00CF641C /* PlayerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5FACFA1C07320E00CF641C /* PlayerData.swift */; };
 		5C609C4F1BDF9C5D00872C34 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C609C4E1BDF9C5D00872C34 /* AdSupport.framework */; };
 		5C609C521BDF9DE800872C34 /* AdColony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C609C511BDF9DE800872C34 /* AdColony.framework */; };
 		5C609C601BDF9F2300872C34 /* AdColony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C609C531BDF9F2200872C34 /* AdColony.framework */; };
@@ -256,7 +257,6 @@
 		1359DD0F1B7287A7006C12FA /* Button.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Button.swift; path = src/Button.swift; sourceTree = "<group>"; };
 		1359DD151B728C95006C12FA /* Switch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Switch.swift; path = src/Switch.swift; sourceTree = "<group>"; };
 		1359DD171B728D3E006C12FA /* Label.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Label.swift; path = src/Label.swift; sourceTree = "<group>"; };
-		135C5CA11BA8310A006643BB /* PlayerData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayerData.swift; path = CoreData/PlayerData.swift; sourceTree = "<group>"; };
 		135C5CA31BA8364B006643BB /* PowerUpSlotData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PowerUpSlotData.swift; path = CoreData/PowerUpSlotData.swift; sourceTree = "<group>"; };
 		135C5CA51BA8364C006643BB /* SkinSlotData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SkinSlotData.swift; path = CoreData/SkinSlotData.swift; sourceTree = "<group>"; };
 		135EA4901BBAE375006C765F /* GameFonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GameFonts.swift; path = src/GameFonts.swift; sourceTree = "<group>"; };
@@ -396,6 +396,8 @@
 		5C2535F21BEFAD8E005EFA80 /* 2 9.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "2 9.tmx"; sourceTree = "<group>"; };
 		5C2535FC1BEFBB55005EFA80 /* Emitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Emitter.swift; path = src/Emitter.swift; sourceTree = "<group>"; };
 		5C48055D1B84CFF60066E151 /* DoorTile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoorTile.swift; sourceTree = "<group>"; };
+		5C5FACF61C07309200CF641C /* TutorialData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TutorialData.swift; path = CoreData/TutorialData.swift; sourceTree = "<group>"; };
+		5C5FACFA1C07320E00CF641C /* PlayerData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayerData.swift; path = CoreData/PlayerData.swift; sourceTree = "<group>"; };
 		5C609C4E1BDF9C5D00872C34 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		5C609C511BDF9DE800872C34 /* AdColony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AdColony.framework; sourceTree = "<group>"; };
 		5C609C531BDF9F2200872C34 /* AdColony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdColony.framework; path = "../Documents/Game/AdColony-iOS-SDK-master 2/AdColony.framework"; sourceTree = "<group>"; };
@@ -412,6 +414,7 @@
 		5C609C5E1BDF9F2300872C34 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		5C609C5F1BDF9F2300872C34 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		5CB1A4051BDE7007007EB123 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
+		5CD9856E1C072EBC00DDA253 /* TowerUp 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "TowerUp 3.xcdatamodel"; sourceTree = "<group>"; };
 		5CF8A3A51B8F39A000C16CA9 /* PowerUpData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PowerUpData.swift; path = CoreData/PowerUpData.swift; sourceTree = "<group>"; };
 		5CF8A3A71B8F39A000C16CA9 /* FloorData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FloorData.swift; path = CoreData/FloorData.swift; sourceTree = "<group>"; };
 		5CF8A3A91B8F39A000C16CA9 /* SkinData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SkinData.swift; path = CoreData/SkinData.swift; sourceTree = "<group>"; };
@@ -591,6 +594,7 @@
 				13CCB7011B72B9D90060334C /* CreditsScene.swift */,
 				13CCB7031B7373D00060334C /* FloorsScene.swift */,
 				1359DD001B72805F006C12FA /* GameScene.swift */,
+				5C1D159A1BEB784D00A19114 /* InAppScene.swift */,
 				13B32C051B74EE93001A1486 /* LobbyScene.swift */,
 				3A979C651BA0780100A8E09F /* LocalGameScene.swift */,
 				3A979C671BA1BB9500A8E09F /* LocalLobbyScene.swift */,
@@ -600,7 +604,6 @@
 				13FC80071B86404500865C72 /* MultiplayerMissionScene.swift */,
 				13CCB6FF1B72B9A70060334C /* OptionsScene.swift */,
 				13CCB6FD1B72B9010060334C /* TowersScene.swift */,
-				5C1D159A1BEB784D00A19114 /* InAppScene.swift */,
 			);
 			name = Scenes;
 			sourceTree = "<group>";
@@ -608,18 +611,19 @@
 		139A0E8D1B74319000EDE944 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				1359DC981B727726006C12FA /* TowerUp.xcdatamodeld */,
 				84E0882D1BEA37FD00D3C82C /* ALIterativeMigrator.h */,
 				84E0882E1BEA37FD00D3C82C /* ALIterativeMigrator.m */,
 				5CF8A3A71B8F39A000C16CA9 /* FloorData.swift */,
 				3AF2530C1BBD6E8D0089BF7A /* InvitedFriendData.swift */,
 				139A0E8E1B7431CB00EDE944 /* MemoryCard.swift */,
-				135C5CA11BA8310A006643BB /* PlayerData.swift */,
+				5C5FACFA1C07320E00CF641C /* PlayerData.swift */,
 				5CF8A3A51B8F39A000C16CA9 /* PowerUpData.swift */,
 				135C5CA31BA8364B006643BB /* PowerUpSlotData.swift */,
 				5CF8A3A91B8F39A000C16CA9 /* SkinData.swift */,
 				135C5CA51BA8364C006643BB /* SkinSlotData.swift */,
 				132D229E1B9875230094CF53 /* TowerData.swift */,
-				1359DC981B727726006C12FA /* TowerUp.xcdatamodeld */,
+				5C5FACF61C07309200CF641C /* TutorialData.swift */,
 			);
 			name = CoreData;
 			sourceTree = "<group>";
@@ -1115,6 +1119,7 @@
 				5CF8A3AA1B8F39A000C16CA9 /* SkinData.swift in Sources */,
 				13D2521A1BCEE31F002E5F59 /* IAPHelper.swift in Sources */,
 				1359DD0C1B7286D3006C12FA /* MainMenuScene.swift in Sources */,
+				5C5FACF81C07309200CF641C /* TutorialData.swift in Sources */,
 				13DE13051B94C38E0092D50B /* ScrollNode.swift in Sources */,
 				5C2535FD1BEFBB55005EFA80 /* Emitter.swift in Sources */,
 				137153BF1BE11864004F5F3F /* BlackSpriteNode.swift in Sources */,
@@ -1136,6 +1141,7 @@
 				139501A51BC6F98D0053EA5D /* Saw.swift in Sources */,
 				5C1D159B1BEB784D00A19114 /* InAppScene.swift in Sources */,
 				1305E4ED1BB18B1B009F9B0A /* Slider.swift in Sources */,
+				5C5FACFC1C07320E00CF641C /* PlayerData.swift in Sources */,
 				1383005F1BD69F330099D1A5 /* Slime.swift in Sources */,
 				135C5CA61BA8364C006643BB /* SkinSlotData.swift in Sources */,
 				1323FF611B90C83300EF4C2E /* Skin.swift in Sources */,
@@ -1146,7 +1152,6 @@
 				8414F3D11BF200B100202AFA /* Shot.swift in Sources */,
 				1309B4241BDFB58C000F0B9E /* BoxExplosive.swift in Sources */,
 				5CF8A3A81B8F39A000C16CA9 /* FloorData.swift in Sources */,
-				135C5CA21BA8310A006643BB /* PlayerData.swift in Sources */,
 				13BC7EE11BAAE883003D6CCD /* WebSocket.swift in Sources */,
 				137D3D9F1BB43097003202D9 /* Bomb.swift in Sources */,
 				13BC7EDE1BAAE883003D6CCD /* SocketStringReader.swift in Sources */,
@@ -1346,10 +1351,11 @@
 		1359DC981B727726006C12FA /* TowerUp.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				5CD9856E1C072EBC00DDA253 /* TowerUp 3.xcdatamodel */,
 				84E088271BEA0ACE00D3C82C /* TowerUp 2.xcdatamodel */,
 				1359DC991B727726006C12FA /* TowerUp.xcdatamodel */,
 			);
-			currentVersion = 84E088271BEA0ACE00D3C82C /* TowerUp 2.xcdatamodel */;
+			currentVersion = 5CD9856E1C072EBC00DDA253 /* TowerUp 3.xcdatamodel */;
 			path = TowerUp.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

@@ -22,7 +22,9 @@ class MainMenuScene: GameScene {
     }
     //variavel para teste deve ser substituida por uma que fique salva no banco de dados
     
-    var tutorialD = false
+    var playerData = MemoryCard.sharedInstance.playerData
+    
+    var tutorialD:Bool!
     
 
     var state = states.mainMenu
@@ -40,6 +42,8 @@ class MainMenuScene: GameScene {
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
         self.backgroundColor = GameColors.blue
+        
+        self.tutorialD = self.playerData.tutorial!.tutorial0.boolValue
         
         self.addChild(Control(textureName: "mainMenuBackground", x:-49, y:-32, xAlign: .center, yAlign: .center))
         
@@ -60,9 +64,11 @@ class MainMenuScene: GameScene {
         //self.buttonVideoCoin = Button(textureName: "earncoins", x: 1074, y: 118, xAlign: .center, yAlign: .center)
         //self.addChild(self.buttonVideoCoin)
         
-        if (!tutorialD){
+        if (!tutorialD.boolValue) {
         
             self.nextState = states.tutorial1
+            
+            self.playerData.tutorial?.tutorial0 = NSNumber(bool: true)
         }
         
     }

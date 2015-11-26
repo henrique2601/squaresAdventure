@@ -43,6 +43,8 @@ class MemoryCard: NSObject {
         //Player
         self.playerData = self.newPlayerData()
         
+        self.playerData.tutorial = self.newTutorial()
+        
         //Towers e Floors
         let tower = self.newTowerData()
         let floor = self.newFloorData()
@@ -178,7 +180,8 @@ class MemoryCard: NSObject {
         
             let modelNames = Array<String>(arrayLiteral:
             "TowerUp",
-            "TowerUp 2")
+            "TowerUp 2",
+            "TowerUp 3")
             
             try! ALIterativeMigrator.iterativeMigrateURL(url, ofType: NSSQLiteStoreType, toModel: self.managedObjectModel, orderedModelNames: modelNames)
             
@@ -237,6 +240,13 @@ class MemoryCard: NSObject {
         playerData.musicEnabled = NSNumber(bool: false)
         
         return playerData
+    }
+    
+    func newTutorial() -> TutorialData {
+        let tutorial = NSEntityDescription.insertNewObjectForEntityForName("TutorialData", inManagedObjectContext: self.managedObjectContext!) as! TutorialData
+        tutorial.tutorial0 = NSNumber(bool: false)
+        
+        return tutorial
     }
     
     func newTowerData() -> TowerData {
