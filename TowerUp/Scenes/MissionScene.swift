@@ -25,6 +25,7 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
     //variavel para teste deve ser substituida por uma que fique salva no banco de dados
     
     var tutorialD = false
+    var tutorialD2 = false
     
     var tutorial5:SKSpriteNode!
     var tutorial6:SKSpriteNode!
@@ -308,7 +309,7 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
             case states.tutorial5:
                 
                 
-                self.tutorial5 = SKSpriteNode(imageNamed: "spring0")
+                self.tutorial5 = SKSpriteNode(imageNamed: "finger00")
                 self.tutorial5.position = CGPoint(x: 290,y: -110)
                 self.tutorial5.size.height = 128
                 self.tutorial5.size.width = 256
@@ -318,9 +319,23 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
                 self.labelTutorial5.zPosition = self.tutorial5.zPosition - 1
                 self.addChild(labelTutorial5)
                 
-                
                 self.nextState  = states.mission
                 self.tutorialD = true
+                
+                break
+                
+            case states.tutorial6:
+                
+                self.tutorial6 = SKSpriteNode(imageNamed: "tapFinger00")
+                self.tutorial6.position = CGPoint(x: 550,y: -280)
+                self.tutorial6.size.height = 128
+                self.tutorial6.size.width = 256
+                self.addChild(tutorial6)
+                self.tutorial6.runAction(self.tutorialAnimation2)
+                
+                self.nextState  = states.mission
+                self.tutorialD2 = true
+                
                 
                 break
                 
@@ -355,6 +370,17 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
                             Control.touchesArray.remove(self.slider.touch)
                             self.addChild(self.slider)
                             self.slider.position = CGPoint(x: Int(location.x), y: Int(location.y) + 32)
+                            
+                            if(!tutorialD2){
+                            
+                                self.nextState = states.tutorial6
+                                
+                                print("Ultima parte")
+                                
+                                
+                            
+                            }
+                            
                             break
                         }
                     }
@@ -450,5 +476,48 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
         return b
     }()
     
+    lazy var tutorialAnimation2:SKAction = {
+        let textures = [
+            SKTexture(imageNamed: "tapFinger00"),
+            SKTexture(imageNamed: "tapFinger01"),
+            SKTexture(imageNamed: "tapFinger02"),
+            SKTexture(imageNamed: "tapFinger03"),
+            SKTexture(imageNamed: "tapFinger04"),
+            SKTexture(imageNamed: "tapFinger05"),
+            SKTexture(imageNamed: "tapFinger06"),
+            SKTexture(imageNamed: "tapFinger07"),
+            SKTexture(imageNamed: "tapFinger08"),
+            SKTexture(imageNamed: "tapFinger09"),
+            SKTexture(imageNamed: "tapFinger10"),
+            SKTexture(imageNamed: "tapFinger11"),
+            SKTexture(imageNamed: "tapFinger12"),
+            SKTexture(imageNamed: "tapFinger13"),
+            SKTexture(imageNamed: "tapFinger14"),
+            SKTexture(imageNamed: "tapFinger15"),
+            SKTexture(imageNamed: "tapFinger16"),
+            SKTexture(imageNamed: "tapFinger17"),
+            SKTexture(imageNamed: "tapFinger18"),
+            SKTexture(imageNamed: "tapFinger19"),
+            SKTexture(imageNamed: "tapFinger20"),
+            SKTexture(imageNamed: "tapFinger21"),
+            SKTexture(imageNamed: "tapFinger22"),
+            SKTexture(imageNamed: "tapFinger23"),
+            SKTexture(imageNamed: "tapFinger24"),
+            SKTexture(imageNamed: "tapFinger25"),
+            SKTexture(imageNamed: "tapFinger26"),
+            SKTexture(imageNamed: "tapFinger27"),
+            SKTexture(imageNamed: "tapFinger28"),
+            SKTexture(imageNamed: "tapFinger29"),
+            SKTexture(imageNamed: "tapFinger30"),
+            SKTexture(imageNamed: "tapFinger31")
+        ]
+        
+        let a = SKAction.animateWithTextures(textures, timePerFrame: 0.08)
+        
+        let b = SKAction.repeatAction(a, count: 12)
+        
+        return b
+    }()
+
     
 }
