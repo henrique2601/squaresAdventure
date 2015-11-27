@@ -254,6 +254,13 @@ class BeforeMissionScene: GameScene {
         let right:Int = 300
         
         let texture = SKTexture(imageNamed: "boxSmall")
+        if (!tutorialD){
+            
+            self.nextState = states.tutorial4
+            
+            self.playerData.tutorial?.tutorial3 = NSNumber(bool: true)
+
+        }
         
         let spriteNode = SKSpriteNode(texture: nil, color: UIColor.clearColor(),
             size: CGSize(width: Int(texture.size().width) + left + right, height: Int(texture.size().height) + top + bottom))
