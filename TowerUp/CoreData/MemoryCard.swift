@@ -160,8 +160,9 @@ class MemoryCard: NSObject {
         // The persistent store coordinator for the application. This implementation creates and return a coordinator, having added the store for the application to it. This property is optional since there are legitimate error conditions that could cause the creation of the store to fail.
         // Create the coordinator and store
         var coordinator: NSPersistentStoreCoordinator? = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
-        //let url = self.applicationDocumentsDirectory.URLByAppendingPathComponent("TowerUp.sqlite")
+        
         let url = NSFileManager.defaultManager().URLForUbiquityContainerIdentifier(nil)!.URLByAppendingPathComponent("TowerUp.sqlite")
+        
         var error: NSError? = nil
         var failureReason = "There was an error creating or loading the application's saved data."
         
@@ -196,35 +197,45 @@ class MemoryCard: NSObject {
             
             try! coordinator!.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: nil)
             
-            // iCloud notification subscriptions
-            let notificationCenter = NSNotificationCenter.defaultCenter();
-            
-            notificationCenter.addObserver(
-                self,
-                selector: "persistentStoreCoordinatorStoresWillChange:",
-                name: NSPersistentStoreCoordinatorStoresWillChangeNotification,
-                object: coordinator)
-            
-            notificationCenter.addObserver(self,
-                selector: "persistentStoreCoordinatorStoresDidChange:",
-                name: NSPersistentStoreCoordinatorStoresDidChangeNotification,
-                object: coordinator)
-            
-            notificationCenter.addObserver(self,
-                selector: "persistentStoreDidImportUbiquitousContentChanges:",
-                name: NSPersistentStoreDidImportUbiquitousContentChangesNotification,
-                object: coordinator)
-            
-            notificationCenter.addObserver(self,
-                selector: "managedObjectContextDidSave:",
-                name: NSManagedObjectContextDidSaveNotification,
-                object: coordinator)
-            
-            return coordinator
-            
         } catch {
             fatalError()
         }
+        
+        let fileManager = NSFileManager.defaultManager()
+        let last_url = self.applicationDocumentsDirectory.URLByAppendingPathComponent("TowerUp.sqlite")
+        
+        // check if old store exists, then ...
+        if NSFileManager.defaultManager().fileExistsAtPath(last_url.path!) {
+            // ... migrate
+            var existingStoreOptions = [NSReadOnlyPersistentStoreOption: true]
+            
+            var existingStore = coordinator!.persistentStoreForURL(last_url)
+            try! coordinator!.migratePersistentStore(existingStore!, toURL: url, options: existingStoreOptions, withType: NSSQLiteStoreType)
+        }
+        
+        // iCloud notification subscriptions
+        let notificationCenter = NSNotificationCenter.defaultCenter();
+        
+        notificationCenter.addObserver(
+            self,
+            selector: "persistentStoreCoordinatorStoresWillChange:",
+            name: NSPersistentStoreCoordinatorStoresWillChangeNotification,
+            object: coordinator)
+        
+        notificationCenter.addObserver(self,
+            selector: "persistentStoreCoordinatorStoresDidChange:",
+            name: NSPersistentStoreCoordinatorStoresDidChangeNotification,
+            object: coordinator)
+        
+        notificationCenter.addObserver(self,
+            selector: "persistentStoreDidImportUbiquitousContentChanges:",
+            name: NSPersistentStoreDidImportUbiquitousContentChangesNotification,
+            object: coordinator)
+        
+        notificationCenter.addObserver(self,
+            selector: "managedObjectContextDidSave:",
+            name: NSManagedObjectContextDidSaveNotification,
+            object: coordinator)
         
         return coordinator
     }()
