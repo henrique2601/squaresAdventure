@@ -180,6 +180,7 @@ class MemoryCard: NSObject {
                 // ... migrate
                 var existingStoreOptions = [NSReadOnlyPersistentStoreOption: true]
                 
+                coordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
                 try coordinator?.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: last_url, options: nil)
                 
                 if let existingStore = coordinator!.persistentStoreForURL(last_url) {

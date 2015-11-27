@@ -926,7 +926,6 @@
 				TargetAttributes = {
 					81BA81441A49DA1800E65899 = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = JZ3J7RVLD7;
 						SystemCapabilities = {
 							com.apple.InAppPurchase = {
 								enabled = 0;
@@ -1316,7 +1315,7 @@
 					"$(PROJECT_DIR)",
 				);
 				"OTHER_SWIFT_FLAGS[arch=*]" = "-D DEBUG";
-				PRODUCT_BUNDLE_IDENTIFIER = com.PabloHenri91.TowerUp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.WTFGames.TowerUp;
 				PRODUCT_NAME = "Squares Adventure";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "TowerUp/TowerUp-Bridging-Header.h";
@@ -1345,7 +1344,7 @@
 					"$(PROJECT_DIR)",
 				);
 				"OTHER_SWIFT_FLAGS[arch=*]" = "-D RELEASE";
-				PRODUCT_BUNDLE_IDENTIFIER = com.PabloHenri91.TowerUp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.WTFGames.TowerUp;
 				PRODUCT_NAME = "Squares Adventure";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "TowerUp/TowerUp-Bridging-Header.h";
