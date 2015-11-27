@@ -18,10 +18,10 @@ class TowersScene: GameScene {
         case tutorial2
     }
     
-    //variavel para teste deve ser substituida por uma que fique salva no banco de dados
-    
-    var tutorialD = false
-    
+  
+    var tutorialD:Bool!
+
+   
     var tutorial2:Control!
     
     var state = states.towers
@@ -39,6 +39,8 @@ class TowersScene: GameScene {
         super.didMoveToView(view)
         self.backgroundColor = GameColors.blue
         self.addChild(Control(textureName: "background", xAlign: .center, yAlign: .center))
+        
+        self.tutorialD = self.playerData.tutorial!.tutorial1!.boolValue
         
         Music.sharedInstance.play(musicNamed: "som de fundo do menu.wav")
         
@@ -108,6 +110,9 @@ class TowersScene: GameScene {
         if (!tutorialD){
             
             self.nextState = states.tutorial2
+            
+            self.playerData.tutorial?.tutorial1 = NSNumber(bool: true)
+            
         }
 
         
@@ -142,7 +147,6 @@ class TowersScene: GameScene {
                 self.tutorial2.zPosition = self.towersScrollNode.zPosition + 1
                 self.buttonBack.zPosition -= 1
 
-                
                 break
                 
             default:

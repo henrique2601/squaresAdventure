@@ -57,6 +57,11 @@
     </entity>
     <entity name="TutorialData" representedClassName="TutorialData" syncable="YES">
         <attribute name="tutorial0" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="tutorial1" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="tutorial2" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="tutorial3" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="tutorial4" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="tutorial5" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <relationship name="playerData" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PlayerData" inverseName="tutorial" inverseEntity="PlayerData" syncable="YES"/>
     </entity>
     <fetchRequest name="FetchRequest" entity="PlayerData"/>
@@ -69,6 +74,6 @@
         <element name="SkinData" positionX="412" positionY="-126" width="128" height="118"/>
         <element name="SkinSlotData" positionX="682" positionY="-204" width="128" height="73"/>
         <element name="TowerData" positionX="198" positionY="-270" width="128" height="90"/>
-        <element name="TutorialData" positionX="180" positionY="-333" width="128" height="75"/>
+        <element name="TutorialData" positionX="180" positionY="-333" width="128" height="150"/>
     </elements>
 </model>

@@ -14,6 +14,11 @@ import CoreData
 class TutorialData: NSManagedObject {
     
     @NSManaged var tutorial0: NSNumber?
+    @NSManaged var tutorial1: NSNumber?
+    @NSManaged var tutorial2: NSNumber?
+    @NSManaged var tutorial3: NSNumber?
+    @NSManaged var tutorial4: NSNumber?
+    @NSManaged var tutorial5: NSNumber?
     @NSManaged var playerData: PlayerData?
     
 }

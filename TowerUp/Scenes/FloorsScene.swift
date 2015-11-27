@@ -19,7 +19,7 @@ class FloorsScene: GameScene {
     
     //variavel para teste deve ser substituida por uma que fique salva no banco de dados
     
-    var tutorialD = false
+    var tutorialD:Bool!
     
     var tutorial3:Control!
     
@@ -42,6 +42,8 @@ class FloorsScene: GameScene {
         self.addChild(Control(textureName: "background", xAlign: .center, yAlign: .center))
         
         Music.sharedInstance.play(musicNamed: "som de fundo do menu.wav")
+        
+        self.tutorialD = self.playerData.tutorial!.tutorial2!.boolValue
         
         self.boxCoins = BoxCoins()
         self.addChild(self.boxCoins)
@@ -115,6 +117,9 @@ class FloorsScene: GameScene {
         if (!tutorialD){
             
             self.nextState = states.tutorial3
+            
+            self.playerData.tutorial?.tutorial1 = NSNumber(bool: true)
+            
         }
         
         
