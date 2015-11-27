@@ -172,7 +172,22 @@ class MemoryCard: NSObject {
             (NSPersistentStoreUbiquitousContentNameKey, "SquaresAdventureData"))
         
         do {
-            try coordinator!.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: options)
+            let fileManager = NSFileManager.defaultManager()
+            let last_url = self.applicationDocumentsDirectory.URLByAppendingPathComponent("TowerUp.sqlite")
+            
+            // check if old store exists, then ...
+            if fileManager.fileExistsAtPath(last_url.path!) {
+                // ... migrate
+                var existingStoreOptions = [NSReadOnlyPersistentStoreOption: true]
+                
+                try coordinator?.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: last_url, options: nil)
+                
+                if let existingStore = coordinator!.persistentStoreForURL(last_url) {
+                    try coordinator!.migratePersistentStore(existingStore, toURL: url, options: existingStoreOptions, withType: NSSQLiteStoreType)
+                }
+            } else {
+                try coordinator!.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: options)
+            }
         } catch var error1 as NSError {
             error = error1
             coordinator = nil
@@ -199,18 +214,6 @@ class MemoryCard: NSObject {
             
         } catch {
             fatalError()
-        }
-        
-        let fileManager = NSFileManager.defaultManager()
-        let last_url = self.applicationDocumentsDirectory.URLByAppendingPathComponent("TowerUp.sqlite")
-        
-        // check if old store exists, then ...
-        if NSFileManager.defaultManager().fileExistsAtPath(last_url.path!) {
-            // ... migrate
-            var existingStoreOptions = [NSReadOnlyPersistentStoreOption: true]
-            
-            var existingStore = coordinator!.persistentStoreForURL(last_url)
-            try! coordinator!.migratePersistentStore(existingStore!, toURL: url, options: existingStoreOptions, withType: NSSQLiteStoreType)
         }
         
         // iCloud notification subscriptions
