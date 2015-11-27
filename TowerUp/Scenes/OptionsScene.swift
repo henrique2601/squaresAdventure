@@ -51,6 +51,11 @@ class OptionsScene: GameScene, FBSDKGameRequestDialogDelegate {
         return SKAction.repeatActionForever(SKAction.rotateByAngle(CGFloat(M_PI * 2), duration: 1))
         }()
     
+////////////////////////////////
+    
+
+///////////////////////////////
+    
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
         self.backgroundColor = GameColors.blue

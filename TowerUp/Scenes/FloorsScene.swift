@@ -14,7 +14,14 @@ class FloorsScene: GameScene {
         case floors
         case beforeMission
         case towers
+        case tutorial3
     }
+    
+    //variavel para teste deve ser substituida por uma que fique salva no banco de dados
+    
+    var tutorialD:Bool!
+    
+    var tutorial3:Control!
     
     var state = states.floors
     var nextState = states.floors
@@ -35,6 +42,8 @@ class FloorsScene: GameScene {
         self.addChild(Control(textureName: "background", x:-49, y:-32, xAlign: .center, yAlign: .center))
         
         Music.sharedInstance.play(musicNamed: "som de fundo do menu.wav")
+        
+        self.tutorialD = self.playerData.tutorial!.tutorial2!.boolValue
         
         self.boxCoins = BoxCoins()
         self.addChild(self.boxCoins)
@@ -104,6 +113,16 @@ class FloorsScene: GameScene {
         
         self.buttonBack = Button(textureName: "buttonGraySquareSmall", icon:"return", x: 20, y: 652, xAlign:.left, yAlign:.down)
         self.addChild(self.buttonBack)
+        
+        if (!tutorialD){
+            
+            self.nextState = states.tutorial3
+            
+            self.playerData.tutorial?.tutorial2 = NSNumber(bool: true)
+            
+        }
+        
+        
     }
     
     override func update(currentTime: NSTimeInterval) {
@@ -125,6 +144,18 @@ class FloorsScene: GameScene {
             case states.towers:
                 self.view!.presentScene(TowersScene(), transition: Config.defaultTransition)
                 break
+                
+            case states.tutorial3:
+                
+                self.tutorial3 = Control(textureName: "tutorialEn2", x: 120, y: 35, xAlign: .center, yAlign: .center)
+                self.addChild(self.tutorial3)
+                self.blackSpriteNode.hidden = false
+                self.floorsScrollNone.zPosition += 1
+                self.tutorial3.zPosition = self.floorsScrollNone.zPosition + 1
+                self.floorsScrollNone.zPosition -= 1
+                
+                break
+
                 
             default:
                 break
@@ -172,6 +203,36 @@ class FloorsScene: GameScene {
                     }
                 }
                 break
+            case states.tutorial3:
+                
+                for touch in (touches ) {
+                    let location = touch.locationInNode(self)
+                    
+                    if (self.floorsScrollNone.containsPoint(location)) {
+                        if(touch.tapCount > 0) {
+                            
+                            var i = 0
+                            let locationInScrollNode = touch.locationInNode(self.floorsScrollNone)
+                            
+                            for cell in self.floorsScrollNone.cells {
+                                if(cell.containsPoint(locationInScrollNode)) {
+                                    if(i < self.selectedTower.floors.count) {
+                                        MapManager.floor = i
+                                        self.nextState = states.beforeMission
+                                    } else {
+                                        print("Andar \(i) ainda não foi desbloqueada")
+                                    }
+                                    return
+                                }
+                                i++
+                            }
+                        }
+                    }
+                }
+                break
+
+                
+            
                 
             default:
                 break

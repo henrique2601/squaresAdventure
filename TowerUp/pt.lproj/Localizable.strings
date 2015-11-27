@@ -25,8 +25,13 @@
 "Cancel" = "Cancelar";
 
 
+//Tutorial
 
-
-
+"tutorialEn0" = "tutorialBR0";
+"tutorialEn1" = "tutorialBR1";
+"tutorialEn2" = "tutorialBR2";
+"tutorialEn3" = "tutorialBR3";
+"tutorialEn4" = "tutorialBR4";
+"tutorialEn5" = "tutorialBR5";
 
 //"" = ""

@@ -18,7 +18,15 @@ class BeforeMissionScene: GameScene {
         //case chooseSkin
         //case choosePowerUps
         case floors
+        case tutorial4
+        case tutorial5
     }
+    
+    var tutorialD:Bool!
+    var tutorialD2:Bool!
+    
+    var tutorial4:Control!
+    var tutorial5:Control!
     
     var state = states.loading
     var nextState = states.beforeMission
@@ -49,6 +57,12 @@ class BeforeMissionScene: GameScene {
         self.addChild(Control(textureName: "background", x:-49, y:-32, xAlign: .center, yAlign: .center))
         
         Music.sharedInstance.play(musicNamed: "som de fundo do menu.wav")
+        
+        
+        self.tutorialD = self.playerData.tutorial!.tutorial3!.boolValue
+        self.tutorialD2 = self.playerData.tutorial!.tutorial4!.boolValue
+        
+        
         
         //PowerUps
         if(self.playerData.powerUps.count > 0) {
@@ -283,6 +297,32 @@ class BeforeMissionScene: GameScene {
                 self.view!.presentScene(FloorsScene(), transition: Config.defaultTransition)
                 break
                 
+            case states.tutorial4:
+                
+                self.tutorial4 = Control(textureName: "tutorialEn3", x: 30, y: 80, xAlign: .center, yAlign: .center)
+                self.addChild(self.tutorial4)
+                self.blackSpriteNode.hidden = false
+                self.skinsScrollNode.zPosition += 1
+                self.tutorial4.zPosition = self.skinsScrollNode.zPosition + 1
+                
+                break
+
+            case states.tutorial5:
+                
+                self.tutorial4.hidden = true
+                self.skinsScrollNode.hidden = true
+                    
+                self.tutorial5 = Control(textureName: "tutorialEn4", x: 30, y: 345, xAlign: .center, yAlign: .center)
+                self.addChild(self.tutorial5)
+                self.skinsScrollNode.zPosition = self.buttonPlay.zPosition + 20
+                self.tutorial5.zPosition = self.skinsScrollNode.zPosition + 10
+                
+                self.playerData.tutorial?.tutorial4 = NSNumber(bool: true)
+
+                
+                break
+
+                
             default:
                 break
             }
@@ -337,10 +377,17 @@ class BeforeMissionScene: GameScene {
     }
     
     func touchesEndedSkins(touch:UITouch, location:CGPoint) {
+        
+        if(!self.tutorialD){
+            
+            self.tutorialD = true
+            self.nextState = states.tutorial5
+            
+        }
         if(touch.tapCount > 0) {
             if (self.skinsScrollNode.containsPoint(location)) {
                 let locationInScrollNode = touch.locationInNode(self.skinsScrollNode)
-                
+
                 for skin in self.skinsScrollNode.cells {
                     if(skin.containsPoint(locationInScrollNode)) {
                         if(!self.mySkins.containsObject(skin.name!)) {
@@ -426,6 +473,31 @@ class BeforeMissionScene: GameScene {
                     
                 }
                 break
+            case states.tutorial4:
+                for touch in (touches ) {
+                    let location = touch.locationInNode(self)
+                    
+                    self.touchesEndedSkins(touch, location: location)
+                    
+                    
+                    
+                }
+                break
+
+            case states.tutorial5:
+                for touch in (touches ) {
+                    let location = touch.locationInNode(self)
+                    
+                    if (self.buttonPlay.containsPoint(location)) {
+                        self.nextState = .mission
+                        return
+                    }
+                    
+                    self.touchesEndedPowerUps(touch, location: location)
+                    
+                }
+                break
+
                 
             case states.powerUpsInfo:
                 for touch in touches {

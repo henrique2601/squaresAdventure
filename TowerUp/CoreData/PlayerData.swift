@@ -26,6 +26,7 @@ class PlayerData: NSManagedObject {
     @NSManaged var towers: NSOrderedSet
     @NSManaged var invitedFriends: NSSet
     @NSManaged var soundEnabled: NSNumber
+    @NSManaged var tutorial: TutorialData?
 }
 
 extension PlayerData{
