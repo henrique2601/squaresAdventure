@@ -140,7 +140,7 @@ class TowersScene: GameScene {
                 
             case states.tutorial2:
                 
-                self.tutorial2 = Control(textureName: "tutorialBR1", x: 120, y: 30, xAlign: .center, yAlign: .center)
+                self.tutorial2 = Control(textureName: "tutorialEn1", x: 120, y: 30, xAlign: .center, yAlign: .center)
                 self.addChild(self.tutorial2)
                 self.blackSpriteNode.hidden = false
                 self.towersScrollNode.zPosition += 1

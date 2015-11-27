@@ -21,9 +21,8 @@ class BeforeMissionScene: GameScene {
         case tutorial5
     }
     
-    //variavel para teste deve ser substituida por uma que fique salva no banco de dados
-    
-    var tutorialD = false
+    var tutorialD:Bool!
+    var tutorialD2:Bool!
     
     var tutorial4:Control!
     var tutorial5:Control!
@@ -53,6 +52,12 @@ class BeforeMissionScene: GameScene {
         self.addChild(Control(textureName: "background", xAlign: .center, yAlign: .center))
         
         Music.sharedInstance.play(musicNamed: "som de fundo do menu.wav")
+        
+        
+        self.tutorialD = self.playerData.tutorial!.tutorial3!.boolValue
+        self.tutorialD2 = self.playerData.tutorial!.tutorial4!.boolValue
+        
+        
         
         //PowerUps
         if(self.playerData.powerUps.count > 0) {
@@ -217,8 +222,10 @@ class BeforeMissionScene: GameScene {
         if (!tutorialD){
             
             self.nextState = states.tutorial4
+            
+            self.playerData.tutorial?.tutorial3 = NSNumber(bool: true)
+
         }
-        
         
     }
     
@@ -250,7 +257,7 @@ class BeforeMissionScene: GameScene {
                 
             case states.tutorial4:
                 
-                self.tutorial4 = Control(textureName: "tutorialBR3", x: 30, y: 80, xAlign: .center, yAlign: .center)
+                self.tutorial4 = Control(textureName: "tutorialEn3", x: 30, y: 80, xAlign: .center, yAlign: .center)
                 self.addChild(self.tutorial4)
                 self.blackSpriteNode.hidden = false
                 self.skinsScrollNode.zPosition += 1
@@ -263,10 +270,13 @@ class BeforeMissionScene: GameScene {
                 self.tutorial4.hidden = true
                 self.skinsScrollNode.hidden = true
                     
-                self.tutorial5 = Control(textureName: "tutorialBR4", x: 30, y: 345, xAlign: .center, yAlign: .center)
+                self.tutorial5 = Control(textureName: "tutorialEn4", x: 30, y: 345, xAlign: .center, yAlign: .center)
                 self.addChild(self.tutorial5)
                 self.skinsScrollNode.zPosition = self.buttonPlay.zPosition + 20
                 self.tutorial5.zPosition = self.skinsScrollNode.zPosition + 10
+                
+                self.playerData.tutorial?.tutorial4 = NSNumber(bool: true)
+
                 
                 break
 
@@ -328,6 +338,7 @@ class BeforeMissionScene: GameScene {
         
         if(!self.tutorialD){
             
+            self.tutorialD = true
             self.nextState = states.tutorial5
             
         }

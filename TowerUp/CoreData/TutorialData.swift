@@ -19,6 +19,7 @@ class TutorialData: NSManagedObject {
     @NSManaged var tutorial3: NSNumber?
     @NSManaged var tutorial4: NSNumber?
     @NSManaged var tutorial5: NSNumber?
+    @NSManaged var tutorial6: NSNumber?
     @NSManaged var playerData: PlayerData?
     
 }

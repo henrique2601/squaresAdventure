@@ -18,14 +18,14 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
         case floors
         case powerUp
         case restart
-        case tutorial5
         case tutorial6
+        case tutorial7
     }
     
     //variavel para teste deve ser substituida por uma que fique salva no banco de dados
     
-    var tutorialD = false
-    var tutorialD2 = false
+    var tutorialD:Bool!
+    var tutorialD2:Bool!
     
     var tutorial5:SKSpriteNode!
     var tutorial6:SKSpriteNode!
@@ -84,6 +84,8 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
         
         Music.sharedInstance.play(musicNamed: "A New Camp.mp3")
         
+        self.tutorialD = self.playerData.tutorial!.tutorial5!.boolValue
+        self.tutorialD2 = self.playerData.tutorial!.tutorial6!.boolValue
         
         self.parallax = Parallax(imageNamed: Towers.types[MapManager.tower].tileset + "Background")
         self.addChild(self.parallax)
@@ -231,7 +233,10 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
                 
                 if(!tutorialD) {
                     
-                    self.nextState = states.tutorial5
+                    self.nextState = states.tutorial6
+                    
+                    self.playerData.tutorial?.tutorial5 = NSNumber(bool: true)
+                    //
                     
                 }
                 
@@ -306,7 +311,7 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
                 self.view!.presentScene(MissionScene(), transition: Config.defaultTransition)
                 break
                 
-            case states.tutorial5:
+            case states.tutorial6:
                 
                 
                 self.tutorial5 = SKSpriteNode(imageNamed: "finger00")
@@ -315,19 +320,19 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
                 self.tutorial5.size.width = 256
                 self.addChild(tutorial5)
                 self.tutorial5.runAction(self.tutorialAnimation)
-                self.labelTutorial5 = Control(textureName: "tutorialBR5", x:120 , y:120)
+                self.labelTutorial5 = Control(textureName: "tutorialEn5", x:120 , y:120)
                 self.labelTutorial5.zPosition = self.tutorial5.zPosition - 1
                 self.addChild(labelTutorial5)
                 
-                self.nextState  = states.mission
+                self.nextState  = states.tutorial7
                 self.tutorialD = true
                 
                 break
                 
-            case states.tutorial6:
+            case states.tutorial7:
                 
                 self.tutorial6 = SKSpriteNode(imageNamed: "tapFinger00")
-                self.tutorial6.position = CGPoint(x: 550,y: -280)
+                self.tutorial6.position = CGPoint(x: 550,y: -220)
                 self.tutorial6.size.height = 128
                 self.tutorial6.size.width = 256
                 self.addChild(tutorial6)
@@ -336,6 +341,7 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
                 self.nextState  = states.mission
                 self.tutorialD2 = true
                 
+                self.playerData.tutorial?.tutorial6 = NSNumber(bool: true)
                 
                 break
                 
@@ -471,7 +477,7 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
         
         let a = SKAction.animateWithTextures(textures, timePerFrame: 0.08)
         
-        let b = SKAction.repeatAction(a, count: 12)
+        let b = SKAction.repeatAction(a, count: 5)
         
         return b
     }()
@@ -514,7 +520,7 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
         
         let a = SKAction.animateWithTextures(textures, timePerFrame: 0.08)
         
-        let b = SKAction.repeatAction(a, count: 12)
+        let b = SKAction.repeatAction(a, count: 5)
         
         return b
     }()

@@ -112,7 +112,7 @@ class MainMenuScene: GameScene {
                 
             case states.tutorial1:
                 
-                self.tutorial1 = Control(textureName: "tutorialBR0", x: 30, y: 445, xAlign: .center, yAlign: .center)
+                self.tutorial1 = Control(textureName: "tutorialEn0", x: 30, y: 445, xAlign: .center, yAlign: .center)
                 self.addChild(self.tutorial1)
                 self.blackSpriteNode.hidden = false
                 self.buttonPlay.zPosition += 1

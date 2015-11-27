@@ -118,7 +118,7 @@ class FloorsScene: GameScene {
             
             self.nextState = states.tutorial3
             
-            self.playerData.tutorial?.tutorial1 = NSNumber(bool: true)
+            self.playerData.tutorial?.tutorial2 = NSNumber(bool: true)
             
         }
         
@@ -146,7 +146,7 @@ class FloorsScene: GameScene {
                 
             case states.tutorial3:
                 
-                self.tutorial3 = Control(textureName: "tutorialBR2", x: 120, y: 35, xAlign: .center, yAlign: .center)
+                self.tutorial3 = Control(textureName: "tutorialEn2", x: 120, y: 35, xAlign: .center, yAlign: .center)
                 self.addChild(self.tutorial3)
                 self.blackSpriteNode.hidden = false
                 self.floorsScrollNone.zPosition += 1
