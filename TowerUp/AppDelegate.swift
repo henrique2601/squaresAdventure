@@ -33,6 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Enable storing and querying data from Local Datastore. 
         // Remove this line if you don't want to use Local Datastore features or want to use cachePolicy.
         
+
         
         Fabric.with([Crashlytics.self])
         Parse.enableLocalDatastore()
@@ -62,33 +63,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         PFACL.setDefaultACL(defaultACL, withAccessForCurrentUser:true)
 
+        // Register for Push Notitications
         if application.applicationState != UIApplicationState.Background {
             // Track an app open here if we launch with a push, unless
             // "content_available" was used to trigger a background push (introduced in iOS 7).
             // In that case, we skip tracking here to avoid double counting the app-open.
-
+            
             let preBackgroundPush = !application.respondsToSelector("backgroundRefreshStatus")
             let oldPushHandlerOnly = !self.respondsToSelector("application:didReceiveRemoteNotification:fetchCompletionHandler:")
-            var noPushPayload = false
+            var pushPayload = false
             if let options = launchOptions {
-                noPushPayload = options[UIApplicationLaunchOptionsRemoteNotificationKey] != nil
+                pushPayload = options[UIApplicationLaunchOptionsRemoteNotificationKey] != nil
             }
-            if (preBackgroundPush || oldPushHandlerOnly || noPushPayload) {
+            if (preBackgroundPush || oldPushHandlerOnly || pushPayload) {
                 PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
+                print("lauch por notificacao 1")
+                print(pushPayload)
             }
         }
-        //TODO: registrar no momento adequado o usuário para receber notificações
-        /*
-        if application.respondsToSelector("registerUserNotificationSettings:") {
-            let userNotificationTypes = UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound
-            let settings = UIUserNotificationSettings(forTypes: userNotificationTypes, categories: nil)
-            application.registerUserNotificationSettings(settings)
-            application.registerForRemoteNotifications()
-        } else {
-            let types = UIRemoteNotificationType.Badge | UIRemoteNotificationType.Alert | UIRemoteNotificationType.Sound
-            application.registerForRemoteNotificationTypes(types)
+
+        
+        // Extract the notification data
+        if let notificationPayload = launchOptions?[UIApplicationLaunchOptionsRemoteNotificationKey] as? NSDictionary {
+            
+            // Create a pointer to the Photo object
+            let roomID = notificationPayload["roomID"] as? NSString
+            
+            print("lauch por notificacao 2")
+            print(roomID)
+
+            // Show photo view controller
+            //let viewController = PhotoVC(photo: object);
+            //self.navController.pushViewController(viewController, animated: true);
         }
-        */
         
         //Delay the fade of the HYDRA LOGO
         
@@ -129,42 +136,46 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
         let installation = PFInstallation.currentInstallation()
         installation.setDeviceTokenFromData(deviceToken)
-        installation.saveInBackground()
+        installation["user"] = PFUser.currentUser()
         
-        PFPush.subscribeToChannelInBackground("") { (succeeded: Bool, error: NSError?) in
-            if succeeded {
-                print("TowerUp successfully subscribed to push notifications on the broadcast channel.")
-            } else {
-                print("TowerUp failed to subscribe to push notifications on the broadcast channel with error = %@.", error)
-            }
-        }
-    }
 
+        
+        installation.saveInBackground()
+    }
+    
     func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
         if error.code == 3010 {
             print("Push notifications are not supported in the iOS Simulator.")
-        } else if error.code == 3000 {
-            //TODO criar código de autorização válido de 'aps-environment' para o aplicativo
         } else {
             print("application:didFailToRegisterForRemoteNotificationsWithError: %@", error)
         }
     }
-
-    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
-        PFPush.handlePush(userInfo)
-        if application.applicationState == UIApplicationState.Inactive {
-            PFAnalytics.trackAppOpenedWithRemoteNotificationPayload(userInfo)
-        }
-    }
+    
+//    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+//        PFPush.handlePush(userInfo)
+//        if application.applicationState == UIApplicationState.Inactive {
+//            PFAnalytics.trackAppOpenedWithRemoteNotificationPayload(userInfo)
+//            print("recebi push quando tava inativo")
+//            print(userInfo)
+//        }
+//    }
 
     ///////////////////////////////////////////////////////////
     // Uncomment this method if you want to use Push Notifications with Background App Refresh
     ///////////////////////////////////////////////////////////
-    // func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
-    //     if application.applicationState == UIApplicationState.Inactive {
-    //         PFAnalytics.trackAppOpenedWithRemoteNotificationPayload(userInfo)
-    //     }
-    // }
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+        if application.applicationState == UIApplicationState.Inactive {
+            print("recebi push quando tava inativo 2")
+            print(userInfo)
+            PFAnalytics.trackAppOpenedWithRemoteNotificationPayload(userInfo)
+        } else {
+            print("recebi push quando tava ativo")
+            print(userInfo)
+        }
+        
+        
+        
+    }
 
     //--------------------------------------
     // MARK: Facebook SDK Integration

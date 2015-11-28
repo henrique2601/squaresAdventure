@@ -60,30 +60,30 @@ class Towers: NSObject {
             FloorType(maxDeathCount: 0, maxTime: 10, minCoins: 0),//18
             FloorType(maxDeathCount: 0, maxTime: 6, minCoins: 0),//19
             FloorType(maxDeathCount: 0, maxTime: 10, minCoins: 0) //20
-            ])),
-        
-        TowerType(tileset:"cake", floorTypes: Array<FloorType>([
-            FloorType(maxDeathCount: 1, maxTime: 10, minCoins: 0),//0
-            FloorType(maxDeathCount: 2, maxTime: 15, minCoins: 0),//1
-            FloorType(maxDeathCount: 3, maxTime: 20, minCoins: 0),//2
-            FloorType(maxDeathCount: 4, maxTime: 25, minCoins: 0),//3
-            FloorType(maxDeathCount: 5, maxTime: 30, minCoins: 0),//4
-            FloorType(maxDeathCount: 6, maxTime: 35, minCoins: 0),//5
-            FloorType(maxDeathCount: 7, maxTime: 40, minCoins: 0),//6
-            FloorType(maxDeathCount: 1, maxTime: 15, minCoins: 0),//7
-            FloorType(maxDeathCount: 1, maxTime: 15, minCoins: 0),//8
-            FloorType(maxDeathCount: 1, maxTime: 15, minCoins: 0),//9
-            FloorType(maxDeathCount: 1, maxTime: 15, minCoins: 0),//10
-            FloorType(maxDeathCount: 1, maxTime: 15, minCoins: 0),//11
-            FloorType(maxDeathCount: 1, maxTime: 15, minCoins: 0),//12
-            FloorType(maxDeathCount: 1, maxTime: 15, minCoins: 0),//13
-            FloorType(maxDeathCount: 1, maxTime: 15, minCoins: 0),//14
-            FloorType(maxDeathCount: 1, maxTime: 15, minCoins: 0),//15
-            FloorType(maxDeathCount: 1, maxTime: 15, minCoins: 0),//16
-            FloorType(maxDeathCount: 1, maxTime: 15, minCoins: 0),//17
-            FloorType(maxDeathCount: 1, maxTime: 15, minCoins: 0),//18
-            FloorType(maxDeathCount: 1, maxTime: 15, minCoins: 0) //19
-            ]))//,
+           ]))//,
+//        
+//        TowerType(tileset:"cake", floorTypes: Array<FloorType>([
+//            FloorType(maxDeathCount: 1, maxTime: 10, minCoins: 0),//0
+//            FloorType(maxDeathCount: 2, maxTime: 15, minCoins: 0),//1
+//            FloorType(maxDeathCount: 3, maxTime: 20, minCoins: 0),//2
+//            FloorType(maxDeathCount: 4, maxTime: 25, minCoins: 0),//3
+//            FloorType(maxDeathCount: 5, maxTime: 30, minCoins: 0),//4
+//            FloorType(maxDeathCount: 6, maxTime: 35, minCoins: 0),//5
+//            FloorType(maxDeathCount: 7, maxTime: 40, minCoins: 0),//6
+//            FloorType(maxDeathCount: 1, maxTime: 15, minCoins: 0),//7
+//            FloorType(maxDeathCount: 1, maxTime: 15, minCoins: 0),//8
+//            FloorType(maxDeathCount: 1, maxTime: 15, minCoins: 0),//9
+//            FloorType(maxDeathCount: 1, maxTime: 15, minCoins: 0),//10
+//            FloorType(maxDeathCount: 1, maxTime: 15, minCoins: 0),//11
+//            FloorType(maxDeathCount: 1, maxTime: 15, minCoins: 0),//12
+//            FloorType(maxDeathCount: 1, maxTime: 15, minCoins: 0),//13
+//            FloorType(maxDeathCount: 1, maxTime: 15, minCoins: 0),//14
+//            FloorType(maxDeathCount: 1, maxTime: 15, minCoins: 0),//15
+//            FloorType(maxDeathCount: 1, maxTime: 15, minCoins: 0),//16
+//            FloorType(maxDeathCount: 1, maxTime: 15, minCoins: 0),//17
+//            FloorType(maxDeathCount: 1, maxTime: 15, minCoins: 0),//18
+//            FloorType(maxDeathCount: 1, maxTime: 15, minCoins: 0) //19
+//            ]))//,
 //
 //        TowerType(tileset:"castle", floorTypes: Array<FloorType>([
 //            FloorType(maxDeathCount: 1, maxTime: 10, minCoins: 10),//0

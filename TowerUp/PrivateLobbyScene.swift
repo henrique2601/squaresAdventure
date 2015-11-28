@@ -10,7 +10,9 @@ import UIKit
 import SpriteKit
 import ParseFacebookUtilsV4
 
-class PrivateLobbyScene: GameScene, FBSDKGameRequestDialogDelegate {
+
+
+class PrivateLobbyScene: GameScene, FBSDKGameRequestDialogDelegate, UIApplicationDelegate {
     enum states {
         case loading
         case lobby
@@ -32,11 +34,12 @@ class PrivateLobbyScene: GameScene, FBSDKGameRequestDialogDelegate {
     
     var cropBox:CropBox!
     var friendsScroll:ScrollNode!
-    var picNodes = Array<SKSpriteNode>()
+    var picNodes = Array<Control>()
     
     //facebook Request
     var after:String = ""
     var idFriendArray = NSMutableArray()
+    var idFriendPushArray = NSMutableArray()
     var blockedArray = NSMutableArray()
     var nameFriendArray = NSMutableArray()
     var picsArray = NSMutableArray()
@@ -55,7 +58,7 @@ class PrivateLobbyScene: GameScene, FBSDKGameRequestDialogDelegate {
         Music.sharedInstance.play(musicNamed: "som de fundo do menu.wav")
         
         self.cropBox = CropBox(textureName: "lobby1", z: -1000, xAlign: .center, yAlign: .center)
-        self.friendsScroll = ScrollNode(x: 222, y: 95, cells: Array<SKNode>(), spacing: 31, scrollDirection: .vertical)
+        self.friendsScroll = ScrollNode(x: 793, y: 288, cells: Array<SKNode>(), spacing: 16, scrollDirection: .vertical)
         self.cropBox.addChild(self.friendsScroll)
         
         self.addChild(self.cropBox)
@@ -79,6 +82,9 @@ class PrivateLobbyScene: GameScene, FBSDKGameRequestDialogDelegate {
         self.buttonBack = Button(textureName: "buttonGraySquareSmall", icon:"return", x: 20, y: 652, xAlign:.left, yAlign:.down)
         self.addChild(self.buttonBack)
         
+        
+
+        
         self.loadFriends()
         
     }
@@ -86,27 +92,61 @@ class PrivateLobbyScene: GameScene, FBSDKGameRequestDialogDelegate {
     
     func loadFriends(){
         
-        var params: NSMutableDictionary = ["fields": "name" ]
+        let params: NSMutableDictionary = ["fields": "name" ]
         
         var friendCell:FriendCell!
         
         let request: FBSDKGraphRequest = FBSDKGraphRequest.init(graphPath: "me/friends", parameters: params as [NSObject : AnyObject], HTTPMethod: "GET")
         
+        
+        
+        
+        if((FBSDKAccessToken.currentAccessToken()) != nil){
+            FBSDKGraphRequest(graphPath: "me", parameters: nil).startWithCompletionHandler({ (connection, result, error) -> Void in
+                if (error == nil){
+                    
+                    
+                    let resultDictionary = result as? NSDictionary
+                    
+                    print(resultDictionary)
+                    let user = PFUser.currentUser()
+                    user?.setObject((resultDictionary?.objectForKey("id"))!.description, forKey: "fbID")
+                    user?.setObject((resultDictionary?.objectForKey("name"))!.description, forKey: "name")
+                    user?.saveInBackground()
+                    
+                    let installation = PFInstallation.currentInstallation()
+                    installation.setObject(user!, forKey: "user")
+                    installation.setObject((resultDictionary?.objectForKey("id"))!.description, forKey: "userFbID")
+                    
+                    installation.saveInBackground()
+                    
+                }
+            })
+        }
+        
+        
+        
+        
         request.startWithCompletionHandler({ (FBSDKGraphRequestConnection, result, error) -> Void in
             
             if (result != nil && error == nil){
                 
+                //print("request rodado")
+                
                 //print (result)
-                let resultdict = result as! NSDictionary
+    
                 let friendArray = result.objectForKey("data") as! Array<NSDictionary>
                 
                 //print(friendArray)
                 
                 for item in friendArray
                 {
-                    var facebookID = item["id"] as! String
-                    var name = item["name"] as! String
-                    var pictureURL = NSURL(string: String("https://graph.facebook.com/" + facebookID + "/picture?height=100&return_ssl_resources=1"))
+                    let facebookID = item["id"] as! String
+                    self.idFriendPushArray.addObject(facebookID)
+                    
+                    let pictureURL = NSURL(string: String("https://graph.facebook.com/" + facebookID + "/picture?height=50&return_ssl_resources=1"))
+                    
+                    //print("https://graph.facebook.com/" + facebookID + "/picture?height=50&return_ssl_resources=1")
                     self.picsArray.addObject(pictureURL!)
                     
 
@@ -117,26 +157,42 @@ class PrivateLobbyScene: GameScene, FBSDKGameRequestDialogDelegate {
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
                     
                     
+                    
                     for picURL in self.picsArray {
+                        
+                       // print("assinc loop picurl")
                         
                         let url = picURL as! NSURL
                         
                         if let imageData = NSData(contentsOfURL: url) {
-                            let spriteNode = SKSpriteNode(texture: SKTexture(data: imageData, size: CGSize(width: 100, height: 100)))
-                            self.picNodes.append(spriteNode)
+                            //print("carregando imagem")
+                            let image = UIImage(data: imageData)
                             
-                            if (self.picNodes.count == 3) {
+                        
                                 
-                                dispatch_async(dispatch_get_main_queue()) {
+                                let spriteNode = SKSpriteNode(texture: SKTexture(image: image!))
+                                
+                                let control = Control(spriteNode: spriteNode)
+                                
+                                self.picNodes.append(control)
+                                
+                                if (self.picNodes.count == 3) {
+                                    //print("3 imagens, mandei para o scroll")
                                     
-                                    //adicona no scroll
-                                    friendCell = FriendCell(friends: self.picNodes)
-                                    self.picNodes.removeAll()
-                                    self.friendsScroll.append(friendCell)
+                                    dispatch_async(dispatch_get_main_queue()) {
+                                        
+                                        //adicona no scroll
+                                        friendCell = FriendCell(friends: self.picNodes)
+                                        self.picNodes.removeAll()
+                                        self.friendsScroll.append(friendCell)
+                                        
+                                    }
                                     
                                 }
                                 
-                            }
+                        
+                            
+                            
                             
                         }
                         
@@ -145,27 +201,53 @@ class PrivateLobbyScene: GameScene, FBSDKGameRequestDialogDelegate {
                     
                     dispatch_async(dispatch_get_main_queue()) {
                         
-                        //adicona no scroll
-                        friendCell = FriendCell(friends: self.picNodes)
-                        self.picNodes.removeAll()
-                        self.friendsScroll.append(friendCell)
+                        if (self.picNodes.count > 0 ){
+                            
+                            //adicona no scroll
+                            friendCell = FriendCell(friends: self.picNodes)
+                            self.picNodes.removeAll()
+                            self.friendsScroll.append(friendCell)
+                            
+                        }
                         
+
                     }
-                    
+ 
                     
                 }
-                
-                
-                
-            
                 
 
                 
             } else if (result == nil){
-                self.loginFromInvite()
+                self.login()
             }
             
         })
+        
+        
+        
+        
+        
+        
+        
+    }
+    
+    
+
+    
+
+    func initializeNotificationServices() -> Void {
+        let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
+        UIApplication.sharedApplication().registerUserNotificationSettings(settings)
+        
+        // This is an asynchronous method to retrieve a Device Token
+        // Callbacks are in AppDelegate.swift
+        // Success = didRegisterForRemoteNotificationsWithDeviceToken
+        // Fail = didFailToRegisterForRemoteNotificationsWithError
+        UIApplication.sharedApplication().registerForRemoteNotifications()
+        
+        
+        
         
     }
     
@@ -243,6 +325,9 @@ class PrivateLobbyScene: GameScene, FBSDKGameRequestDialogDelegate {
                     
                     if (self.buttonGo.containsPoint(location)) {
                         //faz algo
+                        
+                        self.sendPush()
+                        
                         return
                     }
                     
@@ -283,8 +368,44 @@ class PrivateLobbyScene: GameScene, FBSDKGameRequestDialogDelegate {
     }
     
     
+    func sendPush(){
+        
+//        // Find users near a given location
+//        let userQuery = PFUser.query()
+//        userQuery!.whereKey("fbID", equalTo: "1028250087225308")
+//        
+        // Find devices associated with these users
+        let pushQuery = PFInstallation.query()
+        //print(self.idFriendPushArray)
+        pushQuery!.whereKey("userFbID", containedIn: self.idFriendPushArray as [AnyObject])
+    
+        
+        let user = PFUser.currentUser()
+        print(user)
+        
+        // Send push notification to query
+        let push = PFPush()
+        push.setQuery(pushQuery) // Set our Installation query
+        push.setMessage( user!.objectForKey("name")!.description + " invited you to play")
+        
+        let data = [
+            "alert" : user!.objectForKey("name")!.description + " invited you to play",
+            "roomID" : user!.objectForKey("fbID")!.description]
+        
+        push.setData(data)
+        push.sendPushInBackground()
+        
+        
+        
+        
+        print("mandei")
+        //print(userQuery)
+        
+    }
+    
+    
     func gameRequestDialog(gameRequestDialog: FBSDKGameRequestDialog!, didCompleteWithResults results: [NSObject : AnyObject]!){
-        print("complete, result:")
+        //print("complete, result:")
         
         if (self.idFriendArray.count == 50 || after == "end"){
             
@@ -383,7 +504,7 @@ class PrivateLobbyScene: GameScene, FBSDKGameRequestDialogDelegate {
                     }
                 }
                 
-                print(self.idFriendArray.count.description + "amigos")
+                //print(self.idFriendArray.count.description + "amigos")
                 
                 
                 if let test = ((resultdict.objectForKey("paging") as? NSDictionary)?.objectForKey("cursors") as? NSDictionary)?.objectForKey("after") as? String {
@@ -397,7 +518,7 @@ class PrivateLobbyScene: GameScene, FBSDKGameRequestDialogDelegate {
                     
                 else {
                     self.after = "end"
-                    print("fim")
+                    //print("fim")
                 }
                 
                 if (self.idFriendArray.count == 50 || self.after == "end" ){
@@ -425,7 +546,7 @@ class PrivateLobbyScene: GameScene, FBSDKGameRequestDialogDelegate {
                         
                     else {
                         print("assistir video")
-                        //assitir video aqui
+                        //TODO: assitir video aqui
                         self.nextState = .lobby
                     }
                     
@@ -460,6 +581,9 @@ class PrivateLobbyScene: GameScene, FBSDKGameRequestDialogDelegate {
                     print("User logged in through Facebook!")
                 }
                 
+                
+                
+                
                 self.inviteFriends(nil, limit: 50)
                 
             } else {
@@ -467,6 +591,32 @@ class PrivateLobbyScene: GameScene, FBSDKGameRequestDialogDelegate {
             }
         })
         return
+    }
+    
+    func login(){
+        
+        var permissions = [ "public_profile", "email", "user_friends" ]
+        
+        PFFacebookUtils.logInInBackgroundWithReadPermissions(permissions,  block: {  (user: PFUser?, error: NSError?) -> Void in
+            if let user = user {
+                if user.isNew {
+                    print("User signed up and logged in through Facebook!")
+                } else {
+                    print("User logged in through Facebook!")
+                }
+                
+                
+
+                
+                
+                self.initializeNotificationServices()
+                self.loadFriends()
+                
+            } else {
+                print("Uh oh. The user cancelled the Facebook login.")
+            }
+        })
+        
     }
 
     

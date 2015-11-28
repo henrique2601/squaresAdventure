@@ -14,14 +14,15 @@ class FriendCell: SKNode {
     
 
     
-    init(friends:Array<SKSpriteNode>) {
+    init(friends:Array<Control>) {
         super.init()
         
     
         for (var i=0; i < friends.count; i++){
             let friend = friends[i]
-            let x = 41 + 131  * i
-            friend.position = CGPoint(x: x/2, y: -41/2)
+            let x =  131 * i
+            friend.sketchPosition = CGPoint(x: x, y: 0)
+            friend.resetPosition()
             self.addChild(friend)
         }
         
