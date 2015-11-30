@@ -160,35 +160,11 @@ class MemoryCard: NSObject {
         // The persistent store coordinator for the application. This implementation creates and return a coordinator, having added the store for the application to it. This property is optional since there are legitimate error conditions that could cause the creation of the store to fail.
         // Create the coordinator and store
         var coordinator: NSPersistentStoreCoordinator? = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
-        
-        let url = NSFileManager.defaultManager().URLForUbiquityContainerIdentifier(nil)!.URLByAppendingPathComponent("TowerUp.sqlite")
-        
+        let url = self.applicationDocumentsDirectory.URLByAppendingPathComponent("TowerUp.sqlite")
         var error: NSError? = nil
         var failureReason = "There was an error creating or loading the application's saved data."
-        
-        let options = Dictionary(dictionaryLiteral:
-            (NSMigratePersistentStoresAutomaticallyOption, true),
-            (NSInferMappingModelAutomaticallyOption , true),
-            (NSPersistentStoreUbiquitousContentNameKey, "SquaresAdventureData"))
-        
         do {
-            let fileManager = NSFileManager.defaultManager()
-            let last_url = self.applicationDocumentsDirectory.URLByAppendingPathComponent("TowerUp.sqlite")
-            
-            // check if old store exists, then ...
-            if fileManager.fileExistsAtPath(last_url.path!) {
-                // ... migrate
-                var existingStoreOptions = [NSReadOnlyPersistentStoreOption: true]
-                
-                coordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
-                try coordinator?.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: last_url, options: nil)
-                
-                if let existingStore = coordinator!.persistentStoreForURL(last_url) {
-                    try coordinator!.migratePersistentStore(existingStore, toURL: url, options: existingStoreOptions, withType: NSSQLiteStoreType)
-                }
-            } else {
-                try coordinator!.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: options)
-            }
+            try coordinator!.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: nil)
         } catch var error1 as NSError {
             error = error1
             coordinator = nil
@@ -213,33 +189,11 @@ class MemoryCard: NSObject {
             
             try! coordinator!.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: nil)
             
+            return coordinator
+            
         } catch {
             fatalError()
         }
-        
-        // iCloud notification subscriptions
-        let notificationCenter = NSNotificationCenter.defaultCenter();
-        
-        notificationCenter.addObserver(
-            self,
-            selector: "persistentStoreCoordinatorStoresWillChange:",
-            name: NSPersistentStoreCoordinatorStoresWillChangeNotification,
-            object: coordinator)
-        
-        notificationCenter.addObserver(self,
-            selector: "persistentStoreCoordinatorStoresDidChange:",
-            name: NSPersistentStoreCoordinatorStoresDidChangeNotification,
-            object: coordinator)
-        
-        notificationCenter.addObserver(self,
-            selector: "persistentStoreDidImportUbiquitousContentChanges:",
-            name: NSPersistentStoreDidImportUbiquitousContentChangesNotification,
-            object: coordinator)
-        
-        notificationCenter.addObserver(self,
-            selector: "managedObjectContextDidSave:",
-            name: NSManagedObjectContextDidSaveNotification,
-            object: coordinator)
         
         return coordinator
     }()
@@ -252,43 +206,8 @@ class MemoryCard: NSObject {
         }
         var managedObjectContext = NSManagedObjectContext()
         managedObjectContext.persistentStoreCoordinator = coordinator
-        
-        managedObjectContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
-        
         return managedObjectContext
     }()
-    
-    func persistentStoreCoordinatorStoresWillChange(notification: NSNotification) {
-        print("persistentStoreCoordinatorStoresWillChange")
-        self.managedObjectContext!.performBlockAndWait {
-            if(self.managedObjectContext!.hasChanges) {
-                self.saveContext()
-            }
-            self.managedObjectContext!.reset()
-        }
-    }
-    
-    func persistentStoreCoordinatorStoresDidChange(notification: NSNotification) {
-        print("persistentStoreCoordinatorStoresDidChange")
-        self.managedObjectContext!.performBlockAndWait {
-            self.playerData = nil
-            self.loadGame()
-        }
-    }
-    
-    func persistentStoreDidImportUbiquitousContentChanges(notification: NSNotification) {
-        print("persistentStoreDidImportUbiquitousContentChanges")
-        self.managedObjectContext!.performBlockAndWait {
-            self.managedObjectContext!.reset()//TODO: ???
-            self.managedObjectContext!.mergeChangesFromContextDidSaveNotification(notification)
-            self.playerData = nil
-            self.loadGame()
-        }
-    }
-    
-    func managedObjectContextDidSave(notification: NSNotification) {
-        print("managedObjectContextDidSave")
-    }
     
     // MARK: - Core Data Saving support
     
