@@ -415,6 +415,7 @@ class BeforeMissionScene: GameScene {
                                     self.showSkins()
                                 } else {
                                     //TODO: assistir video para ganhar mais moedas???
+                                    self.boxCoins.containsPoint()
                                     print("Não tenho dinheiro para comprar")
                                 }
                             } else {

@@ -457,6 +457,7 @@ class OptionsScene: GameScene, FBSDKGameRequestDialogDelegate {
                     else {
                         print("assistir video")
                         //assitir video aqui
+                        
                         self.nextState = .options
                     }
                     

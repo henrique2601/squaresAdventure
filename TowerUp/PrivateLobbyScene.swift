@@ -555,6 +555,7 @@ class PrivateLobbyScene: GameScene, FBSDKGameRequestDialogDelegate, UIApplicatio
                     else {
                         print("assistir video")
                         //TODO: assitir video aqui
+                        self.boxCoins.containsPoint()
                         self.nextState = .lobby
                     }
                     

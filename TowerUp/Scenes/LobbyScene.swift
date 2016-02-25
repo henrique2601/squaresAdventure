@@ -383,6 +383,7 @@ class LobbyScene: GameScene, UITextFieldDelegate {
                                                 self.nextState = states.lobby
                                             } else {
                                                 //TODO: assistir video para ganhar mais moedas???
+                                                self.boxCoins.containsPoint()
                                                 print("Não tenho dinheiro para comprar")
                                             }
                                         } else {
@@ -397,6 +398,7 @@ class LobbyScene: GameScene, UITextFieldDelegate {
                                                 self.nextState = states.lobby
                                             } else {
                                                 //TODO: assistir video para ganhar mais gemas???
+                                                self.boxCoins.containsPoint()
                                                 print("Não tenho gemas para comprar")
                                             }
                                         }
