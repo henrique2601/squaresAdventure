@@ -15,8 +15,11 @@ class ServerManager: NSObject, GBPingDelegate {
     let ping = GBPing()
     var responseTime: Int = 0
     var numResponses: Int = 0
-    var servers = ["181.41.197.181", "https://squaregame.mybluemix.net"]
-    var serversSocket = ["181.41.197.181:8081", "https://squaregame.mybluemix.net"]
+    var servers = ["181.41.197.181"]
+    var serversSocket = ["181.41.197.181:8081"]
+    //var servers = ["181.41.197.181", "https://squaregame.mybluemix.net"]
+    //var serversSocket = ["181.41.197.181:8081", "https://squaregame.mybluemix.net"]
+    //var serversSocket = ["paulo.santos.kinghost.net/square", "paulo.santos.kinghost.net/square"]
     var count: Int = 0
     var minTime: Int = 999999
     var minServer: String!

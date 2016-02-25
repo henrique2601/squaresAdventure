@@ -79,6 +79,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
                 print("lauch por notificacao 1")
                 print(pushPayload)
+        
+                
             }
         }
 
@@ -86,15 +88,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Extract the notification data
         if let notificationPayload = launchOptions?[UIApplicationLaunchOptionsRemoteNotificationKey] as? NSDictionary {
             
-            // Create a pointer to the Photo object
+            
             let roomID = notificationPayload["roomID"] as? NSString
             
-            print("lauch por notificacao 2")
-            print(roomID)
-
-            // Show photo view controller
-            //let viewController = PhotoVC(photo: object);
-            //self.navController.pushViewController(viewController, animated: true);
+            
+            NSNotificationCenter.defaultCenter().postNotificationName("privateGameInvite", object: roomID)
+            
+            return true
+            
         }
         
         //Delay the fade of the HYDRA LOGO
@@ -151,26 +152,38 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-//    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
-//        PFPush.handlePush(userInfo)
-//        if application.applicationState == UIApplicationState.Inactive {
-//            PFAnalytics.trackAppOpenedWithRemoteNotificationPayload(userInfo)
-//            print("recebi push quando tava inativo")
-//            print(userInfo)
-//        }
-//    }
+
 
     ///////////////////////////////////////////////////////////
     // Uncomment this method if you want to use Push Notifications with Background App Refresh
     ///////////////////////////////////////////////////////////
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
         if application.applicationState == UIApplicationState.Inactive {
-            print("recebi push quando tava inativo 2")
-            print(userInfo)
+            
+       
+            let roomID = userInfo["roomID"] as? NSString
+            
+            print("recebi push quando tava inativo ")
+            //print(userInfo)
+            
             PFAnalytics.trackAppOpenedWithRemoteNotificationPayload(userInfo)
+            
+            NSNotificationCenter.defaultCenter().postNotificationName("privateGameInvite", object: roomID)
         } else {
+            
+            let roomID = userInfo["roomID"] as? NSString
+            
             print("recebi push quando tava ativo")
-            print(userInfo)
+            //print(userInfo)
+    
+            PFAnalytics.trackAppOpenedWithRemoteNotificationPayload(userInfo)
+            
+            print("Room da notification" + (roomID! as String))
+            
+            
+            completionHandler(UIBackgroundFetchResult.NoData)
+            NSNotificationCenter.defaultCenter().postNotificationName("privateGameInvite", object: roomID)
+            
         }
         
         

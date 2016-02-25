@@ -16,6 +16,8 @@ class GameScene: SKScene {
     var backgroundUp:Control!
     var backgroundDown:Control!
     
+    var roomID:NSString?
+    
     override init() {
         Control.touchesArray = Set<UITouch>()
         Bomb.bombList = Array<Bomb>()
@@ -38,6 +40,8 @@ class GameScene: SKScene {
         
         self.blackSpriteNode = BlackSpriteNode()
         self.addChild(self.blackSpriteNode)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "privateGameInviteRecivied:", name:"privateGameInvite", object: roomID)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -98,5 +102,23 @@ class GameScene: SKScene {
         spriteNode = SKSpriteNode(texture: nil, color: GameColors.greenGrass, size: self.size)
         self.backgroundDown = Control(spriteNode: spriteNode, x: 0, y: 375, z: -20000, size:size, xAlign: .center, yAlign: .center)
         self.addChild(self.backgroundDown)
+    }
+    
+    func privateGameInviteRecivied(notification: NSNotification){
+        //Take Action on Notification
+        print("notification recieved")
+        //print(notification)
+        
+        let roomID = notification.object as! String
+        
+        print(roomID)
+        
+        self.view!.presentScene(PrivateLobbySceneSecondary(roomName: roomID), transition: Config.defaultTransition)
+        
+    }
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+        
     }
 }

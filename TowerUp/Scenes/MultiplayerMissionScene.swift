@@ -45,7 +45,7 @@ class MultiplayerMissionScene: GameScene, SKPhysicsContactDelegate {
     var player:PlayerOnline!
     var mapManager:MapManager!
     var parallax:Parallax!
-    var room:Int = 0
+    var room:String = "a"
     let velo:CGFloat = 3
     var time: NSTimeInterval = 0
     var currentTime:NSTimeInterval!

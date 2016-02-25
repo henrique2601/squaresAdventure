@@ -156,7 +156,7 @@ class LocalGameScene: GameScene, SKPhysicsContactDelegate {
         if(self.player.healthPoints > 0){
             self.myCamera.update(self.player.position)
         }
-        self.player.updateEmiter(self.currentTime, room: self.room)
+        //self.player.updateEmiter(self.currentTime, room: self.room)
         self.player.didFinishUpdate()
         self.parallax.update(self.myCamera.position)
     }

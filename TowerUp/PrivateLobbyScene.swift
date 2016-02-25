@@ -17,6 +17,7 @@ class PrivateLobbyScene: GameScene, FBSDKGameRequestDialogDelegate, UIApplicatio
         case loading
         case lobby
         case invite
+        case nextLobby
         case returnLobby
     }
     
@@ -44,6 +45,7 @@ class PrivateLobbyScene: GameScene, FBSDKGameRequestDialogDelegate, UIApplicatio
     var nameFriendArray = NSMutableArray()
     var picsArray = NSMutableArray()
     var loadingImage:SKSpriteNode!
+    var fbID: String!
     
     lazy var deathEffect:SKAction = {
         return SKAction.repeatActionForever(SKAction.rotateByAngle(CGFloat(M_PI * 2), duration: 1))
@@ -301,6 +303,11 @@ class PrivateLobbyScene: GameScene, FBSDKGameRequestDialogDelegate, UIApplicatio
                 break
                 
                 
+            case states.nextLobby:
+                self.view!.presentScene(PrivateLobbySceneSecondary(roomName: self.fbID), transition: Config.defaultTransition)
+                break
+                
+                
                 
                 
             default:
@@ -395,9 +402,10 @@ class PrivateLobbyScene: GameScene, FBSDKGameRequestDialogDelegate, UIApplicatio
         push.setData(data)
         push.sendPushInBackground()
         
+        self.fbID = user!.objectForKey("fbID")!.description
         
         
-        
+        self.nextState = .nextLobby
         print("mandei")
         //print(userQuery)
         
