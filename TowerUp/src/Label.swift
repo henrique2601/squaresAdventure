@@ -40,7 +40,7 @@ class Label: Control {
         Control.controlList.insert(self)
     }
     
-    func getText() -> NSString{
+    func getText() -> String{
         return self.labelNode.text!
     }
     

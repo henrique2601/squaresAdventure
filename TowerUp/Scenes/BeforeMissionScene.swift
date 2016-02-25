@@ -14,10 +14,19 @@ class BeforeMissionScene: GameScene {
         case loading
         case beforeMission
         case mission
+        case powerUpsInfo
         //case chooseSkin
         //case choosePowerUps
         case floors
+        case tutorial4
+        case tutorial5
     }
+    
+    var tutorialD:Bool!
+    var tutorialD2:Bool!
+    
+    var tutorial4:Control!
+    var tutorial5:Control!
     
     var state = states.loading
     var nextState = states.beforeMission
@@ -31,12 +40,16 @@ class BeforeMissionScene: GameScene {
     
     var skinsScrollNode:ScrollNode!
     var powerUpsScrollNode:ScrollNode!
+    var powerUpsInfoScrollNode:ScrollNode!
     
     var mySkins = NSMutableArray()//Skins Desbloqueadas/Compradas
     //var myPowerUps = NSMutableArray()//PowerUps Desbloqueados/Comprados
     
     var buttonPlay:Button!
     var buttonBack:Button!
+    var buttonPowerUpsInfo:Button!
+    
+    var boxPowerUpsInfo:CropBox!
     
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
@@ -44,6 +57,12 @@ class BeforeMissionScene: GameScene {
         self.addChild(Control(textureName: "background", x:-49, y:-32, xAlign: .center, yAlign: .center))
         
         Music.sharedInstance.play(musicNamed: "som de fundo do menu.wav")
+        
+        
+        self.tutorialD = self.playerData.tutorial!.tutorial3!.boolValue
+        self.tutorialD2 = self.playerData.tutorial!.tutorial4!.boolValue
+        
+        
         
         //PowerUps
         if(self.playerData.powerUps.count > 0) {
@@ -73,6 +92,9 @@ class BeforeMissionScene: GameScene {
     
     func showPowerUps() {
         if let teste = self.powerUpsScrollNode {
+            teste.removeFromParent()
+        }
+        if let teste = self.powerUpsInfoScrollNode {
             teste.removeFromParent()
         }
         
@@ -106,8 +128,30 @@ class BeforeMissionScene: GameScene {
         //
         //                powerUpsArray.append(cell)
         
-        self.powerUpsScrollNode = ScrollNode(x: 667, y: 566, cells: powerUpsArray, scrollDirection: .horizontal, scaleNodes: true, scaleDistance:1334 + 100)
+        self.powerUpsScrollNode = ScrollNode(x: 667, y: 566, cells: powerUpsArray, scrollDirection: .horizontal, scaleNodes: true, scaleDistance:1334 + 100, index:Int(powerUpsArray.count/2))
         self.addChild(self.powerUpsScrollNode)
+        ScrollNode.scrollNodeList.remove(self.powerUpsScrollNode)//TODO: remover esta linha para scrollar powerUps
+        
+        self.buttonPowerUpsInfo = Button(textureName: "buttonBlueSquare", icon: "about_filled", x: 297, y: 630, xAlign: .center, yAlign: .down, top: 10, bottom: 10, left: 10, right: 10)
+        self.addChild(self.buttonPowerUpsInfo)
+        
+        self.boxPowerUpsInfo = CropBox(textureName: "box1024x512", xAlign:.center, yAlign:.center)
+        self.addChild(self.boxPowerUpsInfo)
+        
+        powerUpsArray = Array<PowerUp>()
+        
+        //PowerUps desbloqueados
+        for item in self.playerData.powerUps {
+            let powerUp = PowerUp(powerUpData: item as! PowerUpData)
+            powerUp.addChild(Label(text: powerUp.powerUpType.text, x:100, y:0, horizontalAlignmentMode:SKLabelHorizontalAlignmentMode.Left))
+            powerUpsArray.append(powerUp)
+        }
+        
+        self.powerUpsInfoScrollNode = ScrollNode(x: 100, y: 100, cells: powerUpsArray, scrollDirection: .vertical, scaleNodes: false, scaleDistance:1334 + 100)
+        self.boxPowerUpsInfo.addChild(self.powerUpsInfoScrollNode)
+        
+        self.boxPowerUpsInfo.zPosition = self.skinsScrollNode.zPosition + 10000
+        self.boxPowerUpsInfo.hidden = true
     }
     
     func showSkins() {
@@ -203,6 +247,25 @@ class BeforeMissionScene: GameScene {
         
         self.skinsScrollNode = ScrollNode(x: 667, y: 366, cells: skinsArray, spacing: 0, scrollDirection: ScrollNode.scrollTypes.horizontal, scaleNodes: true, scaleDistance:1334/4 + 100, index:index)
         self.addChild(skinsScrollNode)
+        
+        let top:Int = 0
+        let bottom:Int = 0
+        let left:Int = 300
+        let right:Int = 300
+        
+        let texture = SKTexture(imageNamed: "boxSmall")
+        if (!tutorialD){
+            
+            self.nextState = states.tutorial4
+            
+            self.playerData.tutorial?.tutorial3 = NSNumber(bool: true)
+
+        }
+        
+        let spriteNode = SKSpriteNode(texture: nil, color: UIColor.clearColor(),
+            size: CGSize(width: Int(texture.size().width) + left + right, height: Int(texture.size().height) + top + bottom))
+        
+        self.skinsScrollNode.addChild(spriteNode)
     }
     
     override func update(currentTime: NSTimeInterval) {
@@ -222,15 +285,50 @@ class BeforeMissionScene: GameScene {
                 break
                 
             case states.beforeMission:
+                self.blackSpriteNode.hidden = true
+                self.boxPowerUpsInfo.hidden = true
                 self.player = Player(playerData: self.playerData, x: 667, y: 466, loadPhysics: false)
                 self.player.hidden = true
                 self.addChild(self.player)
                 
                 break
                 
+            case states.powerUpsInfo:
+                self.boxPowerUpsInfo.hidden = false
+                self.blackSpriteNode.hidden = false
+                self.blackSpriteNode.zPosition = self.boxPowerUpsInfo.zPosition - 1
+                self.buttonBack.zPosition = self.blackSpriteNode.zPosition + 1
+                break
+                
             case states.floors:
                 self.view!.presentScene(FloorsScene(), transition: Config.defaultTransition)
                 break
+                
+            case states.tutorial4:
+                
+                self.tutorial4 = Control(textureName: "tutorialEn3", x: 30, y: 80, xAlign: .center, yAlign: .center)
+                self.addChild(self.tutorial4)
+                self.blackSpriteNode.hidden = false
+                self.skinsScrollNode.zPosition += 1
+                self.tutorial4.zPosition = self.skinsScrollNode.zPosition + 1
+                
+                break
+
+            case states.tutorial5:
+                
+                self.tutorial4.hidden = true
+                self.skinsScrollNode.hidden = true
+                    
+                self.tutorial5 = Control(textureName: "tutorialEn4", x: 30, y: 345, xAlign: .center, yAlign: .center)
+                self.addChild(self.tutorial5)
+                self.skinsScrollNode.zPosition = self.buttonPlay.zPosition + 20
+                self.tutorial5.zPosition = self.skinsScrollNode.zPosition + 10
+                
+                self.playerData.tutorial?.tutorial4 = NSNumber(bool: true)
+
+                
+                break
+
                 
             default:
                 break
@@ -286,10 +384,17 @@ class BeforeMissionScene: GameScene {
     }
     
     func touchesEndedSkins(touch:UITouch, location:CGPoint) {
+        
+        if(!self.tutorialD){
+            
+            self.tutorialD = true
+            self.nextState = states.tutorial5
+            
+        }
         if(touch.tapCount > 0) {
             if (self.skinsScrollNode.containsPoint(location)) {
                 let locationInScrollNode = touch.locationInNode(self.skinsScrollNode)
-                
+
                 for skin in self.skinsScrollNode.cells {
                     if(skin.containsPoint(locationInScrollNode)) {
                         if(!self.mySkins.containsObject(skin.name!)) {
@@ -328,7 +433,7 @@ class BeforeMissionScene: GameScene {
                                 }
                             }
                         } else {
-                            for item in self.playerData.skins as! NSOrderedSet {
+                            for item in self.playerData.skins {
                                 let skinData = item as! SkinData
                                 if (skinData.index.description == skin.name!) {
                                     self.playerData.skinSlot.skin = skinData
@@ -349,7 +454,7 @@ class BeforeMissionScene: GameScene {
         if (self.state == self.nextState) {
             switch (self.state) {
             case states.beforeMission:
-                for touch in (touches ) {
+                for touch in touches {
                     let location = touch.locationInNode(self)
                     
                     if (self.buttonPlay.containsPoint(location)) {
@@ -365,10 +470,50 @@ class BeforeMissionScene: GameScene {
                         self.boxCoins.containsPoint()
                     }
                     
+                    if(self.buttonPowerUpsInfo.containsPoint(location)) {
+                        self.nextState = .powerUpsInfo
+                    }
+                    
                     self.touchesEndedSkins(touch, location: location)
                     
                     self.touchesEndedPowerUps(touch, location: location)
                     
+                }
+                break
+            case states.tutorial4:
+                for touch in (touches ) {
+                    let location = touch.locationInNode(self)
+                    
+                    self.touchesEndedSkins(touch, location: location)
+                    
+                    
+                    
+                }
+                break
+
+            case states.tutorial5:
+                for touch in (touches ) {
+                    let location = touch.locationInNode(self)
+                    
+                    if (self.buttonPlay.containsPoint(location)) {
+                        self.nextState = .mission
+                        return
+                    }
+                    
+                    self.touchesEndedPowerUps(touch, location: location)
+                    
+                }
+                break
+
+                
+            case states.powerUpsInfo:
+                for touch in touches {
+                    let location = touch.locationInNode(self)
+                    
+                    if !(self.boxPowerUpsInfo.cropNode.containsPoint(location)) {
+                        self.nextState = .beforeMission
+                        return
+                    }
                 }
                 break
                 

@@ -51,6 +51,11 @@ class OptionsScene: GameScene, FBSDKGameRequestDialogDelegate {
         return SKAction.repeatActionForever(SKAction.rotateByAngle(CGFloat(M_PI * 2), duration: 1))
         }()
     
+////////////////////////////////
+    
+
+///////////////////////////////
+    
     override func didMoveToView(view: SKView) {
         super.didMoveToView(view)
         self.backgroundColor = GameColors.blue
@@ -111,10 +116,10 @@ class OptionsScene: GameScene, FBSDKGameRequestDialogDelegate {
                 
                 var controlsArray = Array<SKSpriteNode>()
                 
-                var spriteNode = SKSpriteNode(imageNamed: "useButtons")
+                var spriteNode = SKSpriteNode(imageNamed: "useLeftSliderAndScreenRight")
                 controlsArray.append(spriteNode)
                 
-                spriteNode = SKSpriteNode(imageNamed: "useLeftSliderAndScreenRight")
+                spriteNode = SKSpriteNode(imageNamed: "useButtons")
                 controlsArray.append(spriteNode)
                 
                 self.chooseControlsScrollNode = ScrollNode(x: 667, y: 466, cells:controlsArray, spacing:1, scaleNodes:true, scaleDistance:1334/4 + 100, index:self.playerData.configControls.integerValue - 1)

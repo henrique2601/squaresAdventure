@@ -177,9 +177,3 @@ public extension String {
         return randomString as String
     }
 }
-
-//extension NSSet: ArrayLiteralConvertible {
-//    public class func convertFromArrayLiteral(elements: AnyObject...) -> Self {
-//        return self.init(array: elements)
-//    }
-//}

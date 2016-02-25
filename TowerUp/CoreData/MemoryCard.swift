@@ -9,6 +9,12 @@
 import UIKit
 import CoreData
 
+public enum controlsConfig:Int {
+    case none  = 0
+    case useButtons = 2
+    case useLeftSliderAndScreenRight = 1
+}
+
 class MemoryCard: NSObject {
     
     static let sharedInstance = MemoryCard()
@@ -16,12 +22,6 @@ class MemoryCard: NSObject {
     private var autoSave:Bool = false
     
     var playerData:PlayerData!
-    
-    internal enum controlsConfig:Int {
-        case none  = 0
-        case useButtons = 1
-        case useLeftSliderAndScreenRight = 2
-    }
     
     override init() {
         super.init()
@@ -42,6 +42,8 @@ class MemoryCard: NSObject {
         
         //Player
         self.playerData = self.newPlayerData()
+        
+        self.playerData.tutorial = self.newTutorial()
         
         //Towers e Floors
         let tower = self.newTowerData()
@@ -178,7 +180,8 @@ class MemoryCard: NSObject {
         
             let modelNames = Array<String>(arrayLiteral:
             "TowerUp",
-            "TowerUp 2")
+            "TowerUp 2",
+            "TowerUp 3")
             
             try! ALIterativeMigrator.iterativeMigrateURL(url, ofType: NSSQLiteStoreType, toModel: self.managedObjectModel, orderedModelNames: modelNames)
             
@@ -237,6 +240,13 @@ class MemoryCard: NSObject {
         playerData.musicEnabled = NSNumber(bool: false)
         
         return playerData
+    }
+    
+    func newTutorial() -> TutorialData {
+        let tutorial = NSEntityDescription.insertNewObjectForEntityForName("TutorialData", inManagedObjectContext: self.managedObjectContext!) as! TutorialData
+        tutorial.tutorial0 = NSNumber(bool: false)
+        
+        return tutorial
     }
     
     func newTowerData() -> TowerData {

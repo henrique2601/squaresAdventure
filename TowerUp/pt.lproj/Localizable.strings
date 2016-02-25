@@ -24,9 +24,25 @@
 //MessegeBox
 "Cancel" = "Cancelar";
 
+//powerUp Info
 
+"You can fly like a butterfly. Don't try it at home." = "Você pode voar como uma borboleta. Não tente isto em casa.";
 
+"Seven lifes, like a cat, for 5 seconds." = "Sete vidas, assim como um gato, por 5 segundos.";
 
+"When down, you can use this to get back to the game." = "Quando estiver morto , pode usa-lo para voltar ao jogo.";
 
+"Use this to activate reverse gravity for 2 seconds." = "Use isso para inverter a gravidade por 2 segundos.";
+
+"Try this if you want to explode something." = "Tente isto se quiseres explodir alguém.";
+
+//Tutorial
+
+"tutorialEn0" = "tutorialBR0";
+"tutorialEn1" = "tutorialBR1";
+"tutorialEn2" = "tutorialBR2";
+"tutorialEn3" = "tutorialBR3";
+"tutorialEn4" = "tutorialBR4";
+"tutorialEn5" = "tutorialBR5";
 
 //"" = ""

@@ -19,7 +19,25 @@ class CropBox: Box {
         }
     }
     
-    private var cropNode = SKCropNode()
+    override var zPosition: CGFloat  {
+        set {
+            self.cropNode.zPosition = newValue
+        }
+        get {
+            return self.cropNode.zPosition
+        }
+    }
+    
+    override var hidden: Bool  {
+        set {
+            self.cropNode.hidden = newValue
+        }
+        get {
+            return self.cropNode.hidden
+        }
+    }
+    
+    var cropNode = SKCropNode()
     
     override init(name:String = "", textureName:String, x:Int = -1, y:Int = -1, z:Int = 0, xAlign:Control.xAlignments = .center, yAlign:Control.yAlignments = .center) {
         
