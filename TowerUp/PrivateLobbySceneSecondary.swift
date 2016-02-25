@@ -505,8 +505,6 @@ class PrivateLobbySceneSecondary: GameScene, UITextFieldDelegate {
                     
                     if (self.buttonBack.containsPoint(location)) {
                         self.socket.disconnect()
-                        self.socket.off(messages.join.rawValue)
-                        self.socket = nil
                         PlayerOnline.playerOnlineList = Set<PlayerOnline>()
                         self.nextState = states.lobby
                         return
