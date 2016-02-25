@@ -207,7 +207,7 @@ class PowerUp: Button {
                     bomb.creator = player.name
                     player.parent?.addChild(bomb)
                      if let scene = player.scene as? MultiplayerMissionScene {
-                        print(scene.room.description + "room")
+                        print(scene.room + "room")
                         scene.socket.emit("crateBomb", scene.room ,Int(player.position.x) , Int(player.position.y), scene.localName)
                     }
                 } else {

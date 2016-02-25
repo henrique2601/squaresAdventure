@@ -12,6 +12,9 @@ class ViewController: UIViewController {
     
     //static var memoryCard = MemoryCard()
     
+    var teste : String?
+    
+    
     override func viewDidLoad() {
         // Do any additional setup after loading the view, typically from a nib.
         
@@ -37,7 +40,17 @@ class ViewController: UIViewController {
         
         Config.skViewBoundsSize = skView.bounds.size
         Config.updateSceneSize()
-        let scene = MainMenuScene()
+        
+       var scene: SKScene!
+        
+        if let abc = self.teste {
+           print("variavel teste" + abc)
+              //scene = PrivateLobbySceneSecondary(roomName: self.fbID)
+        } else {
+              scene = MainMenuScene()
+        }
+        
+        
         skView.presentScene(scene)
         
         IAPHelper.sharedInstance.requestProducts()
@@ -58,6 +71,10 @@ class ViewController: UIViewController {
             gameScene.blackSpriteNode.update()
             gameScene.setBackground()
         }
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        
     }
     
     override func shouldAutorotate() -> Bool {

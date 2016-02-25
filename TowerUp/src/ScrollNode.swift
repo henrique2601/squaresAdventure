@@ -348,6 +348,10 @@ class ScrollNode: Control {
     
     func append(cell:SKNode) {
         
+        let size = cell.calculateAccumulatedFrame()
+        self.width = Int(size.width)
+        self.height = Int(size.height)
+        
         var i = 0
         for _ in self.cells {
             i++
@@ -355,10 +359,10 @@ class ScrollNode: Control {
         
         switch(self.scrollType) {
         case scrollTypes.horizontal:
-            cell.position = CGPoint(x: (Int(cell.calculateAccumulatedFrame().width) + self.spacing) * i, y: 0)
+            cell.position = CGPoint(x: (Int(width) + self.spacing) * i, y: 0)
             break
         case scrollTypes.vertical:
-            cell.position = CGPoint(x: 0, y: -(Int(cell.calculateAccumulatedFrame().height) + self.spacing) * i)
+            cell.position = CGPoint(x: 0, y: -(Int(height) + self.spacing) * i)
             break
         }
         

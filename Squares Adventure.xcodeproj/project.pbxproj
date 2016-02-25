@@ -165,6 +165,7 @@
 		3AB2D4A51BD6740D004375B3 /* -1 0.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 3AB2D4A41BD6740D004375B3 /* -1 0.tmx */; };
 		3AB2D4A71BD7B36C004375B3 /* WinCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB2D4A61BD7B36C004375B3 /* WinCell.swift */; };
 		3AB95A181BC2F79A00368009 /* boom4.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3AB95A171BC2F79A00368009 /* boom4.wav */; };
+		3AE0FFED1C7DC6F80066B3B2 /* PrivateLobbySceneSecondary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE0FFEC1C7DC6F80066B3B2 /* PrivateLobbySceneSecondary.swift */; };
 		3AED55DA1BEA2DF40078F59C /* -1 1.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 3AED55D91BEA2DF40078F59C /* -1 1.tmx */; };
 		3AED55DC1BEA2F4F0078F59C /* 0 0.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 3AED55DB1BEA2F4F0078F59C /* 0 0.tmx */; };
 		3AF2530E1BBD6E8D0089BF7A /* InvitedFriendData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF2530C1BBD6E8D0089BF7A /* InvitedFriendData.swift */; };
@@ -392,6 +393,7 @@
 		3AB2D4A41BD6740D004375B3 /* -1 0.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "-1 0.tmx"; sourceTree = "<group>"; };
 		3AB2D4A61BD7B36C004375B3 /* WinCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WinCell.swift; path = src/WinCell.swift; sourceTree = "<group>"; };
 		3AB95A171BC2F79A00368009 /* boom4.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = boom4.wav; sourceTree = "<group>"; };
+		3AE0FFEC1C7DC6F80066B3B2 /* PrivateLobbySceneSecondary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivateLobbySceneSecondary.swift; sourceTree = "<group>"; };
 		3AED55D91BEA2DF40078F59C /* -1 1.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "-1 1.tmx"; sourceTree = "<group>"; };
 		3AED55DB1BEA2F4F0078F59C /* 0 0.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "0 0.tmx"; sourceTree = "<group>"; };
 		3AF2530A1BBAB13E0089BF7A /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -620,6 +622,7 @@
 				13FC80071B86404500865C72 /* MultiplayerMissionScene.swift */,
 				13CCB6FF1B72B9A70060334C /* OptionsScene.swift */,
 				3A79EFD51BFD239700FB42F2 /* PrivateLobbyScene.swift */,
+				3AE0FFEC1C7DC6F80066B3B2 /* PrivateLobbySceneSecondary.swift */,
 				13CCB6FD1B72B9010060334C /* TowersScene.swift */,
 			);
 			name = Scenes;
@@ -930,9 +933,16 @@
 				TargetAttributes = {
 					81BA81441A49DA1800E65899 = {
 						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = ER489438ZX;
 						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
 							com.apple.InAppPurchase = {
 								enabled = 0;
+							};
+							com.apple.Push = {
+								enabled = 1;
 							};
 						};
 					};
@@ -1179,6 +1189,7 @@
 				5CF8A3A81B8F39A000C16CA9 /* FloorData.swift in Sources */,
 				135C5CA21BA8310A006643BB /* PlayerData.swift in Sources */,
 				3A79EFD11BFB635200FB42F2 /* SocketAckEmitter.swift in Sources */,
+				3AE0FFED1C7DC6F80066B3B2 /* PrivateLobbySceneSecondary.swift in Sources */,
 				13BC7EE11BAAE883003D6CCD /* WebSocket.swift in Sources */,
 				137D3D9F1BB43097003202D9 /* Bomb.swift in Sources */,
 				13BC7EDE1BAAE883003D6CCD /* SocketStringReader.swift in Sources */,
@@ -1318,7 +1329,7 @@
 					"$(PROJECT_DIR)",
 				);
 				"OTHER_SWIFT_FLAGS[arch=*]" = "-D DEBUG";
-				PRODUCT_BUNDLE_IDENTIFIER = com.WTFGames.TowerUp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Paulo.SquareAdventures;
 				PRODUCT_NAME = "Squares Adventure";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "TowerUp/TowerUp-Bridging-Header.h";
@@ -1346,7 +1357,7 @@
 					"$(PROJECT_DIR)",
 				);
 				"OTHER_SWIFT_FLAGS[arch=*]" = "-D RELEASE";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Paulo.TowerUp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Paulo.SquareAdventures;
 				PRODUCT_NAME = "Squares Adventure";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "TowerUp/TowerUp-Bridging-Header.h";

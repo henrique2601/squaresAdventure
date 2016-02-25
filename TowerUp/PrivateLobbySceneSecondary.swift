@@ -10,7 +10,7 @@
 import UIKit
 import SpriteKit
 
-class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
+class PrivateLobbySceneSecondary: GameScene, UITextFieldDelegate {
     
     enum states {
         case loading
@@ -29,6 +29,7 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
         case didJoin = "d"
         case join = "j"
         case joinRoom = "r"
+        case joinPrivateRoom = "p"
         case update = "u"
         case countDown = "c"
         case begin = "b"
@@ -37,7 +38,7 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
     var server: String = "nao"
     var message = messages.addPlayers
     
-    var room: String = "a"
+    var room: String?
     //let socket = SocketIOClient(socketURL: "179.232.86.110:3001", opts: nil)
     
     var myTextField: Textfield!
@@ -68,6 +69,15 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
     
     var lobby2:CropBox!
     
+    init(roomName:String){
+        super.init()
+        self.room = roomName
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     func addHandlers(){
         
         self.socket.on(messages.addPlayers.rawValue) {[weak self] data, ack in
@@ -77,10 +87,9 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
             }
             
             
-            this.room = data[1] as! String
+            //this.room = data[1] as! Int
             MapManager.floor = data[2] as! Int
             
-            print("recebi esse vetor")
             print(data[0])
             
             if let playersArray = data[0] as? NSArray {
@@ -129,12 +138,27 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
             }
             print("Added Players")
             
-            this.playerScrollNode = ScrollNode(x: 388, y: 359,  cells: this.playersNodes, spacing: 0, scrollDirection: ScrollNode.scrollTypes.vertical , scaleNodes: false )
+            if (this.playerScrollNode == nil) {
+                
+                this.playerScrollNode = ScrollNode(x: 388, y: 359,  cells: this.playersNodes, spacing: 0, scrollDirection: ScrollNode.scrollTypes.vertical , scaleNodes: false )
+                
+                this.lobby2.addChild(this.playerScrollNode)
+                
+            } else {
+                
+                this.playerScrollNode.removeAllChildren()
+                this.playerScrollNode.removeFromParent()
+                
+                this.playerScrollNode = ScrollNode(x: 388, y: 359,  cells: this.playersNodes, spacing: 0, scrollDirection: ScrollNode.scrollTypes.vertical , scaleNodes: false )
+                
+                this.lobby2.addChild(this.playerScrollNode)
+                
+            }
             
-            this.lobby2.addChild(this.playerScrollNode)
+            
         }
         
-                
+        
         self.socket.on(messages.disconnect.rawValue) {[weak self] data, ack in
             
             guard let this = self else {
@@ -186,7 +210,7 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
                 return
             }
             
-            this.socket.emit(messages.joinRoom.rawValue, this.localName , this.playerData.skinSlot.skin.index.integerValue)
+            this.socket.emit(messages.joinPrivateRoom.rawValue, this.room!, this.localName , this.playerData.skinSlot.skin.index.integerValue)
         }
         
         
@@ -209,14 +233,14 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
         
         self.socket.on(messages.begin.rawValue) {[weak self] data, ack in
             
-            //print("begin Recieved")
+            print("begin Recieved")
             
             guard let this = self else {
                 return
             }
             
             this.nextState = .multiplayerMission
-            //print(PlayerOnline.playerOnlineList)
+            print(PlayerOnline.playerOnlineList)
         }
         
         
@@ -250,7 +274,27 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
                 cell.addChild(playerSkin)
                 cell.name = player.id!.description
                 
-                this.playerScrollNode.append(cell)
+
+                
+                if (this.playerScrollNode == nil) {
+                    
+                    print(this.playersNodes)
+                    
+                    this.playersNodes.append(cell)
+                    
+                    this.playerScrollNode = ScrollNode(x: 388, y: 359,  cells: this.playersNodes, spacing: 0, scrollDirection: ScrollNode.scrollTypes.vertical , scaleNodes: false )
+                    
+                    this.lobby2.addChild(this.playerScrollNode)
+                    
+                } else {
+                    
+                    this.playerScrollNode.append(cell)
+                    
+                }
+                
+                
+                
+                
             }
         }
     }
@@ -327,7 +371,7 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
     }
     
     
-
+    
     
     override func update(currentTime: NSTimeInterval) {
         
@@ -337,7 +381,7 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
                 
             //case states.multiPlayerLobby:
                 //print(self.socket.status)
-            
+                
                 
             default:
                 break
@@ -371,7 +415,7 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
                             self.powerUpSlotsScrollNode.removeFromParent()
                             
                         } else {
-                           self.nextState = .connecting
+                            self.nextState = .connecting
                         }
                         
                         
@@ -408,7 +452,7 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
                 self.nextState = .multiPlayerLobby
                 break
                 
-
+                
                 
             case states.multiPlayerLobby:
                 self.player = Player(playerData: self.playerData, x: 970, y: 459, loadPhysics: false)
@@ -435,7 +479,7 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
                 
             case states.multiplayerMission:
                 let nextScene = MultiplayerMissionScene(socket: self.socket)
-                nextScene.room = self.room
+                nextScene.room = self.room!
                 nextScene.localName = self.myTextField.myTextField.text
                 self.view!.presentScene(nextScene, transition: Config.defaultTransition)
                 break
@@ -457,10 +501,12 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
                 for touch in (touches ) {
                     let location = touch.locationInNode(self)
                     
-                  
+                    
                     
                     if (self.buttonBack.containsPoint(location)) {
                         self.socket.disconnect()
+                        self.socket.off(messages.join.rawValue)
+                        self.socket = nil
                         PlayerOnline.playerOnlineList = Set<PlayerOnline>()
                         self.nextState = states.lobby
                         return
@@ -469,13 +515,13 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
                         self.boxCoins.containsPoint()
                     }
                     
-
+                    
                     
                     
                 }
                 break
                 
- 
+                
                 
                 
             default:
@@ -483,6 +529,6 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
             }
         }
     }
-
-
+    
+    
 }
