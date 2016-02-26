@@ -186,7 +186,6 @@
 		5C5FAD001C073C7000CF641C /* TutorialData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5FACFE1C073C7000CF641C /* TutorialData.swift */; };
 		5C609C4F1BDF9C5D00872C34 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C609C4E1BDF9C5D00872C34 /* AdSupport.framework */; };
 		5C609C521BDF9DE800872C34 /* AdColony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C609C511BDF9DE800872C34 /* AdColony.framework */; };
-		5C609C601BDF9F2300872C34 /* AdColony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C609C531BDF9F2200872C34 /* AdColony.framework */; };
 		5C609C611BDF9F2300872C34 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C609C541BDF9F2200872C34 /* AVFoundation.framework */; };
 		5C609C621BDF9F2300872C34 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C609C551BDF9F2200872C34 /* CoreGraphics.framework */; };
 		5C609C631BDF9F2300872C34 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C609C561BDF9F2200872C34 /* CoreMedia.framework */; };
@@ -223,6 +222,7 @@
 		8429BBC31BEB7B9F00F96F83 /* -1 3.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 8429BBC21BEB7B9F00F96F83 /* -1 3.tmx */; };
 		8429BBC61BEB802100F96F83 /* -1 4.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 8429BBC41BEB802100F96F83 /* -1 4.tmx */; };
 		8429BBC71BEB802100F96F83 /* -1 5.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 8429BBC51BEB802100F96F83 /* -1 5.tmx */; };
+		843F71E61C806E9500C1BD03 /* AdColony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 843F71E51C806E9500C1BD03 /* AdColony.framework */; };
 		844F3D2B1BE26EF1000AAD31 /* Win.sks in Resources */ = {isa = PBXBuildFile; fileRef = 844F3D2A1BE26EF1000AAD31 /* Win.sks */; };
 		849B35F01BFA020E008C7A83 /* CropBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849B35EF1BFA020E008C7A83 /* CropBox.swift */; };
 		84A7808F1BEA557300AC96AD /* -1 2.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 84A7808E1BEA557300AC96AD /* -1 2.tmx */; };
@@ -415,7 +415,6 @@
 		5C5FACFE1C073C7000CF641C /* TutorialData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TutorialData.swift; path = CoreData/TutorialData.swift; sourceTree = "<group>"; };
 		5C609C4E1BDF9C5D00872C34 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		5C609C511BDF9DE800872C34 /* AdColony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AdColony.framework; sourceTree = "<group>"; };
-		5C609C531BDF9F2200872C34 /* AdColony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdColony.framework; path = "../Documents/Game/AdColony-iOS-SDK-master 2/AdColony.framework"; sourceTree = "<group>"; };
 		5C609C541BDF9F2200872C34 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		5C609C551BDF9F2200872C34 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		5C609C561BDF9F2200872C34 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
@@ -456,6 +455,7 @@
 		8429BBC21BEB7B9F00F96F83 /* -1 3.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "-1 3.tmx"; sourceTree = "<group>"; };
 		8429BBC41BEB802100F96F83 /* -1 4.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "-1 4.tmx"; sourceTree = "<group>"; };
 		8429BBC51BEB802100F96F83 /* -1 5.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "-1 5.tmx"; sourceTree = "<group>"; };
+		843F71E51C806E9500C1BD03 /* AdColony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AdColony.framework; sourceTree = "<group>"; };
 		844F3D2A1BE26EF1000AAD31 /* Win.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Win.sks; sourceTree = "<group>"; };
 		849B35EF1BFA020E008C7A83 /* CropBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CropBox.swift; path = src/CropBox.swift; sourceTree = "<group>"; };
 		84A7808E1BEA557300AC96AD /* -1 2.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "-1 2.tmx"; sourceTree = "<group>"; };
@@ -475,9 +475,9 @@
 				3A037DDD1BB9BA5100D30AE5 /* ParseFacebookUtilsV4.framework in Frameworks */,
 				81BA817F1A49E0F000E65899 /* libstdc++.6.dylib in Frameworks */,
 				5C609C4F1BDF9C5D00872C34 /* AdSupport.framework in Frameworks */,
-				5C609C601BDF9F2300872C34 /* AdColony.framework in Frameworks */,
 				5C609C611BDF9F2300872C34 /* AVFoundation.framework in Frameworks */,
 				5C609C621BDF9F2300872C34 /* CoreGraphics.framework in Frameworks */,
+				843F71E61C806E9500C1BD03 /* AdColony.framework in Frameworks */,
 				5C609C631BDF9F2300872C34 /* CoreMedia.framework in Frameworks */,
 				5C609C641BDF9F2300872C34 /* CoreTelephony.framework in Frameworks */,
 				5C609C651BDF9F2300872C34 /* EventKit.framework in Frameworks */,
@@ -853,33 +853,33 @@
 		81BA816A1A49DB5600E65899 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				5C609C531BDF9F2200872C34 /* AdColony.framework */,
+				843F71E51C806E9500C1BD03 /* AdColony.framework */,
+				5C609C4E1BDF9C5D00872C34 /* AdSupport.framework */,
 				5C609C541BDF9F2200872C34 /* AVFoundation.framework */,
+				81BA816B1A49DB6800E65899 /* Bolts.framework */,
 				5C609C551BDF9F2200872C34 /* CoreGraphics.framework */,
 				5C609C561BDF9F2200872C34 /* CoreMedia.framework */,
 				5C609C571BDF9F2200872C34 /* CoreTelephony.framework */,
 				5C609C581BDF9F2300872C34 /* EventKit.framework */,
 				5C609C591BDF9F2300872C34 /* EventKitUI.framework */,
-				5C609C5A1BDF9F2300872C34 /* libz.1.2.5.dylib */,
-				5C609C5B1BDF9F2300872C34 /* MediaPlayer.framework */,
-				5C609C5C1BDF9F2300872C34 /* MessageUI.framework */,
-				5C609C5D1BDF9F2300872C34 /* QuartzCore.framework */,
-				5C609C5E1BDF9F2300872C34 /* Social.framework */,
-				5C609C5F1BDF9F2300872C34 /* WebKit.framework */,
-				5C609C511BDF9DE800872C34 /* AdColony.framework */,
-				5C609C4E1BDF9C5D00872C34 /* AdSupport.framework */,
-				5CB1A4051BDE7007007EB123 /* iAd.framework */,
 				3A037DD11BB9A7F300D30AE5 /* FBAudienceNetwork.framework */,
 				3A037DD21BB9A7F300D30AE5 /* FBSDKCoreKit.framework */,
-				3A037DDB1BB9B7F100D30AE5 /* ParseFacebookUtilsV4.framework */,
 				3A037DD31BB9A7F300D30AE5 /* FBSDKLoginKit.framework */,
 				3A037DD41BB9A7F300D30AE5 /* FBSDKMessengerShareKit.framework */,
 				3A037DD51BB9A7F300D30AE5 /* FBSDKShareKit.framework */,
-				81BA816B1A49DB6800E65899 /* Bolts.framework */,
+				5CB1A4051BDE7007007EB123 /* iAd.framework */,
+				5C609C5A1BDF9F2300872C34 /* libz.1.2.5.dylib */,
+				5C609C5B1BDF9F2300872C34 /* MediaPlayer.framework */,
+				5C609C5C1BDF9F2300872C34 /* MessageUI.framework */,
 				81BA816C1A49DB6800E65899 /* Parse.framework */,
 				81BA816D1A49DB6800E65899 /* ParseCrashReporting.framework */,
+				3A037DDB1BB9B7F100D30AE5 /* ParseFacebookUtilsV4.framework */,
 				81BA81801A49E10C00E65899 /* ParseUI.framework */,
+				5C609C5D1BDF9F2300872C34 /* QuartzCore.framework */,
+				5C609C5E1BDF9F2300872C34 /* Social.framework */,
 				81BA81751A49E0C500E65899 /* System Frameworks */,
+				5C609C5F1BDF9F2300872C34 /* WebKit.framework */,
+				5C609C511BDF9DE800872C34 /* AdColony.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -933,7 +933,7 @@
 				TargetAttributes = {
 					81BA81441A49DA1800E65899 = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = ER489438ZX;
+						DevelopmentTeam = JZ3J7RVLD7;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -1187,7 +1187,6 @@
 				8414F3D11BF200B100202AFA /* Shot.swift in Sources */,
 				1309B4241BDFB58C000F0B9E /* BoxExplosive.swift in Sources */,
 				5CF8A3A81B8F39A000C16CA9 /* FloorData.swift in Sources */,
-				135C5CA21BA8310A006643BB /* PlayerData.swift in Sources */,
 				3A79EFD11BFB635200FB42F2 /* SocketAckEmitter.swift in Sources */,
 				3AE0FFED1C7DC6F80066B3B2 /* PrivateLobbySceneSecondary.swift in Sources */,
 				13BC7EE11BAAE883003D6CCD /* WebSocket.swift in Sources */,
@@ -1246,7 +1245,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -1264,7 +1263,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1290,7 +1289,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1301,7 +1300,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1322,14 +1321,13 @@
 				);
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/**";
 				INFOPLIST_FILE = TowerUp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				"OTHER_SWIFT_FLAGS[arch=*]" = "-D DEBUG";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Paulo.SquareAdventures;
+				PRODUCT_BUNDLE_IDENTIFIER = com.WTFGames.TowerUp;
 				PRODUCT_NAME = "Squares Adventure";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "TowerUp/TowerUp-Bridging-Header.h";
@@ -1350,14 +1348,13 @@
 				);
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/**";
 				INFOPLIST_FILE = TowerUp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
 				"OTHER_SWIFT_FLAGS[arch=*]" = "-D RELEASE";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Paulo.SquareAdventures;
+				PRODUCT_BUNDLE_IDENTIFIER = com.WTFGames.TowerUp;
 				PRODUCT_NAME = "Squares Adventure";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "TowerUp/TowerUp-Bridging-Header.h";

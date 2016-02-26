@@ -278,6 +278,7 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
             
             self.powerUpSlotsScrollNode = ScrollNode(x: 970, y: 610, xAlign: .center, yAlign: .center, cells: powerUpSlotsArray, scrollDirection: ScrollNode.scrollTypes.horizontal, scaleNodes: false, index:1)
             self.powerUpSlotsScrollNode.canScroll = false
+            self.powerUpSlotsScrollNode.zPosition = self.powerUpSlotsScrollNode.zPosition * 2
             self.addChild(self.powerUpSlotsScrollNode)
             
             
@@ -298,6 +299,7 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
         self.addChild(self.buttonBack)
         
         self.player = Player(playerData: self.playerData, x: 970, y: 459, loadPhysics: false)
+        self.player.zPosition = self.player.zPosition * 2
         self.addChild(self.player)
         
         self.localName = MemoryCard.sharedInstance.playerData.name
@@ -412,6 +414,7 @@ class MultiPlayerLobbyScene: GameScene, UITextFieldDelegate {
                 
             case states.multiPlayerLobby:
                 self.player = Player(playerData: self.playerData, x: 970, y: 459, loadPhysics: false)
+                self.player.zPosition = self.player.zPosition * 2
                 self.addChild(self.player)
                 
                 
