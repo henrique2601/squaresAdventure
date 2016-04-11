@@ -402,6 +402,8 @@ class PrivateLobbyScene: GameScene, FBSDKGameRequestDialogDelegate, UIApplicatio
         push.setData(data)
         push.sendPushInBackground()
         
+        
+        
         self.fbID = user!.objectForKey("fbID")!.description
         
         
