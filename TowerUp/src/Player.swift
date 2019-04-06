@@ -30,12 +30,12 @@ class Player: Square {
             }
         }
     }
-    var lastAlive:NSTimeInterval = 0
-    var lastHeal:NSTimeInterval = 0
+    var lastAlive:TimeInterval = 0
+    var lastHeal:TimeInterval = 0
     
     //Gameplay
     var win:Bool = false
-    var lastNoWin:NSTimeInterval = 0
+    var lastNoWin:TimeInterval = 0
     
     //Controls
     var jump:Bool = false
@@ -58,15 +58,15 @@ class Player: Square {
     
     init(texture:String = "rabbit", x:Int, y:Int, loadPhysics:Bool) {
         super.init()
-        self.loadNewPlayer("player", texture:texture, x: x, y: y, loadPhysics: loadPhysics)
+        self.loadNewPlayer(name: "player", texture:texture, x: x, y: y, loadPhysics: loadPhysics)
     }
     
     init(playerData:PlayerData, x:Int, y:Int, loadPhysics:Bool) {
         super.init()
         
-        let skinType = Skins.types[playerData.skinSlot.skin.index.integerValue]
+        let skinType = Skins.types[playerData.skinSlot.skin.index.intValue]
         
-        self.loadNewPlayer("player", texture:skinType.imageName, x: x, y: y, loadPhysics: loadPhysics)
+        self.loadNewPlayer(name: "player", texture:skinType.imageName, x: x, y: y, loadPhysics: loadPhysics)
     }
     
     init(skinId:Int, x:Int, y:Int, loadPhysics:Bool) {
@@ -74,7 +74,7 @@ class Player: Square {
         
         let skinType = Skins.types[skinId]
         
-        self.loadNewPlayer("player", texture:skinType.imageName, x: x, y: y, loadPhysics: loadPhysics)
+        self.loadNewPlayer(name: "player", texture:skinType.imageName, x: x, y: y, loadPhysics: loadPhysics)
     }
     
     func loadNewPlayer(name:String, texture:String, x:Int, y:Int, loadPhysics:Bool) {
@@ -195,7 +195,7 @@ class Player: Square {
         
         let action = SKAction()
         action.duration = 2
-        particles.runAction(action , completion: { () -> Void in
+        particles.run(action , completion: { () -> Void in
             particles.removeFromParent()
         })
     }
@@ -205,32 +205,32 @@ class Player: Square {
         switch(physicsBody.categoryBitMask) {
             
         case physicsCategory.ground.rawValue:
-            self.smoke(contact)
+            self.smoke(contact: contact)
             break
             
         case physicsCategory.boxCrate.rawValue:
-            self.smoke(contact)
+            self.smoke(contact: contact)
             break
             
         case physicsCategory.player.rawValue:
-            self.smoke(contact)
+            self.smoke(contact: contact)
             break
             
         case physicsCategory.gem.rawValue:
             if let node = physicsBody.node {
                 let gem = (node as! Gem)
                 if let scene = self.scene as? MissionScene {
-                    let playerData = MemoryCard.sharedInstance.playerData
-                    playerData.gems = NSNumber(integer: Int(playerData.gems) + gem.bonus)
+                    let playerData = MemoryCard.sharedInstance.playerData!
+                    playerData.gems = NSNumber(value: Int(truncating: playerData.gems) + gem.bonus)
                     print("now i have \(playerData.gems.description ) gems =}")
                     MemoryCard.sharedInstance.currentFloor().gemAvailable = false
                     
                     scene.boxCoins.labelGems.setText(playerData.gems.description)
                 } else {
-                    if let _ = self.scene as? MultiplayerMissionScene {
-                        let playerData = MemoryCard.sharedInstance.playerData
-                        playerData.gems = NSNumber(integer: Int(playerData.gems) + gem.bonus)
-                    }
+//                    if let _ = self.scene as? MultiplayerMissionScene {
+//                        let playerData = MemoryCard.sharedInstance.playerData
+//                        playerData.gems = NSNumber(integer: Int(playerData.gems) + gem.bonus)
+//                    }
                 }
                 gem.bonus = 0
                 gem.removeFromParent()
@@ -244,7 +244,7 @@ class Player: Square {
                 
                 let action = SKAction()
                 action.duration = 2
-                particles?.runAction(action , completion: { () -> Void in
+                particles?.run(action , completion: { () -> Void in
                     particles?.removeFromParent()
                 })
             }
@@ -256,24 +256,24 @@ class Player: Square {
                 
                 if let scene = self.scene as? MissionScene {
                     
-                    let playerData = MemoryCard.sharedInstance.playerData
-                    playerData.coins = NSNumber(integer: Int(playerData.coins) + coin.bonus)
+                    let playerData = MemoryCard.sharedInstance.playerData!
+                    playerData.coins = NSNumber(value: Int(playerData.coins) + coin.bonus)
                     
                     scene.collectedBonus = scene.collectedBonus + coin.bonus
                 } else {
-                    if let scene = self.scene as? MultiplayerMissionScene {
-                        
-                        if ( scene.localName == self.name ) {
-                            
-                            let playerData = MemoryCard.sharedInstance.playerData
-                            playerData.coins = NSNumber(integer: Int(playerData.coins) + coin.bonus)
-                            
-                            scene.collectedBonus = scene.collectedBonus + coin.bonus
-                            
-                        }
-                        
-                        
-                    }
+//                    if let scene = self.scene as? MultiplayerMissionScene {
+//
+//                        if ( scene.localName == self.name ) {
+//
+//                            let playerData = MemoryCard.sharedInstance.playerData!
+//                            playerData.coins = NSNumber(integer: Int(playerData.coins) + coin.bonus)
+//
+//                            scene.collectedBonus = scene.collectedBonus + coin.bonus
+//
+//                        }
+//
+//
+//                    }
                 }
                 
                 coin.bonus = 0
@@ -289,7 +289,7 @@ class Player: Square {
                 
                 let action = SKAction()
                 action.duration = 2
-                particles.runAction(action , completion: { () -> Void in
+                particles.run(action , completion: { () -> Void in
                     particles.removeFromParent()
                 })
 
@@ -317,10 +317,10 @@ class Player: Square {
             break
             
         case physicsCategory.spring.rawValue:
-            self.smoke(contact)
+            self.smoke(contact: contact)
             if let node = physicsBody.node {
                 let spring = node as! Spring
-                spring.doLogic(self)
+                spring.doLogic(player: self)
             }
             break
             
@@ -333,22 +333,23 @@ class Player: Square {
                 self.boom.play()
                 self.healthPoints = 0
                 
-                if let scene = self.scene as? MultiplayerMissionScene {
-                    
-                    
-                    //print("toquei na caixa")
-                    //print(scene.localName)
-                    //print(self.name)
-                    
-                    if (scene.localName == self.name!) {
-                        print("mandei pro servidor " + bomb.listPosition.description)
-                        
-                        scene.socket.emit("removeBomb", scene.room , bomb.listPosition)
-                        bomb.removeFromParent()
-                    }
-                } else {
-                    bomb.removeFromParent()
-                }
+                bomb.removeFromParent()
+//                if let scene = self.scene as? MultiplayerMissionScene {
+//
+//
+//                    //print("toquei na caixa")
+//                    //print(scene.localName)
+//                    //print(self.name)
+//
+//                    if (scene.localName == self.name!) {
+//                        print("mandei pro servidor " + bomb.listPosition.description)
+//
+//                        scene.socket.emit("removeBomb", scene.room , bomb.listPosition)
+//                        bomb.removeFromParent()
+//                    }
+//                } else {
+//
+//                }
             }
             break
             
@@ -358,9 +359,9 @@ class Player: Square {
             
         case physicsCategory.winTile.rawValue:
             if (self.healthPoints > 0) {
-                self.physicsBody?.dynamic = false
+                self.physicsBody?.isDynamic = false
                 self.physicsBody?.categoryBitMask = physicsCategory.none.rawValue
-                self.hidden = true
+                self.isHidden = true
                 self.win = true
                 self.winSound.play()
             }
@@ -374,27 +375,28 @@ class Player: Square {
                 self.boom.play()
                 self.healthPoints = 0
                 
+                boxCrateBomb.removeFromParent()
                 
-                if let scene = self.scene as? MultiplayerMissionScene {
-                    
-                    
-                    //print("toquei na caixa")
-                    //print(scene.localName)
-                    //print(self.name)
-                    
-                    if (scene.localName == self.name!){
-                        //print("mandei pro servidor")
-                        
-                        
-                        scene.socket.emit("removeBoxCrateBomb", scene.room , boxCrateBomb.listPosition , self.name!)
-                        boxCrateBomb.removeFromParent()
-                        
-                        
-                    }
-                } else {
-                    
-                        boxCrateBomb.removeFromParent()
-                }
+//                if let scene = self.scene as? MultiplayerMissionScene {
+//
+//
+//                    //print("toquei na caixa")
+//                    //print(scene.localName)
+//                    //print(self.name)
+//
+//                    if (scene.localName == self.name!){
+//                        //print("mandei pro servidor")
+//
+//
+//                        scene.socket.emit("removeBoxCrateBomb", scene.room , boxCrateBomb.listPosition , self.name!)
+//                        boxCrateBomb.removeFromParent()
+//
+//
+//                    }
+//                } else {
+                
+                
+                //}
             }
             
             break
@@ -434,7 +436,7 @@ class Player: Square {
             break
             
         case physicsCategory.winTile.rawValue:
-            self.physicsBody?.dynamic = true
+            self.physicsBody?.isDynamic = true
             self.win = false
             break
             
@@ -444,7 +446,7 @@ class Player: Square {
         }
     }
     
-    func update(currentTime:NSTimeInterval) {
+    func update(currentTime:TimeInterval) {
         
         if(self.healthPoints > 0) {
             self.lastAlive = currentTime
@@ -454,7 +456,7 @@ class Player: Square {
                 self.lastHeal = currentTime
             } else {
                 if(currentTime - self.lastHeal > 3) {
-                    self.healthPoints++
+                    self.healthPoints += 1
                 }
             }
             //
@@ -467,9 +469,9 @@ class Player: Square {
                     if let scene = self.scene as? MissionScene {
                         scene.nextState = MissionScene.states.win
                     }
-                    if let scene = self.scene as? MultiplayerMissionScene {
-                        scene.nextState = MultiplayerMissionScene.states.win
-                    }
+//                    if let scene = self.scene as? MultiplayerMissionScene {
+//                        scene.nextState = MultiplayerMissionScene.states.win
+//                    }
                 }
             }
             //
@@ -483,9 +485,9 @@ class Player: Square {
                 if(physicsBody.allContactedBodies().count > 0) {
                     for body in physicsBody.allContactedBodies() as NSArray {
                         if(
-                            body.categoryBitMask == physicsCategory.ground.rawValue ||
-                            body.categoryBitMask == physicsCategory.boxCrate.rawValue ||
-                            body.categoryBitMask == physicsCategory.player.rawValue) {
+                            (body as AnyObject).categoryBitMask == physicsCategory.ground.rawValue ||
+                                (body as AnyObject).categoryBitMask == physicsCategory.boxCrate.rawValue ||
+                                (body as AnyObject).categoryBitMask == physicsCategory.player.rawValue) {
                             if (abs(self.physicsBody!.velocity.dy) < 200) {
                                 if(self.jump) {
                                     //self.jumpSound.play()
@@ -505,7 +507,7 @@ class Player: Square {
             }
             
             if self.move != 0 {
-                self.needAngularImpulse--
+                self.needAngularImpulse -= 1
                 let velocity = self.physicsBody!.velocity
                 if (abs(velocity.dx) < 400) {
                     self.physicsBody?.applyImpulse(CGVector(dx: self.move/20, dy: 0))
@@ -520,12 +522,12 @@ class Player: Square {
             if(self.needToPlayDeathAnimation) {
                 self.redSpritekitNode = SKSpriteNode(color: UIColor(red: 1, green: 0, blue: 0, alpha: 0.75), size: Config.currentSceneSize)
                 self.redSpritekitNode.anchorPoint = CGPoint(x: 0, y: 1)
-                self.redSpritekitNode.runAction(SKAction.fadeOutWithDuration(1))
+                self.redSpritekitNode.run(SKAction.fadeOut(withDuration: 1))
                 self.redSpritekitNode.zPosition = Config.HUDZPosition * 2
                 self.scene?.addChild(redSpritekitNode)
                 self.needToPlayDeathAnimation = false
                 
-                let skinType = Skins.types[playerData.skinSlot.skin.index.integerValue]
+                let skinType = Skins.types[playerData!.skinSlot.skin.index.intValue]
                 
                 self.spriteNodeDead = SKSpriteNode(imageNamed: skinType.imageName + "Dead")
                 self.spriteNodeDead.zPosition = self.spriteNode.zPosition + 1
@@ -565,13 +567,13 @@ class Player: Square {
         emitterNode.position = self.startingPosition
         
         self.resetCategoryBitMasks()
-        self.hidden = false
+        self.isHidden = false
         self.position = self.startingPosition
         self.physicsBody!.velocity = CGVector(dx: 0, dy: 1)
         self.physicsBody!.angularVelocity = 0
         self.zRotation = 0
         self.healthPoints = self.maxHealthPoints
-        self.deathCount++
+        self.deathCount += 1
         
         self.needToPlayDeathAnimation = true
         if let _ = self.redSpritekitNode {
@@ -582,8 +584,8 @@ class Player: Square {
             self.spriteNodeDead.removeFromParent()
         }
         
-        self.runAction(SKAction.fadeAlphaTo(-1, duration: 0))
-        self.runAction(SKAction.fadeAlphaTo(1, duration: 0.2))
+        self.run(SKAction.fadeAlpha(to: -1, duration: 0))
+        self.run(SKAction.fadeAlpha(to: 1, duration: 0.2))
     
     }
     
@@ -600,6 +602,6 @@ class Player: Square {
         self.win = false
         self.lastNoWin = 0
         
-        self.physicsBody?.dynamic = true
+        self.physicsBody?.isDynamic = true
     }
 }

@@ -17,7 +17,7 @@ class Slime: Tile {
             self.physicsBody = SKPhysicsBody(texture: mask, alphaThreshold: 0.7, size: mask.size())
         } else {
             // Fallback on earlier versions
-            self.physicsBody = SKPhysicsBody(rectangleOfSize: mask.size())
+            self.physicsBody = SKPhysicsBody(rectangleOf: mask.size())
         }
         
         self.physicsBody!.categoryBitMask = physicsCategory.slime.rawValue
@@ -30,7 +30,7 @@ class Slime: Tile {
             physicsCategory.player.rawValue |
             physicsCategory.boxCrate.rawValue |
             physicsCategory.slime.rawValue
-        self.physicsBody!.dynamic = true
+        self.physicsBody!.isDynamic = true
         
         self.physicsBody!.linearDamping = 1
     }

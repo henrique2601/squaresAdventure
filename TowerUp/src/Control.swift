@@ -38,7 +38,7 @@ class Control: SKNode {
     
     var size:CGSize!
     
-    var sketchPosition:CGPoint = CGPointZero
+    var sketchPosition:CGPoint = CGPoint.zero
     
     static var dx:CGFloat = 0
     static var dy:CGFloat = 0
@@ -50,12 +50,12 @@ class Control: SKNode {
     init(name:String = "", textureName:String, size:CGSize = CGSize.zero, x:Int = 0, y:Int = 0, z:Int = 0, xAlign:Control.xAlignments = .left, yAlign:Control.yAlignments = .up) {
         super.init()
         let spriteNode = SKSpriteNode(imageNamed: textureName)
-        self.load(name, spriteNode: spriteNode, size:size, x: x, y: y, z:z, xAlign: xAlign, yAlign: yAlign)
+        self.load(name: name, spriteNode: spriteNode, size:size, x: x, y: y, z:z, xAlign: xAlign, yAlign: yAlign)
     }
     
     init(name:String = "", spriteNode:SKSpriteNode, size:CGSize = CGSize.zero, x:Int = 0, y:Int = 0, z:Int = 0, xAlign:Control.xAlignments = .left, yAlign:Control.yAlignments = .up) {
         super.init()
-        self.load(name, spriteNode: spriteNode, size:size, x: x, y: y, z:z, xAlign: xAlign, yAlign: yAlign)
+        self.load(name: name, spriteNode: spriteNode, size:size, x: x, y: y, z:z, xAlign: xAlign, yAlign: yAlign)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -109,8 +109,8 @@ class Control: SKNode {
     class func touchesMoved() {
         
         for touch in Control.touchesArray {
-            let location = touch.locationInNode(Control.gameScene)
-            let previousLocation = touch.previousLocationInNode(Control.gameScene)
+            let location = touch.location(in: Control.gameScene)
+            let previousLocation = touch.previousLocation(in: Control.gameScene)
             
             Control.dx += location.x - previousLocation.x
             Control.dy += location.y - previousLocation.y
@@ -126,9 +126,9 @@ class Control: SKNode {
         for touch in touches {
             Control.touchesArray.remove(touch)
         }
-        Button.update(touches)
+        Button.update(touches: touches)
         PowerUp.update()
-        Switch.update(touches)
+        Switch.update(touches: touches)
     }
     
     override func removeFromParent() {

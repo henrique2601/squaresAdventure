@@ -27,7 +27,7 @@ class BoxExplosive: Tile {
         
         super.init(imageName: "boxExplosive_disabled", position: CGPoint(x: tileX * Int(Tile.sizeInPoints), y: tileY * Int(Tile.sizeInPoints)))
         
-        self.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: 64, height: 64))
+        self.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 64, height: 64))
         
         self.physicsBody!.categoryBitMask = physicsCategory.boxExplosiveDisabled.rawValue
         self.physicsBody!.contactTestBitMask = physicsCategory.none.rawValue
@@ -35,7 +35,7 @@ class BoxExplosive: Tile {
         
         self.physicsBody!.restitution = 4
         
-        self.physicsBody!.dynamic = false
+        self.physicsBody!.isDynamic = false
         
         self.zPosition = Config.HUDZPosition - 1
         
@@ -73,15 +73,15 @@ class BoxExplosive: Tile {
             
             let action = SKAction()
             action.duration = 2
-            particles.runAction(action , completion: {
+            particles.run(action , completion: {
                 particles.removeFromParent()
             })
         }
                 
-        for (var i = 0 ; i < BoxExplosive.boxExplosiveList.count ; i++) {
+        for i in 0 ..< BoxExplosive.boxExplosiveList.count {
             if (BoxExplosive.boxExplosiveList[i].listPosition == self.listPosition) {
          
-                BoxExplosive.boxExplosiveList.removeAtIndex(i)
+                BoxExplosive.boxExplosiveList.remove(at: i)
                 //break usado para evitar continuar enumerando a lista apos ela ter sido alterada.
                 break
             }

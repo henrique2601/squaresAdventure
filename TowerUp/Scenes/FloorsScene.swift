@@ -26,7 +26,7 @@ class FloorsScene: GameScene {
     var state = states.floors
     var nextState = states.floors
     
-    var playerData = MemoryCard.sharedInstance.playerData
+    var playerData = MemoryCard.sharedInstance.playerData!
     
     var floorsScrollNone:ScrollNode!
     
@@ -36,8 +36,8 @@ class FloorsScene: GameScene {
     
     var buttonBack:Button!
     
-    override func didMoveToView(view: SKView) {
-        super.didMoveToView(view)
+    override func didMove(to view: SKView) {
+        super.didMove(to: view)
         self.backgroundColor = GameColors.blue
         self.addChild(Control(textureName: "background", x:-49, y:-32, xAlign: .center, yAlign: .center))
         
@@ -50,7 +50,7 @@ class FloorsScene: GameScene {
         
         var floorsArray = Array<SKSpriteNode>()
         
-        self.selectedTower = self.playerData.towers.objectAtIndex(MapManager.tower) as! TowerData
+        self.selectedTower = self.playerData.towers.object(at: MapManager.tower) as! TowerData
         
         
         //Andares da torre selecionada desbloqueados que foram salvos no CoreData
@@ -64,7 +64,7 @@ class FloorsScene: GameScene {
             if(floorIndex < towerType.floorTypes.count){
                 let cell = SKSpriteNode(imageNamed: Towers.types[MapManager.tower].tileset + "Floor")
                 
-                for(var i = 0; i <= floorData.stars.integerValue; i++) {
+                for i in 0 ..< floorData.stars.intValue {
                     switch(i){
                     case 0:
                         break
@@ -90,12 +90,12 @@ class FloorsScene: GameScene {
                 cell.addChild(labelName)
                 
                 floorsArray.append(cell)
-                floorIndex++
+                floorIndex += 1
             }
         }
         
         //Andares bloqueados, mostrar cadeado
-        for (0; floorIndex < towerType.floorTypes.count; floorIndex++) {
+        for floorIndex in 0 ..< towerType.floorTypes.count {
             let cell = SKSpriteNode(imageNamed: "boxSmall")
             
             let spriteNode = SKSpriteNode(imageNamed: "boxSmallLocked")
@@ -108,7 +108,7 @@ class FloorsScene: GameScene {
             floorsArray.append(cell)
         }
         
-        self.floorsScrollNone = ScrollNode(x: 667, y: 466, cells:floorsArray, spacing: 1, scrollDirection: ScrollNode.scrollTypes.horizontal, scaleNodes:true, scaleDistance:1334/4 + 100, index: MemoryCard.sharedInstance.currentTower().lastPlayedFloor.integerValue)
+        self.floorsScrollNone = ScrollNode(x: 667, y: 466, cells:floorsArray, spacing: 1, scrollDirection: ScrollNode.scrollTypes.horizontal, scaleNodes:true, scaleDistance:1334/4 + 100, index: MemoryCard.sharedInstance.currentTower().lastPlayedFloor.intValue)
         self.addChild(self.floorsScrollNone)
         
         self.buttonBack = Button(textureName: "buttonGraySquareSmall", icon:"return", x: 20, y: 652, xAlign:.left, yAlign:.down)
@@ -118,15 +118,15 @@ class FloorsScene: GameScene {
             
             self.nextState = states.tutorial3
             
-            self.playerData.tutorial?.tutorial2 = NSNumber(bool: true)
+            self.playerData.tutorial?.tutorial2 = NSNumber(value: true)
             
         }
         
         
     }
     
-    override func update(currentTime: NSTimeInterval) {
-        super.update(currentTime)
+    override func update(currentTime: TimeInterval) {
+        super.update(currentTime: currentTime)
         if(self.state == self.nextState) {
             switch (self.state) {
             default:
@@ -149,7 +149,7 @@ class FloorsScene: GameScene {
                 
                 self.tutorial3 = Control(textureName: "tutorialEn2", x: 120, y: 35, xAlign: .center, yAlign: .center)
                 self.addChild(self.tutorial3)
-                self.blackSpriteNode.hidden = false
+                self.blackSpriteNode.isHidden = false
                 self.floorsScrollNone.zPosition += 1
                 self.tutorial3.zPosition = self.floorsScrollNone.zPosition + 1
                 self.floorsScrollNone.zPosition -= 1
@@ -164,31 +164,31 @@ class FloorsScene: GameScene {
     }
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        super.touchesEnded(touches, withEvent: event)
+        super.touchesEnded(touches, with: event)
         
         if (self.state == self.nextState) {
             switch (self.state) {
             case states.floors:
                 for touch in (touches ) {
-                    let location = touch.locationInNode(self)
+                    let location = touch.location(in: self)
                     
-                    if (self.buttonBack.containsPoint(location)) {
+                    if (self.buttonBack.contains(location)) {
                         self.nextState = .towers
                         return
                     }
                     
-                    if(self.boxCoins.containsPoint(location)) {
+                    if(self.boxCoins.contains(location)) {
                         self.boxCoins.containsPoint()
                     }
                     
-                    if (self.floorsScrollNone.containsPoint(location)) {
+                    if (self.floorsScrollNone.contains(location)) {
                         if(touch.tapCount > 0) {
                             
                             var i = 0
-                            let locationInScrollNode = touch.locationInNode(self.floorsScrollNone)
+                            let locationInScrollNode = touch.location(in: self.floorsScrollNone)
                             
                             for cell in self.floorsScrollNone.cells {
-                                if(cell.containsPoint(locationInScrollNode)) {
+                                if(cell.contains(locationInScrollNode)) {
                                     if(i < self.selectedTower.floors.count) {
                                         MapManager.floor = i
                                         self.nextState = states.beforeMission
@@ -197,7 +197,7 @@ class FloorsScene: GameScene {
                                     }
                                     return
                                 }
-                                i++
+                                i += 1
                             }
                         }
                     }
@@ -206,16 +206,16 @@ class FloorsScene: GameScene {
             case states.tutorial3:
                 
                 for touch in (touches ) {
-                    let location = touch.locationInNode(self)
+                    let location = touch.location(in: self)
                     
-                    if (self.floorsScrollNone.containsPoint(location)) {
+                    if (self.floorsScrollNone.contains(location)) {
                         if(touch.tapCount > 0) {
                             
                             var i = 0
-                            let locationInScrollNode = touch.locationInNode(self.floorsScrollNone)
+                            let locationInScrollNode = touch.location(in: self.floorsScrollNone)
                             
                             for cell in self.floorsScrollNone.cells {
-                                if(cell.containsPoint(locationInScrollNode)) {
+                                if(cell.contains(locationInScrollNode)) {
                                     if(i < self.selectedTower.floors.count) {
                                         MapManager.floor = i
                                         self.nextState = states.beforeMission
@@ -224,7 +224,7 @@ class FloorsScene: GameScene {
                                     }
                                     return
                                 }
-                                i++
+                                i += 1
                             }
                         }
                     }

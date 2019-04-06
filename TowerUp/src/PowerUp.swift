@@ -27,7 +27,7 @@ class PowerUp: Button {
     var powerUpShadow:SKSpriteNode!
     var powerUpPressedShadow:SKSpriteNode!
     
-    var lastUse:NSTimeInterval = 0
+    var lastUse:TimeInterval = 0
     
     var needUpdate = false
     
@@ -37,11 +37,11 @@ class PowerUp: Button {
     var inUse:Bool = false {
         didSet {
             if(self.inUse) {
-                self.powerUpShadow.hidden = false
-                self.powerUpPressedShadow.hidden = false
+                self.powerUpShadow.isHidden = false
+                self.powerUpPressedShadow.isHidden = false
             } else {
-                self.powerUpShadow.hidden = true
-                self.powerUpPressedShadow.hidden = true
+                self.powerUpShadow.isHidden = true
+                self.powerUpPressedShadow.isHidden = true
             }
         }
     }
@@ -49,7 +49,7 @@ class PowerUp: Button {
     init(powerUpData:PowerUpData, colorBlendFactor:CGFloat = 1) {
         self.powerUpData = powerUpData
         super.init()
-        self.load(colorBlendFactor)
+        self.load(colorBlendFactor: colorBlendFactor)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -60,7 +60,7 @@ class PowerUp: Button {
         let name:String = powerUpData.index.description
         self.name = name
         
-        self.powerUpType = PowerUps.types[powerUpData.index.integerValue]
+        self.powerUpType = PowerUps.types[powerUpData.index.intValue]
         
         let texture = SKTexture(imageNamed: self.powerUpType.powerUpImage)
         self.powerUp = SKSpriteNode(texture: texture, size: texture.size())
@@ -69,7 +69,7 @@ class PowerUp: Button {
         self.powerUpShadow = SKSpriteNode(texture: texture, size: texture.size())
         self.powerUpShadow.color = UIColor(red: 0, green: 0, blue: 0, alpha: 0.75 * colorBlendFactor)
         self.powerUpShadow.colorBlendFactor = 1
-        self.powerUpShadow.hidden = true
+        self.powerUpShadow.isHidden = true
         
         self.labelPrice = Label(text: self.powerUpType.price.description, x: 0, y: 31)
         self.powerUp.addChild(self.labelPrice)
@@ -83,11 +83,11 @@ class PowerUp: Button {
         self.powerUpPressedShadow = SKSpriteNode(texture: texturePressed, size: texturePressed.size())
         self.powerUpPressedShadow.color = UIColor(red: 0, green: 0, blue: 0, alpha: 0.75 * colorBlendFactor)
         self.powerUpPressedShadow.colorBlendFactor = 1
-        self.powerUpPressedShadow.hidden = true
+        self.powerUpPressedShadow.isHidden = true
         
         self.labelPricePressed = Label(text: self.powerUpType.price.description, x: 0, y: 31 + 2)
         self.powerUpPressed.addChild(self.labelPricePressed)
-        self.powerUpPressed.hidden = true
+        self.powerUpPressed.isHidden = true
         self.addChild(self.powerUpPressed)
         self.powerUpPressed.addChild(self.powerUpPressedShadow)
         
@@ -99,13 +99,13 @@ class PowerUp: Button {
         self.eventBegin = Event<Void>()
         self.eventUpdate = Event<Void>()
         self.eventEnd = Event<Void>()
-        switch(self.powerUpData.index.integerValue) {
+        switch(self.powerUpData.index.intValue) {
             
         case 0://Antigravidade
             
             var emitterNode:SKEmitterNode!
             
-            self.eventBegin?.addHandler({
+            self.eventBegin?.addHandler(handler: {
                 //
                 emitterNode = SKEmitterNode(fileNamed: "PowerUp0.sks")!
                 emitterNode.targetNode = player.parent!
@@ -118,14 +118,14 @@ class PowerUp: Button {
                     self.lastUse = -1
                 }
             })
-            self.eventUpdate?.addHandler({
+            self.eventUpdate?.addHandler(handler: {
                 emitterNode.position = player.position
             })
-            self.eventEnd?.addHandler({
+            self.eventEnd?.addHandler(handler: {
                 world.physicsWorld.gravity = world.defaultGravity
                 emitterNode.particleAlpha = 0
                 emitterNode.particleAlphaRange = 0
-                emitterNode.runAction(SKAction.fadeOutWithDuration(1), completion: {
+                emitterNode.run(SKAction.fadeOut(withDuration: 1), completion: {
                     emitterNode.removeFromParent()
                 })
                 
@@ -135,7 +135,7 @@ class PowerUp: Button {
         case 1://Invencibilidade
             var emitterNode:SKEmitterNode!
             
-            self.eventBegin?.addHandler({
+            self.eventBegin?.addHandler(handler: {
                 
                 if(player.healthPoints > 0) {
                     //
@@ -147,15 +147,15 @@ class PowerUp: Button {
                     self.lastUse = -1
                 }
             })
-            self.eventUpdate?.addHandler({
+            self.eventUpdate?.addHandler(handler: {
                 emitterNode.position = player.position
                 player.healthPoints = player.maxHealthPoints
             })
             
-            self.eventEnd?.addHandler({
+            self.eventEnd?.addHandler(handler: {
                 emitterNode.particleAlpha = 0
                 emitterNode.particleAlphaRange = 0
-                emitterNode.runAction(SKAction.fadeOutWithDuration(1), completion: {
+                emitterNode.run(SKAction.fadeOut(withDuration: 1), completion: {
                     emitterNode.removeFromParent()
                 })
             })
@@ -164,7 +164,7 @@ class PowerUp: Button {
         case 2://Fenix Caida :D
             var emitterNode:SKEmitterNode!
             
-            self.eventBegin?.addHandler({
+            self.eventBegin?.addHandler(handler: {
                 
                 if(player.healthPoints <= 0) {
                     
@@ -186,14 +186,14 @@ class PowerUp: Button {
             break
             
         case 3://Reverse Gravity
-            self.eventBegin?.addHandler({
+            self.eventBegin?.addHandler(handler: {
                 if(player.healthPoints > 0) {
                     world.physicsWorld.gravity = CGVector(dx: 0.0, dy: 9.8)
                 } else {
                     self.lastUse = -1
                 }
             })
-            self.eventEnd?.addHandler({
+            self.eventEnd?.addHandler(handler: {
                 world.physicsWorld.gravity = world.defaultGravity
             })
             break
@@ -201,20 +201,20 @@ class PowerUp: Button {
         case 4://Bomba Caixa! :D
             var bomb:BoxExplosive!
             
-            self.eventBegin?.addHandler({
+            self.eventBegin?.addHandler(handler: {
                 if(player.healthPoints > 0) {
                     bomb = BoxExplosive(position: player.position)
                     bomb.creator = player.name
                     player.parent?.addChild(bomb)
-                     if let scene = player.scene as? MultiplayerMissionScene {
-                        print(scene.room + "room")
-                        scene.socket.emit("crateBomb", scene.room ,Int(player.position.x) , Int(player.position.y), scene.localName)
-                    }
+//                     if let scene = player.scene as? MultiplayerMissionScene {
+//                        print(scene.room + "room")
+//                        scene.socket.emit("crateBomb", scene.room ,Int(player.position.x) , Int(player.position.y), scene.localName)
+//                    }
                 } else {
                     self.lastUse = -1
                 }
             })
-            self.eventEnd?.addHandler({
+            self.eventEnd?.addHandler(handler: {
                 bomb.activate()
             })
             break
@@ -227,24 +227,24 @@ class PowerUp: Button {
         }
     }
     
-    class func doLogic(currentTime: NSTimeInterval) {
+    class func doLogic(currentTime: TimeInterval) {
         for powerUp in PowerUp.powerUpList {
             if powerUp.pressed == true {
                 
                 if currentTime - powerUp.lastUse > powerUp.powerUpType.coolDown {
                     
-                    let playerData = MemoryCard.sharedInstance.playerData
+                    let playerData = MemoryCard.sharedInstance.playerData!
                     if(powerUp.powerUpType.price <= Int(playerData.coins)) {
                         powerUp.lastUse = currentTime
                         powerUp.eventBegin?.raise()
                         if(powerUp.lastUse != -1) {// -1 significa que o PowerUp não pode ser ativado.
-                            playerData.coins = NSNumber(integer: Int(playerData.coins) - powerUp.powerUpType.price)
+                            playerData.coins = NSNumber(value: Int(playerData.coins) - powerUp.powerUpType.price)
                             if let scene = powerUp.scene as? MissionScene {
                                 scene.boxCoins.labelCoins.setText(MemoryCard.sharedInstance.playerData.coins.description)
                             }
-                            if let scene = powerUp.scene as? MultiplayerMissionScene {
-                                scene.boxCoins.labelCoins.setText(MemoryCard.sharedInstance.playerData.coins.description)
-                            }
+//                            if let scene = powerUp.scene as? MultiplayerMissionScene {
+//                                scene.boxCoins.labelCoins.setText(MemoryCard.sharedInstance.playerData.coins.description)
+//                            }
                             PowerUp.updatePowerUpLabels()
                             powerUp.inUse = true
                             powerUp.needUpdate = true
@@ -270,14 +270,14 @@ class PowerUp: Button {
     }
     
     class func updatePowerUpLabels() {
-        let playerData = MemoryCard.sharedInstance.playerData
+        let playerData = MemoryCard.sharedInstance.playerData!
         for powerUp in PowerUp.powerUpList {
             if(powerUp.powerUpType.price <= Int(playerData.coins)) {
-                powerUp.labelPrice.setText(powerUp.powerUpType.price.description, color: GameColors.black)
-                powerUp.labelPricePressed.setText(powerUp.powerUpType.price.description, color: GameColors.black)
+                powerUp.labelPrice.setText(text: powerUp.powerUpType.price.description, color: GameColors.black)
+                powerUp.labelPricePressed.setText(text: powerUp.powerUpType.price.description, color: GameColors.black)
             } else {
-                powerUp.labelPrice.setText(powerUp.powerUpType.price.description, color: GameColors.red)
-                powerUp.labelPricePressed.setText(powerUp.powerUpType.price.description, color: GameColors.red)
+                powerUp.labelPrice.setText(text: powerUp.powerUpType.price.description, color: GameColors.red)
+                powerUp.labelPricePressed.setText(text: powerUp.powerUpType.price.description, color: GameColors.red)
             }
         }
     }
@@ -292,9 +292,9 @@ class PowerUp: Button {
         var i = 0
         for touch in Control.touchesArray {
             if let parent = self.parent {
-                let location = touch.locationInNode(parent)
-                if self.containsPoint(location) {
-                    i++
+                let location = touch.location(in: parent)
+                if self.contains(location) {
+                    i += 1
                 }
             }
         }
@@ -307,14 +307,14 @@ class PowerUp: Button {
     
     func powerUpPresse() {
         self.pressed = true
-        self.powerUp.hidden = true
-        self.powerUpPressed.hidden = false
+        self.powerUp.isHidden = true
+        self.powerUpPressed.isHidden = false
     }
     
     func powerUpRelease() {
         self.pressed = false
-        self.powerUp.hidden = false
-        self.powerUpPressed.hidden = true
+        self.powerUp.isHidden = false
+        self.powerUpPressed.isHidden = true
     }
     
     override func removeFromParent() {
@@ -325,12 +325,12 @@ class PowerUp: Button {
 
 class PowerUpType: NSObject {
     var powerUpImage:String
-    var coolDown:NSTimeInterval
-    var duration:NSTimeInterval
+    var coolDown:TimeInterval
+    var duration:TimeInterval
     var price:Int
     var text:String!
     
-    init(powerUpImage:String, price:Int, coolDown:NSTimeInterval, duration:NSTimeInterval, text:String) {
+    init(powerUpImage:String, price:Int, coolDown:TimeInterval, duration:TimeInterval, text:String) {
         self.powerUpImage = powerUpImage
         self.coolDown = coolDown
         self.duration = duration

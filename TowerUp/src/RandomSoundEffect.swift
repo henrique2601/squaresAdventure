@@ -20,14 +20,14 @@ class RandomSoundEffect: NSObject {
     init(soundFilePrefix:filePrefix, count:Int, node:SKNode) {
         super.init()
         
-        for var i = 0; i < count; i++ {
+        for i in 0 ..< count {
             self.soundList.append(SoundEffect(soundFile: soundFilePrefix.rawValue + i.description, node: node))
         }
     }
     
     func play() {
         if(MemoryCard.sharedInstance.playerData.soundEnabled.boolValue == true) {
-            self.soundList[Int.random(soundList.count)].play()
+            self.soundList[Int.random(n: soundList.count)].play()
         }
     }
 }

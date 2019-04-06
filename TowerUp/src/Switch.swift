@@ -20,7 +20,7 @@ class Switch: Control {
     
     init(textureName:String, on:Bool = true, x:Int = 0, y:Int = 0, xAlign:Control.xAlignments = .left, yAlign:Control.yAlignments = .up) {
         super.init()
-        self.load(textureName, on:on, x: x, y: y, xAlign: xAlign, yAlign: yAlign)
+        self.load(textureName: textureName, on:on, x: x, y: y, xAlign: xAlign, yAlign: yAlign)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -37,13 +37,13 @@ class Switch: Control {
         let texture0 = SKTexture(imageNamed: "\(textureName)0")
         self.switch0 = SKSpriteNode(texture: texture0, size: texture0.size())
         self.switch0.anchorPoint = CGPoint(x: 0, y: 1)
-        self.switch0.hidden = on
+        self.switch0.isHidden = on
         self.addChild(self.switch0)
         
         let texture1 = SKTexture(imageNamed: "\(textureName)1")
         self.switch1 = SKSpriteNode(texture: texture1, size: texture1.size())
         self.switch1.anchorPoint = CGPoint(x: 0, y: 1)
-        self.switch1.hidden = !on
+        self.switch1.isHidden = !on
         self.addChild(self.switch1)
         
         Switch.switchList.insert(self)
@@ -59,8 +59,8 @@ class Switch: Control {
         for switchNode in Switch.switchList {
             for touch in touches {
                 if let parent = switchNode.parent {
-                    let location = touch.locationInNode(parent)
-                    if switchNode.containsPoint(location) {
+                    let location = touch.location(in: parent)
+                    if switchNode.contains(location) {
                         switchNode.switchPressed()
                     }
                 }
@@ -69,10 +69,10 @@ class Switch: Control {
     }
     
     private func switchPressed() {
-        self.switch0.hidden = !self.switch0.hidden
-        self.switch1.hidden = !self.switch1.hidden
+        self.switch0.isHidden = !self.switch0.isHidden
+        self.switch1.isHidden = !self.switch1.isHidden
         
-        self.on = self.switch0.hidden
+        self.on = self.switch0.isHidden
     }
     
     override func removeFromParent() {

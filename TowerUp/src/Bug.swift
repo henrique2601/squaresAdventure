@@ -13,13 +13,13 @@ class Bug: Tile {
     init(x:Int, y:Int) {
         super.init(imageName: "bug", x: x, y: y)
         
-        self.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: 64, height: 64))
+        self.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 64, height: 64))
         
         self.physicsBody!.categoryBitMask = physicsCategory.none.rawValue
         self.physicsBody!.contactTestBitMask = physicsCategory.none.rawValue
         self.physicsBody!.collisionBitMask = physicsCategory.none.rawValue
         
-        self.physicsBody!.dynamic = false
+        self.physicsBody!.isDynamic = false
     }
 
     required init?(coder aDecoder: NSCoder) {

@@ -41,15 +41,15 @@ class GameScene: SKScene {
         self.blackSpriteNode = BlackSpriteNode()
         self.addChild(self.blackSpriteNode)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "privateGameInviteRecivied:", name:"privateGameInvite", object: roomID)
+        NotificationCenter.default.addObserver(self, selector: "privateGameInviteRecivied:", name:NSNotification.Name(rawValue: "privateGameInvite"), object: roomID)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func didMoveToView(view: SKView) {
-        self.scaleMode = SKSceneScaleMode.AspectFit
+    override func didMove(to view: SKView) {
+        self.scaleMode = SKSceneScaleMode.aspectFit
         self.anchorPoint = CGPoint(x: 0, y: 1)
         MemoryCard.sharedInstance.saveGame()
         
@@ -58,7 +58,7 @@ class GameScene: SKScene {
         Control.gameScene = self
     }
     
-    override func update(currentTime: NSTimeInterval) {
+    override func update(_ currentTime: TimeInterval) {
         ScrollNode.update()
     }
     
@@ -67,20 +67,20 @@ class GameScene: SKScene {
         Control.dy = 0
     }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        Control.touchesBegan(touches )
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        Control.touchesBegan(touches: touches )
     }
     
-    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         Control.touchesMoved()
     }
     
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        Control.touchesEnded(touches)
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        Control.touchesEnded(touches: touches)
     }
     
-    override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
-        Control.touchesEnded(touches! as Set<UITouch>)
+    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        Control.touchesEnded(touches: touches as Set<UITouch>)
     }
     
     func setBackground() {
@@ -95,12 +95,12 @@ class GameScene: SKScene {
         var spriteNode = SKSpriteNode(texture: nil, color: GameColors.blueSky, size: self.size)
         let size = CGSize(width: self.size.width, height: self.size.height/CGFloat(2))
         
-        self.backgroundUp = Control(spriteNode: spriteNode, x: 0, y: 0, z: -20000, size:size, xAlign: .center, yAlign: .up)
+        self.backgroundUp = Control(spriteNode: spriteNode, size:size, x: 0, y: 0, z: -20000, xAlign: .center, yAlign: .up)
         
         self.addChild(self.backgroundUp)
         
         spriteNode = SKSpriteNode(texture: nil, color: GameColors.greenGrass, size: self.size)
-        self.backgroundDown = Control(spriteNode: spriteNode, x: 0, y: 375, z: -20000, size:size, xAlign: .center, yAlign: .center)
+        self.backgroundDown = Control(spriteNode: spriteNode, size:size, x: 0, y: 375, z: -20000, xAlign: .center, yAlign: .center)
         self.addChild(self.backgroundDown)
     }
     
@@ -113,12 +113,12 @@ class GameScene: SKScene {
         
         print(roomID)
         
-        self.view!.presentScene(PrivateLobbySceneSecondary(roomName: roomID), transition: Config.defaultTransition)
+        //self.view!.presentScene(PrivateLobbySceneSecondary(roomName: roomID), transition: Config.defaultTransition)
         
     }
     
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
         
     }
 }

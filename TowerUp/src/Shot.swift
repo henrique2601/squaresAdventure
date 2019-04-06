@@ -13,7 +13,7 @@ class Shot: SKSpriteNode {
     init(shotDirection:CGVector) {
         
         let texture = SKTexture(imageNamed: "shot")
-        super.init(texture: texture, color: UIColor.clearColor(), size: texture.size())
+        super.init(texture: texture, color: UIColor.clear, size: texture.size())
         
         self.physicsBody = SKPhysicsBody(circleOfRadius: 16)
         

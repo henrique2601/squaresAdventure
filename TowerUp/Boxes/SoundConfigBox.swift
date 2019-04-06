@@ -14,7 +14,7 @@ class SoundConfigBox: Box {
     var switchMusic:Switch!
     var switchSound:Switch!
     
-    var playerData = MemoryCard.sharedInstance.playerData
+    var playerData = MemoryCard.sharedInstance.playerData!
     
     init() {
         super.init(textureName: "box340x355")
@@ -30,19 +30,19 @@ class SoundConfigBox: Box {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        super.touchesEnded(touches, withEvent: event)
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
         for touch in (touches ) {
-            let location = touch.locationInNode(self)
+            let location = touch.location(in: self)
             
-            if (self.switchMusic.containsPoint(location)) {
-                self.playerData.musicEnabled = NSNumber(bool: self.switchMusic.on)
+            if (self.switchMusic.contains(location)) {
+                self.playerData.musicEnabled = NSNumber(value: self.switchMusic.on)
                 Music.sharedInstance.play()
                 return
             }
             
-            if (self.switchSound.containsPoint(location)) {
-                self.playerData.soundEnabled = NSNumber(bool: self.switchSound.on)
+            if (self.switchSound.contains(location)) {
+                self.playerData.soundEnabled = NSNumber(value: self.switchSound.on)
                 return
             }
         }

@@ -31,7 +31,7 @@ class BeforeMissionScene: GameScene {
     var state = states.loading
     var nextState = states.beforeMission
     
-    var playerData = MemoryCard.sharedInstance.playerData
+    var playerData = MemoryCard.sharedInstance.playerData!
     
     var boxCoins:BoxCoins!
     
@@ -51,8 +51,8 @@ class BeforeMissionScene: GameScene {
     
     var boxPowerUpsInfo:CropBox!
     
-    override func didMoveToView(view: SKView) {
-        super.didMoveToView(view)
+    override func didMove(to view: SKView) {
+        super.didMove(to: view)
         self.backgroundColor = GameColors.blue
         self.addChild(Control(textureName: "background", x:-49, y:-32, xAlign: .center, yAlign: .center))
         
@@ -143,7 +143,7 @@ class BeforeMissionScene: GameScene {
         //PowerUps desbloqueados
         for item in self.playerData.powerUps {
             let powerUp = PowerUp(powerUpData: item as! PowerUpData)
-            powerUp.addChild(Label(text: powerUp.powerUpType.text, x:100, y:0, horizontalAlignmentMode:SKLabelHorizontalAlignmentMode.Left))
+            powerUp.addChild(Label(text: powerUp.powerUpType.text, x:100, y:0, horizontalAlignmentMode:SKLabelHorizontalAlignmentMode.left))
             powerUpsArray.append(powerUp)
         }
         
@@ -151,7 +151,7 @@ class BeforeMissionScene: GameScene {
         self.boxPowerUpsInfo.addChild(self.powerUpsInfoScrollNode)
         
         self.boxPowerUpsInfo.zPosition = self.skinsScrollNode.zPosition + 10000
-        self.boxPowerUpsInfo.hidden = true
+        self.boxPowerUpsInfo.isHidden = true
     }
     
     func showSkins() {
@@ -171,12 +171,12 @@ class BeforeMissionScene: GameScene {
             
             let skin = item as! SkinData
             
-            self.mySkins.addObject(skin.index.description)//Gravando indices das minhas skins
+            self.mySkins.add(skin.index.description)//Gravando indices das minhas skins
             
             let cell = SKSpriteNode(imageNamed: "boxSmall")
             cell.name = String(skin.index.description)
             
-            let skinType = Skins.types[skin.index.integerValue]
+            let skinType = Skins.types[skin.index.intValue]
             
             let spriteNodeSkin = SKSpriteNode(imageNamed: skinType.imageName)
             spriteNodeSkin.zPosition = cell.zPosition + 1
@@ -190,13 +190,13 @@ class BeforeMissionScene: GameScene {
             if(self.playerData.skinSlot.skin == skin) {
                 index = i
             }
-            i++
+            i += 1
         }
         
         //Skins bloqueadas
         var skinIndex = 0
         for skinType in Skins.types {
-            if(!self.mySkins.containsObject(skinIndex.description)) {
+            if(!self.mySkins.contains(skinIndex.description)) {
                 let cell = SKSpriteNode(imageNamed: "boxSmall")
                 cell.name = skinIndex.description
                 
@@ -230,7 +230,7 @@ class BeforeMissionScene: GameScene {
                 
                 skinsArray.append(cell)
             }
-            skinIndex++
+            skinIndex += 1
         }
         
         //Skin misteriosa =}
@@ -258,18 +258,18 @@ class BeforeMissionScene: GameScene {
             
             self.nextState = states.tutorial4
             
-            self.playerData.tutorial?.tutorial3 = NSNumber(bool: true)
+            self.playerData.tutorial?.tutorial3 = NSNumber(value: true)
 
         }
         
-        let spriteNode = SKSpriteNode(texture: nil, color: UIColor.clearColor(),
+        let spriteNode = SKSpriteNode(texture: nil, color: UIColor.clear,
             size: CGSize(width: Int(texture.size().width) + left + right, height: Int(texture.size().height) + top + bottom))
         
         self.skinsScrollNode.addChild(spriteNode)
     }
     
-    override func update(currentTime: NSTimeInterval) {
-        super.update(currentTime)
+    override func update(currentTime: TimeInterval) {
+        super.update(currentTime: currentTime)
         if(self.state == self.nextState) {
             switch (self.state) {
             default:
@@ -285,17 +285,17 @@ class BeforeMissionScene: GameScene {
                 break
                 
             case states.beforeMission:
-                self.blackSpriteNode.hidden = true
-                self.boxPowerUpsInfo.hidden = true
+                self.blackSpriteNode.isHidden = true
+                self.boxPowerUpsInfo.isHidden = true
                 self.player = Player(playerData: self.playerData, x: 667, y: 466, loadPhysics: false)
-                self.player.hidden = true
+                self.player.isHidden = true
                 self.addChild(self.player)
                 
                 break
                 
             case states.powerUpsInfo:
-                self.boxPowerUpsInfo.hidden = false
-                self.blackSpriteNode.hidden = false
+                self.boxPowerUpsInfo.isHidden = false
+                self.blackSpriteNode.isHidden = false
                 self.blackSpriteNode.zPosition = self.boxPowerUpsInfo.zPosition - 1
                 self.buttonBack.zPosition = self.blackSpriteNode.zPosition + 1
                 break
@@ -308,7 +308,7 @@ class BeforeMissionScene: GameScene {
                 
                 self.tutorial4 = Control(textureName: "tutorialEn3", x: 30, y: 80, xAlign: .center, yAlign: .center)
                 self.addChild(self.tutorial4)
-                self.blackSpriteNode.hidden = false
+                self.blackSpriteNode.isHidden = false
                 self.skinsScrollNode.zPosition += 1
                 self.tutorial4.zPosition = self.skinsScrollNode.zPosition + 1
                 
@@ -316,15 +316,15 @@ class BeforeMissionScene: GameScene {
 
             case states.tutorial5:
                 
-                self.tutorial4.hidden = true
-                self.skinsScrollNode.hidden = true
+                self.tutorial4.isHidden = true
+                self.skinsScrollNode.isHidden = true
                     
                 self.tutorial5 = Control(textureName: "tutorialEn4", x: 30, y: 345, xAlign: .center, yAlign: .center)
                 self.addChild(self.tutorial5)
                 self.skinsScrollNode.zPosition = self.buttonPlay.zPosition + 20
                 self.tutorial5.zPosition = self.skinsScrollNode.zPosition + 10
                 
-                self.playerData.tutorial?.tutorial4 = NSNumber(bool: true)
+                self.playerData.tutorial?.tutorial4 = NSNumber(value: true)
 
                 
                 break
@@ -338,11 +338,11 @@ class BeforeMissionScene: GameScene {
     
     func touchesEndedPowerUps(touch:UITouch, location:CGPoint) {
         if(touch.tapCount > 0) {
-            if (self.powerUpSlotsScrollNode.containsPoint(location)) {
-                let locationInScrollNode = touch.locationInNode(self.powerUpSlotsScrollNode)
+            if (self.powerUpSlotsScrollNode.contains(location)) {
+                let locationInScrollNode = touch.location(in: self.powerUpSlotsScrollNode)
                 
                 for powerUpSlot in self.powerUpSlotsScrollNode.cells {
-                    if(powerUpSlot.containsPoint(locationInScrollNode)) {
+                    if(powerUpSlot.contains(locationInScrollNode)) {
                         if let powerUpSlot = powerUpSlot as? PowerUpSlot {
                             for powerUp in self.powerUpsScrollNode.cells {
                                 if let powerUp = powerUp as? PowerUp {
@@ -359,18 +359,18 @@ class BeforeMissionScene: GameScene {
                 return
             }
             
-            if (self.powerUpsScrollNode.containsPoint(location)) {
-                let locationInScrollNode = touch.locationInNode(self.powerUpsScrollNode)
+            if (self.powerUpsScrollNode.contains(location)) {
+                let locationInScrollNode = touch.location(in: self.powerUpsScrollNode)
                 
                 for cell in self.powerUpsScrollNode.cells {
-                    if(cell.containsPoint(locationInScrollNode)) {
+                    if(cell.contains(locationInScrollNode)) {
                         
                         for powerUpSlot in self.powerUpSlotsScrollNode.cells as! Array<PowerUpSlot> {
                             if(powerUpSlot.empty) {
                                 if let powerUp = cell as? PowerUp {
                                     if(!powerUp.inUse) {
                                         powerUp.inUse = true
-                                        powerUpSlot.setPowerUp(powerUp.powerUpData)
+                                        powerUpSlot.setPowerUp(powerUpData: powerUp.powerUpData)
                                     }
                                 }
                                 break
@@ -392,12 +392,12 @@ class BeforeMissionScene: GameScene {
             
         }
         if(touch.tapCount > 0) {
-            if (self.skinsScrollNode.containsPoint(location)) {
-                let locationInScrollNode = touch.locationInNode(self.skinsScrollNode)
+            if (self.skinsScrollNode.contains(location)) {
+                let locationInScrollNode = touch.location(in: self.skinsScrollNode)
 
                 for skin in self.skinsScrollNode.cells {
-                    if(skin.containsPoint(locationInScrollNode)) {
-                        if(!self.mySkins.containsObject(skin.name!)) {
+                    if(skin.contains(locationInScrollNode)) {
+                        if(!self.mySkins.contains(skin.name!)) {
                             let cellIndex:Int = Int(skin.name!)!
                             if(cellIndex >= Skins.types.count) {
                                 return
@@ -405,12 +405,12 @@ class BeforeMissionScene: GameScene {
                             let skinType = Skins.types[cellIndex]
                             
                             if (skinType.buyWithCoins == true) {
-                                if(Int(self.playerData.coins) >= skinType.price) {
+                                if(Int(truncating: self.playerData.coins) >= skinType.price) {
                                     let skinData = MemoryCard.sharedInstance.newSkinData()
-                                    skinData.index = NSNumber(integer: Int(skin.name!)!)
-                                    self.playerData.addSkin(skinData)
+                                    skinData.index = NSNumber(value: Int(skin.name!)!)
+                                    self.playerData.addSkin(value: skinData)
                                     self.playerData.skinSlot.skin = skinData
-                                    self.playerData.coins = NSNumber(integer: Int(self.playerData.coins) - skinType.price)
+                                    self.playerData.coins = NSNumber(value: Int(truncating: self.playerData.coins) - skinType.price)
                                     self.boxCoins.labelCoins.setText(self.playerData.coins.description)
                                     self.showSkins()
                                 } else {
@@ -420,12 +420,12 @@ class BeforeMissionScene: GameScene {
                                 }
                             } else {
                                 //Tentando comprar com gemas
-                                if(Int(self.playerData.gems) >= skinType.price) {
+                                if(Int(truncating: self.playerData.gems) >= skinType.price) {
                                     let skinData = MemoryCard.sharedInstance.newSkinData()
-                                    skinData.index = NSNumber(integer: Int(skin.name!)!)
-                                    self.playerData.addSkin(skinData)
+                                    skinData.index = NSNumber(value: Int(skin.name!)!)
+                                    self.playerData.addSkin(value: skinData)
                                     self.playerData.skinSlot.skin = skinData
-                                    self.playerData.gems = NSNumber(integer: Int(self.playerData.gems) - skinType.price)
+                                    self.playerData.gems = NSNumber(value: Int(truncating: self.playerData.gems) - skinType.price)
                                     self.boxCoins.labelGems.setText(self.playerData.gems.description)
                                     self.showSkins()
                                 } else {
@@ -450,42 +450,42 @@ class BeforeMissionScene: GameScene {
     }
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        super.touchesEnded(touches, withEvent: event)
+        super.touchesEnded(touches, with: event)
         
         if (self.state == self.nextState) {
             switch (self.state) {
             case states.beforeMission:
                 for touch in touches {
-                    let location = touch.locationInNode(self)
+                    let location = touch.location(in: self)
                     
-                    if (self.buttonPlay.containsPoint(location)) {
+                    if (self.buttonPlay.contains(location)) {
                         self.nextState = .mission
                         return
                     }
-                    if (self.buttonBack.containsPoint(location)) {
+                    if (self.buttonBack.contains(location)) {
                         self.nextState = .floors
                         return
                     }
                     
-                    if(self.boxCoins.containsPoint(location)) {
+                    if(self.boxCoins.contains(location)) {
                         self.boxCoins.containsPoint()
                     }
                     
-                    if(self.buttonPowerUpsInfo.containsPoint(location)) {
+                    if(self.buttonPowerUpsInfo.contains(location)) {
                         self.nextState = .powerUpsInfo
                     }
                     
-                    self.touchesEndedSkins(touch, location: location)
+                    self.touchesEndedSkins(touch: touch, location: location)
                     
-                    self.touchesEndedPowerUps(touch, location: location)
+                    self.touchesEndedPowerUps(touch: touch, location: location)
                     
                 }
                 break
             case states.tutorial4:
                 for touch in (touches ) {
-                    let location = touch.locationInNode(self)
+                    let location = touch.location(in: self)
                     
-                    self.touchesEndedSkins(touch, location: location)
+                    self.touchesEndedSkins(touch: touch, location: location)
                     
                     
                     
@@ -494,14 +494,14 @@ class BeforeMissionScene: GameScene {
 
             case states.tutorial5:
                 for touch in (touches ) {
-                    let location = touch.locationInNode(self)
+                    let location = touch.location(in: self)
                     
-                    if (self.buttonPlay.containsPoint(location)) {
+                    if (self.buttonPlay.contains(location)) {
                         self.nextState = .mission
                         return
                     }
                     
-                    self.touchesEndedPowerUps(touch, location: location)
+                    self.touchesEndedPowerUps(touch: touch, location: location)
                     
                 }
                 break
@@ -509,9 +509,9 @@ class BeforeMissionScene: GameScene {
                 
             case states.powerUpsInfo:
                 for touch in touches {
-                    let location = touch.locationInNode(self)
+                    let location = touch.location(in: self)
                     
-                    if !(self.boxPowerUpsInfo.cropNode.containsPoint(location)) {
+                    if !(self.boxPowerUpsInfo.cropNode.contains(location)) {
                         self.nextState = .beforeMission
                         return
                     }

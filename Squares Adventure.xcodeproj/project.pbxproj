@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -64,22 +64,6 @@
 		139A0E881B73D00200EDE944 /* BeforeMissionScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139A0E871B73D00200EDE944 /* BeforeMissionScene.swift */; };
 		139A0E8A1B73D05900EDE944 /* MissionScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139A0E891B73D05900EDE944 /* MissionScene.swift */; };
 		139A0E8F1B7431CB00EDE944 /* MemoryCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 139A0E8E1B7431CB00EDE944 /* MemoryCard.swift */; };
-		13B32C061B74EE93001A1486 /* LobbyScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B32C051B74EE93001A1486 /* LobbyScene.swift */; };
-		13BC7ED31BAAE883003D6CCD /* SocketAckManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13BC7EC41BAAE883003D6CCD /* SocketAckManager.swift */; };
-		13BC7ED41BAAE883003D6CCD /* SocketAnyEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13BC7EC51BAAE883003D6CCD /* SocketAnyEvent.swift */; };
-		13BC7ED51BAAE883003D6CCD /* SocketEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13BC7EC61BAAE883003D6CCD /* SocketEngine.swift */; };
-		13BC7ED61BAAE883003D6CCD /* SocketEngineClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13BC7EC71BAAE883003D6CCD /* SocketEngineClient.swift */; };
-		13BC7ED71BAAE883003D6CCD /* SocketEventHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13BC7EC81BAAE883003D6CCD /* SocketEventHandler.swift */; };
-		13BC7ED81BAAE883003D6CCD /* SocketFixUTF8.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13BC7EC91BAAE883003D6CCD /* SocketFixUTF8.swift */; };
-		13BC7ED91BAAE883003D6CCD /* SocketIOClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13BC7ECA1BAAE883003D6CCD /* SocketIOClient.swift */; };
-		13BC7EDA1BAAE883003D6CCD /* SocketIOClientStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13BC7ECB1BAAE883003D6CCD /* SocketIOClientStatus.swift */; };
-		13BC7EDB1BAAE883003D6CCD /* SocketLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13BC7ECC1BAAE883003D6CCD /* SocketLogger.swift */; };
-		13BC7EDC1BAAE883003D6CCD /* SocketPacket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13BC7ECD1BAAE883003D6CCD /* SocketPacket.swift */; };
-		13BC7EDD1BAAE883003D6CCD /* SocketParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13BC7ECE1BAAE883003D6CCD /* SocketParser.swift */; };
-		13BC7EDE1BAAE883003D6CCD /* SocketStringReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13BC7ECF1BAAE883003D6CCD /* SocketStringReader.swift */; };
-		13BC7EDF1BAAE883003D6CCD /* SocketTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13BC7ED01BAAE883003D6CCD /* SocketTypes.swift */; };
-		13BC7EE01BAAE883003D6CCD /* SwiftRegex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13BC7ED11BAAE883003D6CCD /* SwiftRegex.swift */; };
-		13BC7EE11BAAE883003D6CCD /* WebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13BC7ED21BAAE883003D6CCD /* WebSocket.swift */; };
 		13CCB6FC1B72AD310060334C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13CCB6FB1B72AD310060334C /* LaunchScreen.xib */; };
 		13CCB6FE1B72B9010060334C /* TowersScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13CCB6FD1B72B9010060334C /* TowersScene.swift */; };
 		13CCB7001B72B9A70060334C /* OptionsScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13CCB6FF1B72B9A70060334C /* OptionsScene.swift */; };
@@ -131,7 +115,6 @@
 		13F390B41BD543B60089BF15 /* 1 7.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 13F3908E1BD543B60089BF15 /* 1 7.tmx */; };
 		13F390B51BD543B60089BF15 /* 1 8.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 13F3908F1BD543B60089BF15 /* 1 8.tmx */; };
 		13F390B61BD543B60089BF15 /* 1 9.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 13F390901BD543B60089BF15 /* 1 9.tmx */; };
-		13FC80081B86404500865C72 /* MultiplayerMissionScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FC80071B86404500865C72 /* MultiplayerMissionScene.swift */; };
 		13FC800A1B8640B800865C72 /* PlayerOnline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13FC80091B8640B800865C72 /* PlayerOnline.swift */; };
 		13FF272B1BDAB01100D49E81 /* PowerUp1.sks in Resources */ = {isa = PBXBuildFile; fileRef = 13FF272A1BDAB01100D49E81 /* PowerUp1.sks */; };
 		3A037DD61BB9A7F300D30AE5 /* FBAudienceNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A037DD11BB9A7F300D30AE5 /* FBAudienceNetwork.framework */; };
@@ -141,7 +124,6 @@
 		3A037DDA1BB9A7F300D30AE5 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A037DD51BB9A7F300D30AE5 /* FBSDKShareKit.framework */; };
 		3A037DDD1BB9BA5100D30AE5 /* ParseFacebookUtilsV4.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A037DDB1BB9B7F100D30AE5 /* ParseFacebookUtilsV4.framework */; };
 		3A24842A1BC0E370002C5411 /* BoxDeathsAndTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A2484291BC0E370002C5411 /* BoxDeathsAndTime.swift */; };
-		3A390C871BCCB42D00F948F6 /* MultiPlayerLobbyScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A390C861BCCB42D00F948F6 /* MultiPlayerLobbyScene.swift */; };
 		3A390C8F1BCE950000F948F6 /* GBPing.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A390C8B1BCE950000F948F6 /* GBPing.m */; };
 		3A390C901BCE950000F948F6 /* GBPingSummary.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A390C8D1BCE950000F948F6 /* GBPingSummary.m */; };
 		3A390C921BD0576F00F948F6 /* ServerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A390C911BD0576F00F948F6 /* ServerManager.swift */; };
@@ -149,23 +131,15 @@
 		3A453D6E1BDABB6700224EA8 /* MultiplayerLobbyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A453D6D1BDABB6700224EA8 /* MultiplayerLobbyCell.swift */; };
 		3A4C7A451BF0E1E9006DD731 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A4C7A431BF0E1E9006DD731 /* Fabric.framework */; };
 		3A4C7A461BF0E1E9006DD731 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A4C7A441BF0E1E9006DD731 /* Crashlytics.framework */; };
-		3A79EFD11BFB635200FB42F2 /* SocketAckEmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A79EFCD1BFB635200FB42F2 /* SocketAckEmitter.swift */; };
-		3A79EFD21BFB635200FB42F2 /* SocketEnginePacketType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A79EFCE1BFB635200FB42F2 /* SocketEnginePacketType.swift */; };
-		3A79EFD31BFB635200FB42F2 /* SocketEngineSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A79EFCF1BFB635200FB42F2 /* SocketEngineSpec.swift */; };
-		3A79EFD41BFB635200FB42F2 /* SocketIOClientOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A79EFD01BFB635200FB42F2 /* SocketIOClientOption.swift */; };
-		3A79EFD61BFD239700FB42F2 /* PrivateLobbyScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A79EFD51BFD239700FB42F2 /* PrivateLobbyScene.swift */; };
 		3A79EFD81BFE091500FB42F2 /* FriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A79EFD71BFE091400FB42F2 /* FriendCell.swift */; };
 		3A8223CE1BC6BDA70029C75D /* Coin.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3A8223CD1BC6BDA70029C75D /* Coin.wav */; };
 		3A8223D01BC6C0360029C75D /* jump_01.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3A8223CF1BC6C0360029C75D /* jump_01.wav */; };
 		3A8223D41BC6C6300029C75D /* qubodupImpactMeat01.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3A8223D31BC6C6300029C75D /* qubodupImpactMeat01.wav */; };
 		3A979BF31B987B3300A8E09F /* Textfield.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A979BF21B987B3300A8E09F /* Textfield.swift */; };
 		3A979C641BA0773C00A8E09F /* MPCManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A979C631BA0773C00A8E09F /* MPCManager.swift */; };
-		3A979C661BA0780100A8E09F /* LocalGameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A979C651BA0780100A8E09F /* LocalGameScene.swift */; };
-		3A979C681BA1BB9500A8E09F /* LocalLobbyScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A979C671BA1BB9500A8E09F /* LocalLobbyScene.swift */; };
 		3AB2D4A51BD6740D004375B3 /* -1 0.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 3AB2D4A41BD6740D004375B3 /* -1 0.tmx */; };
 		3AB2D4A71BD7B36C004375B3 /* WinCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB2D4A61BD7B36C004375B3 /* WinCell.swift */; };
 		3AB95A181BC2F79A00368009 /* boom4.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3AB95A171BC2F79A00368009 /* boom4.wav */; };
-		3AE0FFED1C7DC6F80066B3B2 /* PrivateLobbySceneSecondary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AE0FFEC1C7DC6F80066B3B2 /* PrivateLobbySceneSecondary.swift */; };
 		3AED55DA1BEA2DF40078F59C /* -1 1.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 3AED55D91BEA2DF40078F59C /* -1 1.tmx */; };
 		3AED55DC1BEA2F4F0078F59C /* 0 0.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 3AED55DB1BEA2F4F0078F59C /* 0 0.tmx */; };
 		3AF2530E1BBD6E8D0089BF7A /* InvitedFriendData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF2530C1BBD6E8D0089BF7A /* InvitedFriendData.swift */; };
@@ -288,22 +262,6 @@
 		139A0E871B73D00200EDE944 /* BeforeMissionScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BeforeMissionScene.swift; path = Scenes/BeforeMissionScene.swift; sourceTree = "<group>"; };
 		139A0E891B73D05900EDE944 /* MissionScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MissionScene.swift; path = Scenes/MissionScene.swift; sourceTree = "<group>"; };
 		139A0E8E1B7431CB00EDE944 /* MemoryCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MemoryCard.swift; path = CoreData/MemoryCard.swift; sourceTree = "<group>"; };
-		13B32C051B74EE93001A1486 /* LobbyScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LobbyScene.swift; path = Scenes/LobbyScene.swift; sourceTree = "<group>"; };
-		13BC7EC41BAAE883003D6CCD /* SocketAckManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketAckManager.swift; sourceTree = "<group>"; };
-		13BC7EC51BAAE883003D6CCD /* SocketAnyEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketAnyEvent.swift; sourceTree = "<group>"; };
-		13BC7EC61BAAE883003D6CCD /* SocketEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketEngine.swift; sourceTree = "<group>"; };
-		13BC7EC71BAAE883003D6CCD /* SocketEngineClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketEngineClient.swift; sourceTree = "<group>"; };
-		13BC7EC81BAAE883003D6CCD /* SocketEventHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketEventHandler.swift; sourceTree = "<group>"; };
-		13BC7EC91BAAE883003D6CCD /* SocketFixUTF8.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketFixUTF8.swift; sourceTree = "<group>"; };
-		13BC7ECA1BAAE883003D6CCD /* SocketIOClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketIOClient.swift; sourceTree = "<group>"; };
-		13BC7ECB1BAAE883003D6CCD /* SocketIOClientStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketIOClientStatus.swift; sourceTree = "<group>"; };
-		13BC7ECC1BAAE883003D6CCD /* SocketLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketLogger.swift; sourceTree = "<group>"; };
-		13BC7ECD1BAAE883003D6CCD /* SocketPacket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketPacket.swift; sourceTree = "<group>"; };
-		13BC7ECE1BAAE883003D6CCD /* SocketParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketParser.swift; sourceTree = "<group>"; };
-		13BC7ECF1BAAE883003D6CCD /* SocketStringReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketStringReader.swift; sourceTree = "<group>"; };
-		13BC7ED01BAAE883003D6CCD /* SocketTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketTypes.swift; sourceTree = "<group>"; };
-		13BC7ED11BAAE883003D6CCD /* SwiftRegex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftRegex.swift; sourceTree = "<group>"; };
-		13BC7ED21BAAE883003D6CCD /* WebSocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebSocket.swift; sourceTree = "<group>"; };
 		13CCB6FB1B72AD310060334C /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		13CCB6FD1B72B9010060334C /* TowersScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TowersScene.swift; path = Scenes/TowersScene.swift; sourceTree = "<group>"; };
 		13CCB6FF1B72B9A70060334C /* OptionsScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OptionsScene.swift; path = Scenes/OptionsScene.swift; sourceTree = "<group>"; };
@@ -355,7 +313,6 @@
 		13F3908E1BD543B60089BF15 /* 1 7.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "1 7.tmx"; sourceTree = "<group>"; };
 		13F3908F1BD543B60089BF15 /* 1 8.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "1 8.tmx"; sourceTree = "<group>"; };
 		13F390901BD543B60089BF15 /* 1 9.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "1 9.tmx"; sourceTree = "<group>"; };
-		13FC80071B86404500865C72 /* MultiplayerMissionScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MultiplayerMissionScene.swift; path = Scenes/MultiplayerMissionScene.swift; sourceTree = "<group>"; };
 		13FC80091B8640B800865C72 /* PlayerOnline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayerOnline.swift; path = src/PlayerOnline.swift; sourceTree = "<group>"; };
 		13FF272A1BDAB01100D49E81 /* PowerUp1.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = PowerUp1.sks; sourceTree = "<group>"; };
 		3A037DD11BB9A7F300D30AE5 /* FBAudienceNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBAudienceNetwork.framework; sourceTree = "<group>"; };
@@ -365,7 +322,6 @@
 		3A037DD51BB9A7F300D30AE5 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
 		3A037DDB1BB9B7F100D30AE5 /* ParseFacebookUtilsV4.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtilsV4.framework; sourceTree = "<group>"; };
 		3A2484291BC0E370002C5411 /* BoxDeathsAndTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BoxDeathsAndTime.swift; path = src/BoxDeathsAndTime.swift; sourceTree = "<group>"; };
-		3A390C861BCCB42D00F948F6 /* MultiPlayerLobbyScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MultiPlayerLobbyScene.swift; path = Scenes/MultiPlayerLobbyScene.swift; sourceTree = "<group>"; };
 		3A390C891BCE950000F948F6 /* GBPing-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GBPing-Prefix.pch"; sourceTree = "<group>"; };
 		3A390C8A1BCE950000F948F6 /* GBPing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GBPing.h; sourceTree = "<group>"; };
 		3A390C8B1BCE950000F948F6 /* GBPing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GBPing.m; sourceTree = "<group>"; };
@@ -377,23 +333,15 @@
 		3A453D6D1BDABB6700224EA8 /* MultiplayerLobbyCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MultiplayerLobbyCell.swift; path = src/MultiplayerLobbyCell.swift; sourceTree = "<group>"; };
 		3A4C7A431BF0E1E9006DD731 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		3A4C7A441BF0E1E9006DD731 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
-		3A79EFCD1BFB635200FB42F2 /* SocketAckEmitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketAckEmitter.swift; sourceTree = "<group>"; };
-		3A79EFCE1BFB635200FB42F2 /* SocketEnginePacketType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketEnginePacketType.swift; sourceTree = "<group>"; };
-		3A79EFCF1BFB635200FB42F2 /* SocketEngineSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketEngineSpec.swift; sourceTree = "<group>"; };
-		3A79EFD01BFB635200FB42F2 /* SocketIOClientOption.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketIOClientOption.swift; sourceTree = "<group>"; };
-		3A79EFD51BFD239700FB42F2 /* PrivateLobbyScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivateLobbyScene.swift; sourceTree = "<group>"; };
 		3A79EFD71BFE091400FB42F2 /* FriendCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendCell.swift; sourceTree = "<group>"; };
 		3A8223CD1BC6BDA70029C75D /* Coin.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Coin.wav; sourceTree = "<group>"; };
 		3A8223CF1BC6C0360029C75D /* jump_01.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = jump_01.wav; sourceTree = "<group>"; };
 		3A8223D31BC6C6300029C75D /* qubodupImpactMeat01.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = qubodupImpactMeat01.wav; sourceTree = "<group>"; };
 		3A979BF21B987B3300A8E09F /* Textfield.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Textfield.swift; path = src/Textfield.swift; sourceTree = "<group>"; };
 		3A979C631BA0773C00A8E09F /* MPCManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPCManager.swift; sourceTree = "<group>"; };
-		3A979C651BA0780100A8E09F /* LocalGameScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalGameScene.swift; sourceTree = "<group>"; };
-		3A979C671BA1BB9500A8E09F /* LocalLobbyScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocalLobbyScene.swift; path = Scenes/LocalLobbyScene.swift; sourceTree = "<group>"; };
 		3AB2D4A41BD6740D004375B3 /* -1 0.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "-1 0.tmx"; sourceTree = "<group>"; };
 		3AB2D4A61BD7B36C004375B3 /* WinCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WinCell.swift; path = src/WinCell.swift; sourceTree = "<group>"; };
 		3AB95A171BC2F79A00368009 /* boom4.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = boom4.wav; sourceTree = "<group>"; };
-		3AE0FFEC1C7DC6F80066B3B2 /* PrivateLobbySceneSecondary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivateLobbySceneSecondary.swift; sourceTree = "<group>"; };
 		3AED55D91BEA2DF40078F59C /* -1 1.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "-1 1.tmx"; sourceTree = "<group>"; };
 		3AED55DB1BEA2F4F0078F59C /* 0 0.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "0 0.tmx"; sourceTree = "<group>"; };
 		3AF2530A1BBAB13E0089BF7A /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -613,16 +561,9 @@
 				13CCB7031B7373D00060334C /* FloorsScene.swift */,
 				1359DD001B72805F006C12FA /* GameScene.swift */,
 				5C1D159A1BEB784D00A19114 /* InAppScene.swift */,
-				13B32C051B74EE93001A1486 /* LobbyScene.swift */,
-				3A979C651BA0780100A8E09F /* LocalGameScene.swift */,
-				3A979C671BA1BB9500A8E09F /* LocalLobbyScene.swift */,
 				1359DD0B1B7286D3006C12FA /* MainMenuScene.swift */,
 				139A0E891B73D05900EDE944 /* MissionScene.swift */,
-				3A390C861BCCB42D00F948F6 /* MultiPlayerLobbyScene.swift */,
-				13FC80071B86404500865C72 /* MultiplayerMissionScene.swift */,
 				13CCB6FF1B72B9A70060334C /* OptionsScene.swift */,
-				3A79EFD51BFD239700FB42F2 /* PrivateLobbyScene.swift */,
-				3AE0FFEC1C7DC6F80066B3B2 /* PrivateLobbySceneSecondary.swift */,
 				13CCB6FD1B72B9010060334C /* TowersScene.swift */,
 			);
 			name = Scenes;
@@ -646,32 +587,6 @@
 				5C5FACFE1C073C7000CF641C /* TutorialData.swift */,
 			);
 			name = CoreData;
-			sourceTree = "<group>";
-		};
-		13BC7EC31BAAE883003D6CCD /* SocketIOClientSwift */ = {
-			isa = PBXGroup;
-			children = (
-				3A79EFCD1BFB635200FB42F2 /* SocketAckEmitter.swift */,
-				3A79EFCE1BFB635200FB42F2 /* SocketEnginePacketType.swift */,
-				3A79EFCF1BFB635200FB42F2 /* SocketEngineSpec.swift */,
-				3A79EFD01BFB635200FB42F2 /* SocketIOClientOption.swift */,
-				13BC7EC41BAAE883003D6CCD /* SocketAckManager.swift */,
-				13BC7EC51BAAE883003D6CCD /* SocketAnyEvent.swift */,
-				13BC7EC61BAAE883003D6CCD /* SocketEngine.swift */,
-				13BC7EC71BAAE883003D6CCD /* SocketEngineClient.swift */,
-				13BC7EC81BAAE883003D6CCD /* SocketEventHandler.swift */,
-				13BC7EC91BAAE883003D6CCD /* SocketFixUTF8.swift */,
-				13BC7ECA1BAAE883003D6CCD /* SocketIOClient.swift */,
-				13BC7ECB1BAAE883003D6CCD /* SocketIOClientStatus.swift */,
-				13BC7ECC1BAAE883003D6CCD /* SocketLogger.swift */,
-				13BC7ECD1BAAE883003D6CCD /* SocketPacket.swift */,
-				13BC7ECE1BAAE883003D6CCD /* SocketParser.swift */,
-				13BC7ECF1BAAE883003D6CCD /* SocketStringReader.swift */,
-				13BC7ED01BAAE883003D6CCD /* SocketTypes.swift */,
-				13BC7ED11BAAE883003D6CCD /* SwiftRegex.swift */,
-				13BC7ED21BAAE883003D6CCD /* WebSocket.swift */,
-			);
-			path = SocketIOClientSwift;
 			sourceTree = "<group>";
 		};
 		13E0C0B61BDA7ECE00D4E249 /* VisualEffects */ = {
@@ -832,7 +747,6 @@
 				3A390C881BCE950000F948F6 /* GBPing */,
 				1305E4EE1BB1D663009F9B0A /* Music */,
 				1359DD021B728114006C12FA /* Scenes */,
-				13BC7EC31BAAE883003D6CCD /* SocketIOClientSwift */,
 				1308A4661BC2C3A400D4F85B /* SoundEffects */,
 				1359DCFD1B727FFE006C12FA /* src */,
 				81BA81481A49DA1800E65899 /* Supporting Files */,
@@ -949,7 +863,7 @@
 				};
 			};
 			buildConfigurationList = 81BA81401A49DA1800E65899 /* Build configuration list for PBXProject "Squares Adventure" */;
-			compatibilityVersion = "Xcode 3.2";
+			compatibilityVersion = "Xcode 10.0";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -1092,14 +1006,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				81BA814D1A49DA1800E65899 /* ViewController.swift in Sources */,
-				3A979C661BA0780100A8E09F /* LocalGameScene.swift in Sources */,
 				1323B1521B83554A00174777 /* WinTile.swift in Sources */,
-				3A79EFD61BFD239700FB42F2 /* PrivateLobbyScene.swift in Sources */,
 				13CCB7001B72B9A70060334C /* OptionsScene.swift in Sources */,
 				132D229F1B9875230094CF53 /* TowerData.swift in Sources */,
 				13EBD7C01B7A6614005F1CA4 /* Camera.swift in Sources */,
-				13BC7EDB1BAAE883003D6CCD /* SocketLogger.swift in Sources */,
-				13BC7EDD1BAAE883003D6CCD /* SocketParser.swift in Sources */,
 				1326AE8D1B86283F00D4563B /* AfterMissionBox.swift in Sources */,
 				81BA814B1A49DA1800E65899 /* AppDelegate.swift in Sources */,
 				5C48055E1B84CFF60066E151 /* DoorTile.swift in Sources */,
@@ -1108,26 +1018,17 @@
 				13D8316D1BA7415D00A95FEB /* MessageBox.swift in Sources */,
 				3A24842A1BC0E370002C5411 /* BoxDeathsAndTime.swift in Sources */,
 				137F8DF11BBC66DF00B1C304 /* BoxCoins.swift in Sources */,
-				13FC80081B86404500865C72 /* MultiplayerMissionScene.swift in Sources */,
-				13BC7ED61BAAE883003D6CCD /* SocketEngineClient.swift in Sources */,
 				139A0E8A1B73D05900EDE944 /* MissionScene.swift in Sources */,
 				137D3DA11BB435DE003202D9 /* BoxCrate.swift in Sources */,
-				13BC7EE01BAAE883003D6CCD /* SwiftRegex.swift in Sources */,
 				139501A31BC54AE90053EA5D /* SoundConfigBox.swift in Sources */,
-				13BC7EDC1BAAE883003D6CCD /* SocketPacket.swift in Sources */,
 				3A79EFD81BFE091500FB42F2 /* FriendCell.swift in Sources */,
 				1359DD081B728611006C12FA /* GameColors.swift in Sources */,
 				1359DD161B728C95006C12FA /* Switch.swift in Sources */,
-				13BC7ED41BAAE883003D6CCD /* SocketAnyEvent.swift in Sources */,
-				13BC7ED91BAAE883003D6CCD /* SocketIOClient.swift in Sources */,
 				1359DD041B728168006C12FA /* Config.swift in Sources */,
 				1305E4F21BB1D6AC009F9B0A /* Music.swift in Sources */,
 				137DC5151BA1C3E300D58DED /* PowerUpSlot.swift in Sources */,
 				1359DD061B728574006C12FA /* GameMath.swift in Sources */,
-				13B32C061B74EE93001A1486 /* LobbyScene.swift in Sources */,
 				132D229B1B9871D10094CF53 /* Tower.swift in Sources */,
-				13BC7ED31BAAE883003D6CCD /* SocketAckManager.swift in Sources */,
-				13BC7EDA1BAAE883003D6CCD /* SocketIOClientStatus.swift in Sources */,
 				1308A46A1BC2E35000D4F85B /* RandomSoundEffect.swift in Sources */,
 				139A0E881B73D00200EDE944 /* BeforeMissionScene.swift in Sources */,
 				1326AE881B85FCA300D4563B /* Box.swift in Sources */,
@@ -1146,9 +1047,7 @@
 				13EBD7BE1B7A65E5005F1CA4 /* World.swift in Sources */,
 				133184A01B83679200DF11D5 /* Coin.swift in Sources */,
 				137D3DA51BB43DB3003202D9 /* Spring.swift in Sources */,
-				3A979C681BA1BB9500A8E09F /* LocalLobbyScene.swift in Sources */,
 				1383FD601B7A4A920012DA45 /* Chunk.swift in Sources */,
-				13BC7ED51BAAE883003D6CCD /* SocketEngine.swift in Sources */,
 				5CF8A3AA1B8F39A000C16CA9 /* SkinData.swift in Sources */,
 				13D2521A1BCEE31F002E5F59 /* IAPHelper.swift in Sources */,
 				1359DD0C1B7286D3006C12FA /* MainMenuScene.swift in Sources */,
@@ -1156,24 +1055,20 @@
 				13DE13051B94C38E0092D50B /* ScrollNode.swift in Sources */,
 				5C2535FD1BEFBB55005EFA80 /* Emitter.swift in Sources */,
 				137153BF1BE11864004F5F3F /* BlackSpriteNode.swift in Sources */,
-				13BC7ED71BAAE883003D6CCD /* SocketEventHandler.swift in Sources */,
 				13428EBE1B7CB0BC0017D23A /* Square.swift in Sources */,
 				139A0E8F1B7431CB00EDE944 /* MemoryCard.swift in Sources */,
 				1323FF5D1B90817F00EF4C2E /* MultiplayerWinBox.swift in Sources */,
 				1383FD641B7A50990012DA45 /* Ground.swift in Sources */,
 				84E0882F1BEA37FD00D3C82C /* ALIterativeMigrator.m in Sources */,
-				13BC7EDF1BAAE883003D6CCD /* SocketTypes.swift in Sources */,
 				3AB2D4A71BD7B36C004375B3 /* WinCell.swift in Sources */,
 				13CCB7021B72B9D90060334C /* CreditsScene.swift in Sources */,
 				3A979BF31B987B3300A8E09F /* Textfield.swift in Sources */,
 				3A453D6E1BDABB6700224EA8 /* MultiplayerLobbyCell.swift in Sources */,
-				3A79EFD21BFB635200FB42F2 /* SocketEnginePacketType.swift in Sources */,
 				13CCB6FE1B72B9010060334C /* TowersScene.swift in Sources */,
 				137D3D9D1BB42DDF003202D9 /* Bug.swift in Sources */,
 				135EA4911BBAE375006C765F /* GameFonts.swift in Sources */,
 				133184A21B83AADB00DF11D5 /* Spike.swift in Sources */,
 				139501A51BC6F98D0053EA5D /* Saw.swift in Sources */,
-				3A79EFD41BFB635200FB42F2 /* SocketIOClientOption.swift in Sources */,
 				5C1D159B1BEB784D00A19114 /* InAppScene.swift in Sources */,
 				1305E4ED1BB18B1B009F9B0A /* Slider.swift in Sources */,
 				5C5FACFC1C07320E00CF641C /* PlayerData.swift in Sources */,
@@ -1187,17 +1082,10 @@
 				8414F3D11BF200B100202AFA /* Shot.swift in Sources */,
 				1309B4241BDFB58C000F0B9E /* BoxExplosive.swift in Sources */,
 				5CF8A3A81B8F39A000C16CA9 /* FloorData.swift in Sources */,
-				3A79EFD11BFB635200FB42F2 /* SocketAckEmitter.swift in Sources */,
-				3AE0FFED1C7DC6F80066B3B2 /* PrivateLobbySceneSecondary.swift in Sources */,
-				13BC7EE11BAAE883003D6CCD /* WebSocket.swift in Sources */,
 				137D3D9F1BB43097003202D9 /* Bomb.swift in Sources */,
-				13BC7EDE1BAAE883003D6CCD /* SocketStringReader.swift in Sources */,
 				5CF8A3A61B8F39A000C16CA9 /* PowerUpData.swift in Sources */,
 				135C5CA41BA8364B006643BB /* PowerUpSlotData.swift in Sources */,
-				13BC7ED81BAAE883003D6CCD /* SocketFixUTF8.swift in Sources */,
-				3A79EFD31BFB635200FB42F2 /* SocketEngineSpec.swift in Sources */,
 				849B35F01BFA020E008C7A83 /* CropBox.swift in Sources */,
-				3A390C871BCCB42D00F948F6 /* MultiPlayerLobbyScene.swift in Sources */,
 				1359DC9A1B727726006C12FA /* TowerUp.xcdatamodeld in Sources */,
 				3A390C921BD0576F00F948F6 /* ServerManager.swift in Sources */,
 				13CCB7041B7373D00060334C /* FloorsScene.swift in Sources */,
@@ -1263,11 +1151,12 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1300,9 +1189,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1321,7 +1211,10 @@
 				);
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/**";
 				INFOPLIST_FILE = TowerUp/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1348,7 +1241,10 @@
 				);
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/**";
 				INFOPLIST_FILE = TowerUp/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",

@@ -22,32 +22,32 @@ class Box: Control {
         
         self.zPosition = Config.HUDZPosition * 2
         
-        self.hidden = false
+        self.isHidden = false
     }
 
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        Control.touchesBegan(touches)
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        Control.touchesBegan(touches: touches)
     }
     
-    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         Control.touchesMoved()
     }
     
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        Control.touchesEnded(touches)
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        Control.touchesEnded(touches: touches)
     }
     
-    override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
-        Control.touchesEnded(touches! as Set<UITouch>)
+    override func touchesCancelled(_ touches: Set<UITouch>?, with event: UIEvent?) {
+        Control.touchesEnded(touches: touches! as Set<UITouch>)
     }
     
-    override var hidden: Bool {
+    override var isHidden: Bool {
         didSet {
-            self.userInteractionEnabled = !hidden
+            self.isUserInteractionEnabled = !isHidden
         }
     }
 }

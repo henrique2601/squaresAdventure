@@ -11,21 +11,21 @@ import SpriteKit
 
 class Config: NSObject {
     
-    static var skViewBoundsSize:CGSize = CGSizeZero
-    static var translate:CGPoint = CGPointZero
-    static var translateInView:CGPoint = CGPointZero
+    static var skViewBoundsSize:CGSize = CGSize.zero
+    static var translate:CGPoint = CGPoint.zero
+    static var translateInView:CGPoint = CGPoint.zero
     
     static var HUDZPosition:CGFloat = 1000
     
     static var currentSceneSize:CGSize!
     
-    static var defaultTransition = SKTransition.crossFadeWithDuration(0.5)
+    static var defaultTransition = SKTransition.crossFade(withDuration: 0.5)
     
     static let sceneSize:CGSize = CGSize(width: 1334/2, height: 750/2)
     
     static func updateSceneSize() -> CGSize {
         
-        switch(Int(UIDevice.currentDevice().systemVersion[0] as String)!) {
+        switch(Int(UIDevice.current.systemVersion[0] as String)!) {
             
         case 9:
             
@@ -68,7 +68,8 @@ class Config: NSObject {
 
 public extension String {
     subscript (i: Int) -> Character {
-        return self[self.startIndex.advancedBy(i)]
+        
+        return self[self.index(self.startIndex, offsetBy: i)]
     }
     
     subscript (i: Int) -> String {
@@ -76,7 +77,10 @@ public extension String {
     }
     
     subscript (r: Range<Int>) -> String {
-        return substringWithRange(Range(start: startIndex.advancedBy(r.startIndex), end: startIndex.advancedBy(r.endIndex)))
+        let start = index(startIndex, offsetBy: r.startIndex)
+        let end = index(startIndex, offsetBy: r.endIndex)
+        let range = start..<end
+        return String(self[range])
     }
 }
 
@@ -88,12 +92,12 @@ public extension Int {
         return Int(arc4random_uniform(UInt32(n)))
     }
     /**
-    Create a random num Int
+    Create a random num Ints
     - parameter lower: number Int
     - parameter upper: number Int
     :return: random number Int
     */
-    public static func random(min min: Int, max: Int) -> Int {
+    public static func random(min: Int, max: Int) -> Int {
         return Int(arc4random_uniform(UInt32(max - min + 1))) + min
     }
     
@@ -103,7 +107,7 @@ public extension Int {
     - parameter upper: number CGFloat
     :return: random number Int
     */
-    public static func random(min min: CGFloat, max: CGFloat) -> Int {
+    public static func random(min: CGFloat, max: CGFloat) -> Int {
         return Int(arc4random_uniform(UInt32(max - min + 1))) + Int(min)
     }
 }
@@ -122,7 +126,7 @@ public extension Double {
     - parameter upper: number Double
     :return: random number Double
     */
-    public static func random(min min: Double, max: Double) -> Double {
+    public static func random(min: Double, max: Double) -> Double {
         return Double.random() * (max - min) + min
     }
 }
@@ -140,7 +144,7 @@ public extension Float {
     - parameter upper: number Float
     :return: random number Float
     */
-    public static func random(min min: Float, max: Float) -> Float {
+    public static func random(min: Float, max: Float) -> Float {
         return Float.random() * (max - min) + min
     }
 }
@@ -152,7 +156,7 @@ public extension CGFloat {
     public static func random() -> CGFloat {
         return CGFloat(Float(arc4random()) / 0xFFFFFFFF)
     }
-    public static func random(min min: CGFloat, max: CGFloat) -> CGFloat {
+    public static func random(min: CGFloat, max: CGFloat) -> CGFloat {
         return CGFloat.random() * (max - min) + min
     }
 }
@@ -168,10 +172,10 @@ public extension String {
         
         let randomString : NSMutableString = NSMutableString(capacity: len)
         
-        for (var i=0; i < len; i++){
+        for i in 0 ..< len {
             let length = UInt32 (letters.length)
             let rand = arc4random_uniform(length)
-            randomString.appendFormat("%C", letters.characterAtIndex(Int(rand)))
+            randomString.appendFormat("%C", letters.character(at: Int(rand)))
         }
         
         return randomString as String

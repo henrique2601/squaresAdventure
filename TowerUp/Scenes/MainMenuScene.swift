@@ -22,7 +22,7 @@ class MainMenuScene: GameScene {
     }
     //variavel para teste deve ser substituida por uma que fique salva no banco de dados
     
-    var playerData = MemoryCard.sharedInstance.playerData
+    var playerData = MemoryCard.sharedInstance.playerData!
     
     var tutorialD:Bool!
     
@@ -39,8 +39,8 @@ class MainMenuScene: GameScene {
 
     var tutorial1:Control!
     
-    override func didMoveToView(view: SKView) {
-        super.didMoveToView(view)
+    override func didMove(to view: SKView) {
+        super.didMove(to: view)
         self.backgroundColor = GameColors.blue
         
         if let _ = self.playerData.tutorial {
@@ -58,8 +58,8 @@ class MainMenuScene: GameScene {
         self.buttonPlay = Button(textureName: "buttonPink", text:"SINGLEPLAYER" , x: 519, y: 428 , xAlign: .center, yAlign: .center, fontColor:.white)
         self.addChild(self.buttonPlay)
         
-        self.buttonPlayOnline = Button(textureName: "buttonPink", text:"MULTIPLAYER", x: 519, y: 548, xAlign: .center, yAlign: .center, fontColor:.white)
-        self.addChild(self.buttonPlayOnline)
+//        self.buttonPlayOnline = Button(textureName: "buttonPink", text:"MULTIPLAYER", x: 519, y: 548, xAlign: .center, yAlign: .center, fontColor:.white)
+//        self.addChild(self.buttonPlayOnline)
         
         self.buttonOptions = Button(textureName: "buttonSandSquareSmall", icon:"settings", x: 1236, y: 20, xAlign: .right, yAlign: .up)
         self.addChild(self.buttonOptions)
@@ -70,17 +70,17 @@ class MainMenuScene: GameScene {
         //self.buttonVideoCoin = Button(textureName: "earncoins", x: 1074, y: 118, xAlign: .center, yAlign: .center)
         //self.addChild(self.buttonVideoCoin)
         
-        if (!tutorialD.boolValue) {
+        if (tutorialD) {
         
             self.nextState = states.tutorial1
             
-            self.playerData.tutorial?.tutorial0 = NSNumber(bool: true)
+            self.playerData.tutorial?.tutorial0 = NSNumber(value: true)
         }
         
     }
     
-    override func update(currentTime: NSTimeInterval) {
-        super.update(currentTime)
+    override func update(currentTime: TimeInterval) {
+        super.update(currentTime: currentTime)
         if(self.state == self.nextState) {
             switch (self.state) {
             default:
@@ -95,9 +95,9 @@ class MainMenuScene: GameScene {
                 self.view!.presentScene(TowersScene(), transition: Config.defaultTransition)
                 break
                 
-            case states.multiplayer:
-                self.view!.presentScene(LobbyScene(), transition: Config.defaultTransition)
-                break
+//            case states.multiplayer:
+//                self.view!.presentScene(LobbyScene(), transition: Config.defaultTransition)
+//                break
                 
             case states.options:
                 self.view!.presentScene(OptionsScene(), transition: Config.defaultTransition)
@@ -115,7 +115,7 @@ class MainMenuScene: GameScene {
                 
                 self.tutorial1 = Control(textureName: "tutorialEn0", x: 30, y: 445, xAlign: .center, yAlign: .center)
                 self.addChild(self.tutorial1)
-                self.blackSpriteNode.hidden = false
+                self.blackSpriteNode.isHidden = false
                 self.buttonPlay.zPosition += 1
                 self.tutorial1.zPosition = self.buttonPlay.zPosition
                 self.buttonPlayOnline.zPosition -= 1
@@ -131,23 +131,23 @@ class MainMenuScene: GameScene {
     }
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        super.touchesEnded(touches, withEvent: event)
+        super.touchesEnded(touches, with: event)
         
         if (self.state == self.nextState) {
             switch (self.state) {
             case states.mainMenu:
                 for touch in (touches ) {
-                    let location = touch.locationInNode(self)
+                    let location = touch.location(in: self)
                     
-                    if (self.buttonPlay.containsPoint(location)) {
+                    if (self.buttonPlay.contains(location)) {
                         self.nextState = .towers
                         return
                     }
-                    if (self.buttonPlayOnline.containsPoint(location)) {
+                    if (self.buttonPlayOnline.contains(location)) {
                         self.nextState = .multiplayer
                         return
                     }
-                    if (self.buttonOptions.containsPoint(location)) {
+                    if (self.buttonOptions.contains(location)) {
                         self.nextState = .options
                         return
                     }
@@ -161,16 +161,16 @@ class MainMenuScene: GameScene {
                 
             case states.tutorial1:
                 for touch in (touches ) {
-                    let location = touch.locationInNode(self)
+                    let location = touch.location(in: self)
                     
-                    if (self.buttonPlay.containsPoint(location)) {
+                    if (self.buttonPlay.contains(location)) {
                         self.nextState = .towers
                         return
                     }
-                    if (self.buttonPlayOnline.containsPoint(location)) {
+                    if (self.buttonPlayOnline.contains(location)) {
                         return
                     }
-                    if (self.buttonOptions.containsPoint(location)) {
+                    if (self.buttonOptions.contains(location)) {
                         return
                     }
                     // if (self.buttonBuyCoin.containsPoint(location)) {

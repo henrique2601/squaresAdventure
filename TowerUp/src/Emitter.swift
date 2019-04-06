@@ -14,9 +14,9 @@ class Emitter: Tile {
     
     var shotDirection:CGVector!
     
-    var lastShot:NSTimeInterval = 0
+    var lastShot:TimeInterval = 0
     
-    var shotInterval:NSTimeInterval = 0
+    var shotInterval:TimeInterval = 0
     
     init(x:Int, y:Int, specialTiles:Int) {
         var imageName:String!
@@ -52,13 +52,13 @@ class Emitter: Tile {
         fatalError("init(coder:) has not been implemented")
     }
     
-    static func update(currentTime: NSTimeInterval) {
+    static func update(currentTime: TimeInterval) {
         for emitter in Emitter.emitterList {
-            emitter.update(currentTime)
+            emitter.update(currentTime: currentTime)
         }
     }
     
-    func update(currentTime: NSTimeInterval) {
+    func update(currentTime: TimeInterval) {
         if(currentTime - self.lastShot > self.shotInterval) {
             let shot = Shot(shotDirection: self.shotDirection)
             shot.position = self.position

@@ -21,7 +21,7 @@ class BoxDeathsAndTime: Control {
     
     override init() {
         let texture = SKTexture(imageNamed: "boxDeathsAndTime")
-        let spriteNode = SKSpriteNode(texture: texture, color: UIColor.clearColor(), size: texture.size())
+        let spriteNode = SKSpriteNode(texture: texture, color: UIColor.clear, size: texture.size())
         
         super.init(spriteNode: spriteNode, x: 462, y: 20, xAlign: .right, yAlign: .up)
         

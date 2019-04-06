@@ -17,7 +17,7 @@ class Spring: Tile {
         let textures = [
             SKTexture(imageNamed: "spring1")
         ]
-        return SKAction.animateWithTextures(textures, timePerFrame: 0.5)
+        return SKAction.animate(with: textures, timePerFrame: 0.5)
     }()
     
     lazy var endAnimation:SKAction = {
@@ -32,14 +32,14 @@ class Spring: Tile {
             self.physicsBody = SKPhysicsBody(texture: mask, size: mask.size())
         } else {
             // Fallback on earlier versions
-            self.physicsBody = SKPhysicsBody(rectangleOfSize: mask.size())
+            self.physicsBody = SKPhysicsBody(rectangleOf: mask.size())
         }
         
         self.physicsBody!.categoryBitMask = physicsCategory.spring.rawValue
         self.physicsBody!.contactTestBitMask = physicsCategory.none.rawValue
         self.physicsBody!.collisionBitMask = physicsCategory.none.rawValue
         
-        self.physicsBody!.dynamic = false
+        self.physicsBody!.isDynamic = false
         
         self.physicsBody!.restitution = 2
     }
@@ -54,9 +54,9 @@ class Spring: Tile {
                 player.physicsBody!.angularVelocity = self.physicsBody!.angularVelocity/2
                 player.physicsBody!.velocity.dx = self.physicsBody!.velocity.dx/2
                 
-                self.runAction(self.animation, completion: { () -> Void in
+                self.run(self.animation, completion: { () -> Void in
                     self.doingLogic = false
-                    self.runAction(self.endAnimation)
+                    self.run(self.endAnimation)
                 })
                 
             }

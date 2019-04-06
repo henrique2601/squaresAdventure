@@ -21,7 +21,7 @@ class Ground: Tile {
         self.physicsBody!.contactTestBitMask = physicsCategory.none.rawValue
         self.physicsBody!.collisionBitMask = physicsCategory.none.rawValue
         
-        self.physicsBody!.dynamic = false
+        self.physicsBody!.isDynamic = false
     }
     
     init(type:String, imageName:String, x:Int, y:Int) {
@@ -32,14 +32,14 @@ class Ground: Tile {
             self.physicsBody = SKPhysicsBody(texture: texture, alphaThreshold: 0.7,  size: texture.size())
         } else {
             // Fallback on earlier versions
-            self.physicsBody = SKPhysicsBody(rectangleOfSize: texture.size())
+            self.physicsBody = SKPhysicsBody(rectangleOf: texture.size())
         }
         
         self.physicsBody!.categoryBitMask = physicsCategory.ground.rawValue
         self.physicsBody!.contactTestBitMask = physicsCategory.none.rawValue
         self.physicsBody!.collisionBitMask = physicsCategory.none.rawValue
         
-        self.physicsBody!.dynamic = false
+        self.physicsBody!.isDynamic = false
     }
 
     required init?(coder aDecoder: NSCoder) {

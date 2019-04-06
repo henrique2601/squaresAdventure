@@ -19,7 +19,7 @@ class MultiplayerWinBox: Box {
         
         var nodesList = Array<WinCell>()
         
-        for (var i = 0; i < winPlayersList.count; i++) {
+        for i in 0..<winPlayersList.count {
             var playerArray = winPlayersList[i].characters.split{$0 == ","}.map(String.init)
             let skin = Int(playerArray[0])
             let name = playerArray[1]
@@ -50,24 +50,24 @@ class MultiplayerWinBox: Box {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        super.touchesEnded(touches, withEvent: event)
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
         for touch in (touches ) {
-            let location = touch.locationInNode(self)
+            let location = touch.location(in: self)
             
-            if (self.buttonExit.containsPoint(location)) {
-                if let scene = self.scene as? MultiplayerMissionScene {
-                    scene.socket.disconnect()
-                    PlayerOnline.playerOnlineList = Set<PlayerOnline>()
-                    scene.view!.presentScene(LobbyScene(), transition: Config.defaultTransition)
-                }
-                
-                if let scene = self.scene as? LocalGameScene {
-                    scene.view!.presentScene(MainMenuScene(), transition: Config.defaultTransition)
-                }
-                
-                return
-            }
+//            if (self.buttonExit.contains(location)) {
+//                if let scene = self.scene as? MultiplayerMissionScene {
+//                    scene.socket.disconnect()
+//                    PlayerOnline.playerOnlineList = Set<PlayerOnline>()
+//                    scene.view!.presentScene(LobbyScene(), transition: Config.defaultTransition)
+//                }
+//                
+//                if let scene = self.scene as? LocalGameScene {
+//                    scene.view!.presentScene(MainMenuScene(), transition: Config.defaultTransition)
+//                }
+//                
+//                return
+//            }
         }
     }
 }

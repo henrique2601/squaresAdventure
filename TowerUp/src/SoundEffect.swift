@@ -30,7 +30,7 @@ class SoundEffect: NSObject {
     
     func play() {
         if(MemoryCard.sharedInstance.playerData.soundEnabled.boolValue == true) {
-            self.node.runAction(self.sound)
+            self.node.run(self.sound)
         }
     }
 }

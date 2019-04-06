@@ -28,9 +28,9 @@ class InAppScene: GameScene {
     var buttonBack:Button!
     var buttonAd:Button!
     
-    override func didMoveToView(view: SKView) {
+    override func didMove(to view: SKView) {
        
-        super.didMoveToView(view)
+        super.didMove(to: view)
         
         
         IAPHelper.sharedInstance.requestProducts()
@@ -46,7 +46,7 @@ class InAppScene: GameScene {
         //Products
        
         
-        for (0; productsIndex < 6 ; productsIndex++) {
+        for productsIndex in 0 ..< 6 {
             let cell = SKSpriteNode(imageNamed: "boxSmall")
             
             let spriteNode = SKSpriteNode(imageNamed: "boxSmallLocked")
@@ -65,8 +65,8 @@ class InAppScene: GameScene {
         
     }
     
-    override func update(currentTime: NSTimeInterval) {
-        super.update(currentTime)
+    override func update(currentTime: TimeInterval) {
+        super.update(currentTime: currentTime)
         if(self.state == self.nextState){
             switch (self.state) {
             default:
@@ -88,15 +88,15 @@ class InAppScene: GameScene {
     }
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        super.touchesEnded(touches, withEvent: event)
+        super.touchesEnded(touches, with: event)
         
         if (self.state == self.nextState) {
             switch (self.state) {
             case states.inApp:
                 for touch in (touches ) {
-                    let location = touch.locationInNode(self)
+                    let location = touch.location(in: self)
                     
-                    if (self.buttonBack.containsPoint(location)) {
+                    if (self.buttonBack.contains(location)) {
                         self.nextState = .mainMenu
                         return
                     }

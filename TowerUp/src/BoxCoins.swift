@@ -17,14 +17,14 @@ class BoxCoins: Control, AdColonyAdDelegate {
     override init() {
         let texture = SKTexture(imageNamed: "boxCoins")
         
-        let spriteNode = SKSpriteNode(texture: texture, color: UIColor.clearColor(), size: texture.size())
+        let spriteNode = SKSpriteNode(texture: texture, color: UIColor.clear, size: texture.size())
         
         super.init(spriteNode: spriteNode, x: 1058, y: 20, xAlign: .right, yAlign: .up)
         
         let playerData = MemoryCard.sharedInstance.playerData
         
-        self.labelCoins = Label(text: playerData.coins.description, x: 160, y: 33)
-        self.labelGems = Label(text: playerData.gems.description, x: 160, y: 100)
+        self.labelCoins = Label(text: playerData!.coins.description, x: 160, y: 33)
+        self.labelGems = Label(text: playerData!.gems.description, x: 160, y: 100)
         self.addChild(self.labelCoins)
         self.addChild(self.labelGems)
         
@@ -43,15 +43,15 @@ class BoxCoins: Control, AdColonyAdDelegate {
             
             self.parent?.addChild(box)
             
-            gameScene.blackSpriteNode.hidden = false
+            gameScene.blackSpriteNode.isHidden = false
             gameScene.blackSpriteNode.zPosition = box.zPosition - 1
             box.buttonOK.addHandler {
-                ViewController.triggerVideo(self)
-                gameScene.blackSpriteNode.hidden = true
+                ViewController.triggerVideo(withDelegate: self)
+                gameScene.blackSpriteNode.isHidden = true
             }
             
             box.buttonCancel.addHandler {
-                gameScene.blackSpriteNode.hidden = true
+                gameScene.blackSpriteNode.isHidden = true
             }
         }
         
@@ -59,8 +59,8 @@ class BoxCoins: Control, AdColonyAdDelegate {
     
     func onAdColonyAdAttemptFinished(shown: Bool, inZone zoneID: String) {
         if(shown) {
-            let playerData = MemoryCard.sharedInstance.playerData
-            playerData.coins = NSNumber(integer: playerData.coins.integerValue + 100)
+            let playerData = MemoryCard.sharedInstance.playerData!
+            playerData.coins = NSNumber(value: playerData.coins.intValue + 100)
             self.labelCoins.setText(playerData.coins.description)
         }
     }

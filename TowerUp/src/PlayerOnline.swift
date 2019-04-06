@@ -11,7 +11,7 @@ import UIKit
 class PlayerOnline: Player {
     
     var id : Int!
-    var lastCurrentTime: NSTimeInterval = 0
+    var lastCurrentTime: TimeInterval = 0
     var labelName: Label!
     var skin: Int!
     static var playerOnlineList = Set<PlayerOnline>()
@@ -32,12 +32,12 @@ class PlayerOnline: Player {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func updateEmiter(currentTime:NSTimeInterval , room:String) {
+    func updateEmiter(currentTime:TimeInterval , room:String) {
         
-        if ((currentTime - lastCurrentTime) > 0.047) {
-            (self.scene as! MultiplayerMissionScene).socket.emit("u", room , Int(self.position.x) , Int(self.position.y) , Int(self.physicsBody!.velocity.dx) , Int(self.physicsBody!.velocity.dy) , Int(self.zRotation * 1000000) , Int(self.physicsBody!.angularVelocity))
-            lastCurrentTime = currentTime
-        }
+//        if ((currentTime - lastCurrentTime) > 0.047) {
+//            (self.scene as! MultiplayerMissionScene).socket.emit("u", room , Int(self.position.x) , Int(self.position.y) , Int(self.physicsBody!.velocity.dx) , Int(self.physicsBody!.velocity.dy) , Int(self.zRotation * 1000000) , Int(self.physicsBody!.angularVelocity))
+//            lastCurrentTime = currentTime
+//        }
     }
     
     func updateOnline(x: CGFloat, y: CGFloat , vx: CGFloat , vy: CGFloat , rotation:CGFloat , vrotation:CGFloat)

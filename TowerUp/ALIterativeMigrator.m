@@ -119,7 +119,7 @@
    }
 
    // Migrate through the list
-   for (int i = 0; i < ([relevantModels count] - 1); i++)
+   for (int i = 0; i < ([relevantModels count] - 1); i += 1)
    {
       NSManagedObjectModel* modelA = [relevantModels objectAtIndex:i];
       NSManagedObjectModel* modelB = [relevantModels objectAtIndex:(i + 1)];

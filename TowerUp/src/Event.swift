@@ -9,11 +9,11 @@
 import UIKit
 
 class Event<T> : NSObject {
-    typealias EventHandler = T -> ()
+    typealias EventHandler = (T) -> ()
     
     private var eventHandlers = [EventHandler]()
     
-    func addHandler(handler: EventHandler) {
+    func addHandler(handler: @escaping EventHandler) {
         eventHandlers.append(handler)
     }
     

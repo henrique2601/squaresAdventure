@@ -22,12 +22,12 @@ class Music: NSObject {
         if (self.musicName != name) {
             self.musicName = name
             
-            var auxName:[String] = name.componentsSeparatedByString(".")
+            var auxName:[String] = name.components(separatedBy: ".")
             
-            let backgroundMusicURL = NSBundle.mainBundle().URLForResource(auxName[0], withExtension: auxName[1])
+            let backgroundMusicURL = Bundle.main.url(forResource: auxName[0], withExtension: auxName[1])
             
             do {
-                try self.audioPlayer = AVAudioPlayer(contentsOfURL: backgroundMusicURL!)
+                try self.audioPlayer = AVAudioPlayer(contentsOf: backgroundMusicURL!)
                 self.audioPlayer.numberOfLoops = -1
                 self.audioPlayer.prepareToPlay()
                 self.play()

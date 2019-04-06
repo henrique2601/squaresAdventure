@@ -17,16 +17,16 @@ class Bomb: Tile {
     init(x:Int, y:Int) {
         super.init(imageName: "bomb", x: x, y: y)
         
-        self.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: 64, height: 64))
+        self.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 64, height: 64))
         
         self.physicsBody!.categoryBitMask = physicsCategory.bomb.rawValue
         self.physicsBody!.contactTestBitMask = physicsCategory.none.rawValue
         self.physicsBody!.collisionBitMask = physicsCategory.none.rawValue
-        self.color = UIColor.blackColor()
+        self.color = UIColor.black
         self.colorBlendFactor = 0.2
         self.physicsBody!.restitution = 4
         
-        self.physicsBody!.dynamic = false
+        self.physicsBody!.isDynamic = false
         
         if (Bomb.bombList.count > 0) {
             self.listPosition = (Bomb.bombList.last?.listPosition)! + 1
@@ -58,14 +58,14 @@ class Bomb: Tile {
             
             let action = SKAction()
             action.duration = 2
-            particles.runAction(action , completion: {
+            particles.run(action , completion: {
                 particles.removeFromParent()
             })
         }
         
-        for (var i=0 ; i < Bomb.bombList.count ; i++) {
+        for i in 0 ..< Bomb.bombList.count {
             if (Bomb.bombList[i].listPosition == self.listPosition){
-                Bomb.bombList.removeAtIndex(i)
+                Bomb.bombList.remove(at: i)
             }
         }
         super.removeFromParent()

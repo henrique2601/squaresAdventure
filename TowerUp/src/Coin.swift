@@ -24,7 +24,7 @@ class Coin: Tile {
             SKTexture(imageNamed: "gold_5"),
             SKTexture(imageNamed: "gold_6")
         ]
-        return SKAction.repeatActionForever(SKAction.animateWithTextures(textures, timePerFrame: 1/60 * 6))
+        return SKAction.repeatForever(SKAction.animate(with: textures, timePerFrame: 1/60 * 6))
     }()
     
     override init(imageName:String, x:Int, y:Int) {
@@ -33,19 +33,19 @@ class Coin: Tile {
     
     init(type:String, x:Int, y:Int) {
         super.init(imageName: "gold_1", x: x, y: y)
-        self.runAction(Coin.animation)
+        self.run(Coin.animation)
         
         self.zPosition = Config.HUDZPosition - CGFloat(1)
         
-        self.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: 32, height: 32))
+        self.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 32, height: 32))
         
         self.physicsBody!.categoryBitMask = physicsCategory.coin.rawValue
         self.physicsBody!.contactTestBitMask = physicsCategory.none.rawValue
         self.physicsBody!.collisionBitMask = physicsCategory.ground.rawValue | physicsCategory.coin.rawValue
         
-        self.physicsBody!.dynamic = false
+        self.physicsBody!.isDynamic = false
         
-        Coin.coinList.addObject(self)
+        Coin.coinList.add(self)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -53,7 +53,7 @@ class Coin: Tile {
     }
     
     override func removeFromParent() {
-        Coin.coinList.removeObject(self)
+        Coin.coinList.remove(self)
         super.removeFromParent()
     }
 }

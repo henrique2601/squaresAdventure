@@ -15,7 +15,7 @@ class BlackSpriteNode: SKSpriteNode {
         super.init(texture: nil, color: GameColors.black, size: Config.currentSceneSize)
         self.anchorPoint = CGPoint(x: 0, y: 1)
         self.zPosition = Config.HUDZPosition
-        self.hidden = true
+        self.isHidden = true
     }
     
     func update() {

@@ -13,7 +13,7 @@ class Square: Control {
     
     func loadPhysics() {
         //Physics Config
-        self.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: 32, height: 32))
+        self.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 32, height: 32))
         
         self.physicsBody!.angularDamping = 4
         self.physicsBody!.linearDamping = 2

@@ -18,14 +18,14 @@ class Spike: Tile {
             self.physicsBody = SKPhysicsBody(texture: mask, alphaThreshold: 0.7, size: mask.size())
         } else {
             // Fallback on earlier versions
-            self.physicsBody = SKPhysicsBody(rectangleOfSize: mask.size())        }
+            self.physicsBody = SKPhysicsBody(rectangleOf: mask.size())        }
         
         self.physicsBody!.categoryBitMask = physicsCategory.spike.rawValue
         self.physicsBody!.contactTestBitMask = physicsCategory.none.rawValue
         self.physicsBody!.collisionBitMask = physicsCategory.none.rawValue
-        self.color = UIColor.blackColor()
+        self.color = UIColor.black
         self.colorBlendFactor = 0.2
-        self.physicsBody!.dynamic = false
+        self.physicsBody!.isDynamic = false
         
         self.physicsBody!.restitution = 2
     }

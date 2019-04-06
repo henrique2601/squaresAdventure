@@ -48,9 +48,9 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
     //Effect
     
     //Gameplay
-    var lastReset:NSTimeInterval!
+    var lastReset:TimeInterval!
     
-    var playerData = MemoryCard.sharedInstance.playerData
+    var playerData = MemoryCard.sharedInstance.playerData!
     
     var boxCoins:BoxCoins!
     var boxDeathsAndTime:BoxDeathsAndTime!
@@ -76,8 +76,8 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
         return
     }
     
-    override func didMoveToView(view: SKView) {
-        super.didMoveToView(view)
+    override func didMove(to view: SKView) {
+        super.didMove(to: view)
         self.backgroundColor = GameColors.blueSky
         
         self.boxDeathsAndTime = BoxDeathsAndTime()
@@ -104,9 +104,9 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
         self.player = Player(playerData: self.playerData, x: 128, y: 128, loadPhysics: true)
         self.world.addChild(self.player)
         
-        self.mapManager.reloadMap(CGPoint(x: 10, y: 10))
+        self.mapManager.reloadMap(position: CGPoint(x: 10, y: 10))
         
-        switch(self.playerData.configControls.integerValue) {
+        switch(self.playerData.configControls.intValue) {
             
         case controlsConfig.useButtons.rawValue:
             self.buttonLeft = Button(textureName: "buttonSandSquare", icon:"arrowLeft", x:20, y:626, xAlign:.left, yAlign:.down, colorBlendFactor:0.5, top:Int(Config.currentSceneSize.height/2), bottom: 39, left:39, right:39)
@@ -137,7 +137,7 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
                 if let powerUpSlotData = item as? PowerUpSlotData {
                     if let powerUpData = powerUpSlotData.powerUp {
                         let powerUp = PowerUp(powerUpData: powerUpData, colorBlendFactor: 0.5)
-                        powerUp.loadEvent(self.player, world: self.world)
+                        powerUp.loadEvent(player: self.player, world: self.world)
                         powerUpsArray.append(powerUp)
                     }
                 }
@@ -162,15 +162,15 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
     }
     
     func didBeginContact(contact: SKPhysicsContact) {
-        world.didBeginContact(contact)
+        world.didBeginContact(contact: contact)
     }
     
     func didEndContact(contact: SKPhysicsContact) {
-        world.didEndContact(contact)
+        world.didEndContact(contact: contact)
     }
     
-    override func update(currentTime: NSTimeInterval) {
-        super.update(currentTime)
+    override func update(currentTime: TimeInterval) {
+        super.update(currentTime: currentTime)
         if(self.state == self.nextState){
             switch (self.state) {
             case states.mission:
@@ -180,7 +180,7 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
                     
                 }
                 
-                switch(self.playerData.configControls.integerValue) {
+                switch(self.playerData.configControls.intValue) {
                 case controlsConfig.useButtons.rawValue:
                     self.player.jump = self.buttonJump.pressed
                     
@@ -196,17 +196,17 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
                     
                     var jump = 0
                     for touch in Control.touchesArray {
-                        let location = touch.locationInNode(self)
+                        let location = touch.location(in: self)
                         
-                        if (!self.powerUpsScrollNode.containsPoint(location)) {
+                        if (!self.powerUpsScrollNode.contains(location)) {
                             if(location.x > (self.scene?.size.width)!/2) {
-                                jump++
+                                jump += 1
                             }
                         }
                     }
                     
                     if(self.slider != nil) {
-                        var x = Int(self.slider.touch.locationInNode(self).x) - Int(self.slider.position.x)
+                        var x = Int(self.slider.touch.location(in: self).x) - Int(self.slider.position.x)
                         if(x > self.slider.limit) {
                             x = self.slider.limit
                         }
@@ -226,17 +226,18 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
                     break
                 }
                 
-                PowerUp.doLogic(currentTime)
+                PowerUp.doLogic(currentTime: currentTime)
                 
-                self.player.update(currentTime)
-                self.mapManager.update(currentTime)
-                Emitter.update(currentTime)
+                self.player.update(currentTime: currentTime)
+                self.mapManager.update(currentTime: currentTime)
+                //self.mapManager.update(currentTime)
+                Emitter.update(currentTime: currentTime)
                 
                 if(!tutorialD) {
                     
                     self.nextState = states.tutorial6
                     
-                    self.playerData.tutorial?.tutorial5 = NSNumber(bool: true)
+                    self.playerData.tutorial?.tutorial5 = NSNumber(value: true)
                     //
                     
                 }
@@ -257,7 +258,7 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
                 break
                 
             case states.mission:
-                self.mapManager.reloadMap(CGPoint(x: 10, y: 10))
+                self.mapManager.reloadMap(position: CGPoint(x: 10, y: 10))
                 self.player.reset()
                 self.boxDeathsAndTime.reset()
                 self.lastReset = currentTime
@@ -275,32 +276,32 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
                         if(MapManager.floor == tower.floors.count - 1) {
                             if(tower.floors.count < towerType.floorTypes.count) {
                                 let floor = MemoryCard.sharedInstance.newFloorData()
-                                tower.addFloor(floor)
+                                tower.addFloor(value: floor)
                             } else {
                                 if (tower.floors.count == towerType.floorTypes.count) {
                                     //Libera fase para futuros updates
                                     var floor = MemoryCard.sharedInstance.newFloorData()
-                                    tower.addFloor(floor)
+                                    tower.addFloor(value: floor)
                                     
                                     //Cria próxima torre
                                     let newTower = MemoryCard.sharedInstance.newTowerData()
                                     floor = MemoryCard.sharedInstance.newFloorData()
-                                    self.playerData.addTower(newTower)
-                                    newTower.addFloor(floor)
+                                    self.playerData.addTower(value: newTower)
+                                    newTower.addFloor(value: floor)
                                     break
                                 }
                             }
                         }
                         break
                     }
-                    towerIndex++
+                    towerIndex += 1
                 }
                 
                 let box = AfterMissionBox(background: "boxWhite", time: Int(currentTime - self.lastReset).description, deaths: self.player.deathCount.description, bonus: self.collectedBonus.description, scene: self.scene)
                 
                 self.addChild(box)
                 
-                self.blackSpriteNode.hidden = false
+                self.blackSpriteNode.isHidden = false
                 self.blackSpriteNode.zPosition = box.zPosition - 1
                 
                 break
@@ -319,7 +320,7 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
                 self.tutorial5.size.height = 128
                 self.tutorial5.size.width = 256
                 self.addChild(tutorial5)
-                self.tutorial5.runAction(self.tutorialAnimation)
+                self.tutorial5.run(self.tutorialAnimation)
                 self.labelTutorial5 = Control(textureName: "tutorialEn5", x:120 , y:120)
                 self.labelTutorial5.zPosition = self.tutorial5.zPosition - 1
                 self.addChild(labelTutorial5)
@@ -336,12 +337,12 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
                 self.tutorial6.size.height = 128
                 self.tutorial6.size.width = 256
                 self.addChild(tutorial6)
-                self.tutorial6.runAction(self.tutorialAnimation2)
+                self.tutorial6.run(self.tutorialAnimation2)
                 
                 self.nextState  = states.mission
                 self.tutorialD2 = true
                 
-                self.playerData.tutorial?.tutorial6 = NSNumber(bool: true)
+                self.playerData.tutorial?.tutorial6 = NSNumber(value: true)
                 
                 break
                 
@@ -355,20 +356,20 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
     {
         super.didFinishUpdate()
         if(self.player.healthPoints > 0){
-            self.myCamera.update(CGPoint(x:Int(self.player.position.x), y: Int(self.player.position.y)))
+            self.myCamera.update(newPosition: CGPoint(x:Int(self.player.position.x), y: Int(self.player.position.y)))
         }
-        self.parallax.update(self.myCamera.position)
+        self.parallax.update(position: self.myCamera.position)
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        super.touchesBegan(touches, withEvent: event)
+        super.touchesBegan(touches, with: event)
         
-        switch(self.playerData.configControls.integerValue) {
+        switch(self.playerData.configControls.intValue) {
         case controlsConfig.useLeftSliderAndScreenRight.rawValue:
             if (self.state == self.nextState) {
                 for touch in touches {
                     
-                    let location = touch.locationInNode(self)
+                    let location = touch.location(in: self)
                     
                     if(self.slider == nil) {
                         if(location.x < (self.scene?.size.width)!/2) {
@@ -401,9 +402,9 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
     }
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        super.touchesEnded(touches, withEvent: event)
+        super.touchesEnded(touches, with: event)
         
-        switch(self.playerData.configControls.integerValue) {
+        switch(self.playerData.configControls.intValue) {
         case controlsConfig.useLeftSliderAndScreenRight.rawValue:
             
             if let slider = self.slider {
@@ -422,16 +423,16 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
         
         if (self.state == self.nextState) {
             for touch in touches {
-                let location = touch.locationInNode(self)
+                let location = touch.location(in: self)
                 
-                if (self.buttonBack.containsPoint(location)) {
+                if (self.buttonBack.contains(location)) {
                     self.nextState = .floors
                     return
                 }
-                if(self.boxCoins.containsPoint(location)) {
+                if(self.boxCoins.contains(location)) {
                     self.boxCoins.containsPoint()
                 }
-                if (self.buttonRestart.containsPoint(location)) {
+                if (self.buttonRestart.contains(location)) {
                     self.nextState = .restart
                     return
                 }
@@ -479,9 +480,9 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
             SKTexture(imageNamed: "finger33")
         ]
         
-        let a = SKAction.animateWithTextures(textures, timePerFrame: 0.08)
+        let a = SKAction.animate(with: textures, timePerFrame: 0.08)
         
-        let b = SKAction.repeatAction(a, count: 5)
+        let b = SKAction.repeat(a, count: 5)
         
         return b
     }()
@@ -522,9 +523,9 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
             SKTexture(imageNamed: "tapFinger31")
         ]
         
-        let a = SKAction.animateWithTextures(textures, timePerFrame: 0.08)
+        let a = SKAction.animate(with: textures, timePerFrame: 0.08)
         
-        let b = SKAction.repeatAction(a, count: 5)
+        let b = SKAction.repeat(a, count: 5)
         
         return b
     }()

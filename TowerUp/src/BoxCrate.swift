@@ -14,7 +14,7 @@ class BoxCrate: Tile {
     init(x:Int, y:Int) {
         super.init(imageName: "boxCrate", x: x, y: y)
         
-        self.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: 64, height: 64))
+        self.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 64, height: 64))
         
         self.physicsBody!.categoryBitMask = physicsCategory.boxCrate.rawValue
         self.physicsBody!.contactTestBitMask = physicsCategory.none.rawValue
@@ -23,7 +23,7 @@ class BoxCrate: Tile {
             physicsCategory.spring.rawValue |
             physicsCategory.player.rawValue |
             physicsCategory.boxCrate.rawValue
-        self.physicsBody!.dynamic = true
+        self.physicsBody!.isDynamic = true
         
         self.physicsBody!.linearDamping = 2
     }

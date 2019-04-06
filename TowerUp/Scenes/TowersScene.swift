@@ -27,7 +27,7 @@ class TowersScene: GameScene {
     var state = states.towers
     var nextState = states.towers
     
-    var playerData = MemoryCard.sharedInstance.playerData
+    var playerData = MemoryCard.sharedInstance.playerData!
     
     var towersScrollNode:ScrollNode!
     
@@ -35,8 +35,8 @@ class TowersScene: GameScene {
     
     var buttonBack:Button!
     
-    override func didMoveToView(view: SKView) {
-        super.didMoveToView(view)
+    override func didMove(to view: SKView) {
+        super.didMove(to: view)
         self.backgroundColor = GameColors.blue
         self.addChild(Control(textureName: "background", x:-49, y:-32, xAlign: .center, yAlign: .center))
         
@@ -71,7 +71,7 @@ class TowersScene: GameScene {
                 var stars = 0
                 for item in tower.floors as NSOrderedSet {
                     let floor = item as! FloorData
-                    stars += floor.stars.integerValue
+                    stars += floor.stars.intValue
                 }
                 
                 let labelProgress = Label(text: (stars).description + "/" + (towerType.floorTypes.count * 3).description, x: 42, y: 176)
@@ -81,12 +81,12 @@ class TowersScene: GameScene {
                 
                 towersArray.append(cell)
             }
-            towerIndex++
+            towerIndex += 1
         }
 
     
         //Torres bloqueadas, mostrar cadeado
-        for (0; towerIndex < Towers.types.count; towerIndex++) {
+        for towerIndex in 0 ..< Towers.types.count {
             let cell = SKSpriteNode(imageNamed: "towerBox")
             let spriteNode = SKSpriteNode(imageNamed: "towerBoxLocked")
             spriteNode.zPosition = cell.zPosition + 1
@@ -100,7 +100,7 @@ class TowersScene: GameScene {
         
         //TODO: torre "?"
         
-        self.towersScrollNode = ScrollNode(x: 667, y: 466, cells:towersArray, spacing:5, scaleNodes:true, scaleDistance:1334/4 + 100, index:self.playerData.lastPlayedTower.integerValue)
+        self.towersScrollNode = ScrollNode(x: 667, y: 466, cells:towersArray, spacing:5, scaleNodes:true, scaleDistance:1334/4 + 100, index:self.playerData.lastPlayedTower.intValue)
         
         self.addChild(self.towersScrollNode)
         
@@ -111,7 +111,7 @@ class TowersScene: GameScene {
             
             self.nextState = states.tutorial2
             
-            self.playerData.tutorial?.tutorial1 = NSNumber(bool: true)
+            self.playerData.tutorial?.tutorial1 = NSNumber(value: true)
             
         }
 
@@ -119,8 +119,8 @@ class TowersScene: GameScene {
         
     }
     
-    override func update(currentTime: NSTimeInterval) {
-        super.update(currentTime)
+    override func update(currentTime: TimeInterval) {
+        super.update(currentTime: currentTime)
         if(self.state == self.nextState) {
             switch (self.state) {
             default:
@@ -143,7 +143,7 @@ class TowersScene: GameScene {
                 
                 self.tutorial2 = Control(textureName: "tutorialEn1", x: 120, y: 30, xAlign: .center, yAlign: .center)
                 self.addChild(self.tutorial2)
-                self.blackSpriteNode.hidden = false
+                self.blackSpriteNode.isHidden = false
                 self.towersScrollNode.zPosition += 1
                 self.tutorial2.zPosition = self.towersScrollNode.zPosition + 1
                 self.buttonBack.zPosition -= 1
@@ -157,31 +157,31 @@ class TowersScene: GameScene {
     }
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        super.touchesEnded(touches, withEvent: event)
+        super.touchesEnded(touches, with: event)
         
         if (self.state == self.nextState) {
             switch (self.state) {
             case states.towers:
                 for touch in (touches ) {
-                    let location = touch.locationInNode(self)
+                    let location = touch.location(in: self)
                     
-                    if (self.buttonBack.containsPoint(location)) {
+                    if (self.buttonBack.contains(location)) {
                         self.nextState = .mainMenu
                         return
                     }
                     
-                    if(self.boxCoins.containsPoint(location)) {
+                    if(self.boxCoins.contains(location)) {
                         self.boxCoins.containsPoint()
                     }
                     
-                    if (self.towersScrollNode.containsPoint(location)) {
+                    if (self.towersScrollNode.contains(location)) {
                         if(touch.tapCount > 0) {
                             
                             var i = 0
-                            let locationInScrollNode = touch.locationInNode(self.towersScrollNode)
+                            let locationInScrollNode = touch.location(in: self.towersScrollNode)
                             
                             for cell in self.towersScrollNode.cells {
-                                if(cell.containsPoint(locationInScrollNode)) {
+                                if(cell.contains(locationInScrollNode)) {
                                     if(i < self.playerData.towers.count) {
                                         MapManager.tower = i
                                         
@@ -191,7 +191,7 @@ class TowersScene: GameScene {
                                     }
                                     return
                                 }
-                                i++
+                                i += 1
                             }
                         }
                     }
@@ -201,21 +201,21 @@ class TowersScene: GameScene {
                 
             case states.tutorial2:
                 for touch in (touches ) {
-                    let location = touch.locationInNode(self)
+                    let location = touch.location(in: self)
                     
-                    if (self.buttonBack.containsPoint(location)) {
+                    if (self.buttonBack.contains(location)) {
                         self.nextState = .mainMenu
                         return
                     }
                     
-                    if (self.towersScrollNode.containsPoint(location)) {
+                    if (self.towersScrollNode.contains(location)) {
                         if(touch.tapCount > 0) {
                             
                             var i = 0
-                            let locationInScrollNode = touch.locationInNode(self.towersScrollNode)
+                            let locationInScrollNode = touch.location(in: self.towersScrollNode)
                             
                             for cell in self.towersScrollNode.cells {
-                                if(cell.containsPoint(locationInScrollNode)) {
+                                if(cell.contains(locationInScrollNode)) {
                                     if(i < self.playerData.towers.count) {
                                         MapManager.tower = i
                                         
@@ -225,7 +225,7 @@ class TowersScene: GameScene {
                                     }
                                     return
                                 }
-                                i++
+                                i += 1
                             }
                         }
                     }

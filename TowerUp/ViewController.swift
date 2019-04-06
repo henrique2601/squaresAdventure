@@ -20,7 +20,7 @@ class ViewController: UIViewController {
         
         // Configure the view.
         let skView = self.view as! SKView
-        skView.multipleTouchEnabled = true
+        skView.isMultipleTouchEnabled = true
         
         #if DEBUG
 //            skView.showsFPS = true
@@ -73,19 +73,15 @@ class ViewController: UIViewController {
         }
     }
     
-    override func viewWillAppear(animated: Bool) {
-        
-    }
-    
-    override func shouldAutorotate() -> Bool {
+    override var shouldAutorotate: Bool {
         return true
     }
     
-    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
-            return UIInterfaceOrientationMask.All
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        if UIDevice.current.userInterfaceIdiom == .phone {
+            return .all
         } else {
-            return UIInterfaceOrientationMask.All
+            return .all
         }
     }
 
@@ -94,13 +90,13 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    override func prefersStatusBarHidden() -> Bool {
+    override var prefersStatusBarHidden: Bool {
         return true
     }
     
     static func triggerVideo(withDelegate:AdColonyAdDelegate)
     {
-        AdColony.playVideoAdForZone("vz8a4089d331e742a9a1", withDelegate: withDelegate)
+        AdColony.playVideoAd(forZone: "vz8a4089d331e742a9a1", with: withDelegate)
     }
 
 }

@@ -27,64 +27,64 @@ class ServerManager: NSObject, GBPingDelegate {
     
     static let sharedInstance = ServerManager()
     
-    func bestServer(returnBlock: (String) -> ()){
+    func bestServer(returnBlock: @escaping (String) -> ()){
         self.server = servers[self.count]
         self.ping.host = self.server
         //print("pinging " + self.count.description + " " + self.ping.host)
         self.ping.delegate = self
         self.ping.timeout = 1.0
         self.ping.pingPeriod = 0.9
-        self.ping.setupWithBlock({ success, error in
-            if success {
-                
-                self.ping.startPinging()
-                
-                dispatch_after(
-                    dispatch_time(DISPATCH_TIME_NOW,
-                        numericCast(UInt64(1 *
-                            Double(NSEC_PER_SEC)))),
-                    dispatch_get_global_queue(
-                        DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),
-                    {
-                        do {
-                            try self.stopPing()
-                            
-//                            print(self.count)
-//                            print(self.servers.count)
-                            
-                            self.count++
-                            print("self.count " + self.count.description)
-                            print("self.servers.count " + self.servers.count.description)
-                            if (self.count < self.servers.count ) {
-                                self.bestServer(returnBlock)
-                            } else {
-                                
-                                self.count = 0
-                                
-                                print("fim")
-                                
-                                if let _ = self.minServer {
-                                  returnBlock(self.minServer)
-                                } else {
-                                    print("erro fim")
-                                    returnBlock("erro")
-                                }
-                                
-                                
-                                
-                            }
-                            
-                        }
-                        catch {
-                            print("Error during async execution")
-                            print(error)
-                        }
-                    }
-                )
-
-            }
-            
-        })
+//        self.ping.setup({ success, error in
+//            if success {
+//                
+//                self.ping.startPinging()
+//                
+//                dispatch_after(
+//                    DispatchTime.now(DispatchTime.now(),dispatch_time_t(DispatchTime.now()),
+//                        numericCast(UInt64(1 *
+//                            Double(NSEC_PER_SEC)))),
+//                    DispatchQueue.global(
+//                        DispatchQueue.GlobalQueuePriority.default, 0),
+//                    {
+//                        do {
+//                            try self.stopPing()
+//                            
+////                            print(self.count)
+////                            print(self.servers.count)
+//                            
+//                            self.count += 1
+//                            print("self.count " + self.count.description)
+//                            print("self.servers.count " + self.servers.count.description)
+//                            if (self.count < self.servers.count ) {
+//                                self.bestServer(returnBlock)
+//                            } else {
+//                                
+//                                self.count = 0
+//                                
+//                                print("fim")
+//                                
+//                                if let _ = self.minServer {
+//                                  returnBlock(self.minServer)
+//                                } else {
+//                                    print("erro fim")
+//                                    returnBlock("erro")
+//                                }
+//                                
+//                                
+//                                
+//                            }
+//                            
+//                        }
+//                        catch {
+//                            print("Error during async execution")
+//                            print(error)
+//                        }
+//                    }
+//                )
+//
+//            }
+//            
+//        })
         
     }
     
@@ -97,7 +97,7 @@ class ServerManager: NSObject, GBPingDelegate {
 //        print("count" + self.count.description)
         if (self.numResponses > 0) {
             
-            var avg = (self.responseTime / self.numResponses)
+            let avg = (self.responseTime / self.numResponses)
 //            print("avg" + avg.description)
 //            print("minTime" + self.minTime.description)
             if (avg < self.minTime)

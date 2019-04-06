@@ -20,13 +20,13 @@ class Button: Control {
     
     var event:Event<Void>?// = Event()
     
-    func addHandler(handler: Void -> ()) {
+    func addHandler(handler: () -> ()) {
         if let _ = self.event {
             
         } else {
             self.event = Event()
         }
-        self.event!.addHandler(handler)
+        self.event!.addHandler(handler: handler)
     }
     
     enum labelColors {
@@ -43,7 +43,7 @@ class Button: Control {
     init(textureName:String, icon:String = "", text:String = "", fontSize:GameFonts.fontSize = .medium, x:Int = 0, y:Int = 0, xAlign:Control.xAlignments = .left, yAlign:Control.yAlignments = .up, colorBlendFactor:CGFloat = CGFloat(1), touchArea:CGSize = CGSize.zero,
         top:Int = 0, bottom:Int = 0, left:Int = 0, right:Int = 0, fontColor:labelColors = .black) {
         super.init()
-            self.load(textureName, icon:icon, text:text, fontSize:fontSize.rawValue, x:x, y:y, xAlign:xAlign, yAlign:yAlign, colorBlendFactor:colorBlendFactor, top:top, bottom:bottom, left:left, right:right, fontColor:fontColor)
+        self.load(textureName: textureName, icon:icon, text:text, fontSize:fontSize.rawValue, x:x, y:y, xAlign:xAlign, yAlign:yAlign, colorBlendFactor:colorBlendFactor, top:top, bottom:bottom, left:left, right:right, fontColor:fontColor)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -59,7 +59,7 @@ class Button: Control {
         
         let texture = SKTexture(imageNamed: textureName)
         
-        let spriteNode = SKSpriteNode(texture: nil, color: UIColor.clearColor(),
+        let spriteNode = SKSpriteNode(texture: nil, color: UIColor.clearColor,
             size: CGSize(width: Int(texture.size().width) + left + right, height: Int(texture.size().height) + top + bottom))
         spriteNode.anchorPoint = CGPoint(x: 0, y: 1)
         self.addChild(spriteNode)
@@ -101,8 +101,8 @@ class Button: Control {
                 break
             }
             
-            labelNode.verticalAlignmentMode = SKLabelVerticalAlignmentMode.Center
-            labelNode.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Center
+            labelNode.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
+            labelNode.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
             labelNode.position = CGPoint(x: texture.size().width/2, y: -texture.size().height/2)
             self.button.addChild(labelNode)
             labelNode.zPosition = labelNode.zPosition + 1
@@ -113,7 +113,7 @@ class Button: Control {
         self.buttonPressed.color = UIColor(red: 1, green: 1, blue: 1, alpha: colorBlendFactor)
         self.buttonPressed.colorBlendFactor = 1
         self.buttonPressed.anchorPoint = CGPoint(x: 0, y: 1)
-        self.buttonPressed.hidden = true
+        self.buttonPressed.isHidden = true
         self.addChild(self.buttonPressed)
         
         if (icon != "") {
@@ -145,8 +145,8 @@ class Button: Control {
                 break
             }
             
-            labelNodePressed.verticalAlignmentMode = SKLabelVerticalAlignmentMode.Center
-            labelNodePressed.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.Center
+            labelNodePressed.verticalAlignmentMode = SKLabelVerticalAlignmentMode.center
+            labelNodePressed.horizontalAlignmentMode = SKLabelHorizontalAlignmentMode.center
             //TODO: deslocamento vindo por parâmetro
             labelNodePressed.position = CGPoint(x: texturePressed.size().width/2, y: -texturePressed.size().height/2 - 3)
             self.buttonPressed.addChild(labelNodePressed)
@@ -168,9 +168,9 @@ class Button: Control {
             if let event = button.event {
                 for touch in touches {
                     if let parent = button.parent {
-                        let location = touch.locationInNode(parent)
-                        if button.containsPoint(location) {
-                            event.raise()
+                        let location = touch.location(in: parent)
+                        if button.contains(location) {
+                            event.raise(Void)
                         }
                     }
                 }
@@ -189,9 +189,9 @@ class Button: Control {
         var i = 0
         for touch in Control.touchesArray {
             if let parent = self.parent {
-                let location = touch.locationInNode(parent)
-                if self.containsPoint(location) {
-                    i++
+                let location = touch.location(in: parent)
+                if self.contains(location) {
+                    i += 1
                 }
             }
         }
@@ -204,14 +204,14 @@ class Button: Control {
     
     func buttonPresse() {
         self.pressed = true
-        self.button.hidden = true
-        self.buttonPressed.hidden = false
+        self.button.isHidden = true
+        self.buttonPressed.isHidden = false
     }
     
     func buttonRelease() {
         self.pressed = false
-        self.button.hidden = false
-        self.buttonPressed.hidden = true
+        self.button.isHidden = false
+        self.buttonPressed.isHidden = true
     }
     
     override func removeFromParent() {

@@ -36,7 +36,7 @@ class ScrollNode: Control {
     
     init(x:Int = 0, y:Int = 0, xAlign:Control.xAlignments = .center, yAlign:Control.yAlignments = .center, cells:Array<SKNode>, spacing:Int = 10, scrollDirection:scrollTypes = scrollTypes.horizontal, scaleNodes:Bool = false, scaleDistance:Int = 1000, index:Int = 0) {
         super.init()
-        self.load(x, y:y, xAlign:xAlign, yAlign:yAlign, cells:cells, spacing:spacing, scrollDirection:scrollDirection, scaleNodes:scaleNodes, scaleDistance:scaleDistance, index:index)
+        self.load(x: x, y:y, xAlign:xAlign, yAlign:yAlign, cells:cells, spacing:spacing, scrollDirection:scrollDirection, scaleNodes:scaleNodes, scaleDistance:scaleDistance, index:index)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -73,13 +73,13 @@ class ScrollNode: Control {
                 break
             }
             if(self.scaleNodes) {
-                self.setCellScale(spriteNode)
+                self.setCellScale(spriteNode: spriteNode)
             }
             
-            self.initPhysics(spriteNode)
+            self.initPhysics(node: spriteNode)
             
             self.addChild(spriteNode)
-            i++
+            i += 1
         }
         
         ScrollNode.scrollNodeList.insert(self)
@@ -87,7 +87,7 @@ class ScrollNode: Control {
     }
     
     func initPhysics(node:SKNode) {
-        node.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: 10, height: 10))
+        node.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 10, height: 10))
         node.physicsBody!.affectedByGravity = false
         node.physicsBody!.categoryBitMask = physicsCategory.scrollNodeCell.rawValue
         node.physicsBody!.contactTestBitMask = physicsCategory.none.rawValue
@@ -101,14 +101,14 @@ class ScrollNode: Control {
             
             for cell in scrollNode.cells {
                 if(scrollNode.scaleNodes) {
-                    scrollNode.setCellScale(cell)
+                    scrollNode.setCellScale(spriteNode: cell)
                 }
             }
             
             var containsPoins = false
             
             for touch in Control.touchesArray {
-                if scrollNode.containsPoint(touch.locationInNode(scrollNode.parent!)) {
+                if scrollNode.contains(touch.location(in: scrollNode.parent!)) {
                     containsPoins = true
                     break
                 }
@@ -151,7 +151,7 @@ class ScrollNode: Control {
                             for cell in scrollNode.cells {
                                 cell.physicsBody!.applyForce(CGVector(dx: auxMove, dy: 0))
                                 if(scrollNode.scaleNodes) {
-                                    scrollNode.setCellScale(cell)
+                                    scrollNode.setCellScale(spriteNode: cell)
                                 }
                             }
                         }
@@ -189,7 +189,7 @@ class ScrollNode: Control {
                             for cell in scrollNode.cells {
                                 cell.physicsBody!.applyForce(CGVector(dx: 0, dy: auxMove))
                                 if(scrollNode.scaleNodes) {
-                                    scrollNode.setCellScale(cell)
+                                    scrollNode.setCellScale(spriteNode: cell)
                                 }
                             }
                         }
@@ -226,14 +226,14 @@ class ScrollNode: Control {
                     if(canMove) {
                         
                         for touch in Control.touchesArray {
-                            if scrollNode.containsPoint(touch.locationInNode(scrollNode.parent!)) {
+                            if scrollNode.contains(touch.location(in: scrollNode.parent!)) {
                                 for cell in scrollNode.cells {
                                     let position = cell.position
                                     cell.physicsBody!.velocity = CGVector(dx: 0, dy: 0)
                                     cell.position = CGPoint(x: position.x + Control.dx, y: position.y)
                                     cell.physicsBody!.applyForce(CGVector(dx: Control.dx * CGFloat(scrollNode.force * 5), dy: 0))
                                     if(scrollNode.scaleNodes) {
-                                        scrollNode.setCellScale(cell)
+                                        scrollNode.setCellScale(spriteNode: cell)
                                     }
                                 }
                             }
@@ -259,7 +259,7 @@ class ScrollNode: Control {
                         }
                         
                         if(canMove) {
-                            if scrollNode.containsPoint(touch.locationInNode(scrollNode.parent!)) {
+                            if scrollNode.contains(touch.location(in: scrollNode.parent!)) {
                                 
                                 for cell in scrollNode.cells {
                                     let position = cell.position
@@ -267,7 +267,7 @@ class ScrollNode: Control {
                                     cell.position = CGPoint(x: position.x, y: position.y + Control.dy)
                                     cell.physicsBody!.applyForce(CGVector(dx: 0, dy: Control.dy * CGFloat(scrollNode.force * 5)))
                                     if(scrollNode.scaleNodes) {
-                                        scrollNode.setCellScale(cell)
+                                        scrollNode.setCellScale(spriteNode: cell)
                                     }
                                 }
                             }
@@ -291,14 +291,14 @@ class ScrollNode: Control {
                 case scrollTypes.horizontal:
                     
                     for touch in Control.touchesArray {
-                        if scrollNode.containsPoint(touch.locationInNode(scrollNode.parent!)) {
+                        if scrollNode.contains(touch.location(in: scrollNode.parent!)) {
                             
                             for cell in scrollNode.cells {
                                 let position = cell.position
                                 cell.position = CGPoint(x: position.x + Control.dx, y: position.y)
                                 cell.physicsBody!.applyForce(CGVector(dx: Control.dx * CGFloat(scrollNode.force * 10), dy: 0))
                                 if(scrollNode.scaleNodes) {
-                                    scrollNode.setCellScale(cell)
+                                    scrollNode.setCellScale(spriteNode: cell)
                                 }
                             }
                         }
@@ -309,14 +309,14 @@ class ScrollNode: Control {
                 case scrollTypes.vertical:
                     
                     for touch in Control.touchesArray {
-                        if scrollNode.containsPoint(touch.locationInNode(scrollNode.parent!)) {
+                        if scrollNode.contains(touch.location(in: scrollNode.parent!)) {
                             
                             for cell in scrollNode.cells {
                                 let position = cell.position
                                 cell.position = CGPoint(x: position.x, y: position.y + Control.dy)
                                 cell.physicsBody!.applyForce(CGVector(dx: 0, dy: Control.dy * CGFloat(scrollNode.force * 10)))
                                 if(scrollNode.scaleNodes) {
-                                    scrollNode.setCellScale(cell)
+                                    scrollNode.setCellScale(spriteNode: cell)
                                 }
                             }
                         }
@@ -354,7 +354,7 @@ class ScrollNode: Control {
         
         var i = 0
         for _ in self.cells {
-            i++
+            i += 1
         }
         
         switch(self.scrollType) {
@@ -370,7 +370,7 @@ class ScrollNode: Control {
         self.canScroll = (self.cells.count > 1)
         self.addChild(cell)
         
-        self.initPhysics(cell)
+        self.initPhysics(node: cell)
     }
     
     override func removeFromParent() {

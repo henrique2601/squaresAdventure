@@ -38,12 +38,12 @@ class AfterMissionBox: Box {
         
         /*
         se esta completa
-            cinza++
+            cinza += 1
             se completou
-                amarela++
+                amarela += 1
         senao
             se completou
-                novaAmarela++
+                novaAmarela += 1
         
         for i de 0 ate estrelacinza.count
             exibe estrela cinza
@@ -61,21 +61,21 @@ class AfterMissionBox: Box {
         var starsYellow:Int = 0
         var starsGray:Int = 0
         
-        let minCoins = Towers.types[MapManager.tower].floorTypes[MapManager.floor].minCoins
+        let minCoins = Towers.types[MapManager.tower].floorTypes[MapManager.floor].minCoins!
         
-        if(floorData.bonus == NSNumber(bool: true)) {
+        if(floorData.bonus == NSNumber(value: true)) {
             
-            starsGray++
+            starsGray += 1
             self.labelBonus = Label(color:GameColors.gray, text: "\(bonus)/\(minCoins)", x: 266, y: 211)
             
-            if(Int(bonus) >= minCoins) {
-                starsYellow++
+            if(Int(bonus)! >= minCoins) {
+                starsYellow += 1
             }
             
         } else {
-            if(Int(bonus) >= minCoins) {
-                 floorData.bonus = NSNumber(bool: true)
-                starsYellowNew++
+            if(Int(bonus)! >= minCoins) {
+                floorData.bonus = NSNumber(value: true)
+                starsYellowNew += 1
                 self.labelBonus = Label(color:GameColors.green, text: "\(bonus)/\(minCoins)", x: 266, y: 211)
             } else {
                 self.labelBonus = Label(color:GameColors.red, text: "\(bonus)/\(minCoins)", x: 266, y: 211)
@@ -84,19 +84,19 @@ class AfterMissionBox: Box {
         self.addChild(self.labelBonus)
         
         
-        let maxDeathCount = Towers.types[MapManager.tower].floorTypes[MapManager.floor].maxDeathCount
+        let maxDeathCount = Towers.types[MapManager.tower].floorTypes[MapManager.floor].maxDeathCount!
         
-        if(floorData.deaths == NSNumber(bool: true)) {
-            starsGray++
+        if(floorData.deaths == NSNumber(value: true)) {
+            starsGray += 1
             self.labelDeaths = Label(color:GameColors.gray, text: "\(deaths)/\(maxDeathCount)", x: 266, y: 309)
-            if(Int(deaths) <= maxDeathCount) {
-                starsYellow++
+            if(Int(deaths)! <= maxDeathCount) {
+                starsYellow += 1
                 
             }
         } else {
-            if(Int(deaths) <= maxDeathCount) {
-                floorData.deaths = NSNumber(bool: true)
-                starsYellowNew++
+            if(Int(deaths)! <= maxDeathCount) {
+                floorData.deaths = NSNumber(value: true)
+                starsYellowNew += 1
                 self.labelDeaths = Label(color:GameColors.green, text: "\(deaths)/\(maxDeathCount)", x: 266, y: 309)
             } else {
                 self.labelDeaths = Label(color:GameColors.red, text: "\(deaths)/\(maxDeathCount)", x: 266, y: 309)
@@ -105,19 +105,19 @@ class AfterMissionBox: Box {
         self.addChild(self.labelDeaths)
         
         
-        let maxTime = Towers.types[MapManager.tower].floorTypes[MapManager.floor].maxTime
+        let maxTime = Towers.types[MapManager.tower].floorTypes[MapManager.floor].maxTime!
         
         
-        if(floorData.time == NSNumber(bool: true)) {
-            starsGray++
+        if(floorData.time == NSNumber(value: true)) {
+            starsGray += 1
             self.labelTime = Label(color:GameColors.gray, text: "\(time)s/\(maxTime)s", x: 266, y: 407)
-            if(Int(time) <= maxTime) {
-                starsYellow++
+            if(Int(time)! <= maxTime) {
+                starsYellow += 1
             }
         } else {
-            if(Int(time) <= maxTime) {
-                 floorData.time = NSNumber(bool: true)
-                starsYellowNew++
+            if(Int(time)! <= maxTime) {
+                floorData.time = NSNumber(value: true)
+                starsYellowNew += 1
                 self.labelTime = Label(color:GameColors.green, text: "\(time)s/\(maxTime)s", x: 266, y: 407)
             } else {
                 self.labelTime = Label(color:GameColors.red, text: "\(time)s/\(maxTime)s", x: 266, y: 407)
@@ -125,16 +125,16 @@ class AfterMissionBox: Box {
         }
         self.addChild(self.labelTime)
         
-        let lastStars = floorData.stars.integerValue
-        floorData.stars = NSNumber(integer: floorData.bonus.integerValue + floorData.deaths.integerValue + floorData.time.integerValue)
+        let lastStars = floorData.stars.intValue
+        floorData.stars = NSNumber(value: floorData.bonus.intValue + floorData.deaths.intValue + floorData.time.intValue)
         
-        if(lastStars < 3 && floorData.stars.integerValue == 3) {
+        if(lastStars < 3 && floorData.stars.intValue == 3) {
             
             let playerData = MemoryCard.sharedInstance.playerData
             
             if let teste = scene as? MissionScene {
                 let bonusCoins = 100
-                playerData.coins = NSNumber(integer: playerData.coins.integerValue + bonusCoins)
+                playerData!.coins = NSNumber(value: playerData!.coins.intValue + bonusCoins)
                 
                 var labelCoinsCount = Int(teste.boxCoins.labelCoins.getText())!
                 let labelCoins = teste.boxCoins.labelCoins
@@ -142,29 +142,29 @@ class AfterMissionBox: Box {
                 let texture = SKTexture(imageNamed: "gold_1")
                 let size = CGSize(width: 32, height: 32)
                 
-                self.runAction({ let a = SKAction(); a.duration = 1; return a }(), completion: {
-                    for var i = 0; i < bonusCoins; i++ {
-                        let spriteNode = SKSpriteNode(texture: texture, color: UIColor.clearColor(), size: size)
+                self.run({ let a = SKAction(); a.duration = 1; return a }(), completion: {
+                    for i in 0 ..< bonusCoins {
+                        let spriteNode = SKSpriteNode(texture: texture, color: UIColor.clear, size: size)
                         spriteNode.position = CGPoint(x: Int(Config.sceneSize.width/2), y: -Int(Config.sceneSize.height/2))
                         spriteNode.zPosition = self.zPosition * 10
                         teste.addChild(spriteNode)
                         
                         
-                        spriteNode.runAction(SKAction.fadeAlphaBy(-0.5, duration: 0))
+                        spriteNode.run(SKAction.fadeAlpha(by: -0.5, duration: 0))
                         
                         let duration = Double.random(min: 0.25, max: 1)
-                        spriteNode.runAction(SKAction.fadeAlphaBy(0.5, duration: duration))
-                        spriteNode.runAction(SKAction.moveTo(CGPoint(x: Int.random(min: -Int(Config.sceneSize.width), max: Int(Config.sceneSize.width) * 2),
+                        spriteNode.run(SKAction.fadeAlpha(by: 0.5, duration: duration))
+                        spriteNode.run(SKAction.move(to: CGPoint(x: Int.random(min: -Int(Config.sceneSize.width), max: Int(Config.sceneSize.width) * 2),
                             y: -Int.random(min: -Int(Config.sceneSize.height), max: Int(Config.sceneSize.height) * 2)), duration: duration), completion: {
                                 
                                 let duration = Double.random(min: 0.25, max: 1)
-                                spriteNode.runAction(SKAction.fadeAlphaBy(-1, duration: duration))
+                                spriteNode.run(SKAction.fadeAlpha(by: -1, duration: duration))
                                 
-                                spriteNode.runAction(SKAction.moveTo(CGPoint(x: Int(Config.sceneSize.width) - 50, y: -40), duration: duration), completion: {
+                                spriteNode.run(SKAction.move(to: CGPoint(x: Int(Config.sceneSize.width) - 50, y: -40), duration: duration), completion: {
                                     self.coinSound.play()
                                     spriteNode.removeFromParent()
-                                    labelCoinsCount++
-                                    labelCoins.setText(labelCoinsCount.description)
+                                    labelCoinsCount += 1
+                                    labelCoins!.setText(labelCoinsCount.description)
                                 })
                         })
                     }
@@ -174,7 +174,7 @@ class AfterMissionBox: Box {
             var towerStars = 0
             for item in MemoryCard.sharedInstance.currentTower().floors {
                 let floorData = item as! FloorData
-                towerStars = towerStars + floorData.bonus.integerValue + floorData.deaths.integerValue + floorData.time.integerValue
+                towerStars = towerStars + floorData.bonus.intValue + floorData.deaths.intValue + floorData.time.intValue
             }
             
             if (towerStars == Towers.types[MapManager.tower].floorTypes.count * 3) {
@@ -188,35 +188,35 @@ class AfterMissionBox: Box {
                     let texture = SKTexture(imageNamed: "gemBlue")
                     let size = CGSize(width: 64, height: 64)
                     
-                    self.runAction({ let a = SKAction(); a.duration = 2; return a }(), completion: {
-                        for var i = 0; i < bonusGems; i++ {
-                            let spriteNode = SKSpriteNode(texture: texture, color: UIColor.clearColor(), size: size)
+                    self.run({ let a = SKAction(); a.duration = 2; return a }(), completion: {
+                        for var i in 0 ..< bonusGems {
+                            let spriteNode = SKSpriteNode(texture: texture, color: UIColor.clear, size: size)
                             spriteNode.position = CGPoint(x: Int(Config.sceneSize.width/2), y: -Int(Config.sceneSize.height/2))
                             spriteNode.zPosition = self.zPosition * 11
                             teste.addChild(spriteNode)
                             
                             
-                            spriteNode.runAction(SKAction.fadeAlphaBy(-0.5, duration: 0))
+                            spriteNode.run(SKAction.fadeAlpha(by: -0.5, duration: 0))
                             
                             let duration = Double.random(min: 0.25, max: 1)
-                            spriteNode.runAction(SKAction.fadeAlphaBy(0.5, duration: duration))
-                            spriteNode.runAction(SKAction.moveTo(CGPoint(x: Int.random(min: -Int(Config.sceneSize.width), max: Int(Config.sceneSize.width) * 2),
+                            spriteNode.run(SKAction.fadeAlpha(by: 0.5, duration: duration))
+                            spriteNode.run(SKAction.move(to: CGPoint(x: Int.random(min: -Int(Config.sceneSize.width), max: Int(Config.sceneSize.width) * 2),
                                 y: -Int.random(min: -Int(Config.sceneSize.height), max: Int(Config.sceneSize.height) * 2)), duration: duration), completion: {
                                     
                                     let duration = Double.random(min: 0.25, max: 1)
-                                    spriteNode.runAction(SKAction.fadeAlphaBy(-1, duration: duration))
+                                    spriteNode.run(SKAction.fadeAlpha(by: -1, duration: duration))
                                     
-                                    spriteNode.runAction(SKAction.moveTo(CGPoint(x: Int(Config.sceneSize.width) - 50, y: -40), duration: duration), completion: {
+                                    spriteNode.run(SKAction.move(to: CGPoint(x: Int(Config.sceneSize.width) - 50, y: -40), duration: duration), completion: {
                                         self.coinSound.play()
                                         spriteNode.removeFromParent()
-                                        labelGemsCount++
-                                        labelGems.setText(labelGemsCount.description)
+                                        labelGemsCount += 1
+                                        labelGems!.setText(labelGemsCount.description)
                                     })
                             })
                         }
                     })
                     
-                    playerData.gems = NSNumber(integer: playerData.gems.integerValue + bonusGems)
+                    playerData!.gems = NSNumber(value: playerData!.gems.intValue + bonusGems)
                 }
             }
         }
@@ -237,17 +237,17 @@ class AfterMissionBox: Box {
         var j = 0
         var h = 0
         
-        for i = 0; i < starsGray; i++ {
-            showStarGrayAt(i)
+        for i in 0 ..< starsGray {
+            showStarGrayAt(i: i)
         }
-        i--
+        i -= 1
         
-        for j = 0; j < starsYellow; j++ {
-            self.showStarAt(i - j)
+        for j in 0 ..< starsYellow {
+            self.showStarAt(i: i - j)
         }
-        i++
-        for h = 0; h < starsYellowNew; h++ {
-            self.showStarAt(i + h)
+        i += 1
+        for h in 0 ..< starsYellowNew {
+            self.showStarAt(i: i + h)
         }
         
         self.labelBonus.zPosition = afterMissionBoxBackground.zPosition + 1
@@ -260,9 +260,9 @@ class AfterMissionBox: Box {
     func showStarGrayAt(i:Int) {
         
         let starTexture = SKTexture(imageNamed: "starBig")
-        let starSpriteNode = SKSpriteNode(texture: starTexture, color: UIColor.clearColor(), size: starTexture.size())
+        let starSpriteNode = SKSpriteNode(texture: starTexture, color: UIColor.clear, size: starTexture.size())
         
-        starSpriteNode.color = UIColor.blackColor()
+        starSpriteNode.color = UIColor.black
         starSpriteNode.colorBlendFactor = 0.5
         
         switch(i) {
@@ -293,7 +293,7 @@ class AfterMissionBox: Box {
             star.position = randonPosition
             self.addChild(star)
             let emitterNode = SKEmitterNode(fileNamed: "Win.sks")!
-            star.runAction(SKAction.moveTo(startingPosition, duration: 1), completion: {
+            star.run(SKAction.move(to: startingPosition, duration: 1), completion: {
                 emitterNode.particleBirthRate = 1000000
                 emitterNode.particleSpeedRange = 10000
             })
@@ -311,7 +311,7 @@ class AfterMissionBox: Box {
             star.position = randonPosition
             self.addChild(star)
             let emitterNode = SKEmitterNode(fileNamed: "Win.sks")!
-            star.runAction(SKAction.moveTo(startingPosition, duration: 1), completion: {
+            star.run(SKAction.move(to: startingPosition, duration: 1), completion: {
                 emitterNode.particleBirthRate = 1000000
                 emitterNode.particleSpeedRange = 10000
             })
@@ -328,7 +328,7 @@ class AfterMissionBox: Box {
             star.position = randonPosition
             self.addChild(star)
             let emitterNode = SKEmitterNode(fileNamed: "Win.sks")!
-            star.runAction(SKAction.moveTo(startingPosition, duration: 1), completion: {
+            star.run(SKAction.move(to: startingPosition, duration: 1), completion: {
                 emitterNode.particleBirthRate = 1000000
                 emitterNode.particleSpeedRange = 10000
             })
@@ -348,34 +348,34 @@ class AfterMissionBox: Box {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        super.touchesEnded(touches, withEvent: event)
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
         for touch in (touches ) {
-            let location = touch.locationInNode(self)
+            let location = touch.location(in: self)
             
-            if (self.buttonExit.containsPoint(location)) {
+            if (self.buttonExit.contains(location)) {
                 if let scene = self.scene as? MissionScene {
                     scene.nextState = MissionScene.states.floors
-                    scene.blackSpriteNode.hidden = true
+                    scene.blackSpriteNode.isHidden = true
                     self.removeFromParent()
                 }
                 return
             }
-            if (self.buttonRestart.containsPoint(location)) {
+            if (self.buttonRestart.contains(location)) {
                 if let scene = self.scene as? MissionScene {
                     scene.nextState = MissionScene.states.mission
-                    scene.blackSpriteNode.hidden = true
+                    scene.blackSpriteNode.isHidden = true
                     self.removeFromParent()
                 }
                 return
             }
-            if (self.buttonNext.containsPoint(location)) {
+            if (self.buttonNext.contains(location)) {
                 //
                 if let scene = self.scene as? MissionScene {
                     scene.nextState = MissionScene.states.powerUp
-                    scene.blackSpriteNode.hidden = true
+                    scene.blackSpriteNode.isHidden = true
                     self.removeFromParent()
-                    MapManager.floor++
+                    MapManager.floor += 1
                     
                     var towerIndex = 0
                     for _ in MemoryCard.sharedInstance.playerData.towers {
@@ -384,14 +384,14 @@ class AfterMissionBox: Box {
                             let towerType = Towers.types[towerIndex]
                             if(MapManager.floor >= towerType.floorTypes.count) {
                                 MapManager.floor = 0
-                                MapManager.tower++
+                                MapManager.tower += 1
                                 if(MapManager.tower >= Towers.types.count) {
                                     MapManager.tower = 0
                                 }
                             }
                             break
                         }
-                        towerIndex++
+                        towerIndex += 1
                     }
                 }
                 return

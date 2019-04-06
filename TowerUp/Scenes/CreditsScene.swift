@@ -22,8 +22,8 @@ class CreditsScene: GameScene {
     var buttonBack:Button!
     var buttonAd:Button!
     
-    override func didMoveToView(view: SKView) {
-        super.didMoveToView(view)
+    override func didMove(to view: SKView) {
+        super.didMove(to: view)
         self.addChild(Control(textureName: "background", x:-49, y:-32, xAlign: .center, yAlign: .center))
         
         Music.sharedInstance.play(musicNamed: "som de fundo do menu.wav")
@@ -37,8 +37,8 @@ class CreditsScene: GameScene {
         
     }
     
-    override func update(currentTime: NSTimeInterval) {
-        super.update(currentTime)
+    override func update(currentTime: TimeInterval) {
+        super.update(currentTime: currentTime)
         if(self.state == self.nextState){
             switch (self.state) {
             default:
@@ -60,20 +60,20 @@ class CreditsScene: GameScene {
     }
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        super.touchesEnded(touches, withEvent: event)
+        super.touchesEnded(touches, with: event)
         
         if (self.state == self.nextState) {
             switch (self.state) {
             case states.credits:
                 for touch in (touches ) {
-                    let location = touch.locationInNode(self)
+                    let location = touch.location(in: self)
                     
-                    if (self.buttonBack.containsPoint(location)) {
+                    if (self.buttonBack.contains(location)) {
                         self.nextState = .mainMenu
                         return
                     }
                     
-                    if(self.buttonAd.containsPoint(location)){
+                    if(self.buttonAd.contains(location)){
                     
                         //ViewController.triggerVideo
                     

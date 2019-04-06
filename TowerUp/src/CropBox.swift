@@ -28,12 +28,12 @@ class CropBox: Box {
         }
     }
     
-    override var hidden: Bool  {
+    override var isHidden: Bool  {
         set {
-            self.cropNode.hidden = newValue
+            self.cropNode.isHidden = newValue
         }
         get {
-            return self.cropNode.hidden
+            return self.cropNode.isHidden
         }
     }
     
@@ -52,14 +52,14 @@ class CropBox: Box {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func addChild(node: SKNode) {
+    override func addChild(_ node: SKNode) {
         self.cropNode.addChild(node)
     }
 }
 
 extension GameScene {
     
-    override func addChild(node: SKNode) {
+    override func addChild(_ node: SKNode) {
         if let box = node as? CropBox {
             super.addChild(box.cropNode)
         } else {

@@ -43,7 +43,7 @@ class WinCell: SKNode {
         self.skin.position = CGPoint(x: -281/2, y: -30/2)
         self.addChild(self.skin)
         
-        self.playerName = Label(text: name,  horizontalAlignmentMode: .Left)
+        self.playerName = Label(text: name,  horizontalAlignmentMode: .left)
         self.playerName.position = CGPoint(x: -198/2, y: -30/2)
         self.addChild(self.playerName)
         

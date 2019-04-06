@@ -13,9 +13,9 @@ class Label: Control {
     
     var labelNode:SKLabelNode!
     
-    init(color:UIColor = GameColors.black, text:String, fontSize:GameFonts.fontSize = .medium, x:Int = 0, y:Int = 0, xAlign:Control.xAlignments = .left, yAlign:Control.yAlignments = .up , verticalAlignmentMode:SKLabelVerticalAlignmentMode = .Center, horizontalAlignmentMode:SKLabelHorizontalAlignmentMode = .Center ) {
+    init(color:UIColor = GameColors.black, text:String, fontSize:GameFonts.fontSize = .medium, x:Int = 0, y:Int = 0, xAlign:Control.xAlignments = .left, yAlign:Control.yAlignments = .up , verticalAlignmentMode:SKLabelVerticalAlignmentMode = .center, horizontalAlignmentMode:SKLabelHorizontalAlignmentMode = .center ) {
         super.init()
-        self.load(color, text:text, fontSize:fontSize.rawValue, x:x, y:y, xAlign:xAlign, yAlign:yAlign, verticalAlignmentMode:verticalAlignmentMode, horizontalAlignmentMode:horizontalAlignmentMode)
+        self.load(color: color, text:text, fontSize:fontSize.rawValue, x:x, y:y, xAlign:xAlign, yAlign:yAlign, verticalAlignmentMode:verticalAlignmentMode, horizontalAlignmentMode:horizontalAlignmentMode)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -44,7 +44,7 @@ class Label: Control {
         return self.labelNode.text!
     }
     
-    func setText(text:String) {
+    func setText(_ text:String) {
         self.labelNode.text = NSLocalizedString(text, tableName: nil, comment:"")
         self.labelNode.zPosition = Config.HUDZPosition/2
     }

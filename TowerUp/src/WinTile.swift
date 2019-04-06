@@ -13,13 +13,13 @@ class WinTile: Tile {
     init(type:String, x:Int, y:Int) {
         super.init(imageName: "winTile", x: x, y: y)//TODO: winTile vai mudar de acordo com o tipo de torre
         
-        self.physicsBody = SKPhysicsBody(rectangleOfSize: CGSize(width: 32, height: 32))
+        self.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 32, height: 32))
         
         self.physicsBody!.categoryBitMask = physicsCategory.winTile.rawValue
         self.physicsBody!.contactTestBitMask = physicsCategory.none.rawValue
         self.physicsBody!.collisionBitMask = physicsCategory.none.rawValue
         
-        self.physicsBody!.dynamic = false
+        self.physicsBody!.isDynamic = false
         
         self.anchorPoint = CGPoint(x: 0.5, y: 0.25)
     }

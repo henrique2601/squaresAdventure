@@ -17,32 +17,32 @@ static var textfieldList = Set<Textfield>()
     
     init(name:String, x:Int, y:Int, view:UIView) {
         super.init()
-        self.load(name, textureName: name, x: x, y: y, xAlign: .left, yAlign: .up, view:view)
+        self.load(name: name, textureName: name, x: x, y: y, xAlign: .left, yAlign: .up, view:view)
     }
 
     init(name:String, textureName:String, x:Int, y:Int, view:UIView) {
         super.init()
-        self.load(name, textureName: textureName, x: x, y: y, xAlign: .left, yAlign: .up, view:view)
+        self.load(name: name, textureName: textureName, x: x, y: y, xAlign: .left, yAlign: .up, view:view)
     }
     
     init(name:String, x:Int, y:Int, align:Control.xAlignments, view:UIView) {
         super.init()
-        self.load(name, textureName: name, x: x, y: y, xAlign: align, yAlign: .center, view:view)
+        self.load(name: name, textureName: name, x: x, y: y, xAlign: align, yAlign: .center, view:view)
     }
     
     init(name:String, x:Int, y:Int, xAlign:Control.xAlignments, yAlign:Control.yAlignments, view:UIView) {
         super.init()
-        self.load(name, textureName: name, x: x, y: y, xAlign: xAlign, yAlign: yAlign, view:view)
+        self.load(name: name, textureName: name, x: x, y: y, xAlign: xAlign, yAlign: yAlign, view:view)
     }
     
     init(name:String, textureName:String, x:Int, y:Int, align:Control.xAlignments, view:UIView) {
         super.init()
-        self.load(name, textureName: textureName, x: x, y: y, xAlign: align, yAlign: .center, view:view)
+        self.load(name: name, textureName: textureName, x: x, y: y, xAlign: align, yAlign: .center, view:view)
     }
     
     init(name:String, textureName:String, x:Int, y:Int, xAlign:Control.xAlignments, yAlign:Control.yAlignments, view:UIView) {
         super.init()
-        self.load(name, textureName: textureName, x: x, y: y, xAlign: xAlign, yAlign: yAlign, view:view)
+        self.load(name: name, textureName: textureName, x: x, y: y, xAlign: xAlign, yAlign: yAlign, view:view)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -60,8 +60,8 @@ static var textfieldList = Set<Textfield>()
         view.addSubview(myTextField)
         self.myTextField.backgroundColor = GameColors.white
         self.myTextField.text = name
-        self.myTextField.borderStyle = UITextBorderStyle.RoundedRect
-        self.myTextField.textAlignment = NSTextAlignment.Center
+        self.myTextField.borderStyle = UITextField.BorderStyle.roundedRect
+        self.myTextField.textAlignment = NSTextAlignment.center
         
         Textfield.textfieldList.insert(self)
     }
@@ -82,8 +82,7 @@ static var textfieldList = Set<Textfield>()
         
         let y0 = (self.sketchPosition.y / 2 ) * xScale
         
-        
-        self.myTextField?.frame = CGRectMake(self.position.x * xScale, y0 + Config.translateInView.y, 150 * xScale, 40 * xScale)
+        self.myTextField?.frame = CGRect.init(x:self.position.x * xScale, y: y0 + Config.translateInView.y, width: 150 * xScale, height: 40 * xScale)
         self.myTextField?.font = UIFont (name: "TrebuchetMS", size: 22 * xScale)
         
     }

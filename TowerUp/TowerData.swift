@@ -21,7 +21,7 @@ class TowerData: NSManagedObject {
 
 extension TowerData {
     func addFloor(value: FloorData) {
-        let items = self.mutableOrderedSetValueForKey("floors");
-        items.addObject(value)
+        let items = self.mutableOrderedSetValue(forKey: "floors");
+        items.add(value)
     }
 }

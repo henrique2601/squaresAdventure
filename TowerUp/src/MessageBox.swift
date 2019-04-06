@@ -27,13 +27,13 @@ class MessageBox: Control {
     init(text:String, textureName:String, type:MessageBox.messageType) {
         
         let texture = SKTexture(imageNamed: "messegeBox")
-        let spriteNode = SKSpriteNode(texture: texture, color: UIColor.clearColor(), size: texture.size())
+        let spriteNode = SKSpriteNode(texture: texture, color: UIColor.clear, size: texture.size())
         
         let position = CGPoint(x: 1334/2 - texture.size().width,
             y: 750/2  - texture.size().height)
         super.init(spriteNode: spriteNode, x: Int(position.x), y: Int(position.y), xAlign:.center, yAlign:.center)
         
-        MessageBox.messageBoxCount++
+        MessageBox.messageBoxCount += 1
         self.zPosition = Config.HUDZPosition * CGFloat(3 + MessageBox.messageBoxCount)
         
         self.addChild(Label(text:text, x:255, y:46))
@@ -51,31 +51,31 @@ class MessageBox: Control {
             break
         }
         
-        self.hidden = false
+        self.isHidden = false
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        Button.touchesEnded(touches )
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        Button.touchesEnded(touches: touches )
         for touch in (touches ) {
-            let location = touch.locationInNode(self)
+            let location = touch.location(in: self)
             
             if let _ = self.buttonCancel {
-                if (self.buttonCancel.containsPoint(location) == true) {
-                    self.hidden = true
-                    self.touchesEndedAtButtonCancel.raise()
+                if (self.buttonCancel.contains(location) == true) {
+                    self.isHidden = true
+                    self.touchesEndedAtButtonCancel.raise(data: Void)
                     self.removeFromParent()
                     return
                 }
             }
             
             if let _ = self.buttonOK {
-                if (self.buttonOK.containsPoint(location) == true) {
-                    self.hidden = true
-                    self.touchesEndedAtButtonOK.raise()
+                if (self.buttonOK.contains(location) == true) {
+                    self.isHidden = true
+                     self.touchesEndedAtButtonOK.raise(data: Void)
                     self.removeFromParent()
                     return
                 }
@@ -83,9 +83,9 @@ class MessageBox: Control {
         }
     }
     
-    override var hidden: Bool {
+    override var isHidden: Bool {
         didSet {
-            self.userInteractionEnabled = !hidden
+            self.isUserInteractionEnabled = !isHidden
         }
     }
 }

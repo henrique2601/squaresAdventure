@@ -18,7 +18,7 @@ class FriendCell: SKNode {
         super.init()
         
     
-        for (var i=0; i < friends.count; i++){
+        for i in 0 ..< friends.count {
             let friend = friends[i]
             let x =  131 * i
             friend.sketchPosition = CGPoint(x: x, y: 0)

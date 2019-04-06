@@ -9,7 +9,7 @@
 import UIKit
 import SpriteKit
 
-class Chunk: SKSpriteNode, NSXMLParserDelegate {
+class Chunk: SKSpriteNode, XMLParserDelegate {
     
     var layer = ""
     var height = ""
@@ -31,17 +31,17 @@ class Chunk: SKSpriteNode, NSXMLParserDelegate {
     
     
     init(tower:Int, floor:Int, regionX:Int, regionY:Int) {
-        super.init(texture: nil, color: UIColor.clearColor(), size: CGSize(width: Chunk.sizeInPointsX, height: Chunk.sizeInPointsY))
+        super.init(texture: nil, color: UIColor.clear, size: CGSize(width: Chunk.sizeInPointsX, height: Chunk.sizeInPointsY))
         
-        self.anchorPoint = CGPointZero
-        self.load(tower, floor:floor, regionX: regionX, regionY: regionY)
+        self.anchorPoint = CGPoint.zero
+        self.load(tower: tower, floor:floor, regionX: regionX, regionY: regionY)
     }
     
     init(tower:Int, floor:Int) {
-        super.init(texture: nil, color: UIColor.clearColor(), size: CGSize.zero)
+        super.init(texture: nil, color: UIColor.clear, size: CGSize.zero)
         
-        self.anchorPoint = CGPointZero
-        self.load(tower, floor:floor)
+        self.anchorPoint = CGPoint.zero
+        self.load(tower: tower, floor:floor)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -49,7 +49,7 @@ class Chunk: SKSpriteNode, NSXMLParserDelegate {
     }
     
     override func removeAllChildren() {
-        dispatch_async(dispatch_get_main_queue()) {
+        DispatchQueue.main.async {
             super.removeAllChildren()
         }
     }
@@ -57,8 +57,8 @@ class Chunk: SKSpriteNode, NSXMLParserDelegate {
     func loadVisual(data: [AnyObject], width:CGFloat = Chunk.sizeInTilesX, height:CGFloat = Chunk.sizeInTilesY) {
         var i = 0
         let tiles:NSMutableArray = NSMutableArray()
-        for (var y = 0; y < Int(height); y++) {
-            for (var x = 0; x <  Int(width); x++) {
+        for y in 0..<Int(height) {
+            for x in 0..<Int(width) {
                 let aux = String(data[i]).stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
                 let id = Int(aux)!
                 if(id != 0) {
@@ -69,17 +69,17 @@ class Chunk: SKSpriteNode, NSXMLParserDelegate {
                     //TODO: exportar função?
                     //MapManager.loading é setado para true durante o update do MapManager. No carregamento inicial seu valor é false
                     if(MapManager.loading) {
-                        tiles.addObject(tile)
+                        tiles.add(tile)
                     } else {
                         self.addChild(tile)
                     }
                 }
-                i++
+                i += 1
             }
         }
         
         if(MapManager.loading){
-            dispatch_async(dispatch_get_main_queue()) {
+            DispatchQueue.main.async {
                 for tile in tiles {
                     self.addChild(tile as! SKNode)
                 }
@@ -96,8 +96,8 @@ class Chunk: SKSpriteNode, NSXMLParserDelegate {
         var coinsInChunk = 0
         var i = 0
         let tiles:NSMutableArray = NSMutableArray()
-        for (var y = 0; y < Int(height); y++) {
-            for (var x = 0; x <  Int(width); x++) {
+        for y in 0 ..< Int(height) {
+            for x in 0 ..<  Int(width) {
                 let aux = String(data[i]).stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
                 let id = Int(aux)!
                 if(id != 0) {
@@ -106,7 +106,7 @@ class Chunk: SKSpriteNode, NSXMLParserDelegate {
                         switch(id) {
                         case Tile.specialTiles.coinTile.rawValue:
                             tile = Coin(type: "Gold", x: x, y: y)
-                            coinsInChunk++
+                            coinsInChunk += 1
                             break
                         case Tile.specialTiles.winTile.rawValue:
                             tile = WinTile(type: self.type, x: x, y: y)
@@ -122,6 +122,7 @@ class Chunk: SKSpriteNode, NSXMLParserDelegate {
                         case Tile.specialTiles.boxCreate.rawValue:
                             tile = BoxCrate(x: x, y: y)
                             break
+                        
                             
                         case Tile.specialTiles.gem.rawValue:
                             if (MapManager.tower >= 0) {
@@ -179,7 +180,7 @@ class Chunk: SKSpriteNode, NSXMLParserDelegate {
                     //TODO: exportar função?
                     //MapManager.loading é setado para true durante o update do MapManager. No carregamento inicial seu valor é false
                     if(MapManager.loading) {
-                        tiles.addObject(tile)
+                        tiles.add(tile)
                     } else {
                         self.addChild(tile)
                     }
@@ -198,7 +199,7 @@ class Chunk: SKSpriteNode, NSXMLParserDelegate {
 //                    }
                     #endif
                 }
-                i++
+                i += 1
             }
         }
         
@@ -209,7 +210,7 @@ class Chunk: SKSpriteNode, NSXMLParserDelegate {
         }
         
         if(MapManager.loading){
-            dispatch_async(dispatch_get_main_queue()) {
+            DispatchQueue.main.async {
                 for tile in tiles {
                     self.addChild(tile as! SKNode)
                 }
@@ -221,8 +222,8 @@ class Chunk: SKSpriteNode, NSXMLParserDelegate {
         //Remove obejetos que cairem para fora do cenario
         let coins = Coin.coinList
         if(coins.count > 0) {
-            for(var i = coins.count - 1; i >= 0; i--) {
-                if let coin = coins.objectAtIndex(i) as? Coin {
+            for i in coins.count - 1 ... 0 {
+                if let coin = coins.object(at: i) as? Coin {
                     if(coin.position.y < -128) {
                         coin.removeFromParent()
                     }
@@ -234,10 +235,9 @@ class Chunk: SKSpriteNode, NSXMLParserDelegate {
     func load(tower:Int, floor:Int, regionX:Int, regionY:Int) {
         self.position = CGPoint(x: self.size.width * (CGFloat)(regionX), y: self.size.height * (CGFloat)(regionY))
 
-        if let path = NSBundle.mainBundle().pathForResource("ground \(tower) \(floor) \(regionX) \(regionY)", ofType: "") {
-            self
-            let data = (try! NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding)).componentsSeparatedByString(",")
-            self.loadGround(data)
+        if let path = Bundle.main.path(forResource: "ground \(tower) \(floor) \(regionX) \(regionY)", ofType: "") {
+            let data = (try! NSString(contentsOfFile: path, encoding: String.Encoding.utf8.rawValue)).components(separatedBy: ",")
+            self.loadGround(data: data as [AnyObject])
             Chunk.maxChunkX = max(regionX, Chunk.maxChunkX)
             Chunk.maxChunkY = max(regionY, Chunk.maxChunkY)
             
@@ -246,17 +246,17 @@ class Chunk: SKSpriteNode, NSXMLParserDelegate {
             }
         }
         
-        if let path = NSBundle.mainBundle().pathForResource("visual \(tower) \(floor) \(regionX) \(regionY)", ofType: "") {
-            let data = (try! NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding)).componentsSeparatedByString(",")
-            self.loadVisual(data)
+        if let path = Bundle.main.path(forResource: "visual \(tower) \(floor) \(regionX) \(regionY)", ofType: "") {
+            let data = (try! NSString(contentsOfFile: path, encoding: String.Encoding.utf8.rawValue)).components(separatedBy: ",")
+            self.loadVisual(data: data as [AnyObject])
         }
     }
     
     func load(tower:Int, floor:Int) {
         
-        if let url = NSBundle.mainBundle().URLForResource("\(tower) \(floor)", withExtension: "tmx") {
+        if let url = Bundle.main.url(forResource: "\(tower) \(floor)", withExtension: "tmx") {
             
-            let xmlParser = NSXMLParser.init(contentsOfURL: url)!
+            let xmlParser = XMLParser.init(contentsOf: url)!
             xmlParser.delegate = self
             
             xmlParser.parse()
@@ -272,7 +272,7 @@ class Chunk: SKSpriteNode, NSXMLParserDelegate {
 //        }
     }
     
-    func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
+    func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
 //        print(elementName)
 //        print(namespaceURI)
 //        print(qName)
@@ -308,17 +308,17 @@ class Chunk: SKSpriteNode, NSXMLParserDelegate {
         }
     }
     
-    func parser(parser: NSXMLParser, foundCharacters string: String) {
+    func parser(_ parser: XMLParser, foundCharacters string: String) {
         
-        let data = string.componentsSeparatedByString(",")
+        let data = string.components(separatedBy: ",")
         
         if(data.count >= 441) {
             switch self.layer {
             case "ground":
-                self.loadGround(data, width:CGFloat(Int(self.width)!), height:CGFloat(Int(self.height)!))
+                self.loadGround(data: data as [AnyObject], width:CGFloat(Int(self.width)!), height:CGFloat(Int(self.height)!))
                 break
             case "visual":
-                self.loadVisual(data, width:CGFloat(Int(self.width)!), height:CGFloat(Int(self.height)!))
+                self.loadVisual(data: data as [AnyObject], width:CGFloat(Int(self.width)!), height:CGFloat(Int(self.height)!))
                 break
             default:
                 break
