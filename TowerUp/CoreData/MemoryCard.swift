@@ -61,9 +61,9 @@ class MemoryCard: NSObject {
         
         for i in 0 ..< PowerUps.types.count {//Teste com todos os PowerUps desbloqueados no inicio do jogo
             let powerUp = self.newPowerUpData()
-            powerUp.index = NSNumber(integer: i)
-            powerUp.available = NSNumber(integer: 10)
-            self.playerData.addPowerUp(powerUp)
+            powerUp.index = NSNumber(value: i)
+            powerUp.available = NSNumber(value: 10)
+            self.playerData.addPowerUp(value: powerUp)
         }
         
         
@@ -108,9 +108,9 @@ class MemoryCard: NSObject {
                 if(self.playerData.powerUps.count < PowerUps.types.count) {
                     for i in self.playerData.powerUps.count ..< PowerUps.types.count {//Teste com todos os PowerUps desbloqueados no inicio do jogo
                         let powerUp = self.newPowerUpData()
-                        powerUp.index = NSNumber(integer: i)
-                        powerUp.available = NSNumber(integer: 10)
-                        self.playerData.addPowerUp(powerUp)
+                        powerUp.index = NSNumber(value: i)
+                        powerUp.available = NSNumber(value: 10)
+                        self.playerData.addPowerUp(value: powerUp)
                     }
                 }
                 

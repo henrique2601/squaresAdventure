@@ -5,7 +5,6 @@
 //
 
 import UIKit
-import Parse
 import SpriteKit
 
 class ViewController: UIViewController {

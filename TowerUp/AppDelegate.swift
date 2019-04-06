@@ -6,9 +6,7 @@
 
 import UIKit
 import Bolts
-import Parse
 import CoreData
-import ParseFacebookUtilsV4
 import AdSupport
 import Fabric
 import Crashlytics
@@ -36,32 +34,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         
         Fabric.with([Crashlytics.self])
-        Parse.enableLocalDatastore()
+        //Parse.enableLocalDatastore()
 
         // ****************************************************************************
         // Uncomment this line if you want to enable Crash Reporting
         // ParseCrashReporting.enable()
         //
         // Uncomment and fill in with your Parse credentials:
-        Parse.setApplicationId("IvYhNIyO7wyJsDF4181S9iddoTg1QmrjUGcoPPnD", clientKey: "L3muupUM7rmO6BLmfNVZ6kymNYdYY3JCJmGVsmti")
+        //Parse.setApplicationId("IvYhNIyO7wyJsDF4181S9iddoTg1QmrjUGcoPPnD", clientKey: "L3muupUM7rmO6BLmfNVZ6kymNYdYY3JCJmGVsmti")
         //
         // If you are using Facebook, uncomment and add your FacebookAppID to your bundle's plist as
         // described here: https://developers.facebook.com/docs/getting-started/facebook-sdk-for-ios/
         // Uncomment the line inside TowerUp-Bridging-Header and the following line here:
-        PFFacebookUtils.initializeFacebook(applicationLaunchOptions: launchOptions)
+        //PFFacebookUtils.initializeFacebook(applicationLaunchOptions: launchOptions)
         // ****************************************************************************
 
-        PFUser.enableAutomaticUser()
+        //PFUser.enableAutomaticUser()
         
         //Configure AdColony once on app launch
         AdColony.configure(withAppID: "app5d136cde2e2547ad9f", zoneIDs: ["vz8a4089d331e742a9a1"], delegate: nil, logging: true)
 
-        let defaultACL = PFACL()
+        //let defaultACL = PFACL()
 
         // If you would like all objects to be private by default, remove this line.
-        defaultACL.setPublicReadAccess(true)
+        //defaultACL.setPublicReadAccess(true)
 
-        PFACL.setDefault(defaultACL, withAccessForCurrentUser:true)
+        //PFACL.setDefault(defaultACL, withAccessForCurrentUser:true)
 
         
         //Delay the fade of the HYDRA LOGO
@@ -87,7 +85,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-        FBSDKAppEvents.activateApp()
+        //FBSDKAppEvents.activateApp()
     }
     
     func applicationWillTerminate(_ application: UIApplication) {
@@ -100,22 +98,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: Push Notifications
     //--------------------------------------
 
-    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        let installation = PFInstallation.current()
-        installation.setDeviceTokenFrom(deviceToken as Data)
-        installation["user"] = PFUser.current()
-        
-
-        
-        installation.saveInBackground()
-    }
+//    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+//        let installation = PFInstallation.current()
+//        installation.setDeviceTokenFrom(deviceToken as Data)
+//        installation["user"] = PFUser.current()
+//
+//
+//
+//        installation.saveInBackground()
+//    }
     
-    func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        if error._code == 3010 {
-            print("Push notifications are not supported in the iOS Simulator.")
-        } else {
-            print("application:didFailToRegisterForRemoteNotificationsWithError: %@", error)
-        }
-    }
+//    func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+//        if error._code == 3010 {
+//            print("Push notifications are not supported in the iOS Simulator.")
+//        } else {
+//            print("application:didFailToRegisterForRemoteNotificationsWithError: %@", error)
+//        }
+//    }
     
 }

@@ -73,7 +73,7 @@ class World: SKNode {
     }
 }
 
-struct physicsCategory : OptionSetType {
+struct physicsCategory : OptionSet {
     typealias RawValue = UInt32
     private var value: UInt32 = 0
     init(_ value: UInt32) { self.value = value }
@@ -102,4 +102,24 @@ struct physicsCategory : OptionSetType {
     static var boxExplosiveDisabled: physicsCategory { return physicsCategory(1 << 15) }
     static var scrollNodeCell: physicsCategory { return physicsCategory(1 << 16) }
     
+}
+
+public extension OptionSet where RawValue: FixedWidthInteger {
+    
+    func elements() -> AnySequence<Self> {
+        var remainingBits = rawValue
+        var bitMask: RawValue = 1
+        return AnySequence {
+            return AnyIterator {
+                while remainingBits != 0 {
+                    defer { bitMask = bitMask &* 2 }
+                    if remainingBits & bitMask != 0 {
+                        remainingBits = remainingBits & ~bitMask
+                        return Self(rawValue: bitMask)
+                    }
+                }
+                return nil
+            }
+        }
+    }
 }

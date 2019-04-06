@@ -8,7 +8,6 @@
 
 import UIKit
 import SpriteKit
-import ParseFacebookUtilsV4
 
 class OptionsScene: GameScene {
     enum states {
@@ -77,8 +76,8 @@ class OptionsScene: GameScene {
         self.addChild(self.buttonBack)
     }
     
-    override func update(currentTime: TimeInterval) {
-        super.update(currentTime: currentTime)
+    override func update(_ currentTime: TimeInterval) {
+        super.update(currentTime)
         if(self.state == self.nextState){
             switch (self.state) {
                 
@@ -204,7 +203,7 @@ class OptionsScene: GameScene {
         }
     }
     
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesEnded(touches, with: event)
         
         if (self.state == self.nextState) {

@@ -8,11 +8,11 @@
 
 import UIKit
 
-class ServerManager: NSObject, GBPingDelegate {
+class ServerManager: NSObject {
     
     
     
-    let ping = GBPing()
+//    let ping = GBPing()
     var responseTime: Int = 0
     var numResponses: Int = 0
     var servers = ["181.41.197.181"]
@@ -28,12 +28,12 @@ class ServerManager: NSObject, GBPingDelegate {
     static let sharedInstance = ServerManager()
     
     func bestServer(returnBlock: @escaping (String) -> ()){
-        self.server = servers[self.count]
-        self.ping.host = self.server
-        //print("pinging " + self.count.description + " " + self.ping.host)
-        self.ping.delegate = self
-        self.ping.timeout = 1.0
-        self.ping.pingPeriod = 0.9
+//        self.server = servers[self.count]
+//        self.ping.host = self.server
+//        //print("pinging " + self.count.description + " " + self.ping.host)
+//        self.ping.delegate = self
+//        self.ping.timeout = 1.0
+//        self.ping.pingPeriod = 0.9
 //        self.ping.setup({ success, error in
 //            if success {
 //                
@@ -90,23 +90,23 @@ class ServerManager: NSObject, GBPingDelegate {
     
     func stopPing(){
         
-        self.ping.stop()
-//        print("stoped")
-//        print("num responses " + self.numResponses.description)
-//        print("response time " + self.responseTime.description)
-//        print("count" + self.count.description)
-        if (self.numResponses > 0) {
-            
-            let avg = (self.responseTime / self.numResponses)
-//            print("avg" + avg.description)
-//            print("minTime" + self.minTime.description)
-            if (avg < self.minTime)
-            {
-                //print("menor" + self.servers[self.count])
-                self.minTime = avg
-                self.minServer = self.serversSocket[self.count]
-            }
-        }
+//        self.ping.stop()
+////        print("stoped")
+////        print("num responses " + self.numResponses.description)
+////        print("response time " + self.responseTime.description)
+////        print("count" + self.count.description)
+//        if (self.numResponses > 0) {
+//            
+//            let avg = (self.responseTime / self.numResponses)
+////            print("avg" + avg.description)
+////            print("minTime" + self.minTime.description)
+//            if (avg < self.minTime)
+//            {
+//                //print("menor" + self.servers[self.count])
+//                self.minTime = avg
+//                self.minServer = self.serversSocket[self.count]
+//            }
+//        }
         
         
 
@@ -115,11 +115,11 @@ class ServerManager: NSObject, GBPingDelegate {
 
     //ping protocol
     
-    func ping(pinger: GBPing!, didReceiveReplyWithSummary summary: GBPingSummary!) {
-        //print(summary)
-        self.responseTime = self.responseTime + Int(summary.rtt * 1000)
-        self.numResponses = self.numResponses + 1
-    }
+//    func ping(pinger: GBPing!, didReceiveReplyWithSummary summary: GBPingSummary!) {
+//        //print(summary)
+//        self.responseTime = self.responseTime + Int(summary.rtt * 1000)
+//        self.numResponses = self.numResponses + 1
+//    }
     
     //    func ping(pinger: GBPing!, didFailToSendPingWithSummary summary: GBPingSummary!, error: NSError!) {
     //        print(summary)

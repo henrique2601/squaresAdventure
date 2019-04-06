@@ -66,7 +66,7 @@ class MessageBox: Control {
             if let _ = self.buttonCancel {
                 if (self.buttonCancel.contains(location) == true) {
                     self.isHidden = true
-                    self.touchesEndedAtButtonCancel.raise(data: Void)
+                    self.touchesEndedAtButtonCancel.raise()
                     self.removeFromParent()
                     return
                 }
@@ -75,7 +75,7 @@ class MessageBox: Control {
             if let _ = self.buttonOK {
                 if (self.buttonOK.contains(location) == true) {
                     self.isHidden = true
-                     self.touchesEndedAtButtonOK.raise(data: Void)
+                     self.touchesEndedAtButtonOK.raise()
                     self.removeFromParent()
                     return
                 }

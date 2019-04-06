@@ -161,16 +161,16 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
         
     }
     
-    func didBeginContact(contact: SKPhysicsContact) {
+    func didBegin(_ contact: SKPhysicsContact) {
         world.didBeginContact(contact: contact)
     }
     
-    func didEndContact(contact: SKPhysicsContact) {
+    func didEnd(_ contact: SKPhysicsContact) {
         world.didEndContact(contact: contact)
     }
     
-    override func update(currentTime: TimeInterval) {
-        super.update(currentTime: currentTime)
+    override func update(_ currentTime: TimeInterval) {
+        super.update(currentTime)
         if(self.state == self.nextState){
             switch (self.state) {
             case states.mission:
@@ -238,10 +238,8 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
                     self.nextState = states.tutorial6
                     
                     self.playerData.tutorial?.tutorial5 = NSNumber(value: true)
-                    //
-                    
+
                 }
-                
                 
                 break
             default:
@@ -361,7 +359,7 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
         self.parallax.update(position: self.myCamera.position)
     }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         
         switch(self.playerData.configControls.intValue) {
@@ -382,11 +380,7 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
                             if(!tutorialD2){
                             
                                 self.nextState = states.tutorial6
-                                
-                                print("Ultima parte")
-                                
-                                
-                            
+      
                             }
                             
                             break
@@ -401,7 +395,7 @@ class MissionScene: GameScene, SKPhysicsContactDelegate {
         }
     }
     
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesEnded(touches, with: event)
         
         switch(self.playerData.configControls.intValue) {

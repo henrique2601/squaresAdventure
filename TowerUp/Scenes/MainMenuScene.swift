@@ -79,8 +79,8 @@ class MainMenuScene: GameScene {
         
     }
     
-    override func update(currentTime: TimeInterval) {
-        super.update(currentTime: currentTime)
+    override func update(_ currentTime: TimeInterval) {
+        super.update(currentTime)
         if(self.state == self.nextState) {
             switch (self.state) {
             default:
@@ -130,7 +130,7 @@ class MainMenuScene: GameScene {
         }
     }
     
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesEnded(touches, with: event)
         
         if (self.state == self.nextState) {
@@ -143,10 +143,10 @@ class MainMenuScene: GameScene {
                         self.nextState = .towers
                         return
                     }
-                    if (self.buttonPlayOnline.contains(location)) {
-                        self.nextState = .multiplayer
-                        return
-                    }
+//                    if (self.buttonPlayOnline.contains(location)) {
+//                        self.nextState = .multiplayer
+//                        return
+//                    }
                     if (self.buttonOptions.contains(location)) {
                         self.nextState = .options
                         return

@@ -95,7 +95,7 @@ class FloorsScene: GameScene {
         }
         
         //Andares bloqueados, mostrar cadeado
-        for floorIndex in 0 ..< towerType.floorTypes.count {
+        for _ in 0 ..< towerType.floorTypes.count {
             let cell = SKSpriteNode(imageNamed: "boxSmall")
             
             let spriteNode = SKSpriteNode(imageNamed: "boxSmallLocked")
@@ -125,8 +125,8 @@ class FloorsScene: GameScene {
         
     }
     
-    override func update(currentTime: TimeInterval) {
-        super.update(currentTime: currentTime)
+    override func update(_ currentTime: TimeInterval) {
+        super.update(currentTime)
         if(self.state == self.nextState) {
             switch (self.state) {
             default:
@@ -163,7 +163,7 @@ class FloorsScene: GameScene {
         }
     }
     
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesEnded(touches, with: event)
         
         if (self.state == self.nextState) {

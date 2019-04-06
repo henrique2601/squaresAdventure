@@ -20,7 +20,7 @@ class Button: Control {
     
     var event:Event<Void>?// = Event()
     
-    func addHandler(handler: () -> ()) {
+    func addHandler(handler: @escaping () -> ()) {
         if let _ = self.event {
             
         } else {
@@ -59,7 +59,7 @@ class Button: Control {
         
         let texture = SKTexture(imageNamed: textureName)
         
-        let spriteNode = SKSpriteNode(texture: nil, color: UIColor.clearColor,
+        let spriteNode = SKSpriteNode(texture: nil, color: UIColor.clear,
             size: CGSize(width: Int(texture.size().width) + left + right, height: Int(texture.size().height) + top + bottom))
         spriteNode.anchorPoint = CGPoint(x: 0, y: 1)
         self.addChild(spriteNode)
@@ -170,7 +170,7 @@ class Button: Control {
                     if let parent = button.parent {
                         let location = touch.location(in: parent)
                         if button.contains(location) {
-                            event.raise(Void)
+                            event.raise()
                         }
                     }
                 }

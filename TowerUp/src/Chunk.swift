@@ -59,7 +59,10 @@ class Chunk: SKSpriteNode, XMLParserDelegate {
         let tiles:NSMutableArray = NSMutableArray()
         for y in 0..<Int(height) {
             for x in 0..<Int(width) {
-                let aux = String(data[i]).stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+                let aux = (data[i] as! String).trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+                //let aux = (data[i] as! String).trimmingCharacters(in: CharacterSet.whitespaces)
+                //let aux = String(data)
+               // let aux = String(data[i]).stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
                 let id = Int(aux)!
                 if(id != 0) {
                     var tile:Tile!
@@ -98,7 +101,8 @@ class Chunk: SKSpriteNode, XMLParserDelegate {
         let tiles:NSMutableArray = NSMutableArray()
         for y in 0 ..< Int(height) {
             for x in 0 ..<  Int(width) {
-                let aux = String(data[i]).stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+                let aux = (data[i] as! String).trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+                //let aux = String(data[i]).stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
                 let id = Int(aux)!
                 if(id != 0) {
                     var tile:Tile!

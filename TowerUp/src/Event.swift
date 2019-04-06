@@ -9,7 +9,7 @@
 import UIKit
 
 class Event<T> : NSObject {
-    typealias EventHandler = (T) -> ()
+    typealias EventHandler = () -> ()
     
     private var eventHandlers = [EventHandler]()
     
@@ -17,9 +17,9 @@ class Event<T> : NSObject {
         eventHandlers.append(handler)
     }
     
-    func raise(data: T) {
+    func raise() {
         for handler in eventHandlers {
-            handler(data)
+            handler()
         }
     }
 }

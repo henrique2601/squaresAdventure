@@ -46,7 +46,7 @@ class PowerUpSlot: SKSpriteNode {
     
     func setPowerUp(powerUpData:PowerUpData) {
         self.powerUpSlotData.powerUp = powerUpData
-        let powerUpType = PowerUps.types[powerUpData.index.integerValue]
+        let powerUpType = PowerUps.types[powerUpData.index.intValue]
         let spriteNode = SKSpriteNode(imageNamed: powerUpType.powerUpImage)
         spriteNode.zPosition = self.zPosition + 1
         self.addChild(spriteNode)

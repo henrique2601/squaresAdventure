@@ -86,7 +86,7 @@ class TowersScene: GameScene {
 
     
         //Torres bloqueadas, mostrar cadeado
-        for towerIndex in 0 ..< Towers.types.count {
+        for _ in 0 ..< Towers.types.count {
             let cell = SKSpriteNode(imageNamed: "towerBox")
             let spriteNode = SKSpriteNode(imageNamed: "towerBoxLocked")
             spriteNode.zPosition = cell.zPosition + 1
@@ -119,8 +119,8 @@ class TowersScene: GameScene {
         
     }
     
-    override func update(currentTime: TimeInterval) {
-        super.update(currentTime: currentTime)
+    override func update(_ currentTime: TimeInterval) {
+        super.update(currentTime)
         if(self.state == self.nextState) {
             switch (self.state) {
             default:
@@ -156,7 +156,7 @@ class TowersScene: GameScene {
         }
     }
     
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesEnded(touches, with: event)
         
         if (self.state == self.nextState) {
