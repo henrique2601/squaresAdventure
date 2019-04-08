@@ -29,11 +29,13 @@ class Music: NSObject {
             do {
                 try self.audioPlayer = AVAudioPlayer(contentsOf: backgroundMusicURL!)
                 self.audioPlayer.numberOfLoops = -1
-                //self.audioPlayer.prepareToPlay()
-                //self.play()
+                #if !DEBUG
+                self.audioPlayer.prepareToPlay()
+                self.play()
+                #endif
             } catch {
                 #if DEBUG
-                    fatalError()
+                fatalError()
                 #endif
             }
         }
