@@ -63,7 +63,7 @@ class Bomb: Tile {
             })
         }
         
-        for i in 0 ..< Bomb.bombList.count {
+        for i in (0 ..< Bomb.bombList.count).reversed() {
             if (Bomb.bombList[i].listPosition == self.listPosition){
                 Bomb.bombList.remove(at: i)
             }
