@@ -9,7 +9,7 @@
 import UIKit
 import SpriteKit
 
-class BoxCoins: Control, AdColonyAdDelegate {
+class BoxCoins: Control {
     
     var labelCoins:Label!
     var labelGems:Label!
@@ -46,7 +46,6 @@ class BoxCoins: Control, AdColonyAdDelegate {
             gameScene.blackSpriteNode.isHidden = false
             gameScene.blackSpriteNode.zPosition = box.zPosition - 1
             box.buttonOK.addHandler {
-                ViewController.triggerVideo(withDelegate: self)
                 gameScene.blackSpriteNode.isHidden = true
             }
             

@@ -5,11 +5,8 @@
 //
 
 import UIKit
-import Bolts
 import CoreData
 import AdSupport
-import Fabric
-import Crashlytics
 
 // If you want to use any of the UI components, uncomment this line
 // import ParseUI
@@ -31,9 +28,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Enable storing and querying data from Local Datastore. 
         // Remove this line if you don't want to use Local Datastore features or want to use cachePolicy.
         
-
-        
-        Fabric.with([Crashlytics.self])
         //Parse.enableLocalDatastore()
 
         // ****************************************************************************
@@ -50,9 +44,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // ****************************************************************************
 
         //PFUser.enableAutomaticUser()
-        
-        //Configure AdColony once on app launch
-        AdColony.configure(withAppID: "app5d136cde2e2547ad9f", zoneIDs: ["vz8a4089d331e742a9a1"], delegate: nil, logging: true)
 
         //let defaultACL = PFACL()
 

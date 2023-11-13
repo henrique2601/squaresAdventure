@@ -7,10 +7,6 @@
 #ifndef TowerUp_Bridging_Header_h
 #define TowerUp_Bridging_Header_h
 
-// If you are using Facebook, uncomment this line to get automatic import of the header inside your project.
-#import <Bolts/Bolts.h>
-#import <AdColony/AdColony.h>
-
 #import "ALIterativeMigrator.h"
 
 #endif
